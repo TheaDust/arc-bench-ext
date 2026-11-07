@@ -2,7 +2,7 @@ import { cappedEntry } from './support/list-cap';
 // requirement: REQ-7.1
 import { test, expect } from '@playwright/test';
 import { identity, enter, region, entry, home, login, heading, createShelf, openShelf, expectAbsentEntry,
-  newContextFor, REVIEWER_ACCOUNT } from './helpers';
+  newContextFor, records, REVIEWER_ACCOUNT } from './helpers';
 
 test("REQ-7.1: Record shelf visit", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -49,14 +49,14 @@ test("REQ-7.1: Deduplicate and isolate recent views", async ({ page, browser }, 
   await openShelf(page, shelfA);
   await home(page);
   await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);
-  expect(await region(page, 'My Recently Viewed').getByRole('listitem').count()).toBeLessThanOrEqual(10);
+  expect(await records(region(page, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
   const reviewer = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
   const reviewerPage = reviewer.page;
   const shelfB = await createShelf(reviewerPage, id, 'Shelf 7.3-B');
   await openShelf(reviewerPage, shelfB);
   await home(reviewerPage);
   await expect(entry(region(reviewerPage, 'My Recently Viewed'), shelfB)).toHaveCount(1);
-  expect(await region(reviewerPage, 'My Recently Viewed').getByRole('listitem').count()).toBeLessThanOrEqual(10);
+  expect(await records(region(reviewerPage, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
   await expectAbsentEntry(region(reviewerPage, 'My Recently Viewed'), shelfA);
   await page.reload();
   await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);

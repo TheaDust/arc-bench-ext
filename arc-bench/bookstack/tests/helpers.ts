@@ -218,6 +218,11 @@ export async function favorite(page: Page) {
   await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');
 }
 
+export function records(collection: Locator) {
+  return collection.getByRole('listitem').or(collection.getByRole('row')
+    .filter({ hasNot: collection.page().getByRole('columnheader') }));
+}
+
 export function membership(page: Page, name: string) {
   return page.getByRole('checkbox', { name, exact: true });
 }

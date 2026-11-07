@@ -2,7 +2,7 @@ import { cappedEntry } from './support/list-cap';
 // requirement: REQ-9.1
 import { test, expect } from '@playwright/test';
 import { identity, named, enter, region, entry, home, heading, text, button, createBook, createPage, openBook,
-  expectAbsentEntry } from './helpers';
+  expectAbsentEntry, records } from './helpers';
 
 test("REQ-9.1: Open recently published page", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -38,7 +38,7 @@ test("REQ-9.1: Edit updates recently updated page", async ({ page }, testInfo) =
   await home(page);
   const recent = region(page, 'Recently Updated Pages');
   await expect(entry(recent, updated)).toHaveCount(1);
-  expect(await recent.getByRole('listitem').count()).toBeLessThanOrEqual(5);
+  expect(await records(recent).count()).toBeLessThanOrEqual(5);
   await expectAbsentEntry(recent, original);
   await entry(recent, updated).click();
   await heading(page, updated);

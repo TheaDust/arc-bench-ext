@@ -884,7 +884,7 @@ index 86ade3c..967bdb2 100644
 +  await expectAbsentEntry(region(page, 'Recently Updated Pages'), original);
 +});
 diff --git a/arc-bench/bookstack/tests/REQ-7.1.spec.ts b/arc-bench/bookstack/tests/REQ-7.1.spec.ts
-index 79b8d3e..ab5f8f2 100644
+index 79b8d3e..901bbba 100644
 --- a/arc-bench/bookstack/tests/REQ-7.1.spec.ts
 +++ b/arc-bench/bookstack/tests/REQ-7.1.spec.ts
 @@ -1,7 +1,8 @@
@@ -893,7 +893,7 @@ index 79b8d3e..ab5f8f2 100644
  import { test, expect } from '@playwright/test';
 -import { identity, enter, region, entry, home, login, heading, createShelf, openShelf } from './helpers';
 +import { identity, enter, region, entry, home, login, heading, createShelf, openShelf, expectAbsentEntry,
-+  newContextFor, REVIEWER_ACCOUNT } from './helpers';
++  newContextFor, records, REVIEWER_ACCOUNT } from './helpers';
  
  test("REQ-7.1: Record shelf visit", async ({ page }, testInfo) => {
    const id = identity(testInfo);
@@ -912,14 +912,14 @@ index 79b8d3e..ab5f8f2 100644
 +  await openShelf(page, shelfA);
 +  await home(page);
 +  await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);
-+  expect(await region(page, 'My Recently Viewed').getByRole('listitem').count()).toBeLessThanOrEqual(10);
++  expect(await records(region(page, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
 +  const reviewer = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
 +  const reviewerPage = reviewer.page;
 +  const shelfB = await createShelf(reviewerPage, id, 'Shelf 7.3-B');
 +  await openShelf(reviewerPage, shelfB);
 +  await home(reviewerPage);
 +  await expect(entry(region(reviewerPage, 'My Recently Viewed'), shelfB)).toHaveCount(1);
-+  expect(await region(reviewerPage, 'My Recently Viewed').getByRole('listitem').count()).toBeLessThanOrEqual(10);
++  expect(await records(region(reviewerPage, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
 +  await expectAbsentEntry(region(reviewerPage, 'My Recently Viewed'), shelfA);
 +  await page.reload();
 +  await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);
@@ -974,7 +974,7 @@ index 5aa87fd..b89c265 100644
 +  await reviewer.context.close();
 +});
 diff --git a/arc-bench/bookstack/tests/REQ-9.1.spec.ts b/arc-bench/bookstack/tests/REQ-9.1.spec.ts
-index 5f60c28..6dbb5c2 100644
+index 5f60c28..fefa5da 100644
 --- a/arc-bench/bookstack/tests/REQ-9.1.spec.ts
 +++ b/arc-bench/bookstack/tests/REQ-9.1.spec.ts
 @@ -1,7 +1,8 @@
@@ -983,7 +983,7 @@ index 5f60c28..6dbb5c2 100644
  import { test, expect } from '@playwright/test';
 -import { identity, enter, region, entry, home, heading, text, createBook, createPage } from './helpers';
 +import { identity, named, enter, region, entry, home, heading, text, button, createBook, createPage, openBook,
-+  expectAbsentEntry } from './helpers';
++  expectAbsentEntry, records } from './helpers';
  
  test("REQ-9.1: Open recently published page", async ({ page }, testInfo) => {
    const id = identity(testInfo);
@@ -1007,7 +1007,7 @@ index 5f60c28..6dbb5c2 100644
 +  await home(page);
 +  const recent = region(page, 'Recently Updated Pages');
 +  await expect(entry(recent, updated)).toHaveCount(1);
-+  expect(await recent.getByRole('listitem').count()).toBeLessThanOrEqual(5);
++  expect(await records(recent).count()).toBeLessThanOrEqual(5);
 +  await expectAbsentEntry(recent, original);
 +  await entry(recent, updated).click();
 +  await heading(page, updated);
@@ -1017,7 +1017,7 @@ index 5f60c28..6dbb5c2 100644
 +  await expect(entry(region(page, 'Recently Updated Pages'), updated)).toHaveCount(1);
 +});
 diff --git a/arc-bench/bookstack/tests/helpers.ts b/arc-bench/bookstack/tests/helpers.ts
-index f52c035..f7bfea0 100644
+index f52c035..a72c40b 100644
 --- a/arc-bench/bookstack/tests/helpers.ts
 +++ b/arc-bench/bookstack/tests/helpers.ts
 @@ -1,14 +1,25 @@
@@ -1077,7 +1077,7 @@ index f52c035..f7bfea0 100644
  export async function metadata(page: Page, name: string, description: string, tags: string) {
    await page.getByRole('textbox', { name: 'Name', exact: true }).fill(name);
    await page.getByRole('textbox', { name: 'Description', exact: true }).fill(description);
-@@ -148,3 +167,82 @@ export async function createPage(page: Page, id: string, book: string, base: str
+@@ -148,3 +167,87 @@ export async function createPage(page: Page, id: string, book: string, base: str
    await expect(opening).toBeVisible();
    return name;
  }
@@ -1130,6 +1130,11 @@ index f52c035..f7bfea0 100644
 +  await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
 +  await button(page, 'Favorite').click();
 +  await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');
++}
++
++export function records(collection: Locator) {
++  return collection.getByRole('listitem').or(collection.getByRole('row')
++    .filter({ hasNot: collection.page().getByRole('columnheader') }));
 +}
 +
 +export function membership(page: Page, name: string) {
