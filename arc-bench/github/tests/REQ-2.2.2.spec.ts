@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectSelectedChoice, selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -20,8 +21,8 @@ test('REQ-2.2.2: Manage Organization Team Members and Hierarchy - Scenario 1', a
   await page.getByRole('link', { name: 'Members', exact: true }).click();
   await page.getByRole('button', { name: 'Add member', exact: true }).click();
   await page.getByRole('textbox', { name: 'Username', exact: true }).fill(member);
-  await page.getByRole('button', { name: 'Add member', exact: true }).click();
-  await expect(page.getByText(member, { exact: true })).toBeVisible();
+  await page.getByRole('button', { name: 'Add member to team', exact: true }).click();
+  await expectText(page, member, { exact: true });
 
   await page.getByRole('button', { name: `Remove ${member}`, exact: true }).click();
   await expect(page.getByText(member, { exact: true })).not.toBeVisible();
@@ -46,7 +47,7 @@ test('REQ-2.2.2: Manage Organization Team Members and Hierarchy - Scenario 2', a
   });
   await page.getByRole('button', { name: 'Save', exact: true }).click();
 
-  await expect(page.getByText('Cyclic team hierarchy is not allowed', { exact: true })).toBeVisible();
+  await expectText(page, 'Cyclic team hierarchy is not allowed', { exact: true });
   await page.reload();
   await expectSelectedChoice(page.getByRole('combobox', { name: 'Parent team', exact: true }), originalParent);
 });

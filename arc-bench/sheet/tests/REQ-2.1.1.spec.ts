@@ -26,6 +26,9 @@ test('REQ-2.1.1: Add a Worksheet - Scenario 1', async ({ page }) => {
 
   await addWorksheet(page, 'Sheet2');
   await expect(gridCell(page, 'A1')).toHaveText('');
+  await expect(gridCell(page, 'A1')).toBeVisible();
+  const newSheetCells = page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByRole('gridcell');
+  await expect.poll(async () => (await newSheetCells.allTextContents()).every(value => value.trim() === '')).toBe(true);
   await expect(worksheetTab(page, 'Sheet1')).toBeVisible();
 
   await worksheetTab(page, 'Sheet1').click();
@@ -38,6 +41,8 @@ test('REQ-2.1.1: Add a Worksheet - Scenario 1', async ({ page }) => {
   await expectActiveWorksheet(page, 'Sheet2');
   await expectSelectedCell(page, 'A1');
   await expect(gridCell(page, 'A1')).toHaveText('');
+  await expect(gridCell(page, 'A1')).toBeVisible();
+  await expect.poll(async () => (await newSheetCells.allTextContents()).every(value => value.trim() === '')).toBe(true);
   await expect(worksheetTab(page, 'Sheet1')).toBeVisible();
 });
 

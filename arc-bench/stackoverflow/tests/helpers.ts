@@ -31,7 +31,21 @@ export const test = base.extend({
 });
 export type Account = keyof typeof accounts;
 export const region = (scope: Page | Locator, name: string) => scope.getByRole('region', { name, exact: true });
-export const action = (scope: Page | Locator, name: string) => scope.getByRole('button', { name, exact: true }).or(scope.getByRole('link', { name, exact: true }));
+const buttonActions = new Set(['Products', 'Log in', 'Sign up', 'Show password', 'Hide password',
+  'Forgot password?', 'Stack User', 'Helpful User', 'Home', 'Questions', 'Tags', 'Users',
+  'Ask Question', 'Newest', 'Active', 'Next page', 'Edit profile',
+  'Save and copy changes to all public communities', 'Up vote', 'Down vote', 'Save',
+  'Timeline', 'Share', 'Edit', 'Follow', 'Add a comment', 'Post Your Question', 'Bold',
+  'Italic', 'Code', 'Save edits', 'Cancel', 'Delete', 'Confirm deletion', 'Post Your Answer',
+  'Accept answer', 'Accepted answer', 'Show 2 more comments', 'Reply', 'Add Reply',
+  'Watch tag', 'Unwatch tag', 'Filter', 'Save custom filter', 'Save filter']);
+export const action = (scope: Page | Locator, name: string) => buttonActions.has(name)
+  ? scope.getByRole('button', { name, exact: true })
+  : scope.getByRole('button', { name, exact: true }).or(scope.getByRole('link', { name, exact: true }));
+/** Existence is not a uniqueness obligation for ordinary visible feedback. */
+export async function expectPresence(candidates: Locator) {
+  await expect.poll(() => candidates.filter({ visible: true }).count()).toBeGreaterThan(0);
+}
 export const field = (scope: Page | Locator, name: string) => formField(scope, name);
 export const mainNav = (page: Page) => page.getByRole('navigation', { name: 'Main navigation', exact: true });
 export const profileNav = (page: Page) => page.getByRole('navigation', { name: 'Profile navigation', exact: true });
@@ -107,7 +121,7 @@ export async function composeQuestion(page: Page, title: string, text = body, ta
 export async function publishAnswer(page: Page, text = answerBody) {
   await field(page, 'Your Answer').fill(text);
   await action(page, 'Post Your Answer').click();
-  await expect(region(page, 'Answers').getByText(text, { exact: true })).toBeVisible();
+  await expectPresence(region(page, 'Answers').getByText(text, { exact: true }));
 }
 export async function publishComment(scope: Locator, text = commentBody) {
   const thread = await ownComments(scope);
@@ -160,6 +174,49 @@ export async function beforeText(scope: Locator, firstIdentity: string, secondId
     const a = text.indexOf(firstIdentity), b = text.indexOf(secondIdentity);
     return a >= 0 && b >= 0 && a < b;
   }).toBe(true);
+}
+
+/** Inspect every public feed page, without assuming a particular page size. */
+export async function visitFeed(page: Page, inspect: (feed: Locator) => Promise<void | boolean>) {
+  const feed = region(page, 'Question feed');
+  await expect(feed).toBeVisible();
+  const seen = new Set<string>();
+  while (true) {
+    const content = await feed.innerText();
+    expect(seen.has(content), 'Feed pagination must advance to a distinct page').toBe(false);
+    seen.add(content);
+    if (await inspect(feed)) return;
+    const next = action(feed, 'Next page');
+    await expect(next).toBeVisible();
+    if (!await next.isEnabled()) return;
+    await next.click();
+    await expect(feed).not.toHaveText(content);
+  }
+}
+
+/** A timestamp has no mandated display format; native time metadata is public. */
+export async function expectTimestamp(scope: Locator) {
+  await expect(scope).toBeVisible();
+  await expect.poll(async () => {
+    for (const time of await scope.locator('time[datetime]').filter({ visible: true }).all()) {
+      const instant = await time.getAttribute('datetime');
+      if (instant && Number.isFinite(Date.parse(instant)) && (await time.innerText()).trim()) return true;
+    }
+    const text = await scope.innerText();
+    return /\b(?:20\d{2}[-/]\d{1,2}[-/]\d{1,2}|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*\s+\d{1,2}|\d{1,2}\s+(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*|\d{1,2}:\d{2}(?::\d{2})?|just now|(?:\d+|an?)\s*(?:seconds?|minutes?|hours?|days?|[smhd])\s+ago)\b/i.test(text);
+  }).toBe(true);
+}
+
+/** Compare the declared UTC calendar date, allowing ordinary equivalent spellings. */
+export async function expectUtcDate(target: Locator, expected: string) {
+  await expect(target).toBeVisible();
+  await expect.poll(async () => {
+    const text = (await target.innerText()).trim().replace(/^(?:Asked|Modified)\s*:?\s*/i, '');
+    const qualified = /(?:Z|UTC|GMT|[+-]\d{2}:?\d{2})$/i.test(text) ? text
+      : /^\d{4}-\d{2}-\d{2}T/.test(text) ? `${text}Z` : `${text} UTC`;
+    const milliseconds = Date.parse(qualified);
+    return Number.isFinite(milliseconds) ? new Date(milliseconds).toISOString().slice(0, 10) : null;
+  }).toBe(expected);
 }
 
 /** Compare the two required public identities across the feed's pages. */

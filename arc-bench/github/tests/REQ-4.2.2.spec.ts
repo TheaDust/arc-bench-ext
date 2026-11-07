@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -12,7 +13,7 @@ test('REQ-4.2.2: Inspect Commit and Revision Differences - Scenario 1', async ({
   const changedFile = seedValue(testInfo, 'CHANGED_FILE');
 
   await openVisibleTarget(page, commitEntry);
-  await expect(page.getByText(changedFile, { exact: true })).toBeVisible();
-  await expect(page.getByText(/changed files|changed/i)).toBeVisible();
-  await expect(page.getByText(/\+\d+.*-\d+|\d+ additions?.*\d+ deletions?/i)).toBeVisible();
+  await expectText(page, changedFile, { exact: true });
+  await expectText(page, /changed files|changed/i);
+  await expectText(page, /\+\d+.*-\d+|\d+ additions?.*\d+ deletions?/i);
 });

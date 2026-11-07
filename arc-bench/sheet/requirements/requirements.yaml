@@ -9,6 +9,8 @@ description:
     For active workbook, worksheet, selection, clipboard and history state: Established through workbook navigation and editing interactions, including copy, cut, paste, undo and redo. Runtime selections and history are not preloaded.
 
     For calculation, sort, filter, pivot and export state: Produced through formula entry, sorting, filtering, pivot apply/refresh and export UI. Formula results, sorted rows and pivot aggregates are computed by the application, not supplied as initial values.
+
+    Calculated numeric results are compared by numeric value; harmless decimal trailing zeros, conventional three-digit grouping and scientific notation are equivalent presentations. This does not change ordinary entered/imported text: leading zeros, spaces, blank fields and raw formula expressions remain preserved as specified.
     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
 
 scenarios: []
@@ -154,6 +156,8 @@ children:
         Supports importing external CSV data completely as a workbook and exporting the current active worksheet as CSV. After a successful import, the Sheet1 editor page opens and continues to show the complete imported result after refresh or reopening; export reads only the current active worksheet and must not change workbook content or the current interface state.
 
         For external CSV upload files: External files supplied at import time, not preloaded workbooks. File names use the caller's runtime-unique workbook name followed by .csv. Import does not pre-create application records.
+
+        CSV exchange is compared by decoded cells in their original row and column order, not by one serializer's byte layout. Optional quoting of fields that do not require quotes, LF or CRLF record separators, an optional UTF-8 BOM and a final record separator are equivalent. Embedded line breaks retain their position and count (CRLF and LF encode the same line break); commas, quote characters, spaces, empty fields and leading zeros remain cell data. Exported formulas must decode to their calculated results, not their raw expressions.
     scenarios: []
     children:
     - id: REQ-1.3.1
@@ -173,8 +177,8 @@ children:
         steps:
         - id: STEP-REQ-1.3.1-01-01
           Given: |-
-            The visitor is on the workbook home page and has a CSV containing quoted commas, a quoted newline and quote escapes, numeric text including 007, and blank fields.
-            The input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is "Name,Note,Count,Blank\r\nAlex,\"Harbor District, East\",42,\r\nJordan,\"They said\"\"hello\"\"\r\nnext line\",3,\r\nAlice,English text,007,". In this notation, \r\n denotes CRLF and \n denotes LF; quoted CSV fields retain embedded line breaks.
+            The visitor is on the workbook home page and has a CSV containing quoted commas, a quoted newline and quote escapes, UTF-8 English and Chinese text, numeric text including 007, and blank fields.
+            The input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is "Name,Note,Count,Blank\r\nAlex,\"Harbor District, East\",42,\r\nJordan,\"They said\"\"hello\"\"\r\nnext line\",3,\r\nAlice,English text 中文,007,". In this notation, \r\n denotes CRLF and \n denotes LF; quoted CSV fields retain embedded line breaks.
           When: The user opens Import CSV, uploads the CSV, and confirms the import.
           Then: A workbook named from the uploaded file is opened on Sheet1; headers, quoted text, 42, 3, 007, and
             blank D2/D3/D4 cells appear in the asserted coordinates and remain after refresh.
@@ -238,7 +242,7 @@ children:
         - id: STEP-REQ-1.3.2-02-01
           Given: A blank workbook has 2 in A1 and formula =A1*2 in B1.
           When: The user exports Sheet1, selects B1, and refreshes.
-          Then: The download is 2,4; Sheet1 remains active, B1 displays 4, and its formula bar contains =A1*2 before
+          Then: The download decodes to one row with cells 2 and 4; Sheet1 remains active, B1 displays 4, and its formula bar contains =A1*2 before
             and after refresh.
           references:
           - \ref[requirement](REQ-4.1.1)

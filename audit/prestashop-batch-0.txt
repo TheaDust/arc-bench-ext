@@ -1,0 +1,318 @@
+REQ-1.1 Discover storefront content
+Opening the storefront while logged out displays "Global navigation"(role=navigation), "Carousel"(role=region), "Popular Products"(role=region) containing Hummingbird detail t-shirt, "Promotions"(role=region), "Newsletter"(role=region), and the footer. Users navigate through "Logo"(role=link), "CLOTHES"(role=link), "Sign in"(role=button), and "Cart"(role=link), search with "Search"(role=searchbox), and access language selection through "Language"(role=combobox). Cart count starts at 0. All controls are keyboard-accessible, and mobile navigation collapses behind "Menu"(role=button).
+
+English action names are case-insensitive. Global navigation remains available across pages.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.1-01 Discover homepage
+{"Given":"An anonymous visitor has an empty cart and the seeded catalog is available.","When":"Open the storefront homepage.","Then":"Global navigation, Carousel, Popular Products containing Hummingbird detail t-shirt, Promotions, Newsletter and footer are visible; Logo, CLOTHES, Sign in, Cart, Search and Language are available and Cart reports 0."}
+SCN-REQ-1.1-02 Use responsive keyboard navigation
+{"Given":"The anonymous homepage is open with its desktop navigation visible.","When":"Use Tab to reach each global navigation control; resize the viewport to 390×844, focus Menu and press Enter, then reach CLOTHES with Tab.","Then":"Desktop controls are keyboard reachable; mobile Menu opens navigation and CLOTHES receives keyboard focus."}
+TEST
+// requirement: REQ-1.1
+
+test("REQ-1.1: Discover homepage", async ({ page }) => {
+  await home(page);
+  for (const name of ['Logo', 'CLOTHES', 'Sign in', 'Cart']) await expect(action(nav(page), name)).toBeVisible();
+  await expect(nav(page).getByRole('searchbox', { name: 'Search', exact: true })).toBeVisible();
+  await expect(nav(page).getByRole('combobox', { name: 'Language', exact: true })).toBeVisible();
+  await expect(action(nav(page), 'Cart')).toContainText('0');
+  for (const name of ['Carousel', 'Popular Products', 'Promotions', 'Newsletter']) await expect(region(page, name)).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Popular Products', exact: true })).toBeVisible();
+  await expect(action(region(page, 'Popular Products'), DETAIL)).toBeVisible();
+  await expect(page.getByRole('contentinfo')).toBeVisible();
+});
+
+test("REQ-1.1: Use responsive keyboard navigation", async ({ page }) => {
+  await home(page);
+  const controls = [action(nav(page), 'Logo'), action(nav(page), 'CLOTHES'), nav(page).getByRole('searchbox', { name: 'Search', exact: true }), nav(page).getByRole('combobox', { name: 'Language', exact: true }), action(nav(page), 'Sign in'), action(nav(page), 'Cart')];
+  for (const control of controls) await tabTo(page, control);
+  await page.setViewportSize({ width: 390, height: 844 });
+  const menu = action(nav(page), 'Menu');
+  await tabTo(page, menu);
+  await page.keyboard.press('Enter');
+  await expect(action(nav(page), 'CLOTHES')).toBeVisible();
+  await tabTo(page, action(nav(page), 'CLOTHES'));
+});
+
+
+REQ-1.2 Navigate categories and return home
+Hovering or keyboard-focusing and activating "CLOTHES"(role=link) reveals "Men"(role=link) and "Women"(role=link). Men opens its product listing with Hummingbird detail t-shirt and Sort by; activating CLOTHES itself opens the parent category. From any catalog page, "Logo"(role=link) returns home to Popular Products.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.2-01 Browse Men and return with logo
+{"Given":"The anonymous homepage is open and the seeded catalog contains Hummingbird detail t-shirt.","When":"Hover CLOTHES, activate Men, then activate Logo.","Then":"Men initially shows its heading, Sort by and Hummingbird detail t-shirt; Logo returns to the homepage with Popular Products."}
+SCN-REQ-1.2-02 Open subcategory by keyboard
+{"Given":"The anonymous homepage is open.","When":"Focus CLOTHES using the keyboard, press Enter to reveal its submenu, then focus Men and press Enter.","Then":"Men opens with its heading and Hummingbird detail t-shirt in Product list."}
+TEST
+// requirement: REQ-1.2
+
+test("REQ-1.2: Browse Men and return with logo", async ({ page }) => {
+  await home(page);
+  await action(nav(page), 'CLOTHES').hover();
+  for (const name of ['Men', 'Women']) await expect(action(nav(page), name)).toBeVisible();
+  await action(nav(page), 'Men').click();
+  await expect(page.getByRole('heading', { name: 'Men', exact: true })).toBeVisible();
+  await expect(card(page, DETAIL)).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Sort by', exact: true })).toBeVisible();
+  await action(nav(page), 'Logo').click();
+  await expect(page.getByRole('heading', { name: 'Popular Products', exact: true })).toBeVisible();
+  await expect(action(region(page, 'Popular Products'), DETAIL)).toBeVisible();
+});
+
+test("REQ-1.2: Open subcategory by keyboard", async ({ page }) => {
+  await home(page);
+  await tabTo(page, action(nav(page), 'CLOTHES'));
+  await page.keyboard.press('Enter');
+  await expect(action(nav(page), 'Women')).toBeVisible();
+  await tabTo(page, action(nav(page), 'Men'));
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: 'Men', exact: true })).toBeVisible();
+  await expect(card(page, DETAIL)).toBeVisible();
+});
+
+
+REQ-1.3 Search products
+Focusing "Search"(role=searchbox) and entering shirt displays "Search suggestions"(role=region) with Hummingbird detail t-shirt. Pressing Enter submits the search and displays a "Product list"(role=region) containing that product.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.3-01 Suggest and search shirt
+{"Given":"The anonymous homepage is open and the catalog includes Hummingbird detail t-shirt.","When":"Fill Search (searchbox) with shirt, inspect Search suggestions, then press Enter in Search.","Then":"Suggestions include Hummingbird detail t-shirt; the submitted Product list includes that same product."}
+TEST
+// requirement: REQ-1.3
+
+test("REQ-1.3: Suggest and search shirt", async ({ page }) => {
+  await home(page);
+  const search = nav(page).getByRole('searchbox', { name: 'Search', exact: true });
+  await search.focus(); await expect(search).toBeFocused();
+  await search.fill('shirt');
+  await expect(region(page, 'Search suggestions').getByText(DETAIL, { exact: true })).toBeVisible();
+  await search.press('Enter');
+  await expect(card(page, DETAIL)).toBeVisible();
+});
+
+
+REQ-1.4 Browse carousel promotions
+"Carousel"(role=region) contains at least two visually distinct promotion slides. Its visible image source or accessible name changes automatically within five seconds; clicking "Next"(role=button) changes the slide immediately. "Shop now"(role=link) opens a product or category containing Hummingbird detail t-shirt.
+
+The active carousel promotion is an image named for that promotion; exactly one promotion image is visible.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Displayed dates use UTC and the shared clock 2026-10-06T12:00:00Z; carousel transitions use elapsed time.
+SCN-REQ-1.4-01 Advance automatically
+{"Given":"The homepage Carousel is visible with an identifiable current promotion image.","When":"Observe the carousel without activating a control for up to five seconds.","Then":"The visible promotion image source or accessible name changes to a different slide."}
+SCN-REQ-1.4-02 Advance with Next
+{"Given":"The homepage Carousel is visible and its current promotion is recorded.","When":"Click Next (button) within Carousel.","Then":"The visible promotion changes to a different slide."}
+SCN-REQ-1.4-03 Shop from promotion
+{"Given":"The homepage Carousel offers Shop now (link).","When":"Activate Shop now.","Then":"A product detail for Hummingbird detail t-shirt or a category containing that product opens."}
+TEST
+// requirement: REQ-1.4
+
+test("REQ-1.4: Advance automatically", async ({ page }) => {
+  await home(page);
+  const before = await slideIdentity(page);
+  await expect.poll(() => slideIdentity(page), { timeout: 5_000, intervals: [50, 100] }).not.toEqual(before);
+});
+
+test("REQ-1.4: Advance with Next", async ({ page }) => {
+  await home(page);
+  const before = await slideIdentity(page);
+  await action(region(page, 'Carousel'), 'Next').click();
+  await expect.poll(() => slideIdentity(page), { timeout: 2_000 }).not.toEqual(before);
+});
+
+test("REQ-1.4: Shop from promotion", async ({ page }) => {
+  await home(page);
+  await action(region(page, 'Carousel'), 'Shop now').click();
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true }).or(page.getByRole('heading', { name: 'Men', exact: true }))).toBeVisible();
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true }).or(card(page, DETAIL))).toBeVisible();
+});
+
+
+REQ-1.5 Open popular product
+Within "Popular Products"(role=region), "Hummingbird detail t-shirt"(role=link) is keyboard-accessible. Activating it opens that same product's detail with its heading and Add to cart action.
+
+Popular product cards include quick-view and wishlist controls.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.5-01 Open popular t-shirt
+{"Given":"The homepage Popular Products contains Hummingbird detail t-shirt.","When":"Reach its named product link using the keyboard and activate it.","Then":"The product detail heading identifies Hummingbird detail t-shirt and Add to cart is visible."}
+TEST
+// requirement: REQ-1.5
+
+test("REQ-1.5: Open popular t-shirt", async ({ page }) => {
+  await home(page);
+  await tabTo(page, action(region(page, 'Popular Products'), DETAIL));
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+  await expect(action(page, 'Add to cart')).toBeVisible();
+});
+
+
+REQ-1.6 Open empty cart
+With an empty visitor cart, clicking "Cart"(role=link) opens Shopping cart with an empty-cart message and no cart t-shirt row.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.6-01 Inspect empty cart
+{"Given":"An anonymous visitor has added no products and Cart shows 0.","When":"Activate Cart (link) in Global navigation.","Then":"Shopping cart displays an empty-cart message and no Hummingbird cart t-shirt row."}
+TEST
+// requirement: REQ-1.6
+
+test("REQ-1.6: Inspect empty cart", async ({ page }) => {
+  await home(page); await action(nav(page), 'Cart').click();
+  await expect(page.getByRole('heading', { name: 'Shopping cart', exact: true })).toBeVisible();
+  await expect(page.getByText(/(?:cart is empty|no items in your cart)/i)).toBeVisible();
+  await expect(cartRow(page, CART)).toHaveCount(0);
+});
+
+
+REQ-1.7 Preview popular product without leaving home
+Hovering "Product Hummingbird detail t-shirt"(role=region) within Popular Products reveals "Quick view"(role=button). Clicking it opens "Quick view Hummingbird detail t-shirt"(role=dialog) with that exact product and its current price 24. "Close"(role=button) dismisses the preview and restores the homepage's Popular Products without adding anything to the cart.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-1.7-01 Preview popular product without leaving home
+{"Given":"The anonymous homepage contains the popular Hummingbird detail t-shirt and an empty cart.","When":"Hover its Product region, click Quick view (button), inspect the preview, then click Close within the dialog.","Then":"Quick view Hummingbird detail t-shirt displays that product and price 24; Close dismisses it, Popular Products remains visible, and Cart still reports 0."}
+TEST
+// requirement: REQ-1.7
+
+test("REQ-1.7: Preview popular product without leaving home", async ({ page }) => {
+  await home(page);
+  const popular = region(page, 'Popular Products');
+  const product = region(popular, `Product ${DETAIL}`); await product.hover();
+  await action(product, 'Quick view').click();
+  const preview = page.getByRole('dialog', { name: `Quick view ${DETAIL}`, exact: true });
+  await expect(preview).toBeVisible(); await expect(preview).toContainText(DETAIL);
+  await expectMoney(region(preview, 'Sale price'), 24);
+  await action(preview, 'Close').click(); await expect(preview).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Popular Products', exact: true })).toBeVisible();
+  await expect(action(nav(page), 'Cart')).toContainText('0');
+});
+
+
+REQ-2.1 Browse category hierarchy
+The Men category displays its heading, "Category description"(role=region), numeric "Product count"(role=status), "Sort by"(role=combobox), and product grid. "Breadcrumb"(role=navigation) presents Home, CLOTHES, and Men in order; its "CLOTHES"(role=link) returns to the parent category with CLOTHES heading and a Men entry. Parent-category Men and "Women"(role=link) entries are keyboard-accessible, and Women opens its own listing with Sort by.
+
+The category sidebar provides availability, sale, category, size, color, composition, price, and brand filters. Concrete behavior is specified only where the source provides an oracle. Subcategories is a named region.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.1-01 Inspect category and breadcrumb
+{"Given":"The seeded catalog is available to an anonymous visitor.","When":"Open CLOTHES then Men through Global navigation.","Then":"Men heading, Category description, numeric Product count, Sort by and Product list are visible; Breadcrumb presents Home, CLOTHES and Men in that order."}
+SCN-REQ-2.1-02 Return to parent category
+{"Given":"The visitor is viewing the Men category.","When":"Activate CLOTHES in Breadcrumb.","Then":"The parent CLOTHES category opens with its heading and a keyboard-accessible Men entry."}
+SCN-REQ-2.1-03 Browse Women from parent
+{"Given":"The visitor has returned from Men to the parent CLOTHES category using Breadcrumb.","When":"Focus Women (link) using the keyboard and activate it.","Then":"Women opens with its heading and Sort by control."}
+TEST
+// requirement: REQ-2.1
+
+test("REQ-2.1: Inspect category and breadcrumb", async ({ page }) => {
+  await home(page); await men(page);
+  await expect(page.getByRole('heading', { name: 'Men', exact: true })).toBeVisible();
+  await expect(region(page, 'Category description')).toContainText('Men');
+  const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb', exact: true });
+  await expect(breadcrumb).toHaveText(/Home\s*.*CLOTHES\s*.*Men/);
+  await expect(count(page)).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Sort by', exact: true })).toBeVisible();
+  await expect(region(page, 'Product list')).toBeVisible();
+});
+
+test("REQ-2.1: Return to parent category", async ({ page }) => {
+  await home(page); await men(page);
+  await action(page.getByRole('navigation', { name: 'Breadcrumb', exact: true }), 'CLOTHES').click();
+  await expect(page.getByRole('heading', { name: 'CLOTHES', exact: true })).toBeVisible();
+  await expect(action(region(page, 'Subcategories'), 'Men')).toBeVisible();
+});
+
+test("REQ-2.1: Browse Women from parent", async ({ page }) => {
+  await home(page); await action(nav(page), 'CLOTHES').click();
+  await expect(action(region(page, 'Subcategories'), 'Men')).toBeVisible();
+  await tabTo(page, action(region(page, 'Subcategories'), 'Women'));
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: 'Women', exact: true })).toBeVisible();
+  await expect(page.getByRole('combobox', { name: 'Sort by', exact: true })).toBeVisible();
+});
+
+
+REQ-2.2 Inspect and open product cards
+"Product Hummingbird detail t-shirt"(role=region) contains the product image, name, sale and regular prices, and Sale label. Hover reveals "Quick view"(role=button), "Wishlist"(role=link), and "White"(role=button) as the color preview. The keyboard-accessible "Hummingbird detail t-shirt"(role=link) opens that same product's detail with Add to cart.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.2-01 Inspect card and hover actions
+{"Given":"The visitor is viewing Men with Hummingbird detail t-shirt in Product list.","When":"Inspect Product Hummingbird detail t-shirt and hover that region.","Then":"The card shows its image, name, sale price 24, regular price 30 and Sale label; hover reveals Quick view, Wishlist and White color-preview controls."}
+SCN-REQ-2.2-02 Open card using keyboard
+{"Given":"Men Product list includes Hummingbird detail t-shirt.","When":"Use keyboard focus to reach its product link and activate it.","Then":"The exact product detail opens with its named heading and Add to cart."}
+TEST
+// requirement: REQ-2.2
+
+test("REQ-2.2: Inspect card and hover actions", async ({ page }) => {
+  await home(page); await men(page);
+  const product = card(page, DETAIL);
+  await expect(product.getByRole('img', { name: DETAIL, exact: true })).toBeVisible();
+  await expect(action(product, DETAIL)).toBeVisible();
+  await expect(product.getByText('Sale', { exact: true })).toBeVisible();
+  await expectMoney(region(product, 'Sale price'), 24); await expectMoney(region(product, 'Regular price'), 30);
+  await product.hover();
+  for (const name of ['Quick view', 'Wishlist', 'White']) await expect(action(product, name)).toBeVisible();
+});
+
+test("REQ-2.2: Open card using keyboard", async ({ page }) => {
+  await home(page); await men(page);
+  await tabTo(page, action(card(page, DETAIL), DETAIL)); await page.keyboard.press('Enter');
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+  await expect(action(page, 'Add to cart')).toBeVisible();
+});
+
+
+REQ-2.3 Filter catalog results
+Selecting "In stock"(role=checkbox) retains the White t-shirt and excludes the out-of-stock Black mug. Selecting "White"(role=checkbox) as the color filter also retains that t-shirt and excludes the Black mug. Entering a number in "Minimum price"(role=spinbutton) retains only products at or above that amount and updates "Product count"(role=status); entering 20 includes the White t-shirt and excludes the Black mug. "Clear all"(role=button) removes applied filters and restores the original results and count.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.3-01 Filter in-stock products
+{"Given":"The unfiltered Men catalog includes in-stock White t-shirt and out-of-stock Black mug.","When":"Check In stock (checkbox) in Filters.","Then":"White t-shirt remains in Product list and Black mug is excluded."}
+SCN-REQ-2.3-02 Filter White color
+{"Given":"The unfiltered Men catalog includes White t-shirt and Black mug.","When":"Check White (checkbox) in Filters.","Then":"White t-shirt remains in Product list and Black mug is excluded."}
+SCN-REQ-2.3-03 Filter minimum price
+{"Given":"The unfiltered Men catalog includes White t-shirt priced 22 and Black mug priced 12.","When":"Fill Minimum price (spinbutton) with 20 and commit the input.","Then":"White t-shirt remains, Black mug is excluded, and Product count reports the filtered result set."}
+SCN-REQ-2.3-04 Clear applied filters
+{"Given":"The visitor has opened Men and recorded the original Product count, then applied In stock.","When":"Click Clear all (button).","Then":"In stock is unchecked and the original Product count and previously excluded Black mug return."}
+TEST
+// requirement: REQ-2.3
+
+test("REQ-2.3: Filter in-stock products", async ({ page }) => {
+  await home(page); await men(page);
+  await page.getByRole('checkbox', { name: 'In stock', exact: true }).check();
+  await expect(card(page, WHITE)).toBeVisible(); await expect(card(page, BLACK)).toHaveCount(0);
+});
+
+test("REQ-2.3: Filter White color", async ({ page }) => {
+  await home(page); await men(page);
+  await page.getByRole('checkbox', { name: 'White', exact: true }).check();
+  await expect(card(page, WHITE)).toBeVisible(); await expect(card(page, BLACK)).toHaveCount(0);
+});
+
+test("REQ-2.3: Filter minimum price", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  await page.getByRole('spinbutton', { name: 'Minimum price', exact: true }).fill('20');
+  await page.getByRole('spinbutton', { name: 'Minimum price', exact: true }).blur();
+  await expect(count(page)).not.toHaveText(before);
+  await expect(card(page, WHITE)).toBeVisible(); await expect(card(page, BLACK)).toHaveCount(0);
+  await expect.poll(async () => (await listingPrices(page)).every(p => p >= 20)).toBe(true);
+});
+
+test("REQ-2.3: Clear applied filters", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const stock = page.getByRole('checkbox', { name: 'In stock', exact: true }); await stock.check();
+  await expect(card(page, BLACK)).toHaveCount(0); await expect(card(page, WHITE)).toBeVisible();
+  await action(page, 'Clear all').click();
+  await expect(stock).not.toBeChecked();
+  await expect(card(page, BLACK)).toBeVisible(); await expect(card(page, WHITE)).toBeVisible();
+  await expect(count(page)).toHaveText(before);
+});

@@ -1,3 +1,4 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -20,7 +21,7 @@ test('REQ-4.1.2: Copy Formulas and Adjust Relative References - Scenario 1', asy
   await expect(gridCell(page, 'A1')).toHaveText('1');
   await expect(gridCell(page, 'B1')).toHaveText('2');
   await expect(gridCell(page, 'A2')).toHaveText('10');
-  await expect(gridCell(page, 'C1')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 3);
   await expect(gridCell(page, 'C2')).toHaveText('');
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=A1+$B$1');
@@ -29,18 +30,18 @@ test('REQ-4.1.2: Copy Formulas and Adjust Relative References - Scenario 1', asy
   await gridCell(page, 'C2').click();
   await page.keyboard.press('Control+V');
 
-  await expect(gridCell(page, 'C2')).toHaveText('12');
-  await expect(gridCell(page, 'C1')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'C2'), 12);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 3);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=A1+$B$1');
   await gridCell(page, 'C2').click();
   await expect(formulaBar(page)).toHaveValue('=A2+$B$1');
 
   await page.reload();
-  await expect(gridCell(page, 'C1')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 3);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=A1+$B$1');
-  await expect(gridCell(page, 'C2')).toHaveText('12');
+  await expectCalculatedNumber(gridCell(page, 'C2'), 12);
   await gridCell(page, 'C2').click();
   await expect(formulaBar(page)).toHaveValue('=A2+$B$1');
 });

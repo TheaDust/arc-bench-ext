@@ -1,6 +1,6 @@
 // requirement: REQ-8.1
 import { test, expect } from '@playwright/test';
-import { identity, enter, region, entry, button, home, login, createBook } from './helpers';
+import { expectAbsentEntry, identity, enter, region, entry, button, home, login, createBook } from './helpers';
 
 test("REQ-8.1: Favorite a book", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -26,5 +26,5 @@ test("REQ-8.1: Persist removal of a favorite", async ({ page }, testInfo) => {
   await page.reload();
   await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
   await home(page);
-  await expect(entry(region(page, 'My Most Viewed Favorites'), book)).toHaveCount(0);
+  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), book);
 });

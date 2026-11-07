@@ -1,5 +1,7 @@
 # 需求与测试一致性收口
 
+当前版 `2026-11-07-per-task-semantic-review` 的完整逐题记录见 [audit/README.md](audit/README.md)。下文保留 `2026-11-06` 的历史定向收口证据，不能作为当前全部场景的完整验证结果。当前需求澄清、测试修订及未决问题以 audit 各题报告和 revision.json 为准。
+
 修订 `2026-11-06-isolated-scenarios`，父版本 `2026-11-06-consistency-audit`。
 
 前轮登记的 5 组问题现已分别落实到执行器、公开需求及正式测试。状态为 `targeted-gaps-closed`：表示这 5 组已知缺口的局部闭合；不表示全部 714 个场景均完成了真实应用端到端验证，也不表示每个条件分支已有独立故障注入。

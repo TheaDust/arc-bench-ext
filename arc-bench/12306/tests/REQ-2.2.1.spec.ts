@@ -9,4 +9,6 @@ test("REQ-2.2.1: Open credential login", async ({ page }) => {
   await expect(page.getByPlaceholder('Email/Username/Mobile number', { exact: true })).toBeVisible();
   await expect(page.getByPlaceholder('Password', { exact: true })).toBeVisible();
   await expect(button(page, 'LOGIN')).toBeVisible();
+  await expect(link(page, 'Sign Out')).not.toBeVisible();
+  await expect(page.getByPlaceholder('Password', { exact: true })).toHaveAttribute('type', 'password');
 });

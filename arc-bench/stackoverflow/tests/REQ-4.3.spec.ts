@@ -15,6 +15,10 @@ test('REQ-4.3: Accept and replace definitive solution', async ({ page, browser }
   await expect(action(region(page,'Answers'),'Accepted answer')).toHaveCount(1);
   await expect(action(answer(page,'Stack User'),'Accepted answer')).toBeVisible();
   await expect(action(answer(page),'Accepted answer')).toHaveCount(0);
+  await page.reload();
+  await expect(action(region(page,'Answers'),'Accepted answer')).toHaveCount(1);
+  await expect(action(answer(page,'Stack User'),'Accepted answer')).toBeVisible();
+  await expect(action(answer(page),'Accepted answer')).toHaveCount(0);
 });
 
 test('REQ-4.3: Prevent non-owner acceptance', async ({ page, browser }, info) => {

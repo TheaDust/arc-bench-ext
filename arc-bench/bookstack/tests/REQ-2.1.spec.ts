@@ -11,5 +11,6 @@ test("REQ-2.1: Show login form", async ({ page }, testInfo) => {
   await expect(formField(page, 'Password')).toBeVisible();
   await expect(formField(page, 'Password')).toHaveAttribute('type', 'password');
   await expect(button(page, 'Login')).toBeVisible();
+  await expect(page.getByRole('checkbox', { name: 'Remember Me', exact: true })).toBeVisible();
   await expect(page.getByRole('checkbox', { name: 'Remember Me', exact: true })).not.toBeChecked();
 });

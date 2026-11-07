@@ -1,0 +1,259 @@
+REQ-2.4 Sort products by ascending price
+Selecting Price, low to high in "Sort by"(role=combobox) orders the current prices in "Product list"(role=region) ascending while retaining the White t-shirt. Equal-price products have no prescribed tie order.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.4-01 Sort current prices ascending
+{"Given":"The unfiltered Men Product list includes White t-shirt.","When":"Select Price, low to high in Sort by (combobox).","Then":"The displayed current prices are nondecreasing, White t-shirt remains, and the selected sort label is shown; equal-price products have no required tie order."}
+TEST
+// requirement: REQ-2.4
+
+test("REQ-2.4: Sort current prices ascending", async ({ page }) => {
+  await home(page); await men(page);
+  const sort = page.getByRole('combobox', { name: 'Sort by', exact: true });
+  await selectChoice(sort, { label: 'Price, low to high' });
+  await expectSelectedChoice(sort, 'Price, low to high');
+  await expect(card(page, WHITE)).toBeVisible();
+  await expect.poll(async () => { const p = await listingPrices(page); return p.length >= 2 && p.every((v, i) => i === 0 || p[i - 1] <= v); }).toBe(true);
+});
+
+
+REQ-2.5 Browse additional result pages
+The unfiltered Men listing initially shows 12 of 13 products. "Product count"(role=status) displays Showing <start>-<end> of <total> item(s). Clicking "Next"(role=button) within "Pagination"(role=navigation) opens the remaining product slice and updates the range to 13-13 of 13 without changing the total.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.5-01 Inspect first page and browse second
+{"Given":"The unfiltered Men catalog contains 13 products.","When":"Record the first-page product identities, then click Next in Pagination (navigation).","Then":"Initially 12 products and Showing 1-12 of 13 are displayed; the second page shows one different product and Showing 13-13 of 13, preserving total 13."}
+TEST
+// requirement: REQ-2.5
+
+test("REQ-2.5: Inspect first page and browse second", async ({ page }) => {
+  await home(page); await men(page);
+  await expect(count(page)).toHaveText('Showing 1-12 of 13 item(s)');
+  const cards = region(page, 'Product list').getByRole('region', { name: /^Product / });
+  await expect(cards).toHaveCount(12); const before = await cards.allTextContents();
+  await action(page.getByRole('navigation', { name: 'Pagination', exact: true }), 'Next').click();
+  await expect(count(page)).toHaveText('Showing 13-13 of 13 item(s)');
+  await expect(cards).toHaveCount(1); const after = await cards.allTextContents();
+  expect(after).not.toEqual(before); expect(before).not.toContain(after[0]);
+});
+
+
+REQ-2.6 Filter products on sale
+Selecting "On sale"(role=checkbox) within "Filters"(role=region) includes discounted products and excludes undiscounted products according to published catalog. The visible results and "Product count"(role=status) update to the filtered set.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.6-01 Filter products on sale
+{"Given":"The unfiltered Men catalog contains Hummingbird detail t-shirt and White t-shirt with their published catalog attributes; its original Product count is recorded.","When":"Check On sale (checkbox) in Filters.","Then":"Hummingbird detail t-shirt remains in Product list, White t-shirt is excluded, and Product count changes to the filtered result set."}
+TEST
+// requirement: REQ-2.6
+
+test("REQ-2.6: Filter products on sale", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const filter = region(page, 'Filters').getByRole('checkbox', { name: 'On sale', exact: true });
+  await filter.check(); await expect(filter).toBeChecked();
+  await expect(card(page, 'Hummingbird detail t-shirt')).toBeVisible();
+  await expect(card(page, 'White t-shirt')).toHaveCount(0);
+  await expect(count(page)).not.toHaveText(before);
+});
+
+
+REQ-2.7 Filter product size
+Choosing "M"(role=checkbox) within "Filters"(role=region) includes products offering size M and excludes One size products, using published catalog attributes. The displayed results and "Product count"(role=status) update accordingly.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.7-01 Filter product size
+{"Given":"The unfiltered Men catalog contains White t-shirt and Black mug with their published catalog attributes; its original Product count is recorded.","When":"Check M (checkbox) in Filters.","Then":"White t-shirt remains in Product list, Black mug is excluded, and Product count changes to the filtered result set."}
+TEST
+// requirement: REQ-2.7
+
+test("REQ-2.7: Filter product size", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const filter = region(page, 'Filters').getByRole('checkbox', { name: 'M', exact: true });
+  await filter.check(); await expect(filter).toBeChecked();
+  await expect(card(page, 'White t-shirt')).toBeVisible();
+  await expect(card(page, 'Black mug')).toHaveCount(0);
+  await expect(count(page)).not.toHaveText(before);
+});
+
+
+REQ-2.8 Filter product composition
+Choosing "Cotton"(role=checkbox) within "Filters"(role=region) includes cotton products and excludes ceramic and polyester products according to published catalog. The result set and "Product count"(role=status) update together.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.8-01 Filter product composition
+{"Given":"The unfiltered Men catalog contains White t-shirt and Black mug with their published catalog attributes; its original Product count is recorded.","When":"Check Cotton (checkbox) in Filters.","Then":"White t-shirt remains in Product list, Black mug is excluded, and Product count changes to the filtered result set."}
+TEST
+// requirement: REQ-2.8
+
+test("REQ-2.8: Filter product composition", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const filter = region(page, 'Filters').getByRole('checkbox', { name: 'Cotton', exact: true });
+  await filter.check(); await expect(filter).toBeChecked();
+  await expect(card(page, 'White t-shirt')).toBeVisible();
+  await expect(card(page, 'Black mug')).toHaveCount(0);
+  await expect(count(page)).not.toHaveText(before);
+});
+
+
+REQ-2.9 Filter product brand
+Choosing "Hummingbird"(role=checkbox) within "Filters"(role=region) retains that brand and excludes Benchmark Basics using published catalog. The displayed results and "Product count"(role=status) reflect the selected brand.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.9-01 Filter product brand
+{"Given":"The unfiltered Men catalog contains Hummingbird detail t-shirt and White t-shirt with their published catalog attributes; its original Product count is recorded.","When":"Check Hummingbird (checkbox) in Filters.","Then":"Hummingbird detail t-shirt remains in Product list, White t-shirt is excluded, and Product count changes to the filtered result set."}
+TEST
+// requirement: REQ-2.9
+
+test("REQ-2.9: Filter product brand", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const filter = region(page, 'Filters').getByRole('checkbox', { name: 'Hummingbird', exact: true });
+  await filter.check(); await expect(filter).toBeChecked();
+  await expect(card(page, 'Hummingbird detail t-shirt')).toBeVisible();
+  await expect(card(page, 'White t-shirt')).toHaveCount(0);
+  await expect(count(page)).not.toHaveText(before);
+});
+
+
+REQ-2.10 Combine filters and clear them
+Filters combine by intersection. Selecting "In stock"(role=checkbox) and entering 25 in "Minimum price"(role=spinbutton) retains the cart t-shirt while excluding the White t-shirt priced 22 and the out-of-stock Black mug priced 12. "Clear all"(role=button) restores original first-page product identities and count, clears In stock, and resets Minimum price to empty or 0.
+
+Product list contains one "Product <name>" region per product. Sale price contains only the current monetary amount; discounted cards also expose Regular price. Monetary amounts use USD and a decimal point, with one numeric amount per amount region and an optional currency marker.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-2.10-01 Combine filters and clear them
+{"Given":"The visitor has recorded the unfiltered Men first-page product identities and count; White t-shirt costs 22, Black mug costs 12 and is out of stock, and Hummingbird cart t-shirt costs 25.","When":"Check In stock, enter 25 in Minimum price and commit it; inspect the results, then click Clear all.","Then":"The intersection includes Hummingbird cart t-shirt and excludes White t-shirt and Black mug; Clear all restores the original identities and count, unchecks In stock, and resets Minimum price to empty or 0."}
+TEST
+// requirement: REQ-2.10
+
+test("REQ-2.10: Combine filters and clear them", async ({ page }) => {
+  await home(page); await men(page);
+  const before = await count(page).innerText();
+  const products = region(page, 'Product list').getByRole('region', { name: /^Product / });
+  const identities = await products.allTextContents();
+  const stock = page.getByRole('checkbox', { name: 'In stock', exact: true }); await stock.check();
+  const minimum = page.getByRole('spinbutton', { name: 'Minimum price', exact: true }); await minimum.fill('25'); await minimum.blur();
+  await expect(stock).toBeChecked(); await expect(minimum).toHaveValue('25');
+  await expect(card(page, CART)).toBeVisible(); await expect(card(page, WHITE)).toHaveCount(0); await expect(card(page, BLACK)).toHaveCount(0);
+  await expect.poll(async () => (await listingPrices(page)).every(p => p >= 25)).toBe(true);
+  await action(page, 'Clear all').click(); await expect(stock).not.toBeChecked(); await expect(minimum).toHaveValue(/^(?:0)?$/);
+  await expect(count(page)).toHaveText(before); await expect(products).toHaveText(identities);
+});
+
+
+REQ-3.1 Inspect product details
+Opening Hummingbird detail t-shirt displays its heading and "Add to cart"(role=button). "Product images"(role=region) contains exactly one main image named Hummingbird detail t-shirt, thumbnail choices, and "Zoom"(role=button). "Product information"(role=region) shows its name, sale and regular prices, 20% discount, tax information, and regular-fit description.
+
+Product information exposes named Sale price and Regular price amounts. Stock status displays "Available stock: <number>". Selected product and variant remain consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+For Hummingbird detail t-shirt, the tax-inclusive sale price is USD 24, tax-exclusive price is USD 20, regular price is USD 30 and discount is 20%. The reference is HB-DETAIL, the description and features are regular-fit, the data sheet is cotton, the average rating is 4 with the existing Good fit review, and related products are from Men.
+SCN-REQ-3.1-01 Inspect selected product
+{"Given":"The seeded Hummingbird detail t-shirt is available in Men.","When":"Open its named product link and inspect Product images and Product information.","Then":"The detail heading and Add to cart identify the product; exactly one main image has its product name, thumbnails and Zoom are available, and information shows sale price 24, regular price 30, 20% discount, tax and regular-fit description."}
+TEST
+// requirement: REQ-3.1
+
+test("REQ-3.1: Inspect selected product", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+  await expect(action(page, 'Add to cart')).toBeVisible();
+  const images = region(page, 'Product images');
+  await expect(images.getByRole('img', { name: DETAIL, exact: true })).toHaveCount(1);
+  await expect(images.getByRole('img', { name: DETAIL, exact: true })).toBeVisible();
+  await expect(action(images, 'Zoom')).toBeVisible();
+  const info = region(page, 'Product information'); await expect(info).toContainText(DETAIL);
+  await expectMoney(region(info, 'Sale price'), 24); await expectMoney(region(info, 'Regular price'), 30);
+  await expect(info).toContainText('20%'); await expect(info).toContainText(/tax/i); await expect(info).toContainText(/regular.fit/i);
+});
+
+
+REQ-3.2 Select product combination and quantity
+Users choose M in "Size"(role=combobox) and "White"(role=radio), with price and stock reflecting that combination. "Quantity"(role=spinbutton) starts at 1; "Increase quantity"(role=button) changes it to 2, while "Decrease quantity"(role=button) returns it to 1 and cannot reduce it below 1. Direct entry of 3 is accepted. Entering 999 exceeds stock, so "Add to cart"(role=button) shows an insufficient-stock alert and adds no product.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.2-01 Choose M and White
+{"Given":"Hummingbird detail t-shirt detail is open with its available variants.","When":"Select M in Size (combobox) and White (radio).","Then":"Size visibly selects M and White is checked for the selected combination."}
+SCN-REQ-3.2-02 Adjust and directly enter quantity
+{"Given":"Hummingbird detail t-shirt detail is open and Quantity starts at 1.","When":"Click Increase quantity, Decrease quantity, and Decrease quantity again; then fill Quantity with 3.","Then":"Quantity changes to 2, returns to 1, remains 1 at the lower bound, then displays the directly entered value 3."}
+SCN-REQ-3.2-03 Reject quantity exceeding stock
+{"Given":"The anonymous visitor is viewing Hummingbird detail t-shirt with an empty cart and stock less than 999.","When":"Fill Quantity with 999 and click Add to cart.","Then":"An insufficient-stock alert appears and Cart remains 0; no success dialog is shown."}
+TEST
+// requirement: REQ-3.2
+
+test("REQ-3.2: Choose M and White", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  const size = page.getByRole('combobox', { name: 'Size', exact: true });
+  await selectChoice(size, { label: 'M' });
+  await expectSelectedChoice(size, 'M');
+  await page.getByRole('radio', { name: 'White', exact: true }).check();
+  await expect(page.getByRole('radio', { name: 'White', exact: true })).toBeChecked();
+});
+
+test("REQ-3.2: Adjust and directly enter quantity", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  const q = page.getByRole('spinbutton', { name: 'Quantity', exact: true }); await expect(q).toHaveValue('1');
+  await action(page, 'Increase quantity').click(); await expect(q).toHaveValue('2');
+  await action(page, 'Decrease quantity').click(); await expect(q).toHaveValue('1');
+  const decrease = action(page, 'Decrease quantity');
+  if (await decrease.isEnabled()) await decrease.click();
+  await expect(q).toHaveValue('1');
+  await q.fill('3'); await expect(q).toHaveValue('3');
+});
+
+test("REQ-3.2: Reject quantity exceeding stock", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  await page.getByRole('spinbutton', { name: 'Quantity', exact: true }).fill('999'); await action(page, 'Add to cart').click();
+  await expect(page.getByRole('alert')).toContainText(/(?:insufficient|not enough|exceeds).*stock|stock.*(?:insufficient|not enough)/i);
+  await expect(success(page)).toHaveCount(0);
+  await expect(action(nav(page), 'Cart')).toContainText(/\b0\b/);
+  await action(nav(page), 'Cart').click();
+  await expect(cartRow(page, DETAIL)).toHaveCount(0);
+});
+
+
+REQ-3.3 Add product to cart and choose next destination
+Clicking "Add to cart"(role=button) for one default available Hummingbird cart t-shirt opens "Product successfully added to your shopping cart"(role=dialog) with that product and increases cart count. "Continue shopping"(role=link) closes the dialog and returns to the same detail; "Proceed to checkout"(role=link) opens Shopping cart with that product and its correct subtotal.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.3-01 Add default product
+{"Given":"Hummingbird cart t-shirt detail is open with default M/White variant, Quantity 1 and an empty cart.","When":"Click Add to cart (button).","Then":"Product successfully added to your shopping cart (dialog) identifies Hummingbird cart t-shirt and Cart reports one unit."}
+SCN-REQ-3.3-02 Continue on same product
+{"Given":"One default Hummingbird cart t-shirt has been added through Add to cart and its success dialog is open.","When":"Activate Continue shopping in the success dialog.","Then":"The dialog closes and the same product detail remains visible."}
+SCN-REQ-3.3-03 Proceed from confirmation to cart
+{"Given":"One default Hummingbird cart t-shirt has been added through Add to cart and its success dialog is open.","When":"Activate Proceed to checkout in the success dialog.","Then":"Shopping cart opens with the named product row and subtotal 25."}
+TEST
+// requirement: REQ-3.3
+
+test("REQ-3.3: Add default product", async ({ page }) => {
+  await home(page); await openProduct(page, CART); await expect(page.getByRole('spinbutton', { name: 'Quantity', exact: true })).toHaveValue('1');
+  await action(page, 'Add to cart').click(); await expect(success(page)).toBeVisible(); await expect(success(page)).toContainText(CART);
+  await expect(action(nav(page), 'Cart')).toContainText('1');
+});
+
+test("REQ-3.3: Continue on same product", async ({ page }) => {
+  await home(page); await addProduct(page, CART);
+  await action(success(page), 'Continue shopping').click(); await expect(success(page)).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: CART, exact: true })).toBeVisible(); await expect(action(page, 'Add to cart')).toBeVisible();
+});
+
+test("REQ-3.3: Proceed from confirmation to cart", async ({ page }) => {
+  await home(page); await addProduct(page, CART); await action(success(page), 'Proceed to checkout').click();
+  await expect(page.getByRole('heading', { name: 'Shopping cart', exact: true })).toBeVisible();
+  await expect(cartRow(page, CART)).toBeVisible(); await expectMoney(region(cartRow(page, CART), 'Subtotal'), 25);
+});

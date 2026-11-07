@@ -1,5 +1,5 @@
 import { expectVisibleText } from './support/public-controls';
-import { test, expect, entry, action, region, mainNav, numeric } from './helpers';
+import { test, expect, entry, action, region, mainNav, numeric, visitFeed } from './helpers';
 import { retryTitle } from './fixtures/data';
 
 // requirement: REQ-6.1
@@ -21,11 +21,13 @@ test('REQ-6.1: Browse popular tags and python questions', async ({ page, browser
   await action(region(catalog,'Tag python'),'python').click();
   await expect(region(page,'Python tag')).toContainText('python programming questions');
   await expect(region(page,'Related tags')).toBeVisible();
-  const feed=region(page,'Question feed');
-  await expect(action(feed,'SO Python Unanswered Recent')).toBeVisible();
-  await expect(action(feed,'SO Python Answered Active')).toBeVisible();
-  await expect(action(feed,retryTitle)).toHaveCount(0);
-  const summaries=feed.getByRole('region',{name:/^Question /});
-  expect(await summaries.count()).toBeGreaterThan(0);
-  for (const summary of await summaries.all()) await expectVisibleText(summary, 'python');
+  const found = new Set<string>();
+  await visitFeed(page, async feed => {
+    for (const title of ['SO Python Unanswered Recent','SO Python Answered Active'])
+      if (await region(feed, `Question ${title}`).isVisible()) found.add(title);
+    await expect(action(feed,retryTitle)).toHaveCount(0);
+    for (const summary of await feed.getByRole('region',{name:/^Question /}).all())
+      await expectVisibleText(summary, 'python');
+  });
+  expect([...found].sort()).toEqual(['SO Python Answered Active','SO Python Unanswered Recent']);
 });

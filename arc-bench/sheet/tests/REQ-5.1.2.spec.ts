@@ -1,5 +1,6 @@
 import { selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
+import { expectCsvValues } from './support/observations';
 import { expect, Page, test } from '@playwright/test';
 import {
   createBlankWorkbook,
@@ -180,7 +181,7 @@ test('REQ-5.1.2: Filter Rows by Value or Condition - Scenario 3', async ({ page 
   const downloadPromise = page.waitForEvent('download');
   await page.getByRole('button', { name: /^Export CSV$/ }).click();
   const exported = normalizeCsv(await readDownload(await downloadPromise));
-  expect(exported).toBe(sourceCsv);
+  expectCsvValues(exported, sourceCsv);
 
   await page.reload();
   await expect(gridCell(page, 'A3')).not.toBeVisible();

@@ -6,8 +6,7 @@ test("REQ-2.2.2: Authenticate by username email and mobile", async ({ page }) =>
     await entry(page);
     for (const identity of ['registered_user', 'registered_user@example.com', '13800000010']) {
         await login(page, identity);
-        await expect.poll(async () => (await page.getByRole('status').filter({ visible: true }).allTextContents())
-            .some(message => message.includes('Login successful'))).toBe(true);
+        await text(page, 'Login successful', false);
         await expect(link(page.getByRole('navigation'), 'Booking')).toBeVisible();
         await home(page);
         await expect(region(page, 'Ticket search')).toBeVisible();

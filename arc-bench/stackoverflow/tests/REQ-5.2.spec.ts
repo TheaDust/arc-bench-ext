@@ -1,4 +1,4 @@
-import { test, expect, login, openQuestion, post, comment, publishComment, createQuestion } from './helpers';
+import { test, expect, login, openQuestion, post, comment, publishComment, createQuestion, expectTimestamp } from './helpers';
 import {  } from './fixtures/data';
 
 // requirement: REQ-5.2
@@ -8,6 +8,8 @@ test('REQ-5.2: Publish a question comment', async ({ page, browser }, info) => {
   await login(page,'question_comment_user'); await openQuestion(page,title);
   await publishComment(post(page));
   await expect(await comment(post(page))).toContainText('Stack User');
-  await expect(await comment(post(page))).toContainText(/2026|ago|just now/);
+  await expectTimestamp(await comment(post(page)));
   await page.reload(); await expect(await comment(post(page))).toBeVisible();
+  await expect(await comment(post(page))).toContainText('Stack User');
+  await expectTimestamp(await comment(post(page)));
 });

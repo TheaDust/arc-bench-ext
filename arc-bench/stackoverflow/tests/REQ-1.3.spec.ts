@@ -11,5 +11,5 @@ test('REQ-1.3: Read without an account', async ({ page, browser }, info) => {
   for (const tag of ['node.js','http','retry']) await expectVisibleText(post(page), tag);
   for (const name of ['Log in','Sign up']) await expect(action(page.getByRole('banner'),name)).toBeVisible();
   await expect(region(page,'Log in')).toHaveCount(0);
-  await expect(region(page,'Answers')).toBeVisible();
+  await expect(region(page,'Answers')).toHaveCount(1);
 });

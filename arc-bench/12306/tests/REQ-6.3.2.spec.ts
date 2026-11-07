@@ -15,4 +15,5 @@ test("REQ-6.3.2: Save passenger type", async ({ page }) => {
     await expect(button(r, 'Edit')).toBeVisible();
     await page.reload();
     await expect(r).toContainText('Child');
+    await expect(button(r, 'Edit')).toBeVisible();
 });

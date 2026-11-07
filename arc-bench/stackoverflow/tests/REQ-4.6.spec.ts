@@ -16,12 +16,14 @@ test('REQ-4.6: Delete answer and reverse vote reputation', async ({ page, browse
   });
   await login(page,'answer_delete_user'); await openQuestion(page,title);
   await action(answer(page,'Stack User'),'Delete').click(); await confirmDeletion(page);
-  await expect(region(page,'Answers').getByText(text,{exact:true})).toHaveCount(0);
+  await expect(region(page,'Answers')).toHaveCount(1);
+  await expect(region(page,'Answers').getByText(text,{exact:true}).filter({visible:true})).toHaveCount(0);
   await expect(output(page,'Answer count')).toHaveText('0');
   await ownProfile(page); await expectNumeric(page,'Reputation',reputation);
   await asUser(browser,'stack_user',async visitor => {
    await openQuestion(visitor,title);
-   await expect(region(visitor,'Answers').getByText(text,{exact:true})).toHaveCount(0);
+   await expect(region(visitor,'Answers')).toHaveCount(1);
+   await expect(region(visitor,'Answers').getByText(text,{exact:true}).filter({visible:true})).toHaveCount(0);
    await expect(output(visitor,'Answer count')).toHaveText('0');
   });
 });

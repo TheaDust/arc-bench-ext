@@ -1,0 +1,36 @@
+{
+  "executionMode": "integrated run plus targeted supplemental run, not one fresh 175-test execution",
+  "integratedRun": {
+    "report": "contract-runs/integration-174.json",
+    "startTime": "2026-11-07T09:42:20.541Z",
+    "duration": 68359.615,
+    "expected": 174,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "supplementalRun": {
+    "report": "contract-runs/stackoverflow-final.json",
+    "startTime": "2026-11-07T09:48:09.796Z",
+    "duration": 8548.245,
+    "expected": 25,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "uniqueTests": 175,
+  "unchangedOtherTaskTestsRetained": 150,
+  "replacedEarlierStackOverflowTests": 24,
+  "newStackOverflowTestsExecuted": 25,
+  "changedSourceFiles": [
+    "arc-bench/stackoverflow/tests/helpers.ts",
+    "arc-bench/stackoverflow/tests/REQ-1.3.spec.ts",
+    "arc-bench/stackoverflow/tests/REQ-4.6.spec.ts",
+    "arc-bench/stackoverflow/tests/REQ-6.5.spec.ts",
+    "arc-bench/stackoverflow/tests/REQ-6.6.spec.ts",
+    "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+    "arc-bench/sheet/tests/REQ-2.1.1.spec.ts",
+    "audit/validation/stackoverflow.spec.ts"
+  ],
+  "sourceEvidence": "Seven other tasks retain identical contract/helper/shared inputs. Late formal-spec assertions were typechecked and collected; no formal business application scenarios were executed."
+}

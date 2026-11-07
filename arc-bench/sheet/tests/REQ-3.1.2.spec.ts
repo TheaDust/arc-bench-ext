@@ -1,3 +1,5 @@
+import { expectCalculatedNumber } from './support/observations';
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -56,7 +58,7 @@ test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 2', async ({ page }
   await gridCell(page, 'A1').click();
   await page.keyboard.press('Control+V');
 
-  await expect(page.getByText(/Please enter a number between 0 and 100/)).toBeVisible();
+  await expectText(page, /Please enter a number between 0 and 100/);
   await expect(gridCell(page, 'A1')).toHaveText('10');
   await expect(gridCell(page, 'A2')).toHaveText('20');
   await page.reload();
@@ -76,7 +78,7 @@ test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 3', async ({ page }
 
   await expect(gridCell(page, 'A1')).toHaveText('3');
   await expect(gridCell(page, 'B1')).toHaveText('5');
-  await expect(gridCell(page, 'C1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('5');
   await gridCell(page, 'C1').click();
@@ -85,7 +87,9 @@ test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 3', async ({ page }
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('3');
   await expect(gridCell(page, 'B1')).toHaveText('5');
-  await expect(gridCell(page, 'C1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 6);
+  await gridCell(page, 'C1').click();
+  await expect(formulaBar(page)).toHaveValue('=B1+1');
 });
 
 test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 4', async ({ page }) => {
@@ -104,6 +108,7 @@ test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 4', async ({ page }
   await expect(gridCell(page, 'A1')).toHaveText('Alpha');
   await expect(gridCell(page, 'B1')).toHaveText('');
   await expect(gridCell(page, 'C1')).toHaveText('Gamma');
+  await expect(gridCell(page, 'E4')).toHaveText('Keep');
 });
 
 test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 5', async ({ page }) => {
@@ -122,4 +127,7 @@ test('REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 5', async ({ page }
   await page.reload();
   await expect(gridCell(page, 'C3')).toHaveText('One');
   await expect(gridCell(page, 'D4')).toHaveText('Four');
+  await expect(gridCell(page, 'D3')).toHaveText('Two');
+  await expect(gridCell(page, 'C4')).toHaveText('Three');
+  await expect(gridCell(page, 'A1')).toHaveText('Outside');
 });

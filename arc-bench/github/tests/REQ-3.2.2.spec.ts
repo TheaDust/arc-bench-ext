@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { branchState, createFile } from './support/branch-state';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -30,13 +31,13 @@ test('REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1', async (
   await page.getByRole('button', { name: /^Create fork$/ }).click();
 
   await expect(page.getByRole('heading', { name: new RegExp(forkName, 'i') })).toBeVisible();
-  await expect(page.getByText(new RegExp(`forked from.*${sourceRepositoryName}`, 'i'))).toBeVisible();
+  await expectText(page, new RegExp(`forked from.*${sourceRepositoryName}`, 'i'));
   const forkUrl = page.url();
   const copied = { ...source, owner: account.username };
   expect(await branchState(page)).toEqual(copied);
   await page.reload();
   expect(await branchState(page)).toEqual(copied);
-  await expect(page.getByText(`Forked from ${sourceRepositoryName}`, { exact: true })).toBeVisible();
+  await expectText(page, `Forked from ${sourceRepositoryName}`, { exact: true });
   await page.getByRole('link', { name: 'Owner repositories', exact: true }).click();
   await page.reload();
   await expect(page.getByRole('link', { name: forkName, exact: true })).toHaveCount(1);
@@ -73,5 +74,5 @@ test('REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 2', async (
   await page.getByRole('button', { name: 'Fork', exact: true }).click();
   await page.getByRole('textbox', { name: 'Repository name', exact: true }).fill(existingForkName);
   await page.getByRole('button', { name: /^Create fork$/ }).click();
-  await expect(page.getByText(/name.*(already|exists)/i)).toBeVisible();
+  await expectText(page, /name.*(already|exists)/i);
 });

@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -17,7 +18,7 @@ test('REQ-6.3.4: Submit a Pull Request Review - Scenario 1', async ({ page }, te
   await page.getByRole('button', { name: /review changes/i }).click();
   await page.getByRole('radio', { name: /approve/i }).check();
   await page.getByRole('button', { name: /submit review/i }).click();
-  await expect(page.getByText(/approved/i)).toBeVisible();
+  await expectText(page, /approved/i);
 });
 
 test('REQ-6.3.4: Submit a Pull Request Review - Scenario 2', async ({ page }, testInfo) => {
@@ -33,8 +34,8 @@ test('REQ-6.3.4: Submit a Pull Request Review - Scenario 2', async ({ page }, te
   await page.getByRole('radio', { name: /request changes/i }).check();
   await page.getByRole('button', { name: /submit review/i }).click();
 
-  await expect(page.getByText(/changes requested/i)).toBeVisible();
-  await expect(page.getByText(summary, { exact: true })).toBeVisible();
+  await expectText(page, /changes requested/i);
+  await expectText(page, summary, { exact: true });
   await page.reload();
-  await expect(page.getByText(/changes requested/i)).toBeVisible();
+  await expectText(page, /changes requested/i);
 });

@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -17,9 +18,14 @@ test('REQ-6.4: Request or Remove Pull Request Reviewers - Scenario 1', async ({ 
   await page.getByRole('button', { name: /reviewers/i }).click();
   await page.getByRole('textbox', { name: 'Search', exact: true }).fill(reviewer);
   await page.getByRole('option', { name: reviewer, exact: true }).click();
-  await expect(page.getByText(reviewer, { exact: true })).toBeVisible();
+  const removeRequest = page.getByRole('button', { name: `Remove ${reviewer}`, exact: true }).filter({ visible: true });
+  await expectText(page, reviewer, { exact: true });
+  await expect(removeRequest).toBeVisible();
   await page.reload();
-  await expect(page.getByText(reviewer, { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: new RegExp(`remove.*${reviewer}`, 'i') }).click();
-  await expect(page.getByText(reviewer, { exact: true })).not.toBeVisible();
+  await expectText(page, reviewer, { exact: true });
+  await expect(removeRequest).toBeVisible();
+  await removeRequest.click();
+  await expect(removeRequest).toHaveCount(0);
+  await page.reload();
+  await expect(removeRequest).toHaveCount(0);
 });

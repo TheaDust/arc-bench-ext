@@ -1,3 +1,4 @@
+import { expectCartUnits } from './helpers';
 // requirement: REQ-1.1
 import { test, expect } from '@playwright/test';
 import { home, nav, action, region, card, count, tabTo, men, openProduct, slideIdentity, expectMoney, listingPrices, cartRow, success, addProduct, cartSetup, login, loginEmail, account, createAddress, fillAddress, addressesStep, checkoutSetup, shippingStep, paymentStep, placeOrder, confirmDeletion, history, historyRow, wishlistPage, createWishlist, wishlist, wishlistProduct, DETAIL, CART, STEP, WHITE, BLACK, HISTORY_PRODUCT, WISH_PRODUCT } from './helpers';
@@ -7,9 +8,9 @@ test("REQ-1.1: Discover homepage", async ({ page }) => {
   for (const name of ['Logo', 'CLOTHES', 'Sign in', 'Cart']) await expect(action(nav(page), name)).toBeVisible();
   await expect(nav(page).getByRole('searchbox', { name: 'Search', exact: true })).toBeVisible();
   await expect(nav(page).getByRole('combobox', { name: 'Language', exact: true })).toBeVisible();
-  await expect(action(nav(page), 'Cart')).toContainText('0');
+  await expectCartUnits(page, 0);
   for (const name of ['Carousel', 'Popular Products', 'Promotions', 'Newsletter']) await expect(region(page, name)).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Popular Products', exact: true })).toBeVisible();
+  await expect(region(page, 'Popular Products')).toBeVisible();
   await expect(action(region(page, 'Popular Products'), DETAIL)).toBeVisible();
   await expect(page.getByRole('contentinfo')).toBeVisible();
 });

@@ -1,3 +1,4 @@
+import { expectText } from './helpers';
 import { formField } from './support/public-controls';
 // requirement: REQ-6.2
 import { test, expect } from '@playwright/test';
@@ -9,5 +10,5 @@ test("REQ-6.2: Create new customer", async ({ page }) => {
   const values = { 'First name': 'New', 'Last name': 'Customer', Email: 'new_customer_7_3@example.com', Password: 'ShopPass123!', Birthdate: '1995-08-21' };
   for (const [name, value] of Object.entries(values)) { await formField(page, name).fill(value); await expect(formField(page, name)).toHaveValue(value); }
   for (const name of ['Receive offers', 'Newsletter', 'Terms']) { const c = page.getByRole('checkbox', { name, exact: true }); await c.check(); await expect(c).toBeChecked(); }
-  await action(page, 'Save').click(); await expect(page.getByText('New Customer', { exact: true })).toBeVisible(); await expect(action(nav(page), 'My account')).toBeVisible();
+  await action(page, 'Save').click(); await expectText(nav(page), 'New Customer'); await expect(action(nav(page), 'My account')).toBeVisible();
 });

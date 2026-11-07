@@ -6,10 +6,29 @@ export { ACCOUNTS, IDS };
 const runId = randomBytes(8).toString('hex');
 type Scope = Page | Locator;
 const choiceFields = new Set(['Cabin class', 'Airline', 'Type', 'Gender']);
-export const field = (s: Scope, name: string) =>
-  formField(s, name, choiceFields.has(name) ? 'combobox' : 'textbox');
+export const field = (s: Scope, name: string) => {
+  const control = formField(s, name, choiceFields.has(name) ? 'combobox' : 'textbox');
+  return /password/i.test(name) ? control.and(s.locator('input[type="password"]')) : control;
+};
 export const button = (s: Scope, name: string) => s.getByRole('button', { name, exact: true });
-export const action = (s: Scope, name: string) => button(s, name).or(s.getByRole('link', { name, exact: true }));
+const declaredButtonActions = new Set(['My account', 'Flights', 'More services', 'Airport guide',
+  'Domestic airport directory', 'International airport directory', 'Free registration', 'Resend code',
+  'My information', 'View more orders from the past year', 'Shanghai - Beijing']);
+const declaredLinkActions = new Set(['Verification code login', 'Password login']);
+export const action = (s: Scope, name: string) => {
+  if (declaredButtonActions.has(name)) return button(s, name);
+  const link = s.getByRole('link', { name, exact: true });
+  return declaredLinkActions.has(name) ? link : button(s, name).or(link);
+};
+// These account entries have no declared control role; retain exact identity and strict uniqueness.
+export const accountEntry = (s: Scope, name: 'Orders' | 'Personal center') => action(s, name)
+  .or(s.getByRole('menuitem', { name, exact: true }));
+
+export async function expectFeeAbsent(page: Page, fee: string) {
+  const details = region(page, 'Fee details');
+  await expect(details).toBeVisible();
+  await expect(details.getByText(fee, { exact: true }).filter({ visible: true })).toHaveCount(0);
+}
 export const region = (s: Scope, name: string) => s.getByRole('region', { name, exact: true });
 export const dialog = (s: Scope, name: string) => s.getByRole('dialog', { name, exact: true });
 export const tab = (s: Scope, name: string) => s.getByRole('tab', { name, exact: true });
@@ -22,6 +41,12 @@ export const record = (s: Scope, name: string) => s.getByRole('listitem', { name
 // Count only publicly named business records, not nested decorative lists or table headers.
 export const records = (s: Scope) => s.getByRole('listitem', { name: /^Record / })
   .or(s.getByRole('row', { name: /^Record / })).or(s.getByRole('group', { name: /^Record / }));
+export async function expectEmptyRecords(page: Page, name: string) {
+  const list = region(page, name);
+  // Empty accessible collections need no nonzero visual area.
+  await expect(list).toHaveCount(1);
+  await expect(records(list)).toHaveCount(0);
+}
 export const flight = (page: Page, number: string) => region(page, 'Flight list').getByRole('listitem', { name: `Flight ${number}`, exact: true });
 export const visible = async (l: Locator) => { await expect(l).toBeVisible(); };
 export const heading = async (page: Page, name: string) => visible(page.getByRole('heading', { name, exact: true }));
@@ -108,9 +133,9 @@ export async function submitBooking(page: Page) {
   await checkbox(page, 'Agree to booking terms').check();
   await button(page, 'Submit order').click();
 }
-export async function openOrders(page: Page, owner: string) { await loginOwner(page, owner); await button(page, 'My account').click(); await page.getByRole('link', { name: 'Orders', exact: true }).click(); }
+export async function openOrders(page: Page, owner: string) { await loginOwner(page, owner); await button(page, 'My account').click(); await accountEntry(page, 'Orders').click(); }
 export async function openOrderDetails(page: Page, owner: string, number: string) { await openOrders(page, owner); await button(record(region(page, 'Order list'), number), 'View details').click(); }
-export async function openPersonal(page: Page, owner: string) { await loginOwner(page, owner); await button(page, 'My account').click(); await page.getByRole('link', { name: 'Personal center', exact: true }).click(); }
+export async function openPersonal(page: Page, owner: string) { await loginOwner(page, owner); await button(page, 'My account').click(); await accountEntry(page, 'Personal center').click(); }
 export async function openCommon(page: Page, owner: string, name: string) { await openPersonal(page, owner); await button(page, 'Common information').click(); await page.getByRole('link', { name, exact: true }).click(); }
 export async function createTraveler(page: Page, name: string, id: string) {
   await button(page, 'Add traveler').click();

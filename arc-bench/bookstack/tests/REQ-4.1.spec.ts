@@ -1,6 +1,6 @@
 // requirement: REQ-4.1
 import { test, expect } from '@playwright/test';
-import { identity, enter, region, entry, go, createShelf } from './helpers';
+import { expectKeyboardEntry, identity, enter, region, entry, go, createShelf } from './helpers';
 
 test("REQ-4.1: Show a uniquely identified item", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -9,6 +9,5 @@ test("REQ-4.1: Show a uniquely identified item", async ({ page }, testInfo) => {
   await go(page, 'Shelves');
   await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(1);
   await expect(entry(region(page, 'Shelf list'), name)).toBeVisible();
-  await entry(region(page, 'Shelf list'), name).focus();
-  await expect(entry(region(page, 'Shelf list'), name)).toBeFocused();
+  await expectKeyboardEntry(page, entry(region(page, 'Shelf list'), name));
 });

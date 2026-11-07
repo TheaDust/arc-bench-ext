@@ -1,3 +1,4 @@
+import { expectCartUnits } from './helpers';
 import { expectSelectedChoice, selectChoice } from './support/public-controls';
 // requirement: REQ-3.2
 import { test, expect } from '@playwright/test';
@@ -28,7 +29,7 @@ test("REQ-3.2: Reject quantity exceeding stock", async ({ page }) => {
   await page.getByRole('spinbutton', { name: 'Quantity', exact: true }).fill('999'); await action(page, 'Add to cart').click();
   await expect(page.getByRole('alert')).toContainText(/(?:insufficient|not enough|exceeds).*stock|stock.*(?:insufficient|not enough)/i);
   await expect(success(page)).toHaveCount(0);
-  await expect(action(nav(page), 'Cart')).toContainText(/\b0\b/);
+  await expectCartUnits(page, 0);
   await action(nav(page), 'Cart').click();
   await expect(cartRow(page, DETAIL)).toHaveCount(0);
 });

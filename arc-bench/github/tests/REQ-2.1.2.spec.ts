@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import { seedValue, signIn, seedAccount, clickVisibleTarget } from './support/e2e';
@@ -34,7 +35,7 @@ test('REQ-2.1.2: Create an Organization After Authentication - Scenario 2', asyn
   await page.getByRole('textbox', { name: 'Organization name', exact: true }).fill(existingOrganizationIdentifier);
   await page.getByRole('button', { name: 'Create organization', exact: true }).click();
 
-  await expect(page.getByText('Organization name already exists', { exact: true })).toBeVisible();
+  await expectText(page, 'Organization name already exists', { exact: true });
   await expect(
     page.getByRole('heading', { name: new RegExp(existingOrganizationIdentifier, 'i') }),
   ).not.toBeVisible();
@@ -49,5 +50,7 @@ test('REQ-2.1.2: Create an Organization After Authentication - Scenario 3', asyn
   await page.getByRole('textbox', { name: 'Organization name', exact: true }).fill('-invalid-organization');
   await page.getByRole('textbox', { name: 'Display name', exact: true }).fill('   ');
   await page.getByRole('button', { name: 'Create organization', exact: true }).click();
-  await expect(page.getByText('Organization name format is invalid', { exact: true })).toBeVisible();
+  await expectText(page, 'Organization name format is invalid', { exact: true });
+  await expectText(page, 'Display name is required', { exact: true });
+  await expect(page.getByRole('textbox', { name: 'Organization name', exact: true })).toHaveValue('-invalid-organization');
 });

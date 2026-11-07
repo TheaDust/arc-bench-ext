@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -14,9 +15,9 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 1', async ({ 
   await openVisibleTarget(page, pullRequestEntry);
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /^Commits$/ }).click();
-  await expect(page.getByText(/commit/i)).toBeVisible();
+  await expectText(page, /commit/i);
   await page.getByRole('link', { name: /files changed/i }).click();
-  await expect(page.getByText(/changed files/i)).toBeVisible();
+  await expectText(page, /changed files/i);
 });
 
 test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 2', async ({ page }, testInfo) => {
@@ -28,7 +29,7 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 2', async ({ 
   await page.reload();
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /^Commits$/ }).click();
-  await expect(page.getByText(/commit/i)).toBeVisible();
+  await expectText(page, /commit/i);
 });
 
 test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 3', async ({
@@ -43,5 +44,5 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 3', async ({
   await openVisibleTarget(page, pullRequestEntry);
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /files changed/i }).click();
-  await expect(page.getByText(/changed files/i)).toBeVisible();
+  await expectText(page, /changed files/i);
 });

@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -18,9 +19,9 @@ test('REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1', async 
   await page.getByRole('button', { name: 'Add comment', exact: true }).first().click();
   await page.getByRole('textbox', { name: 'Comment', exact: true }).fill(comment);
   await page.getByRole('button', { name: 'Add single comment', exact: true }).click();
-  await expect(page.getByText(comment, { exact: true })).toBeVisible();
+  await expectText(page, comment, { exact: true });
   await page.reload();
-  await expect(page.getByText(comment, { exact: true })).toBeVisible();
+  await expectText(page, comment, { exact: true });
 });
 
 test('REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 2', async ({ page }, testInfo) => {
@@ -35,8 +36,8 @@ test('REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 2', async 
   await page.getByRole('textbox', { name: 'Comment', exact: true }).fill(comment);
   await page.getByRole('button', { name: /start a review/i }).click();
 
-  await expect(page.getByText(comment, { exact: true })).toBeVisible();
-  await expect(page.getByText(/pending|pending review/i)).toBeVisible();
+  await expectText(page, comment, { exact: true });
+  await expectText(page, /pending|pending review/i);
   await page.reload();
-  await expect(page.getByText(/pending|pending review/i)).toBeVisible();
+  await expectText(page, /pending|pending review/i);
 });

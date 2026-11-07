@@ -1,111 +1,67 @@
 {
-  "version": 5,
-  "revision": "2026-11-06-isolated-scenarios",
-  "validatedAt": "2026-11-06",
-  "qualityStatus": "targeted-gaps-closed",
-  "scope": "The five previously registered gap groups; not full behavioral certification of all applications.",
-  "tasks": [
-    "12306",
-    "bookstack",
-    "ctrip",
-    "github",
-    "keep",
-    "prestashop",
-    "sheet",
-    "stackoverflow"
-  ],
-  "inputs": {
-    "status": "passed",
+  "revision": "2026-11-07-per-task-semantic-review",
+  "manifestSha256": "e867af2d36db5abeb62de955ed60fa85b46e951ddc7b34ca1430bd4e709027ff",
+  "recordedAt": "2026-11-07T09:54:23.641Z",
+  "status": "source-reviewed-targeted-validation-passed",
+  "scope": {
+    "tasks": 8,
     "atomicRequirements": 408,
     "scenarios": 714,
-    "frozenFiles": 669,
-    "referenceFiles": 201,
-    "changedInputFiles": 16,
-    "publicRequirementChanges": 8,
-    "report": "validation/inputs.json",
-    "preservationReport": "validation/preservation-report.json"
+    "allScenarioGwtReviewed": true,
+    "formalIdentitiesAndTitlesUnchanged": true
+  },
+  "findings": {
+    "total": 112,
+    "fixed": 91,
+    "otherFindings": 21,
+    "source": "audit/summary.json"
   },
   "typecheck": {
-    "status": "passed",
-    "files": 440,
-    "command": "npm run typecheck"
+    "passed": true,
+    "command": "node node_modules/typescript/bin/tsc --project outputs/arc-bench-reviewed-20261107/audit/tsconfig.json"
   },
-  "collection": {
-    "status": "passed",
-    "cases": 714,
-    "report": "validation/collection-report.json"
+  "newContracts": {
+    "uniquePassed": 175,
+    "failed": 0,
+    "skipped": 0,
+    "report": "audit/contract-results.json",
+    "reportSha256": "69ea8854ebae295f089dda5f0cc3e83f7045a2ffe16f52ee6389453350106210",
+    "provenance": "audit/contracts-reuse.json"
   },
-  "contracts": {
-    "status": "passed",
-    "cases": 73,
+  "existingContracts": {
     "passed": 73,
     "failed": 0,
-    "report": "validation/contracts-report.json"
+    "skipped": 0,
+    "report": "validation/contracts-report.json",
+    "reportSha256": "45d158a4451e9e17ba04b4219e2c35ace50a6d2e4ac5e3e65c8c1acdb1ccdff6"
   },
-  "closeoutOracles": {
-    "status": "passed",
-    "positiveCombinations": 14,
-    "positivePassed": 14,
-    "distinctFormalScenarios": 12,
-    "businessMutants": 14,
-    "businessMutantsRejected": 14,
-    "reports": [
-      "validation/closeout/summary.json",
-      "validation/closeout/records-summary.json"
-    ],
-    "scope": "Synthetic implementations exercise actual formal tests, including two legal Sheet metadata layouts. No application score is inferred."
+  "collection": {
+    "passed": true,
+    "report": "validation/collection-report.json",
+    "reportSha256": "c4262352fe5444664ad8de0380ebda95e3531b067b354cf8427a33d78cd64976"
   },
-  "legacyOracles": {
-    "status": "passed",
-    "positivePassed": 5,
-    "persistenceMutantsRejected": 5,
-    "report": "validation/oracle-probes/oracle-summary.json"
+  "sourceIntegrity": {
+    "frozenFiles": 713,
+    "validationInputs": 662,
+    "parentFilesChecked": 739,
+    "parentUnchanged": true,
+    "patchApplyCheck": true
   },
-  "controller": {
-    "status": "passed",
-    "typecheck": "npm run typecheck",
-    "targetedTests": 64,
-    "commands": [
-      {
-        "command": "node --import tsx --test test/scenario-evaluation.test.ts test/arc-experiment.test.ts test/browser/experiment-isolation.test.ts",
-        "passed": 28
-      },
-      {
-        "command": "node --import tsx --test test/arc-experiment-integration.test.ts test/experiment-process.test.ts test/candidate-runtime.test.ts",
-        "passed": 36
-      }
-    ],
-    "protocol": "application-per-scenario-v1",
-    "sourceFiles": {
-      "src/experiments/worker.ts": "d94336d3a0a921f459f3a5306d077813971650d52e7fd6193d680a8ed4902831",
-      "src/experiments/scenario-evaluation.ts": "6cc84a201bff39a1b4dd202b0cae14548e100c6c9db4ec6899faee52e2c74f09",
-      "src/experiments/node-command.mjs": "64056833ea120d3e389dc6f4408b52a393c1541cf0c364579d59f585a3301d01",
-      "src/experiments/protocol.ts": "bb4441ed30cd9f624b763cbf03359e45b6bf4dc6d4ea921b804f0936dfe0c3c1",
-      "src/experiments/process.ts": "42fd189e868645542f2fd388405e5562d03bff20f6f15c8b19e72bf8eff9609d",
-      "src/application/candidate-runtime.ts": "b43ebb2fc7cb749ecf0083e81b345be0c06bc23eb772562fd15aea59ce4466f8",
-      "src/inherited-data.ts": "5a21bd5c5bea664efcd6360e1f955df962d47ed85ba7b9c46a6c73fa3d2881f2",
-      "src/process-lifecycle.ts": "ca94903b0bd1983024c2928285f3462a5b8602ee3d71eb86c82294d2e9db4784",
-      "src/adapters/web/runtime.ts": "70c08a84bd0b6e936c34516b61aaf21e8a21b1d356c886b107d78f1f0f83a6e0",
-      "src/adapters/web/project-spec.ts": "6684e26016d114d2d0f8e4e4180ffb835025f4100a609ce64de783efcbc43d49"
-    },
-    "isolation": "Real browser probe: 3 independent processes/data directories, 1 build; inherited seed preserved; reload and additional context share case data; a business failure does not contaminate the next case.",
-    "launcherProbe": {
-      "status": "passed",
-      "report": "validation/isolation-launcher.json",
-      "total": 2,
-      "expectedBusinessFailure": 1,
-      "notRun": 0
-    }
+  "requirementsChangedTasks": [
+    "ctrip",
+    "github",
+    "prestashop",
+    "sheet"
+  ],
+  "applications": {
+    "generated": false,
+    "modified": false,
+    "completeBusinessScenariosExecuted": 0
   },
-  "historicalResults": {
-    "currentScoresReused": false,
-    "parentRevision": "2026-11-06-consistency-audit",
-    "report": "validation/history/2026-11-06-consistency-audit/validation.json"
-  },
+  "controllerSourceModifiedByThisReview": false,
   "limitations": [
-    "No models invoked and no complete eight-application business rerun in this revision.",
-    "All conditional failure branches, including creation persistence faults and every authorization combination, have not been independently exercised.",
-    "The new public observation contracts and GitHub initial branch records are explicit input changes. Historical application scores do not transfer.",
-    "Only the isolated protocol is authorized for formal scoring; setup-playwright alone does not restore server state."
+    "Static review and targeted synthetic browser contracts do not establish zero false negatives or full-application quality.",
+    "New public requirement conventions require the same updated inputs for all methods; old scores do not transfer.",
+    "175 unique contract results combine a full 174-case run with 25 StackOverflow supplemental cases; 150 unchanged cases retain their original evidence."
   ]
 }

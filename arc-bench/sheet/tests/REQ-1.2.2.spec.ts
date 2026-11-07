@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -21,11 +22,11 @@ test('REQ-1.2.2: Rename a Workbook - Scenario 1', async ({ page }) => {
   const nameInput = page.getByRole('textbox', { name: /^Workbook name$/ });
   await nameInput.fill(`  ${newName}  `);
   await nameInput.press('Enter');
-  await expect(page.getByText(newName, { exact: true })).toBeVisible();
+  await expectText(page, newName, { exact: true });
 
   await openWorkbookHome(page);
   await page.getByRole('link', { name: newName, exact: true }).click();
-  await expect(page.getByText(newName, { exact: true })).toBeVisible();
+  await expectText(page, newName, { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('Existing data');
 
   await page.getByRole('button', { name: /^Rename workbook$/ }).click();
@@ -42,10 +43,10 @@ test('REQ-1.2.2: Rename a Workbook - Scenario 2', async ({ page }) => {
 
   await nameInput.fill('   ');
   await page.getByRole('button', { name: /^Save$/ }).click();
-  await expect(page.getByText(/workbook name cannot be empty/)).toBeVisible();
+  await expectText(page, /workbook name cannot be empty/);
 
   await page.reload();
-  await expect(page.getByText(originalName, { exact: true })).toBeVisible();
+  await expectText(page, originalName, { exact: true });
   await page.getByRole('button', { name: /^Rename workbook$/ }).click();
   await expect(page.getByRole('textbox', { name: /^Workbook name$/ })).toHaveValue(originalName);
 });

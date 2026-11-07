@@ -1,3 +1,4 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, Page, test } from '@playwright/test';
 import {
@@ -19,14 +20,12 @@ async function expectWorksheetState(
   worksheetName: string,
   selectedCell: string,
   cellValue: string,
+  displayValue: string,
 ): Promise<void> {
   await expectActiveWorksheet(page, worksheetName);
   await expectSelectedCell(page, selectedCell);
-  if (cellValue.startsWith('=')) {
-    await expect(gridCell(page, selectedCell)).not.toHaveText('');
-  } else {
-    await expect(gridCell(page, selectedCell)).toHaveText(cellValue);
-  }
+  if (cellValue.startsWith('=')) await expectCalculatedNumber(gridCell(page, selectedCell), Number(displayValue));
+  else await expect(gridCell(page, selectedCell)).toHaveText(displayValue);
   await expect(page.getByRole('textbox', { name: /^Formula bar$/ })).toHaveValue(cellValue);
 }
 
@@ -55,16 +54,16 @@ test('REQ-2.1.2: Switch Worksheets - Scenario 1', async ({ page }) => {
   await expect(gridCell(page, 'A1')).toHaveText(secondCellValue);
   await gridCell(page, 'A1').click();
   await worksheetTab(page, firstWorksheet).click();
-  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue);
+  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue, '4');
 
   await worksheetTab(page, secondWorksheet).click();
-  await expectWorksheetState(page, secondWorksheet, secondSelectedCell, secondCellValue);
+  await expectWorksheetState(page, secondWorksheet, secondSelectedCell, secondCellValue, 'Other');
 
   await worksheetTab(page, firstWorksheet).click();
-  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue);
+  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue, '4');
 
   await page.reload();
-  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue);
+  await expectWorksheetState(page, firstWorksheet, firstSelectedCell, firstCellValue, '4');
 });
 
 test('REQ-2.1.2: Switch Worksheets - Scenario 2', async ({ page }) => {
@@ -80,7 +79,7 @@ test('REQ-2.1.2: Switch Worksheets - Scenario 2', async ({ page }) => {
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
   await expectSelectedCell(page, 'B1');
-  await expect(gridCell(page, 'B1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 4);
   await expect(page.getByRole('textbox', { name: /^Formula bar$/ })).toHaveValue('=A1*2');
 
   await worksheetTab(page, 'Sheet2').click();
@@ -174,7 +173,7 @@ test('REQ-2.1.2: Switch Worksheets - Scenario 5', async ({ page }) => {
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(page.getByRole('textbox', { name: /^Formula bar$/ })).toHaveValue('=A1*3');
 

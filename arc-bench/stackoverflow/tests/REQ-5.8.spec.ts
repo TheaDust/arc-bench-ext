@@ -16,4 +16,5 @@ test('REQ-5.8: Attach a nested reply to its parent', async ({ page, browser }, i
   await expect(region(parent,'Replies')).toContainText('@Helpful User');
   await page.reload();
   await expect(region(await comment(post(page)),'Replies')).toContainText('Thanks, I will add the retry case.');
+  await expect(region(await comment(post(page)),'Replies')).toContainText('@Helpful User');
 });

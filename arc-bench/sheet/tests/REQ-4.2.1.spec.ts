@@ -1,3 +1,4 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -26,8 +27,8 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
   await expect(gridCell(page, 'A1')).toHaveText('10');
-  await expect(gridCell(page, 'B1')).toHaveText('20');
-  await expect(gridCell(page, 'C1')).toHaveText('25');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 20);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 25);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
   await gridCell(page, 'C1').click();
@@ -35,8 +36,8 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
 
   await commitCellThroughFormulaBar(page, 'A1', '20');
   await expect(gridCell(page, 'A1')).toHaveText('20');
-  await expect(gridCell(page, 'B1')).toHaveText('40');
-  await expect(gridCell(page, 'C1')).toHaveText('45');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 40);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 45);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
   await gridCell(page, 'C1').click();
@@ -45,7 +46,7 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
   await worksheetTab(page, 'Sheet2').click();
   await expectActiveWorksheet(page, 'Sheet2');
   await expect(gridCell(page, 'A1')).toHaveText('Other');
-  await expect(gridCell(page, 'B1')).toHaveText('2');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 2);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=1+1');
 
@@ -54,8 +55,18 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
   await page.reload();
   await expectActiveWorksheet(page, 'Sheet1');
   await expect(gridCell(page, 'A1')).toHaveText('20');
-  await expect(gridCell(page, 'B1')).toHaveText('40');
-  await expect(gridCell(page, 'C1')).toHaveText('45');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 40);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 45);
+
+  for (const [coordinate, expression] of Object.entries({ B1: '=A1*2', C1: '=B1+5' })) {
+    await gridCell(page, coordinate).click();
+    await expect(formulaBar(page)).toHaveValue(expression);
+  }
+  await worksheetTab(page, 'Sheet2').click();
+  await expect(gridCell(page, 'A1')).toHaveText('Other');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 2);
+  await gridCell(page, 'B1').click();
+  await expect(formulaBar(page)).toHaveValue('=1+1');
 });
 
 test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scenario 2', async ({ page }) => {
@@ -68,8 +79,8 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
   await page.keyboard.press('Control+V');
 
   await expect(gridCell(page, 'A1')).toHaveText('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
-  await expect(gridCell(page, 'C1')).toHaveText('7');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 7);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
   await gridCell(page, 'C1').click();
@@ -77,8 +88,13 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
-  await expect(gridCell(page, 'C1')).toHaveText('7');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
+  await expectCalculatedNumber(gridCell(page, 'C1'), 7);
+
+  for (const [coordinate, expression] of Object.entries({ B1: '=A1*2', C1: '=B1+1' })) {
+    await gridCell(page, coordinate).click();
+    await expect(formulaBar(page)).toHaveValue(expression);
+  }
 });
 
 test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scenario 3', async ({ page }) => {
@@ -95,8 +111,8 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
 
   await expect(gridCell(page, 'A1')).toHaveText('');
   await expect(gridCell(page, 'B1')).toHaveText('2');
-  await expect(gridCell(page, 'C1')).toHaveText('4');
-  await expect(gridCell(page, 'D1')).toHaveText('5');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 4);
+  await expectCalculatedNumber(gridCell(page, 'D1'), 5);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=B1*2');
   await gridCell(page, 'D1').click();
@@ -105,8 +121,8 @@ test('REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scen
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('');
   await expect(gridCell(page, 'B1')).toHaveText('2');
-  await expect(gridCell(page, 'C1')).toHaveText('4');
-  await expect(gridCell(page, 'D1')).toHaveText('5');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 4);
+  await expectCalculatedNumber(gridCell(page, 'D1'), 5);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=B1*2');
   await gridCell(page, 'D1').click();

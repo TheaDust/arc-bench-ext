@@ -9,6 +9,36 @@ export const section = (page: Page, name: string) =>
 export const editor = (page: Page) => page.getByRole('dialog', { name: 'Note editor', exact: true });
 export const notice = (page: Page, name: string) => page.getByRole('status', { name, exact: true });
 
+/** Presence may have repeated visible copies; action and note identities stay unique. */
+export async function expectVisibleText(scope: Page | Locator, value: string) {
+  await expect.poll(() => scope.getByText(value, { exact: true }).filter({ visible: true }).count()).toBeGreaterThan(0);
+}
+export async function expectNotice(page: Page, name: string) {
+  await expect.poll(() => notice(page, name).filter({ visible: true }).count()).toBeGreaterThan(0);
+}
+export async function expectSearchHighlights(scope: Locator, keyword: string) {
+  const fragments = scope.getByRole('region', { name: `Highlight ${keyword}`, exact: true }).filter({ visible: true });
+  await expect.poll(() => fragments.count()).toBeGreaterThan(0);
+  const exactKeyword = new RegExp(`^${keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i');
+  for (const fragment of await fragments.all()) await expect(fragment).toHaveText(exactKeyword);
+}
+export async function expectEmptyTrash(page: Page) {
+  const deleted = section(page, 'Deleted notes');
+  // A genuine empty collection may have zero rendered area. The role query
+  // excludes hidden/aria-hidden collections without requiring a placeholder.
+  await expect(deleted).toHaveCount(1);
+  await expect(deleted.getByRole('region')).toHaveCount(0);
+}
+export async function completeEmptyTrash(page: Page) {
+  const confirmation = page.getByRole('dialog', { name: 'Empty Trash', exact: true });
+  const deleted = section(page, 'Deleted notes');
+  // Optional confirmation and an already empty visible collection may coexist.
+  await expect.poll(async () => await confirmation.isVisible()
+    || (await deleted.count() === 1 && await deleted.getByRole('region').count() === 0)).toBe(true);
+  if (await confirmation.isVisible()) await action(confirmation, 'Empty Trash').click();
+  await expectEmptyTrash(page);
+}
+
 export async function openHome(page: Page) {
   await page.goto('/');
   await expect(action(page, 'Take a note')).toBeVisible();
@@ -41,8 +71,12 @@ export async function createNote(page: Page, title: string, content: string,
 export async function expectNote(page: Page, title: string, content?: string) {
   await expect(note(page, title)).toHaveCount(1);
   await expect(note(page, title)).toBeVisible();
-  await expect(note(page, title).getByText(title, { exact: true })).toBeVisible();
-  if (content !== undefined) await expect(note(page, title).getByText(content, { exact: true })).toBeVisible();
+  await expectVisibleText(note(page, title), title);
+  if (content !== undefined) await expectVisibleText(note(page, title), content);
+}
+export async function expectNoteInCollection(page: Page, collection: string, title: string, content: string) {
+  await expectNote(page, title, content);
+  await expect(section(page, collection).getByRole('region', { name: title, exact: true })).toHaveCount(1);
 }
 export async function more(page: Page, title: string) {
   await note(page, title).hover();
@@ -52,13 +86,13 @@ export async function deleteNote(page: Page, title: string) {
   await more(page, title);
   await page.getByRole('menuitem', { name: 'Delete Note', exact: true }).click();
   await expect(note(page, title)).toBeHidden();
-  await expect(notice(page, 'Note deleted')).toBeVisible();
+  await expectNotice(page, 'Note deleted');
 }
 export async function archiveNote(page: Page, title: string) {
   await note(page, title).hover();
   await action(note(page, title), `Archive ${title}`).click();
   await expect(note(page, title)).toBeHidden();
-  await expect(notice(page, 'Note archived')).toBeVisible();
+  await expectNotice(page, 'Note archived');
 }
 export async function labelManager(page: Page) {
   await navigate(page, 'Edit Labels');
@@ -105,6 +139,17 @@ export async function expectMultipleColumns(surfaces: Locator[]) {
     return boxes.some((left, index) => boxes.some((right, other) => other > index
       && (left.x + left.width <= right.x || right.x + right.width <= left.x)
       && Math.min(left.y + left.height, right.y + right.height) > Math.max(left.y, right.y)));
+  }).toBe(true);
+}
+
+export async function expectSingleColumn(surfaces: Locator[]) {
+  await expect.poll(async () => {
+    const boxes = await Promise.all(surfaces.map(bounds));
+    const sharedVerticalLine = Math.max(...boxes.map(box => box.x))
+      < Math.min(...boxes.map(box => box.x + box.width));
+    const separatedRows = boxes.every((box, index) => boxes.every((other, otherIndex) =>
+      index === otherIndex || box.y + box.height <= other.y || other.y + other.height <= box.y));
+    return sharedVerticalLine && separatedRows;
   }).toBe(true);
 }
 

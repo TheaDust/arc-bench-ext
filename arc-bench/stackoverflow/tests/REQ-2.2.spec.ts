@@ -1,3 +1,4 @@
+import { expectPresence } from './helpers';
 import { test, expect, entry, action, field, region, suffix } from './helpers';
 import { accounts, password } from './fixtures/data';
 
@@ -25,7 +26,7 @@ test('REQ-2.2: Reject duplicate email', async ({ page, browser }, info) => {
   await field(form,'Email').fill(accounts.stack_user);
   await field(form,'Password').fill(password);
   await action(form,'Sign up').click();
-  await expect(form.getByText('Email is already in use', {exact:true})).toBeVisible();
+  await expectPresence(form.getByText('Email is already in use', {exact:true}));
   await expect(form).toBeVisible();
   await expect(action(page.getByRole('banner'),'Stack User')).toHaveCount(0);
 });

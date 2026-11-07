@@ -1,3 +1,4 @@
+import { amount } from './helpers';
 import { expectSelectedChoice, selectChoice } from './support/public-controls';
 // requirement: REQ-3.9
 import { test, expect } from '@playwright/test';
@@ -5,12 +6,12 @@ import { home, nav, action, region, card, count, tabTo, men, openProduct, slideI
 
 test("REQ-3.9: Update price and stock for selected variant", async ({ page }) => {
   await home(page); await openProduct(page, DETAIL); const size = page.getByRole('combobox', { name: 'Size', exact: true });
-  const info = region(page, 'Product information'); await expectMoney(region(info, 'Sale price'), 24);
+  const info = region(page, 'Product information'); await expectMoney(amount(info, 'Sale price'), 24);
   await selectChoice(size, { label: 'L' }); await page.getByRole('radio', { name: 'Black', exact: true }).check();
   await expectSelectedChoice(size, 'L'); await expect(page.getByRole('radio', { name: 'Black', exact: true })).toBeChecked();
-  await expectMoney(region(info, 'Sale price'), 36); await expectMoney(region(info, 'Regular price'), 45);
+  await expectMoney(amount(info, 'Sale price'), 36); await expectMoney(amount(info, 'Regular price'), 45);
   await expect(info.getByRole('status', { name: 'Stock', exact: true })).toHaveText('Available stock: 2');
   await selectChoice(size, { label: 'M' }); await page.getByRole('radio', { name: 'White', exact: true }).check();
-  await expectMoney(region(info, 'Sale price'), 24); await expectMoney(region(info, 'Regular price'), 30);
+  await expectMoney(amount(info, 'Sale price'), 24); await expectMoney(amount(info, 'Regular price'), 30);
   await expect(info.getByRole('status', { name: 'Stock', exact: true })).toHaveText('Available stock: 50');
 });

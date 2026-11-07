@@ -1,3 +1,4 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -42,7 +43,7 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 1', async ({ page }) 
   await setClipboardText(page, '3\n=C1*2');
   await gridCell(page, 'C1').click();
   await page.keyboard.press('Control+V');
-  await expect(gridCell(page, 'C2')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'C2'), 6);
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText(unrelatedValue);
@@ -51,7 +52,7 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 1', async ({ page }) 
     await gridCell(page, error.cell).click();
     await expect(formulaBar(page)).toHaveValue(error.expression);
   }
-  await expect(gridCell(page, 'C2')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'C2'), 6);
 });
 
 test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 2', async ({ page }) => {
@@ -64,12 +65,12 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 2', async ({ page }) 
   await expect(formulaBar(page)).toHaveValue('=1/0');
 
   await commitCellThroughFormulaBar(page, 'B1', '=A1*3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*3');
 
   await page.reload();
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*3');
 });
@@ -89,6 +90,11 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 3', async ({ page }) 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('#REF!');
   await expect(gridCell(page, 'B1')).toHaveText('#REF!');
+
+  for (const [coordinate, expression] of Object.entries({ A1: '=B1', B1: '=A1' })) {
+    await gridCell(page, coordinate).click();
+    await expect(formulaBar(page)).toHaveValue(expression);
+  }
 });
 
 test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 4', async ({ page }) => {
@@ -106,6 +112,11 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 4', async ({ page }) 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('#NAME?');
   await expect(gridCell(page, 'B1')).toHaveText('#ERROR!');
+
+  for (const [coordinate, expression] of Object.entries({ A1: '=NOPE(1)', B1: '=1+' })) {
+    await gridCell(page, coordinate).click();
+    await expect(formulaBar(page)).toHaveValue(expression);
+  }
 });
 
 test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 5', async ({ page }) => {
@@ -114,10 +125,13 @@ test('REQ-4.2.2: Display and Fix Formula Errors - Scenario 5', async ({ page }) 
   await expect(gridCell(page, 'A1')).toHaveText('#REF!');
 
   await commitCellThroughFormulaBar(page, 'A1', '=2+2');
-  await expect(gridCell(page, 'A1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'A1'), 4);
   await gridCell(page, 'A1').click();
   await expect(formulaBar(page)).toHaveValue('=2+2');
 
   await page.reload();
-  await expect(gridCell(page, 'A1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'A1'), 4);
+
+  await gridCell(page, 'A1').click();
+  await expect(formulaBar(page)).toHaveValue('=2+2');
 });

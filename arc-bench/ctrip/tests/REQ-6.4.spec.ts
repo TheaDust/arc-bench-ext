@@ -22,6 +22,7 @@ test('REQ-6.4: Replace password and require reauthentication', async ({ page }, 
   await button(page, 'Log in').click();
   await alertText(page, 'Incorrect account or password');
   await field(page, 'Password').fill('NewTravel1234!');
+  await checkbox(page, 'Agree to terms').check();
   await button(page, 'Log in').click();
   await visible(action(page, 'My account'));
 });

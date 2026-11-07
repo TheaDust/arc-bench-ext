@@ -1,5 +1,5 @@
 // requirement: REQ-2.4
-import { test, expect, action, note, notice, openHome, navigate, createNote, deleteNote, expectNote } from './helpers';
+import { test, expect, action, note, notice, openHome, navigate, createNote, deleteNote, expectNote, expectNoteInCollection } from './helpers';
 import { identity } from './fixtures/data';
 
 test('REQ-2.4: Move a deleted note to Trash', async ({ page }, info) => {
@@ -11,7 +11,7 @@ test('REQ-2.4: Move a deleted note to Trash', async ({ page }, info) => {
   await expect(action(notice(page, 'Note deleted'), 'Undo')).toBeVisible();
   await expect(note(page, title)).toBeHidden();
   await navigate(page, 'Trash');
-  await expectNote(page, title, 'Deletion preserves this content');
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Deletion preserves this content');
 });
 
 test('REQ-2.4: Undo deletion', async ({ page }, info) => {
@@ -35,7 +35,7 @@ test('REQ-2.4: Dismiss deletion notifications', async ({ page }, info) => {
   await expect(notice(page, 'Note deleted')).toBeHidden();
   await expect(note(page, title)).toBeHidden();
   await navigate(page, 'Trash');
-  await expectNote(page, title, 'Dismissal preserves deleted content');
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Dismissal preserves deleted content');
   await page.reload();
-  await expectNote(page, title, 'Dismissal preserves deleted content');
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Dismissal preserves deleted content');
 });

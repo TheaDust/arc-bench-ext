@@ -18,7 +18,7 @@ test("REQ-6.1: Save an owned recent draft", async ({ page }, testInfo) => {
   const book = await createBook(page, id, 'Book 6.1.2');
   const draft = await createPage(page, id, book, 'Page Draft 6.1.2', 'Draft content created by corresponding prerequisite behavior.', true);
   await home(page);
-  const recentDraft = region(page, 'My Recent Drafts').getByText(draft, { exact: true });
+  const recentDraft = region(page, 'My Recent Drafts').getByText(draft, { exact: true }).filter({ visible: true });
   await expect(recentDraft).toHaveCount(1);
   await expect(recentDraft).toBeVisible();
 });

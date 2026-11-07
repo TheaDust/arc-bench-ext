@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -13,7 +14,7 @@ test('REQ-3.3: View a Public Repository Overview - Scenario 1', async ({ page },
 
   await openVisibleTarget(page, repositoryEntry);
   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();
-  await expect(page.getByText(/public/i)).toBeVisible();
+  await expectText(page, /public/i);
   await expect(page.getByRole('link', { name: /^Code$/ })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();

@@ -1,3 +1,4 @@
+import { expectHeading } from './helpers';
 // requirement: REQ-3.7
 import { test, expect } from '@playwright/test';
 import { home, action, region, openProduct, DETAIL } from './helpers';
@@ -15,5 +16,5 @@ test('REQ-3.7: Switch product thumbnail image', async ({ page }) => {
   await expect.poll(() => main.getAttribute('src')).not.toBe(front);
   await action(images, 'Front').click();
   await expect(main).toHaveAttribute('src', front!);
-  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+  await expectHeading(page, DETAIL);
 });

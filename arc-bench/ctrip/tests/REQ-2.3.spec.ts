@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => { await installClock(page); });
 test('REQ-2.3: Select a future departure with fare', async ({ page }, testInfo) => {
   await openHome(page);
   await field(page, 'Departure date').click();
-  await textVisible(page, '¥460');
+  await expect(button(page, '2026-07-21')).toContainText('¥460');
   await button(page, '2026-07-21').click();
   await expect(field(page, 'Departure date')).toHaveValue('2026-07-21');
   await expect(button(page, '2026-07-21')).not.toBeVisible();

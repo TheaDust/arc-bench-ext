@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -16,7 +17,7 @@ test('REQ-5.3.3: Assign Issues and Pull Requests to a Milestone - Scenario 1', a
   await openVisibleTarget(page, issueEntry);
   await page.getByRole('button', { name: /milestone/i }).click();
   await page.getByRole('option', { name: milestone, exact: true }).click();
-  await expect(page.getByText(milestone, { exact: true })).toBeVisible();
+  await expectText(page, milestone, { exact: true });
   await page.reload();
-  await expect(page.getByText(milestone, { exact: true })).toBeVisible();
+  await expectText(page, milestone, { exact: true });
 });

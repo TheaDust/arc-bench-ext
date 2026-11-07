@@ -1,3 +1,4 @@
+import { expectText, expectCellText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, Page, test } from '@playwright/test';
 import {
@@ -24,7 +25,7 @@ test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 1', async ({ page })
     'Alex,"Harbor District, East",42,',
     'Jordan,"They said""hello""',
     'next line",3,',
-    'Alice,English text,007,',
+    'Alice,English text 中文,007,',
   ].join('\r\n');
 
   await openCsvImport(page);
@@ -35,34 +36,37 @@ test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 1', async ({ page })
   });
   await page.getByRole('button', { name: /^Confirm import$/ }).click();
 
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
+  await expectText(page, workbookName, { exact: true });
   await expectActiveWorksheet(page, 'Sheet1');
-  await expect(gridCell(page, 'A1')).toHaveText('Name');
-  await expect(gridCell(page, 'B1')).toHaveText('Note');
-  await expect(gridCell(page, 'C1')).toHaveText('Count');
-  await expect(gridCell(page, 'D1')).toHaveText('Blank');
-  await expect(gridCell(page, 'A2')).toHaveText('Alex');
-  await expect(gridCell(page, 'B2')).toHaveText('Harbor District, East');
-  await expect(gridCell(page, 'C2')).toHaveText('42');
-  await expect(gridCell(page, 'D2')).toHaveText('');
-  await expect(gridCell(page, 'A3')).toHaveText('Jordan');
-  await expect(gridCell(page, 'B3')).toHaveText('They said"hello"\n next line');
-  await expect(gridCell(page, 'C3')).toHaveText('3');
-  await expect(gridCell(page, 'D3')).toHaveText('');
-  await expect(gridCell(page, 'A4')).toHaveText('Alice');
-  await expect(gridCell(page, 'B4')).toHaveText('English text');
-  await expect(gridCell(page, 'C4')).toHaveText('007');
-  await expect(gridCell(page, 'D4')).toHaveText('');
+  await expectCellText(gridCell(page, 'A1'), 'Name');
+  await expectCellText(gridCell(page, 'B1'), 'Note');
+  await expectCellText(gridCell(page, 'C1'), 'Count');
+  await expectCellText(gridCell(page, 'D1'), 'Blank');
+  await expectCellText(gridCell(page, 'A2'), 'Alex');
+  await expectCellText(gridCell(page, 'B2'), 'Harbor District, East');
+  await expectCellText(gridCell(page, 'C2'), '42');
+  await expectCellText(gridCell(page, 'D2'), '');
+  await expectCellText(gridCell(page, 'A3'), 'Jordan');
+  await expectCellText(gridCell(page, 'B3'), 'They said"hello"\nnext line');
+  await expectCellText(gridCell(page, 'C3'), '3');
+  await expectCellText(gridCell(page, 'D3'), '');
+  await expectCellText(gridCell(page, 'A4'), 'Alice');
+  await expectCellText(gridCell(page, 'B4'), 'English text 中文');
+  await expectCellText(gridCell(page, 'C4'), '007');
+  await expectCellText(gridCell(page, 'D4'), '');
 
   await page.reload();
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
+  await expectText(page, workbookName, { exact: true });
   await expectActiveWorksheet(page, 'Sheet1');
-  await expect(gridCell(page, 'B2')).toHaveText('Harbor District, East');
-  await expect(gridCell(page, 'B3')).toHaveText('They said"hello"\n next line');
-  await expect(gridCell(page, 'D2')).toHaveText('');
-  await expect(gridCell(page, 'D3')).toHaveText('');
-  await expect(gridCell(page, 'B4')).toHaveText('English text');
-  await expect(gridCell(page, 'C4')).toHaveText('007');
+  await expectCellText(gridCell(page, 'B2'), 'Harbor District, East');
+  await expectCellText(gridCell(page, 'B3'), 'They said"hello"\nnext line');
+  await expectCellText(gridCell(page, 'D2'), '');
+  await expectCellText(gridCell(page, 'D3'), '');
+  await expectCellText(gridCell(page, 'B4'), 'English text 中文');
+  await expectCellText(gridCell(page, 'C4'), '007');
+  for (const [coordinate, value] of Object.entries({ A1: 'Name', B1: 'Note', C1: 'Count', D1: 'Blank',
+    A2: 'Alex', C2: '42', A3: 'Jordan', C3: '3', A4: 'Alice', D4: '' }))
+    await expectCellText(gridCell(page, coordinate), value);
 });
 
 test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 2', async ({ page }) => {
@@ -76,7 +80,7 @@ test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 2', async ({ page })
   });
   await page.getByRole('button', { name: /^Confirm import$/ }).click();
 
-  await expect(page.getByText(/invalid csv file format\. import failed\./i)).toBeVisible();
+  await expectText(page, /invalid csv file format\. import failed\./i);
   await openWorkbookHome(page);
   await expect(page.getByRole('link', { name: workbookName, exact: true })).toHaveCount(0);
 });
@@ -93,15 +97,15 @@ test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 3', async ({ page })
   });
   await page.getByRole('button', { name: /^Confirm import$/ }).click();
 
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
-  await expect(gridCell(page, 'A2')).toHaveText('London');
-  await expect(gridCell(page, 'B3')).toHaveText('');
-  await expect(gridCell(page, 'C4')).toHaveText('3');
+  await expectText(page, workbookName, { exact: true });
+  await expectCellText(gridCell(page, 'A2'), 'London');
+  await expectCellText(gridCell(page, 'B3'), '');
+  await expectCellText(gridCell(page, 'C4'), '3');
 
   await page.reload();
-  await expect(gridCell(page, 'A2')).toHaveText('London');
-  await expect(gridCell(page, 'B3')).toHaveText('');
-  await expect(gridCell(page, 'C4')).toHaveText('3');
+  await expectCellText(gridCell(page, 'A2'), 'London');
+  await expectCellText(gridCell(page, 'B3'), '');
+  await expectCellText(gridCell(page, 'C4'), '3');
 });
 
 test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 4', async ({ page }) => {
@@ -116,10 +120,12 @@ test('REQ-1.3.1: Import CSV to Create a Workbook - Scenario 4', async ({ page })
   });
   await page.getByRole('button', { name: /^Confirm import$/ }).click();
 
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
-  await expect(gridCell(page, 'A1')).toHaveText('Title');
-  await expect(gridCell(page, 'A4')).toHaveText('Gamma');
+  await expectText(page, workbookName, { exact: true });
+  await expectActiveWorksheet(page, 'Sheet1');
+  await expectCellText(gridCell(page, 'A1'), 'Title');
+  await expectCellText(gridCell(page, 'A4'), 'Gamma');
   await page.reload();
-  await expect(gridCell(page, 'A1')).toHaveText('Title');
-  await expect(gridCell(page, 'A4')).toHaveText('Gamma');
+  await expectActiveWorksheet(page, 'Sheet1');
+  await expectCellText(gridCell(page, 'A1'), 'Title');
+  await expectCellText(gridCell(page, 'A4'), 'Gamma');
 });

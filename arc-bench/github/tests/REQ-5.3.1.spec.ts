@@ -1,3 +1,5 @@
+import { expectText } from './support/observations';
+import { expectOptionSelected } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -18,10 +20,16 @@ test('REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1', async ({ p
   await selector.click();
   await page.getByRole('textbox', { name: 'Search assignees', exact: true }).fill(assignee);
   await page.getByRole('option', { name: assignee, exact: true }).click();
-  await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+  await expectText(page, assignee, { exact: true });
   await page.reload();
-  await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+  await expectText(page, assignee, { exact: true });
   await selector.click();
-  await page.getByRole('option', { name: assignee, exact: true }).click();
-  await expect(page.getByText(assignee, { exact: true }).filter({ visible: true })).toHaveCount(0);
+  await page.getByRole('textbox', { name: 'Search assignees', exact: true }).fill(assignee);
+  const option = page.getByRole('option', { name: assignee, exact: true });
+  await expectOptionSelected(option, true);
+  await option.click();
+  await page.reload();
+  await selector.click();
+  await page.getByRole('textbox', { name: 'Search assignees', exact: true }).fill(assignee);
+  await expectOptionSelected(option, false);
 });

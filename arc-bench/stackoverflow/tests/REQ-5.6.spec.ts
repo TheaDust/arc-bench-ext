@@ -8,10 +8,13 @@ test('REQ-5.6: Apply and remove a helpful-comment vote', async ({ page, browser 
   const target=await comment(post(page));
   await expect(action(target,'Down vote')).toHaveCount(0);
   await expectNumeric(target,'Comment votes',1);
+  await expect(action(target,'Up vote')).toHaveAttribute('aria-pressed','false');
   await action(target,'Up vote').click();
   await expectNumeric(target,'Comment votes',2);
   await expect(action(target,'Up vote')).toHaveAttribute('aria-pressed','true');
+  await expect(action(target,'Down vote')).toHaveCount(0);
   await action(target,'Up vote').click();
   await expectNumeric(target,'Comment votes',1);
   await expect(action(target,'Up vote')).toHaveAttribute('aria-pressed','false');
+  await expect(action(target,'Down vote')).toHaveCount(0);
 });

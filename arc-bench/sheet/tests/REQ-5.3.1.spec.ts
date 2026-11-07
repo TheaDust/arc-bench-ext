@@ -1,3 +1,5 @@
+import { expectCalculatedNumber } from './support/observations';
+import { expectText } from './support/observations';
 import { selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
 import { expect, Locator, Page, test } from '@playwright/test';
@@ -76,13 +78,13 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 1', async ({ 
   await expect(gridCell(page, 'A1')).toHaveText('Region');
   await expect(gridCell(page, 'B1')).toHaveText('SUM of Sales');
   await expect(gridCell(page, 'A2')).toHaveText('East');
-  await expect(gridCell(page, 'B2')).toHaveText('1800');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 1800);
   await expect(gridCell(page, 'A3')).toHaveText('North');
-  await expect(gridCell(page, 'B3')).toHaveText('1500');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1500);
   await expect(gridCell(page, 'A4')).toHaveText('South');
-  await expect(gridCell(page, 'B4')).toHaveText('1000');
+  await expectCalculatedNumber(gridCell(page, 'B4'), 1000);
   await expect(gridCell(page, 'A5')).toHaveText('Grand Total');
-  await expect(gridCell(page, 'B5')).toHaveText('4300');
+  await expectCalculatedNumber(gridCell(page, 'B5'), 4300);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -95,10 +97,10 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 1', async ({ 
   await expectActiveWorksheet(page, 'Pivot1');
   await page.reload();
   await expectActiveWorksheet(page, 'Pivot1');
-  await expect(gridCell(page, 'B2')).toHaveText('1800');
-  await expect(gridCell(page, 'B3')).toHaveText('1500');
-  await expect(gridCell(page, 'B4')).toHaveText('1000');
-  await expect(gridCell(page, 'B5')).toHaveText('4300');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 1800);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1500);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 1000);
+  await expectCalculatedNumber(gridCell(page, 'B5'), 4300);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 2', async ({ page }) => {
@@ -117,16 +119,16 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 2', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await expect(gridCell(page, 'A2')).toHaveText('East');
-  await expect(gridCell(page, 'B2')).toHaveText('1800');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 1800);
   await expect(gridCell(page, 'A3')).toHaveText('North');
-  await expect(gridCell(page, 'B3')).toHaveText('800');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 800);
   await expect(gridCell(page, 'A4')).toHaveText('Grand Total');
-  await expect(gridCell(page, 'B4')).toHaveText('2600');
+  await expectCalculatedNumber(gridCell(page, 'B4'), 2600);
 
   await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('2100');
-  await expect(gridCell(page, 'B3')).toHaveText('800');
-  await expect(gridCell(page, 'B4')).toHaveText('2900');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2100);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 800);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 2900);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -143,9 +145,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 2', async ({ 
   await expectActiveWorksheet(page, 'Pivot1');
   await page.reload();
   await expectActiveWorksheet(page, 'Pivot1');
-  await expect(gridCell(page, 'B2')).toHaveText('2100');
-  await expect(gridCell(page, 'B3')).toHaveText('800');
-  await expect(gridCell(page, 'B4')).toHaveText('2900');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2100);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 800);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 2900);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 3', async ({ page }) => {
@@ -174,21 +176,26 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 3', async ({ 
   await expect(gridCell(page, 'C1')).toHaveText('Q2');
   await expect(gridCell(page, 'D1')).toHaveText('Grand Total');
   await expect(gridCell(page, 'A2')).toHaveText('East');
-  await expect(gridCell(page, 'B2')).toHaveText('2');
-  await expect(gridCell(page, 'C2')).toHaveText('1');
-  await expect(gridCell(page, 'D2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
+  await expectCalculatedNumber(gridCell(page, 'C2'), 1);
+  await expectCalculatedNumber(gridCell(page, 'D2'), 3);
   await expect(gridCell(page, 'A3')).toHaveText('North');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
-  await expect(gridCell(page, 'C3')).toHaveText('0');
-  await expect(gridCell(page, 'D3')).toHaveText('1');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
+  await expectCalculatedNumber(gridCell(page, 'C3'), 0);
+  await expectCalculatedNumber(gridCell(page, 'D3'), 1);
   await expect(gridCell(page, 'A4')).toHaveText('Grand Total');
-  await expect(gridCell(page, 'D4')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'D4'), 4);
 
   await page.reload();
   await expectActiveWorksheet(page, 'Pivot1');
-  await expect(gridCell(page, 'B2')).toHaveText('2');
-  await expect(gridCell(page, 'C2')).toHaveText('1');
-  await expect(gridCell(page, 'D4')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
+  await expectCalculatedNumber(gridCell(page, 'C2'), 1);
+  await expectCalculatedNumber(gridCell(page, 'D4'), 4);
+
+  for (const [coordinate, value] of Object.entries({ A1: 'Region', B1: 'Q1', C1: 'Q2', D1: 'Grand Total', A2: 'East',
+    D2: '3', A3: 'North', B3: '1', C3: '0', D3: '1', A4: 'Grand Total' }))
+    if (/^\d+$/.test(value)) await expectCalculatedNumber(gridCell(page, coordinate), Number(value));
+    else await expect(gridCell(page, coordinate)).toHaveText(value);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 4', async ({ page }) => {
@@ -214,11 +221,11 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 4', async ({ 
   await expect(gridCell(page, 'A1')).toHaveText('Region');
   await expect(gridCell(page, 'B1')).toHaveText('AVERAGE of Sales');
   await expect(gridCell(page, 'A2')).toHaveText('East');
-  await expect(gridCell(page, 'B2')).toHaveText('200');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 200);
   await expect(gridCell(page, 'A3')).toHaveText('North');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
   await expect(gridCell(page, 'A4')).toHaveText('Grand Total');
-  await expect(gridCell(page, 'B4')).toHaveText('200');
+  await expectCalculatedNumber(gridCell(page, 'B4'), 200);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -228,9 +235,13 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 4', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await page.reload();
-  await expect(gridCell(page, 'B2')).toHaveText('200');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('200');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 200);
+
+  await worksheetTab(page, 'Sheet1').click();
+  for (const [coordinate, value] of Object.entries({ B2: '100', B3: 'not numeric', B4: '300', B5: '200', B6: '' }))
+    await expect(gridCell(page, coordinate)).toHaveText(value);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ page }) => {
@@ -251,19 +262,19 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ 
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^COUNT$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
   await expect(gridCell(page, 'A2')).toHaveText('Open');
-  await expect(gridCell(page, 'B2')).toHaveText('2');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
   await expect(gridCell(page, 'A3')).toHaveText('Closed');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
-  await expect(gridCell(page, 'B4')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 3);
 
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^SUM$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
-  await expect(page.getByText(
+  await expectText(page, 
     /^(value field requires numeric values)$/i,
-  )).toBeVisible();
-  await expect(gridCell(page, 'B2')).toHaveText('2');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
-  await expect(gridCell(page, 'B4')).toHaveText('3');
+  );
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 3);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -274,10 +285,10 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ 
   await expectActiveWorksheet(page, 'Pivot1');
   await page.reload();
   await expect(gridCell(page, 'A2')).toHaveText('Open');
-  await expect(gridCell(page, 'B2')).toHaveText('2');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
   await expect(gridCell(page, 'A3')).toHaveText('Closed');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
-  await expect(gridCell(page, 'B4')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 3);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 6', async ({ page }) => {
@@ -312,18 +323,18 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 6', async ({ 
   await chooseEditorOption(page, editor, /^(values)$/i, /^Sales$/i);
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^SUM$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 
   await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
   await page.reload();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 7', async ({ page }) => {
@@ -343,9 +354,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 7', async ({ 
   await chooseEditorOption(page, editor, /^(values)$/i, /^Sales$/i);
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^SUM$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -361,9 +372,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 7', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('450');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('650');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 450);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 650);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -376,15 +387,15 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 7', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('450');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('650');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 450);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 650);
 
   await page.reload();
   await expectActiveWorksheet(page, 'Pivot1');
-  await expect(gridCell(page, 'B2')).toHaveText('450');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('650');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 450);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 650);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8', async ({ page }) => {
@@ -404,9 +415,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8', async ({ 
   await chooseEditorOption(page, editor, /^(values)$/i, /^Sales$/i);
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^SUM$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -419,12 +430,12 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
-  await expect(page.getByText(
+  await expectText(page, 
     /^(pivot field is no longer available\. select a new field\.)$/i,
-  )).toBeVisible();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  );
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
@@ -433,9 +444,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8', async ({ 
   await worksheetTab(page, 'Pivot1').click();
   await expectActiveWorksheet(page, 'Pivot1');
   await page.reload();
-  await expect(gridCell(page, 'B2')).toHaveText('400');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
-  await expect(gridCell(page, 'B4')).toHaveText('600');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 400);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
+  await expectCalculatedNumber(gridCell(page, 'B4'), 600);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9', async ({ page }) => {
@@ -460,12 +471,17 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9', async ({ 
   await expect(gridCell(page, 'A1')).toHaveText('Region');
   await expect(gridCell(page, 'B1')).toHaveText('COUNT of Status');
   await expect(gridCell(page, 'A2')).toHaveText('East');
-  await expect(gridCell(page, 'B2')).toHaveText('2');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
   await expect(gridCell(page, 'A3')).toHaveText('North');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
   await expect(gridCell(page, 'A4')).toHaveText('South');
-  await expect(gridCell(page, 'B4')).toHaveText('1');
+  await expectCalculatedNumber(gridCell(page, 'B4'), 1);
   await page.reload();
-  await expect(gridCell(page, 'B2')).toHaveText('2');
-  await expect(gridCell(page, 'B3')).toHaveText('1');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 2);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 1);
+
+  await expect(gridCell(page, 'A2')).toHaveText('East');
+  await expect(gridCell(page, 'A3')).toHaveText('North');
+  await expect(gridCell(page, 'A4')).toHaveText('South');
+  await expectCalculatedNumber(gridCell(page, 'B4'), 1);
 });

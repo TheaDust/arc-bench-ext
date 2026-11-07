@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText, selectChoice } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -23,9 +24,9 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
   await page.getByRole('checkbox', { name: /require.*status check.*test/i }).check();
   await page.getByRole('button', { name: /create|save changes/i }).click();
   await page.reload();
-  await expect(page.getByText(pattern, { exact: true })).toBeVisible();
-  await expect(page.getByText(/1 approval/i)).toBeVisible();
-  await expect(page.getByText(/status check.*test/i)).toBeVisible();
+  await expectText(page, pattern, { exact: true });
+  await expectText(page, /1 approval/i);
+  await expectText(page, /status check.*test/i);
 });
 
 test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scenario 2', async ({ page }, testInfo) => {
@@ -55,13 +56,13 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
 
   await signIn(page, administrator);
   await openVisibleTarget(page, pullRequestEntry);
-  await expect(page.getByText(/test.*pending|pending.*test/i)).toBeVisible();
+  await expectText(page, /test.*pending|pending.*test/i);
   const testStatus = page.getByRole('combobox', { name: /test.*status|status.*test/i });
   await selectChoice(testStatus, { label: 'success' });
   await page.getByRole('button', { name: /save|update/i }).click();
 
-  await expect(page.getByText(/test.*success|success.*test/i)).toBeVisible();
+  await expectText(page, /test.*success|success.*test/i);
   await expectVisibleText(page, administrator.username);
   await page.reload();
-  await expect(page.getByText(/test.*success|success.*test/i)).toBeVisible();
+  await expectText(page, /test.*success|success.*test/i);
 });

@@ -1,0 +1,106 @@
+REQ-7.7 Create or inspect wishlists
+"Wishlist"(role=link) opens saved collections, each represented by "{wishlist title}"(role=listitem) with a named opening entry and Edit and Delete actions. Clicking "Create new wishlist"(role=button) opens "Create new wishlist"(role=dialog), where "Name"(role=textbox) and "Save"(role=button) create exactly one Holiday Picks listitem. Favorites may similarly be created empty for rename and delete prerequisites. Opening seeded "Favorites"(role=link) shows its membership-bearing "Hummingbird wishlist t-shirt"(role=listitem) with Remove and Add to cart actions.
+
+For wishlist with product membership: No source-defined authenticated flow adds products to a wishlist; seed only these membership-bearing Favorites objects. Rename/delete tests create an empty Favorites via the in-scope UI instead.
+
+For empty wishlist: Created through REQ-7.7. Favorites and Holiday Picks are isolated to scenario-owned accounts.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.7-01 Inspect seeded wishlist and products
+{"Given":"Verified wishlist_view_user has seeded Favorites containing Hummingbird wishlist t-shirt.","When":"Sign in, open Wishlist from My account, then activate Favorites.","Then":"Favorites is visible in the collection list; opening it shows the named product listitem and its Add to cart action."}
+SCN-REQ-7.7-02 Create Holiday Picks wishlist
+{"Given":"Signed-in wishlist_create_user has opened Wishlist.","When":"Click Create new wishlist; enter Holiday Picks in Name within its dialog and click Save.","Then":"Exactly one Holiday Picks collection appears with Edit and Delete actions."}
+TEST
+// requirement: REQ-7.7
+
+test("REQ-7.7: Inspect seeded wishlist and products", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_view_user'); const favorite = wishlist(page, 'Favorites'); await expect(favorite).toBeVisible(); await action(favorite, 'Favorites').click();
+  const product = wishlistProduct(page); await expect(product).toBeVisible(); await expect(product).toContainText(WISH_PRODUCT); await expect(action(product, 'Add to cart')).toBeVisible();
+});
+
+test("REQ-7.7: Create Holiday Picks wishlist", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_create_user'); await action(page, 'Create new wishlist').click(); const dialog = page.getByRole('dialog', { name: 'Create new wishlist', exact: true }); await expect(dialog).toBeVisible();
+  await dialog.getByRole('textbox', { name: 'Name', exact: true }).fill('Holiday Picks'); await action(dialog, 'Save').click(); await expect(wishlist(page, 'Holiday Picks')).toHaveCount(1); await expect(wishlist(page, 'Holiday Picks')).toBeVisible();
+  for (const name of ['Edit', 'Delete']) await expect(action(wishlist(page, 'Holiday Picks'), name)).toBeVisible();
+});
+
+
+REQ-7.8 Rename or delete a wishlist
+For wishlist_rename_user or wishlist_delete_user, the UI-created "Favorites"(role=listitem) offers scoped "Edit"(role=button) and "Delete"(role=button). Edit displays Favorites in "Name"(role=textbox); replacing it with Holiday Picks and clicking "Save"(role=button) leaves one Holiday Picks and no Favorites. Delete instead removes Favorites from the collection list.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.8-01 Rename Favorites wishlist
+{"Given":"Signed-in wishlist_rename_user has created an empty Favorites collection through Create new wishlist.","When":"Click Edit within Favorites, verify Name contains Favorites, replace it with Holiday Picks and click Save.","Then":"Favorites disappears and exactly one Holiday Picks collection remains."}
+SCN-REQ-7.8-02 Delete Favorites wishlist
+{"Given":"Signed-in wishlist_delete_user has created an empty Favorites collection through Create new wishlist.","When":"Click Delete within Favorites and confirm deletion.","Then":"Favorites is removed from the collection list."}
+TEST
+// requirement: REQ-7.8
+
+test("REQ-7.8: Rename Favorites wishlist", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_rename_user'); await createWishlist(page, 'Favorites'); await action(wishlist(page, 'Favorites'), 'Edit').click();
+  await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toHaveValue('Favorites'); await page.getByRole('textbox', { name: 'Name', exact: true }).fill('Holiday Picks'); await action(page, 'Save').click();
+  await expect(wishlist(page, 'Holiday Picks')).toHaveCount(1); await expect(wishlist(page, 'Favorites')).toHaveCount(0);
+});
+
+test("REQ-7.8: Delete Favorites wishlist", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_delete_user'); await createWishlist(page, 'Favorites'); await expect(wishlist(page, 'Favorites')).toBeVisible();
+  await confirmDeletion(page, action(wishlist(page, 'Favorites'), 'Delete')); await expect(wishlist(page, 'Favorites')).toHaveCount(0); await expect(action(page, 'Create new wishlist')).toBeVisible();
+});
+
+
+REQ-7.9 Remove wishlist product or move it to cart
+Seeded Favorites for wishlist_remove_user or wishlist_cart_user contains "Hummingbird wishlist t-shirt"(role=listitem). "Remove"(role=button) deletes that product's wishlist membership; "Add to cart"(role=button) instead adds that exact default available product to the cart. If the wishlist remains visible after addition, "Cart"(role=link) opens the cart to inspect the selected product.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.9-01 Remove Favorites product
+{"Given":"Signed-in wishlist_remove_user has opened seeded Favorites containing Hummingbird wishlist t-shirt.","When":"Click Remove within that product listitem.","Then":"Hummingbird wishlist t-shirt is removed from Favorites."}
+SCN-REQ-7.9-02 Add Favorites product to cart
+{"Given":"Signed-in wishlist_cart_user has opened seeded Favorites containing Hummingbird wishlist t-shirt and has an empty cart.","When":"Click Add to cart within that product; wait for Cart to report one unit, dismiss an optional success dialog through Continue shopping, then activate Cart.","Then":"Shopping cart contains the exact Hummingbird wishlist t-shirt product."}
+TEST
+// requirement: REQ-7.9
+
+test("REQ-7.9: Remove Favorites product", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_remove_user'); await action(wishlist(page, 'Favorites'), 'Favorites').click(); await expect(wishlistProduct(page)).toBeVisible();
+  await confirmDeletion(page, action(wishlistProduct(page), 'Remove')); await expect(wishlistProduct(page)).toHaveCount(0);
+});
+
+test("REQ-7.9: Add Favorites product to cart", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_cart_user'); await action(wishlist(page, 'Favorites'), 'Favorites').click(); await action(wishlistProduct(page), 'Add to cart').click();
+  await expect(action(nav(page), 'Cart')).toContainText(/\b1\b/);
+  if (await success(page).isVisible()) await action(success(page), 'Continue shopping').click();
+  await action(nav(page), 'Cart').click(); await expect(cartRow(page, WISH_PRODUCT)).toBeVisible();
+});
+
+
+REQ-7.10 Delete only the selected address
+After creating "Home"(role=article) and "Office"(role=article) through UI under the same account, clicking "Delete"(role=button) within Home removes only Home and preserves Office with its original values. Business identity, rather than row position, determines the target.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.10-01 Delete only the selected address
+{"Given":"Signed-in address_delete_user has created Home and Office through UI with 1 Commerce Road and 13800000020 and is viewing Addresses.","When":"Click Delete within Home and confirm deletion.","Then":"Home disappears; exactly one Office article remains with its original street and phone."}
+TEST
+// requirement: REQ-7.10
+
+test("REQ-7.10: Delete only the selected address", async ({ page }) => {
+  await home(page); await login(page, 'address_delete_user'); await createAddress(page, 'Home'); await createAddress(page, 'Office');
+  await confirmDeletion(page, action(page.getByRole('article', { name: 'Home', exact: true }), 'Delete')); await expect(page.getByRole('article', { name: 'Home', exact: true })).toHaveCount(0);
+  const office = page.getByRole('article', { name: 'Office', exact: true }); await expect(office).toHaveCount(1); await expect(office).toBeVisible(); await expect(office).toContainText('1 Commerce Road'); await expect(office).toContainText('13800000020');
+});
+
+
+REQ-7.11 Delete only the selected wishlist
+For UI-created "Favorites"(role=listitem) and "Holiday Picks"(role=listitem) under wishlist_delete_user, "Delete"(role=button) scoped to Favorites removes only that collection. Holiday Picks remains exactly once and its "Holiday Picks"(role=link) still opens the surviving wishlist with a Holiday Picks heading, independent of list ordering.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.11-01 Delete only the selected wishlist
+{"Given":"Signed-in wishlist_delete_user has created empty Favorites and Holiday Picks collections through UI.","When":"Click Delete within Favorites, confirm deletion, then activate the surviving Holiday Picks link.","Then":"Favorites disappears, Holiday Picks remains exactly once, and its opening link displays the surviving wishlist."}
+TEST
+// requirement: REQ-7.11
+
+test("REQ-7.11: Delete only the selected wishlist", async ({ page }) => {
+  await home(page); await wishlistPage(page, 'wishlist_delete_user'); await createWishlist(page, 'Favorites'); await createWishlist(page, 'Holiday Picks');
+  await confirmDeletion(page, action(wishlist(page, 'Favorites'), 'Delete')); await expect(wishlist(page, 'Favorites')).toHaveCount(0);
+  const remaining = wishlist(page, 'Holiday Picks'); await expect(remaining).toHaveCount(1); await expect(remaining).toBeVisible(); await expect(action(remaining, 'Holiday Picks')).toBeVisible();
+  await action(remaining, 'Holiday Picks').click();
+  await expect(page.getByRole('heading', { name: 'Holiday Picks', exact: true })).toBeVisible();
+});

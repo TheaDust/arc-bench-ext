@@ -8,6 +8,8 @@ test("REQ-5.1.2: Intercept logged-out personal center", async ({ page }) => {
     await expect(page.getByPlaceholder('Email/Username/Mobile number', { exact: true })).toBeVisible();
     await expect(page.getByPlaceholder('Password', { exact: true })).toBeVisible();
     await expect(button(page, 'LOGIN')).toBeVisible();
+    await expect(page.getByRole('navigation', { name: 'Personal center menu', exact: true })).not.toBeVisible();
+    await expect(region(page, 'Notice')).not.toBeVisible();
 });
 test("REQ-5.1.2: Enter authenticated personal center", async ({ page }) => {
     await entry(page);

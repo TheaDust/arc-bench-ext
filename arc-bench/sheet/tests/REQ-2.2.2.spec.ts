@@ -1,3 +1,5 @@
+import { expectCalculatedNumber } from './support/observations';
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -94,12 +96,12 @@ test('REQ-2.2.2: Insert and Delete Columns - Scenario 4', async ({ page }) => {
 
   await expect(gridCell(page, 'A1')).toHaveText('');
   await expect(gridCell(page, 'B1')).toHaveText('2');
-  await expect(gridCell(page, 'C1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 4);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=B1*2');
 
   await page.reload();
-  await expect(gridCell(page, 'C1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'C1'), 4);
   await gridCell(page, 'C1').click();
   await expect(formulaBar(page)).toHaveValue('=B1*2');
 });
@@ -114,8 +116,8 @@ test('REQ-2.2.2: Insert and Delete Columns - Scenario 5', async ({ page }) => {
   await expect(gridCell(page, 'B1')).toHaveText('');
   await expect(gridCell(page, 'C1')).toHaveText('50');
 
-  await commitCellThroughFormulaBar(page, 'C1', '120', { expectChange: false });
-  await expect(page.getByText(/Please enter a number between 0 and 100/)).toBeVisible();
+  await commitCellThroughFormulaBar(page, 'C1', '120', { accepted: false });
+  await expectText(page, /Please enter a number between 0 and 100/);
   await expect(gridCell(page, 'C1')).toHaveText('50');
   await commitCellThroughFormulaBar(page, 'B1', '120');
   await expect(gridCell(page, 'B1')).toHaveText('120');

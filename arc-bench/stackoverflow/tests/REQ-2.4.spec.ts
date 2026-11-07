@@ -1,3 +1,4 @@
+import { expectPresence } from './helpers';
 import { test, expect, login, ownProfile, action, field, region } from './helpers';
 import {  } from './fixtures/data';
 
@@ -14,7 +15,9 @@ test('REQ-2.4: Save and reopen public identity', async ({ page, browser }, info)
   for (const [name,value] of Object.entries(updates)) await field(page,name).fill(value);
   await action(page,'Save and copy changes to all public communities').click();
   await expect(page.getByRole('status').filter({hasText:/success|saved|updated/i})).toBeVisible();
-  for (const value of ['Stack User Updated','Shanghai','Backend Engineer',updates['About me']]) await expect(region(page,'Public profile').getByText(value,{exact:true})).toBeVisible();
+  for (const value of ['Stack User Updated','Shanghai','Backend Engineer',updates['About me']]) await expectPresence(region(page,'Public profile').getByText(value,{exact:true}));
+  await page.reload();
+  for (const value of ['Stack User Updated','Shanghai','Backend Engineer',updates['About me']]) await expectPresence(region(page,'Public profile').getByText(value,{exact:true}));
   await action(page,'Edit profile').click();
   for (const [name,value] of Object.entries(updates)) {
     if (name === 'Website' || name === 'GitHub') {

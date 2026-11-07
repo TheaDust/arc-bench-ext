@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -14,7 +15,7 @@ test('REQ-4.2.1: View Repository Commit History - Scenario 1', async ({ page }, 
 
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('link', { name: /^Commits$/ }).click();
-  await expect(page.getByText(commitMessage, { exact: true })).toBeVisible();
-  await expect(page.getByText(commitAuthor, { exact: true })).toBeVisible();
-  await expect(page.getByText(/ago/i).first()).toBeVisible();
+  await expectText(page, commitMessage, { exact: true });
+  await expectText(page, commitAuthor, { exact: true });
+  await expectText(page, /ago/i);
 });

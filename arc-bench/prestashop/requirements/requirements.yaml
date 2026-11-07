@@ -4,6 +4,8 @@ description:
   text: |-
     Named form controls use their declared role and exact accessible name. Decorative required-field markers preserve that accessible name. A required label remains associated with its control; native password and file inputs retain their input types.
 
+    Monetary field names associate one amount with the surrounding product, cart row, order or summary. Unless a field explicitly declares role=region, the phrase amount region describes this public field-value association rather than a mandatory ARIA container role. Equivalent named region, group, status/output and native dt/dd associations are accepted; an unrelated amount elsewhere is not evidence for that field. Cart retains its base action name while its accessible name may include a numeric count suffix such as Cart (3) or Cart 3.
+
     A B2C storefront for browsing products, selecting variants, managing a cart, completing checkout, and managing customer accounts.
 
     Displayed dates use UTC and the shared application/evaluator clock 2026-10-06T12:00:00Z; elapsed time drives carousel behavior.

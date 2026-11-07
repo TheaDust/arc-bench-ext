@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import { seedValue, signIn, seedAccount, openVisibleOrganization } from './support/e2e';
@@ -15,7 +16,7 @@ test('REQ-2.2.4: Remove a Member from an Organization - Scenario 1', async ({ pa
   await page.getByRole('link', { name: 'Your organizations', exact: true }).click();
   await openVisibleOrganization(page, seedValue(testInfo, 'EXISTING_ORGANIZATION'));
   await page.getByRole('link', { name: 'People', exact: true }).click();
-  await expect(page.getByText(member, { exact: true })).toBeVisible();
+  await expectText(page, member, { exact: true });
   await page.getByRole('button', { name: `Member menu ${member}`, exact: true }).click();
   await page.getByRole('menuitem', { name: 'Remove from organization', exact: true }).click();
   await page.getByRole('button', { name: 'Remove', exact: true }).click();
@@ -34,7 +35,7 @@ test('REQ-2.2.4: Remove a Member from an Organization - Scenario 2', async ({ pa
   await page.getByRole('link', { name: 'Your organizations', exact: true }).click();
   await openVisibleOrganization(page, seedValue(testInfo, 'EXISTING_ORGANIZATION'));
   await page.getByRole('link', { name: 'People', exact: true }).click();
-  await expect(page.getByText(member, { exact: true })).toBeVisible();
+  await expectText(page, member, { exact: true });
   await expect(
     page.getByRole('button', {
       name: `Member menu ${member}`,

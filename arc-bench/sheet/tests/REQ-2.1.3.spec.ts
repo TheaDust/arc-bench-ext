@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, Locator, Page, test } from '@playwright/test';
 import {
@@ -33,7 +34,7 @@ test('REQ-2.1.3: Rename a Worksheet - Scenario 1', async ({ page }) => {
   await expect(dialog.getByRole('textbox', { name: /^Worksheet name$/ })).toHaveValue('Sheet2');
   const nameInput = dialog.getByRole('textbox', { name: /^Worksheet name$/ });
   await nameInput.fill(`  ${newName}  `);
-  await nameInput.press('Enter');
+  await dialog.getByRole('button', { name: /^Save$/ }).click();
 
   await expectActiveWorksheet(page, newName);
   await expect(worksheetTab(page, 'Sheet1')).toBeVisible();
@@ -53,7 +54,7 @@ test('REQ-2.1.3: Rename a Worksheet - Scenario 2', async ({ page }) => {
   await dialog.getByRole('textbox', { name: /^Worksheet name$/ }).fill('Sheet1');
   await dialog.getByRole('button', { name: /^Save$/ }).click();
 
-  await expect(page.getByText(/worksheet name already exists/)).toBeVisible();
+  await expectText(page, /worksheet name already exists/);
   await expect(worksheetTab(page, 'Sheet1')).toBeVisible();
   await expectActiveWorksheet(page, 'Sheet2');
 
@@ -69,7 +70,7 @@ test('REQ-2.1.3: Rename a Worksheet - Scenario 3', async ({ page }) => {
   await dialog.getByRole('textbox', { name: /^Worksheet name$/ }).fill('   ');
   await dialog.getByRole('button', { name: /^Save$/ }).click();
 
-  await expect(page.getByText(/worksheet name cannot be empty/)).toBeVisible();
+  await expectText(page, /worksheet name cannot be empty/);
   await expectActiveWorksheet(page, 'Sheet1');
 
   await page.reload();

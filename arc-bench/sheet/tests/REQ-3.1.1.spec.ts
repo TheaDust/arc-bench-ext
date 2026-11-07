@@ -1,3 +1,4 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -22,14 +23,14 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 1', asyn
   await expectSelectedCell(page, 'A1');
   await expect(gridCell(page, 'A1')).toHaveText('2');
   await expect(formulaBar(page)).toHaveValue('2');
-  await expect(gridCell(page, 'B1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 4);
 
   await commitCellThroughFormulaBar(page, 'A1', '3');
   await expect(gridCell(page, 'A1')).toHaveText('3');
   await gridCell(page, 'A1').click();
   await expectSelectedCell(page, 'A1');
   await expect(formulaBar(page)).toHaveValue('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
 
   await gridCell(page, 'B1').click();
   await expectSelectedCell(page, 'B1');
@@ -37,7 +38,7 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 1', asyn
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 });
@@ -58,7 +59,7 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 2', asyn
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('Saved value');
-  await expect(page.getByText('Unsaved value', { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText('Unsaved value', { exact: true }).filter({ visible: true })).toHaveCount(0);
 });
 
 test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 3', async ({ page }) => {
@@ -73,7 +74,8 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 3', asyn
 
   for (const value of values) {
     await commitCellThroughGrid(page, value.cell, value.raw);
-    await expect(gridCell(page, value.cell)).toHaveText(value.visible);
+    if (value.raw.startsWith('=')) await expectCalculatedNumber(gridCell(page, value.cell), Number(value.visible));
+    else await expect(gridCell(page, value.cell)).toHaveText(value.visible);
     await gridCell(page, value.cell).click();
     await expect(formulaBar(page)).toHaveValue(value.raw);
   }
@@ -87,7 +89,8 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 3', asyn
 
   await page.reload();
   for (const value of values) {
-    await expect(gridCell(page, value.cell)).toHaveText(value.visible);
+    if (value.raw.startsWith('=')) await expectCalculatedNumber(gridCell(page, value.cell), Number(value.visible));
+    else await expect(gridCell(page, value.cell)).toHaveText(value.visible);
   }
   await expect(gridCell(page, 'B1')).toHaveText('Committed by selection change');
   await gridCell(page, 'A5').click();
@@ -100,13 +103,13 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 4', asyn
   await commitCellThroughFormulaBar(page, 'D4', '=C3*3');
 
   await expect(gridCell(page, 'C3')).toHaveText('7');
-  await expect(gridCell(page, 'D4')).toHaveText('21');
+  await expectCalculatedNumber(gridCell(page, 'D4'), 21);
   await gridCell(page, 'D4').click();
   await expect(formulaBar(page)).toHaveValue('=C3*3');
 
   await page.reload();
   await expect(gridCell(page, 'C3')).toHaveText('7');
-  await expect(gridCell(page, 'D4')).toHaveText('21');
+  await expectCalculatedNumber(gridCell(page, 'D4'), 21);
   await gridCell(page, 'D4').click();
   await expect(formulaBar(page)).toHaveValue('=C3*3');
 });

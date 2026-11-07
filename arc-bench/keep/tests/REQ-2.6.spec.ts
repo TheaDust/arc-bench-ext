@@ -1,5 +1,5 @@
 // requirement: REQ-2.6
-import { test, expect, action, note, notice, section, openHome, navigate, createNote, archiveNote, expectNote } from './helpers';
+import { test, expect, action, note, notice, section, openHome, navigate, createNote, archiveNote, expectNote, expectNoteInCollection } from './helpers';
 import { identity } from './fixtures/data';
 
 test('REQ-2.6: Archive a note into its separate list', async ({ page }, info) => {
@@ -12,7 +12,7 @@ test('REQ-2.6: Archive a note into its separate list', async ({ page }, info) =>
   await expect(action(notice(page, 'Note archived'), 'Undo')).toBeVisible();
   await navigate(page, 'Archived');
   await expect(section(page, 'Archived notes')).toBeVisible();
-  await expectNote(page, title, 'Trip itinerary');
+  await expectNoteInCollection(page, 'Archived notes', title, 'Trip itinerary');
   await expect(note(page, active)).toBeHidden();
   await navigate(page, 'Notes');
   await page.reload();
@@ -41,12 +41,12 @@ test('REQ-2.6: Unarchive the selected note', async ({ page }, info) => {
   await archiveNote(page, title);
   await archiveNote(page, other);
   await navigate(page, 'Archived');
-  await expectNote(page, title, 'Selected itinerary');
-  await expectNote(page, other, 'Other itinerary');
+  await expectNoteInCollection(page, 'Archived notes', title, 'Selected itinerary');
+  await expectNoteInCollection(page, 'Archived notes', other, 'Other itinerary');
   await note(page, title).hover();
   await action(note(page, title), `Unarchive ${title}`).click();
   await expect(note(page, title)).toBeHidden();
-  await expectNote(page, other, 'Other itinerary');
+  await expectNoteInCollection(page, 'Archived notes', other, 'Other itinerary');
   await navigate(page, 'Notes');
   await page.reload();
   await expectNote(page, title, 'Selected itinerary');

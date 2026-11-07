@@ -12,6 +12,7 @@ test("REQ-3.4: Read details tab", async ({ page }) => {
   await home(page); await openProduct(page, DETAIL); await page.getByRole('tab', { name: 'Product Details', exact: true }).click();
   await expect(page.getByRole('tab', { name: 'Product Details', exact: true })).toHaveAttribute('aria-selected', 'true');
   const panel = page.getByRole('tabpanel', { name: 'Product Details', exact: true });
-  for (const text of ['Reference', 'HB-DETAIL', 'Data sheet', 'cotton', 'Features']) await expect(panel).toContainText(text);
+  for (const text of ['Reference', 'HB-DETAIL', 'Data sheet', 'Features']) await expect(panel).toContainText(text);
+  await expect(panel).toContainText(/cotton/i);
   await expect(panel).toContainText(/regular.fit/i);
 });

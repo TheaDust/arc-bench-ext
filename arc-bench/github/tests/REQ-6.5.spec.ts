@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { branchState, output } from './support/branch-state';
 import { selectChoice, expectChoiceLabels } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
@@ -22,7 +23,7 @@ test('REQ-6.5: Merge an Eligible Pull Request - Scenario 1', async ({ page }, te
   await expectChoiceLabels(method, ['Create a merge commit']);
   await page.getByRole('button', { name: 'Merge pull request', exact: true }).click();
   await page.getByRole('button', { name: 'Confirm merge', exact: true }).click();
-  await expect(page.getByText('Merged', { exact: true })).toBeVisible();
+  await expectText(page, 'Merged', { exact: true });
   const commit = await output(page, 'Merge commit', 'Merge result');
   expect(await output(page, 'Merged by', 'Merge result')).toBe(maintainer.username);
   const time = await output(page, 'Merged at', 'Merge result');
@@ -48,7 +49,7 @@ test('REQ-6.5: Merge an Eligible Pull Request - Scenario 1', async ({ page }, te
     expect(await branchState(page)).toEqual(before.compare);
     await page.goto(prUrl);
     await page.reload();
-    await expect(page.getByText('Merged', { exact: true })).toBeVisible();
+    await expectText(page, 'Merged', { exact: true });
     expect(await output(page, 'Merge commit', 'Merge result')).toBe(commit);
     expect(await output(page, 'Merged by', 'Merge result')).toBe(maintainer.username);
     expect(await output(page, 'Merged at', 'Merge result')).toBe(time);
@@ -63,10 +64,10 @@ test('REQ-6.5: Merge an Eligible Pull Request - Scenario 2', async ({ page }, te
   const prUrl = page.url();
   const before = await branches(page, prUrl);
   await expect(page.getByRole('button', { name: 'Merge pull request', exact: true })).toBeDisabled();
-  await expect(page.getByText('Review required by branch protection', { exact: true })).toBeVisible();
-  await expect(page.getByText('Open', { exact: true })).toBeVisible();
+  await expectText(page, 'Review required by branch protection', { exact: true });
+  await expectText(page, 'Open', { exact: true });
   await page.reload();
-  await expect(page.getByText('Open', { exact: true })).toBeVisible();
+  await expectText(page, 'Open', { exact: true });
   await expect(page.getByRole('region', { name: 'Merge result', exact: true })).toHaveCount(0);
   await expect(page.getByRole('button', { name: 'Merge pull request', exact: true })).toBeDisabled();
   for (const [url, state] of [[before.baseUrl,before.base],[before.compareUrl,before.compare]] as const) {
@@ -77,7 +78,7 @@ test('REQ-6.5: Merge an Eligible Pull Request - Scenario 2', async ({ page }, te
 });
 
 async function branches(page: import('@playwright/test').Page, prUrl: string) {
-  await expect(page.getByText('Open', { exact: true })).toBeVisible();
+  await expectText(page, 'Open', { exact: true });
   await page.getByRole('link', { name: 'Base branch', exact: true }).click();
   const baseUrl = page.url();
   const base = await branchState(page);

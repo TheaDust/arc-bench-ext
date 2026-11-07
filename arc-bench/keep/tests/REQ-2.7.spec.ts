@@ -1,6 +1,7 @@
 // requirement: REQ-2.7
 import { test, expect, action, note, openHome, createNote, expectNote } from './helpers';
 import { identity } from './fixtures/data';
+import { expectLightGreenSurface } from './visual';
 
 test('REQ-2.7: Color an existing note', async ({ page }, info) => {
   await openHome(page);
@@ -13,6 +14,7 @@ test('REQ-2.7: Color an existing note', async ({ page }, info) => {
   await expectNote(page, title, 'Water the herbs');
   await note(page, title).hover();
   await expect(action(note(page, title), `Background color ${title}: Light green`)).toBeVisible();
+  await expectLightGreenSurface(note(page, title));
 });
 
 test('REQ-2.7: Create a colored note', async ({ page }, info) => {
@@ -23,4 +25,5 @@ test('REQ-2.7: Create a colored note', async ({ page }, info) => {
   await expectNote(page, title, 'Plant spring herbs');
   await note(page, title).hover();
   await expect(action(note(page, title), `Background color ${title}: Light green`)).toBeVisible();
+  await expectLightGreenSurface(note(page, title));
 });

@@ -1,0 +1,42 @@
+{
+  "src/experiments/worker.ts": {
+    "expected": "d94336d3a0a921f459f3a5306d077813971650d52e7fd6193d680a8ed4902831",
+    "current": "d94336d3a0a921f459f3a5306d077813971650d52e7fd6193d680a8ed4902831"
+  },
+  "src/experiments/scenario-evaluation.ts": {
+    "expected": "6cc84a201bff39a1b4dd202b0cae14548e100c6c9db4ec6899faee52e2c74f09",
+    "current": "6cc84a201bff39a1b4dd202b0cae14548e100c6c9db4ec6899faee52e2c74f09"
+  },
+  "src/experiments/node-command.mjs": {
+    "expected": "64056833ea120d3e389dc6f4408b52a393c1541cf0c364579d59f585a3301d01",
+    "current": "64056833ea120d3e389dc6f4408b52a393c1541cf0c364579d59f585a3301d01"
+  },
+  "src/experiments/protocol.ts": {
+    "expected": "bb4441ed30cd9f624b763cbf03359e45b6bf4dc6d4ea921b804f0936dfe0c3c1",
+    "current": "bb4441ed30cd9f624b763cbf03359e45b6bf4dc6d4ea921b804f0936dfe0c3c1"
+  },
+  "src/experiments/process.ts": {
+    "expected": "42fd189e868645542f2fd388405e5562d03bff20f6f15c8b19e72bf8eff9609d",
+    "current": "42fd189e868645542f2fd388405e5562d03bff20f6f15c8b19e72bf8eff9609d"
+  },
+  "src/application/candidate-runtime.ts": {
+    "expected": "b43ebb2fc7cb749ecf0083e81b345be0c06bc23eb772562fd15aea59ce4466f8",
+    "current": "b43ebb2fc7cb749ecf0083e81b345be0c06bc23eb772562fd15aea59ce4466f8"
+  },
+  "src/inherited-data.ts": {
+    "expected": "5a21bd5c5bea664efcd6360e1f955df962d47ed85ba7b9c46a6c73fa3d2881f2",
+    "current": "5a21bd5c5bea664efcd6360e1f955df962d47ed85ba7b9c46a6c73fa3d2881f2"
+  },
+  "src/process-lifecycle.ts": {
+    "expected": "ca94903b0bd1983024c2928285f3462a5b8602ee3d71eb86c82294d2e9db4784",
+    "current": "ca94903b0bd1983024c2928285f3462a5b8602ee3d71eb86c82294d2e9db4784"
+  },
+  "src/adapters/web/runtime.ts": {
+    "expected": "70c08a84bd0b6e936c34516b61aaf21e8a21b1d356c886b107d78f1f0f83a6e0",
+    "current": "70c08a84bd0b6e936c34516b61aaf21e8a21b1d356c886b107d78f1f0f83a6e0"
+  },
+  "src/adapters/web/project-spec.ts": {
+    "expected": "6684e26016d114d2d0f8e4e4180ffb835025f4100a609ce64de783efcbc43d49",
+    "current": "6684e26016d114d2d0f8e4e4180ffb835025f4100a609ce64de783efcbc43d49"
+  }
+}

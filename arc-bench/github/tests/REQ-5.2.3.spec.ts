@@ -1,3 +1,5 @@
+import { expectDiscussionComment } from './support/observations';
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -17,10 +19,10 @@ test('REQ-5.2.3: Comment on an Issue Discussion - Scenario 1', async ({ page }, 
   await openVisibleTarget(page, issueEntry);
   await page.getByRole('textbox', { name: 'Comment', exact: true }).fill(comment);
   await page.getByRole('button', { name: /^comment$/i }).click();
-  await expect(page.getByText(comment, { exact: true })).toBeVisible();
+  await expectDiscussionComment(page, comment, commenter.username);
   await expectVisibleText(page, commenter.username);
   await page.reload();
-  await expect(page.getByText(comment, { exact: true })).toBeVisible();
+  await expectDiscussionComment(page, comment, commenter.username);
 });
 
 test('REQ-5.2.3: Comment on an Issue Discussion - Scenario 2', async ({ page }, testInfo) => {
@@ -36,11 +38,12 @@ test('REQ-5.2.3: Comment on an Issue Discussion - Scenario 2', async ({ page }, 
   await page.getByRole('textbox', { name: 'Comment', exact: true }).fill('   ');
   if (await commentButton.isEnabled()) {
     await commentButton.click();
-    await expect(page.getByText(/comment.*required|comment.*empty/i)).toBeVisible();
+    await expectText(page, /comment.*required|comment.*empty/i);
   } else {
     await expect(commentButton).toBeDisabled();
   }
 
+  await expect(page.getByRole('article')).toHaveCount(beforeCount);
   await page.reload();
   await expect(page.getByRole('article')).toHaveCount(beforeCount);
 });

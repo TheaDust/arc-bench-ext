@@ -1,6 +1,6 @@
 # ARC-Bench modified
 
-本目录包含 8 个 Web 应用的需求、参考图片、Playwright 场景及验收器回归。当前修订 `2026-11-06-isolated-scenarios`，来源和冻结文件见 [revision.json](revision.json)。
+本目录包含 8 个 Web 应用的需求、参考图片、Playwright 场景及验收器回归。当前修订 `2026-11-07-per-task-semantic-review`，来源和冻结文件见 [revision.json](revision.json)。逐题审查、变更依据与未决项见 [audit/README.md](audit/README.md)。
 
 | 题目 | 原子需求 | 场景 |
 | --- | ---: | ---: |
@@ -17,13 +17,13 @@
 生成比较在同版 ShallowCode 中执行：
 
 ```powershell
-npm run experiment -- run --bench-root E:\my-works\coding\arc-bench-modified --tasks stackoverflow --methods baseline,shallow --repeats 1
+npm run experiment -- run --bench-root E:\my-works\coding\ShallowCode\outputs\arc-bench-reviewed-20261107 --tasks stackoverflow --methods baseline,shallow --repeats 1
 ```
 
 已有产物可单独重验，输出目录必须新建，应用必须声明 shallowcode.config.json：
 
 ```powershell
-node E:\my-works\coding\arc-bench-modified\evaluate-project.mjs E:\my-works\coding\ShallowCode stackoverflow <应用目录> <新评测目录> baseline
+node E:\my-works\coding\ShallowCode\outputs\arc-bench-reviewed-20261107\evaluate-project.mjs E:\my-works\coding\ShallowCode stackoverflow <应用目录> <新评测目录> baseline
 ```
 
 入口先验证冻结的控制器和单题输入，保存 manifest，再收集测试并逐场景评测。方法参数支持 baseline / shallow / arc；它只选择运行合同兼容方式，不调用生成模型。退出码 0 表示全部通过、1 表示存在业务失败、2 表示执行错误。正式运行须保留新目录中的 manifest.json、evaluation/evaluation.json、cases.json、逐场景报告/日志/浏览器产物。
@@ -42,4 +42,4 @@ npm run test:inputs
 npm run test:closeout
 ```
 
-[CONSISTENCY.md](CONSISTENCY.md) 说明前轮五组缺口的闭合依据及新增公开合同；[QUALITY.md](QUALITY.md) 说明证据范围；[validation.json](validation.json) 登记本版验证结果。场景收集、合同回归和合成应用探针均不代表八题真实应用通过率。旧结果及父版记录保留在 validation/history/，旧成绩不迁移至本版。
+[audit/README.md](audit/README.md) 汇集本轮八题的逐场景审查矩阵；[CONSISTENCY.md](CONSISTENCY.md) 保留前轮收口依据；[QUALITY.md](QUALITY.md) 说明证据范围；[validation.json](validation.json) 登记本版验证结果。场景收集、合同回归和合成应用探针均不代表八题真实应用通过率。父版清单另存于 audit/parent-revision.json，旧成绩不迁移至本版。这里是 ARC-Bench 的派生修订版，应与上游原版区分报告。

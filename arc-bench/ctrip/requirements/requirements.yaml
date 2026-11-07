@@ -782,7 +782,7 @@ children:
     name: Select and exchange route cities
     description:
       text: |-
-        "Origin"(role=textbox) and "Destination"(role=textbox) accept cities; "Swap cities"(role=button) exchanges their values without searching. "City selection"(role=button) opens "City selection"(role=dialog), with its "City selection"(role=tab) choices: origin defaults to Popular with Chengdu, while the destination's GHIJ tab includes Guangzhou. Choosing a city closes the dialog and fills the city and airport code.
+        "Origin"(role=textbox) and "Destination"(role=textbox) accept cities; "Swap cities"(role=button) exchanges their values without searching. Clicking the corresponding Origin or Destination field opens "City selection"(role=dialog), with category tabs: origin defaults to Popular with Chengdu, while the destination's GHIJ tab includes Guangzhou. Choosing a city closes the dialog and fills the city and airport code.
 
         Global navigation is a navigation landmark named Global navigation. Fields have associated labels; explicitly named tabs, radios, checkboxes, dialogs and fields retain their stated roles.
 
@@ -2809,7 +2809,7 @@ children:
     name: Remove saved address records
     description:
       text: |-
-        In "Address list"(role=region), "Delete"(role=button) for an identified record opens "Delete address"(role=dialog); Confirm deletion removes only that address. "{business identity}"(role=checkbox) selections with "Delete selected"(role=button) expose "Delete addresses"(role=button) and "Delete addresses"(role=dialog); confirmation removes only selected entries. Removal persists, and targets are created through UI add/save.
+        In "Address list"(role=region), "Delete"(role=button) for an identified record opens "Delete address"(role=dialog); Confirm deletion removes only that address. After "{business identity}"(role=checkbox) selections, "Delete selected"(role=button) opens "Delete addresses"(role=dialog); confirmation removes only selected entries. Removal persists, and targets are created through UI add/save.
 
         Address list records may be rows, listitems, or groups named "Record <address recipient>". Exactly one record per business identity appears in the named list region. Header rows and decorative groups do not use the Record prefix.
 
@@ -2899,7 +2899,7 @@ children:
     name: Remove saved invoice title records
     description:
       text: |-
-        In "Invoice title list"(role=region), "Delete"(role=button) opens "Delete invoice title"(role=dialog) for the identified title; confirmation removes only that record. "{business identity}"(role=checkbox) selections and "Delete selected"(role=button) expose "Delete invoice titles"(role=button) and "Delete invoice titles"(role=dialog); confirmation removes only selected titles. Removal persists, and scenario targets are UI-created.
+        In "Invoice title list"(role=region), "Delete"(role=button) opens "Delete invoice title"(role=dialog) for the identified title; confirmation removes only that record. After "{business identity}"(role=checkbox) selections, "Delete selected"(role=button) opens "Delete invoice titles"(role=dialog); confirmation removes only selected titles. Removal persists, and scenario targets are UI-created.
 
         Invoice title list records may be rows, listitems, or groups named "Record <invoice title>". Exactly one record per business identity appears in the named list region. Header rows and decorative groups do not use the Record prefix.
 

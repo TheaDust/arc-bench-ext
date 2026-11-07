@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { selectChoice } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -21,8 +22,8 @@ test('REQ-6.2.2: Compare Branches Before Opening a Pull Request - Scenario 1', a
   await selectChoice(page.getByRole('combobox', { name: /base/i }), { label: base });
   await selectChoice(page.getByRole('combobox', { name: /compare/i }), { label: compare });
   await page.getByRole('button', { name: /compare changes/i }).click();
-  await expect(page.getByText(changedFile, { exact: true })).toBeVisible();
-  await expect(page.getByText(/commit/i)).toBeVisible();
+  await expectText(page, changedFile, { exact: true });
+  await expectText(page, /commit/i);
 });
 
 test('REQ-6.2.2: Compare Branches Before Opening a Pull Request - Scenario 2', async ({ page }, testInfo) => {
@@ -36,7 +37,7 @@ test('REQ-6.2.2: Compare Branches Before Opening a Pull Request - Scenario 2', a
   await selectChoice(page.getByRole('combobox', { name: /base/i }), { label: branch });
   await selectChoice(page.getByRole('combobox', { name: /compare/i }), { label: branch });
 
-  await expect(page.getByText(/identical/i)).toBeVisible();
+  await expectText(page, /identical|no differences/i);
   const createButton = page.getByRole('button', {
     name: /create pull request/i,
   });

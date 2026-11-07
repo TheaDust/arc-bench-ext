@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -16,7 +17,7 @@ test('REQ-4.1: Browse Repository Files and Directories - Scenario 1', async ({ p
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('link', { name: directory, exact: true }).click();
   await page.getByRole('link', { name: fileName, exact: true }).click();
-  await expect(page.getByText(expectedContent, { exact: true })).toBeVisible();
+  await expectText(page, expectedContent, { exact: true });
   await page.reload();
-  await expect(page.getByText(expectedContent, { exact: true })).toBeVisible();
+  await expectText(page, expectedContent, { exact: true });
 });

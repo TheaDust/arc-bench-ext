@@ -1,0 +1,237 @@
+REQ-6.1 Sign in with password visibility and remember option
+Clicking "Sign in"(role=button) opens "Email"(role=textbox), masked "Password"(role=textbox), a Sign in submit action, and "No account? Create one here"(role=link). "SHOW"(role=button) reveals the password and "Remember me"(role=checkbox) is selectable. Valid verified Store User credentials sign in, showing Store User, "My account"(role=link), and "Sign out"(role=button). Registration does not replace the source's verified-account fixture.
+
+Remember-me lifetime is unspecified.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Remember-me lifetime is unspecified; successful authentication does not imply an invented expiry guarantee.
+SCN-REQ-6.1-01 Open sign-in entry
+{"Given":"An anonymous visitor is on the homepage.","When":"Activate Sign in in Global navigation.","Then":"Email and masked Password fields, the Sign in submit button and No account? Create one here link are visible."}
+SCN-REQ-6.1-02 Reveal password and sign in
+{"Given":"The anonymous visitor has opened Sign in and verified Store User credentials are prestashop_user@example.com / ShopPass123!.","When":"Enter those credentials, click SHOW, check Remember me, then click the Sign in submit button.","Then":"Email retains its value, Password becomes visible with the entered value, Remember me is checked, and successful sign-in exposes Store User, My account and Sign out in Global navigation."}
+TEST
+// requirement: REQ-6.1
+
+test("REQ-6.1: Open sign-in entry", async ({ page }) => {
+  await home(page); await action(nav(page), 'Sign in').click();
+  for (const name of ['Email', 'Password']) await expect(formField(page, name)).toBeVisible();
+  await expect(formField(page, 'Password')).toHaveAttribute('type', 'password');
+  await expect(page.getByRole('button', { name: /^sign in$/i })).toBeVisible(); await expect(action(page, 'No account? Create one here')).toBeVisible();
+});
+
+test("REQ-6.1: Reveal password and sign in", async ({ page }) => {
+  await home(page); await action(nav(page), 'Sign in').click();
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill('prestashop_user@example.com'); await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveValue('prestashop_user@example.com');
+  const password = formField(page, 'Password'); await password.fill('ShopPass123!'); await expect(password).toHaveAttribute('type', 'password');
+  await action(page, 'SHOW').click(); await expect(password).toHaveAttribute('type', 'text'); await expect(password).toHaveValue('ShopPass123!');
+  const remember = page.getByRole('checkbox', { name: 'Remember me', exact: true }); await remember.check(); await expect(remember).toBeChecked();
+  await page.getByRole('button', { name: /^sign in$/i }).click(); await expect(nav(page)).toContainText('Store User');
+  for (const name of ['My account', 'Sign out']) await expect(action(nav(page), name)).toBeVisible();
+});
+
+
+REQ-6.2 Register customer
+From Sign in, "No account? Create one here"(role=link) opens registration with "Mr."(role=radio), "First name"(role=textbox), "Last name"(role=textbox), "Email"(role=textbox), "Password"(role=textbox), "Birthdate"(role=textbox), and "Receive offers"(role=checkbox), "Newsletter"(role=checkbox), and "Terms"(role=checkbox). Entering New Customer, unused new_customer_7_3@example.com, ShopPass123!, 1995-08-21, and all stated choices, then clicking "Save"(role=button), creates a signed-in account showing New Customer.
+
+For registered customer: Created through REQ-6.2 using new_customer_7_3@example.com.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-6.2-01 Create new customer
+{"Given":"An anonymous visitor has opened Sign in; new_customer_7_3@example.com is unused in this scenario world.","When":"Activate No account? Create one here; select Mr., enter First name New, Last name Customer, Email new_customer_7_3@example.com, Password ShopPass123! and Birthdate 1995-08-21, check Receive offers, Newsletter and Terms, then click Save.","Then":"Registration creates a signed-in customer identified as New Customer."}
+TEST
+// requirement: REQ-6.2
+
+test("REQ-6.2: Create new customer", async ({ page }) => {
+  await home(page); await action(nav(page), 'Sign in').click(); await action(page, 'No account? Create one here').click();
+  const mr = page.getByRole('radio', { name: 'Mr.', exact: true }); await mr.check(); await expect(mr).toBeChecked();
+  const values = { 'First name': 'New', 'Last name': 'Customer', Email: 'new_customer_7_3@example.com', Password: 'ShopPass123!', Birthdate: '1995-08-21' };
+  for (const [name, value] of Object.entries(values)) { await formField(page, name).fill(value); await expect(formField(page, name)).toHaveValue(value); }
+  for (const name of ['Receive offers', 'Newsletter', 'Terms']) { const c = page.getByRole('checkbox', { name, exact: true }); await c.check(); await expect(c).toBeChecked(); }
+  await action(page, 'Save').click(); await expect(page.getByText('New Customer', { exact: true })).toBeVisible(); await expect(action(nav(page), 'My account')).toBeVisible();
+});
+
+
+REQ-6.3 Request password reset
+Clicking "Forgot your password?"(role=link) from Sign in opens "Email"(role=textbox) and "Send"(role=button). Submitting existing prestashop_user@example.com displays an email-sent confirmation mentioning that address; actual mailbox delivery is not asserted.
+
+Password reset confirmation is a named status message.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Password reset confirmation is a named status message; actual email delivery is unspecified.
+SCN-REQ-6.3-01 Request existing-account reset
+{"Given":"An anonymous visitor has opened Sign in and prestashop_user@example.com is an existing verified account.","When":"Activate Forgot your password?, enter that address in Email and click Send.","Then":"Password reset confirmation reports that a reset email was sent and mentions prestashop_user@example.com; mailbox delivery is outside this oracle."}
+TEST
+// requirement: REQ-6.3
+
+test("REQ-6.3: Request existing-account reset", async ({ page }) => {
+  await home(page); await action(nav(page), 'Sign in').click(); await action(page, 'Forgot your password?').click();
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill('prestashop_user@example.com'); await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveValue('prestashop_user@example.com');
+  await action(page, 'Send').click(); const message = page.getByRole('status', { name: 'Password reset confirmation', exact: true });
+  await expect(message).toContainText('prestashop_user@example.com'); await expect(message).toContainText(/(?:sent|send).*email|email.*(?:sent|send)/i);
+});
+
+
+REQ-6.4 Sign out to storefront
+The signed-in Store User clicks "Sign out"(role=button) from My account and returns home, which shows "Sign in"(role=button), Cart, and Hummingbird detail t-shirt. Sign out is no longer available.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-6.4-01 Sign out from account
+{"Given":"Store User has signed in through the sign-in UI and opened My account.","When":"Activate Sign out in Global navigation.","Then":"The homepage displays Sign in, Cart and Hummingbird detail t-shirt, and Sign out is unavailable."}
+TEST
+// requirement: REQ-6.4
+
+test("REQ-6.4: Sign out from account", async ({ page }) => {
+  await home(page); await login(page, 'user'); await account(page); await action(nav(page), 'Sign out').click();
+  await expect(action(nav(page), 'Sign in')).toBeVisible(); await expect(action(nav(page), 'Cart')).toBeVisible(); await expect(action(nav(page), 'Sign out')).toHaveCount(0);
+  await expect(action(region(page, 'Popular Products'), DETAIL)).toBeVisible();
+});
+
+
+REQ-7.1 Inspect account overview
+Clicking "My account"(role=link) after signing in displays My account heading, Store User, and "Information"(role=link), "Addresses"(role=link), "Order history and details"(role=link), and "Wishlist"(role=link) entry points.
+
+Account overview is a named region.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.1-01 Inspect account overview
+{"Given":"Verified Store User has signed in through Email and Password.","When":"Activate My account (link).","Then":"My account heading and Store User appear with Information, Addresses, Order history and details and Wishlist entry links."}
+TEST
+// requirement: REQ-7.1
+
+test("REQ-7.1: Inspect account overview", async ({ page }) => {
+  await home(page); await login(page, 'user'); await account(page); await expect(page.getByRole('heading', { name: 'My account', exact: true })).toBeVisible();
+  await expect(region(page, 'Account overview')).toContainText('Store User'); for (const name of ['Information', 'Addresses', 'Order history and details', 'Wishlist']) await expect(action(region(page, 'Account overview'), name)).toBeVisible();
+});
+
+
+REQ-7.2 Change customer email and password
+The profile_user opens "Information"(role=link) with "Email"(role=textbox), "Current password"(role=textbox), and "New password"(role=textbox). Entering ShopPass123! as the current password, changing Email to prestashop_profile_user_next@example.com, and clicking "Save"(role=button) displays "Profile update"(role=status) confirmation and the new email while retaining the old password. A subsequent save with current password ShopPass123! and new password ShopPass456! confirms the password change. The resulting credentials permit sign-in.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Profile update is the named status identifying the update result. Existing account verification is outside scope; the new profile email is initially unused.
+SCN-REQ-7.2-01 Save email then password
+{"Given":"Verified profile_user has signed in using ShopPass123! and opened Information.","When":"Enter Current password ShopPass123!, replace Email with prestashop_profile_user_next@example.com and click Save; then enter Current password ShopPass123! and New password ShopPass456! and click Save again; sign out and sign in with the new credentials.","Then":"Each save reports Profile update success; the new email remains displayed after the first save and the new email/password pair successfully signs in after the second."}
+TEST
+// requirement: REQ-7.2
+
+test("REQ-7.2: Save email then password", async ({ page }) => {
+  await home(page); await login(page, 'profile_user'); await account(page); await action(region(page, 'Account overview'), 'Information').click();
+  await formField(page, 'Current password').fill('ShopPass123!'); await page.getByRole('textbox', { name: 'Email', exact: true }).fill('prestashop_profile_user_next@example.com'); await action(page, 'Save').click();
+  await expect(page.getByRole('status', { name: 'Profile update', exact: true })).toContainText(/saved|updated/i); await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveValue('prestashop_profile_user_next@example.com');
+  await formField(page, 'Current password').fill('ShopPass123!'); await formField(page, 'New password').fill('ShopPass456!'); await action(page, 'Save').click();
+  await expect(page.getByRole('status', { name: 'Profile update', exact: true })).toContainText(/saved|updated/i);
+  await action(nav(page), 'Sign out').click(); await loginEmail(page, 'prestashop_profile_user_next@example.com', 'ShopPass456!'); await expect(action(nav(page), 'My account')).toBeVisible();
+});
+
+
+REQ-7.3 Create and view addresses
+Clicking "Addresses"(role=link) displays each saved address as "{alias}"(role=article), containing its values and Update and Delete actions. "Create new address"(role=button) opens "Alias"(role=textbox), "First name"(role=textbox), "Last name"(role=textbox), "Address"(role=textbox), "Postal code"(role=textbox), "City"(role=textbox), "Country"(role=combobox), and "Phone"(role=textbox), displaying entered values before submission. "Save"(role=button) with Office and shared examples address values creates one Office article; Home setup uses the same creation behavior and values.
+
+For customer address: Created through REQ-7.3 or checkout REQ-5.3. Home/Office: Store User, 1 Commerce Road, 200000, Shanghai, China, 13800000020. Home is created in UI setup before selection/edit/delete scenarios. Updated street: 88 Market Street.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+The existing customer address books start empty. Home is created through the address UI before address selection, editing or deletion; it is not an extra preloaded address.
+SCN-REQ-7.3-01 View Home address
+{"Given":"Signed-in address_view_user has created Home through the normal address UI using Store User, 1 Commerce Road, 200000 Shanghai, China and 13800000020.","When":"Open Addresses from Account overview.","Then":"Home (article) shows those saved values and its Update and Delete actions."}
+SCN-REQ-7.3-02 Create Office address
+{"Given":"Signed-in address_create_user has opened Addresses and has no address articles.","When":"Click Create new address; enter Alias Office, First name Store, Last name User, Address 1 Commerce Road, Postal code 200000, City Shanghai, Country China and Phone 13800000020; inspect entered values, then click Save.","Then":"Exactly one Office article displays the saved address values with Update and Delete controls."}
+TEST
+// requirement: REQ-7.3
+
+test("REQ-7.3: View Home address", async ({ page }) => {
+  await home(page); await login(page, 'address_view_user'); await createAddress(page, 'Home'); await account(page); await action(region(page, 'Account overview'), 'Addresses').click();
+  await expect(page.getByRole('article', { name: 'Home', exact: true })).toBeVisible(); const address = page.getByRole('article', { name: 'Home', exact: true });
+  for (const value of ['Store', 'User', '1 Commerce Road', '200000', 'Shanghai', 'China', '13800000020']) await expect(address).toContainText(value);
+  for (const name of ['Update', 'Delete']) await expect(action(address, name)).toBeVisible();
+});
+
+test("REQ-7.3: Create Office address", async ({ page }) => {
+  await home(page); await login(page, 'address_create_user'); await account(page); await action(region(page, 'Account overview'), 'Addresses').click();
+  await expect(page.getByRole('article')).toHaveCount(0); await action(page, 'Create new address').click(); await fillAddress(page, 'Office'); await action(page, 'Save').click();
+  const office = page.getByRole('article', { name: 'Office', exact: true }); await expect(office).toHaveCount(1); await expect(office).toBeVisible();
+  for (const text of ['Store', 'User', '1 Commerce Road', '200000', 'Shanghai', 'China', '13800000020']) await expect(office).toContainText(text);
+  for (const name of ['Update', 'Delete']) await expect(action(office, name)).toBeVisible();
+});
+
+
+REQ-7.4 Edit or delete named address
+The address_edit_user or address_delete_user first creates Home through UI. In "Home"(role=article), "Update"(role=button) opens its current Alias and street values. Editing the street to 88 Market Street and clicking "Save"(role=button) updates that same article. Alternatively, "Delete"(role=button) within Home removes only that address and returns to the address list.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.4-01 Update Home street
+{"Given":"Signed-in address_edit_user has created Home at 1 Commerce Road through UI and opened Addresses.","When":"Click Update within Home, verify Alias Home and the existing street, replace Address with 88 Market Street and click Save.","Then":"The same Home article shows 88 Market Street instead of the original street."}
+SCN-REQ-7.4-02 Delete Home address
+{"Given":"Signed-in address_delete_user has created Home through UI and opened Addresses.","When":"Click Delete within Home and confirm the deletion prompt.","Then":"Home is removed and the address list is displayed."}
+TEST
+// requirement: REQ-7.4
+
+test("REQ-7.4: Update Home street", async ({ page }) => {
+  await home(page); await login(page, 'address_edit_user'); await createAddress(page, 'Home'); const homeAddress = page.getByRole('article', { name: 'Home', exact: true }); await action(homeAddress, 'Update').click();
+  await expect(page.getByRole('textbox', { name: 'Alias', exact: true })).toHaveValue('Home'); await expect(page.getByRole('textbox', { name: 'Address', exact: true })).toHaveValue('1 Commerce Road');
+  await page.getByRole('textbox', { name: 'Address', exact: true }).fill('88 Market Street'); await action(page, 'Save').click(); await expect(homeAddress).toContainText('88 Market Street');
+  await expect(homeAddress).not.toContainText('1 Commerce Road');
+});
+
+test("REQ-7.4: Delete Home address", async ({ page }) => {
+  await home(page); await login(page, 'address_delete_user'); await createAddress(page, 'Home'); const address = page.getByRole('article', { name: 'Home', exact: true }); await expect(address).toBeVisible();
+  await confirmDeletion(page, action(address, 'Delete')); await expect(address).toHaveCount(0); await expect(action(page, 'Create new address')).toBeVisible();
+});
+
+
+REQ-7.5 Read historical orders and details
+Clicking "Order history and details"(role=link) shows the historical "PS-HISTORY-001"(role=row), with the order-history t-shirt, reference, date 2026-07-18, Delivered status, and Total 34. "Details"(role=link) opens "Order details"(role=region) for that order, containing its product, shared examples shipping information, and Bank wire payment.
+
+Order history is a named region.
+
+For completed delivered historical order: Exactly one initial historical order. The scoped checkout flow cannot create Delivered status or the historical date/reference; the historical order already has these fixed values.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Displayed dates use UTC and the shared clock 2026-10-06T12:00:00Z; carousel transitions use elapsed time.
+SCN-REQ-7.5-01 Inspect historical order list
+{"Given":"Verified order_history_user has the seeded historical order PS-HISTORY-001.","When":"Sign in and open Order history and details from My account.","Then":"The PS-HISTORY-001 row shows Hummingbird order-history t-shirt, 2026-07-18, Delivered and total 34, with Details, Reorder and PDF entries."}
+SCN-REQ-7.5-02 Inspect selected order details
+{"Given":"Signed-in order_history_user is viewing Order history and details with seeded PS-HISTORY-001.","When":"Activate Details within PS-HISTORY-001.","Then":"Order details identifies that reference and Hummingbird order-history t-shirt with its historical shipping address and Bank wire payment."}
+TEST
+// requirement: REQ-7.5
+
+test("REQ-7.5: Inspect historical order list", async ({ page }) => {
+  await home(page); await history(page); const row = historyRow(page); await expect(row).toHaveCount(1);
+  for (const text of ['PS-HISTORY-001', HISTORY_PRODUCT, '2026-07-18', 'Delivered']) await expect(row).toContainText(text); await expectMoney(region(row, 'Total'), 34);
+  for (const name of ['Details', 'Reorder', 'PDF']) await expect(action(row, name)).toBeVisible();
+  await expect(region(page, 'Order history').getByRole('row').filter({ has: page.getByRole('button', { name: /^details$/i }).or(page.getByRole('link', { name: /^details$/i })) })).toHaveCount(1);
+});
+
+test("REQ-7.5: Inspect selected order details", async ({ page }) => {
+  await home(page); await history(page); await action(historyRow(page), 'Details').click(); const details = region(page, 'Order details');
+  await expect(details).toContainText('PS-HISTORY-001');
+  for (const text of [HISTORY_PRODUCT, '1 Commerce Road', 'Shanghai', '200000', 'China', 'Bank wire']) await expect(details).toContainText(text);
+});
+
+
+REQ-7.6 Reorder or download invoice
+Within historical "PS-HISTORY-001"(role=row), "Reorder"(role=link) adds the available order-history t-shirt to Shopping cart with subtotal 29. "PDF"(role=link) downloads a valid invoice PDF for that reference, identified by its suggested filename. No internal order query is required.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-7.6-01 Reorder historical product
+{"Given":"Signed-in order_history_user is viewing seeded PS-HISTORY-001 and its historical product remains available; the cart is empty.","When":"Activate Reorder within that named order row.","Then":"Shopping cart contains Hummingbird order-history t-shirt and subtotal 29."}
+SCN-REQ-7.6-02 Download historical invoice
+{"Given":"Signed-in order_history_user is viewing seeded PS-HISTORY-001.","When":"Activate PDF within that order row and receive the browser download.","Then":"The download succeeds, its suggested filename identifies PS-HISTORY-001 and ends in .pdf, and the downloaded bytes begin with %PDF-."}
+TEST
+// requirement: REQ-7.6
+
+test("REQ-7.6: Reorder historical product", async ({ page }) => {
+  await home(page); await history(page); await action(historyRow(page), 'Reorder').click();
+  await expect(page.getByRole('heading', { name: 'Shopping cart', exact: true })).toBeVisible(); await expect(cartRow(page, HISTORY_PRODUCT)).toBeVisible(); await expectMoney(region(cartRow(page, HISTORY_PRODUCT), 'Subtotal'), 29);
+});
+
+test("REQ-7.6: Download historical invoice", async ({ page }) => {
+  await home(page); await history(page); const pending = page.waitForEvent('download'); await action(historyRow(page), 'PDF').click(); const download = await pending;
+  expect(await download.failure()).toBeNull(); expect(download.suggestedFilename()).toMatch(/PS-HISTORY-001.*\.pdf$/i);
+  const stream = await download.createReadStream(); if (!stream) throw new Error('Missing invoice download stream');
+  const chunks: Buffer[] = []; for await (const chunk of stream) chunks.push(Buffer.from(chunk)); expect(Buffer.concat(chunks).subarray(0, 5).toString()).toBe('%PDF-');
+});

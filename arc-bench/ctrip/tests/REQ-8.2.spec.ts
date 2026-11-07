@@ -8,7 +8,7 @@ test('REQ-8.2: Read completed voucher and issuance rules', async ({ page }, test
   await openHome(page);
   await openVouchers(page, 'voucher_read');
   for (const name of ['Pending', 'In progress', 'Completed']) await visible(tab(page, name));
-  await expect(region(page, 'Issuance rules')).toContainText('365');
+  await expect(region(page, 'Issuance rules')).toContainText(/\b365[\s-]*days?\b/i);
   await tab(page, 'Completed').click();
   await expect(records(region(page, 'Completed vouchers'))).toHaveCount(1);
   await visible(record(region(page, 'Completed vouchers'), 'CTRIP20260718004'));

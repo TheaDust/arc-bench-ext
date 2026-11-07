@@ -1,4 +1,6 @@
+import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
+import { expectCsvValues } from './support/observations';
 import { expect, Page, test } from '@playwright/test';
 import {
   addWorksheet,
@@ -52,16 +54,16 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 1', async ({ pag
   await expect(gridCell(page, 'B3')).toHaveText('They said "hello"\n next line');
   await commitCellThroughFormulaBar(page, 'E2', '=C2*2');
   await commitCellThroughFormulaBar(page, 'E3', '=C3+2');
-  await expect(gridCell(page, 'E2')).toHaveText('4');
-  await expect(gridCell(page, 'E3')).toHaveText('5');
+  await expectCalculatedNumber(gridCell(page, 'E2'), 4);
+  await expectCalculatedNumber(gridCell(page, 'E3'), 5);
   const firstExport = await exportCsv(page);
-  expect(firstExport).toBe(expectedCsv);
+  expectCsvValues(firstExport, expectedCsv, [[1, 4], [2, 4]]);
 
   await page.reload();
-  await expect(gridCell(page, 'E2')).toHaveText('4');
-  await expect(gridCell(page, 'E3')).toHaveText('5');
+  await expectCalculatedNumber(gridCell(page, 'E2'), 4);
+  await expectCalculatedNumber(gridCell(page, 'E3'), 5);
   const secondExport = await exportCsv(page);
-  expect(secondExport).toBe(expectedCsv);
+  expectCsvValues(secondExport, expectedCsv, [[1, 4], [2, 4]]);
 });
 
 test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 2', async ({ page }) => {
@@ -69,17 +71,17 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 2', async ({ pag
   await commitCellThroughFormulaBar(page, 'A1', '2');
   await commitCellThroughFormulaBar(page, 'B1', '=A1*2');
 
-  expect(await exportCsv(page)).toBe('2,4');
+  expectCsvValues(await exportCsv(page), '2,4', [[0, 1]]);
   await expectActiveWorksheet(page, 'Sheet1');
   await expect(gridCell(page, 'A1')).toHaveText('2');
-  await expect(gridCell(page, 'B1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 4);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 
   await page.reload();
   await expectActiveWorksheet(page, 'Sheet1');
   await expect(gridCell(page, 'A1')).toHaveText('2');
-  await expect(gridCell(page, 'B1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 4);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 });
@@ -90,7 +92,7 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 3', async ({ pag
   await addWorksheet(page, 'Sheet2');
   await commitCellThroughFormulaBar(page, 'A1', 'Sheet2');
 
-  expect(await exportCsv(page)).toBe('Sheet2');
+  expectCsvValues(await exportCsv(page), 'Sheet2');
   await expectActiveWorksheet(page, 'Sheet2');
 });
 
@@ -102,6 +104,6 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 4', async ({ pag
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
 
-  expect(await exportCsv(page)).toBe('First');
+  expectCsvValues(await exportCsv(page), 'First');
   await expectActiveWorksheet(page, 'Sheet1');
 });

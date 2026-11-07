@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -29,7 +30,7 @@ test('REQ-4.3.1: List and Switch Repository Branches - Scenario 2', async ({ pag
   await expect(page.getByRole('button', { name: new RegExp(activeBranch, 'i') })).toBeVisible();
   await page.getByRole('button', { name: /branch /i }).click();
   await page.getByRole('textbox', { name: /find.*branch/i }).fill(unknownBranch);
-  await expect(page.getByText(/no.*branch/i)).toBeVisible();
+  await expectText(page, /no.*branch/i);
   await page.keyboard.press('Escape');
 
   await expect(page.getByRole('button', { name: new RegExp(activeBranch, 'i') })).toBeVisible();

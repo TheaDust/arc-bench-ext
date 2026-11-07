@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
 import { expect, Locator, Page, test } from '@playwright/test';
@@ -48,6 +49,11 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 1', a
   await expect(gridCell(page, 'A1')).toHaveText('In Progress');
   await expect(page.getByRole('button', { name: /^(open dropdown for A1)$/i })).toBeVisible();
   await expect(page.getByRole('button', { name: /^(open dropdown for A2)$/i })).toBeVisible();
+
+  await page.getByRole('button', { name: 'Open dropdown for A2', exact: true }).click();
+  for (const value of ['Not Started', 'In Progress', 'Completed'])
+    await expect(page.getByRole('option', { name: value, exact: true })).toBeVisible();
+  await expect(page.getByRole('option')).toHaveCount(3);
 });
 
 test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 2', async ({ page }) => {
@@ -61,16 +67,16 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 2', a
   await dialog.getByRole('button', { name: /^Save$/ }).click();
   await expect(dialog).toBeHidden();
 
-  await commitCellThroughFormulaBar(page, 'A1', '120', { expectChange: false });
-  await expect(page.getByText('Please enter a number between 0 and 100', { exact: true })).toBeVisible();
+  await commitCellThroughFormulaBar(page, 'A1', '120', { accepted: false });
+  await expectText(page, 'Please enter a number between 0 and 100', { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('50');
   await gridCell(page, 'A1').click();
   await expect(formulaBar(page)).toHaveValue('50');
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('50');
-  await commitCellThroughFormulaBar(page, 'A1', '101', { expectChange: false });
-  await expect(page.getByText('Please enter a number between 0 and 100', { exact: true })).toBeVisible();
+  await commitCellThroughFormulaBar(page, 'A1', '101', { accepted: false });
+  await expectText(page, 'Please enter a number between 0 and 100', { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('50');
 
   await commitCellThroughFormulaBar(page, 'A1', '100');
@@ -84,13 +90,17 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 3', a
   await commitCellThroughFormulaBar(page, 'A1', '50');
   await configureNumberValidation(page, 'A1', 'A1', '0', '100');
 
-  await commitCellThroughGrid(page, 'A1', '120', { expectChange: false });
-  await expect(page.getByText('Please enter a number between 0 and 100', { exact: true })).toBeVisible();
+  await commitCellThroughGrid(page, 'A1', '120', { accepted: false });
+  await expectText(page, 'Please enter a number between 0 and 100', { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('50');
   await gridCell(page, 'A1').click();
   await expect(formulaBar(page)).toHaveValue('50');
 
   await page.reload();
+  await expect(gridCell(page, 'A1')).toHaveText('50');
+
+  await commitCellThroughGrid(page, 'A1', '120', { accepted: false });
+  await expectText(page, 'Please enter a number between 0 and 100', { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('50');
 });
 
@@ -108,8 +118,8 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 4', a
   await expect(editDialog).toBeHidden();
   await expect(gridCell(page, 'A1')).toHaveText('50');
 
-  await commitCellThroughFormulaBar(page, 'A1', '5', { expectChange: false });
-  await expect(page.getByText('Please enter a number between 10 and 60', { exact: true })).toBeVisible();
+  await commitCellThroughFormulaBar(page, 'A1', '5', { accepted: false });
+  await expectText(page, 'Please enter a number between 10 and 60', { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText('50');
 
   const deleteDialog = await openDataValidation(page, 'A1', 'A1');
@@ -128,21 +138,21 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 5', a
   await commitCellThroughFormulaBar(page, 'A1', 'Open');
   await configureDropdownValidation(page, 'A1', 'A1', ['Open', 'Closed']);
 
-  await commitCellThroughFormulaBar(page, 'A1', 'Pending', { expectChange: false });
-  await expect(page.getByText(
+  await commitCellThroughFormulaBar(page, 'A1', 'Pending', { accepted: false });
+  await expectText(page, 
     'Please select one of the following values: Open, Closed',
     { exact: true },
-  )).toBeVisible();
+  );
   await expect(gridCell(page, 'A1')).toHaveText('Open');
   await gridCell(page, 'A1').click();
   await expect(formulaBar(page)).toHaveValue('Open');
 
   await page.reload();
-  await commitCellThroughFormulaBar(page, 'A1', 'Pending', { expectChange: false });
-  await expect(page.getByText(
+  await commitCellThroughFormulaBar(page, 'A1', 'Pending', { accepted: false });
+  await expectText(page, 
     'Please select one of the following values: Open, Closed',
     { exact: true },
-  )).toBeVisible();
+  );
   await expect(gridCell(page, 'A1')).toHaveText('Open');
 });
 
@@ -155,8 +165,12 @@ test('REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 6', a
   await commitCellThroughFormulaBar(page, 'A2', 'Completed');
   await expect(gridCell(page, 'A1')).toHaveText('In Progress');
   await expect(gridCell(page, 'A2')).toHaveText('Completed');
+  for (const coordinate of ['A1', 'A2'])
+    await expect(page.getByRole('button', { name: `Open dropdown for ${coordinate}`, exact: true })).toBeVisible();
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('In Progress');
   await expect(gridCell(page, 'A2')).toHaveText('Completed');
+  for (const coordinate of ['A1', 'A2'])
+    await expect(page.getByRole('button', { name: `Open dropdown for ${coordinate}`, exact: true })).toBeVisible();
 });
 

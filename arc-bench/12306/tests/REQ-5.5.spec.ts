@@ -1,7 +1,7 @@
 // requirement: REQ-5.5
 import { expect } from '@playwright/test';
 import { test } from './fixtures/test';
-import { entry, link, button, row, region, orders, orderSetup } from './helpers';
+import { entry, link, button, row, region, orders, orderSetup, text } from './helpers';
 test("REQ-5.5: Refund and inspect history", async ({ page }) => {
     await entry(page);
     await orderSetup(page, 'orders_refund_user', '2026-07-22', true, 'G2002');
@@ -10,8 +10,7 @@ test("REQ-5.5: Refund and inspect history", async ({ page }) => {
     await expect(region(page, 'Refund information')).toContainText('G2002');
     await expect(region(page, 'Refund information')).toContainText('Refund amount');
     await button(page, 'Confirm refund').click();
-    await expect.poll(async () => (await page.getByRole('status').filter({ visible: true }).allTextContents())
-        .some(message => message.includes('Refund successful'))).toBe(true);
+    await text(page, 'Refund successful', false);
     await link(page, 'View History orders').click();
     await expect(row(page, 'G2002')).toContainText('refunded');
     await page.reload();

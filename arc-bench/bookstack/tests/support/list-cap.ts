@@ -3,7 +3,10 @@ import { entry } from '../helpers';
 
 /** Record roles are public; auxiliary buttons and links are not counted as records. */
 export async function cappedEntry(collection: Locator, names: string[], limit: number): Promise<{ target: Locator; name: string }> {
-  const records = collection.getByRole('listitem').or(collection.getByRole('row'));
+  // Standard table header rows are not business records. A data row may use rowheader.
+  const records = collection.getByRole('listitem').or(collection.getByRole('row')
+    .filter({ hasNot: collection.page().getByRole('columnheader') }));
+  await expect(collection).toHaveCount(1);
   await expect.poll(() => records.count()).toBeGreaterThan(0);
   const count = await records.count();
   expect(count).toBeLessThanOrEqual(limit);

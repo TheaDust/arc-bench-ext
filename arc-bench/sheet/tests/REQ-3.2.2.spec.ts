@@ -1,3 +1,5 @@
+import { expectCalculatedNumber } from './support/observations';
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -52,11 +54,11 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 2', async ({ page })
 
   await page.keyboard.press('Control+Y');
   await expect(gridCell(page, 'A1')).toHaveText(newBranchValue);
-  await expect(page.getByText(oldBranchValue, { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText(oldBranchValue, { exact: true }).filter({ visible: true })).toHaveCount(0);
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText(newBranchValue);
-  await expect(page.getByText(oldBranchValue, { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText(oldBranchValue, { exact: true }).filter({ visible: true })).toHaveCount(0);
 });
 
 test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 3', async ({ page }) => {
@@ -64,23 +66,23 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 3', async ({ page })
   await commitCellThroughFormulaBar(page, 'A1', '2');
   await commitCellThroughFormulaBar(page, 'B1', '=A1*2');
   await commitCellThroughFormulaBar(page, 'A1', '3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
 
   await page.getByRole('button', { name: /^Undo$/ }).click();
   await expect(gridCell(page, 'A1')).toHaveText('2');
-  await expect(gridCell(page, 'B1')).toHaveText('4');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 4);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 
   await page.getByRole('button', { name: /^Redo$/ }).click();
   await expect(gridCell(page, 'A1')).toHaveText('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('3');
-  await expect(gridCell(page, 'B1')).toHaveText('6');
+  await expectCalculatedNumber(gridCell(page, 'B1'), 6);
   await gridCell(page, 'B1').click();
   await expect(formulaBar(page)).toHaveValue('=A1*2');
 });
@@ -106,6 +108,9 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 4', async ({ page })
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('A');
   await expect(gridCell(page, 'B2')).toHaveText('D');
+
+  await expect(gridCell(page, 'B1')).toHaveText('B');
+  await expect(gridCell(page, 'A2')).toHaveText('C');
 });
 
 test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 5', async ({ page }) => {
@@ -134,6 +139,9 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 5', async ({ page })
   await page.reload();
   await expect(gridCell(page, 'D1')).toHaveText('Left');
   await expect(gridCell(page, 'E1')).toHaveText('Right');
+
+  await expect(gridCell(page, 'A1')).toHaveText('');
+  await expect(gridCell(page, 'B1')).toHaveText('');
 });
 
 test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 6', async ({ page }) => {
@@ -181,7 +189,7 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 7', async ({ page })
     await page.getByRole('button', { name: 'Rename workbook', exact: true }).click();
     await page.getByRole('textbox', { name: 'Workbook name', exact: true }).fill(name);
     await page.getByRole('button', { name: 'Save', exact: true }).click();
-    await expect(page.getByText(name, { exact: true })).toBeVisible();
+    await expectText(page, name, { exact: true });
   }
   const firstName = uniqueName('pw-undo-first');
   const secondName = uniqueName('pw-undo-second');

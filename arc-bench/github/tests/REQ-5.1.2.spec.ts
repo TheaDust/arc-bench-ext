@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -15,9 +16,9 @@ test('REQ-5.1.2: View an Issue and Its Discussion - Scenario 1', async ({ page }
 
   await openVisibleTarget(page, issueEntry);
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
-  await expect(page.getByText(description, { exact: true })).toBeVisible();
+  await expectText(page, description, { exact: true });
   await expectVisibleText(page, 'Open');
-  await expect(page.getByText(/comment|activity/i).first()).toBeVisible();
+  await expectText(page, /comment|activity/i);
 });
 
 test('REQ-5.1.2: View an Issue and Its Discussion - Scenario 2', async ({ page }, testInfo) => {
@@ -29,7 +30,7 @@ test('REQ-5.1.2: View an Issue and Its Discussion - Scenario 2', async ({ page }
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
-  await expect(page.getByText(description, { exact: true })).toBeVisible();
+  await expectText(page, description, { exact: true });
 });
 
 test('REQ-5.1.2: View an Issue and Its Discussion - Scenario 3', async ({ page }, testInfo) => {

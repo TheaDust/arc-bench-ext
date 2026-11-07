@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -16,7 +17,7 @@ test('REQ-5.3.2: Apply Labels to an Issue - Scenario 1', async ({ page }, testIn
   await openVisibleTarget(page, issueEntry);
   await page.getByRole('button', { name: /labels/i }).click();
   await page.getByRole('option', { name: label, exact: true }).click();
-  await expect(page.getByText(label, { exact: true })).toBeVisible();
+  await expectText(page, label, { exact: true });
   await page.reload();
-  await expect(page.getByText(label, { exact: true })).toBeVisible();
+  await expectText(page, label, { exact: true });
 });

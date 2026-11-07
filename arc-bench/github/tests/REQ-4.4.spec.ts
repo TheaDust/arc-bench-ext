@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -21,9 +22,9 @@ test('REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1', 
   await page.getByRole('textbox', { name: 'File contents', exact: true }).fill(content);
   await page.getByRole('textbox', { name: 'Commit message', exact: true }).fill(message);
   await page.getByRole('button', { name: 'Commit changes', exact: true }).click();
-  await expect(page.getByText(content, { exact: true })).toBeVisible();
+  await expectText(page, content, { exact: true });
   await page.getByRole('link', { name: 'Commits', exact: true }).click();
-  await expect(page.getByText(message, { exact: true })).toBeVisible();
+  await expectText(page, message, { exact: true });
 });
 
 test('REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 2', async ({ page }, testInfo) => {
@@ -36,5 +37,5 @@ test('REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 2', 
   await page.getByRole('textbox', { name: 'File name', exact: true }).fill('../invalid.md');
   await page.getByRole('textbox', { name: /^File contents$/ }).fill('must not be saved');
   await page.getByRole('button', { name: /^Commit changes$/ }).click();
-  await expect(page.getByText(/invalid.*path|commit message.*required/i)).toBeVisible();
+  await expectText(page, /invalid.*path|commit message.*required/i);
 });

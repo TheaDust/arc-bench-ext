@@ -10,5 +10,6 @@ test("REQ-5.6: Save a book with shelf association", async ({ page }, testInfo) =
   await heading(page, book);
   await entry(page, shelf).click();
   await heading(page, shelf);
+  await expect(entry(region(page, 'Book list'), book)).toHaveCount(1);
   await expect(entry(region(page, 'Book list'), book)).toBeVisible();
 });

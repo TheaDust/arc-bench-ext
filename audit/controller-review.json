@@ -1,0 +1,11 @@
+{
+  "changedFiles": {
+    "src/experiments/protocol.ts": {
+      "parent": "bb4441ed30cd9f624b763cbf03359e45b6bf4dc6d4ea921b804f0936dfe0c3c1",
+      "current": "f193978920eb025a4c87360737c8f2577c3cb4ab4fa8838f14275fef0540b9ae",
+      "classification": "reporting-only",
+      "evidence": "Byte comparison: all code preceding summarize/cache aggregation is unchanged after accounting for added formatCostUsd import; csv and the remaining suffix are unchanged. Only result-summary/cache/cost formatting helpers change. Current module import/discovery validated separately."
+    }
+  },
+  "note": "Concurrent workspace edit, not authored by this benchmark review. Other executor files must still match the parent manifest. Source copies archived here; no generated application is changed."
+}

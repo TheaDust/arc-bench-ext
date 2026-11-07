@@ -1,5 +1,5 @@
 import { expectSelectedChoice, expectVisibleText, selectChoice } from './support/public-controls';
-import { test, expect, login, action, field, region, mainNav, output, titleFor } from './helpers';
+import { test, expect, login, action, field, region, mainNav, output, titleFor, visitFeed } from './helpers';
 import { retryTitle } from './fixtures/data';
 
 // requirement: REQ-6.5
@@ -20,14 +20,16 @@ test('REQ-6.5: Save and reapply python unanswered criteria', async ({ page, brow
   const name=titleFor(info,'Python unanswered filter');
   await field(dialog,'Filter title').fill(name); await action(dialog,'Save filter').click();
   const assertResults=async () => {
-   const feed=region(page,'Question feed');
-   await expect(action(feed,'SO Python Unanswered Recent')).toBeVisible();
-   for (const title of ['SO Python Answered Active',retryTitle,'How does React state update?']) await expect(action(feed,title)).toHaveCount(0);
-   const summaries=feed.getByRole('region',{name:/^Question /});
-   for (const summary of await summaries.all()) {
-    await expectVisibleText(summary, 'python');
-    await expect(output(summary,'Answer count')).toHaveText('0');
-   }
+   let requiredQuestionSeen = false;
+   await visitFeed(page, async feed => {
+    requiredQuestionSeen ||= await region(feed, 'Question SO Python Unanswered Recent').isVisible();
+    for (const title of ['SO Python Answered Active',retryTitle,'How does React state update?']) await expect(action(feed,title)).toHaveCount(0);
+    for (const summary of await feed.getByRole('region',{name:/^Question /}).all()) {
+     await expectVisibleText(summary, 'python');
+     await expect(output(summary,'Answer count')).toHaveText('0');
+    }
+   });
+   expect(requiredQuestionSeen).toBe(true);
   };
   await assertResults();
   await action(mainNav(page),'Home').click(); await page.reload();

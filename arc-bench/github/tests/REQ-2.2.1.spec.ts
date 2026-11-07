@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import { seedValue, signIn, seedAccount, openVisibleOrganization, clickVisibleTarget } from './support/e2e';
@@ -35,5 +36,5 @@ test('REQ-2.2.1: Create an Organization Team - Scenario 2', async ({ page }, tes
   await clickVisibleTarget(page, 'New team');
   await page.getByRole('textbox', { name: 'Team name', exact: true }).fill('-invalid-team');
   await page.getByRole('button', { name: 'Create team', exact: true }).click();
-  await expect(page.getByText('Team name is invalid', { exact: true })).toBeVisible();
+  await expectText(page, 'Team name is invalid', { exact: true });
 });

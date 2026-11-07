@@ -1,5 +1,5 @@
 // requirement: REQ-4.1
-import { test, expect, action, note, section, openHome, navigate, createNote, expectNote } from './helpers';
+import { test, expect, action, note, section, openHome, navigate, createNote, expectNote, expectSearchHighlights } from './helpers';
 import { identity } from './fixtures/data';
 
 test('REQ-4.1: Search title and content with highlights', async ({ page }, info) => {
@@ -17,9 +17,7 @@ test('REQ-4.1: Search title and content with highlights', async ({ page }, info)
   await expect(note(page, other)).toBeHidden();
   // Named highlight regions provide the portable semantic highlight contract.
   for (const title of [titleMatch, contentMatch]) {
-    const fragment = note(page, title).getByRole('region', { name: 'Highlight st', exact: true });
-    await expect(fragment).toBeVisible();
-    await expect(fragment).toHaveText(/^st$/i);
+    await expectSearchHighlights(note(page, title), 'st');
   }
   await search.fill('');
   await navigate(page, 'Notes');

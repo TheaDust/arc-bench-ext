@@ -1,0 +1,258 @@
+REQ-3.4 Read description and product details
+Selecting "Description"(role=tab) displays its corresponding named tabpanel with the regular-fit description. Selecting "Product Details"(role=tab) displays the matching tabpanel with Reference HB-DETAIL, a cotton Data sheet, and regular-fit Features.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.4-01 Read description tab
+{"Given":"Hummingbird detail t-shirt detail is open.","When":"Select Description (tab).","Then":"Description is selected and its named tabpanel displays the regular-fit product description."}
+SCN-REQ-3.4-02 Read details tab
+{"Given":"Hummingbird detail t-shirt detail is open.","When":"Select Product Details (tab).","Then":"Product Details is selected and its tabpanel shows Reference HB-DETAIL, a cotton Data sheet and regular-fit Features."}
+TEST
+// requirement: REQ-3.4
+
+test("REQ-3.4: Read description tab", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); await page.getByRole('tab', { name: 'Description', exact: true }).click();
+  await expect(page.getByRole('tab', { name: 'Description', exact: true })).toHaveAttribute('aria-selected', 'true');
+  await expect(page.getByRole('tabpanel', { name: 'Description', exact: true })).toContainText(/regular.fit/i);
+});
+
+test("REQ-3.4: Read details tab", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); await page.getByRole('tab', { name: 'Product Details', exact: true }).click();
+  await expect(page.getByRole('tab', { name: 'Product Details', exact: true })).toHaveAttribute('aria-selected', 'true');
+  const panel = page.getByRole('tabpanel', { name: 'Product Details', exact: true });
+  for (const text of ['Reference', 'HB-DETAIL', 'Data sheet', 'cotton', 'Features']) await expect(panel).toContainText(text);
+  await expect(panel).toContainText(/regular.fit/i);
+});
+
+
+REQ-3.5 Inspect reviews and enforce visitor sign-in prompts
+"Reviews"(role=region) shows the seeded Good fit review and average rating 4. For an anonymous visitor, "Write your review"(role=button) opens "Sign in required"(role=dialog), identifying Hummingbird detail t-shirt, without submitting a review. "Wishlist"(role=link) produces the same product-specific sign-in prompt without storing wishlist membership.
+
+Reviews displays "Average rating: <value>".
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.5-01 Read existing review
+{"Given":"Hummingbird detail t-shirt has a seeded Good fit review and average rating 4.","When":"Open the product detail and inspect Reviews.","Then":"Reviews displays Good fit and average rating 4."}
+SCN-REQ-3.5-02 Require sign-in before review
+{"Given":"An anonymous visitor is viewing Hummingbird detail t-shirt and its existing Reviews.","When":"Click Write your review (button).","Then":"Sign in required (dialog) identifies the product, and existing Reviews remains unchanged without a newly submitted review."}
+SCN-REQ-3.5-03 Require sign-in before wishlist
+{"Given":"An anonymous visitor is viewing Hummingbird detail t-shirt.","When":"Activate Wishlist (link).","Then":"Sign in required (dialog) identifies the product and the visitor remains anonymous; the wishlist action does not report successful membership."}
+TEST
+// requirement: REQ-3.5
+
+test("REQ-3.5: Read existing review", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); const reviews = region(page, 'Reviews'); await reviews.scrollIntoViewIfNeeded();
+  await expect(reviews).toContainText('Good fit'); await expect(reviews).toContainText(/Average rating\s*:?\s*4(?:\.0)?/i);
+});
+
+test("REQ-3.5: Require sign-in before review", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); const reviews = region(page, 'Reviews');
+  await reviews.scrollIntoViewIfNeeded(); const before = await reviews.innerText(); await action(reviews, 'Write your review').click();
+  const prompt = page.getByRole('dialog', { name: 'Sign in required', exact: true }); await expect(prompt).toBeVisible(); await expect(prompt).toContainText(DETAIL);
+  await expect(reviews).toHaveText(before, { useInnerText: true });
+});
+
+test("REQ-3.5: Require sign-in before wishlist", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); await action(page, 'Wishlist').click();
+  const prompt = page.getByRole('dialog', { name: 'Sign in required', exact: true }); await expect(prompt).toBeVisible(); await expect(prompt).toContainText(DETAIL);
+  await expect(action(nav(page), 'Sign in')).toBeVisible(); await expect(action(nav(page), 'Sign out')).toHaveCount(0);
+});
+
+
+REQ-3.6 Discover recently viewed and related products
+After visiting Hummingbird detail t-shirt, "Recently viewed"(role=region) includes that product. "Related products"(role=region) contains a different Men product with a keyboard-accessible opening entry.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.6-01 Inspect recommendations and viewing history
+{"Given":"The visitor has opened Hummingbird detail t-shirt from Men.","When":"Inspect Related products and Recently viewed.","Then":"Recently viewed contains Hummingbird detail t-shirt; Related products contains a different seeded Men product with a keyboard-accessible opening entry."}
+TEST
+// requirement: REQ-3.6
+
+test("REQ-3.6: Inspect recommendations and viewing history", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  const recent = region(page, 'Recently viewed'); await recent.scrollIntoViewIfNeeded(); await expect(recent.getByText(DETAIL, { exact: true })).toBeVisible();
+  const related = region(page, 'Related products'); await related.scrollIntoViewIfNeeded();
+  const names = ['Hummingbird cart t-shirt', 'Hummingbird checkout-step t-shirt', 'Hummingbird order-confirmation t-shirt', 'Hummingbird order-complete t-shirt', 'Hummingbird order-history t-shirt', 'Hummingbird wishlist t-shirt', WHITE, BLACK, ...[1,2,3,4].map(i => `Catalog item ${i}`)];
+  await expect.poll(async () => { for (const name of names) if (await action(related, name).isVisible()) return true; return false; }).toBe(true);
+});
+
+
+REQ-3.7 Switch product thumbnail image
+"Product images"(role=region) offers keyboard-accessible "Front"(role=button) and "Back"(role=button) thumbnails. Back replaces the single main image with the distinct back view while retaining the product's accessible name; Front restores the original front image. Switching images does not change the selected product.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.7-01 Switch product thumbnail image
+{"Given":"Hummingbird detail t-shirt detail shows its Front main image; its original image source is recorded.","When":"Click Back in Product images, inspect the main image, then click Front.","Then":"Back displays a different image source with the same product accessible name; Front restores the original source, and the selected product heading is unchanged."}
+TEST
+// requirement: REQ-3.7
+
+test('REQ-3.7: Switch product thumbnail image', async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  const images = region(page, 'Product images');
+  const main = images.getByRole('img', { name: DETAIL, exact: true });
+  await expect(main).toHaveCount(1); await expect(main).toBeVisible();
+  // Compare only public resource identities; do not download or inspect image contents.
+  await expect(main).toHaveAttribute('src', /\S+/);
+  const front = await main.getAttribute('src');
+  await action(images, 'Back').click();
+  await expect(main).toHaveCount(1); await expect(main).toBeVisible();
+  await expect.poll(() => main.getAttribute('src')).not.toBe(front);
+  await action(images, 'Front').click();
+  await expect(main).toHaveAttribute('src', front!);
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+});
+
+
+REQ-3.8 Open and close enlarged product image
+Clicking "Zoom"(role=button) in Product images opens "Product image"(role=dialog) with the currently selected product image and a visible Front view or Back view caption. "Close"(role=button) dismisses the enlargement without changing the product or selected image.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.8-01 Open and close enlarged product image
+{"Given":"Hummingbird detail t-shirt detail is open and Back has been selected in Product images.","When":"Click Zoom, inspect Product image (dialog), then click its Close button.","Then":"The dialog displays one enlarged product image and Back view caption; closing it preserves the product heading and selected back image."}
+TEST
+// requirement: REQ-3.8
+
+test('REQ-3.8: Open and close enlarged product image', async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL);
+  const images = region(page, 'Product images');
+  const main = images.getByRole('img', { name: DETAIL, exact: true });
+  await expect(main).toHaveAttribute('src', /\S+/);
+  const front = await main.getAttribute('src');
+  await action(images, 'Back').click();
+  await expect.poll(() => main.getAttribute('src')).not.toBe(front);
+  const selected = await main.getAttribute('src');
+  await action(images, 'Zoom').click();
+  const zoom = page.getByRole('dialog', { name: 'Product image', exact: true });
+  await expect(zoom).toBeVisible();
+  const enlarged = zoom.getByRole('img', { name: DETAIL, exact: true });
+  await expect(enlarged).toHaveCount(1); await expect(enlarged).toBeVisible();
+  await expect(zoom.getByText('Back view', { exact: true })).toBeVisible();
+  await action(zoom, 'Close').click(); await expect(zoom).toHaveCount(0);
+  await expect(main).toHaveCount(1); await expect(main).toBeVisible();
+  await expect(main).toHaveAttribute('src', selected!);
+  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+});
+
+
+REQ-3.9 Update price and stock for selected variant
+Choosing L in "Size"(role=combobox) and "Black"(role=radio) updates "Product information"(role=region) to the published catalog variant's sale price 36, regular price 45, and "Stock"(role=status) displaying Available stock: 2. Selecting M and "White"(role=radio) restores sale price 24, regular price 30, and Available stock: 50. Both monetary values and stock must follow the actual selected combination rather than only changing the selection controls.
+
+Product information exposes named Sale price and Regular price amounts. Stock status displays "Available stock: <number>". Selected product and variant remain consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+SCN-REQ-3.9-01 Update price and stock for selected variant
+{"Given":"Hummingbird detail t-shirt detail is open with the catalog variant data.","When":"Select L in Size and Black (radio), inspect information, then select M and White (radio).","Then":"L/Black shows sale price 36, regular price 45 and Available stock: 2; M/White restores price 24, regular price 30 and Available stock: 50."}
+TEST
+// requirement: REQ-3.9
+
+test("REQ-3.9: Update price and stock for selected variant", async ({ page }) => {
+  await home(page); await openProduct(page, DETAIL); const size = page.getByRole('combobox', { name: 'Size', exact: true });
+  const info = region(page, 'Product information'); await expectMoney(region(info, 'Sale price'), 24);
+  await selectChoice(size, { label: 'L' }); await page.getByRole('radio', { name: 'Black', exact: true }).check();
+  await expectSelectedChoice(size, 'L'); await expect(page.getByRole('radio', { name: 'Black', exact: true })).toBeChecked();
+  await expectMoney(region(info, 'Sale price'), 36); await expectMoney(region(info, 'Regular price'), 45);
+  await expect(info.getByRole('status', { name: 'Stock', exact: true })).toHaveText('Available stock: 2');
+  await selectChoice(size, { label: 'M' }); await page.getByRole('radio', { name: 'White', exact: true }).check();
+  await expectMoney(region(info, 'Sale price'), 24); await expectMoney(region(info, 'Regular price'), 30);
+  await expect(info.getByRole('status', { name: 'Stock', exact: true })).toHaveText('Available stock: 50');
+});
+
+
+REQ-4.1 Inspect cart contents and summary
+After UI addition, Shopping cart contains exactly one "Hummingbird cart t-shirt"(role=row) with image, M/White combination, Unit price 25, "Quantity"(role=spinbutton) set to 1, Subtotal 25, and "Delete"(role=button). "Cart summary"(role=region) reconciles Items subtotal 25, Shipping 5, and Total 30 including tax. Discount appears only when applicable and is absent for this undiscounted product.
+
+Cart rows expose named Unit price and Subtotal amounts. Cart summary exposes Items subtotal, Shipping, Total, and Discount when applicable. Variant text identifies "Size: <size>" and "Color: <color>". Cart count counts units, and cart state remains consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Each cart row identifies its product and selected variant. Cart count counts units, while Unit price, Subtotal, Items subtotal, Shipping, Total and any Discount reconcile consistently across navigation.
+SCN-REQ-4.1-01 Inspect cart row and totals
+{"Given":"The visitor has added one default M/White Hummingbird cart t-shirt through UI and opened Shopping cart from the success dialog.","When":"Inspect its named row and Cart summary.","Then":"Exactly one row shows image, M/White, Unit price 25, Quantity 1, Subtotal 25 and Delete; summary shows Items subtotal 25, Shipping 5 and Total 30 including tax, with no Discount."}
+TEST
+// requirement: REQ-4.1
+
+test("REQ-4.1: Inspect cart row and totals", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); const row = cartRow(page, CART);
+  await expect(row.getByRole('img', { name: CART, exact: true })).toBeVisible(); await expect(row).toContainText(CART);
+  await expect(row).toContainText(/Size\s*:?\s*M/); await expect(row).toContainText(/Color\s*:?\s*White/);
+  await expectMoney(region(row, 'Unit price'), 25); await expect(row.getByRole('spinbutton', { name: 'Quantity', exact: true })).toHaveValue('1');
+  await expectMoney(region(row, 'Subtotal'), 25); await expect(action(row, 'Delete')).toBeVisible();
+  const summary = region(page, 'Cart summary'); await expectMoney(region(summary, 'Items subtotal'), 25);
+  await expectMoney(region(summary, 'Shipping'), 5); await expectMoney(region(summary, 'Total'), 30);
+  await expect(summary).toContainText(/tax/i); await expect(region(summary, 'Discount')).toHaveCount(0);
+});
+
+
+REQ-4.2 Change or remove cart items
+Clicking "Increase quantity"(role=button) within "Hummingbird cart t-shirt"(role=row) changes quantity from 1 to 2, row Subtotal to 50, and Total in "Cart summary"(role=region) to 55. "Delete"(role=button) on that row removes it, displays the empty-cart message, and recalculates Items subtotal and Total to 0.
+
+Cart rows expose named Unit price and Subtotal amounts. Cart summary exposes Items subtotal, Shipping, Total, and Discount when applicable. Variant text identifies "Size: <size>" and "Color: <color>". Cart count counts units, and cart state remains consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Each cart row identifies its product and selected variant. Cart count counts units, while Unit price, Subtotal, Items subtotal, Shipping, Total and any Discount reconcile consistently across navigation.
+SCN-REQ-4.2-01 Increase cart quantity
+{"Given":"Shopping cart contains one M/White Hummingbird cart t-shirt priced 25 and quantity 1, added through UI.","When":"Click Increase quantity within that product row.","Then":"Quantity becomes 2, row Subtotal becomes 50 and Cart summary Total becomes 55."}
+SCN-REQ-4.2-02 Delete cart product
+{"Given":"Shopping cart contains one Hummingbird cart t-shirt added through UI.","When":"Click Delete within its named row.","Then":"The product row disappears, an empty-cart message appears, and Items subtotal and Total both become 0."}
+TEST
+// requirement: REQ-4.2
+
+test("REQ-4.2: Increase cart quantity", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); const row = cartRow(page, CART); await action(row, 'Increase quantity').click();
+  await expect(row.getByRole('spinbutton', { name: 'Quantity', exact: true })).toHaveValue('2'); await expectMoney(region(row, 'Subtotal'), 50);
+  await expectMoney(region(region(page, 'Cart summary'), 'Total'), 55);
+});
+
+test("REQ-4.2: Delete cart product", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); await action(cartRow(page, CART), 'Delete').click();
+  await expect(cartRow(page, CART)).toHaveCount(0); await expect(page.getByText(/(?:cart is empty|no items in your cart)/i)).toBeVisible();
+  await expectMoney(region(region(page, 'Cart summary'), 'Items subtotal'), 0); await expectMoney(region(region(page, 'Cart summary'), 'Total'), 0);
+});
+
+
+REQ-4.3 Continue browsing or begin checkout
+From Shopping cart, "Continue shopping"(role=link) opens Men with the cart t-shirt available. "Proceed to checkout"(role=link) opens "Personal Information"(role=region) and "Order summary"(role=region) containing the selected product. Both transitions retain the cart.
+
+Cart rows expose named Unit price and Subtotal amounts. Cart summary exposes Items subtotal, Shipping, Total, and Discount when applicable. Variant text identifies "Size: <size>" and "Color: <color>". Cart count counts units, and cart state remains consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Each cart row identifies its product and selected variant. Cart count counts units, while Unit price, Subtotal, Items subtotal, Shipping, Total and any Discount reconcile consistently across navigation.
+SCN-REQ-4.3-01 Return to browsing
+{"Given":"Shopping cart contains one Hummingbird cart t-shirt added through UI.","When":"Activate Continue shopping (link).","Then":"Men opens with Hummingbird cart t-shirt available and the header Cart still reports one unit."}
+SCN-REQ-4.3-02 Enter checkout with selected cart
+{"Given":"Shopping cart contains one Hummingbird cart t-shirt added through UI.","When":"Activate Proceed to checkout (link).","Then":"Personal Information and Order summary open; the summary still contains the selected Hummingbird cart t-shirt."}
+TEST
+// requirement: REQ-4.3
+
+test("REQ-4.3: Return to browsing", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); await action(page, 'Continue shopping').click();
+  await expect(page.getByRole('heading', { name: 'Men', exact: true })).toBeVisible(); await expect(card(page, CART)).toBeVisible();
+  await expect(action(nav(page), 'Cart')).toContainText('1');
+});
+
+test("REQ-4.3: Enter checkout with selected cart", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); await action(page, 'Proceed to checkout').click();
+  await expect(region(page, 'Personal Information')).toBeVisible(); await expect(region(page, 'Order summary')).toContainText(CART);
+});
+
+
+REQ-4.4 Edit cart quantity directly
+Entering 3 in "Quantity"(role=spinbutton) within "Hummingbird cart t-shirt"(role=row) and committing on blur updates its Subtotal to 75 and "Cart summary"(role=region) to Items subtotal 75 and Total 80. The header "Cart"(role=link) reports a count of three units.
+
+Cart rows expose named Unit price and Subtotal amounts. Cart summary exposes Items subtotal, Shipping, Total, and Discount when applicable. Variant text identifies "Size: <size>" and "Color: <color>". Cart count counts units, and cart state remains consistent across navigation within a flow.
+
+English action names are case-insensitive. Global navigation remains available across pages; each mutation affects the selected business identity.
+
+Each cart row identifies its product and selected variant. Cart count counts units, while Unit price, Subtotal, Items subtotal, Shipping, Total and any Discount reconcile consistently across navigation.
+SCN-REQ-4.4-01 Edit cart quantity directly
+{"Given":"Shopping cart contains one Hummingbird cart t-shirt priced 25, quantity 1 and shipping 5.","When":"Fill Quantity within its row with 3, then blur that field.","Then":"Row Subtotal and summary Items subtotal become 75, Total becomes 80, and header Cart reports three units."}
+TEST
+// requirement: REQ-4.4
+
+test("REQ-4.4: Edit cart quantity directly", async ({ page }) => {
+  await home(page); await cartSetup(page, CART); const row = cartRow(page, CART); const quantity = row.getByRole('spinbutton', { name: 'Quantity', exact: true });
+  await quantity.fill('3'); await quantity.blur(); await expect(quantity).toHaveValue('3'); await expectMoney(region(row, 'Unit price'), 25);
+  await expectMoney(region(row, 'Subtotal'), 75); const summary = region(page, 'Cart summary');
+  await expectMoney(region(summary, 'Items subtotal'), 75); await expectMoney(region(summary, 'Total'), 80); await expect(action(nav(page), 'Cart')).toContainText('3');
+});

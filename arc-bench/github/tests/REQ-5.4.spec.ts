@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -16,7 +17,7 @@ test('REQ-5.4: Close or Reopen an Issue - Scenario 1', async ({ page }, testInfo
   await openVisibleTarget(page, issueEntry);
   await page.getByRole('button', { name: /close issue/i }).click();
   await expectVisibleText(page, 'Closed');
-  await expect(page.getByText(/closed.*issue/i)).toBeVisible();
+  await expectText(page, /closed.*issue/i);
   await page.getByRole('button', { name: /reopen issue/i }).click();
   await expectVisibleText(page, 'Open');
   await page.reload();

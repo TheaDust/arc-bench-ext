@@ -1,0 +1,45 @@
+{
+  "allIdsUnchanged": true,
+  "tasks": {
+    "12306": {
+      "requirements": 129,
+      "scenarios": 142,
+      "steps": 142
+    },
+    "bookstack": {
+      "requirements": 34,
+      "scenarios": 35,
+      "steps": 35
+    },
+    "ctrip": {
+      "requirements": 107,
+      "scenarios": 152,
+      "steps": 152
+    },
+    "github": {
+      "requirements": 65,
+      "scenarios": 100,
+      "steps": 126
+    },
+    "keep": {
+      "requirements": 22,
+      "scenarios": 33,
+      "steps": 33
+    },
+    "prestashop": {
+      "requirements": 63,
+      "scenarios": 86,
+      "steps": 86
+    },
+    "sheet": {
+      "requirements": 38,
+      "scenarios": 100,
+      "steps": 100
+    },
+    "stackoverflow": {
+      "requirements": 60,
+      "scenarios": 66,
+      "steps": 66
+    }
+  }
+}

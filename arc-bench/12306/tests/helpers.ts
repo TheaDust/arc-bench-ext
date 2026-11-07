@@ -17,25 +17,24 @@ export const field = (s: Surface, name: string) => {
         .or(s.locator('input[type="password"], input[type="date"]'));
     return s.getByLabel(label).and(controls);
 };
-// Equivalent links to the same public agreement may occur in the form and footer.
 export async function openAgreement(page: Page, name: string) {
-    await expect.poll(async () => {
-        for (const candidate of await link(page, name).all())
-            if (await candidate.isVisible()) return true;
-        return false;
-    }).toBe(true);
-    for (const candidate of await link(page, name).all()) {
-        if (await candidate.isVisible()) {
-            await candidate.click();
-            return;
-        }
-    }
-    throw new Error(`No visible agreement link: ${name}`);
+    // The registration contract explicitly declares exactly one agreement link.
+    await link(page, name).click();
 }
 export const region = (s: Surface, name: string) => s.getByRole('region', { name, exact: true });
+export async function expectPaymentDetails(page: Page) {
+    const details = region(page, 'Order details');
+    await expect(details).toBeVisible();
+    for (const value of ['G1001', 'Passenger Example', 'P20269993', 'Business-class seat', 'Total: ￥1870.00'])
+        await expect(details).toContainText(value);
+    await expect(region(page, 'Payment information')).toBeVisible();
+}
 // Public row identity, independent of CSS, column order, and nesting.
 export const row = (s: Surface, identity: string) => s.getByRole('row').filter({ has: ('page' in s ? s.page() : s).getByText(identity, { exact: true }) });
-export async function text(page: Page, value: string, exact = true) { await expect(page.getByText(value, { exact })).toBeVisible(); }
+export async function text(page: Page, value: string, exact = true) {
+    // A presence obligation does not make repeated visible feedback invalid.
+    await expect.poll(() => page.getByText(value, { exact }).filter({ visible: true }).count()).toBeGreaterThan(0);
+}
 export async function entry(page: Page) { await page.goto('/'); }
 export async function home(page: Page) { await link(page.getByRole('navigation').filter({ has: link(page, 'Home') }), 'Home').click(); }
 export async function login(page: Page, user = 'registered_user', password: string = PASS, success = true) {
@@ -103,7 +102,8 @@ export async function checkHeaders(s: Surface, names: string[]) {
         await expect(s.getByRole('columnheader', { name, exact: true })).toBeVisible();
 }
 export async function trainIds(page: Page) {
-    const rows = await page.getByRole('row').filter({ has: button(page, 'Book') }).all();
+    // Membership includes a displayed train even when its Book action is missing.
+    const rows = await page.getByRole('row').filter({ has: page.getByText(/^[GCDKZT]\d+$/, { exact: true }) }).all();
     const result: string[] = [];
     for (const r of rows) {
         const cells = await r.getByRole('cell').allTextContents();
@@ -113,6 +113,22 @@ export async function trainIds(page: Page) {
         result.push(ids[0]);
     }
     return result;
+}
+
+export async function expectGuideQuestion(page: Page, question: string, category?: string) {
+    if (category)
+        await expect(page.getByRole('tab', { name: category, exact: true })).toHaveAttribute('aria-selected', 'true');
+    const selected = page.getByRole('tab', { selected: true });
+    await expect(selected).toHaveCount(1);
+    const categories = ['Ticketing', 'Endorsement and refund', 'Miscellaneous'];
+    const selectedNames: string[] = [];
+    for (const name of categories)
+        if (await selected.and(page.getByRole('tab', { name, exact: true })).count()) selectedNames.push(name);
+    expect(selectedNames).toHaveLength(1);
+    if (category) expect(selectedNames[0]).toBe(category);
+    const panel = page.getByRole('tabpanel', { name: selectedNames[0], exact: true });
+    await expect(panel).toBeVisible();
+    await expect(panel.getByRole('heading', { name: question, exact: true })).toBeInViewport();
 }
 export async function expectTrainIds(page: Page, ids: string[]) { await expect.poll(async () => (await trainIds(page)).sort()).toEqual([...ids].sort()); }
 export async function sortTrains(page: Page, label: string, key: 'departure' | 'duration' | 'arrival') {

@@ -15,4 +15,5 @@ test('REQ-3.1: Create a user label', async ({ page }, info) => {
   await expect(field).toHaveCount(1);
   await expect(field).toHaveValue(label);
   await action(dialog, 'Done').click();
+  await expect(dialog).toBeHidden();
 });

@@ -1,6 +1,6 @@
 // requirement: REQ-4.4
 import { test, expect } from '@playwright/test';
-import { identity, enter, region, entry, button, heading, text, go, createShelf, openShelf } from './helpers';
+import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createShelf, openShelf } from './helpers';
 
 test("REQ-4.4: Confirm deletion", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -15,7 +15,7 @@ test("REQ-4.4: Confirm deletion", async ({ page }, testInfo) => {
   await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(0);
   await page.reload();
   await go(page, 'Shelves');
-  await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(0);
+  await expectAbsentEntry(region(page, 'Shelf list'), name);
 });
 
 test("REQ-4.4: Cancel deletion", async ({ page }, testInfo) => {

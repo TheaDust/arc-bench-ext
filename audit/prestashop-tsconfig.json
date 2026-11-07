@@ -1,0 +1,4 @@
+{
+  "extends": "../validation/tsconfig.json",
+  "include": ["../arc-bench/prestashop/**/*.ts", "validation/prestashop.spec.ts"]
+}

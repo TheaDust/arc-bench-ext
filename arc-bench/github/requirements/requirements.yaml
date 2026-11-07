@@ -285,25 +285,14 @@ children:
       name: 'REQ-1.2: Sign Out and End the Current Web Session - Scenario 1'
       steps:
       - id: STEP-REQ-1.2-01-01
-        Given: 'The visitor starts at the application home page in a fresh unauthenticated browser session. The
-          seeded data is account `alice-dev`, email `alice.dev@example.test`, password `Valid-password-123!`. A
-          signed-in user has entered an organization, repository, or account-settings page they are authorized to
-          access from the account menu and has recorded that protected page heading. Seed values: account `alice-dev`,
-          email `alice.dev@example.test`, password `Valid-password-123!`.'
-        When: 'The user opens the account menu and clicks “Sign out”; if a confirmation dialog appears, the user
-          confirms instead of canceling or closing it. Seed values: account `alice-dev`, email `alice.dev@example.test`,
-          password `Valid-password-123!`.'
-        Then: 'The system returns to an unauthenticated access state, displays the “Sign in” entry, and no longer
-          displays that user''s account menu; if the user cancels the confirmation dialog, the session remains valid
-          and the original page remains accessible. Seed values: account `alice-dev`, email `alice.dev@example.test`,
-          password `Valid-password-123!`.'
+        Given: "In a fresh browser session, sign in as seeded alice-dev (alice.dev@example.test, Valid-password-123!), open Account menu then Settings, and record that protected page URL."
+        When: "Open Account menu, follow Sign out, and activate Confirm sign out in the Sign out dialog."
+        Then: "The Sign in link is visible and the current user Account menu is absent."
         references:
         - \ref[requirement](REQ-1.1.2)
         - \ref[image](IMG-GITHUB-ACCOUNT-MENU-SIGN-OUT)
       - id: STEP-REQ-1.2-01-02
-        Then: 'When the user refreshes, navigates back in the browser, or directly returns to the recorded protected
-          page, the system requires re-authentication and cannot restore the signed-out session. Seed values: account
-          `alice-dev`, email `alice.dev@example.test`, password `Valid-password-123!`.'
+        Then: "After refresh, browser Back, and direct navigation to the recorded protected URL, Sign in remains visible; direct navigation does not restore the signed-out Account menu."
         references:
         - \ref[requirement](REQ-1.1.2)
         - \ref[image](IMG-GITHUB-ACCOUNT-MENU-SIGN-OUT)
@@ -311,23 +300,14 @@ children:
       name: 'REQ-1.2: Sign Out and End the Current Web Session - Scenario 2'
       steps:
       - id: STEP-REQ-1.2-02-01
-        Given: 'The visitor starts at the application home page in a fresh unauthenticated browser session. The
-          seeded data is account `alice-dev`, email `alice.dev@example.test`, password `Valid-password-123!`. The
-          visitor starts at the application home page in a fresh unauthenticated browser session. Seed values: account
-          `alice-dev`, email `alice.dev@example.test`, password `Valid-password-123!`.'
-        When: 'The user signs in as `alice-dev` with `Valid-password-123!` and follows the visible controls for
-          the sign out and end the current web session workflow. Seed values: account `alice-dev`, email `alice.dev@example.test`,
-          password `Valid-password-123!`.'
-        Then: 'The page displays the required headings, controls, values, and status for the sign out and end the
-          current web session workflow. Seed values: account `alice-dev`, email `alice.dev@example.test`, password
-          `Valid-password-123!`.'
+        Given: "In a fresh browser session, sign in as seeded alice-dev (alice.dev@example.test, Valid-password-123!), open Account menu then Settings, and record that protected page URL."
+        When: "Open Account menu, follow Sign out, and activate Cancel in the Sign out dialog."
+        Then: "The dialog closes, the original protected URL remains current, and Account menu remains visible."
         references:
         - \ref[requirement](REQ-1.1.2)
         - \ref[image](IMG-GITHUB-ACCOUNT-MENU-SIGN-OUT)
       - id: STEP-REQ-1.2-02-02
-        Then: 'After refreshing or reopening the visible destination, the successful result remains persisted; a
-          rejected action leaves the original state unchanged. Seed values: account `alice-dev`, email `alice.dev@example.test`,
-          password `Valid-password-123!`.'
+        Then: "After refresh, the same protected URL and authenticated Account menu remain available."
         references:
         - \ref[requirement](REQ-1.1.2)
         - \ref[image](IMG-GITHUB-ACCOUNT-MENU-SIGN-OUT)
@@ -358,11 +338,7 @@ children:
         Given: The visitor starts in a fresh unauthenticated browser session. The system pre-provisions the verified
           account `password-change-success` with email `password-change-success@example.test` and current password
           `Valid-password-123!`.
-        When: The visitor signs in as `password-change-success`, opens Settings and then Password and authentication,
-          enters `Valid-password-123!` in “Current password”, enters `New-password-456!` in both “New password”
-          and “Confirm password”, and clicks “Update password”. The visitor then opens the account-access page,
-          clicks “Sign in”, enters `password-change-success@example.test` and `New-password-456!`, and clicks “Sign
-          in”.
+        When: "The visitor signs in as `password-change-success`, opens Settings and then Password and authentication, enters `Valid-password-123!` in “Current password”, enters `New-password-456!` in both “New password” and “Confirm password”, and clicks “Update password”. In a separate fresh unauthenticated browser session, the visitor opens the account-access page, clicks “Sign in”, enters `password-change-success@example.test` and `New-password-456!`, and clicks “Sign in”."
         Then: The password-settings page displays the exact message “Password updated”.
         references:
         - \ref[requirement](REQ-1.1.2)
@@ -379,11 +355,7 @@ children:
         Given: The visitor starts in a fresh unauthenticated browser session. The system pre-provisions the verified
           account `password-change-invalid` with email `password-change-invalid@example.test` and current password
           `Valid-password-123!`.
-        When: The visitor signs in as `password-change-invalid`, opens Settings and then Password and authentication,
-          enters `Valid-password-123!-wrong` in “Current password”, enters `Another-valid-password-123!` in “New
-          password”, enters `does-not-match` in “Confirm password”, and clicks “Update password”. The visitor then
-          opens the account-access page, clicks “Sign in”, enters `password-change-invalid@example.test` and the
-          original password `Valid-password-123!`, and clicks “Sign in”.
+        When: "The visitor signs in as `password-change-invalid`, opens Settings and then Password and authentication, enters `Valid-password-123!-wrong` in “Current password”, enters `Another-valid-password-123!` in “New password”, enters `does-not-match` in “Confirm password”, and clicks “Update password”. In a separate fresh unauthenticated browser session, the visitor opens the account-access page, clicks “Sign in”, enters `password-change-invalid@example.test` and the original password `Valid-password-123!`, and clicks “Sign in”."
         Then: The password-settings page displays the exact message “Current password is incorrect” and does not
           update the password.
         references:
@@ -402,11 +374,7 @@ children:
         Given: The visitor starts in a fresh unauthenticated browser session. The system pre-provisions the verified
           account `password-change-required` with email `password-change-required@example.test` and current password
           `Valid-password-123!`. The candidate new password is `Required-password-789!`.
-        When: The visitor signs in as `password-change-required`, opens Settings and then Password and authentication,
-          leaves “Current password” empty, enters `Required-password-789!` in both “New password” and “Confirm password”,
-          and clicks “Update password”. The visitor then opens the account-access page, clicks “Sign in”, enters
-          `password-change-required@example.test` and the original password `Valid-password-123!`, and clicks “Sign
-          in”.
+        When: "The visitor signs in as `password-change-required`, opens Settings and then Password and authentication, leaves “Current password” empty, enters `Required-password-789!` in both “New password” and “Confirm password”, and clicks “Update password”. In a separate fresh unauthenticated browser session, the visitor opens the account-access page, clicks “Sign in”, enters `password-change-required@example.test` and the original password `Valid-password-123!`, and clicks “Sign in”."
         Then: The password-settings page displays the exact message “Current password is required” and does not
           update the password.
         references:
@@ -640,20 +608,7 @@ children:
     - id: REQ-2.2.2
       name: Manage Organization Team Members and Hierarchy
       description:
-        text: |-
-          An organization Owner can open a team in the organization’s “Teams” page. The team page exposes “Members” and “Settings”. On Members, “Add member” opens a visibly labeled “Username” textbox and an “Add member” button; after a valid organization member is added, the member appears in the list with a “Remove <username>” button. Removing the member updates the list immediately and remains effective after reload. On Settings, “Parent team” is a combobox and “Save” persists a parent-team change. A change that would make a team its own ancestor is rejected with “Cyclic team hierarchy is not allowed”, and the previously saved parent remains selected after reload.
-
-          Organization membership only determines whether a user can see the organization and can be a candidate for team/repository authorization; it does not automatically grant access to any private repository.
-
-          Access to a private repository comes only from organization Owner status, a direct role grant on that repository, or direct membership in a team authorized for that repository.
-
-          All changes must be reflected simultaneously in organization details, people/team lists, and the actual access results of affected repositories.
-
-          A team name contains 1–50 lowercase ASCII letters, digits, or hyphens, may not begin or end with a hyphen, and must be unique within the same organization; a team must belong to an organization, and a parent team must belong to the same organization and may not create a direct or indirect cycle.
-
-          Organization membership and team membership are independent persisted relationships; team hierarchy is used only for display and management and does not implicitly add members of a parent or child team to the other team.
-
-          Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+        text: "An organization Owner can open a team in the organization’s “Teams” page. The team page exposes “Members” and “Settings”. On Members, “Add member” opens a visibly labeled “Username” textbox and an “Add member to team” submit button; after a valid organization member is added, the member appears in the list with a “Remove <username>” button. Removing the member updates the list immediately and remains effective after reload. On Settings, “Parent team” is a combobox and “Save” persists a parent-team change. A change that would make a team its own ancestor is rejected with “Cyclic team hierarchy is not allowed”, and the previously saved parent remains selected after reload.\n\nOrganization membership only determines whether a user can see the organization and can be a candidate for team/repository authorization; it does not automatically grant access to any private repository.\n\nAccess to a private repository comes only from organization Owner status, a direct role grant on that repository, or direct membership in a team authorized for that repository.\n\nAll changes must be reflected simultaneously in organization details, people/team lists, and the actual access results of affected repositories.\n\nA team name contains 1–50 lowercase ASCII letters, digits, or hyphens, may not begin or end with a hyphen, and must be unique within the same organization; a team must belong to an organization, and a parent team must belong to the same organization and may not create a direct or indirect cycle.\n\nOrganization membership and team membership are independent persisted relationships; team hierarchy is used only for display and management and does not implicitly add members of a parent or child team to the other team.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe page launcher remains named \"Add member\"; the editor submit action is named \"Add member to team\" so the two operations have distinct public identities even when both remain visible. This action-name disambiguation is a versioned benchmark input clarification; existing generated applications are not assumed to implement the revised name."
       scenarios:
       - id: SCN-REQ-2.2.2-01
         name: 'REQ-2.2.2: Manage Organization Team Members and Hierarchy - Scenario 1'
@@ -664,10 +619,7 @@ children:
             this account is an organization Owner authorized to manage `frontend-team` in `Acme Demo`. The registered
             organization member `bob-reviewer` (email `bob-reviewer@example.test`) is not currently a member of
             `frontend-team`.
-          When: The visitor signs in as `team-maintainer`, opens “Account menu”, clicks “Your organizations”, opens
-            `Acme Demo`, clicks “Teams”, opens the team `frontend-team`, and clicks “Members”. The visitor clicks
-            “Add member”, enters `bob-reviewer` in the visibly labeled “Username” textbox, and clicks the “Add member”
-            button. The visitor then clicks “Remove bob-reviewer”.
+          When: "The visitor signs in as `team-maintainer`, opens “Account menu”, clicks “Your organizations”, opens `Acme Demo`, clicks “Teams”, opens the team `frontend-team`, and clicks “Members”. The visitor clicks “Add member”, enters `bob-reviewer` in the visibly labeled “Username” textbox, and clicks the “Add member to team” button. The visitor then clicks “Remove bob-reviewer”."
           Then: After adding, `bob-reviewer` is visible in the member list; after removal, `bob-reviewer` is not
             visible.
           references:
@@ -1091,12 +1043,7 @@ children:
     - id: REQ-3.2.3
       name: Copy a Repository Clone Value
       description:
-        text: |-
-          On a public repository overview, the “Code” button opens a clone popover with “HTTPS” and “SSH” tabs. Each tab provides a button for copying the selected clone value. With browser clipboard permission, the visitor can copy the selected value, receives brief “Copied” feedback, and continues to see the repository heading. This read-only operation does not modify the repository. The capability builds on the public repository overview provided by REQ-3.3 (View a Public Repository Overview) and is available to a visitor who can view that repository.
-
-          A “clone page entry” is a read-only address displayed in the repository Code popover and can be copied to the clipboard; it does not mean this product implements an external Git protocol.
-
-          Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+        text: "On a public repository overview, the “Code” button opens a clone popover with “HTTPS” and “SSH” tabs. Each tab provides a button for copying the selected clone value. With browser clipboard permission, the visitor can copy the selected value, receives brief “Copied” feedback, and continues to see the repository heading. This read-only operation does not modify the repository. The capability builds on the public repository overview provided by REQ-3.3 (View a Public Repository Overview) and is available to a visitor who can view that repository.\n\nA “clone page entry” is a read-only address displayed in the repository Code popover and can be copied to the clipboard; it does not mean this product implements an external Git protocol.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe selected protocol address is publicly labeled \"Clone value\": it may be a read-only native input/textarea or a static publicly labeled text output. No wrapper role or fixed host is required. The selected protocol tab exposes aria-selected=true. The HTTPS address uses https://; SSH uses ssh:// or the usual user@host:path form. The address identifies the current repository, optionally ending in .git. Copy must place that exact displayed address in the actual browser clipboard. Before each copy check, the permitted public clipboard is initialized to an unrelated text value; feedback alone is insufficient. This label and selected-state observation are explicit conventions of this revised benchmark."
         image:
         - id: IMG-GITHUB-CODE-CLONE-MENU
           reference: reference/github-code-clone-menu.png
@@ -1111,8 +1058,7 @@ children:
             its overview without signing in. The browser grants clipboard read and write permission.
           When: The visitor clicks “Code”, selects the “HTTPS” tab, and clicks the button for copying the selected
             clone value.
-          Then: The page displays brief “Copied” feedback for the selected protocol and keeps the `acme-docs` repository
-            heading visible.
+          Then: "The selected protocol tab reports selected=true. Clone value is visible, read-only, uses the selected protocol and identifies acme-docs; after copying, the actual browser clipboard equals the displayed Clone value, Copied feedback is visible, and the acme-docs repository heading remains visible. The concrete clone host is implementation-defined."
           references:
           - \ref[requirement](REQ-1.1.2)
           - \ref[requirement](REQ-3.3)
@@ -1126,8 +1072,7 @@ children:
             its overview without signing in. The browser grants clipboard read and write permission.
           When: The visitor clicks “Code”, selects the “SSH” tab, and clicks the button for copying the selected
             clone value.
-          Then: The page displays brief “Copied” feedback for the selected protocol and keeps the `acme-docs` repository
-            heading visible.
+          Then: "The selected protocol tab reports selected=true. Clone value is visible, read-only, uses the selected protocol and identifies acme-docs; after copying, the actual browser clipboard equals the displayed Clone value, Copied feedback is visible, and the acme-docs repository heading remains visible. The concrete clone host is implementation-defined."
           references:
           - \ref[requirement](REQ-1.1.2)
           - \ref[requirement](REQ-3.3)
@@ -1195,8 +1140,7 @@ children:
           that repository. The administrator starts from the application home page.
         When: The administrator signs in, opens `visibility-demo`, clicks “Settings” and “General”, clicks “Change
           visibility”, selects the “Public” radio, and clicks “Confirm visibility”.
-        Then: The repository overview displays a visible “Public” marker. After the session cookies are cleared,
-          a visitor can reopen `visibility-demo` and see its repository heading.
+        Then: "The repository overview displays a visible “Public” marker. In a separate fresh unauthenticated browser session, a visitor can reopen `visibility-demo` and see its repository heading."
         references:
         - \ref[requirement](REQ-3.3)
         - \ref[requirement](REQ-1.1.2)
@@ -1382,7 +1326,7 @@ children:
             flow`; the visitor can open it without signing in.
           When: The visitor enters `search flow` in the repository Search box, presses Enter, opens the “Code” results,
             and opens the `README.md` result.
-          Then: The opened file displays the exact text `search flow`.
+          Then: "The opened file contains the literal substring `search flow` in its readable content."
           references:
           - \ref[requirement](REQ-4.1)
           - \ref[image](IMG-GITHUB-REPOSITORY-CODE-SEARCH)
@@ -1407,8 +1351,7 @@ children:
             system pre-provisions public repository `acme-docs` with file `README.md` containing the text `search
             flow`.
           When: The visitor searches for `search flow`, opens the “Code” results, and opens the `README.md` result.
-          Then: The file displays `search flow`; after reload, the same text and an exact `README.md` link remain
-            visible.
+          Then: "The readable file content contains the literal substring `search flow`; after reload, the same text and an exact `README.md` link remain visible."
           references:
           - \ref[requirement](REQ-4.1)
           - \ref[image](IMG-GITHUB-REPOSITORY-CODE-SEARCH)
@@ -1995,26 +1938,7 @@ children:
     - id: REQ-5.3.1
       name: Assign or Unassign Issue Participants
       description:
-        text: |-
-          A user with issue-management permission can open the `Assignees` button on an issue detail page. The selector has a textbox named `Search assignees` and options whose exact accessible names are eligible member usernames. Filling the search textbox filters options as the user types. Selecting an option saves the assignment without a separate Save action; the exact username appears in issue metadata and persists after reload. Selecting the same assigned option again removes only that issue-assignee relationship, leaving the member account and repository permission unchanged.
-
-          Every operation is performed around a unique issue number within the repository, and the detail page and list display the same persisted data; after refresh, re-login, or opening from another account with view permission, the same record is still read.
-
-          Named controls below are unique on the active page unless a narrower scope is stated; detail pages and reloads must work independently of earlier list navigation.
-
-          Only Triage, Maintain, Admin or an organization Owner acting as Admin may assign participants, apply labels, set milestones or close/reopen issues. Write and Read alone do not authorize these operations.
-
-          The “activity timeline” is an append-only history that records creation, edits, comments, assignment, labels, milestone, and status changes in chronological order.
-
-          An assignee is a repository member associated with an issue; a label is a repository-scoped classification; and a milestone is a repository-scoped planning target.
-
-          These metadata relationships do not change repository permission.
-
-          Users with Triage, Maintain, or Admin permission may modify them, while other users may view the saved metadata only.
-
-          Selecting an available option saves the relationship immediately; reload displays the saved state.
-
-          Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+        text: "A user with issue-management permission can open the `Assignees` button on an issue detail page. The selector has a textbox named `Search assignees` and options whose exact accessible names are eligible member usernames. Filling the search textbox filters options as the user types. Selecting an option saves the assignment without a separate Save action; the exact username appears in issue metadata and persists after reload. Selecting the same assigned option again removes only that issue-assignee relationship, leaving the member account and repository permission unchanged.\n\nEvery operation is performed around a unique issue number within the repository, and the detail page and list display the same persisted data; after refresh, re-login, or opening from another account with view permission, the same record is still read.\n\nNamed controls below are unique on the active page unless a narrower scope is stated; detail pages and reloads must work independently of earlier list navigation.\n\nOnly Triage, Maintain, Admin or an organization Owner acting as Admin may assign participants, apply labels, set milestones or close/reopen issues. Write and Read alone do not authorize these operations.\n\nThe “activity timeline” is an append-only history that records creation, edits, comments, assignment, labels, milestone, and status changes in chronological order.\n\nAn assignee is a repository member associated with an issue; a label is a repository-scoped classification; and a milestone is a repository-scoped planning target.\n\nThese metadata relationships do not change repository permission.\n\nUsers with Triage, Maintain, or Admin permission may modify them, while other users may view the saved metadata only.\n\nSelecting an available option saves the relationship immediately; reload displays the saved state.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe currently assigned relationship is exposed by the assignee option selected state: an ARIA option reports aria-selected=true when assigned and false when unassigned; a native option uses its selected property. Reopening the picker after reload reflects the persisted relationship. Activity history may retain the username after unassignment. This selected-state observation is an explicit convention of this revised benchmark, not an extra assignment policy."
       scenarios:
       - id: SCN-REQ-5.3.1-01
         name: 'REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1'
@@ -2028,8 +1952,7 @@ children:
           When: The user clicks the `Assignees` button, fills `Search assignees` with `bob-reviewer`, and selects
             the exact `bob-reviewer` option. After reload, the user opens `Assignees` again and selects `bob-reviewer`
             again.
-          Then: The exact `bob-reviewer` text is visible after assignment and reload. After the second selection,
-            `bob-reviewer` is no longer visible as an assignee.
+          Then: "The exact bob-reviewer text is visible after assignment and reload; reopening the option reports selected=true. After the second selection and reload, reopening the option reports selected=false. Historical activity may still mention bob-reviewer."
           references:
           - \ref[requirement](REQ-5.1.2)
           - \ref[requirement](REQ-1.1.2)
@@ -2418,24 +2341,7 @@ children:
     - id: REQ-6.2.4
       name: Create a Draft Pull Request
       description:
-        text: |-
-          From a valid comparison, a contributor can create a Draft PR with `Create draft pull request`; its Draft status is visible and `Merge pull request` is disabled. A separately seeded Draft PR exposes `Ready for review` to its author; confirmation changes it to Open while retaining title and branches, and Open persists after reload.
-
-          Draft creation starts Draft. Only the author, Maintain or Admin may mark a draft Ready for review, changing it to Open without changing its selected branches.
-
-          Failure does not change branches or PR state.
-
-          Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.
-
-          PR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.
-
-          Conversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.
-
-          The current PR status is visible text.
-
-          PR creation requires an authenticated user with Write, Maintain or Admin permission in the target repository.
-
-          Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+        text: "From a valid comparison, a contributor can create a Draft PR with `Create draft pull request`; its Draft status is visible and `Merge pull request` is disabled. A separately seeded Draft PR exposes `Ready for review` to its author; confirmation changes it to Open while retaining title and branches, and Open persists after reload.\n\nDraft creation starts Draft. Only the author, Maintain or Admin may mark a draft Ready for review, changing it to Open without changing its selected branches.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nPR creation requires an authenticated user with Write, Maintain or Admin permission in the target repository.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe Ready for review action is available for a current Draft PR and is no longer visible after it transitions to Open. Historical timeline entries may retain Draft text; current Open state and the disappearance of the transition action distinguish current status from history."
       scenarios:
       - id: SCN-REQ-6.2.4-01
         name: 'REQ-6.2.4: Create a Draft Pull Request - Scenario 1'
@@ -2455,8 +2361,7 @@ children:
           Given: Public repository `acme-docs` has a Draft PR titled `Draft onboarding update`, source `draft-feature`,
             target `main`, authored by `draft-author` (`draft-author@example.test`, `Valid-password-123!`).
           When: The author signs in, opens the Draft PR, clicks `Ready for review`, and clicks `Confirm` if shown.
-          Then: The PR changes to Open, Draft is absent, title and branches remain exact, ready-for-review activity
-            is visible, and Open remains after reload.
+          Then: "The PR changes to Open, the Ready for review action is no longer visible, title and branches remain exact, ready-for-review activity is visible, and Open plus absence of the Ready for review action remain after reload. Historical Draft text may remain in the timeline."
           references:
           - \ref[requirement](REQ-6.2.2)
       children: []
@@ -2681,26 +2586,7 @@ children:
   - id: REQ-6.4
     name: Request or Remove Pull Request Reviewers
     description:
-      text: |-
-        The PR author or an authorized maintainer can use `Reviewers` to manage
-        pending reviewer requests. The picker has a `Search` textbox; typing filters eligible
-        reviewer options and selecting an exact option saves the request immediately. The
-        requested username remains visible after reload. A button named `Remove <username>`
-        removes that request without affecting any submitted review.
-
-        Write, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.
-
-        Failure does not change branches or PR state.
-
-        Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.
-
-        PR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.
-
-        Conversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.
-
-        The current PR status is visible text.
-
-        Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+      text: "The PR author or an authorized maintainer can use `Reviewers` to manage\npending reviewer requests. The picker has a `Search` textbox; typing filters eligible\nreviewer options and selecting an exact option saves the request immediately. The\nrequested username remains visible after reload. A button named `Remove <username>`\nremoves that request without affecting any submitted review.\n\nWrite, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder."
     scenarios:
     - id: SCN-REQ-6.4-01
       name: 'REQ-6.4: Request or Remove Pull Request Reviewers - Scenario 1'
@@ -2712,7 +2598,7 @@ children:
           to manage reviewers for that PR.
         When: The author signs in, opens the PR, clicks `Reviewers`, fills `Search` with `bob-reviewer`, selects
           the exact option, reloads, then clicks `Remove bob-reviewer`.
-        Then: The exact `bob-reviewer` text is visible after selection and reload, then is absent after removal.
+        Then: "The current requested reviewer is visible after selection and reload, with its Remove bob-reviewer button. After removal and reload, that pending request and its removal button are absent. Historical activity or submitted reviews may still mention bob-reviewer."
         references:
         - \ref[requirement](REQ-6.3.1)
         - \ref[requirement](REQ-1.1.2)

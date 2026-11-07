@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { workbookTimestamp } from './support/workbook-record';
 import { Browser, expect, Page, test } from '@playwright/test';
@@ -15,7 +16,7 @@ async function renameWorkbook(page: Page, name: string): Promise<void> {
   await page.getByRole('button', { name: /^Rename workbook$/ }).click();
   await page.getByRole('textbox', { name: /^Workbook name$/ }).fill(name);
   await page.getByRole('button', { name: /^Save$/ }).click();
-  await expect(page.getByText(name, { exact: true })).toBeVisible();
+  await expectText(page, name, { exact: true });
 }
 
 async function expectWorkbookInNewSession(
@@ -29,8 +30,8 @@ async function expectWorkbookInNewSession(
   try {
     const reopenedPage = await context.newPage();
     await reopenedPage.goto(editorUrl);
-    await expect(reopenedPage.getByText(workbookName, { exact: true })).toBeVisible();
-    await expect(reopenedPage.getByText(lastUpdatedText, { exact: true })).toBeVisible();
+    await expectText(reopenedPage, workbookName, { exact: true });
+    await expectText(reopenedPage, lastUpdatedText, { exact: true });
     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);
     await expectActiveWorksheet(reopenedPage, 'Sheet1');
   } finally {
@@ -57,21 +58,21 @@ test('REQ-1.1.1: View and Open a Workbook - Scenario 1', async ({ page, browser 
 
   await workbookLink.click();
   const editorUrl = page.url();
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
-  await expect(page.getByText(lastUpdatedText, { exact: true })).toBeVisible();
+  await expectText(page, workbookName, { exact: true });
+  await expectText(page, lastUpdatedText, { exact: true });
   await expect(gridCell(page, 'A1')).toHaveText(updatedText);
-  await expect(page.getByText(updatedText, { exact: true })).toBeVisible();
+  await expectText(page, updatedText, { exact: true });
   await expectActiveWorksheet(page, activeWorksheet);
-  await expect(page.getByText(activeWorksheetValue, { exact: true })).toBeVisible();
+  await expectText(page, activeWorksheetValue, { exact: true });
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText(updatedText);
 
   await page.reload();
-  await expect(page.getByText(workbookName, { exact: true })).toBeVisible();
-  await expect(page.getByText(updatedText, { exact: true })).toBeVisible();
+  await expectText(page, workbookName, { exact: true });
+  await expectText(page, updatedText, { exact: true });
   await expectActiveWorksheet(page, activeWorksheet);
-  await expect(page.getByText(activeWorksheetValue, { exact: true })).toBeVisible();
+  await expectText(page, activeWorksheetValue, { exact: true });
 
   await expectWorkbookInNewSession(browser, workbookName, editorUrl, updatedText, lastUpdatedText);
 });
@@ -97,19 +98,19 @@ test('REQ-1.1.1: View and Open a Workbook - Scenario 2', async ({ page, browser 
   await expect(page.getByRole('link', { name: secondName, exact: true })).toBeVisible();
   await page.getByRole('link', { name: firstName, exact: true }).click();
   await expect(gridCell(page, 'A1')).toHaveText(firstValue);
-  await expect(page.getByText(secondValue, { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText(secondValue, { exact: true }).filter({ visible: true })).toHaveCount(0);
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText(firstValue);
-  await expect(page.getByText(secondValue, { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText(secondValue, { exact: true }).filter({ visible: true })).toHaveCount(0);
   await page.goto(secondEditorUrl);
   await expect(gridCell(page, 'A1')).toHaveText(secondValue);
   const context = await browser.newContext();
   try {
     const direct = await context.newPage();
     await direct.goto(firstEditorUrl);
-    await expect(direct.getByText(firstName, { exact: true })).toBeVisible();
+    await expectText(direct, firstName, { exact: true });
     await expect(gridCell(direct, 'A1')).toHaveText(firstValue);
-    await expect(direct.getByText(secondValue, { exact: true })).toHaveCount(0);
+    await expect(direct.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByText(secondValue, { exact: true }).filter({ visible: true })).toHaveCount(0);
   } finally { await context.close(); }
 });

@@ -1,3 +1,5 @@
+import { expectCalculatedNumber } from './support/observations';
+import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import {
@@ -24,7 +26,7 @@ test('REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 1', async ({ page }
   await expect(gridCell(page, 'A1')).toHaveText('1');
   await expect(gridCell(page, 'B1')).toHaveText('2');
   await expect(gridCell(page, 'A2')).toHaveText('3');
-  await expect(gridCell(page, 'B2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 3);
   await gridCell(page, 'B2').click();
   await expect(formulaBar(page)).toHaveValue('=A1+$B$1');
   await expect(gridCell(page, 'G1')).toHaveText('Keep');
@@ -37,20 +39,20 @@ test('REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 1', async ({ page }
   await expect(gridCell(page, 'A1')).toHaveText('1');
   await expect(gridCell(page, 'B1')).toHaveText('2');
   await expect(gridCell(page, 'A2')).toHaveText('3');
-  await expect(gridCell(page, 'B2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 3);
   await expect(gridCell(page, 'D1')).toHaveText('1');
   await expect(gridCell(page, 'E1')).toHaveText('2');
   await expect(gridCell(page, 'D2')).toHaveText('3');
-  await expect(gridCell(page, 'E2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'E2'), 3);
   await expect(gridCell(page, 'G1')).toHaveText('Keep');
   await gridCell(page, 'E2').click();
   await expect(formulaBar(page)).toHaveValue('=D1+$B$1');
 
   await page.reload();
   await expect(gridCell(page, 'A1')).toHaveText('1');
-  await expect(gridCell(page, 'B2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 3);
   await expect(gridCell(page, 'D1')).toHaveText('1');
-  await expect(gridCell(page, 'E2')).toHaveText('3');
+  await expectCalculatedNumber(gridCell(page, 'E2'), 3);
   await expect(gridCell(page, 'G1')).toHaveText('Keep');
   await gridCell(page, 'E2').click();
   await expect(formulaBar(page)).toHaveValue('=D1+$B$1');
@@ -110,7 +112,7 @@ test('REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 3', async ({ page }
   await gridCell(page, 'D1').click();
   await page.keyboard.press('Control+V');
 
-  await expect(page.getByText(/Please enter a number between 0 and 100/)).toBeVisible();
+  await expectText(page, /Please enter a number between 0 and 100/);
   await expect(gridCell(page, 'A1')).toHaveText('10');
   await expect(gridCell(page, 'A2')).toHaveText('120');
   await expect(gridCell(page, 'D1')).toHaveText('1');

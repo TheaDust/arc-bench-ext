@@ -11,6 +11,7 @@ test('REQ-2.16: Remove airline filter while keeping nonstop preference', async (
   await checkbox(page, 'Nonstop only').check();
   await selectChoice(field(page, 'Airline'), { label: 'China Southern' });
   await expect(region(page, 'Flight list').getByRole('listitem')).toHaveCount(1);
+  await visible(flight(page, 'CZ3401'));
   await selectChoice(field(page, 'Airline'), { label: 'All airlines' });
   await expect(checkbox(page, 'Nonstop only')).toBeChecked();
   await expect(region(page, 'Flight list').getByRole('listitem')).toHaveCount(2);

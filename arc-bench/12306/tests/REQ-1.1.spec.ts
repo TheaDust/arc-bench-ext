@@ -13,12 +13,14 @@ test("REQ-1.1: Browse public homepage", async ({ page }) => {
     await expect(banners.getByRole('img', { name: 'Banner 1', exact: true })).toBeVisible();
     await button(banners, 'Next banner').click();
     await expect(banners.getByRole('img', { name: 'Banner 2', exact: true })).toBeVisible();
+    await expect(banners.getByRole('img', { name: 'Banner 1', exact: true })).not.toBeVisible();
     await button(banners, 'Next banner').click();
     await expect(banners.getByRole('img', { name: 'Banner 3', exact: true })).toBeVisible();
+    await expect(banners.getByRole('img', { name: 'Banner 2', exact: true })).not.toBeVisible();
     const s = region(page, 'Ticket search');
-    await expect(s.getByPlaceholder('From', { exact: true })).toHaveCount(1);
-    await expect(s.getByPlaceholder('To', { exact: true })).toHaveCount(1);
-    await expect(field(s, 'Date')).toHaveCount(1);
+    await expect(s.getByPlaceholder('From', { exact: true })).toBeVisible();
+    await expect(s.getByPlaceholder('To', { exact: true })).toBeVisible();
+    await expect(field(s, 'Date')).toBeVisible();
     await expect(button(s, 'Search')).toBeEnabled();
     await expect(region(page, 'Quick Guide')).toBeVisible();
     for (const name of ['How to book tickets online?', 'More'])

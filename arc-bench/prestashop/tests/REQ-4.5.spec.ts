@@ -1,3 +1,4 @@
+import { amount } from './helpers';
 import { selectChoice } from './support/public-controls';
 // requirement: REQ-4.5
 import { test, expect } from '@playwright/test';
@@ -8,6 +9,6 @@ test("REQ-4.5: Carry selected variant into cart", async ({ page }) => {
   await selectChoice(page.getByRole('combobox', { name: 'Size', exact: true }), { label: 'L' }); await page.getByRole('radio', { name: 'Black', exact: true }).check();
   await page.getByRole('spinbutton', { name: 'Quantity', exact: true }).fill('2'); await action(page, 'Add to cart').click(); await expect(success(page)).toContainText(DETAIL); await action(success(page), 'Proceed to checkout').click();
   const row = cartRow(page, DETAIL); await expect(row).toContainText(/Size\s*:?\s*L/); await expect(row).toContainText(/Color\s*:?\s*Black/); await expect(row.getByRole('spinbutton', { name: 'Quantity', exact: true })).toHaveValue('2');
-  await expectMoney(region(row, 'Unit price'), 36); await expectMoney(region(row, 'Subtotal'), 72);
-  const summary = region(page, 'Cart summary'); await expectMoney(region(summary, 'Items subtotal'), 72); await expectMoney(region(summary, 'Shipping'), 5); await expectMoney(region(summary, 'Discount'), 18); await expectMoney(region(summary, 'Total'), 77);
+  await expectMoney(amount(row, 'Unit price'), 36); await expectMoney(amount(row, 'Subtotal'), 72);
+  const summary = region(page, 'Cart summary'); await expectMoney(amount(summary, 'Items subtotal'), 72); await expectMoney(amount(summary, 'Shipping'), 5); await expectMoney(amount(summary, 'Discount'), 18); await expectMoney(amount(summary, 'Total'), 77);
 });

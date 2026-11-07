@@ -1,3 +1,5 @@
+import { expectHeading } from './helpers';
+import { expectText } from './helpers';
 // requirement: REQ-3.8
 import { test, expect } from '@playwright/test';
 import { home, action, region, openProduct, DETAIL } from './helpers';
@@ -16,9 +18,9 @@ test('REQ-3.8: Open and close enlarged product image', async ({ page }) => {
   await expect(zoom).toBeVisible();
   const enlarged = zoom.getByRole('img', { name: DETAIL, exact: true });
   await expect(enlarged).toHaveCount(1); await expect(enlarged).toBeVisible();
-  await expect(zoom.getByText('Back view', { exact: true })).toBeVisible();
+  await expectText(zoom, 'Back view');
   await action(zoom, 'Close').click(); await expect(zoom).toHaveCount(0);
   await expect(main).toHaveCount(1); await expect(main).toBeVisible();
   await expect(main).toHaveAttribute('src', selected!);
-  await expect(page.getByRole('heading', { name: DETAIL, exact: true })).toBeVisible();
+  await expectHeading(page, DETAIL);
 });

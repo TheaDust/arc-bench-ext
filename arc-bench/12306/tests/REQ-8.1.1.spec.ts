@@ -12,4 +12,5 @@ test("REQ-8.1.1: Open booking quick-login entry", async ({ page }) => {
   await expect(dialog.getByPlaceholder('Email/Username/Mobile number', { exact: true })).toBeVisible();
   await expect(dialog.getByPlaceholder('Password', { exact: true })).toBeVisible();
   await expect(button(dialog, 'LOGIN')).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Train Information:', exact: true })).not.toBeVisible();
 });

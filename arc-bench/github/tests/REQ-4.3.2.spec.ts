@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -29,5 +30,5 @@ test('REQ-4.3.2: Create a Branch from an Existing Revision - Scenario 2', async 
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('button', { name: /branch /i }).click();
   await page.getByRole('textbox', { name: /find.*branch/i }).fill('invalid..branch');
-  await expect(page.getByText(/invalid.*branch/i)).toBeVisible();
+  await expectText(page, /invalid.*branch/i);
 });

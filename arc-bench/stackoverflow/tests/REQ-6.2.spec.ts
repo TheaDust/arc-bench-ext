@@ -15,5 +15,9 @@ test('REQ-6.2: Toggle python watch preference', async ({ page, browser }, info) 
   await action(region(page,'Python tag'),'Unwatch tag').click();
   await expect(action(region(page,'Python tag'),'Watch tag')).toBeVisible();
   await action(mainNav(page),'Questions').click();
+  await expect(region(page,'Watched tags')).toHaveCount(1);
+  await expect(action(region(page,'Watched tags'),'python')).toHaveCount(0);
+  await page.reload();
+  await expect(region(page,'Watched tags')).toHaveCount(1);
   await expect(action(region(page,'Watched tags'),'python')).toHaveCount(0);
 });

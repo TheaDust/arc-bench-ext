@@ -1,3 +1,4 @@
+import { expectPresence } from './helpers';
 import { test, expect, login, openQuestion, action, field, region, answer, createQuestion, createAnswer } from './helpers';
 import { body, answerBody } from './fixtures/data';
 
@@ -24,7 +25,7 @@ test('REQ-4.5: Reject empty answer edit', async ({ page, browser }, info) => {
   await login(page,'answer_validation_user'); await openQuestion(page,title);
   await action(answer(page,'Stack User'),'Edit').click();
   await field(page,'Body').fill(''); await action(page,'Save edits').click();
-  await expect(page.getByText('Body cannot be empty',{exact:true})).toBeVisible();
+  await expectPresence(page.getByText('Body cannot be empty',{exact:true}));
   await expect(field(page,'Body')).toBeVisible();
   await action(page,'Cancel').click();
   await expect(answer(page,'Stack User')).toContainText(answerBody);

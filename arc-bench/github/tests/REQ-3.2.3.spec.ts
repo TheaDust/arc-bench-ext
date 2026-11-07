@@ -1,3 +1,5 @@
+import { expectText } from './support/observations';
+import { expectCloneCopied } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -15,9 +17,7 @@ test('REQ-3.2.3: Copy a Repository Clone Value - Scenario 1', async ({ page }, t
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('button', { name: /^Code$/ }).click();
   await page.getByRole('tab', { name: /^HTTPS$/ }).click();
-  await page.getByRole('button', { name: /copy.*clone|copy/i }).click();
-
-  await expect(page.getByText(/copied/i)).toBeVisible();
+  await expectCloneCopied(page, 'HTTPS', repositoryName);
   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();
 });
 
@@ -27,7 +27,6 @@ test('REQ-3.2.3: Copy a Repository Clone Value - Scenario 2', async ({ page }, t
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('button', { name: /^Code$/ }).click();
   await page.getByRole('tab', { name: /^SSH$/ }).click();
-  await page.getByRole('button', { name: /copy.*clone|copy/i }).click();
-  await expect(page.getByText(/copied/i)).toBeVisible();
+  await expectCloneCopied(page, 'SSH', seedValue(testInfo, 'PUBLIC_REPOSITORY_NAME'));
   await expect(page.getByRole('heading', { name: /acme-docs/i })).toBeVisible();
 });

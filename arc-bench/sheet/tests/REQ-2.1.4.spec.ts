@@ -1,3 +1,5 @@
+import { expectText } from './support/observations';
+import { expectCalculatedNumber } from './support/observations';
 import { selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
 import { expect, Page, test } from '@playwright/test';
@@ -42,7 +44,7 @@ test('REQ-2.1.4: Delete a Worksheet - Scenario 2', async ({ page }) => {
   await createBlankWorkbook(page);
 
   await chooseDelete(page, 'Sheet1');
-  await expect(page.getByText(/a workbook must contain at least one worksheet/)).toBeVisible();
+  await expectText(page, /a workbook must contain at least one worksheet/);
   await expect(page.getByRole('dialog', { name: /^Delete worksheet$/ })).toHaveCount(0);
   await expectActiveWorksheet(page, 'Sheet1');
 
@@ -80,19 +82,19 @@ test('REQ-2.1.4: Delete a Worksheet - Scenario 3', async ({ page }) => {
   await chooseDelete(page, sourceWorksheet);
   const dialog = page.getByRole('dialog', { name: /^Delete worksheet$/ });
   await dialog.getByRole('button', { name: /^Delete worksheet$/ }).click();
-  await expect(page.getByText(/delete or rebuild dependent pivot tables first/i)).toBeVisible();
+  await expectText(page, /delete or rebuild dependent pivot tables first/i);
   await expect(dialog).toHaveCount(0);
 
   await expectActiveWorksheet(page, sourceWorksheet);
   await expect(gridCell(page, sourceCell)).toHaveText(sourceValue);
   await worksheetTab(page, resultWorksheet).click();
   await expectActiveWorksheet(page, resultWorksheet);
-  await expect(gridCell(page, resultCell)).toHaveText(resultValue);
+  await expectCalculatedNumber(gridCell(page, resultCell), Number(resultValue));
 
   await page.reload();
   await expect(worksheetTab(page, sourceWorksheet)).toBeVisible();
   await expectActiveWorksheet(page, resultWorksheet);
-  await expect(gridCell(page, resultCell)).toHaveText(resultValue);
+  await expectCalculatedNumber(gridCell(page, resultCell), Number(resultValue));
   await worksheetTab(page, sourceWorksheet).click();
   await expectActiveWorksheet(page, sourceWorksheet);
   await expect(gridCell(page, sourceCell)).toHaveText(sourceValue);
@@ -119,8 +121,8 @@ test('REQ-2.1.4: Delete a Worksheet - Scenario 4', async ({ page }) => {
   await selectChoice(editor.getByRole('combobox', { name: /^Values$/ }), { label: /^Sales$/i });
   await selectChoice(editor.getByRole('combobox', { name: /^Summarize by$/ }), { label: /^SUM$/i });
   await editor.getByRole('button', { name: /^Apply$/ }).click();
-  await expect(gridCell(page, 'B2')).toHaveText('100');
-  await expect(gridCell(page, 'B3')).toHaveText('200');
+  await expectCalculatedNumber(gridCell(page, 'B2'), 100);
+  await expectCalculatedNumber(gridCell(page, 'B3'), 200);
 
   await chooseDelete(page, 'Pivot1');
   const pivotDialog = page.getByRole('dialog', { name: /^Delete worksheet$/ });

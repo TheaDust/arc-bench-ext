@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -13,6 +14,6 @@ test('REQ-6.3.2: Inspect Changed Files and Aggregate Diff - Scenario 1', async (
 
   await openVisibleTarget(page, pullRequestEntry);
   await page.getByRole('link', { name: /files changed/i }).click();
-  await expect(page.getByText(changedFile, { exact: true })).toBeVisible();
-  await expect(page.getByText(/\+\d+.*-\d+|\d+ additions?.*\d+ deletions?/i)).toBeVisible();
+  await expectText(page, changedFile, { exact: true });
+  await expectText(page, /\+\d+.*-\d+|\d+ additions?.*\d+ deletions?/i);
 });

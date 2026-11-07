@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { passwordField } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -20,7 +21,7 @@ test('REQ-1.1.2: Sign In with an Existing Account - Scenario 2', async ({ page }
   await (await passwordField(page, 'Password')).fill(`${account.password}-incorrect`);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
 
-  await expect(page.getByText('Invalid credentials')).toBeVisible();
+  await expectText(page, 'Invalid credentials');
 });
 
 test('REQ-1.1.2: Sign In with an Existing Account - Scenario 3', async ({ page }, testInfo) => {
@@ -43,12 +44,12 @@ test('REQ-1.1.2: Sign In with an Existing Account - Scenario 4', async ({ page }
   await page.getByRole('textbox', { name: 'Username or email', exact: true }).fill('unknown@example.test');
   await (await passwordField(page, 'Password')).fill(account.password);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-  await expect(page.getByText('Invalid credentials')).toBeVisible();
+  await expectText(page, 'Invalid credentials');
 
   await openAccountAccess(page);
   await page.getByRole('link', { name: 'Sign in', exact: true }).click();
   await page.getByRole('textbox', { name: 'Username or email', exact: true }).fill(account.username);
   await (await passwordField(page, 'Password')).fill(`${account.password}-wrong`);
   await page.getByRole('button', { name: 'Sign in', exact: true }).click();
-  await expect(page.getByText('Invalid credentials')).toBeVisible();
+  await expectText(page, 'Invalid credentials');
 });

@@ -1,6 +1,6 @@
 // requirement: REQ-5.4
 import { test, expect } from '@playwright/test';
-import { expectMetadata, identity, named, enter, button, heading, text, metadata, createBook, openBook } from './helpers';
+import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createBook, openBook } from './helpers';
 
 test("REQ-5.4: Save metadata changes", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -19,6 +19,9 @@ test("REQ-5.4: Save metadata changes", async ({ page }, testInfo) => {
   await text(page, 'Book updated by corresponding prerequisite behavior.');
   await button(page, 'Edit').click();
   await expectMetadata(page, updated, 'Book updated by corresponding prerequisite behavior.', 'manual, handbook');
+  await go(page, 'Books');
+  await expect(entry(region(page, 'Book list'), original)).toHaveCount(0);
+  await expect(entry(region(page, 'Book list'), updated)).toHaveCount(1);
 });
 
 test("REQ-5.4: Cancel metadata changes", async ({ page }, testInfo) => {
@@ -34,4 +37,7 @@ test("REQ-5.4: Cancel metadata changes", async ({ page }, testInfo) => {
   await heading(page, original);
   await text(page, 'Reference book description.');
   await expect(page.getByRole('heading', { name: updated, exact: true })).toHaveCount(0);
+  await page.reload();
+  await button(page, 'Edit').click();
+  await expectMetadata(page, original, 'Reference book description.', 'manual, handbook');
 });

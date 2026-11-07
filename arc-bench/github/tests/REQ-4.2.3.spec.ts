@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -17,7 +18,7 @@ test('REQ-4.2.3: Search Code Within a Repository - Scenario 1', async ({ page },
   await page.getByRole('searchbox', { name: 'Search', exact: true }).press('Enter');
   await page.getByRole('link', { name: /^Code$/ }).click();
   await page.getByRole('link', { name: fileName, exact: true }).click();
-  await expect(page.getByText(query, { exact: true })).toBeVisible();
+  await expectText(page, query);
 });
 
 test('REQ-4.2.3: Search Code Within a Repository - Scenario 2', async ({ page }, testInfo) => {
@@ -29,7 +30,7 @@ test('REQ-4.2.3: Search Code Within a Repository - Scenario 2', async ({ page },
   await page.getByRole('searchbox', { name: 'Search', exact: true }).press('Enter');
   await page.getByRole('link', { name: /^Code$/ }).click();
 
-  await expect(page.getByText(/no.*code.*results|no results/i)).toBeVisible();
+  await expectText(page, /no.*code.*results|no results/i);
   await expect(page.getByRole('searchbox', { name: 'Search', exact: true })).toHaveValue(query);
 });
 
@@ -43,10 +44,10 @@ test('REQ-4.2.3: Search Code Within a Repository - Scenario 3', async ({ page },
   await page.getByRole('searchbox', { name: 'Search', exact: true }).press('Enter');
   await page.getByRole('link', { name: /^Code$/ }).click();
   await page.getByRole('link', { name: fileName, exact: true }).click();
-  await expect(page.getByText(query, { exact: true })).toBeVisible();
+  await expectText(page, query);
 
   await page.reload();
-  await expect(page.getByText(query, { exact: true })).toBeVisible();
+  await expectText(page, query);
   await expect(page.getByRole('link', { name: fileName, exact: true })).toBeVisible();
 });
 
@@ -58,11 +59,11 @@ test('REQ-4.2.3: Search Code Within a Repository - Scenario 4', async ({ page },
   await page.getByRole('searchbox', { name: 'Search', exact: true }).fill(query);
   await page.getByRole('searchbox', { name: 'Search', exact: true }).press('Enter');
   await page.getByRole('link', { name: /^Code$/ }).click();
-  await expect(page.getByText(/no.*code.*results|no results/i)).toBeVisible();
+  await expectText(page, /no.*code.*results|no results/i);
 
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('searchbox', { name: /^Search$/ }).fill(query);
   await page.getByRole('searchbox', { name: /^Search$/ }).press('Enter');
   await page.getByRole('link', { name: /^Code$/ }).click();
-  await expect(page.getByText(/no.*code.*results|no results/i)).toBeVisible();
+  await expectText(page, /no.*code.*results|no results/i);
 });

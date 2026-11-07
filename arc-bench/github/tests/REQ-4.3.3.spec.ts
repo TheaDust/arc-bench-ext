@@ -1,4 +1,5 @@
 import { selectChoice } from './support/public-controls';
+import { expectNoActionable } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -45,5 +46,5 @@ test('REQ-4.3.3: Change the Repository Default Branch - Scenario 2', async ({ pa
   }
 
   await expect(page.getByRole('combobox', { name: /^Default branch$/ })).toHaveCount(0);
-  await expect(page.getByRole('button', { name: /update default branch/i })).toHaveCount(0);
+  await expectNoActionable(page.getByRole('button', { name: 'Update default branch', exact: true }));
 });

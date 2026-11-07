@@ -13,6 +13,7 @@ test('REQ-5.9: Save company title and taxpayer identity', async ({ page }, testI
   await expect(records(region(page, 'Invoice title list'))).toHaveCount(1);
   await textVisible(record(region(page, 'Invoice title list'), name), '91310000123456789B');
   await page.reload();
+  await expect(records(region(page, 'Invoice title list'))).toHaveCount(1);
   await textVisible(record(region(page, 'Invoice title list'), name), '91310000123456789B');
 });
 

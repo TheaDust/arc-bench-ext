@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { selectChoice } from './support/public-controls';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -21,10 +22,10 @@ test('REQ-2.3: Grant Repository Access to People and Teams - Scenario 1', async 
   await page.getByRole('option', { name: team, exact: true }).click();
   await selectChoice(page.getByRole('combobox', { name: 'Role', exact: true }), { label: 'Write' });
   await page.getByRole('button', { name: 'Add', exact: true }).click();
-  await expect(page.getByText(team, { exact: true })).toBeVisible();
-  await expect(page.getByText('Write', { exact: true })).toBeVisible();
+  await expectText(page, team, { exact: true });
+  await expectText(page, 'Write', { exact: true });
   await page.reload();
-  await expect(page.getByText(team, { exact: true })).toBeVisible();
+  await expectText(page, team, { exact: true });
 });
 
 test('REQ-2.3: Grant Repository Access to People and Teams - Scenario 2', async ({ page }, testInfo) => {

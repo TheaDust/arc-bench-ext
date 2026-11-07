@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -23,7 +24,7 @@ test('REQ-5.2.2: Edit an Issue Title and Description - Scenario 1', async ({ pag
   await page.getByRole('button', { name: 'Save issue description', exact: true }).click();
   await page.reload();
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
-  await expect(page.getByText(body, { exact: true })).toBeVisible();
+  await expectText(page, body, { exact: true });
 });
 
 test('REQ-5.2.2: Edit an Issue Title and Description - Scenario 2', async ({ page }, testInfo) => {
@@ -38,7 +39,7 @@ test('REQ-5.2.2: Edit an Issue Title and Description - Scenario 2', async ({ pag
   await page.getByRole('textbox', { name: 'Issue title', exact: true }).fill('   ');
   await page.getByRole('button', { name: 'Save issue title', exact: true }).click();
 
-  await expect(page.getByText(/title.*required|title.*empty/i)).toBeVisible();
+  await expectText(page, /title.*required|title.*empty/i);
   await page.reload();
   await expect(page.getByRole('heading', { name: originalTitle, exact: true })).toBeVisible();
 });

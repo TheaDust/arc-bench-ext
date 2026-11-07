@@ -8,7 +8,7 @@ test('REQ-2.3: View personal summary', async ({ page, browser }, info) => {
   await ownProfile(page);
   await expect(action(profileNav(page),'Activity')).toBeVisible();
   await expect(action(activityNav(page),'Summary')).toHaveAttribute('aria-current','page');
-  await expect(output(page,'Reputation')).toHaveText(/\d+/);
+  await expect(output(page,'Reputation')).toHaveText(/^-?\d+$/);
   await expect(region(page,'Badges')).toBeVisible();
   await expect(region(page,'Recent activity')).toBeVisible();
 });

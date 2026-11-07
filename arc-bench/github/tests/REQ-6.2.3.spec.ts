@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -32,5 +33,5 @@ test('REQ-6.2.3: Create a Pull Request from Comparison Results - Scenario 2', as
   await page.getByRole('button', { name: /create pull request/i }).click();
   await page.getByRole('textbox', { name: 'Title', exact: true }).fill('   ');
   await page.getByRole('button', { name: /create pull request/i }).click();
-  await expect(page.getByText(/title.*required/i)).toBeVisible();
+  await expectText(page, /title.*required/i);
 });

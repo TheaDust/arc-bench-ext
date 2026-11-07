@@ -13,6 +13,8 @@ test('REQ-7.6: Switch flight-status query dimensions', async ({ page }, testInfo
   await visible(field(page, 'Destination'));
   await visible(field(page, 'Departure date'));
   await expect(page.getByRole('textbox', { name: 'Flight number', exact: true })).not.toBeVisible();
+  await expect(region(page, 'Flight status results')).not.toBeVisible();
+  await expect(region(page, 'Flight details')).not.toBeVisible();
   await radio(page, 'Flight number').check();
   await expect(radio(page, 'Flight number')).toBeChecked();
   await visible(page.getByRole('textbox', { name: 'Flight number', exact: true }));

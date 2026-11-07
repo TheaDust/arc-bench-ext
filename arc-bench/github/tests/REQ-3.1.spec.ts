@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expect, test } from '@playwright/test';
 import { baseUrl, seedValue, openVisibleTarget } from './support/e2e';
 
@@ -28,7 +29,7 @@ test('REQ-3.1: Search for and Locate Repositories - Scenario 3', async ({ page }
   const query = seedValue(testInfo, 'UNKNOWN_REPOSITORY_QUERY');
   await page.getByRole('searchbox', { name: 'Search', exact: true }).fill(query);
   await page.getByRole('searchbox', { name: 'Search', exact: true }).press('Enter');
-  await expect(page.getByText(/no repositories|no results/i)).toBeVisible();
+  await expectText(page, /no repositories|no results/i);
 });
 
 test('REQ-3.1: Search for and Locate Repositories - Scenario 4', async ({ page }, testInfo) => {

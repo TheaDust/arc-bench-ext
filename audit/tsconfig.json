@@ -1,0 +1,4 @@
+{
+  "extends": "../validation/tsconfig.json",
+  "include": ["../arc-bench/**/*.ts", "../validation/*.ts", "validation/**/*.ts"]
+}

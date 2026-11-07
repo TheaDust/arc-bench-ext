@@ -4,7 +4,7 @@ import { home, nav, action, region, card, count, tabTo, men, openProduct, slideI
 
 test("REQ-3.5: Read existing review", async ({ page }) => {
   await home(page); await openProduct(page, DETAIL); const reviews = region(page, 'Reviews'); await reviews.scrollIntoViewIfNeeded();
-  await expect(reviews).toContainText('Good fit'); await expect(reviews).toContainText(/Average rating\s*:?\s*4(?:\.0)?/i);
+  await expect(reviews).toContainText('Good fit'); await expect(reviews).toContainText(/Average rating\s*:?\s*4(?:\.0)?(?![\d.])/i);
 });
 
 test("REQ-3.5: Require sign-in before review", async ({ page }) => {

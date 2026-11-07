@@ -18,10 +18,15 @@ export function identity(info: TestInfo): string {
 }
 export const named = (id: string, base: string) => `${base} [${id}]`;
 export const region = (page: Page, name: string) => page.getByRole('region', { name, exact: true });
-export const button = (page: Page, name: string) => page.getByRole('button', { name, exact: true });
+export const button = (page: Page | Locator, name: string) => page.getByRole('button', { name, exact: true });
 // The contract allows either a link or a button. Union does not choose by DOM order.
 export const entry = (scope: Page | Locator, name: string) =>
   scope.getByRole('link', { name, exact: true }).or(scope.getByRole('button', { name, exact: true }));
+export async function expectAbsentEntry(collection: Locator, name: string) {
+  // Empty accessible regions may have zero area; existence does not require a box.
+  await expect(collection).toHaveCount(1);
+  await expect(entry(collection, name)).toHaveCount(0);
+}
 export async function enter(page: Page) {
   await page.goto('/');
 }
@@ -30,14 +35,36 @@ export async function go(page: Page, name: string) {
   const navigation = page.getByRole('navigation')
     .filter({ has: page.getByRole('link', { name: 'Shelves', exact: true }) })
     .filter({ has: page.getByRole('link', { name: 'Books', exact: true }) });
-  await navigation.getByRole('link', { name, exact: true }).click();
+  const scoped = navigation.getByRole('link', { name, exact: true });
+  // The source requires public entry links, not a particular landmark wrapper.
+  // Use its semantic navigation when present; otherwise require a unique page link.
+  if (await scoped.count()) await scoped.click();
+  else await page.getByRole('link', { name, exact: true }).click();
 }
 export const home = enter;
 export async function heading(page: Page, name: string) {
   await expect(page.getByRole('heading', { name, exact: true })).toBeVisible();
 }
 export async function text(page: Page, value: string) {
-  await expect(page.getByText(value, { exact: true })).toBeVisible();
+  await expect.poll(() => page.getByText(value, { exact: true }).filter({ visible: true }).count()).toBeGreaterThan(0);
+}
+export async function expectFieldValue(control: Locator, value: string) {
+  await expect(control).toBeVisible();
+  await expect(control).toHaveRole('textbox');
+  await expect.poll(() => control.evaluate(element => {
+    if (element instanceof HTMLInputElement || element instanceof HTMLTextAreaElement) return element.value;
+    if (element instanceof HTMLElement && element.isContentEditable) return element.innerText;
+    return null;
+  })).toBe(value);
+}
+export async function expectKeyboardEntry(page: Page, target: Locator) {
+  await expect(target).toHaveCount(1);
+  await expect(target).toBeVisible();
+  for (let index = 0; index < 150; index++) {
+    await page.keyboard.press('Tab');
+    if (await target.evaluate(element => element === element.ownerDocument.activeElement)) return;
+  }
+  await expect(target).toBeFocused();
 }
 export async function login(page: Page, remember = false) {
   await go(page, 'Login');
@@ -46,7 +73,7 @@ export async function login(page: Page, remember = false) {
   await formField(page, 'Password').fill(ACCOUNT.password);
   if (remember) await page.getByRole('checkbox', { name: 'Remember Me', exact: true }).check();
   await button(page, 'Login').click();
-  await expect(page.getByText(ACCOUNT.nickname, { exact: true })).toBeVisible();
+  await text(page, ACCOUNT.nickname);
   await expect(region(page, 'My Recent Drafts')).toBeVisible();
 }
 export async function metadata(page: Page, name: string, description: string, tags: string) {
@@ -55,9 +82,9 @@ export async function metadata(page: Page, name: string, description: string, ta
   await page.getByRole('textbox', { name: 'Tags', exact: true }).fill(tags);
 }
 export async function expectMetadata(page: Page, name: string, description: string, tags: string) {
-  await expect(page.getByRole('textbox', { name: 'Name', exact: true })).toHaveValue(name);
-  await expect(page.getByRole('textbox', { name: 'Description', exact: true })).toHaveValue(description);
-  await expect(page.getByRole('textbox', { name: 'Tags', exact: true })).toHaveValue(tags);
+  await expectFieldValue(page.getByRole('textbox', { name: 'Name', exact: true }), name);
+  await expectFieldValue(page.getByRole('textbox', { name: 'Description', exact: true }), description);
+  await expectFieldValue(page.getByRole('textbox', { name: 'Tags', exact: true }), tags);
 }
 export async function openShelf(page: Page, name: string) {
   await go(page, 'Shelves');
@@ -71,11 +98,11 @@ export async function openBook(page: Page, name: string) {
 }
 export async function beginShelf(page: Page) {
   await openShelf(page, BOOTSTRAP_SHELF);
-  await entry(page, 'New Shelf').click();
+  await button(page, 'New Shelf').click();
 }
 export async function beginBook(page: Page) {
   await go(page, 'Books');
-  await entry(page, 'Create New Book').click();
+  await button(page, 'Create New Book').click();
 }
 export async function createShelf(page: Page, id: string, base: string, description = 'Reference shelf description.', tags = 'knowledge-base, docs') {
   const name = named(id, base);
@@ -96,7 +123,7 @@ export async function createBook(page: Page, id: string, base: string, descripti
 }
 export async function createShelfBook(page: Page, id: string, shelf: string, base: string) {
   await openShelf(page, shelf);
-  await entry(page, 'Create New Book').click();
+  await button(page, 'Create New Book').click();
   const name = named(id, base);
   await metadata(page, name, 'Book created by corresponding prerequisite behavior.', 'created, shelf-book');
   await button(page, 'Save Book').click();
@@ -116,7 +143,8 @@ export async function createPage(page: Page, id: string, book: string, base: str
   } else {
     await heading(page, book);
   }
-  await expect(entry(region(page, 'Page list'), name)).toHaveCount(1);
-  await expect(entry(region(page, 'Page list'), name)).toBeVisible();
+  const opening = draft ? entry(region(page, 'Page list'), name) : button(region(page, 'Page list'), name);
+  await expect(opening).toHaveCount(1);
+  await expect(opening).toBeVisible();
   return name;
 }

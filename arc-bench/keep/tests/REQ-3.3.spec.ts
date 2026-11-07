@@ -1,5 +1,5 @@
 // requirement: REQ-3.3
-import { test, expect, action, note, openHome, navigate, createNote, createLabel, labelManager, expectNote } from './helpers';
+import { test, expect, action, note, openHome, navigate, createNote, createLabel, labelManager, expectNote, expectVisibleText } from './helpers';
 import { identity } from './fixtures/data';
 
 test('REQ-3.3: Rename a label and retain membership', async ({ page }, info) => {
@@ -17,8 +17,8 @@ test('REQ-3.3: Rename a label and retain membership', async ({ page }, info) => 
   const sidebar = page.getByRole('navigation', { name: 'Sidebar', exact: true });
   await expect(action(sidebar, original)).toHaveCount(0);
   await expect(action(sidebar, renamed)).toHaveCount(1);
-  await expect(note(page, title).getByText(original, { exact: true })).toHaveCount(0);
-  await expect(note(page, title).getByText(renamed, { exact: true })).toBeVisible();
+  await expect(note(page, title).getByText(original, { exact: true }).filter({ visible: true })).toHaveCount(0);
+  await expectVisibleText(note(page, title), renamed);
   await navigate(page, renamed);
   await expectNote(page, title, 'Retain label membership');
 });
@@ -35,5 +35,5 @@ test('REQ-3.3: Delete a label without deleting its note', async ({ page }, info)
   await page.reload();
   await expect(action(page.getByRole('navigation', { name: 'Sidebar', exact: true }), label)).toHaveCount(0);
   await expectNote(page, title, 'Keep this labeled note');
-  await expect(note(page, title).getByText(label, { exact: true })).toHaveCount(0);
+  await expect(note(page, title).getByText(label, { exact: true }).filter({ visible: true })).toHaveCount(0);
 });

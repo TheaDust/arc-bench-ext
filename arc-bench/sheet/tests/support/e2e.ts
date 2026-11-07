@@ -68,6 +68,24 @@ export async function expectSelectedCell(page: Page, coordinate: string): Promis
   await expect(gridCell(page, coordinate)).toHaveAttribute('aria-selected', 'true');
 }
 
+export async function expectSelectedRange(page: Page, start: string, end: string): Promise<void> {
+  const references = cellReferencesInRange(start, end);
+  const grid = page.getByRole('grid', { name: 'Worksheet grid', exact: true });
+  await expect(grid).toHaveAttribute('aria-multiselectable', 'true');
+  for (const coordinate of references) await expect(gridCell(page, coordinate)).toHaveAttribute('aria-selected', 'true');
+  await expect(grid.getByRole('gridcell', { selected: true })).toHaveCount(references.length);
+  await expect.poll(() => grid.getByRole('gridcell').evaluateAll(cells => cells.every(cell =>
+    ['true', 'false'].includes(cell.getAttribute('aria-selected') ?? '')))).toBe(true);
+}
+
+export async function expectBlankWorkbook(page: Page): Promise<void> {
+  await expect(page.getByRole('tab')).toHaveCount(1);
+  await expectActiveWorksheet(page, 'Sheet1');
+  await expectSelectedRange(page, 'A1', 'A1');
+  const cells = page.getByRole('grid', { name: 'Worksheet grid', exact: true }).getByRole('gridcell');
+  await expect.poll(async () => (await cells.allTextContents()).every(value => value.trim() === '')).toBe(true);
+}
+
 export async function createBlankWorkbook(page: Page): Promise<string> {
   await openWorkbookHome(page);
   const newWorkbook = page.getByRole('button', {
@@ -81,6 +99,7 @@ export async function createBlankWorkbook(page: Page): Promise<string> {
   await create.click();
   await expectActiveWorksheet(page, 'Sheet1');
   await expectSelectedCell(page, 'A1');
+  await expectBlankWorkbook(page);
   return page.url();
 }
 
@@ -121,8 +140,12 @@ export async function selectCellRange(page: Page, start: string, end: string): P
   for (let attempt = 0; attempt < 3; attempt += 1) {
     await startCell.dragTo(endCell);
     try {
+      await expect(startCell).toHaveAttribute('aria-selected', 'true', { timeout: 1_000 });
+      await expect(endCell).toHaveAttribute('aria-selected', 'true', { timeout: 1_000 });
       for (const cell of selectedCells) {
-        await expect(cell).toHaveAttribute('aria-selected', 'true', { timeout: 1_000 });
+        // A filtered row may be hidden or unmounted. Visible endpoint selection
+        // and the later full-range business result are independent obligations.
+        if (await cell.count()) await expect(cell).toHaveAttribute('aria-selected', 'true', { timeout: 1_000 });
       }
       return;
     } catch (error) {
@@ -184,15 +207,15 @@ export async function commitCellThroughFormulaBar(
   page: Page,
   coordinate: string,
   content: string,
-  options: { expectChange?: boolean } = {},
+  options: { accepted?: boolean } = {},
 ): Promise<void> {
   const cell = gridCell(page, coordinate);
-  const previousText = await cell.innerText();
   await cell.click();
   await formulaBar(page).fill(content);
   await formulaBar(page).press('Enter');
-  if (options.expectChange !== false) {
-    await expect(cell).not.toHaveText(previousText);
+  if (options.accepted !== false) {
+    await cell.click();
+    await expect(formulaBar(page)).toHaveValue(content);
   }
 }
 
@@ -200,17 +223,17 @@ export async function commitCellThroughGrid(
   page: Page,
   coordinate: string,
   content: string,
-  options: { expectChange?: boolean } = {},
+  options: { accepted?: boolean } = {},
 ): Promise<void> {
   const cell = gridCell(page, coordinate);
-  const previousText = await cell.innerText();
   await cell.dblclick();
   const editor = inlineCellEditor(page, coordinate);
   await expect(editor).toBeVisible();
   await editor.fill(content);
   await editor.press('Enter');
-  if (options.expectChange !== false) {
-    await expect(cell).not.toHaveText(previousText);
+  if (options.accepted !== false) {
+    await cell.click();
+    await expect(formulaBar(page)).toHaveValue(content);
   }
 }
 
@@ -270,6 +293,5 @@ export async function readDownload(download: Download): Promise<string> {
 export function normalizeCsv(csv: string): string {
   return csv
     .replace(/^\uFEFF/, '')
-    .replace(/\r\n/g, '\n')
-    .replace(/\n$/, '');
+    .replace(/\r\n/g, '\n');
 }

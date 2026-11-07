@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { passwordField } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -57,7 +58,7 @@ test('REQ-1.1.1: Register a New GitHub Account - Scenario 2', async ({ page }) =
   await page.getByRole('checkbox', { name: 'Agree to the terms', exact: true }).check();
   await page.getByRole('button', { name: 'Create account', exact: true }).click();
 
-  await expect(page.getByText('Username already exists', { exact: true })).toBeVisible();
+  await expectText(page, 'Username already exists', { exact: true });
   await expect(page.getByRole('textbox', { name: 'Username', exact: true })).toHaveValue(existing.username);
   await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toHaveValue(attempted.email);
 });
@@ -72,9 +73,9 @@ test('REQ-1.1.1: Register a New GitHub Account - Scenario 3', async ({ page }) =
   await (await passwordField(page, 'Confirm password')).fill('different');
   await page.getByRole('button', { name: 'Create account', exact: true }).click();
 
-  await expect(page.getByText('Username format is invalid', { exact: true })).toBeVisible();
-  await expect(page.getByText('Email format is invalid', { exact: true })).toBeVisible();
-  await expect(page.getByText('Password requirements are not satisfied', { exact: true })).toBeVisible();
-  await expect(page.getByText('Agree to terms is required', { exact: true })).toBeVisible();
+  await expectText(page, 'Username format is invalid', { exact: true });
+  await expectText(page, 'Email format is invalid', { exact: true });
+  await expectText(page, 'Password requirements are not satisfied', { exact: true });
+  await expectText(page, 'Agree to terms is required', { exact: true });
   await expect(page.getByRole('textbox', { name: 'Username', exact: true })).toHaveValue(`-${account.username}`);
 });

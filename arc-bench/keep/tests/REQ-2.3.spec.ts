@@ -15,5 +15,5 @@ test('REQ-2.3: Save an edited note', async ({ page }, info) => {
   await expect(editor(page)).toBeHidden();
   await page.reload();
   await expectNote(page, title, 'Updated editable content');
-  await expect(note(page, title).getByText('Initial editable content', { exact: true })).toHaveCount(0);
+  await expect(note(page, title).getByText('Initial editable content', { exact: true }).filter({ visible: true })).toHaveCount(0);
 });

@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { passwordField } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -9,7 +10,7 @@ async function openResetStep(page: import('@playwright/test').Page, email: strin
   await page.getByRole('link', { name: 'Forgot password', exact: true }).click();
   await page.getByRole('textbox', { name: 'Email', exact: true }).fill(email);
   await page.getByRole('button', { name: 'Send reset link', exact: true }).click();
-  await expect(page.getByText('123456')).toBeVisible();
+  await expectText(page, '123456');
   await expect((await passwordField(page, 'New password'))).toBeVisible();
 }
 
@@ -32,7 +33,7 @@ test('REQ-1.1.3: Recover Account Access Through a Verified Email - Scenario 2', 
   await (await passwordField(page, 'New password')).fill(attemptedPassword);
   await (await passwordField(page, 'Confirm password')).fill(attemptedPassword);
   await page.getByRole('button', { name: 'Reset password', exact: true }).click();
-  await expect(page.getByText('Verification code is invalid')).toBeVisible();
+  await expectText(page, 'Verification code is invalid');
 
   await openAccountAccess(page);
   await page.getByRole('link', { name: 'Sign in', exact: true }).click();
@@ -51,7 +52,7 @@ test('REQ-1.1.3: Recover Account Access Through a Verified Email - Scenario 3', 
   await (await passwordField(page, 'New password')).fill(newPassword);
   await (await passwordField(page, 'Confirm password')).fill(newPassword);
   await page.getByRole('button', { name: 'Reset password', exact: true }).click();
-  await expect(page.getByText('Password updated')).toBeVisible();
+  await expectText(page, 'Password updated');
 
   await openAccountAccess(page);
   await page.getByRole('link', { name: 'Sign in', exact: true }).click();

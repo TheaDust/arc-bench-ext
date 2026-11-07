@@ -18,4 +18,8 @@ test("REQ-7.4: Select all protects holder", async ({ page }) => {
     await expect(row(page, 'P20269983')).toHaveCount(0);
     await expect(row(page, 'P20269984')).toHaveCount(0);
     await expect(row(page, 'passenger_manager_user')).toBeVisible();
+    await page.reload();
+    await expect(row(page, 'P20269983')).toHaveCount(0);
+    await expect(row(page, 'P20269984')).toHaveCount(0);
+    await expect(row(page, 'passenger_manager_user')).toBeVisible();
 });

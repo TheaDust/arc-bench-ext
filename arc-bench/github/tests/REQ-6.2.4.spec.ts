@@ -1,3 +1,4 @@
+import { expectText } from './support/observations';
 import { expectVisibleText } from './support/public-controls';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
@@ -31,23 +32,24 @@ test('REQ-6.2.4: Create a Draft Pull Request - Scenario 2', async ({ page }, tes
 
   await signIn(page, author);
   await openVisibleTarget(page, draftPullRequestEntry);
-  const draftStatus = page.getByText('Draft', { exact: true });
-  await expect(draftStatus.first()).toBeVisible();
-  await expect(page.getByText(title, { exact: true })).toBeVisible();
-  await expect(page.getByText(sourceBranch, { exact: true })).toBeVisible();
-  await expect(page.getByText(targetBranch, { exact: true })).toBeVisible();
-  await page.getByRole('button', { name: /ready for review/i }).click();
+  await expectText(page, 'Draft', { exact: true });
+  await expectText(page, title, { exact: true });
+  await expectText(page, sourceBranch, { exact: true });
+  await expectText(page, targetBranch, { exact: true });
+  const readyForReview = page.getByRole('button', { name: 'Ready for review', exact: true });
+  await readyForReview.click();
   const confirm = page.getByRole('button', { name: /^Confirm$/ });
   if (await confirm.isVisible()) {
     await confirm.click();
   }
 
   await expectVisibleText(page, 'Open');
-  await expect(draftStatus).toHaveCount(0);
-  await expect(page.getByText(title, { exact: true })).toBeVisible();
-  await expect(page.getByText(sourceBranch, { exact: true })).toBeVisible();
-  await expect(page.getByText(targetBranch, { exact: true })).toBeVisible();
-  await expect(page.getByText(/ready for review|marked.*ready/i)).toBeVisible();
+  await expect(readyForReview).toHaveCount(0);
+  await expectText(page, title, { exact: true });
+  await expectText(page, sourceBranch, { exact: true });
+  await expectText(page, targetBranch, { exact: true });
+  await expectText(page, /ready for review|marked.*ready/i);
   await page.reload();
   await expectVisibleText(page, 'Open');
+  await expect(readyForReview).toHaveCount(0);
 });

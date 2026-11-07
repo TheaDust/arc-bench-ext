@@ -1,3 +1,4 @@
+import { expectPresence } from './helpers';
 import { expectVisibleText } from './support/public-controls';
 import { test, expect, entry, login, ownProfile, activity, action, region, mainNav, profileNav, activityNav, answer, output, noUsableAction } from './helpers';
 import { retryTitle } from './fixtures/data';
@@ -13,7 +14,7 @@ test('REQ-7.4: Navigate answers and questions activity', async ({ page, browser 
   for (const name of ['Score','Activity','Newest','Next page']) await expect(action(content,name)).toBeVisible();
   await expect(action(content,'How does React state update?')).toBeVisible();
   await expect(content).toContainText('Batch state updates safely.');
-  await expect(content.getByText('Accepted answer',{exact:true})).toBeVisible();
+  await expectPresence(content.getByText('Accepted answer',{exact:true}));
   await action(activityNav(page),'Questions').click();
   await expect(action(activityNav(page),'Questions')).toHaveAttribute('aria-current','page');
   await expect(action(content,'SO Activity Owned Question')).toBeVisible();
