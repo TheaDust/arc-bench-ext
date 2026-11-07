@@ -1,0 +1,2252 @@
+{
+  "config": {
+    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\arc-all-tasks-fix\\collection-configs\\sheet.cjs",
+    "rootDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/sheet/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/sheet/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 10000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "REQ-1.1.1.spec.ts",
+      "file": "REQ-1.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.1.1: View and Open a Workbook - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dfcaeeb5172cba9f7773-cc8b2888ccef771cd85f",
+          "file": "REQ-1.1.1.spec.ts",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.1: View and Open a Workbook - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dfcaeeb5172cba9f7773-4297009c574b4bc90a20",
+          "file": "REQ-1.1.1.spec.ts",
+          "line": 75,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.2.1.spec.ts",
+      "file": "REQ-1.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.2.1: Create a Blank Workbook - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c0fbbd007d8dec0fcd5e-692ab38b811e880a62f5",
+          "file": "REQ-1.2.1.spec.ts",
+          "line": 14,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.2.2.spec.ts",
+      "file": "REQ-1.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.2.2: Rename a Workbook - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b5e51d5fe05404e27e1c-8d0de7878749483d707c",
+          "file": "REQ-1.2.2.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.2.2: Rename a Workbook - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b5e51d5fe05404e27e1c-c5f380b95c7d2c06da7d",
+          "file": "REQ-1.2.2.spec.ts",
+          "line": 35,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.3.1.spec.ts",
+      "file": "REQ-1.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.3.1: Import CSV to Create a Workbook - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "47b03469d101391744be-a523a0453cbfc6571e37",
+          "file": "REQ-1.3.1.spec.ts",
+          "line": 20,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.1: Import CSV to Create a Workbook - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "47b03469d101391744be-871eae77ce48664a3f9c",
+          "file": "REQ-1.3.1.spec.ts",
+          "line": 68,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.1: Import CSV to Create a Workbook - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "47b03469d101391744be-e216956838bc7ba8e073",
+          "file": "REQ-1.3.1.spec.ts",
+          "line": 84,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.1: Import CSV to Create a Workbook - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "47b03469d101391744be-1b96315fcc1aea765162",
+          "file": "REQ-1.3.1.spec.ts",
+          "line": 107,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.3.2.spec.ts",
+      "file": "REQ-1.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1ed1a211ab5a8791cda0-44ef1414006d73893cbd",
+          "file": "REQ-1.3.2.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1ed1a211ab5a8791cda0-516483e33305c7ff430e",
+          "file": "REQ-1.3.2.spec.ts",
+          "line": 67,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1ed1a211ab5a8791cda0-f0502c28b5cbbd8b838f",
+          "file": "REQ-1.3.2.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1ed1a211ab5a8791cda0-f7c130a9c205c74ec159",
+          "file": "REQ-1.3.2.spec.ts",
+          "line": 97,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.1.spec.ts",
+      "file": "REQ-2.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.1: Add a Worksheet - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d38b10719e2f8ec2b9f8-3d8620aad9754a54fd06",
+          "file": "REQ-2.1.1.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.1: Add a Worksheet - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d38b10719e2f8ec2b9f8-5f575aa4eebff6b83d4e",
+          "file": "REQ-2.1.1.spec.ts",
+          "line": 44,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.2.spec.ts",
+      "file": "REQ-2.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.2: Switch Worksheets - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-bda0de43e2d7bf720b10",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 37,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Switch Worksheets - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-e031f34c426cb3af6f5c",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Switch Worksheets - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-21199c7284f5fe3c4fcd",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 97,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Switch Worksheets - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-b5b0a9272fbd3c618cd4",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 137,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Switch Worksheets - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-7cd5f0f6bf831fb2ed2f",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 168,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.3.spec.ts",
+      "file": "REQ-2.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.3: Rename a Worksheet - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-eb4490669dce6781adf3",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Rename a Worksheet - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-3f3bce7b80f469f4c218",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 48,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Rename a Worksheet - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-832da5eae714f5a39ee5",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 65,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.4.spec.ts",
+      "file": "REQ-2.1.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.4: Delete a Worksheet - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "48b590c94180ac6a0af3-e2cfe41a8cb4eb642324",
+          "file": "REQ-2.1.4.spec.ts",
+          "line": 24,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.4: Delete a Worksheet - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "48b590c94180ac6a0af3-334d3db3cce91990bdd8",
+          "file": "REQ-2.1.4.spec.ts",
+          "line": 40,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.4: Delete a Worksheet - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "48b590c94180ac6a0af3-8deccb668d15c34386a4",
+          "file": "REQ-2.1.4.spec.ts",
+          "line": 52,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.4: Delete a Worksheet - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "48b590c94180ac6a0af3-acfa18741676b2b400ee",
+          "file": "REQ-2.1.4.spec.ts",
+          "line": 102,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.1.spec.ts",
+      "file": "REQ-2.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.1: Insert and Delete Rows - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-bf2ec9d5a59ca53e15ac",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.1: Insert and Delete Rows - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-39325ae03a4f667b00d0",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 46,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.1: Insert and Delete Rows - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-42f055774a653a7a5924",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 68,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.1: Insert and Delete Rows - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-f59c6a803afb0fc612b8",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 85,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.1: Insert and Delete Rows - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-107a4d13583a05461ccc",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 105,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.2.spec.ts",
+      "file": "REQ-2.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.2: Insert and Delete Columns - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-bf3429c23342fa225d0b",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Insert and Delete Columns - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-922115ae3c3d8a20f8e4",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 41,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Insert and Delete Columns - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-b8695f7aec3ffeef5b1e",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 70,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Insert and Delete Columns - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-02eb15217587ac0d7801",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 87,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Insert and Delete Columns - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-ccb902f83684ea6e1f7a",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 107,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.1.spec.ts",
+      "file": "REQ-3.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2e170d858b1900f11777-4a03cc932fce5e487d67",
+          "file": "REQ-3.1.1.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2e170d858b1900f11777-521d9cd9f0397702d247",
+          "file": "REQ-3.1.1.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2e170d858b1900f11777-7019dc05217f464ec8f9",
+          "file": "REQ-3.1.1.spec.ts",
+          "line": 64,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2e170d858b1900f11777-3471e9bed5cb11b87f41",
+          "file": "REQ-3.1.1.spec.ts",
+          "line": 97,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.2.spec.ts",
+      "file": "REQ-3.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-cd2c5b3771dcb6e7ea87",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-70037cfa4b4a33540d4e",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 49,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-04788f3b9c3edf7e5a58",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 67,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-f94551dd25c0f46fd78c",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 91,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.2: Paste Two-Dimensional Table Data - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-673f61395e53d5ba9184",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 109,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.3.spec.ts",
+      "file": "REQ-3.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.3: Select a Rectangular Cell Range - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f208e790e86e35a5c36a-9b2b5886571214101a2c",
+          "file": "REQ-3.1.3.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.3: Select a Rectangular Cell Range - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f208e790e86e35a5c36a-4a4bec886fae6b2db044",
+          "file": "REQ-3.1.3.spec.ts",
+          "line": 32,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.1.spec.ts",
+      "file": "REQ-3.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-dbfc906d14dfc9103fcc",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-cd77e322abeffaec2f45",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-0623e9894dea80eba2c8",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 100,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Copy, Cut, and Paste Cell Ranges - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-8149e2fdc7f783a4361e",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 126,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.2.spec.ts",
+      "file": "REQ-3.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-50ddbaf117294e66f850",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 19,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-b4647582b8df1e0e9db2",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 39,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-71ad71d0e77aba6f48f4",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-c84f897b90bc0f30f309",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 88,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-fa8c083f5d8449ee6be1",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 111,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 6",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-651b48c5f92bbb743b3f",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 139,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Undo and Redo Recent Operations - Scenario 7",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-698a3712cc407e789b7f",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 179,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.1.1.spec.ts",
+      "file": "REQ-4.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "36b59a4870427800e470-b166577d6dcabd9d38b9",
+          "file": "REQ-4.1.1.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "36b59a4870427800e470-eaf1e0ff342d3c87a9d4",
+          "file": "REQ-4.1.1.spec.ts",
+          "line": 32,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "36b59a4870427800e470-967ace1533cdbbc52c58",
+          "file": "REQ-4.1.1.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "36b59a4870427800e470-0c0fb9a514f97a1c47c7",
+          "file": "REQ-4.1.1.spec.ts",
+          "line": 89,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "36b59a4870427800e470-18e3d7d57ea2a49acae1",
+          "file": "REQ-4.1.1.spec.ts",
+          "line": 108,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.1.2.spec.ts",
+      "file": "REQ-4.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.1.2: Copy Formulas and Adjust Relative References - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9012d5b34ac352f7ce15-edfef45bd0fe55ebf31d",
+          "file": "REQ-4.1.2.spec.ts",
+          "line": 14,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1.2: Copy Formulas and Adjust Relative References - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9012d5b34ac352f7ce15-39df3076e1249bf0d9ed",
+          "file": "REQ-4.1.2.spec.ts",
+          "line": 48,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.1.spec.ts",
+      "file": "REQ-4.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "161472c1072b94c22436-3bbddd1de3ef8d9d7e97",
+          "file": "REQ-4.2.1.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "161472c1072b94c22436-4bbb240918034433cd9f",
+          "file": "REQ-4.2.1.spec.ts",
+          "line": 61,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.1: Recalculate Dependent Formulas After Source Data Changes - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "161472c1072b94c22436-2b8fc61d99d4f5e29c9f",
+          "file": "REQ-4.2.1.spec.ts",
+          "line": 84,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.2.spec.ts",
+      "file": "REQ-4.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.2: Display and Fix Formula Errors - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-3c6076add2898873ffe2",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.2: Display and Fix Formula Errors - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-2df207a6dfb870db57fe",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 57,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.2: Display and Fix Formula Errors - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-1a7eadbe00eb308f3c90",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 77,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.2: Display and Fix Formula Errors - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-8bd4aeec3ade7efa16e8",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 94,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.2: Display and Fix Formula Errors - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-8e77650603e534c5f50c",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 111,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.1.spec.ts",
+      "file": "REQ-5.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-8fefe98174bd5082ecba",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-a78ab4e631533a7a06d5",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 91,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-b79060bc201a463f0ae1",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 127,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-ad68ec6702aef9828dfc",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 173,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-25b13f479ca1bb956bc6",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 226,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: Sort a Data Range by a Specified Column - Scenario 6",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-9e16266afad00790c8d3",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 248,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.2.spec.ts",
+      "file": "REQ-5.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.2: Filter Rows by Value or Condition - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-832a89a4d5072e893e2f",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 40,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: Filter Rows by Value or Condition - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-07dc501e6d33f5fb1c13",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 112,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: Filter Rows by Value or Condition - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-4ca5bda4c25cb0b098e0",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 156,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: Filter Rows by Value or Condition - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-b3f24c785bfe8f511627",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 190,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: Filter Rows by Value or Condition - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-6e89042263207420057a",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 220,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.1.spec.ts",
+      "file": "REQ-5.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-c862624e757ee3059cf3",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 33,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-f0ece3f16c96329cd0e7",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 53,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-74cebd7f69d9bbc13926",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 82,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-d999e722f828829ccd4a",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 97,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-e4b65c87df295e3ff982",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 126,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Set Dropdown or Numeric Validation for a Range - Scenario 6",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-bf1b0b6b801afe066aef",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 149,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.1.spec.ts",
+      "file": "REQ-5.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-d708ab2d1049797f2638",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 41,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-7147ab61866e41e26a03",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 104,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-962b3cd651fb487d9bd5",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 151,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-ddcf6d1f32ccca9b7f93",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 194,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-375cbbac98284c394dc8",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 236,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 6",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-bfa03dfbd77adabf99ed",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 283,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 7",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-4b9468ae8d421607c17a",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 333,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-28b7bc437a425a93631e",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 394,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-1f849839ef3b3836c8dc",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 445,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T09:45:06.573Z",
+    "duration": 1611.135,
+    "expected": 0,
+    "skipped": 100,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

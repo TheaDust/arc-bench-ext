@@ -1,0 +1,30 @@
+{
+  "revision": "2026-11-06-consistency-audit",
+  "identitiesPreserved": true,
+  "testTitlesPreserved": true,
+  "imagesPreserved": true,
+  "changedStepFields": [
+    {
+      "task": "sheet",
+      "step": "STEP-REQ-3.2.2-07-01",
+      "phase": "Given",
+      "before": "One workbook contains a first unique value in A1.",
+      "after": "One runtime-named workbook contains a first unique value in A1."
+    },
+    {
+      "task": "sheet",
+      "step": "STEP-REQ-3.2.2-07-01",
+      "phase": "When",
+      "before": "The user creates a second workbook, enters a second unique value, clicks Undo, and returns home.",
+      "after": "The user creates and runtime-names a second workbook, enters a second unique value, clicks Undo, and returns home."
+    },
+    {
+      "task": "sheet",
+      "step": "STEP-REQ-3.2.2-07-01",
+      "phase": "Then",
+      "before": "The second workbook is not listed, the first workbook remains, and exactly two workbook links are visible including the first workbook.",
+      "after": "Both runtime-named workbook links remain visible. Undo clears only the second workbook's A1 and that blank value survives refresh and reopening; the first workbook retains its original A1 value. Other previously created workbooks are unaffected."
+    }
+  ],
+  "imageFiles": 201
+}

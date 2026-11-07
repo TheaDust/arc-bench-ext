@@ -1,0 +1,3644 @@
+{
+  "config": {
+    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\arc-all-tasks-fix\\collection-configs\\12306.cjs",
+    "rootDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/12306/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/12306/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 10000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "REQ-1.1.spec.ts",
+      "file": "REQ-1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.1: Browse public homepage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a7b8e3b7ae99911946cc-8fc30d3c2e2b5c0b264c",
+          "file": "REQ-1.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.1.spec.ts",
+      "file": "REQ-2.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.1: Open traveler registration",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d38b10719e2f8ec2b9f8-ab981c3d89c3defe7b5d",
+          "file": "REQ-2.1.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.2.spec.ts",
+      "file": "REQ-2.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.2: Create durable account",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-2634113d35852dc25d7d",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.3.spec.ts",
+      "file": "REQ-2.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.3: Reject missing fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-4dbef820bcd8f28daa5c",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Reject duplicate passport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-a607852cb6f6114fdb57",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Reject duplicate username",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-6cbad525da2acfe14e16",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 24,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Reject password mismatch",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-bad736d7ee3ae37554de",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 35,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Reject invalid email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-55a265745c658716063a",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 42,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Require agreement acceptance",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-446ccf2a6c6414a080b7",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 49,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.3: Reject missing confirmation password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "084a80f7ea6b7472b6be-255752d4fcd55b4c4e41",
+          "file": "REQ-2.1.3.spec.ts",
+          "line": 56,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.1.spec.ts",
+      "file": "REQ-2.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.1: Open credential login",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-693f90393adc54081ce1",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.2.spec.ts",
+      "file": "REQ-2.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.2: Authenticate by username email and mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-54c1bc8f4e7fc38dc983",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Reject empty credentials",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-a6ea0c1c582403f18660",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Reject unknown account",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-3da27b7c1d6cebbca603",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Reject wrong password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-06aab651013678b754ce",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 35,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Reject missing password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-f46f034c2f92061edd5c",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 41,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Reject missing account",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-cd3cbe0e67e227fb91f0",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 47,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.3.spec.ts",
+      "file": "REQ-2.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.3: Open registration from login",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c7220b27d9e113ac927e-6c0ba02c6b19e8e4ae10",
+          "file": "REQ-2.2.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.3.spec.ts",
+      "file": "REQ-2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.3: Clear persisted login",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d05b6e14a57e9b3a8c7b-36da297725b0b456dc09",
+          "file": "REQ-2.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.4.spec.ts",
+      "file": "REQ-2.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.4: Reject missing identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ecf2dc02eff2a7bb223c-7d80f924844653ccd890",
+          "file": "REQ-2.4.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.4: Reject mismatched identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ecf2dc02eff2a7bb223c-187c5db59cbc72c3b385",
+          "file": "REQ-2.4.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.4: Reject new password mismatch",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ecf2dc02eff2a7bb223c-97b934a68b1653cfdaf2",
+          "file": "REQ-2.4.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.4: Reject missing recovery email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ecf2dc02eff2a7bb223c-b70881344deef8b5d5b7",
+          "file": "REQ-2.4.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.4: Reject missing recovery ID",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ecf2dc02eff2a7bb223c-dfd4377c284210af1307",
+          "file": "REQ-2.4.spec.ts",
+          "line": 35,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.5.1.spec.ts",
+      "file": "REQ-2.5.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.5.1: Open registration agreement pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5c24c51b95ad4800ba96-41c41a888d55510d8c0d",
+          "file": "REQ-2.5.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.5.2.spec.ts",
+      "file": "REQ-2.5.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.5.2: Read Terms of Service",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "33229850e8ccb63fd7c0-5abd5615c53504b020ee",
+          "file": "REQ-2.5.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.5.3.spec.ts",
+      "file": "REQ-2.5.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.5.3: Read Privacy Policy",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6ae9e0542357ea935c83-5cfd6314124fe2fe3a5e",
+          "file": "REQ-2.5.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.1.spec.ts",
+      "file": "REQ-3.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.1: Open public station and date selectors",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2e170d858b1900f11777-dd39f592197816143cc8",
+          "file": "REQ-3.1.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.2.spec.ts",
+      "file": "REQ-3.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.2: Choose Shanghai using pinyin and Chinese",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-b7389a137f1e92543a8f",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.2: Choose Beijing from alphabetical selector",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ff421702c2b5539a3b26-eb8e0ed0f7f4200f8e18",
+          "file": "REQ-3.1.2.spec.ts",
+          "line": 15,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.3.spec.ts",
+      "file": "REQ-3.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1.3: Select departure date",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f208e790e86e35a5c36a-b228f7850aacdef392dc",
+          "file": "REQ-3.1.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.3: Reject past date",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f208e790e86e35a5c36a-a9802d7781f4ed0b8046",
+          "file": "REQ-3.1.3.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1.3: Reject date beyond sale window",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f208e790e86e35a5c36a-88698116260d522245d9",
+          "file": "REQ-3.1.3.spec.ts",
+          "line": 18,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.spec.ts",
+      "file": "REQ-3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2: Show matching trains and preserve criteria",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "562a46530826d24d804a-87625dffe87c05d0f102",
+          "file": "REQ-3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2: Reject empty From",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "562a46530826d24d804a-009e522c20ac6d0f3baf",
+          "file": "REQ-3.2.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2: Reject empty To",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "562a46530826d24d804a-605f50c90e08533999eb",
+          "file": "REQ-3.2.spec.ts",
+          "line": 24,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.3.1.spec.ts",
+      "file": "REQ-3.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.3.1: Show fare with bookable other class",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4df759af618d95f09c06-96725e6d8ad4155ef8c1",
+          "file": "REQ-3.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.3.2.spec.ts",
+      "file": "REQ-3.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.3.2: Show no direct trains",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "75b29efb05ded5e63bc4-1ef5fe897672e60c217a",
+          "file": "REQ-3.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.4.1.spec.ts",
+      "file": "REQ-3.4.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.4.1: Change date using date picker",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9032e71ac9178581d2b6-99badcc6a3aef4f205d1",
+          "file": "REQ-3.4.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.4.2.spec.ts",
+      "file": "REQ-3.4.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.4.2: Change date using Travel dates",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "62706e68f67c2737fdf1-f49a50f926edac91c70d",
+          "file": "REQ-3.4.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.5.1.spec.ts",
+      "file": "REQ-3.5.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.5.1: Toggle Departure Time sorting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0d9fb878de2b58798f01-7e1be42cd22eae06e067",
+          "file": "REQ-3.5.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.5.2.spec.ts",
+      "file": "REQ-3.5.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.5.2: Toggle Travel time sorting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "8ab2b2a97963e3a0b159-bec4abb1e440f19afd88",
+          "file": "REQ-3.5.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.5.3.spec.ts",
+      "file": "REQ-3.5.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.5.3: Toggle Arrival Time sorting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "78205caeeb65afd3045b-8c2479704496a1a85c77",
+          "file": "REQ-3.5.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.6.1.spec.ts",
+      "file": "REQ-3.6.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.6.1: Restrict train type",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0018471c05698fe1d116-ce9abf5ab851449b580e",
+          "file": "REQ-3.6.1.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.6.1: Filter Other train types",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0018471c05698fe1d116-68668159c22b0ca8a5bb",
+          "file": "REQ-3.6.1.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.6.1: Restore all train types",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0018471c05698fe1d116-d170ee54ec64fb8052f1",
+          "file": "REQ-3.6.1.spec.ts",
+          "line": 17,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.6.2.spec.ts",
+      "file": "REQ-3.6.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.6.2: Filter departure station",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5a2728505a1a78069f98-a030358109a3f77832a7",
+          "file": "REQ-3.6.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.6.3.spec.ts",
+      "file": "REQ-3.6.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.6.3: Filter arrival station",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bf202376438ab8c5b56d-45f91bde76cf152917e2",
+          "file": "REQ-3.6.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.6.4.spec.ts",
+      "file": "REQ-3.6.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.6.4: Filter morning departures",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bc351f3c82b1fc0e3623-5b3d87a5a54770a9d92d",
+          "file": "REQ-3.6.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.7.spec.ts",
+      "file": "REQ-3.7.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.7: Open Tickets quick entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0d98b0be25bd29fb0b43-43b0343a06841d5bd585",
+          "file": "REQ-3.7.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.1.spec.ts",
+      "file": "REQ-4.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.1: Show feasible plans and segment details",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "de6caa8a5418b7d7e7a3-ee5e668a5e991684311c",
+          "file": "REQ-4.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.1.spec.ts",
+      "file": "REQ-4.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.1: Toggle transfer Departure Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "161472c1072b94c22436-bf26a3bf06283efb15b9",
+          "file": "REQ-4.2.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.2.spec.ts",
+      "file": "REQ-4.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.2: Toggle transfer Travel time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-c4d3dfa6162d3de21b7d",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.3.spec.ts",
+      "file": "REQ-4.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.3: Toggle transfer Arrival Time",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b790dd67c6b338c3953a-e5eb3db9e4a31e4cdd3a",
+          "file": "REQ-4.2.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.1.spec.ts",
+      "file": "REQ-5.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.1: Open authenticated personal center",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-8f4bad749aadafd00a02",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.2.spec.ts",
+      "file": "REQ-5.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.2: Intercept logged-out personal center",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-3f930d2635cd7041268b",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: Enter authenticated personal center",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-902d40b54d6bb953875d",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 12,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.3.spec.ts",
+      "file": "REQ-5.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.3: Book from personal notice",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46a8f697e939fc19c0d4-2e9a1d1fd944a436cefd",
+          "file": "REQ-5.1.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.1.spec.ts",
+      "file": "REQ-5.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.1: Open ticket-order categories",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-2d835793b4bce198f888",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.2.spec.ts",
+      "file": "REQ-5.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.2: Show empty Uncompleted orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0136829d92b176f483ab-a5f7f543eaf892a37d7d",
+          "file": "REQ-5.2.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.2: Search from empty Uncompleted orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0136829d92b176f483ab-d53fe856d005bff623d3",
+          "file": "REQ-5.2.2.spec.ts",
+          "line": 15,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.3.spec.ts",
+      "file": "REQ-5.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.3: Show empty Upcoming trips",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "aca2c98e59fde35096ea-f5f258bdbcc7cdd8a2e8",
+          "file": "REQ-5.2.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.3: Search from empty Upcoming trips",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "aca2c98e59fde35096ea-f755fd4677f281021683",
+          "file": "REQ-5.2.3.spec.ts",
+          "line": 15,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.4.spec.ts",
+      "file": "REQ-5.2.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.4: Show empty History orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4d481d32b42cc6d78d10-6c553639b2f42011dfe2",
+          "file": "REQ-5.2.4.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.4: Search from empty History orders",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4d481d32b42cc6d78d10-7666084a3e6fe6dc8a95",
+          "file": "REQ-5.2.4.spec.ts",
+          "line": 16,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.1.spec.ts",
+      "file": "REQ-5.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.1: Open unpaid-order view",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-2190b26e5467e2edb8dd",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.2.spec.ts",
+      "file": "REQ-5.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.2: Inspect unpaid order table",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "221a81884f1ebaf8e189-7204f1bd73677ae84ce3",
+          "file": "REQ-5.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.3.spec.ts",
+      "file": "REQ-5.3.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.3: Resume payment by order identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c61d67dc4cd7bbfdad6c-fc0f4382d204d803918c",
+          "file": "REQ-5.3.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.4.1.spec.ts",
+      "file": "REQ-5.4.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.4.1: Open upcoming-trip filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "329928fbac5cea39111c-e331d0f97ae6dea8c48e",
+          "file": "REQ-5.4.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.4.2.spec.ts",
+      "file": "REQ-5.4.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.4.2: Inspect upcoming table",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bdec390007c080fc0ae4-af5060f0044273df4663",
+          "file": "REQ-5.4.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.4.3.spec.ts",
+      "file": "REQ-5.4.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.4.3: Search by departure range",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a62d8f093ef11510ca94-fc16e756e4a30ebac5b7",
+          "file": "REQ-5.4.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.4.3: Exclude nonmatching date range",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a62d8f093ef11510ca94-f3c01fac56e2a4f0b7a9",
+          "file": "REQ-5.4.3.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.4.3: Exclude nonmatching keyword",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a62d8f093ef11510ca94-82a3aee5fd4fe115f013",
+          "file": "REQ-5.4.3.spec.ts",
+          "line": 20,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.4.3: Reject invalid upcoming keyword",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a62d8f093ef11510ca94-a002436ddd79c8bcec3c",
+          "file": "REQ-5.4.3.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.5.spec.ts",
+      "file": "REQ-5.5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.5: Refund and inspect history",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "79feeab4d9832e694edc-609c47818d83f8d4d634",
+          "file": "REQ-5.5.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.6.spec.ts",
+      "file": "REQ-5.6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.6: Open Upcoming trips through Refund quick entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1f21ae80cb7b718af4e3-cea15a01e7fe53d4a266",
+          "file": "REQ-5.6.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.7.1.spec.ts",
+      "file": "REQ-5.7.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.7.1: Open historical-order filters",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "805e51017ecdb9829159-d526d2b18c65efb5bfb4",
+          "file": "REQ-5.7.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.7.2.spec.ts",
+      "file": "REQ-5.7.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.7.2: Inspect completed historical order",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dff8e3a6d4528b91095d-a53bdadb8807cf90b844",
+          "file": "REQ-5.7.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.7.3.spec.ts",
+      "file": "REQ-5.7.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.7.3: Search history departure range",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2c8b3dfd4456a78c1fd-be8dd40a98be52d51a96",
+          "file": "REQ-5.7.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.7.3: Exclude history outside date range",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2c8b3dfd4456a78c1fd-eca31d15170be0f10061",
+          "file": "REQ-5.7.3.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.7.3: Exclude history nonmatching keyword",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2c8b3dfd4456a78c1fd-3bd35801501facf7b2e5",
+          "file": "REQ-5.7.3.spec.ts",
+          "line": 20,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.7.3: Reject invalid history keyword",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2c8b3dfd4456a78c1fd-b38ed47099170b1744ca",
+          "file": "REQ-5.7.3.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.8.1.spec.ts",
+      "file": "REQ-5.8.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.8.1: Quick entry to Order center",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f8bfc46aa16ba69a63e9-9eeaf6473ec59bdc6832",
+          "file": "REQ-5.8.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.8.2.spec.ts",
+      "file": "REQ-5.8.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.8.2: Quick entry to User information",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c429cee36cfab2e7916c-757ea3f70c1940681145",
+          "file": "REQ-5.8.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.8.3.spec.ts",
+      "file": "REQ-5.8.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.8.3: Quick entry to Account security",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3f5be9ed45c95b28b8ac-326c2982eddaf4f1e349",
+          "file": "REQ-5.8.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.8.4.spec.ts",
+      "file": "REQ-5.8.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.8.4: Quick entry to My passengers",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "27b3c82d85803c8027f5-ca3270503672744d81df",
+          "file": "REQ-5.8.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.1.spec.ts",
+      "file": "REQ-6.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.1: Inspect personal information",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-0b15ebcce29c5d93ebb2",
+          "file": "REQ-6.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.2.spec.ts",
+      "file": "REQ-6.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2: Reject invalid essential password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0c9474e3e44261237194-43ca9d8fb0b093e6b289",
+          "file": "REQ-6.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.1.spec.ts",
+      "file": "REQ-6.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.1: Save contact email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fce4615919234071bb06-3ea0456ca62c7fa44753",
+          "file": "REQ-6.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.2.spec.ts",
+      "file": "REQ-6.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.2: Save passenger type",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "01f6fe1e0f49b4a60c57-7d65e5654076baf2fa31",
+          "file": "REQ-6.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.4.spec.ts",
+      "file": "REQ-6.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.4: Persist changed login password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-a9865f657cfa6db46565",
+          "file": "REQ-6.4.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Reject empty password change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-4a50a3d98ba651e91923",
+          "file": "REQ-6.4.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Reject incorrect current password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-620af44699ef8281fb53",
+          "file": "REQ-6.4.spec.ts",
+          "line": 31,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Reject mismatched new passwords",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-b6b3db0154a107e15ad4",
+          "file": "REQ-6.4.spec.ts",
+          "line": 44,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.5.spec.ts",
+      "file": "REQ-6.5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.5: Persist security email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-7cdb3adc3a5dc4c30e4f",
+          "file": "REQ-6.5.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Reject empty mailbox change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-87b05e2c82db1a48896c",
+          "file": "REQ-6.5.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Reject wrong mailbox password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-ea6f94010c4efad581d6",
+          "file": "REQ-6.5.spec.ts",
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Reject invalid mailbox email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-d05f7dcde488accd543d",
+          "file": "REQ-6.5.spec.ts",
+          "line": 39,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.6.spec.ts",
+      "file": "REQ-6.6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.6: Reject empty mobile change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0efd203c877512652a29-bae74eed682579c600e0",
+          "file": "REQ-6.6.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.6: Reject wrong mobile password",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0efd203c877512652a29-20a850ca7e83c81bb856",
+          "file": "REQ-6.6.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.6: Reject invalid mobile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0efd203c877512652a29-b5bcb08a36888c023421",
+          "file": "REQ-6.6.spec.ts",
+          "line": 29,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.1.spec.ts",
+      "file": "REQ-7.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.1: Inspect passenger table and protected holder",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3e555ff8125373696c08-e2841c4171eb962f3a3b",
+          "file": "REQ-7.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.2.spec.ts",
+      "file": "REQ-7.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.2: Add passenger with durable identity",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-50621c013d691fc443c0",
+          "file": "REQ-7.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.2: Reject empty passenger form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-a7dee00c65d5b24fc321",
+          "file": "REQ-7.2.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.2: Reject duplicate passenger passport",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-eeef9f036737c83c96b0",
+          "file": "REQ-7.2.spec.ts",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.2: Reject passenger invalid email",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-b6f2dab11ce827b3b5f2",
+          "file": "REQ-7.2.spec.ts",
+          "line": 38,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.3.1.spec.ts",
+      "file": "REQ-7.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.3.1: Confirm passenger deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6e33293e5e1d316f78fb-8d15cf09f605ae8a2a62",
+          "file": "REQ-7.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.3.2.spec.ts",
+      "file": "REQ-7.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.3.2: Dismiss passenger deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b81ee417502da86f42b0-7a5a73cdd5a4f9f0944e",
+          "file": "REQ-7.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.4.spec.ts",
+      "file": "REQ-7.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.4: Select all protects holder",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4a73c9ab10eb7995c5fa-7dea9d776bb82c30775f",
+          "file": "REQ-7.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.5.1.spec.ts",
+      "file": "REQ-7.5.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.5.1: Search passenger name",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b4b3b03ff06fbcfbd7-d74aa9fad72c7d3726fa",
+          "file": "REQ-7.5.1.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.5.1: Search passenger ID",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b8b4b3b03ff06fbcfbd7-886287044c7b676836a0",
+          "file": "REQ-7.5.1.spec.ts",
+          "line": 14,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-7.5.2.spec.ts",
+      "file": "REQ-7.5.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.5.2: Clear passenger search",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "46ef17e92e529a177032-815af733c6c49a2d037d",
+          "file": "REQ-7.5.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.1.1.spec.ts",
+      "file": "REQ-8.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.1.1: Open booking quick-login entry",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "273dff50c216428e41a5-39dfeec685ff5c06fb02",
+          "file": "REQ-8.1.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.1.2.spec.ts",
+      "file": "REQ-8.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.1.2: Require quick login before booking",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9af3d7b3e3e8821f6d51-e129d785f4bb1df8e66e",
+          "file": "REQ-8.1.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.1.3.spec.ts",
+      "file": "REQ-8.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.1.3: Open recovery from quick login",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "98c184730d8046d46697-7f6521e40af0a3042172",
+          "file": "REQ-8.1.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.1.4.spec.ts",
+      "file": "REQ-8.1.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.1.4: Open registration from quick login",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "08b2ee2e3d8359a4aa8b-929f09c7df76a830699a",
+          "file": "REQ-8.1.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.2.1.spec.ts",
+      "file": "REQ-8.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.2.1: Open selected-journey booking form",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83e8c6d0c1f153d74574-04486bd2861004898856",
+          "file": "REQ-8.2.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.2.2.spec.ts",
+      "file": "REQ-8.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.2.2: Inspect selected train and availability",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "492a1e24660c1b032072-4ef9da41ad95c59b6145",
+          "file": "REQ-8.2.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.2.3.1.spec.ts",
+      "file": "REQ-8.2.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.2.3.1: Select and configure booking passenger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "ec7e86a9e6700cc78596-046cbec1a60ebb4ee374",
+          "file": "REQ-8.2.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.2.3.2.spec.ts",
+      "file": "REQ-8.2.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.2.3.2: Remove selected booking passenger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "64b658442bd42c5e3af3-b4a9272d0e2fc0ad1c33",
+          "file": "REQ-8.2.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.2.4.spec.ts",
+      "file": "REQ-8.2.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.2.4: Read booking terms",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e5cf9e23054c0ee683eb-399d0659260dc367d051",
+          "file": "REQ-8.2.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.3.1.spec.ts",
+      "file": "REQ-8.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.3.1: Open booking confirmation state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c77463db22f549c56cc9-f810155d086b8b2ecc5c",
+          "file": "REQ-8.3.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.3.2.spec.ts",
+      "file": "REQ-8.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.3.2: Open confirmation for available seat",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "321474488a5ff5550282-5d49bee8561489275d97",
+          "file": "REQ-8.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-8.3.2: Reject no passenger",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "321474488a5ff5550282-047fbaf0d16ce48a3b75",
+          "file": "REQ-8.3.2.spec.ts",
+          "line": 14,
+          "column": 5
+        },
+        {
+          "title": "REQ-8.3.2: Reject unavailable ticket class",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "321474488a5ff5550282-eccf392da6c0435088f6",
+          "file": "REQ-8.3.2.spec.ts",
+          "line": 21,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.3.3.1.spec.ts",
+      "file": "REQ-8.3.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.3.3.1: Confirm order and reach payment",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9750acd74fcdb5fcab46-456be5ecbfe330828b4e",
+          "file": "REQ-8.3.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.3.3.2.spec.ts",
+      "file": "REQ-8.3.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.3.3.2: Edit without submitting",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "56c9ab6dcdb3b525baf1-87f6d9a5369c7155042c",
+          "file": "REQ-8.3.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.4.spec.ts",
+      "file": "REQ-8.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.4: Show consistent payment and running countdown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "798d8828ca9c4572d175-733cd5187931812e628d",
+          "file": "REQ-8.4.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.5.spec.ts",
+      "file": "REQ-8.5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.5: Pay and persist upcoming state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2a7f92c302a070028510-8ffdbb2b22c9207a2931",
+          "file": "REQ-8.5.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.6.spec.ts",
+      "file": "REQ-8.6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.6: Persist unpaid order category",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fea9808179a8a7b9432a-df139a094c3a3273e82a",
+          "file": "REQ-8.6.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.7.spec.ts",
+      "file": "REQ-8.7.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.7: Cancel persist status and release seat",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0873f1c3c4088043a586-5aa9e93550962dc136d5",
+          "file": "REQ-8.7.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.8.1.spec.ts",
+      "file": "REQ-8.8.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.8.1: Confirm order-center cancellation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4b596f495554dfa5cc6a-cb114aca563355dff994",
+          "file": "REQ-8.8.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-8.8.2.spec.ts",
+      "file": "REQ-8.8.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-8.8.2: Dismiss order-center cancellation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a20fee4d45b2f7d8a7ed-927fae2ab38b7e476ab1",
+          "file": "REQ-8.8.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.1.spec.ts",
+      "file": "REQ-9.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.1: Browse guide category content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd17f0bc5642ed41f690-7032aa752109f778fbcf",
+          "file": "REQ-9.1.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.2.1.spec.ts",
+      "file": "REQ-9.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.2.1: Open travel-guide dropdown",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "89e023b07c17c9a90639-689024c1a55555fd8e39",
+          "file": "REQ-9.2.1.spec.ts",
+          "line": 6,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.2.2.spec.ts",
+      "file": "REQ-9.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.2.2: Open all dropdown guide categories",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "bfab3fae5522676b42e1-04fcdbc40149b0ef51c4",
+          "file": "REQ-9.2.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.2.3.spec.ts",
+      "file": "REQ-9.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.2.3: Open dropdown question anchor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "5afb64551df8fac094c1-92053313b4b1399a277a",
+          "file": "REQ-9.2.3.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.3.1.spec.ts",
+      "file": "REQ-9.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.3.1: Open quick question How to book tickets online?",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1379147888cdc111d017-9d40f89ad2610a120013",
+          "file": "REQ-9.3.1.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-9.3.1: Open quick question How to change or refund tickets?",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1379147888cdc111d017-fc73d998c01adc5588b6",
+          "file": "REQ-9.3.1.spec.ts",
+          "line": 14,
+          "column": 5
+        },
+        {
+          "title": "REQ-9.3.1: Open quick question How to check train status?",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1379147888cdc111d017-0f90aca0aa327bf18988",
+          "file": "REQ-9.3.1.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "REQ-9.3.1: Open quick question How to use 12306 mobile app?",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1379147888cdc111d017-d9aac4edfd9aff318557",
+          "file": "REQ-9.3.1.spec.ts",
+          "line": 32,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-9.3.2.spec.ts",
+      "file": "REQ-9.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-9.3.2: Open guide with Quick Guide More",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f6fa7e1c3f0da70f9f16-59a60d793e7b95a4182f",
+          "file": "REQ-9.3.2.spec.ts",
+          "line": 5,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T09:44:43.564Z",
+    "duration": 4275.487000000001,
+    "expected": 0,
+    "skipped": 142,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

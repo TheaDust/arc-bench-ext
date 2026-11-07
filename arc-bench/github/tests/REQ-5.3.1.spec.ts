@@ -1,0 +1,27 @@
+import { openVisibleTarget } from "./support/e2e";
+import { baseUrl } from './support/e2e';
+import { expect, test } from '@playwright/test';
+import { seedValue, signIn, seedAccount } from './support/e2e';
+
+test.beforeEach(async ({ page }) => {
+  await page.goto(baseUrl());
+});
+
+test('REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1', async ({ page }, testInfo) => {
+  const editor = seedAccount(testInfo, 'ISSUE_EDITOR');
+  const issueEntry = seedValue(testInfo, 'ASSIGNABLE_ISSUE_ENTRY');
+
+  await signIn(page, editor);
+  await openVisibleTarget(page, issueEntry);
+  const assignee = seedValue(testInfo, 'ISSUE_ASSIGNEE');
+  const selector = page.getByRole('button', { name: 'Assignees', exact: true });
+  await selector.click();
+  await page.getByRole('textbox', { name: 'Search assignees', exact: true }).fill(assignee);
+  await page.getByRole('option', { name: assignee, exact: true }).click();
+  await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+  await selector.click();
+  await page.getByRole('option', { name: assignee, exact: true }).click();
+  await expect(page.getByText(assignee, { exact: true }).filter({ visible: true })).toHaveCount(0);
+});

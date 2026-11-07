@@ -1,0 +1,296 @@
+
+Running 11 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/11] [ok] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1
+[1A[2K[2/11] [ok] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1
+[1A[2K[3/11] [ok] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1
+[1A[2K[4/11] [ok] › arc-bench\github\tests\REQ-6.5.spec.ts:58:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 2
+
+
+
+
+[1A[2K[5/11] [init-history] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1
+[1A[2K  1) [init-history] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+       at support\branch-state.ts:33
+
+      31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);
+      32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);
+    > 33 |   expect(commits.some(row => row[0] === head)).toBe(true);
+         |                                                ^
+      34 |   for (const commit of commits) {
+      35 |     expect(commit[0]).not.toBe('');
+      36 |     for (const parent of commit[1].split(',').map(value => value.trim()).filter(Boolean)) {
+        at branchState (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\support\branch-state.ts:33:48)
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-3.2.1.spec.ts:26:19
+
+    Error Context: validation\closeout\closeout-results\REQ-3.2.1-REQ-3-2-1-Create-6859b-zation-Options---Scenario-1-init-history\error-context.md
+
+
+
+
+
+
+[1A[2K[6/11] [init-list] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1
+[1A[2K  2) [init-list] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
+
+    Locator:  getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })
+    Expected: [32m1[39m
+    Received: [31m0[39m
+    Timeout:  400ms
+
+    Call log:
+    [2m  - Expect "toHaveCount" with timeout 400ms[22m
+    [2m  - waiting for getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })[22m
+    [2m    4 × locator resolved to 0 elements[22m
+    [2m      - unexpected value "0"[22m
+
+
+      37 |   await page.reload();
+      38 |   const listed = page.getByRole('link', { name: repositoryName, exact: true });
+    > 39 |   await expect(listed).toHaveCount(1);
+         |                        ^
+      40 |   await listed.click();
+      41 |   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();
+      42 |   expect(await branchState(page)).toEqual(initial);
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-3.2.1.spec.ts:39:24
+
+    Error Context: validation\closeout\closeout-results\REQ-3.2.1-REQ-3-2-1-Create-6859b-zation-Options---Scenario-1-init-list\error-context.md
+
+
+
+
+
+
+[1A[2K[7/11] [fork-files] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1
+[1A[2K  3) [fork-files] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 4[39m
+    [31m+ Received  + 0[39m
+
+    [33m@@ -17,13 +17,9 @@[39m
+    [2m    "files": Array [[22m
+    [2m      Array [[22m
+    [2m        "README.md",[22m
+    [2m        "Acme docs",[22m
+    [2m      ],[22m
+    [32m-     Array [[39m
+    [32m-       "src/README.md",[39m
+    [32m-       "Document search flow",[39m
+    [32m-     ],[39m
+    [2m    ],[22m
+    [2m    "head": "source-2",[22m
+    [2m    "owner": "fork-user",[22m
+    [2m  }[22m
+
+      34 |   const forkUrl = page.url();
+      35 |   const copied = { ...source, owner: account.username };
+    > 36 |   expect(await branchState(page)).toEqual(copied);
+         |                                   ^
+      37 |   await page.reload();
+      38 |   expect(await branchState(page)).toEqual(copied);
+      39 |   await expect(page.getByText(`Forked from ${sourceRepositoryName}`, { exact: true })).toBeVisible();
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-3.2.2.spec.ts:36:35
+
+    Error Context: validation\closeout\closeout-results\REQ-3.2.2-REQ-3-2-2-Fork-a-f3b93-ther-Namespace---Scenario-1-fork-files\error-context.md
+
+
+
+
+
+
+[1A[2K[8/11] [fork-writeback] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1
+[1A[2K  4) [fork-writeback] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  -  1[39m
+    [31m+ Received  + 11[39m
+
+    [33m@@ -1,9 +1,15 @@[39m
+    [2m  Object {[22m
+    [2m    "branch": "main",[22m
+    [2m    "commits": Array [[22m
+    [2m      Array [[22m
+    [31m+       "fork-3",[39m
+    [31m+       "source-2",[39m
+    [31m+       "fork-user",[39m
+    [31m+       "Change fork independently",[39m
+    [31m+     ],[39m
+    [31m+     Array [[39m
+    [2m        "source-1",[22m
+    [2m        "",[22m
+    [2m        "alice-dev",[22m
+    [2m        "Initialize acme docs",[22m
+    [2m      ],[22m
+    [33m@@ -13,17 +19,21 @@[39m
+    [2m        "alice-dev",[22m
+    [2m        "Document search flow",[22m
+    [2m      ],[22m
+    [2m    ],[22m
+    [2m    "files": Array [[22m
+    [31m+     Array [[39m
+    [31m+       "fork-only.md",[39m
+    [31m+       "Independent fork content",[39m
+    [31m+     ],[39m
+    [2m      Array [[22m
+    [2m        "README.md",[22m
+    [2m        "Acme docs",[22m
+    [2m      ],[22m
+    [2m      Array [[22m
+    [2m        "src/README.md",[22m
+    [2m        "Document search flow",[22m
+    [2m      ],[22m
+    [2m    ],[22m
+    [32m-   "head": "source-2",[39m
+    [31m+   "head": "fork-3",[39m
+    [2m    "owner": "repo-owner",[22m
+    [2m  }[22m
+
+      53 |   await page.goto(sourceUrl);
+      54 |   await page.reload();
+    > 55 |   expect(await branchState(page)).toEqual(source);
+         |                                   ^
+      56 | });
+      57 |
+      58 | test('REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 2', async ({ page }, testInfo) => {
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-3.2.2.spec.ts:55:35
+
+    Error Context: validation\closeout\closeout-results\REQ-3.2.2-REQ-3-2-2-Fork-a-f3b93-ther-Namespace---Scenario-1-fork-writeback\error-context.md
+
+
+
+
+
+
+[1A[2K[9/11] [merge-status] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1
+[1A[2K  5) [merge-status] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"[7mmerg[27me-1"[39m
+    Received: [31m"[7mbas[27me-1"[39m
+
+      35 |     expect(merged.owner).toBe(before.base.owner);
+      36 |     expect(merged.branch).toBe('main');
+    > 37 |     expect(merged.head).toBe(commit);
+         |                         ^
+      38 |     expect(commit).not.toBe(before.base.head);
+      39 |     expect(merged.files).toEqual(before.compare.files);
+      40 |     const merge = merged.commits.find(row => row[0] === commit)!;
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-6.5.spec.ts:37:25
+
+    Error Context: validation\closeout\closeout-results\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-1-merge-status\error-context.md
+
+
+
+
+
+
+[1A[2K[10/11] [merge-parents] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1
+[1A[2K  6) [merge-parents] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   "base-1",[39m
+    [2m    "compare-1",[22m
+    [31m+   "base-1",[39m
+    [2m  ][22m
+
+      40 |     const merge = merged.commits.find(row => row[0] === commit)!;
+      41 |     expect(merge).toBeDefined();
+    > 42 |     expect(merge[1].split(',').map(value=>value.trim())).toEqual([before.base.head,before.compare.head]);
+         |                                                          ^
+      43 |     expect(merge[2]).toBe(maintainer.username);
+      44 |     const inherited = new Map([...before.base.commits,...before.compare.commits].map(row=>[row[0],row]));
+      45 |     expect(merged.commits.filter(row=>row[0]!==commit)).toEqual([...inherited.values()].sort((a,b)=>a[0].localeCompare(b[0])));
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-6.5.spec.ts:42:58
+
+    Error Context: validation\closeout\closeout-results\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-1-merge-parents\error-context.md
+
+
+
+
+
+
+[1A[2K[11/11] [refusal-write] › arc-bench\github\tests\REQ-6.5.spec.ts:58:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 2
+[1A[2K  7) [refusal-write] › arc-bench\github\tests\REQ-6.5.spec.ts:58:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 2 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m4[39m
+    Received: [31m3[39m
+
+       at support\branch-state.ts:31
+
+      29 |   const files = await rows(page, 'Branch files', ['Path','Content']);
+      30 |   const commits = await rows(page, 'Commit history', ['Commit','Parents','Author','Message']);
+    > 31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);
+         |                                                  ^
+      32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);
+      33 |   expect(commits.some(row => row[0] === head)).toBe(true);
+      34 |   for (const commit of commits) {
+        at branchState (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\support\branch-state.ts:31:50)
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-6.5.spec.ts:75:12
+
+    Error Context: validation\closeout\closeout-results\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-2-refusal-write\error-context.md
+
+
+[1A[2K  7 failed
+    [init-history] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1 
+    [init-list] › arc-bench\github\tests\REQ-3.2.1.spec.ts:10:5 › REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1 
+    [fork-files] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1 
+    [fork-writeback] › arc-bench\github\tests\REQ-3.2.2.spec.ts:11:5 › REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1 
+    [merge-status] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
+    [merge-parents] › arc-bench\github\tests\REQ-6.5.spec.ts:12:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
+    [refusal-write] › arc-bench\github\tests\REQ-6.5.spec.ts:58:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 2 
+  4 passed (32.5s)
+[1A[2K(node:62896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:62896) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:4124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:4124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:54644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:54644) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:70028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:70028) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:44752) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:44752) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:292) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:60204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:60204) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:27772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:27772) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

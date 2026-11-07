@@ -1,0 +1,58 @@
+[
+  {
+    "task": "12306",
+    "atomicRequirements": 93,
+    "scenarios": 142,
+    "normalizedRequirementsDigest": "39ad9ee3b8eea42b3b36488958b182af7fc751156c3cfc73fb5f6c2beae441d2",
+    "status": "passed"
+  },
+  {
+    "task": "bookstack",
+    "atomicRequirements": 24,
+    "scenarios": 35,
+    "normalizedRequirementsDigest": "34d8355bb1cca42ddedace3677fb2497edc1a510f20909164b16c034c713c780",
+    "status": "passed"
+  },
+  {
+    "task": "ctrip",
+    "atomicRequirements": 97,
+    "scenarios": 152,
+    "normalizedRequirementsDigest": "034b5a0d2965b6617c74d0f5eea2f965ac66d464ff8487aae207796a9c29e310",
+    "status": "passed"
+  },
+  {
+    "task": "github",
+    "atomicRequirements": 47,
+    "scenarios": 100,
+    "normalizedRequirementsDigest": "5fb829077c3f4544b551ff31170012b729e16dfb5bb318dcd7357173a9bdc6d5",
+    "status": "passed"
+  },
+  {
+    "task": "keep",
+    "atomicRequirements": 16,
+    "scenarios": 33,
+    "normalizedRequirementsDigest": "a933d17d3e651288d0b487f0f104a4429c9563e76417bf870d79bbca0c938b13",
+    "status": "passed"
+  },
+  {
+    "task": "prestashop",
+    "atomicRequirements": 55,
+    "scenarios": 86,
+    "normalizedRequirementsDigest": "1dfea94108d3498a4f430acadb71678a44ae6c165873e8b22b6b4dad3657f090",
+    "status": "passed"
+  },
+  {
+    "task": "sheet",
+    "atomicRequirements": 24,
+    "scenarios": 100,
+    "normalizedRequirementsDigest": "9262ade1d4a3c0278a3593256927b618e5fa7d7e3fcfbba9a369d1a3c4ff26f3",
+    "status": "passed"
+  },
+  {
+    "task": "stackoverflow",
+    "atomicRequirements": 52,
+    "scenarios": 66,
+    "normalizedRequirementsDigest": "bdc8a507526281cdda47a4e14dbe489cb6d7746e48ee810f3900b1adf527bf10",
+    "status": "passed"
+  }
+]

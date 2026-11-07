@@ -1,0 +1,264 @@
+{
+  "revision": "2026-11-06-isolated-scenarios",
+  "identitiesPreserved": true,
+  "testTitlesPreserved": true,
+  "imagesPreserved": true,
+  "changedStepFields": [],
+  "imageFiles": 201,
+  "descriptionChanges": [
+    {
+      "task": "bookstack",
+      "requirement": "REQ-7.1",
+      "before": {
+        "text": "Authenticated visits to shelves, books, chapters, and pages record those items for the user. Opening / returns home, where \"My Recently Viewed\"(role=region) contains at most ten records and one entry per visited identity. Selecting \"{visited item name}\"(role=button), or the allowed equivalent link, opens the corresponding item.\n\nThe source does not define a tie-breaker or eviction order for recently viewed records.\n\nDates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.",
+        "image": [
+          {
+            "id": "IMG-SHELVES",
+            "reference": "reference/shelves.png",
+            "page": "shelves"
+          },
+          {
+            "id": "IMG-SHELF",
+            "reference": "reference/shelf.png",
+            "page": "shelf"
+          },
+          {
+            "id": "IMG-BOOKS",
+            "reference": "reference/books.png",
+            "page": "books"
+          },
+          {
+            "id": "IMG-BOOK",
+            "reference": "reference/book.png",
+            "page": "book"
+          },
+          {
+            "id": "IMG-CHAPTER",
+            "reference": "reference/chapter.png",
+            "page": "chapter"
+          },
+          {
+            "id": "IMG-PAGE",
+            "reference": "reference/page.png",
+            "page": "page"
+          },
+          {
+            "id": "IMG-INDEX-AFTER-LOGIN",
+            "reference": "reference/index_after_login.png",
+            "page": "home"
+          }
+        ]
+      },
+      "after": {
+        "text": "Authenticated visits to shelves, books, chapters, and pages record those items for the user. Opening / returns home, where \"My Recently Viewed\"(role=region) contains at most ten records and one entry per visited identity. Selecting \"{visited item name}\"(role=button), or the allowed equivalent link, opens the corresponding item.\n\nThe source does not define a tie-breaker or eviction order for recently viewed records.\n\nDates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.\n\nEach business record in this homepage region has exactly one listitem or row role and contains its one named opening button or link. Auxiliary navigation and action controls are outside those records. Records have distinct object identities. For the cap check, prepare more distinct eligible items than the limit through the public creation/visit/favorite actions, then select one of the displayed prepared items; no ranking tie-breaker is required.",
+        "image": [
+          {
+            "id": "IMG-SHELVES",
+            "reference": "reference/shelves.png",
+            "page": "shelves"
+          },
+          {
+            "id": "IMG-SHELF",
+            "reference": "reference/shelf.png",
+            "page": "shelf"
+          },
+          {
+            "id": "IMG-BOOKS",
+            "reference": "reference/books.png",
+            "page": "books"
+          },
+          {
+            "id": "IMG-BOOK",
+            "reference": "reference/book.png",
+            "page": "book"
+          },
+          {
+            "id": "IMG-CHAPTER",
+            "reference": "reference/chapter.png",
+            "page": "chapter"
+          },
+          {
+            "id": "IMG-PAGE",
+            "reference": "reference/page.png",
+            "page": "page"
+          },
+          {
+            "id": "IMG-INDEX-AFTER-LOGIN",
+            "reference": "reference/index_after_login.png",
+            "page": "home"
+          }
+        ]
+      }
+    },
+    {
+      "task": "bookstack",
+      "requirement": "REQ-8.2",
+      "before": {
+        "text": "After an item is favorited, the authenticated homepage's \"My Most Viewed Favorites\"(role=region) exposes that item as \"{favorite item name}\"(role=button), with an equivalent link also permitted. The region contains at most four items; selecting an entry opens the corresponding item. A dedicated favorites page exposes the complete collection.\n\nRanking ties and the name of the complete favorites collection entry are unspecified.",
+        "image": [
+          {
+            "id": "IMG-INDEX-AFTER-LOGIN",
+            "reference": "reference/index_after_login.png",
+            "page": "home"
+          },
+          {
+            "id": "IMG-FAVOURITES",
+            "reference": "reference/favourites.png",
+            "page": "favourites"
+          },
+          {
+            "id": "IMG-BOOK",
+            "reference": "reference/book.png",
+            "page": "book"
+          }
+        ]
+      },
+      "after": {
+        "text": "After an item is favorited, the authenticated homepage's \"My Most Viewed Favorites\"(role=region) exposes that item as \"{favorite item name}\"(role=button), with an equivalent link also permitted. The region contains at most four items; selecting an entry opens the corresponding item. A dedicated favorites page exposes the complete collection.\n\nRanking ties and the name of the complete favorites collection entry are unspecified.\n\nEach business record in this homepage region has exactly one listitem or row role and contains its one named opening button or link. Auxiliary navigation and action controls are outside those records. Records have distinct object identities. For the cap check, prepare more distinct eligible items than the limit through the public creation/visit/favorite actions, then select one of the displayed prepared items; no ranking tie-breaker is required.",
+        "image": [
+          {
+            "id": "IMG-INDEX-AFTER-LOGIN",
+            "reference": "reference/index_after_login.png",
+            "page": "home"
+          },
+          {
+            "id": "IMG-FAVOURITES",
+            "reference": "reference/favourites.png",
+            "page": "favourites"
+          },
+          {
+            "id": "IMG-BOOK",
+            "reference": "reference/book.png",
+            "page": "book"
+          }
+        ]
+      }
+    },
+    {
+      "task": "bookstack",
+      "requirement": "REQ-9.1",
+      "before": {
+        "text": "Creating or editing a page updates \"Recently Updated Pages\"(role=region) on the homepage. This region contains at most five items, and selecting \"{page title}\"(role=button), or the permitted equivalent link, opens that page with its saved title and body.\n\nRanking tie-breakers are unspecified.\n\nDates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.",
+        "image": [
+          {
+            "id": "IMG-INDEX",
+            "reference": "reference/index.png",
+            "page": "home"
+          },
+          {
+            "id": "IMG-PAGE",
+            "reference": "reference/page.png",
+            "page": "page"
+          }
+        ]
+      },
+      "after": {
+        "text": "Creating or editing a page updates \"Recently Updated Pages\"(role=region) on the homepage. This region contains at most five items, and selecting \"{page title}\"(role=button), or the permitted equivalent link, opens that page with its saved title and body.\n\nRanking tie-breakers are unspecified.\n\nDates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.\n\nEach business record in this homepage region has exactly one listitem or row role and contains its one named opening button or link. Auxiliary navigation and action controls are outside those records. Records have distinct object identities. For the cap check, prepare more distinct eligible items than the limit through the public creation/visit/favorite actions, then select one of the displayed prepared items; no ranking tie-breaker is required.",
+        "image": [
+          {
+            "id": "IMG-INDEX",
+            "reference": "reference/index.png",
+            "page": "home"
+          },
+          {
+            "id": "IMG-PAGE",
+            "reference": "reference/page.png",
+            "page": "page"
+          }
+        ]
+      }
+    },
+    {
+      "task": "github",
+      "requirement": "REQ-2.2.3",
+      "before": {
+        "text": "An organization Owner can open the organization’s “People” page and click “Add member”. The form displays a visibly labeled “Username or email” field, a “Role” combobox with a “Member” option, and an “Add member” button. Adding a registered non-member directly creates the organization membership with Member role, displays the account in People without a pending-invitation state, and persists after reload. After the member signs in, the organization appears in “Your organizations”, but membership alone does not grant access to an otherwise unauthorized private repository. Adding an existing member displays “Account is already a member” without duplicating the relationship; an unknown username displays “Account not found”.\n\nOrganization membership only determines whether a user can see the organization and can be a candidate for team/repository authorization; it does not automatically grant access to any private repository.\n\nAccess to a private repository comes only from organization Owner status, a direct role grant on that repository, or direct membership in a team authorized for that repository.\n\nAll changes must be reflected simultaneously in organization details, people/team lists, and the actual access results of affected repositories.\n\nOn the People page, an Owner enters the username or verified email of an existing account and confirms, after which the system immediately saves that account's Member or Owner membership relationship; there is no invitation, Pending, or acceptance step.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder."
+      },
+      "after": {
+        "text": "An organization Owner can open the organization’s “People” page and click “Add member”. The form displays a visibly labeled “Username or email” field, a “Role” combobox with a “Member” option, and an “Add member” button. Adding a registered non-member directly creates the organization membership with Member role, displays the account in People without a pending-invitation state, and persists after reload. After the member signs in, the organization appears in “Your organizations”, but membership alone does not grant access to an otherwise unauthorized private repository. Adding an existing member displays “Account is already a member” without duplicating the relationship; an unknown username displays “Account not found”.\n\nOrganization membership only determines whether a user can see the organization and can be a candidate for team/repository authorization; it does not automatically grant access to any private repository.\n\nAccess to a private repository comes only from organization Owner status, a direct role grant on that repository, or direct membership in a team authorized for that repository.\n\nAll changes must be reflected simultaneously in organization details, people/team lists, and the actual access results of affected repositories.\n\nOn the People page, an Owner enters the username or verified email of an existing account and confirms, after which the system immediately saves that account's Member or Owner membership relationship; there is no invitation, Pending, or acceptance step.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe Add member form is a group named \"Add member form\". Its fields, submit button and validation messages belong to that group. Every persisted People record is a group named \"Member <username>\" containing that exact username and its current role. Opening the form does not duplicate or remove People records. These groups identify records and may be styled as rows, cards or dialogs."
+      }
+    },
+    {
+      "task": "github",
+      "requirement": "REQ-3.2.1",
+      "before": {
+        "text": "This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes. The signed-in workspace provides a “New repository” link. The form labels are “Owner”, “Repository name”, and “Description”; the signed-in user's personal namespace is selected by default, so it is possible to submit without changing the owner. Visibility choices are radio controls “Public” and “Private”; initialization is a checkbox “Add a README file”; submission uses the button “Create repository”. Other defaults must allow duplicate-name and empty-name validation without further input. A successful initialized private repository shows a heading containing the new name, a visible Private marker, and a README file link; the overview persists after reload. The optional description “Repository created by Playwright” is saved when entered. An existing repository in this same default personal namespace is supplied for duplicate validation, which stays on the form and does not open the existing repository heading. On the repository-creation page, a signed-in user selects a personal or organization owner, enters a repository name and description, selects public or private visibility, and chooses whether to create an initial commit with a README. The system verifies that the user may create a repository in that owner's namespace, that the name is unique, and that the options are valid; on success, it stores the repository identifier, owner, visibility, default branch, and creator. If initialization is selected, it must also atomically create the initial branch, README file, and initial commit; failure at any step must leave no partially created repository. On success, the new repository overview page is opened.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.",
+        "image": [
+          {
+            "id": "IMG-GITHUB-CREATE-REPOSITORY",
+            "reference": "reference/github-create-repository.png",
+            "page": "repository_creation"
+          }
+        ]
+      },
+      "after": {
+        "text": "This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes. The signed-in workspace provides a “New repository” link. The form labels are “Owner”, “Repository name”, and “Description”; the signed-in user's personal namespace is selected by default, so it is possible to submit without changing the owner. Visibility choices are radio controls “Public” and “Private”; initialization is a checkbox “Add a README file”; submission uses the button “Create repository”. Other defaults must allow duplicate-name and empty-name validation without further input. A successful initialized private repository shows a heading containing the new name, a visible Private marker, and a README file link; the overview persists after reload. The optional description “Repository created by Playwright” is saved when entered. An existing repository in this same default personal namespace is supplied for duplicate validation, which stays on the form and does not open the existing repository heading. On the repository-creation page, a signed-in user selects a personal or organization owner, enters a repository name and description, selects public or private visibility, and chooses whether to create an initial commit with a README. The system verifies that the user may create a repository in that owner's namespace, that the name is unique, and that the options are valid; on success, it stores the repository identifier, owner, visibility, default branch, and creator. If initialization is selected, it must also atomically create the initial branch, README file, and initial commit; failure at any step must leave no partially created repository. On success, the new repository overview page is opened.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe repository overview and each branch page expose a region named \"Branch state\" for the currently selected branch. It contains visible status outputs named \"Repository owner\", \"Branch name\", and \"Branch head\" with their actual values. A table named \"Branch files\" lists the complete selected branch tree, with ordered columns Path and Content, one body row per full file path (including nested paths) and its saved plain-text content. A table named \"Commit history\" lists the complete reachable history, with ordered columns Commit, Parents, Author, Message, one body row per commit. Commit identifiers are nonempty and unique, Parents is a comma-separated list of identifiers (empty for the root), and rows may appear in any order. Header rows use columnheader cells and data rows use cell roles. These are public readable views of persisted branch/file/commit records, not editable inputs. They update after navigation and reload; identifiers are implementation-defined. This observation interface supplements the ordinary Code, file and Commits navigation.\n\nThe new personal repository belongs to repo-owner. Its initialized default branch is main, has exactly one root commit with repo-owner as author, and contains only README.md. The overview has an \"Owner repositories\" link to the selected owner's persisted repository list; each repository occurs there once as a named link. These same public links and branch observations are available after reload.",
+        "image": [
+          {
+            "id": "IMG-GITHUB-CREATE-REPOSITORY",
+            "reference": "reference/github-create-repository.png",
+            "page": "repository_creation"
+          }
+        ]
+      }
+    },
+    {
+      "task": "github",
+      "requirement": "REQ-3.2.2",
+      "before": {
+        "text": "The source overview has a button “Fork”. The fork form contains a field labeled “Repository name” and button “Create fork”; it defaults to the signed-in user's personal namespace and an allowed visibility, permitting submission after editing only the name. Seed data supplies a readable source, a user allowed to create personal repositories, and an existing fork name in that namespace for the conflict case. Success opens a heading containing the new fork name and visible text “Forked from <source repository name>” with a source link; the heading and source relationship survive reload. On the source repository page, the user clicks “Fork”, selects a target personal or organization namespace, enters an optional new name and visibility, and clicks “Create fork”. The system creates an independent fork, copies the accessible default-branch history, records the source-repository link, and then opens the new fork overview page. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-3.3 (View a Public Repository Overview) and REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes. A signed-in user can fork only when they have Read or higher permission on the source repository and permission to create repositories in the target personal or organization namespace; when the source repository is private, the fork must remain Private, while a public source repository may be forked as Public or Private. The system validates permissions on both ends and stores the new fork's owner, visibility, source-repository identifier, default branch, and copied accessible history; if any check fails, no fork is created.\n\nThe fork conflict seed uses the existing name `acme-docs-fork` in the target\npersonal namespace.\n\nA “fork” is an independent repository copied from a readable source repository — the frontend displays the source link on the fork overview page, and the system stores the source-repository identifier; branches and commits in the fork may evolve independently and never write back to the source repository.\n\nBoth new repositories and forks must enter a browsable repository overview page.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.",
+        "image": [
+          {
+            "id": "IMG-GITHUB-FORK-REPOSITORY",
+            "reference": "reference/github-fork-repository.png",
+            "page": "repository_fork"
+          }
+        ]
+      },
+      "after": {
+        "text": "The source overview has a button “Fork”. The fork form contains a field labeled “Repository name” and button “Create fork”; it defaults to the signed-in user's personal namespace and an allowed visibility, permitting submission after editing only the name. Seed data supplies a readable source, a user allowed to create personal repositories, and an existing fork name in that namespace for the conflict case. Success opens a heading containing the new fork name and visible text “Forked from <source repository name>” with a source link; the heading and source relationship survive reload. On the source repository page, the user clicks “Fork”, selects a target personal or organization namespace, enters an optional new name and visibility, and clicks “Create fork”. The system creates an independent fork, copies the accessible default-branch history, records the source-repository link, and then opens the new fork overview page. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-3.3 (View a Public Repository Overview) and REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes. A signed-in user can fork only when they have Read or higher permission on the source repository and permission to create repositories in the target personal or organization namespace; when the source repository is private, the fork must remain Private, while a public source repository may be forked as Public or Private. The system validates permissions on both ends and stores the new fork's owner, visibility, source-repository identifier, default branch, and copied accessible history; if any check fails, no fork is created.\n\nThe fork conflict seed uses the existing name `acme-docs-fork` in the target\npersonal namespace.\n\nA “fork” is an independent repository copied from a readable source repository — the frontend displays the source link on the fork overview page, and the system stores the source-repository identifier; branches and commits in the fork may evolve independently and never write back to the source repository.\n\nBoth new repositories and forks must enter a browsable repository overview page.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe repository overview and each branch page expose a region named \"Branch state\" for the currently selected branch. It contains visible status outputs named \"Repository owner\", \"Branch name\", and \"Branch head\" with their actual values. A table named \"Branch files\" lists the complete selected branch tree, with ordered columns Path and Content, one body row per full file path (including nested paths) and its saved plain-text content. A table named \"Commit history\" lists the complete reachable history, with ordered columns Commit, Parents, Author, Message, one body row per commit. Commit identifiers are nonempty and unique, Parents is a comma-separated list of identifiers (empty for the root), and rows may appear in any order. Header rows use columnheader cells and data rows use cell roles. These are public readable views of persisted branch/file/commit records, not editable inputs. They update after navigation and reload; identifiers are implementation-defined. This observation interface supplements the ordinary Code, file and Commits navigation.\n\nFor this fork scenario, acme-docs has main as default branch and exactly two files: README.md with content \"Acme docs\", and src/README.md with content \"Document search flow\". Its reachable main history has exactly two commits by alice-dev: the root \"Initialize acme docs\" and its child \"Document search flow\"; the child is main's head. Their identifiers are implementation-defined. The copied fork belongs to fork-user and main is its default branch. The fork exposes \"Owner repositories\" to its owner's list. To check independence, use the public Add file / Create new file / File name / File contents / Commit message / Commit changes flow on the fork, then revisit the previously observed source URL. The fork user can write to their own fork.",
+        "image": [
+          {
+            "id": "IMG-GITHUB-FORK-REPOSITORY",
+            "reference": "reference/github-fork-repository.png",
+            "page": "repository_fork"
+          }
+        ]
+      }
+    },
+    {
+      "task": "github",
+      "requirement": "REQ-6.5",
+      "before": {
+        "text": "On an eligible PR, Merge pull request and then Confirm merge are buttons; confirming displays Merged, and that state remains after reload. A blocked PR keeps a visible disabled Merge pull request button and explains its unmet review or protection condition before any click. Seed data supplies a Maintain account and separate Open PRs for success and refusal. The eligible PR targets protected main, has a current non-author approval and test: success, and has no conflicts. The blocked PR targets a protected branch and lacks the required valid approval; its disabled button is accompanied by Review required by branch protection. The success and refusal states are separate PR records, so neither test relies on restoring a mutation from the other. “Merge” is the only write operation that writes the current compare commit's changes from an Open PR into the base branch; it is not simply marking the PR as complete. Only Maintain, Admin, or organization Owner may merge from the PR detail page using the sole supported “Create a merge commit” method; the merge confirmation area should display satisfied and unsatisfied conditions. Before confirmation, the system rereads the target branch head, current compare commit, merge-conflict state, and protection rules — there must be no valid Request changes; if the target is protected, each enabled rule requirement is enforced independently, requiring 1 valid non-author Approve for the current compare commit when Require 1 approval is enabled and requiring `test` success when Require status check test is enabled. An unprotected target has no additional approval-count or check-success requirement, but merging still requires no merge conflicts and no valid Request changes review. After validation succeeds, the system atomically creates a merge commit whose parents are the target-branch head at merge time and the current compare commit, updates the target-branch head, sets the PR to Merged, and stores the merger, time, and resulting commit identifier. If any condition is unsatisfied or persistence fails, the page explains the applicable reason and neither the target branch nor PR changes; a missing required approval displays “Review required by branch protection”. Merged is terminal. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-6.3.4 (Submit a Pull Request Review) and REQ-6.1 (Protect Branches with Review and Status-Check Requirements); it must reuse that context and keep pages and data consistent after the context changes.\n\nWrite, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.\n\nWhen the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder."
+      },
+      "after": {
+        "text": "On an eligible PR, Merge pull request and then Confirm merge are buttons; confirming displays Merged, and that state remains after reload. A blocked PR keeps a visible disabled Merge pull request button and explains its unmet review or protection condition before any click. Seed data supplies a Maintain account and separate Open PRs for success and refusal. The eligible PR targets protected main, has a current non-author approval and test: success, and has no conflicts. The blocked PR targets a protected branch and lacks the required valid approval; its disabled button is accompanied by Review required by branch protection. The success and refusal states are separate PR records, so neither test relies on restoring a mutation from the other. “Merge” is the only write operation that writes the current compare commit's changes from an Open PR into the base branch; it is not simply marking the PR as complete. Only Maintain, Admin, or organization Owner may merge from the PR detail page using the sole supported “Create a merge commit” method; the merge confirmation area should display satisfied and unsatisfied conditions. Before confirmation, the system rereads the target branch head, current compare commit, merge-conflict state, and protection rules — there must be no valid Request changes; if the target is protected, each enabled rule requirement is enforced independently, requiring 1 valid non-author Approve for the current compare commit when Require 1 approval is enabled and requiring `test` success when Require status check test is enabled. An unprotected target has no additional approval-count or check-success requirement, but merging still requires no merge conflicts and no valid Request changes review. After validation succeeds, the system atomically creates a merge commit whose parents are the target-branch head at merge time and the current compare commit, updates the target-branch head, sets the PR to Merged, and stores the merger, time, and resulting commit identifier. If any condition is unsatisfied or persistence fails, the page explains the applicable reason and neither the target branch nor PR changes; a missing required approval displays “Review required by branch protection”. Merged is terminal. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-6.3.4 (Submit a Pull Request Review) and REQ-6.1 (Protect Branches with Review and Status-Check Requirements); it must reuse that context and keep pages and data consistent after the context changes.\n\nWrite, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.\n\nWhen the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.\n\nThe repository overview and each branch page expose a region named \"Branch state\" for the currently selected branch. It contains visible status outputs named \"Repository owner\", \"Branch name\", and \"Branch head\" with their actual values. A table named \"Branch files\" lists the complete selected branch tree, with ordered columns Path and Content, one body row per full file path (including nested paths) and its saved plain-text content. A table named \"Commit history\" lists the complete reachable history, with ordered columns Commit, Parents, Author, Message, one body row per commit. Commit identifiers are nonempty and unique, Parents is a comma-separated list of identifiers (empty for the root), and rows may appear in any order. Header rows use columnheader cells and data rows use cell roles. These are public readable views of persisted branch/file/commit records, not editable inputs. They update after navigation and reload; identifiers are implementation-defined. This observation interface supplements the ordinary Code, file and Commits navigation.\n\nBoth named PRs refer to a separate repository merge-demo owned by repo-owner, with base main and compare feature-search. Before either scenario, main contains base-only.md = \"Base branch content\" and shared.md = \"Common content\"; feature-search contains those unchanged files plus feature-only.md = \"Feature branch content\". The two heads are distinct. Both PRs start Open; their approval/check eligibility is as described above. The PR detail provides exact links \"Base branch\" and \"Compare branch\" to those live branch pages. The merge method is a combobox named \"Merge method\" with the sole option \"Create a merge commit\". The PR region \"Merge result\" appears on success and contains visible status outputs \"Merge commit\", \"Merged by\", and \"Merged at\"; the time is a nonempty ISO 8601 UTC timestamp. The merge commit's author is pr-maintainer. The refused PR continues to display Open after reload. These seed branch files and public observations make integration, both commit parents, persistence, and refusal distinguishable from a status-only update."
+      }
+    },
+    {
+      "task": "sheet",
+      "requirement": "REQ-1.1.1",
+      "before": {
+        "text": "Users view available workbooks on the workbook home page. Each record displays \"Last updated: <last updated value>\" and provides a link whose accessible name is the workbook name. After the user clicks the link, the editor displays the same \"Last updated: <last updated value>\", the corresponding workbook name, worksheet tabs and order, current active worksheet, row and column structure, grid values, formula bar content, filter views, validation entry points, and pivot table results; data from another workbook must not appear in the current grid. The current editor page entry in the browser must be directly accessible and continue to identify the same workbook after refresh; visiting that exact workbook state in the same or a later browser session must restore the workbook’s most recent successful state without requiring navigation through the home page. The entry format is implementation-defined.\n\nThe active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.\n\nThe current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.\n\nThe workbook home list and editor retain the same workbook name, last-updated value, worksheet order and last active worksheet after successful changes, refresh and reopening.",
+        "image": [
+          {
+            "id": "IMG-WORKBOOK-HOME",
+            "reference": "reference/workbook-home.png",
+            "page": "workbook_home"
+          }
+        ]
+      },
+      "after": {
+        "text": "Users view available workbooks on the workbook home page. Each record displays \"Last updated: <last updated value>\" and provides a link whose accessible name is the workbook name. After the user clicks the link, the editor displays the same \"Last updated: <last updated value>\", the corresponding workbook name, worksheet tabs and order, current active worksheet, row and column structure, grid values, formula bar content, filter views, validation entry points, and pivot table results; data from another workbook must not appear in the current grid. The current editor page entry in the browser must be directly accessible and continue to identify the same workbook after refresh; visiting that exact workbook state in the same or a later browser session must restore the workbook’s most recent successful state without requiring navigation through the home page. The entry format is implementation-defined.\n\nThe active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.\n\nThe current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.\n\nThe workbook home list and editor retain the same workbook name, last-updated value, worksheet order and last active worksheet after successful changes, refresh and reopening.\n\nOn the workbook home page, each workbook record has role group and accessible name \"Workbook <workbook name>\". The record contains its named workbook link and last-updated text; the timestamp may be inside or beside the link. Record identity, rather than link nesting, associates the metadata with the workbook.",
+        "image": [
+          {
+            "id": "IMG-WORKBOOK-HOME",
+            "reference": "reference/workbook-home.png",
+            "page": "workbook_home"
+          }
+        ]
+      }
+    }
+  ]
+}

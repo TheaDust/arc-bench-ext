@@ -1,0 +1,50 @@
+{
+  "12306": {
+    "cases": 142,
+    "expected": 142,
+    "exitCode": 0,
+    "errors": []
+  },
+  "bookstack": {
+    "cases": 35,
+    "expected": 35,
+    "exitCode": 0,
+    "errors": []
+  },
+  "ctrip": {
+    "cases": 152,
+    "expected": 152,
+    "exitCode": 0,
+    "errors": []
+  },
+  "github": {
+    "cases": 100,
+    "expected": 100,
+    "exitCode": 0,
+    "errors": []
+  },
+  "keep": {
+    "cases": 33,
+    "expected": 33,
+    "exitCode": 0,
+    "errors": []
+  },
+  "prestashop": {
+    "cases": 86,
+    "expected": 86,
+    "exitCode": 0,
+    "errors": []
+  },
+  "sheet": {
+    "cases": 100,
+    "expected": 100,
+    "exitCode": 0,
+    "errors": []
+  },
+  "stackoverflow": {
+    "cases": 66,
+    "expected": 66,
+    "exitCode": 0,
+    "errors": []
+  }
+}

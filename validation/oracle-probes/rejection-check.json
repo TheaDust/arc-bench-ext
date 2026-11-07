@@ -1,0 +1,22 @@
+[
+  {
+    "title": "REQ-2.3: Grant Repository Access to People and Teams - Scenario 1",
+    "assertionFailure": "Error: expect(locator).toBeVisible() failed"
+  },
+  {
+    "title": "REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1",
+    "assertionFailure": "Error: expect(locator).toBeVisible() failed"
+  },
+  {
+    "title": "REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1",
+    "assertionFailure": "Error: expect(locator).toBeVisible() failed"
+  },
+  {
+    "title": "REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1",
+    "assertionFailure": "Error: expect(locator).toBeVisible() failed"
+  },
+  {
+    "title": "REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1",
+    "assertionFailure": "Error: expect(locator).toBeVisible() failed"
+  }
+]

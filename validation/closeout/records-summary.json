@@ -1,0 +1,104 @@
+{
+  "positive": {
+    "total": 10,
+    "passed": 10
+  },
+  "mutants": {
+    "total": 7,
+    "rejected": 7
+  },
+  "rows": [
+    {
+      "title": "REQ-1.1.1: View and Open a Workbook - Scenario 1",
+      "project": "sheet-sibling",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-1.1.1: View and Open a Workbook - Scenario 2",
+      "project": "sheet-sibling",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-1.1.1: View and Open a Workbook - Scenario 1",
+      "project": "sheet-nested",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-1.1.1: View and Open a Workbook - Scenario 2",
+      "project": "sheet-nested",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-1.1.1: View and Open a Workbook - Scenario 1",
+      "project": "sheet-direct",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1793962967644-ywlm3f\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n"
+    },
+    {
+      "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",
+      "project": "member-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 2",
+      "project": "member-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",
+      "project": "member-role",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n"
+    },
+    {
+      "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",
+      "project": "member-persist",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n"
+    },
+    {
+      "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",
+      "project": "member-access",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n"
+    },
+    {
+      "title": "REQ-7.1: Record shelf visit",
+      "project": "book-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-7.1: Reopen visited shelf",
+      "project": "book-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-7.1: Record shelf visit",
+      "project": "book-uncapped",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m"
+    },
+    {
+      "title": "REQ-8.2: Open favorited book",
+      "project": "book-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-8.2: Open favorited book",
+      "project": "book-uncapped",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m"
+    },
+    {
+      "title": "REQ-9.1: Open recently published page",
+      "project": "book-ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-9.1: Open recently published page",
+      "project": "book-uncapped",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "version": 3,
+  "revision": "2026-11-06-portable-oracles",
+  "validatedAt": "2026-11-06",
+  "tasks": [
+    "12306",
+    "bookstack",
+    "ctrip",
+    "github",
+    "keep",
+    "prestashop",
+    "sheet",
+    "stackoverflow"
+  ],
+  "inputs": {
+    "status": "passed",
+    "atomicRequirements": 408,
+    "scenarios": 714,
+    "report": "validation/inputs.json",
+    "preservationReport": "validation/preservation-report.json"
+  },
+  "typecheck": {
+    "status": "passed",
+    "files": 434,
+    "command": "npm run typecheck"
+  },
+  "collection": {
+    "status": "passed",
+    "cases": 714,
+    "report": "validation/collection-report.json"
+  },
+  "contracts": {
+    "status": "passed",
+    "cases": 56,
+    "passed": 56,
+    "failed": 0,
+    "report": "validation/contracts-report.json"
+  },
+  "results": [
+    {
+      "name": "bookstack-baseline",
+      "application": "E:\\my-works\\coding\\ShallowCode\\outputs\\web14-baseline-trial",
+      "stats": {
+        "startTime": "2026-11-06T04:33:59.383Z",
+        "duration": 43694.96,
+        "expected": 35,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "elapsedMs": 71591,
+      "requirementDigest": "a253b3376d06316a2b17e81c3b7eddd03fa08f42eb1e7c93d25fc5af631e56a2",
+      "report": "validation/bookstack-baseline/report.json",
+      "task": "bookstack",
+      "testedRevision": "2026-11-06-portable-oracles"
+    },
+    {
+      "name": "bookstack-shallow",
+      "application": "E:/my-works/coding/shallow-test/web14",
+      "stats": {
+        "startTime": "2026-11-06T04:35:13.125Z",
+        "duration": 42742.632,
+        "expected": 35,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "elapsedMs": 71580,
+      "requirementDigest": "a253b3376d06316a2b17e81c3b7eddd03fa08f42eb1e7c93d25fc5af631e56a2",
+      "report": "validation/bookstack-shallow/report.json",
+      "task": "bookstack",
+      "testedRevision": "2026-11-06-portable-oracles"
+    }
+  ],
+  "limits": [
+    "Full application business scenarios were rerun only for BookStack on the two listed existing artifacts.",
+    "Other tasks have structural, type, collection and portable-control regression validation; this does not establish full business correctness.",
+    "The revision uses observed StackOverflow development evidence; freeze new paired evaluations and retain prior scores."
+  ],
+  "historicalValidation": "validation/history/2026-11-05-validation.json"
+}

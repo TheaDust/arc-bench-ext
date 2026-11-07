@@ -1,0 +1,154 @@
+Listing tests:
+  [chromium] › REQ-1.1.spec.ts:7:5 › REQ-1.1: Show signed-out entry
+  [chromium] › REQ-1.10.spec.ts:7:5 › REQ-1.10: Reject a letters-only registration password
+  [chromium] › REQ-1.11.spec.ts:7:5 › REQ-1.11: Reject a numbers-only registration password
+  [chromium] › REQ-1.12.spec.ts:7:5 › REQ-1.12: Accept an eight-character mixed registration password
+  [chromium] › REQ-1.13.spec.ts:7:5 › REQ-1.13: Require a sent code before SMS authentication
+  [chromium] › REQ-1.14.spec.ts:7:5 › REQ-1.14: Reject a short mixed registration password
+  [chromium] › REQ-1.15.spec.ts:7:5 › REQ-1.15: Reject registration without a verification code
+  [chromium] › REQ-1.2.spec.ts:7:5 › REQ-1.2: Open password login
+  [chromium] › REQ-1.2.spec.ts:15:5 › REQ-1.2: Switch login modes
+  [chromium] › REQ-1.3.spec.ts:7:5 › REQ-1.3: Authenticate by email
+  [chromium] › REQ-1.3.spec.ts:15:5 › REQ-1.3: Authenticate by username
+  [chromium] › REQ-1.3.spec.ts:23:5 › REQ-1.3: Authenticate by mobile
+  [chromium] › REQ-1.3.spec.ts:31:5 › REQ-1.3: Reject missing account
+  [chromium] › REQ-1.3.spec.ts:44:5 › REQ-1.3: Reject missing password
+  [chromium] › REQ-1.3.spec.ts:57:5 › REQ-1.3: Reject incorrect password
+  [chromium] › REQ-1.3.spec.ts:70:5 › REQ-1.3: Require legal acceptance
+  [chromium] › REQ-1.4.spec.ts:7:5 › REQ-1.4: Authenticate with sent code
+  [chromium] › REQ-1.4.spec.ts:21:5 › REQ-1.4: Reject sending without mobile
+  [chromium] › REQ-1.4.spec.ts:29:5 › REQ-1.4: Reject empty verification code
+  [chromium] › REQ-1.4.spec.ts:43:5 › REQ-1.4: Reject incorrect verification code
+  [chromium] › REQ-1.4.spec.ts:57:5 › REQ-1.4: Require SMS legal acceptance
+  [chromium] › REQ-1.5.spec.ts:7:5 › REQ-1.5: Open registration agreement
+  [chromium] › REQ-1.5.spec.ts:16:5 › REQ-1.5: Accept from login registration entry
+  [chromium] › REQ-1.5.spec.ts:26:5 › REQ-1.5: Decline registration
+  [chromium] › REQ-1.6.spec.ts:7:5 › REQ-1.6: Advance after mobile verification
+  [chromium] › REQ-1.7.spec.ts:7:5 › REQ-1.7: Complete registration and authenticate created account
+  [chromium] › REQ-1.7.spec.ts:25:5 › REQ-1.7: Reject mismatched passwords
+  [chromium] › REQ-1.7.spec.ts:36:5 › REQ-1.7: Reject weak password
+  [chromium] › REQ-1.8.spec.ts:7:5 › REQ-1.8: Log out and retain signed-out state
+  [chromium] › REQ-1.9.spec.ts:7:5 › REQ-1.9: Reject registration with an incorrect sent code
+  [chromium] › REQ-2.1.spec.ts:7:5 › REQ-2.1: Switch one-way and round-trip modes
+  [chromium] › REQ-2.10.spec.ts:7:5 › REQ-2.10: Order by lowest price
+  [chromium] › REQ-2.10.spec.ts:15:5 › REQ-2.10: Order by highest punctuality
+  [chromium] › REQ-2.10.spec.ts:23:5 › REQ-2.10: Order by earliest departure
+  [chromium] › REQ-2.11.spec.ts:7:5 › REQ-2.11: Expand and collapse the selected flight fare
+  [chromium] › REQ-2.12.spec.ts:7:5 › REQ-2.12: Book JD5162 Economy fare
+  [chromium] › REQ-2.13.spec.ts:7:5 › REQ-2.13: Change route criteria on flight results
+  [chromium] › REQ-2.14.spec.ts:7:5 › REQ-2.14: Recover from an empty flight search
+  [chromium] › REQ-2.15.spec.ts:7:5 › REQ-2.15: Restore flights after removing nonstop filter
+  [chromium] › REQ-2.16.spec.ts:7:5 › REQ-2.16: Remove airline filter while keeping nonstop preference
+  [chromium] › REQ-2.2.spec.ts:7:5 › REQ-2.2: Exchange route cities
+  [chromium] › REQ-2.2.spec.ts:16:5 › REQ-2.2: Choose a popular origin
+  [chromium] › REQ-2.2.spec.ts:25:5 › REQ-2.2: Choose destination by pinyin group
+  [chromium] › REQ-2.3.spec.ts:7:5 › REQ-2.3: Select a future departure with fare
+  [chromium] › REQ-2.3.spec.ts:16:5 › REQ-2.3: Disable past departure dates
+  [chromium] › REQ-2.3.spec.ts:23:5 › REQ-2.3: Add a four-day return trip
+  [chromium] › REQ-2.3.spec.ts:33:5 › REQ-2.3: Disable return before departure
+  [chromium] › REQ-2.4.spec.ts:7:5 › REQ-2.4: Show matching published flights
+  [chromium] › REQ-2.4.spec.ts:18:5 › REQ-2.4: Reject identical cities
+  [chromium] › REQ-2.4.spec.ts:29:5 › REQ-2.4: Show empty route result
+  [chromium] › REQ-2.5.spec.ts:7:5 › REQ-2.5: Search with children included
+  [chromium] › REQ-2.5.spec.ts:15:5 › REQ-2.5: Choose Economy preference
+  [chromium] › REQ-2.6.spec.ts:7:5 › REQ-2.6: Reuse anonymous route history
+  [chromium] › REQ-2.7.spec.ts:7:5 › REQ-2.7: Refresh date and cabin on results
+  [chromium] › REQ-2.8.spec.ts:7:5 › REQ-2.8: Switch to nearby low-fare date
+  [chromium] › REQ-2.8.spec.ts:17:5 › REQ-2.8: Open monthly fares
+  [chromium] › REQ-2.8.spec.ts:25:5 › REQ-2.8: View next week dates
+  [chromium] › REQ-2.9.spec.ts:7:5 › REQ-2.9: Compose nonstop and airline filters
+  [chromium] › REQ-3.1.spec.ts:7:5 › REQ-3.1: Expand airline travel reminders
+  [chromium] › REQ-3.10.spec.ts:7:5 › REQ-3.10: Remove one selected frequent passenger
+  [chromium] › REQ-3.11.spec.ts:7:5 › REQ-3.11: Reject order submission with an invalid passenger ID
+  [chromium] › REQ-3.12.spec.ts:7:5 › REQ-3.12: Require booking terms before order submission
+  [chromium] › REQ-3.13.spec.ts:7:5 › REQ-3.13: Remove purchased extra baggage
+  [chromium] › REQ-3.14.spec.ts:7:5 › REQ-3.14: Remove airport drop-off reservation
+  [chromium] › REQ-3.15.spec.ts:7:5 › REQ-3.15: Remove airport lounge service
+  [chromium] › REQ-3.2.spec.ts:7:5 › REQ-3.2: Fill two passengers with corresponding total
+  [chromium] › REQ-3.3.spec.ts:7:5 › REQ-3.3: Accept checksum-valid passenger identity
+  [chromium] › REQ-3.3.spec.ts:17:5 › REQ-3.3: Reject invalid passenger identity
+  [chromium] › REQ-3.4.spec.ts:7:5 › REQ-3.4: Open booking passenger dialog
+  [chromium] › REQ-3.5.spec.ts:7:5 › REQ-3.5: Replace prefilled contact mobile
+  [chromium] › REQ-3.6.spec.ts:7:5 › REQ-3.6: Add combo insurance
+  [chromium] › REQ-3.6.spec.ts:17:5 › REQ-3.6: Read insurance coverage and claims
+  [chromium] › REQ-3.6.spec.ts:26:5 › REQ-3.6: Read free checked baggage
+  [chromium] › REQ-3.6.spec.ts:32:5 › REQ-3.6: Purchase extra checked baggage
+  [chromium] › REQ-3.6.spec.ts:42:5 › REQ-3.6: Reserve airport drop-off
+  [chromium] › REQ-3.6.spec.ts:53:5 › REQ-3.6: Purchase airport lounge
+  [chromium] › REQ-3.7.spec.ts:7:5 › REQ-3.7: Compose optional fee details
+  [chromium] › REQ-3.7.spec.ts:19:5 › REQ-3.7: Remove only the deselected optional fee
+  [chromium] › REQ-3.8.spec.ts:7:5 › REQ-3.8: Submit a valid unpaid booking
+  [chromium] › REQ-3.9.spec.ts:7:5 › REQ-3.9: Pay with simulated Alipay
+  [chromium] › REQ-4.1.spec.ts:7:5 › REQ-4.1: Open orders from account menu
+  [chromium] › REQ-4.2.spec.ts:7:5 › REQ-4.2: Filter pending payment
+  [chromium] › REQ-4.2.spec.ts:18:5 › REQ-4.2: Filter not traveled
+  [chromium] › REQ-4.2.spec.ts:28:5 › REQ-4.2: Filter pending review
+  [chromium] › REQ-4.2.spec.ts:38:5 › REQ-4.2: Show all account orders
+  [chromium] › REQ-4.3.spec.ts:7:5 › REQ-4.3: Find exact order number
+  [chromium] › REQ-4.4.spec.ts:7:5 › REQ-4.4: Inspect unpaid itinerary and payment countdown
+  [chromium] › REQ-4.4.spec.ts:27:5 › REQ-4.4: Read refund and change conditions
+  [chromium] › REQ-4.5.spec.ts:7:5 › REQ-4.5: Confirm unpaid order cancellation
+  [chromium] › REQ-4.6.spec.ts:7:5 › REQ-4.6: Keep an unpaid order when cancellation is declined
+  [chromium] › REQ-4.7.spec.ts:7:5 › REQ-4.7: Keep order lists scoped to the current account
+  [chromium] › REQ-5.1.spec.ts:7:5 › REQ-5.1: Open personal center
+  [chromium] › REQ-5.1.spec.ts:17:5 › REQ-5.1: Expand and collapse reusable information navigation
+  [chromium] › REQ-5.10.spec.ts:7:5 › REQ-5.10: Delete one traveler after confirmation
+  [chromium] › REQ-5.10.spec.ts:26:5 › REQ-5.10: Delete only selected traveler records
+  [chromium] › REQ-5.11.spec.ts:7:5 › REQ-5.11: Delete one address after confirmation
+  [chromium] › REQ-5.11.spec.ts:26:5 › REQ-5.11: Delete only selected address records
+  [chromium] › REQ-5.12.spec.ts:7:5 › REQ-5.12: Delete one contact after confirmation
+  [chromium] › REQ-5.12.spec.ts:26:5 › REQ-5.12: Delete only selected contact records
+  [chromium] › REQ-5.13.spec.ts:7:5 › REQ-5.13: Delete one invoice title after confirmation
+  [chromium] › REQ-5.13.spec.ts:26:5 › REQ-5.13: Delete only selected invoice title records
+  [chromium] › REQ-5.14.spec.ts:7:5 › REQ-5.14: Edit a saved traveler name
+  [chromium] › REQ-5.15.spec.ts:7:5 › REQ-5.15: Inspect a saved mailing address detail
+  [chromium] › REQ-5.16.spec.ts:7:5 › REQ-5.16: Find a traveler created in the current session
+  [chromium] › REQ-5.17.spec.ts:7:5 › REQ-5.17: Exclude nonmatching notification contacts
+  [chromium] › REQ-5.18.spec.ts:7:5 › REQ-5.18: Exclude nonmatching invoice titles
+  [chromium] › REQ-5.19.spec.ts:7:5 › REQ-5.19: Keep a traveler when deletion is declined
+  [chromium] › REQ-5.2.spec.ts:7:5 › REQ-5.2: Find matching traveler
+  [chromium] › REQ-5.2.spec.ts:16:5 › REQ-5.2: Show traveler search empty state
+  [chromium] › REQ-5.3.spec.ts:7:5 › REQ-5.3: Save traveler and retain masked identity
+  [chromium] › REQ-5.3.spec.ts:18:5 › REQ-5.3: Reject traveler without full name
+  [chromium] › REQ-5.4.spec.ts:7:5 › REQ-5.4: Read recipient and delivery location
+  [chromium] › REQ-5.5.spec.ts:7:5 › REQ-5.5: Save recipient delivery address
+  [chromium] › REQ-5.6.spec.ts:7:5 › REQ-5.6: Search a saved contact by name
+  [chromium] › REQ-5.7.spec.ts:7:5 › REQ-5.7: Save contact with default designation
+  [chromium] › REQ-5.8.spec.ts:7:5 › REQ-5.8: Find company title by keyword
+  [chromium] › REQ-5.9.spec.ts:7:5 › REQ-5.9: Save company title and taxpayer identity
+  [chromium] › REQ-5.9.spec.ts:18:5 › REQ-5.9: Reveal special VAT fields
+  [chromium] › REQ-5.9.spec.ts:26:5 › REQ-5.9: Require company taxpayer ID
+  [chromium] › REQ-6.1.spec.ts:7:5 › REQ-6.1: Read personal information with masking
+  [chromium] › REQ-6.2.spec.ts:7:5 › REQ-6.2: Persist edited profile fields
+  [chromium] › REQ-6.3.spec.ts:7:5 › REQ-6.3: Inspect security settings and reminder
+  [chromium] › REQ-6.4.spec.ts:7:5 › REQ-6.4: Replace password and require reauthentication
+  [chromium] › REQ-6.5.spec.ts:7:5 › REQ-6.5: Advance to new-phone verification
+  [chromium] › REQ-6.6.spec.ts:7:5 › REQ-6.6: Advance after current-email verification
+  [chromium] › REQ-6.7.spec.ts:7:5 › REQ-6.7: Reject a password change with an incorrect current password
+  [chromium] › REQ-6.8.spec.ts:7:5 › REQ-6.8: Reject phone-change identity verification with wrong password
+  [chromium] › REQ-6.9.spec.ts:7:5 › REQ-6.9: Reject an incorrect current-email verification code
+  [chromium] › REQ-7.1.spec.ts:7:5 › REQ-7.1: Open flight status service
+  [chromium] › REQ-7.2.spec.ts:7:5 › REQ-7.2: Show identified flight ground service details
+  [chromium] › REQ-7.3.spec.ts:7:5 › REQ-7.3: Show matching route flight statuses
+  [chromium] › REQ-7.3.spec.ts:19:5 › REQ-7.3: Exchange status route without running query
+  [chromium] › REQ-7.4.spec.ts:7:5 › REQ-7.4: Record and reuse a flight query
+  [chromium] › REQ-7.5.spec.ts:7:5 › REQ-7.5: Clear account search history
+  [chromium] › REQ-7.6.spec.ts:7:5 › REQ-7.6: Switch flight-status query dimensions
+  [chromium] › REQ-7.7.spec.ts:7:5 › REQ-7.7: Record and reuse a flight-status route query
+  [chromium] › REQ-7.8.spec.ts:7:5 › REQ-7.8: Keep status search history private to its account
+  [chromium] › REQ-8.1.spec.ts:7:5 › REQ-8.1: Open reimbursement service entry
+  [chromium] › REQ-8.2.spec.ts:7:5 › REQ-8.2: Read completed voucher and issuance rules
+  [chromium] › REQ-8.3.spec.ts:7:5 › REQ-8.3: Show currently eligible pending order
+  [chromium] › REQ-8.3.spec.ts:15:5 › REQ-8.3: Load older eligible order from past year
+  [chromium] › REQ-8.3.spec.ts:24:5 › REQ-8.3: Show empty pending voucher state
+  [chromium] › REQ-8.4.spec.ts:7:5 › REQ-8.4: Keep eligible reimbursement orders scoped to account
+  [chromium] › REQ-9.1.spec.ts:7:5 › REQ-9.1: Open airport guide
+  [chromium] › REQ-9.2.spec.ts:7:5 › REQ-9.2: Read popular airport links
+  [chromium] › REQ-9.2.spec.ts:13:5 › REQ-9.2: Browse domestic cities by initial
+  [chromium] › REQ-9.2.spec.ts:20:5 › REQ-9.2: Read city weather snapshot
+  [chromium] › REQ-9.3.spec.ts:7:5 › REQ-9.3: Read default airport overview
+  [chromium] › REQ-9.3.spec.ts:15:5 › REQ-9.3: Read airport bus timetable
+  [chromium] › REQ-9.3.spec.ts:22:5 › REQ-9.3: Read airport medical hotline
+  [chromium] › REQ-9.4.spec.ts:7:5 › REQ-9.4: Open domestic airport directory
+  [chromium] › REQ-9.4.spec.ts:17:5 › REQ-9.4: Open international airport directory
+Total: 152 tests in 97 files

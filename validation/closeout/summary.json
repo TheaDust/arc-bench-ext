@@ -1,0 +1,74 @@
+{
+  "positive": {
+    "total": 4,
+    "passed": 4
+  },
+  "mutants": {
+    "total": 7,
+    "rejected": 7
+  },
+  "rows": [
+    {
+      "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+      "project": "ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+      "project": "init-history",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m"
+    },
+    {
+      "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+      "project": "init-list",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n"
+    },
+    {
+      "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+      "project": "ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+      "project": "fork-files",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m"
+    },
+    {
+      "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+      "project": "fork-writeback",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m"
+    },
+    {
+      "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+      "project": "ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 2",
+      "project": "ok",
+      "status": "passed"
+    },
+    {
+      "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+      "project": "merge-status",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m"
+    },
+    {
+      "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+      "project": "merge-parents",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m"
+    },
+    {
+      "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 2",
+      "project": "refusal-write",
+      "status": "failed",
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m"
+    }
+  ]
+}

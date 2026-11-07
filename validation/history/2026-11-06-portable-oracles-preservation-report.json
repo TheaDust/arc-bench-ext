@@ -1,0 +1,58 @@
+{
+  "12306": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 142,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 26,
+    "formalTestTitles": "unchanged"
+  },
+  "bookstack": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 35,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 19,
+    "formalTestTitles": "unchanged"
+  },
+  "ctrip": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 152,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 46,
+    "formalTestTitles": "unchanged"
+  },
+  "github": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 126,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 27,
+    "formalTestTitles": "unchanged"
+  },
+  "keep": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 33,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 20,
+    "formalTestTitles": "unchanged"
+  },
+  "prestashop": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 86,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 38,
+    "formalTestTitles": "unchanged"
+  },
+  "sheet": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 100,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 9,
+    "formalTestTitles": "unchanged"
+  },
+  "stackoverflow": {
+    "identitiesAndOrder": "unchanged",
+    "resultClauses": 66,
+    "resultClauseText": "unchanged",
+    "imagesByteIdentical": 16,
+    "formalTestTitles": "unchanged"
+  }
+}

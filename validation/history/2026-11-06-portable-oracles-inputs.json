@@ -1,0 +1,47 @@
+{
+  "tasks": {
+    "12306": {
+      "atomicRequirements": 93,
+      "scenarios": 142,
+      "images": 26
+    },
+    "bookstack": {
+      "atomicRequirements": 24,
+      "scenarios": 35,
+      "images": 19
+    },
+    "ctrip": {
+      "atomicRequirements": 97,
+      "scenarios": 152,
+      "images": 46
+    },
+    "github": {
+      "atomicRequirements": 47,
+      "scenarios": 100,
+      "images": 24
+    },
+    "keep": {
+      "atomicRequirements": 16,
+      "scenarios": 33,
+      "images": 20
+    },
+    "prestashop": {
+      "atomicRequirements": 55,
+      "scenarios": 86,
+      "images": 22
+    },
+    "sheet": {
+      "atomicRequirements": 24,
+      "scenarios": 100,
+      "images": 8
+    },
+    "stackoverflow": {
+      "atomicRequirements": 52,
+      "scenarios": 66,
+      "images": 15
+    }
+  },
+  "atomicRequirements": 408,
+  "scenarios": 714,
+  "collectionChecked": true
+}

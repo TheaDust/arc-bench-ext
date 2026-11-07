@@ -1,0 +1,17 @@
+
+Running 5 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/5] arc-bench\github\tests\REQ-2.3.spec.ts:10:5 › REQ-2.3: Grant Repository Access to People and Teams - Scenario 1
+[1A[2K[2/5] arc-bench\github\tests\REQ-3.4.spec.ts:10:5 › REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1
+[1A[2K[3/5] arc-bench\github\tests\REQ-4.4.spec.ts:10:5 › REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1
+[1A[2K[4/5] arc-bench\github\tests\REQ-5.3.1.spec.ts:10:5 › REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1
+[1A[2K[5/5] arc-bench\github\tests\REQ-6.3.3.spec.ts:10:5 › REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1
+[1A[2K  5 passed (5.0s)
+[1A[2K(node:29436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:29436) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

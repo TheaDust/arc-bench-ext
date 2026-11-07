@@ -1,0 +1,16 @@
+import { postAction, postAuthor } from './helpers';
+import { test, expect, login, openQuestion, action, region, post, numeric, expectNumeric } from './helpers';
+import {  } from './fixtures/data';
+
+// requirement: REQ-3.7
+
+test('REQ-3.7: Apply question downvote', async ({ page, browser }, info) => {
+  await login(page,'question_downvoter');
+  await openQuestion(page,'SO Downvote Question');
+  const author=(await postAuthor(page)), reputation=await numeric(author,'Reputation');
+  await expectNumeric(post(page),'Score',3);
+  await (await postAction(page,'Down vote')).click();
+  await expectNumeric(post(page),'Score',2);
+  await expect((await postAction(page,'Down vote'))).toHaveAttribute('aria-pressed','true');
+  await expectNumeric(author,'Reputation',reputation-2);
+});

@@ -1,0 +1,47 @@
+
+Running 35 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/35] [chromium] › tests\REQ-1.1.spec.ts:5:5 › REQ-1.1: Show logged-out navigation
+[1A[2K[2/35] [chromium] › tests\REQ-1.2.spec.ts:5:5 › REQ-1.2: Return from shelves
+[1A[2K[3/35] [chromium] › tests\REQ-2.1.spec.ts:6:5 › REQ-2.1: Show login form
+[1A[2K[4/35] [chromium] › tests\REQ-2.2.spec.ts:5:5 › REQ-2.2: Log in with remember me
+[1A[2K[5/35] [chromium] › tests\REQ-3.1.spec.ts:5:5 › REQ-3.1: Show personal dashboard regions
+[1A[2K[6/35] [chromium] › tests\REQ-4.1.spec.ts:5:5 › REQ-4.1: Show a uniquely identified item
+[1A[2K[7/35] [chromium] › tests\REQ-4.2.spec.ts:5:5 › REQ-4.2: Open from global list
+[1A[2K[8/35] [chromium] › tests\REQ-4.3.spec.ts:5:5 › REQ-4.3: Save a new shelf
+[1A[2K[9/35] [chromium] › tests\REQ-4.3.spec.ts:16:5 › REQ-4.3: Cancel new shelf
+[1A[2K[10/35] [chromium] › tests\REQ-4.4.spec.ts:5:5 › REQ-4.4: Confirm deletion
+[1A[2K[11/35] [chromium] › tests\REQ-4.4.spec.ts:21:5 › REQ-4.4: Cancel deletion
+[1A[2K[12/35] [chromium] › tests\REQ-4.5.spec.ts:5:5 › REQ-4.5: Save metadata changes
+[1A[2K[13/35] [chromium] › tests\REQ-4.5.spec.ts:24:5 › REQ-4.5: Cancel metadata changes
+[1A[2K[14/35] [chromium] › tests\REQ-5.1.spec.ts:5:5 › REQ-5.1: Show a uniquely identified item
+[1A[2K[15/35] [chromium] › tests\REQ-5.2.spec.ts:5:5 › REQ-5.2: Open from global list
+[1A[2K[16/35] [chromium] › tests\REQ-5.2.spec.ts:14:5 › REQ-5.2: Open from containing shelf
+[1A[2K[17/35] [chromium] › tests\REQ-5.3.spec.ts:5:5 › REQ-5.3: Save a new book
+[1A[2K[18/35] [chromium] › tests\REQ-5.3.spec.ts:16:5 › REQ-5.3: Cancel new book
+[1A[2K[19/35] [chromium] › tests\REQ-5.4.spec.ts:5:5 › REQ-5.4: Save metadata changes
+[1A[2K[20/35] [chromium] › tests\REQ-5.4.spec.ts:24:5 › REQ-5.4: Cancel metadata changes
+[1A[2K[21/35] [chromium] › tests\REQ-5.5.spec.ts:5:5 › REQ-5.5: Confirm deletion
+[1A[2K[22/35] [chromium] › tests\REQ-5.5.spec.ts:18:5 › REQ-5.5: Cancel deletion
+[1A[2K[23/35] [chromium] › tests\REQ-5.6.spec.ts:5:5 › REQ-5.6: Save a book with shelf association
+[1A[2K[24/35] [chromium] › tests\REQ-6.1.spec.ts:5:5 › REQ-6.1: Publish a page
+[1A[2K[25/35] [chromium] › tests\REQ-6.1.spec.ts:14:5 › REQ-6.1: Save an owned recent draft
+[1A[2K[26/35] [chromium] › tests\REQ-6.2.spec.ts:5:5 › REQ-6.2: Confirm draft deletion
+[1A[2K[27/35] [chromium] › tests\REQ-6.3.spec.ts:5:5 › REQ-6.3: Save and open a chapter
+[1A[2K[28/35] [chromium] › tests\REQ-6.4.spec.ts:5:5 › REQ-6.4: Read selected page
+[1A[2K[29/35] [chromium] › tests\REQ-6.4.spec.ts:15:5 › REQ-6.4: Reopen page editor
+[1A[2K[30/35] [chromium] › tests\REQ-7.1.spec.ts:5:5 › REQ-7.1: Record shelf visit
+[1A[2K[31/35] [chromium] › tests\REQ-7.1.spec.ts:16:5 › REQ-7.1: Reopen visited shelf
+[1A[2K[32/35] [chromium] › tests\REQ-8.1.spec.ts:5:5 › REQ-8.1: Favorite a book
+[1A[2K[33/35] [chromium] › tests\REQ-8.1.spec.ts:15:5 › REQ-8.1: Persist removal of a favorite
+[1A[2K[34/35] [chromium] › tests\REQ-8.2.spec.ts:5:5 › REQ-8.2: Open favorited book
+[1A[2K[35/35] [chromium] › tests\REQ-9.1.spec.ts:5:5 › REQ-9.1: Open recently published page
+[1A[2K  35 passed (47.1s)
+[1A[2K(node:16800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:16800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

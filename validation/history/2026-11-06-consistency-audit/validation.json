@@ -1,0 +1,125 @@
+{
+  "version": 4,
+  "revision": "2026-11-06-consistency-audit",
+  "validatedAt": "2026-11-06",
+  "qualityStatus": "known-gaps",
+  "tasks": [
+    "12306",
+    "bookstack",
+    "ctrip",
+    "github",
+    "keep",
+    "prestashop",
+    "sheet",
+    "stackoverflow"
+  ],
+  "inputs": {
+    "status": "passed",
+    "atomicRequirements": 408,
+    "scenarios": 714,
+    "report": "validation/inputs.json",
+    "preservationReport": "validation/preservation-report.json"
+  },
+  "typecheck": {
+    "status": "passed",
+    "files": 435,
+    "command": "npm run typecheck"
+  },
+  "collection": {
+    "status": "passed",
+    "cases": 714,
+    "report": "validation/collection-report.json"
+  },
+  "contracts": {
+    "status": "passed",
+    "cases": 60,
+    "passed": 60,
+    "failed": 0,
+    "report": "validation/contracts-report.json"
+  },
+  "oracleDiscrimination": {
+    "status": "passed",
+    "formalSuccessCases": 5,
+    "validBehaviorPassed": 5,
+    "discardedPersistenceRejected": 5,
+    "report": "validation/oracle-probes/oracle-summary.json",
+    "scope": "Synthetic fixture checks the actual formal test programs, not full application business correctness."
+  },
+  "results": [
+    {
+      "name": "bookstack-baseline",
+      "application": "E:\\my-works\\coding\\ShallowCode\\outputs\\web14-baseline-trial",
+      "stats": {
+        "startTime": "2026-11-06T09:30:42.181Z",
+        "duration": 50234.324,
+        "expected": 35,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "elapsedMs": 79849,
+      "requirementDigest": "a253b3376d06316a2b17e81c3b7eddd03fa08f42eb1e7c93d25fc5af631e56a2",
+      "report": "validation/bookstack-baseline/report.json",
+      "task": "bookstack",
+      "testedRevision": "2026-11-06-consistency-audit",
+      "testDigest": "3cf06b200b8ea02df47c0e6b87b305d138c91c62fe9ba78cf438d0247bc0c9ef"
+    },
+    {
+      "name": "bookstack-shallow",
+      "application": "E:/my-works/coding/shallow-test/web14",
+      "stats": {
+        "startTime": "2026-11-06T09:32:03.417Z",
+        "duration": 47141.832,
+        "expected": 35,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "elapsedMs": 76514,
+      "requirementDigest": "a253b3376d06316a2b17e81c3b7eddd03fa08f42eb1e7c93d25fc5af631e56a2",
+      "report": "validation/bookstack-shallow/report.json",
+      "task": "bookstack",
+      "testedRevision": "2026-11-06-consistency-audit",
+      "testDigest": "3cf06b200b8ea02df47c0e6b87b305d138c91c62fe9ba78cf438d0247bc0c9ef"
+    }
+  ],
+  "openFindingGroups": [
+    {
+      "id": "OPEN-1",
+      "priority": "P0",
+      "status": "open",
+      "subject": "Per-scenario server-side initial-state isolation is not implemented by existing setup/fixtures."
+    },
+    {
+      "id": "OPEN-2",
+      "priority": "P1",
+      "status": "open",
+      "subject": "GitHub initialization/fork/merge invariants remain incompletely asserted."
+    },
+    {
+      "id": "OPEN-3",
+      "priority": "P1",
+      "status": "open",
+      "subject": "BookStack list limits lack saturated preparations and public record counting."
+    },
+    {
+      "id": "OPEN-4",
+      "priority": "P1",
+      "status": "open",
+      "subject": "GitHub member form and record ownership still depend on last() or global text."
+    },
+    {
+      "id": "OPEN-5",
+      "priority": "P1",
+      "status": "open",
+      "subject": "Sheet metadata assumes timestamp nesting and does not exercise direct editor URL in a fresh session."
+    }
+  ],
+  "review": "CONSISTENCY.md",
+  "limits": [
+    "No complete end-to-end business rerun was performed for the seven non-BookStack tasks.",
+    "Collection and browser contract results do not establish complete Then-clause coverage.",
+    "Current quality status remains known-gaps; freeze paired evaluations after resolving open groups."
+  ],
+  "historicalValidation": "validation/history/2026-11-06-portable-oracles-validation.json"
+}

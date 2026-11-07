@@ -1,0 +1,54 @@
+{
+  "status": "passed",
+  "fixture": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\launcher-smoke\\1793962891952",
+  "evaluation": {
+    "status": "completed",
+    "score": {
+      "total": 2,
+      "passed": 1,
+      "skipped": 0,
+      "notRun": 0,
+      "failed": 1,
+      "passRate": 0.5,
+      "errors": []
+    },
+    "durationMs": 10611,
+    "directory": ".",
+    "caseIsolation": "application-per-scenario",
+    "cases": "cases.json"
+  },
+  "cases": [
+    {
+      "id": "[\"counter.spec.ts\",2,25,\"REQ-1: counter [0]\",\"chromium\"]",
+      "title": "REQ-1: counter [0]",
+      "status": "completed",
+      "durationMs": 5231,
+      "appStartMs": 411,
+      "candidate": {
+        "candidateId": "b2b1afea-2bad-4bdc-bbf4-e6096be452fb",
+        "buildId": "f9f9f259-39f2-4ffb-9a20-a2bef0169c4c",
+        "inputDigest": "2195ab4bc4a752d4c005a58f537d32dbb09bbb6de9fbc16c76aae9f82f5996af",
+        "applicationDigest": "2195ab4bc4a752d4c005a58f537d32dbb09bbb6de9fbc16c76aae9f82f5996af",
+        "runtimeId": "3fcce7a4-144d-4861-9a5d-fd741371af10"
+      },
+      "testMs": 4163,
+      "cleanupMs": 548
+    },
+    {
+      "id": "[\"counter.spec.ts\",2,25,\"REQ-1: counter [1]\",\"chromium\"]",
+      "title": "REQ-1: counter [1]",
+      "status": "completed",
+      "durationMs": 5106,
+      "appStartMs": 381,
+      "candidate": {
+        "candidateId": "b2b1afea-2bad-4bdc-bbf4-e6096be452fb",
+        "buildId": "f9f9f259-39f2-4ffb-9a20-a2bef0169c4c",
+        "inputDigest": "2195ab4bc4a752d4c005a58f537d32dbb09bbb6de9fbc16c76aae9f82f5996af",
+        "applicationDigest": "2195ab4bc4a752d4c005a58f537d32dbb09bbb6de9fbc16c76aae9f82f5996af",
+        "runtimeId": "befece28-c02f-4e2f-abb8-7fb7fae1126f"
+      },
+      "testMs": 3976,
+      "cleanupMs": 641
+    }
+  ]
+}

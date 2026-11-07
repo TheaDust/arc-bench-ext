@@ -1,0 +1,184 @@
+
+Running 5 tests using 1 worker
+
+
+
+
+
+[1A[2K[1/5] arc-bench\github\tests\REQ-2.3.spec.ts:10:5 › REQ-2.3: Grant Repository Access to People and Teams - Scenario 1
+[1A[2K  1) arc-bench\github\tests\REQ-2.3.spec.ts:10:5 › REQ-2.3: Grant Repository Access to People and Teams - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('frontend-team', { exact: true })
+    Expected: visible
+    Timeout: 500ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 500ms[22m
+    [2m  - waiting for getByText('frontend-team', { exact: true })[22m
+
+
+      22 |   await selectChoice(page.getByRole('combobox', { name: 'Role', exact: true }), { label: 'Write' });
+      23 |   await page.getByRole('button', { name: 'Add', exact: true }).click();
+    > 24 |   await expect(page.getByText(team, { exact: true })).toBeVisible();
+         |                                                       ^
+      25 |   await expect(page.getByText('Write', { exact: true })).toBeVisible();
+      26 |   await page.reload();
+      27 |   await expect(page.getByText(team, { exact: true })).toBeVisible();
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-2.3.spec.ts:24:55
+
+    Error Context: validation\oracle-probes\oracle-results\REQ-2.3-REQ-2-3-Grant-Repo-6daa9-ople-and-Teams---Scenario-1\error-context.md
+
+
+
+
+
+
+[1A[2K[2/5] arc-bench\github\tests\REQ-3.4.spec.ts:10:5 › REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1
+[1A[2K  2) arc-bench\github\tests\REQ-3.4.spec.ts:10:5 › REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Public', { exact: true })
+    Expected: visible
+    Timeout: 500ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 500ms[22m
+    [2m  - waiting for getByText('Public', { exact: true })[22m
+
+
+      19 |   await page.getByRole('radio', { name: 'Public', exact: true }).check();
+      20 |   await page.getByRole('button', { name: 'Confirm visibility', exact: true }).click();
+    > 21 |   await expect(page.getByText('Public', { exact: true })).toBeVisible();
+         |                                                           ^
+      22 |   const publicUrl = page.url();
+      23 |   await page.context().clearCookies();
+      24 |   await page.goto(publicUrl);
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-3.4.spec.ts:21:59
+
+    Error Context: validation\oracle-probes\oracle-results\REQ-3.4-REQ-3-4-Change-Rep-e7619-mission-Checks---Scenario-1\error-context.md
+
+
+
+
+
+
+[1A[2K[3/5] arc-bench\github\tests\REQ-4.4.spec.ts:10:5 › REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1
+[1A[2K  3) arc-bench\github\tests\REQ-4.4.spec.ts:10:5 › REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('File content pw-file-1793963040953-2.md', { exact: true })
+    Expected: visible
+    Timeout: 500ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 500ms[22m
+    [2m  - waiting for getByText('File content pw-file-1793963040953-2.md', { exact: true })[22m
+
+
+      22 |   await page.getByRole('textbox', { name: 'Commit message', exact: true }).fill(message);
+      23 |   await page.getByRole('button', { name: 'Commit changes', exact: true }).click();
+    > 24 |   await expect(page.getByText(content, { exact: true })).toBeVisible();
+         |                                                          ^
+      25 |   await page.getByRole('link', { name: 'Commits', exact: true }).click();
+      26 |   await expect(page.getByText(message, { exact: true })).toBeVisible();
+      27 | });
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-4.4.spec.ts:24:58
+
+    Error Context: validation\oracle-probes\oracle-results\REQ-4.4-REQ-4-4-Manage-Rep-9d344--Web-Interface---Scenario-1\error-context.md
+
+
+
+
+
+
+[1A[2K[4/5] arc-bench\github\tests\REQ-5.3.1.spec.ts:10:5 › REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1
+[1A[2K  4) arc-bench\github\tests\REQ-5.3.1.spec.ts:10:5 › REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('bob-reviewer', { exact: true })
+    Expected: visible
+    Timeout: 500ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 500ms[22m
+    [2m  - waiting for getByText('bob-reviewer', { exact: true })[22m
+
+
+      19 |   await page.getByRole('textbox', { name: 'Search assignees', exact: true }).fill(assignee);
+      20 |   await page.getByRole('option', { name: assignee, exact: true }).click();
+    > 21 |   await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+         |                                                           ^
+      22 |   await page.reload();
+      23 |   await expect(page.getByText(assignee, { exact: true })).toBeVisible();
+      24 |   await selector.click();
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-5.3.1.spec.ts:21:59
+
+    Error Context: validation\oracle-probes\oracle-results\REQ-5.3.1-REQ-5-3-1-Assign-772d0-e-Participants---Scenario-1\error-context.md
+
+
+
+
+
+
+[1A[2K[5/5] arc-bench\github\tests\REQ-6.3.3.spec.ts:10:5 › REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1
+[1A[2K  5) arc-bench\github\tests\REQ-6.3.3.spec.ts:10:5 › REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Inline review 1793963047303-4', { exact: true })
+    Expected: visible
+    Timeout: 500ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 500ms[22m
+    [2m  - waiting for getByText('Inline review 1793963047303-4', { exact: true })[22m
+
+
+      19 |   await page.getByRole('textbox', { name: 'Comment', exact: true }).fill(comment);
+      20 |   await page.getByRole('button', { name: 'Add single comment', exact: true }).click();
+    > 21 |   await expect(page.getByText(comment, { exact: true })).toBeVisible();
+         |                                                          ^
+      22 |   await page.reload();
+      23 |   await expect(page.getByText(comment, { exact: true })).toBeVisible();
+      24 | });
+        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-6.3.3.spec.ts:21:58
+
+    Error Context: validation\oracle-probes\oracle-results\REQ-6.3.3-REQ-6-3-3-Add-Re-07dec-ged-Code-Lines---Scenario-1\error-context.md
+
+
+[1A[2K  5 failed
+    arc-bench\github\tests\REQ-2.3.spec.ts:10:5 › REQ-2.3: Grant Repository Access to People and Teams - Scenario 1 
+    arc-bench\github\tests\REQ-3.4.spec.ts:10:5 › REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1 
+    arc-bench\github\tests\REQ-4.4.spec.ts:10:5 › REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1 
+    arc-bench\github\tests\REQ-5.3.1.spec.ts:10:5 › REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1 
+    arc-bench\github\tests\REQ-6.3.3.spec.ts:10:5 › REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1 
+[1A[2K(node:39788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:39788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:57040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:57040) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:8492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:32048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:32048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:42800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[1A[2K(node:42800) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

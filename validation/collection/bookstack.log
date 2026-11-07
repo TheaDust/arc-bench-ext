@@ -1,0 +1,37 @@
+Listing tests:
+  [chromium] › REQ-1.1.spec.ts:5:5 › REQ-1.1: Show logged-out navigation
+  [chromium] › REQ-1.2.spec.ts:5:5 › REQ-1.2: Return from shelves
+  [chromium] › REQ-2.1.spec.ts:5:5 › REQ-2.1: Show login form
+  [chromium] › REQ-2.2.spec.ts:5:5 › REQ-2.2: Log in with remember me
+  [chromium] › REQ-3.1.spec.ts:5:5 › REQ-3.1: Show personal dashboard regions
+  [chromium] › REQ-4.1.spec.ts:5:5 › REQ-4.1: Show a uniquely identified item
+  [chromium] › REQ-4.2.spec.ts:5:5 › REQ-4.2: Open from global list
+  [chromium] › REQ-4.3.spec.ts:5:5 › REQ-4.3: Save a new shelf
+  [chromium] › REQ-4.3.spec.ts:16:5 › REQ-4.3: Cancel new shelf
+  [chromium] › REQ-4.4.spec.ts:5:5 › REQ-4.4: Confirm deletion
+  [chromium] › REQ-4.4.spec.ts:19:5 › REQ-4.4: Cancel deletion
+  [chromium] › REQ-4.5.spec.ts:5:5 › REQ-4.5: Save metadata changes
+  [chromium] › REQ-4.5.spec.ts:23:5 › REQ-4.5: Cancel metadata changes
+  [chromium] › REQ-5.1.spec.ts:5:5 › REQ-5.1: Show a uniquely identified item
+  [chromium] › REQ-5.2.spec.ts:5:5 › REQ-5.2: Open from global list
+  [chromium] › REQ-5.2.spec.ts:14:5 › REQ-5.2: Open from containing shelf
+  [chromium] › REQ-5.3.spec.ts:5:5 › REQ-5.3: Save a new book
+  [chromium] › REQ-5.3.spec.ts:16:5 › REQ-5.3: Cancel new book
+  [chromium] › REQ-5.4.spec.ts:5:5 › REQ-5.4: Save metadata changes
+  [chromium] › REQ-5.4.spec.ts:23:5 › REQ-5.4: Cancel metadata changes
+  [chromium] › REQ-5.5.spec.ts:5:5 › REQ-5.5: Confirm deletion
+  [chromium] › REQ-5.5.spec.ts:18:5 › REQ-5.5: Cancel deletion
+  [chromium] › REQ-5.6.spec.ts:5:5 › REQ-5.6: Save a book with shelf association
+  [chromium] › REQ-6.1.spec.ts:5:5 › REQ-6.1: Publish a page
+  [chromium] › REQ-6.1.spec.ts:14:5 › REQ-6.1: Save an owned recent draft
+  [chromium] › REQ-6.2.spec.ts:5:5 › REQ-6.2: Confirm draft deletion
+  [chromium] › REQ-6.3.spec.ts:5:5 › REQ-6.3: Save and open a chapter
+  [chromium] › REQ-6.4.spec.ts:5:5 › REQ-6.4: Read selected page
+  [chromium] › REQ-6.4.spec.ts:15:5 › REQ-6.4: Reopen page editor
+  [chromium] › REQ-7.1.spec.ts:5:5 › REQ-7.1: Record shelf visit
+  [chromium] › REQ-7.1.spec.ts:16:5 › REQ-7.1: Reopen visited shelf
+  [chromium] › REQ-8.1.spec.ts:5:5 › REQ-8.1: Favorite a book
+  [chromium] › REQ-8.1.spec.ts:15:5 › REQ-8.1: Persist removal of a favorite
+  [chromium] › REQ-8.2.spec.ts:5:5 › REQ-8.2: Open favorited book
+  [chromium] › REQ-9.1.spec.ts:5:5 › REQ-9.1: Open recently published page
+Total: 35 tests in 24 files

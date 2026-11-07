@@ -1,0 +1,35 @@
+Listing tests:
+  [chromium] › REQ-1.1.spec.ts:4:5 › REQ-1.1: Open the workspace
+  [chromium] › REQ-1.1.spec.ts:18:5 › REQ-1.1: Collapse and expand the sidebar
+  [chromium] › REQ-2.1.spec.ts:5:5 › REQ-2.1: Separate pinned and regular notes
+  [chromium] › REQ-2.2.spec.ts:5:5 › REQ-2.2: Autosave on closing the editor
+  [chromium] › REQ-2.2.spec.ts:10:5 › REQ-2.2: Keep a created note after reload
+  [chromium] › REQ-2.3.spec.ts:5:5 › REQ-2.3: Save an edited note
+  [chromium] › REQ-2.4.spec.ts:5:5 › REQ-2.4: Move a deleted note to Trash
+  [chromium] › REQ-2.4.spec.ts:17:5 › REQ-2.4: Undo deletion
+  [chromium] › REQ-2.4.spec.ts:29:5 › REQ-2.4: Dismiss deletion notifications
+  [chromium] › REQ-2.5.spec.ts:5:5 › REQ-2.5: Keep a deleted note in Trash after reload
+  [chromium] › REQ-2.5.spec.ts:18:5 › REQ-2.5: Show deleted notes separately
+  [chromium] › REQ-2.5.spec.ts:31:5 › REQ-2.5: Empty Trash without deleting active notes
+  [chromium] › REQ-2.6.spec.ts:5:5 › REQ-2.6: Archive a note into its separate list
+  [chromium] › REQ-2.6.spec.ts:23:5 › REQ-2.6: Undo archiving
+  [chromium] › REQ-2.6.spec.ts:35:5 › REQ-2.6: Unarchive the selected note
+  [chromium] › REQ-2.7.spec.ts:5:5 › REQ-2.7: Color an existing note
+  [chromium] › REQ-2.7.spec.ts:18:5 › REQ-2.7: Create a colored note
+  [chromium] › REQ-2.8.spec.ts:5:5 › REQ-2.8: Assign multiple labels and filter by either
+  [chromium] › REQ-2.8.spec.ts:22:5 › REQ-2.8: Remove an assigned label
+  [chromium] › REQ-2.8.spec.ts:38:5 › REQ-2.8: Create a note with Reminders
+  [chromium] › REQ-2.9.spec.ts:5:5 › REQ-2.9: Pin an existing note
+  [chromium] › REQ-2.9.spec.ts:19:5 › REQ-2.9: Unpin an existing note
+  [chromium] › REQ-2.9.spec.ts:33:5 › REQ-2.9: Create a pinned note
+  [chromium] › REQ-3.1.spec.ts:5:5 › REQ-3.1: Create a user label
+  [chromium] › REQ-3.2.spec.ts:5:5 › REQ-3.2: Filter by a user label
+  [chromium] › REQ-3.2.spec.ts:19:5 › REQ-3.2: Return to the complete notes list
+  [chromium] › REQ-3.2.spec.ts:35:5 › REQ-3.2: Filter by the default Reminders label
+  [chromium] › REQ-3.3.spec.ts:5:5 › REQ-3.3: Rename a label and retain membership
+  [chromium] › REQ-3.3.spec.ts:26:5 › REQ-3.3: Delete a label without deleting its note
+  [chromium] › REQ-4.1.spec.ts:5:5 › REQ-4.1: Search title and content with highlights
+  [chromium] › REQ-4.1.spec.ts:31:5 › REQ-4.1: Choose a suggested label filter
+  [chromium] › REQ-5.1.spec.ts:4:5 › REQ-5.1: Save settings and discard canceled changes
+  [chromium] › REQ-5.2.spec.ts:5:5 › REQ-5.2: Switch grid to list and back
+Total: 33 tests in 16 files

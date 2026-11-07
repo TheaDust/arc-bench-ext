@@ -1,0 +1,68 @@
+Listing tests:
+  [chromium] › REQ-1.1.spec.ts:6:5 › REQ-1.1: Show the anonymous homepage
+  [chromium] › REQ-1.2.spec.ts:6:5 › REQ-1.2: Open major community sections
+  [chromium] › REQ-1.3.spec.ts:6:5 › REQ-1.3: Read without an account
+  [chromium] › REQ-2.1.spec.ts:6:5 › REQ-2.1: Sign in and retain session
+  [chromium] › REQ-2.1.spec.ts:13:5 › REQ-2.1: Reject empty credentials
+  [chromium] › REQ-2.1.spec.ts:21:5 › REQ-2.1: Reject malformed email
+  [chromium] › REQ-2.1.spec.ts:31:5 › REQ-2.1: Reject unknown account
+  [chromium] › REQ-2.1.spec.ts:41:5 › REQ-2.1: Reject wrong password
+  [chromium] › REQ-2.1.spec.ts:51:5 › REQ-2.1: Toggle password visibility
+  [chromium] › REQ-2.2.spec.ts:6:5 › REQ-2.2: Register and automatically sign in
+  [chromium] › REQ-2.2.spec.ts:21:5 › REQ-2.2: Reject duplicate email
+  [chromium] › REQ-2.2.spec.ts:33:5 › REQ-2.2: Reject weak password
+  [chromium] › REQ-2.3.spec.ts:6:5 › REQ-2.3: View personal summary
+  [chromium] › REQ-2.4.spec.ts:6:5 › REQ-2.4: Save and reopen public identity
+  [chromium] › REQ-2.5.spec.ts:6:5 › REQ-2.5: Move between login and registration
+  [chromium] › REQ-2.6.spec.ts:6:5 › REQ-2.6: Log in with UI-created credentials
+  [chromium] › REQ-3.1.spec.ts:5:5 › REQ-3.1: Open public Questions listing
+  [chromium] › REQ-3.10.spec.ts:6:5 › REQ-3.10: Prevent non-owner question deletion
+  [chromium] › REQ-3.2.spec.ts:6:5 › REQ-3.2: Read a published question
+  [chromium] › REQ-3.3.spec.ts:6:5 › REQ-3.3: Publish with preview and tags
+  [chromium] › REQ-3.3.spec.ts:26:5 › REQ-3.3: Reject missing required fields
+  [chromium] › REQ-3.3.spec.ts:41:5 › REQ-3.3: Reject too-short title and body
+  [chromium] › REQ-3.4.spec.ts:4:5 › REQ-3.4: Save revision and summary
+  [chromium] › REQ-3.5.spec.ts:6:5 › REQ-3.5: Confirm own question deletion
+  [chromium] › REQ-3.6.spec.ts:6:5 › REQ-3.6: Apply and remove question upvote
+  [chromium] › REQ-3.7.spec.ts:6:5 › REQ-3.7: Apply question downvote
+  [chromium] › REQ-3.8.spec.ts:6:5 › REQ-3.8: Follow an owned question to its detail
+  [chromium] › REQ-3.9.spec.ts:6:5 › REQ-3.9: Read saved revision as another user
+  [chromium] › REQ-4.1.spec.ts:6:5 › REQ-4.1: Publish and discover own answer
+  [chromium] › REQ-4.10.spec.ts:6:5 › REQ-4.10: Keep the accepted solution protected
+  [chromium] › REQ-4.2.spec.ts:6:5 › REQ-4.2: Apply and remove answer upvote
+  [chromium] › REQ-4.3.spec.ts:6:5 › REQ-4.3: Accept and replace definitive solution
+  [chromium] › REQ-4.3.spec.ts:20:5 › REQ-4.3: Prevent non-owner acceptance
+  [chromium] › REQ-4.4.spec.ts:6:5 › REQ-4.4: Select highest-score ordering
+  [chromium] › REQ-4.5.spec.ts:6:5 › REQ-4.5: Record same-body answer revision
+  [chromium] › REQ-4.5.spec.ts:21:5 › REQ-4.5: Reject empty answer edit
+  [chromium] › REQ-4.5.spec.ts:33:5 › REQ-4.5: Cancel answer edit
+  [chromium] › REQ-4.6.spec.ts:6:5 › REQ-4.6: Delete answer and reverse vote reputation
+  [chromium] › REQ-4.7.spec.ts:6:5 › REQ-4.7: Switch to latest-modified answers
+  [chromium] › REQ-4.8.spec.ts:6:5 › REQ-4.8: Publish an actual answer correction
+  [chromium] › REQ-4.9.spec.ts:6:5 › REQ-4.9: Prevent non-owner answer deletion
+  [chromium] › REQ-5.1.spec.ts:5:5 › REQ-5.1: Open a question comment thread
+  [chromium] › REQ-5.10.spec.ts:6:5 › REQ-5.10: Preserve question and answer thread boundaries
+  [chromium] › REQ-5.2.spec.ts:6:5 › REQ-5.2: Publish a question comment
+  [chromium] › REQ-5.3.spec.ts:6:5 › REQ-5.3: Reveal the complete comment thread
+  [chromium] › REQ-5.4.spec.ts:6:5 › REQ-5.4: Save comment within five minutes
+  [chromium] › REQ-5.5.spec.ts:6:5 › REQ-5.5: Remove comment without confirmation
+  [chromium] › REQ-5.6.spec.ts:6:5 › REQ-5.6: Apply and remove a helpful-comment vote
+  [chromium] › REQ-5.7.spec.ts:6:5 › REQ-5.7: Publish in the answer thread
+  [chromium] › REQ-5.8.spec.ts:6:5 › REQ-5.8: Attach a nested reply to its parent
+  [chromium] › REQ-5.9.spec.ts:6:5 › REQ-5.9: Refuse another user comment maintenance
+  [chromium] › REQ-6.1.spec.ts:6:5 › REQ-6.1: Browse popular tags and python questions
+  [chromium] › REQ-6.2.spec.ts:6:5 › REQ-6.2: Toggle python watch preference
+  [chromium] › REQ-6.3.spec.ts:6:5 › REQ-6.3: Suggest and search react state
+  [chromium] › REQ-6.4.spec.ts:6:5 › REQ-6.4: Switch newest and active ordering
+  [chromium] › REQ-6.5.spec.ts:6:5 › REQ-6.5: Save and reapply python unanswered criteria
+  [chromium] › REQ-6.6.spec.ts:6:5 › REQ-6.6: Follow a python question from tag discovery
+  [chromium] › REQ-6.7.spec.ts:6:5 › REQ-6.7: Isolate custom filters between accounts
+  [chromium] › REQ-6.8.spec.ts:6:5 › REQ-6.8: Isolate tag watch preferences
+  [chromium] › REQ-7.1.spec.ts:6:5 › REQ-7.1: Inspect reputation contributions
+  [chromium] › REQ-7.2.spec.ts:6:5 › REQ-7.2: Display seeded Teacher achievement
+  [chromium] › REQ-7.3.spec.ts:6:5 › REQ-7.3: Read categorized badges
+  [chromium] › REQ-7.4.spec.ts:6:5 › REQ-7.4: Navigate answers and questions activity
+  [chromium] › REQ-7.4.spec.ts:22:5 › REQ-7.4: Read responses and private votes
+  [chromium] › REQ-7.4.spec.ts:33:5 › REQ-7.4: Protect private voting history
+  [chromium] › REQ-7.5.spec.ts:6:5 › REQ-7.5: Follow an activity answer to its parent
+Total: 66 tests in 52 files

@@ -1,0 +1,801 @@
+{
+  "config": {
+    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\oracle.config.ts",
+    "rootDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json",
+        null
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "ok",
+        "name": "ok",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "init-history",
+        "name": "init-history",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "init-list",
+        "name": "init-list",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "fork-files",
+        "name": "fork-files",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "fork-writeback",
+        "name": "fork-writeback",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "merge-status",
+        "name": "merge-status",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "merge-parents",
+        "name": "merge-parents",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      },
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/closeout-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "refusal-write",
+        "name": "refusal-write",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "REQ-3.2.1.spec.ts",
+          "REQ-3.2.2.spec.ts",
+          "REQ-6.5.spec.ts"
+        ],
+        "timeout": 6000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "REQ-3.2.1.spec.ts",
+      "file": "REQ-3.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ok",
+              "projectName": "ok",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1487,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:02.646Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-79c4e87e51d4a9fc83d2",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "init-history",
+              "projectName": "init-history",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 938,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at branchState (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts:33:48)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:26:19",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                      "column": 48,
+                      "line": 33
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\branch-state.ts:33\n\n  31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);\n  32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);\n> 33 |   expect(commits.some(row => row[0] === head)).toBe(true);\n     |                                                ^\n  34 |   for (const commit of commits) {\n  35 |     expect(commit[0]).not.toBe('');\n  36 |     for (const parent of commit[1].split(',').map(value => value.trim()).filter(Boolean)) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                        "column": 48,
+                        "line": 33
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n\n   at support\\branch-state.ts:33\n\n  31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);\n  32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);\n> 33 |   expect(commits.some(row => row[0] === head)).toBe(true);\n     |                                                ^\n  34 |   for (const commit of commits) {\n  35 |     expect(commit[0]).not.toBe('');\n  36 |     for (const parent of commit[1].split(',').map(value => value.trim()).filter(Boolean)) {\n    at branchState (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts:33:48)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:26:19"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:11.155Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-3.2.1-REQ-3-2-1-Create-6859b-zation-Options---Scenario-1-init-history\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                    "column": 48,
+                    "line": 33
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-a5df81ff14915b4ebdf9",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "init-list",
+              "projectName": "init-list",
+              "results": [
+                {
+                  "workerIndex": 2,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1606,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:39:24",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts",
+                      "column": 24,
+                      "line": 39
+                    },
+                    "snippet": "  37 |   await page.reload();\n  38 |   const listed = page.getByRole('link', { name: repositoryName, exact: true });\n> 39 |   await expect(listed).toHaveCount(1);\n     |                        ^\n  40 |   await listed.click();\n  41 |   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();\n  42 |   expect(await branchState(page)).toEqual(initial);"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts",
+                        "column": 24,
+                        "line": 39
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-34848-ucr0wi', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  37 |   await page.reload();\n  38 |   const listed = page.getByRole('link', { name: repositoryName, exact: true });\n> 39 |   await expect(listed).toHaveCount(1);\n     |                        ^\n  40 |   await listed.click();\n  41 |   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();\n  42 |   expect(await branchState(page)).toEqual(initial);\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:39:24"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:13.993Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-3.2.1-REQ-3-2-1-Create-6859b-zation-Options---Scenario-1-init-list\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts",
+                    "column": 24,
+                    "line": 39
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-3bc33301c483700b7236",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.2.spec.ts",
+      "file": "REQ-3.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ok",
+              "projectName": "ok",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1661,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:04.725Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4045999c6be1fccff049-914c22de71bd4c695bdb",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "fork-files",
+              "projectName": "fork-files",
+              "results": [
+                {
+                  "workerIndex": 3,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1047,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:36:35",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                      "column": 35,
+                      "line": 36
+                    },
+                    "snippet": "  34 |   const forkUrl = page.url();\n  35 |   const copied = { ...source, owner: account.username };\n> 36 |   expect(await branchState(page)).toEqual(copied);\n     |                                   ^\n  37 |   await page.reload();\n  38 |   expect(await branchState(page)).toEqual(copied);\n  39 |   await expect(page.getByText(`Forked from ${sourceRepositoryName}`, { exact: true })).toBeVisible();"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                        "column": 35,
+                        "line": 36
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  34 |   const forkUrl = page.url();\n  35 |   const copied = { ...source, owner: account.username };\n> 36 |   expect(await branchState(page)).toEqual(copied);\n     |                                   ^\n  37 |   await page.reload();\n  38 |   expect(await branchState(page)).toEqual(copied);\n  39 |   await expect(page.getByText(`Forked from ${sourceRepositoryName}`, { exact: true })).toBeVisible();\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:36:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:17.518Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-3.2.2-REQ-3-2-2-Fork-a-f3b93-ther-Namespace---Scenario-1-fork-files\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                    "column": 35,
+                    "line": 36
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4045999c6be1fccff049-dd073a9be1414fad89e2",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 11,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "fork-writeback",
+              "projectName": "fork-writeback",
+              "results": [
+                {
+                  "workerIndex": 4,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2020,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:55:35",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                      "column": 35,
+                      "line": 55
+                    },
+                    "snippet": "  53 |   await page.goto(sourceUrl);\n  54 |   await page.reload();\n> 55 |   expect(await branchState(page)).toEqual(source);\n     |                                   ^\n  56 | });\n  57 |\n  58 | test('REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 2', async ({ page }, testInfo) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                        "column": 35,
+                        "line": 55
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m\n\n  53 |   await page.goto(sourceUrl);\n  54 |   await page.reload();\n> 55 |   expect(await branchState(page)).toEqual(source);\n     |                                   ^\n  56 | });\n  57 |\n  58 | test('REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 2', async ({ page }, testInfo) => {\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:55:35"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:20.579Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-3.2.2-REQ-3-2-2-Fork-a-f3b93-ther-Namespace---Scenario-1-fork-writeback\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts",
+                    "column": 35,
+                    "line": 55
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "4045999c6be1fccff049-911a4a07c69f8769d50f",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 11,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.5.spec.ts",
+      "file": "REQ-6.5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ok",
+              "projectName": "ok",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1866,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:06.406Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-476f0b0f2be4cd653cbb",
+          "file": "REQ-6.5.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "ok",
+              "projectName": "ok",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:08.283Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-45945837ae0b0e7c24cb",
+          "file": "REQ-6.5.spec.ts",
+          "line": 58,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "merge-status",
+              "projectName": "merge-status",
+              "results": [
+                {
+                  "workerIndex": 5,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1554,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:37:25",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                      "column": 25,
+                      "line": 37
+                    },
+                    "snippet": "  35 |     expect(merged.owner).toBe(before.base.owner);\n  36 |     expect(merged.branch).toBe('main');\n> 37 |     expect(merged.head).toBe(commit);\n     |                         ^\n  38 |     expect(commit).not.toBe(before.base.head);\n  39 |     expect(merged.files).toEqual(before.compare.files);\n  40 |     const merge = merged.commits.find(row => row[0] === commit)!;"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                        "column": 25,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m\n\n  35 |     expect(merged.owner).toBe(before.base.owner);\n  36 |     expect(merged.branch).toBe('main');\n> 37 |     expect(merged.head).toBe(commit);\n     |                         ^\n  38 |     expect(commit).not.toBe(before.base.head);\n  39 |     expect(merged.files).toEqual(before.compare.files);\n  40 |     const merge = merged.commits.find(row => row[0] === commit)!;\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:37:25"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:24.633Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-1-merge-status\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                    "column": 25,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-e44234802f5e238fa9be",
+          "file": "REQ-6.5.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "merge-parents",
+              "projectName": "merge-parents",
+              "results": [
+                {
+                  "workerIndex": 6,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1612,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:42:58",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                      "column": 58,
+                      "line": 42
+                    },
+                    "snippet": "  40 |     const merge = merged.commits.find(row => row[0] === commit)!;\n  41 |     expect(merge).toBeDefined();\n> 42 |     expect(merge[1].split(',').map(value=>value.trim())).toEqual([before.base.head,before.compare.head]);\n     |                                                          ^\n  43 |     expect(merge[2]).toBe(maintainer.username);\n  44 |     const inherited = new Map([...before.base.commits,...before.compare.commits].map(row=>[row[0],row]));\n  45 |     expect(merged.commits.filter(row=>row[0]!==commit)).toEqual([...inherited.values()].sort((a,b)=>a[0].localeCompare(b[0])));"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                        "column": 58,
+                        "line": 42
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n\n  40 |     const merge = merged.commits.find(row => row[0] === commit)!;\n  41 |     expect(merge).toBeDefined();\n> 42 |     expect(merge[1].split(',').map(value=>value.trim())).toEqual([before.base.head,before.compare.head]);\n     |                                                          ^\n  43 |     expect(merge[2]).toBe(maintainer.username);\n  44 |     const inherited = new Map([...before.base.commits,...before.compare.commits].map(row=>[row[0],row]));\n  45 |     expect(merged.commits.filter(row=>row[0]!==commit)).toEqual([...inherited.values()].sort((a,b)=>a[0].localeCompare(b[0])));\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:42:58"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:28.094Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-1-merge-parents\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts",
+                    "column": 58,
+                    "line": 42
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-e566b148c43cc90486c6",
+          "file": "REQ-6.5.spec.ts",
+          "line": 12,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 2",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 6000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "refusal-write",
+              "projectName": "refusal-write",
+              "results": [
+                {
+                  "workerIndex": 7,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 1446,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n    at branchState (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts:31:50)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:75:12",
+                    "location": {
+                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                      "column": 50,
+                      "line": 31
+                    },
+                    "snippet": "\u001b[90m   at \u001b[39msupport\\branch-state.ts:31\n\n  29 |   const files = await rows(page, 'Branch files', ['Path','Content']);\n  30 |   const commits = await rows(page, 'Commit history', ['Commit','Parents','Author','Message']);\n> 31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);\n     |                                                  ^\n  32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);\n  33 |   expect(commits.some(row => row[0] === head)).toBe(true);\n  34 |   for (const commit of commits) {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                        "column": 50,
+                        "line": 31
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n\n   at support\\branch-state.ts:31\n\n  29 |   const files = await rows(page, 'Branch files', ['Path','Content']);\n  30 |   const commits = await rows(page, 'Commit history', ['Commit','Parents','Author','Message']);\n> 31 |   expect(new Set(files.map(row => row[0])).size).toBe(files.length);\n     |                                                  ^\n  32 |   expect(new Set(commits.map(row => row[0])).size).toBe(commits.length);\n  33 |   expect(commits.some(row => row[0] === head)).toBe(true);\n  34 |   for (const commit of commits) {\n    at branchState (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts:31:50)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:75:12"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-06T11:02:31.681Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\closeout-results\\REQ-6.5-REQ-6-5-Merge-an-Eligible-Pull-Request---Scenario-2-refusal-write\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\support\\branch-state.ts",
+                    "column": 50,
+                    "line": 31
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-30551fc405bc4070b1e9",
+          "file": "REQ-6.5.spec.ts",
+          "line": 58,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-06T11:02:01.501Z",
+    "duration": 32479.450999999997,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 7,
+    "flaky": 0
+  }
+}

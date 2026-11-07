@@ -1,0 +1,2436 @@
+{
+  "config": {
+    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\arc-all-tasks-fix\\collection-configs\\github.cjs",
+    "rootDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/github/tests",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/my-works/coding/ShallowCode/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-all-tasks-fix/package/arc-bench/github/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.spec.ts"
+        ],
+        "timeout": 10000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "REQ-1.1.1.spec.ts",
+      "file": "REQ-1.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.1.1: Register a New GitHub Account - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dfcaeeb5172cba9f7773-3c1d1a9b9db09be6bd97",
+          "file": "REQ-1.1.1.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.1: Register a New GitHub Account - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dfcaeeb5172cba9f7773-42d60a1e2045871e37ea",
+          "file": "REQ-1.1.1.spec.ts",
+          "line": 45,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.1: Register a New GitHub Account - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dfcaeeb5172cba9f7773-71106313e4ad96251feb",
+          "file": "REQ-1.1.1.spec.ts",
+          "line": 64,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.1.2.spec.ts",
+      "file": "REQ-1.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.1.2: Sign In with an Existing Account - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2affc9ee615b68131185-b243847192f14831d114",
+          "file": "REQ-1.1.2.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.2: Sign In with an Existing Account - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2affc9ee615b68131185-c2a9adf40a10d7372c26",
+          "file": "REQ-1.1.2.spec.ts",
+          "line": 13,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.2: Sign In with an Existing Account - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2affc9ee615b68131185-bc7b8352550b4366f671",
+          "file": "REQ-1.1.2.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.2: Sign In with an Existing Account - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "2affc9ee615b68131185-6f70c83143fee955a355",
+          "file": "REQ-1.1.2.spec.ts",
+          "line": 37,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.1.3.spec.ts",
+      "file": "REQ-1.1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.1.3: Recover Account Access Through a Verified Email - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "df4dda6f636ad2662786-bd31e22d1714e9c52de2",
+          "file": "REQ-1.1.3.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.3: Recover Account Access Through a Verified Email - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "df4dda6f636ad2662786-f431b616bdaf86885228",
+          "file": "REQ-1.1.3.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.1.3: Recover Account Access Through a Verified Email - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "df4dda6f636ad2662786-d8d78e81c6af0988e7c7",
+          "file": "REQ-1.1.3.spec.ts",
+          "line": 44,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.2.spec.ts",
+      "file": "REQ-1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.2: Sign Out and End the Current Web Session - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2b9c9c004eb7688a9e6-caceee27930bd2b215c0",
+          "file": "REQ-1.2.spec.ts",
+          "line": 4,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.2: Sign Out and End the Current Web Session - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b2b9c9c004eb7688a9e6-4c7d1e98324174f0af20",
+          "file": "REQ-1.2.spec.ts",
+          "line": 19,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-1.3.spec.ts",
+      "file": "REQ-1.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-1.3: Change Account Password - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9f64a738d4f7196952bf-1f31ff6cdff20bee8d55",
+          "file": "REQ-1.3.spec.ts",
+          "line": 5,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3: Change Account Password - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9f64a738d4f7196952bf-472d209c5481048ccc23",
+          "file": "REQ-1.3.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "REQ-1.3: Change Account Password - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9f64a738d4f7196952bf-4a04aaec6a26e8291d82",
+          "file": "REQ-1.3.spec.ts",
+          "line": 44,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.1.spec.ts",
+      "file": "REQ-2.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.1: Browse Organization Repositories - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d38b10719e2f8ec2b9f8-8e4f544224a04727fc0d",
+          "file": "REQ-2.1.1.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.1: Browse Organization Repositories - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d38b10719e2f8ec2b9f8-2a10b5bb55424a8c710f",
+          "file": "REQ-2.1.1.spec.ts",
+          "line": 24,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.1.2.spec.ts",
+      "file": "REQ-2.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.1.2: Create an Organization After Authentication - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-d1be616cad06db3813a4",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Create an Organization After Authentication - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-f2c02023f71ea40176d1",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 26,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.1.2: Create an Organization After Authentication - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "905901085cf6c51b3c35-e3d62a26bdcb9c0202ea",
+          "file": "REQ-2.1.2.spec.ts",
+          "line": 43,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.1.spec.ts",
+      "file": "REQ-2.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.1: Create an Organization Team - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-b523039d146a244cb7aa",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.1: Create an Organization Team - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "a131a33dd7a4cda0e68f-826a9b73bb501152103e",
+          "file": "REQ-2.2.1.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.2.spec.ts",
+      "file": "REQ-2.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.2: Manage Organization Team Members and Hierarchy - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-7c4bfcf06fb6214a5c6f",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.2: Manage Organization Team Members and Hierarchy - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f874ef67be2cda98476a-f3e06b13fa3a640f6c97",
+          "file": "REQ-2.2.2.spec.ts",
+          "line": 31,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.3.spec.ts",
+      "file": "REQ-2.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c7220b27d9e113ac927e-17c33d09a00815b9d309",
+          "file": "REQ-2.2.3.spec.ts",
+          "line": 14,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c7220b27d9e113ac927e-1f1acf02ef8c8979ea1b",
+          "file": "REQ-2.2.3.spec.ts",
+          "line": 48,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.2.4.spec.ts",
+      "file": "REQ-2.2.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.2.4: Remove a Member from an Organization - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "042ae79b06d8b68ebb86-f80a1b91ecf0111f1b84",
+          "file": "REQ-2.2.4.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.2.4: Remove a Member from an Organization - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "042ae79b06d8b68ebb86-633c806b2609af635b1f",
+          "file": "REQ-2.2.4.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-2.3.spec.ts",
+      "file": "REQ-2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.3: Grant Repository Access to People and Teams - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d05b6e14a57e9b3a8c7b-b564aff524b87674d25f",
+          "file": "REQ-2.3.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.3: Grant Repository Access to People and Teams - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d05b6e14a57e9b3a8c7b-d97ee6241eda9a48dea2",
+          "file": "REQ-2.3.spec.ts",
+          "line": 20,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.1.spec.ts",
+      "file": "REQ-3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.1: Search for and Locate Repositories - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "514aa3b4d4039f149fbd-aea98ac4d7b3eb15c85e",
+          "file": "REQ-3.1.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1: Search for and Locate Repositories - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "514aa3b4d4039f149fbd-eac916d90cd44b5790a6",
+          "file": "REQ-3.1.spec.ts",
+          "line": 18,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1: Search for and Locate Repositories - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "514aa3b4d4039f149fbd-3e6e77bd6c3d4fcc476d",
+          "file": "REQ-3.1.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.1: Search for and Locate Repositories - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "514aa3b4d4039f149fbd-11afa46c365461e8bb7f",
+          "file": "REQ-3.1.spec.ts",
+          "line": 34,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.1.spec.ts",
+      "file": "REQ-3.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-93ced5daed3f042242bc",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 9,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-2a920e06622e0174cfe6",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "afe8742a3a3f41a86168-bbeebcde9ca2166edd93",
+          "file": "REQ-3.2.1.spec.ts",
+          "line": 42,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.2.spec.ts",
+      "file": "REQ-3.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-4efd359c316185f476f5",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4045999c6be1fccff049-f659678878ade2649fba",
+          "file": "REQ-3.2.2.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.2.3.spec.ts",
+      "file": "REQ-3.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.2.3: Copy a Repository Clone Value - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7b8a9e3a458c6f31e76a-dfe2fe60521ad441dc59",
+          "file": "REQ-3.2.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.2.3: Copy a Repository Clone Value - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "7b8a9e3a458c6f31e76a-6a21b581c3b6274ae649",
+          "file": "REQ-3.2.3.spec.ts",
+          "line": 24,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.3.spec.ts",
+      "file": "REQ-3.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.3: View a Public Repository Overview - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1988e87fdebb2dabc9a6-53434b44a8984ebc21be",
+          "file": "REQ-3.3.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-3.4.spec.ts",
+      "file": "REQ-3.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b67076e62daf2c22eaba-55bf0bf8c49b40cdaaa0",
+          "file": "REQ-3.4.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.4: Change Repository Visibility with Permission Checks - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b67076e62daf2c22eaba-47d9e5abfa27abb42423",
+          "file": "REQ-3.4.spec.ts",
+          "line": 21,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.1.spec.ts",
+      "file": "REQ-4.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.1: Browse Repository Files and Directories - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "de6caa8a5418b7d7e7a3-9e2412856072ec81ed66",
+          "file": "REQ-4.1.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.1.spec.ts",
+      "file": "REQ-4.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.1: View Repository Commit History - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "161472c1072b94c22436-0344cedd0fc059684404",
+          "file": "REQ-4.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.2.spec.ts",
+      "file": "REQ-4.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.2: Inspect Commit and Revision Differences - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "83d83aec819347efbc52-c02b9fa32bd4d823d97f",
+          "file": "REQ-4.2.2.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.2.3.spec.ts",
+      "file": "REQ-4.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.2.3: Search Code Within a Repository - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b790dd67c6b338c3953a-42ecd2847b175546af4a",
+          "file": "REQ-4.2.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.3: Search Code Within a Repository - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b790dd67c6b338c3953a-7e4b074fc28ac92d058c",
+          "file": "REQ-4.2.3.spec.ts",
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.3: Search Code Within a Repository - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b790dd67c6b338c3953a-e227c9b64a34c5a5c458",
+          "file": "REQ-4.2.3.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.2.3: Search Code Within a Repository - Scenario 4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "b790dd67c6b338c3953a-6e2159740d2db3668a3f",
+          "file": "REQ-4.2.3.spec.ts",
+          "line": 53,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.3.1.spec.ts",
+      "file": "REQ-4.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.3.1: List and Switch Repository Branches - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e182992be669491731da-69b86c0869187e25c793",
+          "file": "REQ-4.3.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.3.1: List and Switch Repository Branches - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e182992be669491731da-b62533c7e759d5451c4f",
+          "file": "REQ-4.3.1.spec.ts",
+          "line": 23,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.3.2.spec.ts",
+      "file": "REQ-4.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.3.2: Create a Branch from an Existing Revision - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e4a80b73cfebc723178f-a13daa725f7f6cadc84e",
+          "file": "REQ-4.3.2.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.3.2: Create a Branch from an Existing Revision - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "e4a80b73cfebc723178f-29e40d95505120fa974f",
+          "file": "REQ-4.3.2.spec.ts",
+          "line": 25,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.3.3.spec.ts",
+      "file": "REQ-4.3.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.3.3: Change the Repository Default Branch - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "997042c9e7f74603ed2d-d9451b2b80dc4d266b83",
+          "file": "REQ-4.3.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.3.3: Change the Repository Default Branch - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "997042c9e7f74603ed2d-8ab6030bf372aa23f4d7",
+          "file": "REQ-4.3.3.spec.ts",
+          "line": 30,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-4.4.spec.ts",
+      "file": "REQ-4.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "72719cfc9f88eeeb5aee-72af5edcddde201ee3b2",
+          "file": "REQ-4.4.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.4: Manage Repository Files Through the Web Interface - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "72719cfc9f88eeeb5aee-01656cf0da8d98ed2eae",
+          "file": "REQ-4.4.spec.ts",
+          "line": 18,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.1.spec.ts",
+      "file": "REQ-5.1.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.1: List and Filter Repository Issues - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-2b965b5e5c17796d8f92",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.1: List and Filter Repository Issues - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "99ae3386df6e362120a7-59ec0f0156d97865f8e5",
+          "file": "REQ-5.1.1.spec.ts",
+          "line": 22,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.1.2.spec.ts",
+      "file": "REQ-5.1.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.1.2: View an Issue and Its Discussion - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-5142cc8a3eb16620d3dd",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: View an Issue and Its Discussion - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-af7589fcb18611bdcd93",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.1.2: View an Issue and Its Discussion - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "eb3386871b7977fe2784-2e5d53af7f51f674556b",
+          "file": "REQ-5.1.2.spec.ts",
+          "line": 34,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.1.spec.ts",
+      "file": "REQ-5.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.1: Create a Repository Issue - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-8a9d3acd12079034e7b3",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.1: Create a Repository Issue - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "641c3f53d64d50120fb3-a9ddcf4cc3ade1c32653",
+          "file": "REQ-5.2.1.spec.ts",
+          "line": 28,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.2.spec.ts",
+      "file": "REQ-5.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.2: Edit an Issue Title and Description - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0136829d92b176f483ab-d4a4ee70b8f6896f6c0e",
+          "file": "REQ-5.2.2.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.2: Edit an Issue Title and Description - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0136829d92b176f483ab-d53bcfb26b7d7978a6fb",
+          "file": "REQ-5.2.2.spec.ts",
+          "line": 29,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.2.3.spec.ts",
+      "file": "REQ-5.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.2.3: Comment on an Issue Discussion - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "aca2c98e59fde35096ea-d8230745a5c11af8ef7c",
+          "file": "REQ-5.2.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.2.3: Comment on an Issue Discussion - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "aca2c98e59fde35096ea-c649e33100ce8289f9af",
+          "file": "REQ-5.2.3.spec.ts",
+          "line": 25,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.1.spec.ts",
+      "file": "REQ-5.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.1: Assign or Unassign Issue Participants - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c676d43c4e52096cd584-39c5f2ca5771317e8a53",
+          "file": "REQ-5.3.1.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.2.spec.ts",
+      "file": "REQ-5.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.2: Apply Labels to an Issue - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "221a81884f1ebaf8e189-06b72f4a3cf7466148e9",
+          "file": "REQ-5.3.2.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.3.3.spec.ts",
+      "file": "REQ-5.3.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.3.3: Assign Issues and Pull Requests to a Milestone - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c61d67dc4cd7bbfdad6c-b49bbe6e23f4cfb6618f",
+          "file": "REQ-5.3.3.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-5.4.spec.ts",
+      "file": "REQ-5.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-5.4: Close or Reopen an Issue - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4b1166b6cbfe877a3333-3ba17aba783f7bdcf4b0",
+          "file": "REQ-5.4.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.4: Close or Reopen an Issue - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4b1166b6cbfe877a3333-14703be57774c7c0fab2",
+          "file": "REQ-5.4.spec.ts",
+          "line": 25,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.1.spec.ts",
+      "file": "REQ-6.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-0fd58cd9582b576e65dc",
+          "file": "REQ-6.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-3bf9bf8ba249cbf898f8",
+          "file": "REQ-6.1.spec.ts",
+          "line": 30,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-8dd7af8f4d69fddf68dd",
+          "file": "REQ-6.1.spec.ts",
+          "line": 51,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.2.1.spec.ts",
+      "file": "REQ-6.2.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2.1: List and Filter Repository Pull Requests - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d63dd5277cb67724bd40-02e5a5352a3af1b5e1b2",
+          "file": "REQ-6.2.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2.1: List and Filter Repository Pull Requests - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d63dd5277cb67724bd40-116e444947ec70e448a6",
+          "file": "REQ-6.2.1.spec.ts",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2.1: List and Filter Repository Pull Requests - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d63dd5277cb67724bd40-005e44f16277b40e1389",
+          "file": "REQ-6.2.1.spec.ts",
+          "line": 32,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.2.2.spec.ts",
+      "file": "REQ-6.2.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2.2: Compare Branches Before Opening a Pull Request - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "28f90135d7561b5f7a6f-8b6418b182ee1398215e",
+          "file": "REQ-6.2.2.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2.2: Compare Branches Before Opening a Pull Request - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "28f90135d7561b5f7a6f-b72268ad93bd0e346658",
+          "file": "REQ-6.2.2.spec.ts",
+          "line": 27,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.2.3.spec.ts",
+      "file": "REQ-6.2.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2.3: Create a Pull Request from Comparison Results - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "880ffed6a37913c64ad1-18e2673f1d5f8a5fd397",
+          "file": "REQ-6.2.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2.3: Create a Pull Request from Comparison Results - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "880ffed6a37913c64ad1-e431964e907ba054b5f4",
+          "file": "REQ-6.2.3.spec.ts",
+          "line": 26,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.2.4.spec.ts",
+      "file": "REQ-6.2.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2.4: Create a Draft Pull Request - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dda6edf966526ecf2427-6404e4512da580039353",
+          "file": "REQ-6.2.4.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2.4: Create a Draft Pull Request - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "dda6edf966526ecf2427-b2c1efa2e6ccef67b2fd",
+          "file": "REQ-6.2.4.spec.ts",
+          "line": 24,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.1.spec.ts",
+      "file": "REQ-6.3.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.1: View Pull Request Overview and Commits - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fce4615919234071bb06-c1ba08b5ef97630f6e85",
+          "file": "REQ-6.3.1.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.3.1: View Pull Request Overview and Commits - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fce4615919234071bb06-6edb8715b5cd97f564b3",
+          "file": "REQ-6.3.1.spec.ts",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.3.1: View Pull Request Overview and Commits - Scenario 3",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fce4615919234071bb06-5e0586f99108995576a4",
+          "file": "REQ-6.3.1.spec.ts",
+          "line": 34,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.2.spec.ts",
+      "file": "REQ-6.3.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.2: Inspect Changed Files and Aggregate Diff - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "01f6fe1e0f49b4a60c57-881c0cc2f0f3758bfe9e",
+          "file": "REQ-6.3.2.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.3.spec.ts",
+      "file": "REQ-6.3.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1056eebdaca5bd2348ab-2357ff6abcba60214562",
+          "file": "REQ-6.3.3.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.3.3: Add Review Comments to Changed Code Lines - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1056eebdaca5bd2348ab-39b390c9f38619817b2d",
+          "file": "REQ-6.3.3.spec.ts",
+          "line": 19,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.3.4.spec.ts",
+      "file": "REQ-6.3.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3.4: Submit a Pull Request Review - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6bb0831da058119e38ce-e6ea328664fd2173a466",
+          "file": "REQ-6.3.4.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.3.4: Submit a Pull Request Review - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "6bb0831da058119e38ce-ce10cde91effdabf4d2e",
+          "file": "REQ-6.3.4.spec.ts",
+          "line": 23,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.4.spec.ts",
+      "file": "REQ-6.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.4: Request or Remove Pull Request Reviewers - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-6405ab013a62dfd00c9b",
+          "file": "REQ-6.4.spec.ts",
+          "line": 10,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.5.spec.ts",
+      "file": "REQ-6.5.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-43517d126381874acfaa",
+          "file": "REQ-6.5.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.5: Merge an Eligible Pull Request - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "09bbe10b7fe88456558c-a8fe6d25d4ff66faa593",
+          "file": "REQ-6.5.spec.ts",
+          "line": 23,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "REQ-6.6.spec.ts",
+      "file": "REQ-6.6.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.6: Close or Reopen a Pull Request Without Merging - Scenario 1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0efd203c877512652a29-4814414f15744e8035ac",
+          "file": "REQ-6.6.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.6: Close or Reopen a Pull Request Without Merging - Scenario 2",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0efd203c877512652a29-b1b09f475ee2a8298ade",
+          "file": "REQ-6.6.spec.ts",
+          "line": 24,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-05T09:57:03.844Z",
+    "duration": 320.2220000000002,
+    "expected": 0,
+    "skipped": 100,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

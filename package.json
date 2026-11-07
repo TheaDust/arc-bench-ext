@@ -1,0 +1,18 @@
+{
+  "name": "arc-bench-modified",
+  "private": true,
+  "scripts": {
+    "typecheck": "tsc --project validation/tsconfig.json",
+    "test:contracts": "playwright test --config validation/contracts.config.ts",
+    "test:inputs": "node validation/audit-inputs.mjs",
+    "test:collect": "node validation/collect.mjs",
+    "test:oracles": "node validation/oracle-probes/run-oracle-probes.mjs",
+    "test:closeout": "node validation/closeout/run.mjs && node validation/closeout/run-records.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "@types/node": "20.19.43",
+    "typescript": "7.0.2",
+    "yaml": "2.9.0"
+  }
+}
