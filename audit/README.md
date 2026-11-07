@@ -1,6 +1,6 @@
 # 八题需求与测试逐场景审查
 
-本目录保存 2026-11-07 对八道应用题的子智能体审查记录。输入来自 `E:\my-works\coding\arc-bench-modified` 的 `2026-11-06-isolated-scenarios` 版本，原目录和既有实验产物保持独立。本轮在当前目录修订需求和测试，不修改生成应用或 ShallowCode 控制器。
+本目录保存 2026-11-07 对八道应用题的子智能体审查记录。输入来自导入时的 `2026-11-06-isolated-scenarios` 本地快照；原目录和既有实验产物保持独立。本轮在当前目录修订需求和测试，不修改生成应用或 ShallowCode 控制器。
 
 每题分别读取需求树的继承合同、叶需求、场景及测试。逐场景矩阵记录 Given/When/Then 与断言对应关系；问题清单同时记录假阴性、漏断言、初态、对象归属和不确定解释。`PROTOCOL.md` 规定审查边界。子智能体继承本会话上下文，因此这属于模型辅助审查，不声称双盲审查或人工标注。
 
@@ -38,13 +38,13 @@
 审查前既有 73 条浏览器合同检查全部通过，记录在 `baseline-contracts.json`。本轮新增正反例位于 `validation/`，检查合法公开呈现可通过、错误值/身份/状态仍失败。最终结果登记在根目录 `validation.json`。运行入口：
 
 ```powershell
-node node_modules/typescript/bin/tsc --project outputs/arc-bench-reviewed-20261107/audit/tsconfig.json
-node node_modules/@playwright/test/cli.js test --config outputs/arc-bench-reviewed-20261107/audit/validation/playwright.config.ts
-node outputs/arc-bench-reviewed-20261107/audit/check-review.mjs
-node outputs/arc-bench-reviewed-20261107/validation/collect.mjs
+node node_modules/typescript/bin/tsc --project audit/tsconfig.json
+node node_modules/@playwright/test/cli.js test --config audit/validation/playwright.config.ts
+node audit/check-review.mjs
+node validation/collect.mjs
 ```
 
-以上命令从 ShallowCode 根目录执行。审查矩阵的身份与数量检查只证明记录完整；语义审查和合成 DOM 正反例仍不足以量化所有真实应用的误判率。本轮没有对全部 714 个业务场景运行独立参考应用，也不把未决项视为已解决。
+以上命令从本仓库根目录执行。审查矩阵的身份与数量检查只证明记录完整；语义审查和合成 DOM 正反例仍不足以量化所有真实应用的误判率。本轮没有对全部 714 个业务场景运行独立参考应用，也不把未决项视为已解决。
 
 最终合同证据为 **175 个不同用例通过**，原有 **73 条回归通过**。先完整执行 174 条，随后 StackOverflow 的分页修订只补跑该题 25 条：其余七题 150 条合同及 helper 摘要未变；旧的 24 条 StackOverflow 证据由新执行替换。`contract-results.json` 明确标注组合证据，原始两次报告保存在 `contract-runs/`，不是一次全新 175 条执行。最后两处 Sheet 正式场景补断言只影响类型/收集检查；没有冒充完整应用运行。
 

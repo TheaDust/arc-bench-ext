@@ -1,5 +1,5 @@
 {
-  "name": "arc-bench-modified",
+  "name": "arc-bench-ext",
   "private": true,
   "scripts": {
     "typecheck": "tsc --project validation/tsconfig.json",
