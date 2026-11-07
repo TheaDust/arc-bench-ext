@@ -6,8 +6,8 @@
       "images": 26
     },
     "bookstack": {
-      "atomicRequirements": 24,
-      "scenarios": 35,
+      "atomicRequirements": 26,
+      "scenarios": 49,
       "images": 19
     },
     "ctrip": {
@@ -41,7 +41,7 @@
       "images": 15
     }
   },
-  "atomicRequirements": 408,
-  "scenarios": 714,
+  "atomicRequirements": 410,
+  "scenarios": 728,
   "collectionChecked": true
 }

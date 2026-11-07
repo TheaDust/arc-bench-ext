@@ -1,6 +1,6 @@
 # 需求与测试一致性收口
 
-当前版 `2026-11-07-per-task-semantic-review` 的完整逐题记录见 [audit/README.md](audit/README.md)。下文保留 `2026-11-06` 的历史定向收口证据，不能作为当前全部场景的完整验证结果。当前需求澄清、测试修订及未决问题以 audit 各题报告和 revision.json 为准。
+当前版 `2026-11-07-bookstack-lifecycle` 的完整逐题记录见 [audit/README.md](audit/README.md)。下文保留 `2026-11-06` 的历史定向收口证据，不能作为当前全部场景的完整验证结果。当前需求澄清、测试修订及未决问题以 audit 各题报告和 revision.json 为准。
 
 修订 `2026-11-06-isolated-scenarios`，父版本 `2026-11-06-consistency-audit`。
 

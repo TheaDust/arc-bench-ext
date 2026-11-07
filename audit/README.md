@@ -9,21 +9,23 @@
 | 题目 | 原子需求 | 场景 | 报告 | 矩阵 |
 | --- | ---: | ---: | --- | --- |
 | 12306 | 93 | 142 | [12306.md](12306.md) | [12306.json](12306.json) |
-| BookStack | 24 | 35 | [bookstack.md](bookstack.md) | [bookstack.json](bookstack.json) |
+| BookStack | 26 | 49 | [bookstack.md](bookstack.md) | [bookstack.json](bookstack.json) |
 | Ctrip | 97 | 152 | [ctrip.md](ctrip.md) | [ctrip.json](ctrip.json) |
 | GitHub | 47 | 100 | [github.md](github.md) | [github.json](github.json) |
 | Keep | 16 | 33 | [keep.md](keep.md) | [keep.json](keep.json) |
 | PrestaShop | 55 | 86 | [prestashop.md](prestashop.md) | [prestashop.json](prestashop.json) |
 | Sheet | 24 | 100 | [sheet.md](sheet.md) | [sheet.json](sheet.json) |
 | StackOverflow | 52 | 66 | [stackoverflow.md](stackoverflow.md) | [stackoverflow.json](stackoverflow.json) |
-| 合计 | 408 | 714 | | |
+| 合计 | 410 | 728 | | |
+
+BookStack 在 2026-11-07 的生命周期扩展中新增 2 条原子需求、14 个场景；原 24/35 身份保持不变。扩展场景在本地参考实现上 49/49 通过，旧分数不可直接混算。
 
 共登记 112 项审查发现：91 项完成定向修订，其余 21 项分别保留为部分覆盖、明确范围或观察边界，不能全部解释成已确认的测试缺陷。
 
 | 题目 | 已修订 | 其余发现 | 需求有澄清 |
 | --- | ---: | ---: | --- |
 | 12306 | 12 | 3 | 否 |
-| BookStack | 9 | 2 | 否 |
+| BookStack | 9 | 2 | 是 |
 | Ctrip | 11 | 1 | 是 |
 | GitHub | 14 | 4 | 是 |
 | Keep | 10 | 3 | 否 |
@@ -44,7 +46,7 @@ node audit/check-review.mjs
 node validation/collect.mjs
 ```
 
-以上命令从本仓库根目录执行。审查矩阵的身份与数量检查只证明记录完整；语义审查和合成 DOM 正反例仍不足以量化所有真实应用的误判率。本轮没有对全部 714 个业务场景运行独立参考应用，也不把未决项视为已解决。
+以上命令从本仓库根目录执行。审查矩阵的身份与数量检查只证明记录完整；语义审查和合成 DOM 正反例仍不足以量化所有真实应用的误判率。本轮没有对全部 728 个业务场景运行独立参考应用；BookStack 扩展的 14 个场景在一个本地参考实现上执行并完成 49/49 本题回归，但该实现不是 ShallowCode 候选，也不把未决项视为已解决。
 
 最终合同证据为 **175 个不同用例通过**，原有 **73 条回归通过**。先完整执行 174 条，随后 StackOverflow 的分页修订只补跑该题 25 条：其余七题 150 条合同及 helper 摘要未变；旧的 24 条 StackOverflow 证据由新执行替换。`contract-results.json` 明确标注组合证据，原始两次报告保存在 `contract-runs/`，不是一次全新 175 条执行。最后两处 Sheet 正式场景补断言只影响类型/收集检查；没有冒充完整应用运行。
 

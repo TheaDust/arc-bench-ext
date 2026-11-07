@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-07-per-task-semantic-review`  
+> 当前修订：`2026-11-07-bookstack-lifecycle`  
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -19,28 +19,29 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 | 题目 | 原子需求 | 场景 |
 | --- | ---: | ---: |
 | 12306 | 93 | 142 |
-| bookstack | 24 | 35 |
+| bookstack | 26 | 49 |
 | ctrip | 97 | 152 |
 | github | 47 | 100 |
 | keep | 16 | 33 |
 | prestashop | 55 | 86 |
 | sheet | 24 | 100 |
 | stackoverflow | 52 | 66 |
-| **合计** | **408** | **714** |
+| **合计** | **410** | **728** |
 
-当前修订在保留需求 ID、场景 ID、场景名称和 408/714 分母的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。详细记录见 [audit/README.md](audit/README.md)。
+当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。详细记录见 [audit/README.md](audit/README.md)。
 
 ## 当前状态
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-07-per-task-semantic-review` |
-| 父版本 | `2026-11-06-isolated-scenarios` |
-| 质量状态 | `all-scenarios-source-reviewed-with-explicit-limitations` |
-| 审查发现 | 112 项：91 项修复，21 项保留（7 项 high） |
+| 修订 | `2026-11-07-bookstack-lifecycle` |
+| 父版本 | `2026-11-07-per-task-semantic-review` |
+| 质量状态 | `bookstack-lifecycle-reviewed-with-reference-execution` |
+| 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
 | 新增合同 | 175 条通过 |
 | 原有合同 | 73 条通过 |
-| 完整 714 场景真实应用重验 | 尚未执行 |
+| BookStack 扩展验证 | 49/49 场景通过（本地参考实现；35 个既有 + 14 个扩展） |
+| 完整 728 场景真实应用重验 | 尚未执行 |
 | 验证记录 | [validation.json](validation.json) |
 
 本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量。具体边界见 [QUALITY.md](QUALITY.md) 和 [audit/README.md](audit/README.md)。
@@ -129,7 +130,7 @@ npm run test:closeout
 
 - 上游：<https://github.com/code-philia/arc-bench>
 - 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`
-- 本仓库当前修订：`2026-11-07-per-task-semantic-review`
+- 本仓库当前修订：`2026-11-07-bookstack-lifecycle`
 
 上游快照中没有 `LICENSE` 文件；本仓库目前也没有单独声明开源许可证。公开分发或再利用上游材料前，请先确认上游作者的授权。详见 [NOTICE](NOTICE) 和 [UPSTREAM.md](UPSTREAM.md)。
 

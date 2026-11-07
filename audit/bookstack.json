@@ -1,16 +1,16 @@
 {
   "task": "bookstack",
-  "reviewedRequirements": 24,
-  "reviewedScenarios": 35,
-  "requirementsChanged": false,
-  "reviewScope": "All inherited descriptions, 24 leaves, 35 callbacks, helpers, public-controls and list-cap reviewed; no generated applications or scores consulted.",
+  "reviewedRequirements": 26,
+  "reviewedScenarios": 49,
+  "requirementsChanged": true,
+  "reviewScope": "All 26 leaves and 49 scenarios reviewed. The extension adds page/chapter deletion, shelf membership, rename propagation, draft publish/privacy, and cross-view lifecycle assertions; the 14 extension scenarios were executed against a local reference fixture.",
   "scenarios": [
     {
       "requirementId": "REQ-1.1",
       "scenarioId": "SCN-REQ-1.1-01",
       "name": "Show logged-out navigation",
       "testFile": "arc-bench/bookstack/tests/REQ-1.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:25",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:39",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -49,7 +49,7 @@
       "scenarioId": "SCN-REQ-1.2-01",
       "name": "Return from shelves",
       "testFile": "arc-bench/bookstack/tests/REQ-1.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:48",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:63",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -100,7 +100,7 @@
       "scenarioId": "SCN-REQ-2.1-01",
       "name": "Show login form",
       "testFile": "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:85",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:102",
       "testLine": 6,
       "coverage": {
         "inheritedFrom": [
@@ -168,7 +168,7 @@
       "scenarioId": "SCN-REQ-2.2-01",
       "name": "Log in with remember me",
       "testFile": "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:112",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:129",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -216,7 +216,7 @@
       "scenarioId": "SCN-REQ-3.1-01",
       "name": "Show personal dashboard regions",
       "testFile": "arc-bench/bookstack/tests/REQ-3.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:151",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:168",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -263,7 +263,7 @@
       "scenarioId": "SCN-REQ-4.1-01",
       "name": "Show a uniquely identified item",
       "testFile": "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:192",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:208",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -323,7 +323,7 @@
       "scenarioId": "SCN-REQ-4.2-01",
       "name": "Open from global list",
       "testFile": "arc-bench/bookstack/tests/REQ-4.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:222",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:238",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -378,7 +378,7 @@
       "scenarioId": "SCN-REQ-4.3-01",
       "name": "Save a new shelf",
       "testFile": "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:252",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:272",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -442,7 +442,7 @@
       "scenarioId": "SCN-REQ-4.3-02",
       "name": "Cancel new shelf",
       "testFile": "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:252",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:290",
       "testLine": 16,
       "coverage": {
         "inheritedFrom": [
@@ -506,8 +506,8 @@
       "scenarioId": "SCN-REQ-4.5-01",
       "name": "Save metadata changes",
       "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:305",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:322",
+      "testLine": 6,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -616,8 +616,8 @@
       "scenarioId": "SCN-REQ-4.5-02",
       "name": "Cancel metadata changes",
       "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:305",
-      "testLine": 27,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:339",
+      "testLine": 28,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -710,7 +710,7 @@
       "scenarioId": "SCN-REQ-4.4-01",
       "name": "Confirm deletion",
       "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:354",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:388",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -794,7 +794,7 @@
       "scenarioId": "SCN-REQ-4.4-02",
       "name": "Cancel deletion",
       "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:354",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:403",
       "testLine": 21,
       "coverage": {
         "inheritedFrom": [
@@ -858,7 +858,7 @@
       "scenarioId": "SCN-REQ-5.1-01",
       "name": "Show a uniquely identified item",
       "testFile": "arc-bench/bookstack/tests/REQ-5.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:409",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:458",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -914,7 +914,7 @@
       "scenarioId": "SCN-REQ-5.2-01",
       "name": "Open from global list",
       "testFile": "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:436",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:488",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -970,7 +970,7 @@
       "scenarioId": "SCN-REQ-5.2-02",
       "name": "Open from containing shelf",
       "testFile": "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:436",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:501",
       "testLine": 14,
       "coverage": {
         "inheritedFrom": [
@@ -1034,7 +1034,7 @@
       "scenarioId": "SCN-REQ-5.3-01",
       "name": "Save a new book",
       "testFile": "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:484",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:537",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -1100,7 +1100,7 @@
       "scenarioId": "SCN-REQ-5.3-02",
       "name": "Cancel new book",
       "testFile": "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:484",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:552",
       "testLine": 16,
       "coverage": {
         "inheritedFrom": [
@@ -1166,8 +1166,8 @@
       "scenarioId": "SCN-REQ-5.4-01",
       "name": "Save metadata changes",
       "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:531",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:583",
+      "testLine": 6,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1276,8 +1276,8 @@
       "scenarioId": "SCN-REQ-5.4-02",
       "name": "Cancel metadata changes",
       "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:531",
-      "testLine": 27,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:598",
+      "testLine": 28,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1370,8 +1370,8 @@
       "scenarioId": "SCN-REQ-5.5-01",
       "name": "Confirm deletion",
       "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:575",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:645",
+      "testLine": 7,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1454,8 +1454,8 @@
       "scenarioId": "SCN-REQ-5.5-02",
       "name": "Cancel deletion",
       "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:575",
-      "testLine": 21,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:656",
+      "testLine": 23,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1518,7 +1518,7 @@
       "scenarioId": "SCN-REQ-5.6-01",
       "name": "Save a book with shelf association",
       "testFile": "arc-bench/bookstack/tests/REQ-5.6.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:612",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:706",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -1587,8 +1587,8 @@
       "scenarioId": "SCN-REQ-6.1-01",
       "name": "Publish a page",
       "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:658",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:755",
+      "testLine": 6,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1643,8 +1643,8 @@
       "scenarioId": "SCN-REQ-6.1-02",
       "name": "Save an owned recent draft",
       "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:658",
-      "testLine": 14,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:770",
+      "testLine": 15,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1711,7 +1711,7 @@
       "scenarioId": "SCN-REQ-6.2-01",
       "name": "Confirm draft deletion",
       "testFile": "arc-bench/bookstack/tests/REQ-6.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:712",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:839",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -1786,7 +1786,7 @@
       "scenarioId": "SCN-REQ-6.3-01",
       "name": "Save and open a chapter",
       "testFile": "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:745",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:873",
       "testLine": 5,
       "coverage": {
         "inheritedFrom": [
@@ -1867,8 +1867,8 @@
       "scenarioId": "SCN-REQ-6.4-01",
       "name": "Read selected page",
       "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:779",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:910",
+      "testLine": 6,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1929,8 +1929,8 @@
       "scenarioId": "SCN-REQ-6.4-02",
       "name": "Reopen page editor",
       "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:779",
-      "testLine": 15,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:924",
+      "testLine": 16,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -1999,8 +1999,8 @@
       "scenarioId": "SCN-REQ-7.1-01",
       "name": "Record shelf visit",
       "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:838",
-      "testLine": 6,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:995",
+      "testLine": 7,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -2095,8 +2095,8 @@
       "scenarioId": "SCN-REQ-7.1-02",
       "name": "Reopen visited shelf",
       "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:838",
-      "testLine": 27,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1017",
+      "testLine": 28,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -2171,8 +2171,8 @@
       "scenarioId": "SCN-REQ-8.1-01",
       "name": "Favorite a book",
       "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:924",
-      "testLine": 5,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1081",
+      "testLine": 6,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -2231,8 +2231,8 @@
       "scenarioId": "SCN-REQ-8.1-02",
       "name": "Persist removal of a favorite",
       "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:924",
-      "testLine": 15,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1097",
+      "testLine": 16,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -2319,7 +2319,7 @@
       "scenarioId": "SCN-REQ-8.2-01",
       "name": "Open favorited book",
       "testFile": "arc-bench/bookstack/tests/REQ-8.2.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:976",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1153",
       "testLine": 6,
       "coverage": {
         "inheritedFrom": [
@@ -2431,8 +2431,8 @@
       "scenarioId": "SCN-REQ-9.1-01",
       "name": "Open recently published page",
       "testFile": "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
-      "source": "arc-bench/bookstack/requirements/requirements.yaml:1019",
-      "testLine": 6,
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1195",
+      "testLine": 7,
       "coverage": {
         "inheritedFrom": [
           "ROOT",
@@ -2521,6 +2521,482 @@
         "BOOK-04"
       ],
       "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.4",
+      "scenarioId": "SCN-REQ-4.4-03",
+      "name": "Retain books after shelf deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:418",
+      "testLine": 32,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4",
+          "REQ-4.4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.4.3 containing isolated Book 4.4.3 through that shelf's Create New Book form; the book is also available in the global Book list.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Open the shelf, click Delete, click Confirm Delete, then open Books and the isolated book; reload the book detail."
+        ],
+        "then": [
+          "Shelf list no longer contains the deleted shelf. Book list still contains the isolated book exactly once, and its heading and saved description remain after reload. The book detail no longer exposes the deleted shelf as a parent action."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-4.5",
+      "scenarioId": "SCN-REQ-4.5-03",
+      "name": "Edit related books",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:355",
+      "testLine": 46,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4",
+          "REQ-4.5"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S."
+        ],
+        "then": [
+          "Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-5.4",
+      "scenarioId": "SCN-REQ-5.4-03",
+      "name": "Propagate renamed book",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:611",
+      "testLine": 46,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5",
+          "REQ-5.4"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 5.4.3 containing Book 5.4.3 with Page 5.4.3; the book is favorited and has been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Rename the book to isolated Book Renamed 5.4.3 and save, reload the book; open Books, the containing shelf, and the homepage."
+        ],
+        "then": [
+          "The book heading uses the new name. Book list and the containing shelf's Book list contain the new name exactly once and do not contain the old name. My Most Viewed Favorites and My Recently Viewed contain the new name exactly once and do not contain the old name. Reload preserves the new name and a single book identity."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-5.5",
+      "scenarioId": "SCN-REQ-5.5-03",
+      "name": "Delete contained chapters and pages",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:667",
+      "testLine": 34,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5",
+          "REQ-5.5"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload."
+        ],
+        "then": [
+          "Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-03",
+      "name": "Publish an owned draft",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:788",
+      "testLine": 27,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 6.1.3 with owned draft Page Draft 6.1.3. A fresh anonymous browser has that book open in a separate context.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "In the anonymous context, inspect the book's Page list. In the authenticated context, open the draft from the parent book's Page list, click Save Page, then open the book and the homepage; reload the anonymous book."
+        ],
+        "then": [
+          "Before publishing, the anonymous Page list does not contain the draft. After publishing, the draft is absent from My Recent Drafts, appears exactly once in the parent book's Page list and in Recently Updated Pages, and the anonymous browser can open it and read its saved body. Reload preserves the published page and does not create a duplicate."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-04",
+      "name": "Keep drafts private to their owner",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:805",
+      "testLine": 60,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 6.1.4 with owned draft Page Draft 6.1.4. A fresh anonymous browser and a second verified account have that book open in separate contexts.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Inspect the book's Page list and My Recent Drafts as the anonymous visitor and as the second verified account; attempt to open the draft by the URL observed for its owner; then reopen the parent book as the owner."
+        ],
+        "then": [
+          "Neither the anonymous visitor nor the second account sees the draft in the parent book's Page list; the second account's My Recent Drafts does not contain it and the anonymous homepage does not contain the draft title. Neither can open the draft editor or read its body from the observed URL. The owner still sees the draft exactly once in the parent book's Page list and in My Recent Drafts."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.4",
+      "scenarioId": "SCN-REQ-6.4-03",
+      "name": "Save edited page",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:939",
+      "testLine": 28,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 6.3.3 with Reading content for Page 6.3.3. under isolated Book 6.3.3."
+        ],
+        "when": [
+          "Open that page from the parent Page list, click Edit, replace Page title with isolated Page Updated 6.3.3 and the body with Updated content for Page 6.3.3., click Save Page, then open the parent book and the homepage and reload the page."
+        ],
+        "then": [
+          "The page heading and body show the updated values before and after reload. The parent Page list contains the updated title exactly once and does not contain the old title. Recently Updated Pages contains the updated title exactly once and does not contain the old title."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-7.1",
+      "scenarioId": "SCN-REQ-7.1-03",
+      "name": "Deduplicate and isolate recent views",
+      "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1038",
+      "testLine": 42,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-7",
+          "REQ-7.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 7.3-A; a second verified account has UI-created isolated Shelf 7.3-B. Both shelves are available from the shared Shelf list.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Shelf 7.3-A twice as the verified account, then open Shelf 7.3-B as the second account; open the homepage as each account and reload the verified account's homepage."
+        ],
+        "then": [
+          "The verified account's My Recently Viewed contains Shelf 7.3-A exactly once and not Shelf 7.3-B. The second account's My Recently Viewed contains Shelf 7.3-B and not Shelf 7.3-A. Both regions contain no more than ten records; the verified account's single entry survives reload."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-8.1",
+      "scenarioId": "SCN-REQ-8.1-03",
+      "name": "Keep favorites personal and remove deleted content",
+      "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1114",
+      "testLine": 33,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-8",
+          "REQ-8.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 8.1.3; the book is favorited by that account. A second verified account has not favorited it.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage."
+        ],
+        "then": [
+          "The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-9.1",
+      "scenarioId": "SCN-REQ-9.1-02",
+      "name": "Edit updates recently updated page",
+      "testFile": "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1208",
+      "testLine": 26,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-9",
+          "REQ-9.1"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 9.1.2 with Reading content for Page 9.1.2. under isolated Book 9.1.2."
+        ],
+        "when": [
+          "Open the page from the parent Page list, click Edit, replace its title with isolated Page Updated 9.1.2 and body with Updated content for Page 9.1.2., click Save Page, open the homepage, and activate the updated page entry."
+        ],
+        "then": [
+          "Recently Updated Pages contains the updated title exactly once and does not contain the old title; selecting the entry opens the page with its updated heading and body. The region contains no more than five records; reload preserves the result."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.1",
+      "scenarioId": "SCN-REQ-10.1-01",
+      "name": "Confirm page deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1243",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 10.1.1 with Chapter 10.1.1 and Page 10.1.1 and sibling Page 10.1.1-Sibling. Page 10.1.1 is favorited and has been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Page 10.1.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.1.1; open the homepage and reload the book."
+        ],
+        "then": [
+          "The parent book returns with Page 10.1.1 absent from its Page list and Page 10.1.1-Sibling present; Chapter 10.1.1's Page list no longer contains Page 10.1.1. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Page 10.1.1. Reload preserves the page's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.1",
+      "scenarioId": "SCN-REQ-10.1-02",
+      "name": "Cancel page deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1262",
+      "testLine": 43,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.1"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 10.1.2 with Page content 10.1.2. under isolated Book 10.1.2."
+        ],
+        "when": [
+          "Open the page from the parent Page list, click Delete, click Cancel, and reload the page."
+        ],
+        "then": [
+          "The page remains with its saved heading and body. The parent Page list contains it exactly once, and Recently Updated Pages still contains it. Reload preserves the page."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.2",
+      "scenarioId": "SCN-REQ-10.2-01",
+      "name": "Confirm chapter deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1287",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.2"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 10.2.1 with Chapter 10.2.1 containing Page 10.2.1-A and Page 10.2.1-B, plus root Page 10.2.1-Root and Chapter 10.2.1-Other containing Page 10.2.1-Other-Page. Chapter 10.2.1 and Page 10.2.1-A are favorited and have been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Chapter 10.2.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.2.1-Other; open the homepage, attempt the former Page 10.2.1-A URL, and reload."
+        ],
+        "then": [
+          "Chapter list no longer contains Chapter 10.2.1 and still contains Chapter 10.2.1-Other. The former chapter pages are absent from the parent book's Page list and are not readable from their former URLs; Page 10.2.1-Root and Page 10.2.1-Other-Page remain. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Chapter 10.2.1 or Page 10.2.1-A. Reload preserves the chapter's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.2",
+      "scenarioId": "SCN-REQ-10.2-02",
+      "name": "Cancel chapter deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1305",
+      "testLine": 56,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.2"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Chapter 10.2.2 with Page 10.2.2 under isolated Book 10.2.2."
+        ],
+        "when": [
+          "Open the chapter, click Delete, click Cancel, and reload the chapter."
+        ],
+        "then": [
+          "The chapter remains with its saved heading and description, and its Page list still contains the saved page. No chapter or page is deleted."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
     }
   ],
   "findings": [
@@ -2850,32 +3326,30 @@
     }
   ],
   "changedFiles": [
-    "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
-    "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
-    "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+    "arc-bench/bookstack/requirements/requirements.yaml",
     "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
     "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
-    "arc-bench/bookstack/tests/REQ-5.1.spec.ts",
     "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
     "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
-    "arc-bench/bookstack/tests/REQ-5.6.spec.ts",
     "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
-    "arc-bench/bookstack/tests/REQ-6.2.spec.ts",
-    "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
     "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+    "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
     "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
-    "arc-bench/bookstack/tests/helpers.ts",
-    "arc-bench/bookstack/tests/support/list-cap.ts"
+    "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+    "arc-bench/bookstack/tests/helpers.ts"
   ],
   "limitations": [
     "This is a derivative benchmark source review, not an upstream official-score certification.",
-    "No complete BookStack implementation was run; targeted synthetic controls do not measure full-application false-negative rates.",
     "BOOK-09 broader prose coverage and BOOK-11 parent-entry/text-scope/tag-serialization ambiguities remain explicit.",
-    "No source requirements, seeds, scenario IDs or count changed. Public-controls template remains unchanged."
+    "Extension scenarios were executed against a manually extended reference fixture, not a ShallowCode-generated candidate; this validates oracle feasibility, not an official full-application pass rate.",
+    "Existing 24/35 identities were preserved; the revision now has 26 atomic requirements and 49 scenarios, so older scores are not directly comparable.",
+    "Draft-title activity leakage and page/chapter deletion are newly covered; full eight-task and multi-candidate behavior is outside this review."
   ],
   "validation": {
-    "typecheck": "passed: all BookStack spec/helper files plus audit/validation/bookstack.spec.ts",
-    "browser": "19 added positive/negative contracts pending parent execution",
-    "scope": "No controller changes, so no controller/full repository test suite needed."
+    "typecheck": "passed: BookStack specs and helpers compile with audit/tsconfig.json",
+    "browser": "49/49 BookStack scenarios passed against the local reference fixture (35 existing + 14 extension)",
+    "scope": "Reference fixture only; no ShallowCode candidate or full eight-task rerun."
   }
 }

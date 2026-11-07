@@ -1,29 +1,17 @@
 
 Running 17 tests using 1 worker
 
-
-
-
-
-[1A[2K[1/17] [sheet-sibling] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:45:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
-[1A[2K[2/17] [sheet-sibling] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:79:5 › REQ-1.1.1: View and Open a Workbook - Scenario 2
-
-
-
-
-[1A[2K[3/17] [sheet-nested] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:45:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
-[1A[2K[4/17] [sheet-nested] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:79:5 › REQ-1.1.1: View and Open a Workbook - Scenario 2
-
-
-
-
-[1A[2K[5/17] [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:45:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
-[1A[2K  1) [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:45:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1 
+[1A[2K[1/17] [sheet-sibling] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:46:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
+[1A[2K[2/17] [sheet-sibling] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:80:5 › REQ-1.1.1: View and Open a Workbook - Scenario 2
+[1A[2K[3/17] [sheet-nested] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:46:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
+[1A[2K[4/17] [sheet-nested] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:80:5 › REQ-1.1.1: View and Open a Workbook - Scenario 2
+[1A[2K[5/17] [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:46:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1
+[1A[2K  1) [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:46:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1 
 
     Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveText[2m([22m[32mexpected[39m[2m)[22m failed
 
     Locator: getByRole('gridcell', { name: 'A1', exact: true })
-    Expected: [32m"pw-open-value-1793962967644-ywlm3f"[39m
+    Expected: [32m"pw-open-value-1794057595098-nsulc1"[39m
     Timeout: 500ms
     Error: element(s) not found
 
@@ -32,29 +20,21 @@ Running 17 tests using 1 worker
     [2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })[22m
 
 
-      32 |     await expect(reopenedPage.getByText(workbookName, { exact: true })).toBeVisible();
-      33 |     await expect(reopenedPage.getByText(lastUpdatedText, { exact: true })).toBeVisible();
-    > 34 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);
+      33 |     await expectText(reopenedPage, workbookName, { exact: true });
+      34 |     await expectText(reopenedPage, lastUpdatedText, { exact: true });
+    > 35 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);
          |                                                ^
-      35 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');
-      36 |   } finally {
-      37 |     await context.close();
-        at expectWorkbookInNewSession (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\sheet\tests\REQ-1.1.1.spec.ts:34:48)
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\sheet\tests\REQ-1.1.1.spec.ts:76:3
+      36 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');
+      37 |   } finally {
+      38 |     await context.close();
+        at expectWorkbookInNewSession (E:\my-works\coding\arc-bench-ext\arc-bench\sheet\tests\REQ-1.1.1.spec.ts:35:48)
+        at E:\my-works\coding\arc-bench-ext\arc-bench\sheet\tests\REQ-1.1.1.spec.ts:77:3
 
     Error Context: validation\closeout\record-oracle-results\REQ-1.1.1-REQ-1-1-1-View-and-Open-a-Workbook---Scenario-1-sheet-direct\error-context.md
 
 
-
-
-
-
 [1A[2K[6/17] [member-ok] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1
 [1A[2K[7/17] [member-ok] › arc-bench\github\tests\REQ-2.2.3.spec.ts:60:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 2
-
-
-
-
 [1A[2K[8/17] [member-role] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1
 [1A[2K  2) [member-role] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1 
 
@@ -77,13 +57,9 @@ Running 17 tests using 1 worker
       36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);
       37 |   await page.reload();
       38 |   await expect(record).toHaveCount(1);
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-2.2.3.spec.ts:35:61
+        at E:\my-works\coding\arc-bench-ext\arc-bench\github\tests\REQ-2.2.3.spec.ts:35:61
 
     Error Context: validation\closeout\record-oracle-results\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-role\error-context.md
-
-
-
-
 
 
 [1A[2K[9/17] [member-persist] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1
@@ -110,13 +86,9 @@ Running 17 tests using 1 worker
       39 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();
       40 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();
       41 |
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-2.2.3.spec.ts:38:24
+        at E:\my-works\coding\arc-bench-ext\arc-bench\github\tests\REQ-2.2.3.spec.ts:38:24
 
     Error Context: validation\closeout\record-oracle-results\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-persist\error-context.md
-
-
-
-
 
 
 [1A[2K[10/17] [member-access] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1
@@ -134,55 +106,43 @@ Running 17 tests using 1 worker
     [2m  - waiting for getByText('Access denied', { exact: true })[22m
 
 
-      54 |   await memberPage.getByRole('link', { name: 'Repositories', exact: true }).click();
-      55 |   await memberPage.goto(privateRepositoryUrl);
-    > 56 |   await expect(memberPage.getByText('Access denied', { exact: true })).toBeVisible();
-         |                                                                        ^
+      54 |     await memberPage.getByRole('link', { name: 'Repositories', exact: true }).click();
+      55 |     await memberPage.goto(privateRepositoryUrl);
+    > 56 |     await expect(memberPage.getByText('Access denied', { exact: true })).toBeVisible();
+         |                                                                          ^
       57 |   } finally { await memberContext.close(); }
       58 | });
       59 |
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\github\tests\REQ-2.2.3.spec.ts:56:72
+        at E:\my-works\coding\arc-bench-ext\arc-bench\github\tests\REQ-2.2.3.spec.ts:56:74
 
     Error Context: validation\closeout\record-oracle-results\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-access\error-context.md
 
 
-
-
-
-
-[1A[2K[11/17] [book-ok] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:6:5 › REQ-7.1: Record shelf visit
-[1A[2K[12/17] [book-ok] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:27:5 › REQ-7.1: Reopen visited shelf
+[1A[2K[11/17] [book-ok] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:7:5 › REQ-7.1: Record shelf visit
+[1A[2K[12/17] [book-ok] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:28:5 › REQ-7.1: Reopen visited shelf
 [1A[2K[13/17] [book-ok] › arc-bench\bookstack\tests\REQ-8.2.spec.ts:6:5 › REQ-8.2: Open favorited book
-[1A[2K[14/17] [book-ok] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:6:5 › REQ-9.1: Open recently published page
-
-
-
-
-[1A[2K[15/17] [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:6:5 › REQ-7.1: Record shelf visit
-[1A[2K  5) [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:6:5 › REQ-7.1: Record shelf visit ─
+[1A[2K[14/17] [book-ok] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:7:5 › REQ-9.1: Open recently published page
+[1A[2K[15/17] [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:7:5 › REQ-7.1: Record shelf visit
+[1A[2K  5) [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:7:5 › REQ-7.1: Record shelf visit ─
 
     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
 
     Expected: <= [32m10[39m
     Received:    [31m12[39m
 
-       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:9
+       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:12
 
-       7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
-       8 |   const count = await records.count();
-    >  9 |   expect(count).toBeLessThanOrEqual(limit);
+      10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
+      11 |   const count = await records.count();
+    > 12 |   expect(count).toBeLessThanOrEqual(limit);
          |                 ^
-      10 |   const prepared: { target: Locator; name: string }[] = [];
-      11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
-      12 |   for (const record of await records.all()) {
-        at cappedEntry (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\support\list-cap.ts:9:17)
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\REQ-7.1.spec.ts:22:20
+      13 |   const prepared: { target: Locator; name: string }[] = [];
+      14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
+      15 |   for (const record of await records.all()) {
+        at cappedEntry (E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\support\list-cap.ts:12:17)
+        at E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\REQ-7.1.spec.ts:23:20
 
     Error Context: validation\closeout\record-oracle-results\REQ-7.1-REQ-7-1-Record-shelf-visit-book-uncapped\error-context.md
-
-
-
-
 
 
 [1A[2K[16/17] [book-uncapped] › arc-bench\bookstack\tests\REQ-8.2.spec.ts:6:5 › REQ-8.2: Open favorited book
@@ -193,98 +153,50 @@ Running 17 tests using 1 worker
     Expected: <= [32m4[39m
     Received:    [31m5[39m
 
-       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:9
+       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:12
 
-       7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
-       8 |   const count = await records.count();
-    >  9 |   expect(count).toBeLessThanOrEqual(limit);
+      10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
+      11 |   const count = await records.count();
+    > 12 |   expect(count).toBeLessThanOrEqual(limit);
          |                 ^
-      10 |   const prepared: { target: Locator; name: string }[] = [];
-      11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
-      12 |   for (const record of await records.all()) {
-        at cappedEntry (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\support\list-cap.ts:9:17)
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\REQ-8.2.spec.ts:26:20
+      13 |   const prepared: { target: Locator; name: string }[] = [];
+      14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
+      15 |   for (const record of await records.all()) {
+        at cappedEntry (E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\support\list-cap.ts:12:17)
+        at E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\REQ-8.2.spec.ts:26:20
 
     Error Context: validation\closeout\record-oracle-results\REQ-8.2-REQ-8-2-Open-favorited-book-book-uncapped\error-context.md
 
 
-
-
-
-
-[1A[2K[17/17] [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:6:5 › REQ-9.1: Open recently published page
-[1A[2K  7) [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:6:5 › REQ-9.1: Open recently published page 
+[1A[2K[17/17] [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:7:5 › REQ-9.1: Open recently published page
+[1A[2K  7) [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:7:5 › REQ-9.1: Open recently published page 
 
     Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThanOrEqual[2m([22m[32mexpected[39m[2m)[22m
 
     Expected: <= [32m5[39m
     Received:    [31m6[39m
 
-       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:9
+       at ..\..\arc-bench\bookstack\tests\support\list-cap.ts:12
 
-       7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
-       8 |   const count = await records.count();
-    >  9 |   expect(count).toBeLessThanOrEqual(limit);
+      10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);
+      11 |   const count = await records.count();
+    > 12 |   expect(count).toBeLessThanOrEqual(limit);
          |                 ^
-      10 |   const prepared: { target: Locator; name: string }[] = [];
-      11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
-      12 |   for (const record of await records.all()) {
-        at cappedEntry (E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\support\list-cap.ts:9:17)
-        at E:\my-works\coding\ShallowCode\outputs\benchmark-closeout-20261106\benchmark\arc-bench\bookstack\tests\REQ-9.1.spec.ts:19:20
+      13 |   const prepared: { target: Locator; name: string }[] = [];
+      14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);
+      15 |   for (const record of await records.all()) {
+        at cappedEntry (E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\support\list-cap.ts:12:17)
+        at E:\my-works\coding\arc-bench-ext\arc-bench\bookstack\tests\REQ-9.1.spec.ts:20:20
 
     Error Context: validation\closeout\record-oracle-results\REQ-9.1-REQ-9-1-Open-recently-published-page-book-uncapped\error-context.md
 
 
 [1A[2K  7 failed
-    [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:45:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1 
+    [sheet-direct] › arc-bench\sheet\tests\REQ-1.1.1.spec.ts:46:5 › REQ-1.1.1: View and Open a Workbook - Scenario 1 
     [member-role] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1 
     [member-persist] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1 
     [member-access] › arc-bench\github\tests\REQ-2.2.3.spec.ts:16:5 › REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1 
-    [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:6:5 › REQ-7.1: Record shelf visit ──
+    [book-uncapped] › arc-bench\bookstack\tests\REQ-7.1.spec.ts:7:5 › REQ-7.1: Record shelf visit ──
     [book-uncapped] › arc-bench\bookstack\tests\REQ-8.2.spec.ts:6:5 › REQ-8.2: Open favorited book ─
-    [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:6:5 › REQ-9.1: Open recently published page 
+    [book-uncapped] › arc-bench\bookstack\tests\REQ-9.1.spec.ts:7:5 › REQ-9.1: Open recently published page 
   10 passed (1.1m)
-[1A[2K(node:9020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:9020) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:46900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:46900) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:38848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:38848) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:34252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:34252) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:57744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:57744) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:24788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:24788) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:39980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:39980) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:20160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:20160) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:68508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:68508) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:59004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:59004) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:31128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)
-[1A[2K(node:31128) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
-(Use `node --trace-warnings ...` to show where the warning was created)

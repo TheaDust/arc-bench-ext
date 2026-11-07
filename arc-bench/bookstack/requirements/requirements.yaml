@@ -11,6 +11,8 @@ description:
     For session and personal dashboard state: Established through login, opening content, favoriting content, or saving pages/drafts. No private storage injection.
     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
 
+    The initialized application contains two verified accounts: BookStack User (bookstack_user@example.com / Password123!) and BookStack Reviewer (bookstack_reviewer@example.com / Password123!). Scenarios that require cross-user isolation use the named account; other scenarios use BookStack User.
+
 scenarios: []
 children:
 - id: REQ-1
@@ -305,10 +307,10 @@ children:
   - id: REQ-4.5
     name: Edit or abandon shelf metadata
     description:
-      text: On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox),
-        and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf
-        and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button)
-        discards all pending changes and returns to the unchanged details. Related-book editing is also supported.
+      text: |-
+        On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button) discards all pending changes and returns to the unchanged details.
+
+        Related-book editing is supported. The shelf edit form exposes one checkbox per available book, named by that book's exact name and checked exactly when the book belongs to the shelf. Saving adds every checked book to this shelf and removes every unchecked book from this shelf only; removing a book neither deletes it nor removes it from another shelf. The same book may belong to multiple shelves.
       image:
       - id: IMG-SHELF
         reference: reference/shelf.png
@@ -350,14 +352,31 @@ children:
         - \ref[requirement](REQ-4.2)
         - \ref[image](IMG-SHELF)
         - \ref[image](IMG-EDIT-SHELVE)
+    - id: SCN-REQ-4.5-03
+      name: Edit related books
+      steps:
+      - id: STEP-REQ-4.5-03-01
+        Given: |-
+          An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.
+          Seed prerequisites (prepared before this scenario):
+          - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
+        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
+        Then: Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
+        references:
+        - \ref[requirement](REQ-4.2)
+        - \ref[requirement](REQ-5.2)
+        - \ref[requirement](REQ-5.6)
+        - \ref[image](IMG-SHELF)
+        - \ref[image](IMG-EDIT-SHELVE)
+        - \ref[image](IMG-BOOKS)
     children: []
   - id: REQ-4.4
     name: Delete or retain shelf
     description:
-      text: Clicking "Delete"(role=button) on a selected shelf opens confirmation. "Confirm Delete"(role=button)
-        removes that shelf and returns to "Shelf list"(role=region), where its entry is absent; the
-        deletion remains effective across navigation. "Cancel"(role=button) keeps the shelf and preserves its original
-        heading and description.
+      text: |-
+        Clicking "Delete"(role=button) on a selected shelf opens confirmation. "Confirm Delete"(role=button) removes that shelf and returns to "Shelf list"(role=region), where its entry is absent; the deletion remains effective across navigation. "Cancel"(role=button) keeps the shelf and preserves its original heading and description.
+
+        Deleting a shelf does not delete the books it contains. Contained books remain in the global Book list with their saved metadata, and the deleted shelf no longer appears as a parent action on those books.
       image:
       - id: IMG-DELETE-SHELVES
         reference: reference/delete_shelves.png
@@ -396,6 +415,22 @@ children:
         - \ref[requirement](REQ-4.2)
         - \ref[image](IMG-DELETE-SHELVES)
         - \ref[image](IMG-SHELVES)
+    - id: SCN-REQ-4.4-03
+      name: Retain books after shelf deletion
+      steps:
+      - id: STEP-REQ-4.4-03-01
+        Given: |-
+          An anonymous visitor has UI-created isolated Shelf 4.4.3 containing isolated Book 4.4.3 through that shelf's Create New Book form; the book is also available in the global Book list.
+          Seed prerequisites (prepared before this scenario):
+          - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
+        When: Open the shelf, click Delete, click Confirm Delete, then open Books and the isolated book; reload the book detail.
+        Then: Shelf list no longer contains the deleted shelf. Book list still contains the isolated book exactly once, and its heading and saved description remain after reload. The book detail no longer exposes the deleted shelf as a parent action.
+        references:
+        - \ref[requirement](REQ-4.2)
+        - \ref[requirement](REQ-5.6)
+        - \ref[image](IMG-DELETE-SHELVES)
+        - \ref[image](IMG-BOOKS)
+        - \ref[image](IMG-BOOK)
     children: []
 - id: REQ-5
   name: Manage books
@@ -535,6 +570,8 @@ children:
         On the selected book's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with their saved values. "Save Book"(role=button) changes that same book and returns to its details with the updated heading and description, persisting after reload. "Cancel"(role=button) returns to the unchanged details and discards all pending edits.
 
         Book metadata editing also retains the rich-text description, optional cover image and selected default page template. Cover format and the template catalog are unspecified; saving or cancelling follows the same persistence rules as the other metadata.
+
+        A saved rename is reflected by every list and personal projection that identifies the book: the global Book list, every containing shelf's Book list, My Most Viewed Favorites, and My Recently Viewed use the new name and no longer use the old name. Renaming does not create a second book.
       image:
       - id: IMG-BOOK
         reference: reference/book.png
@@ -571,13 +608,32 @@ children:
         - \ref[requirement](REQ-5.2)
         - \ref[image](IMG-BOOK)
         - \ref[image](IMG-EDIT-BOOK)
+    - id: SCN-REQ-5.4-03
+      name: Propagate renamed book
+      steps:
+      - id: STEP-REQ-5.4-03-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Shelf 5.4.3 containing Book 5.4.3 with Page 5.4.3; the book is favorited and has been opened in the current session.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+        When: Rename the book to isolated Book Renamed 5.4.3 and save, reload the book; open Books, the containing shelf, and the homepage.
+        Then: The book heading uses the new name. Book list and the containing shelf's Book list contain the new name exactly once and do not contain the old name. My Most Viewed Favorites and My Recently Viewed contain the new name exactly once and do not contain the old name. Reload preserves the new name and a single book identity.
+        references:
+        - \ref[requirement](REQ-4.2)
+        - \ref[requirement](REQ-5.2)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+        - \ref[image](IMG-BOOK)
+        - \ref[image](IMG-BOOKS)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
     children: []
   - id: REQ-5.5
     name: Delete or retain book
     description:
-      text: Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button)
-        removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent
-        navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
+      text: |-
+        Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button) removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
+
+        Confirming also removes that book's chapters and pages from the hierarchy, the containing shelf's Book list, Recently Updated Pages, favorites and recently viewed entries. Books on the same shelf and other shelves remain.
       image:
       - id: IMG-DELETE-BOOK
         reference: reference/delete_book.png
@@ -608,6 +664,25 @@ children:
         - \ref[requirement](REQ-5.2)
         - \ref[image](IMG-DELETE-BOOK)
         - \ref[image](IMG-BOOKS)
+    - id: SCN-REQ-5.5-03
+      name: Delete contained chapters and pages
+      steps:
+      - id: STEP-REQ-5.5-03-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+        When: Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload.
+        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence.
+        references:
+        - \ref[requirement](REQ-4.2)
+        - \ref[requirement](REQ-5.6)
+        - \ref[requirement](REQ-6.3)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+        - \ref[image](IMG-DELETE-BOOK)
+        - \ref[image](IMG-BOOKS)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
     children: []
   - id: REQ-5.6
     name: Create a book in a shelf
@@ -664,6 +739,8 @@ children:
         Dates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.
 
         Published pages can be organized under a chapter belonging to their parent book. Saving keeps the book/chapter association so that the page is readable from the appropriate chapter Page list as well as its book context. Drafts belong to the authenticated author and their parent book.
+
+        An owned draft is visible only to its author. Anonymous visitors do not see it in the parent book's Page list, and the anonymous homepage does not contain its title. Other verified users do not see it in the parent book's Page list or in My Recent Drafts. Neither can open the draft. The author can open the draft and click "Save Page"(role=button) to publish it under the same parent book; publishing removes it from My Recent Drafts, adds it exactly once to the parent book's Page list, makes it readable anonymously, and places it in Recently Updated Pages without creating a duplicate page.
       image:
       - id: IMG-BOOK
         reference: reference/book.png
@@ -706,6 +783,39 @@ children:
         - \ref[requirement](REQ-5.3)
         - \ref[requirement](REQ-2.2)
         - \ref[image](IMG-BOOK)
+        - \ref[image](IMG-PAGE-DRAFT)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
+    - id: SCN-REQ-6.1-03
+      name: Publish an owned draft
+      steps:
+      - id: STEP-REQ-6.1-03-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Book 6.1.3 with owned draft Page Draft 6.1.3. A fresh anonymous browser has that book open in a separate context.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+        When: In the anonymous context, inspect the book's Page list. In the authenticated context, open the draft from the parent book's Page list, click Save Page, then open the book and the homepage; reload the anonymous book.
+        Then: Before publishing, the anonymous Page list does not contain the draft. After publishing, the draft is absent from My Recent Drafts, appears exactly once in the parent book's Page list and in Recently Updated Pages, and the anonymous browser can open it and read its saved body. Reload preserves the published page and does not create a duplicate.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-5.3)
+        - \ref[requirement](REQ-9.1)
+        - \ref[image](IMG-PAGE-DRAFT)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
+        - \ref[image](IMG-PAGE)
+    - id: SCN-REQ-6.1-04
+      name: Keep drafts private to their owner
+      steps:
+      - id: STEP-REQ-6.1-04-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Book 6.1.4 with owned draft Page Draft 6.1.4. A fresh anonymous browser and a second verified account have that book open in separate contexts.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
+        When: Inspect the book's Page list and My Recent Drafts as the anonymous visitor and as the second verified account; attempt to open the draft by the URL observed for its owner; then reopen the parent book as the owner.
+        Then: Neither the anonymous visitor nor the second account sees the draft in the parent book's Page list; the second account's My Recent Drafts does not contain it and the anonymous homepage does not contain the draft title. Neither can open the draft editor or read its body from the observed URL. The owner still sees the draft exactly once in the parent book's Page list and in My Recent Drafts.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-5.3)
         - \ref[image](IMG-PAGE-DRAFT)
         - \ref[image](IMG-INDEX-AFTER-LOGIN)
     children: []
@@ -779,10 +889,10 @@ children:
   - id: REQ-6.4
     name: Read a page or reopen its editor
     description:
-      text: Selecting "{page title}"(role=button) from a book or chapter's "Page list"(role=region) displays the
-        published page's title heading and saved body. "Edit"(role=button) on the reading page opens an editor prefilled
-        with the current title in "Page title"(role=textbox) and body in "Write your page content here..."(role=textbox),
-        with "Save Page"(role=button) available to save the page.
+      text: |-
+        Selecting "{page title}"(role=button) from a book or chapter's "Page list"(role=region) displays the published page's title heading and saved body. "Edit"(role=button) on the reading page opens an editor prefilled with the current title in "Page title"(role=textbox) and body in "Write your page content here..."(role=textbox), with "Save Page"(role=button) available to save the page.
+
+        Saving the editor persists the new title and body; the reading page, the parent Page list and Recently Updated Pages use the new title, and the old title and body no longer identify the page. Changes survive reload.
       image:
       - id: IMG-BOOK
         reference: reference/book.png
@@ -824,6 +934,19 @@ children:
         - \ref[requirement](REQ-6.1)
         - \ref[image](IMG-BOOK)
         - \ref[image](IMG-CHAPTER)
+        - \ref[image](IMG-PAGE)
+        - \ref[image](IMG-PAGE-DRAFT)
+    - id: SCN-REQ-6.4-03
+      name: Save edited page
+      steps:
+      - id: STEP-REQ-6.4-03-01
+        Given: An anonymous visitor has UI-published isolated Page 6.3.3 with Reading content for Page 6.3.3. under isolated Book 6.3.3.
+        When: Open that page from the parent Page list, click Edit, replace Page title with isolated Page Updated 6.3.3 and the body with Updated content for Page 6.3.3., click Save Page, then open the parent book and the homepage and reload the page.
+        Then: The page heading and body show the updated values before and after reload. The parent Page list contains the updated title exactly once and does not contain the old title. Recently Updated Pages contains the updated title exactly once and does not contain the old title.
+        references:
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-9.1)
+        - \ref[image](IMG-BOOK)
         - \ref[image](IMG-PAGE)
         - \ref[image](IMG-PAGE-DRAFT)
     children: []
@@ -912,6 +1035,22 @@ children:
         - \ref[image](IMG-CHAPTER)
         - \ref[image](IMG-PAGE)
         - \ref[image](IMG-INDEX-AFTER-LOGIN)
+    - id: SCN-REQ-7.1-03
+      name: Deduplicate and isolate recent views
+      steps:
+      - id: STEP-REQ-7.1-03-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Shelf 7.3-A; a second verified account has UI-created isolated Shelf 7.3-B. Both shelves are available from the shared Shelf list.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
+        When: Open Shelf 7.3-A twice as the verified account, then open Shelf 7.3-B as the second account; open the homepage as each account and reload the verified account's homepage.
+        Then: The verified account's My Recently Viewed contains Shelf 7.3-A exactly once and not Shelf 7.3-B. The second account's My Recently Viewed contains Shelf 7.3-B and not Shelf 7.3-A. Both regions contain no more than ten records; the verified account's single entry survives reload.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-4.2)
+        - \ref[image](IMG-SHELF)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
     children: []
 - id: REQ-8
   name: Personal favorites
@@ -927,7 +1066,7 @@ children:
       text: |-
         On an authenticated shelf, book, chapter, or page details view, "Favorite"(role=button) initially exposes aria-pressed=false. Clicking it stores a personal favorite and changes the action to "Unfavorite"(role=button) with aria-pressed=true. Clicking Unfavorite removes the preference and restores Favorite with aria-pressed=false. The selected state persists after reload and follows the same behavior for all four content types.
 
-        Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload.
+        Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload. Deleting favorited content removes it from the owner's favorite projections.
       image:
       - id: IMG-BOOK
         reference: reference/book.png
@@ -972,6 +1111,24 @@ children:
         - \ref[image](IMG-BOOK)
         - \ref[image](IMG-FAVOURITES)
         - \ref[image](IMG-INDEX)
+    - id: SCN-REQ-8.1-03
+      name: Keep favorites personal and remove deleted content
+      steps:
+      - id: STEP-REQ-8.1-03-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Book 8.1.3; the book is favorited by that account. A second verified account has not favorited it.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
+        When: As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage.
+        Then: The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-5.3)
+        - \ref[requirement](REQ-5.5)
+        - \ref[image](IMG-BOOK)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
+        - \ref[image](IMG-BOOKS)
     children: []
   - id: REQ-8.2
     name: Open a homepage favorite
@@ -1048,4 +1205,112 @@ children:
         - \ref[requirement](REQ-6.1)
         - \ref[image](IMG-INDEX)
         - \ref[image](IMG-PAGE)
+    - id: SCN-REQ-9.1-02
+      name: Edit updates recently updated page
+      steps:
+      - id: STEP-REQ-9.1-02-01
+        Given: An anonymous visitor has UI-published isolated Page 9.1.2 with Reading content for Page 9.1.2. under isolated Book 9.1.2.
+        When: Open the page from the parent Page list, click Edit, replace its title with isolated Page Updated 9.1.2 and body with Updated content for Page 9.1.2., click Save Page, open the homepage, and activate the updated page entry.
+        Then: Recently Updated Pages contains the updated title exactly once and does not contain the old title; selecting the entry opens the page with its updated heading and body. The region contains no more than five records; reload preserves the result.
+        references:
+        - \ref[requirement](REQ-6.4)
+        - \ref[image](IMG-INDEX)
+        - \ref[image](IMG-PAGE)
+    children: []
+- id: REQ-10
+  name: Content lifecycle and relational integrity
+  description:
+    text: |-
+      Published pages and chapters can be deleted with confirmation. Deletion and membership changes keep the hierarchy, global lists, personal projections and homepage regions consistent, and do not remove unrelated content.
+  scenarios: []
+  children:
+  - id: REQ-10.1
+    name: Delete a published page
+    description:
+      text: |-
+        On a published page's reading view, "Delete"(role=button) opens a confirmation with "Confirm Delete"(role=button) and "Cancel"(role=button). Confirming removes that page and returns to its parent book. The page is not readable from its former URL and is absent from the book and chapter "Page list"(role=region), from "Recently Updated Pages"(role=region), and from the author's favorites and recently viewed entries. Cancel keeps the page with its saved title and body. Deletion persists across reload and does not remove sibling pages.
+      image:
+      - id: IMG-PAGE
+        reference: reference/page.png
+        page: page
+      - id: IMG-BOOK
+        reference: reference/book.png
+        page: book
+      - id: IMG-INDEX-AFTER-LOGIN
+        reference: reference/index_after_login.png
+        page: home
+    scenarios:
+    - id: SCN-REQ-10.1-01
+      name: Confirm page deletion
+      steps:
+      - id: STEP-REQ-10.1-01-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Book 10.1.1 with Chapter 10.1.1 and Page 10.1.1 and sibling Page 10.1.1-Sibling. Page 10.1.1 is favorited and has been opened in the current session.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+        When: Open Page 10.1.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.1.1; open the homepage and reload the book.
+        Then: The parent book returns with Page 10.1.1 absent from its Page list and Page 10.1.1-Sibling present; Chapter 10.1.1's Page list no longer contains Page 10.1.1. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Page 10.1.1. Reload preserves the page's absence.
+        references:
+        - \ref[requirement](REQ-5.3)
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.3)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+        - \ref[image](IMG-PAGE)
+        - \ref[image](IMG-BOOK)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
+    - id: SCN-REQ-10.1-02
+      name: Cancel page deletion
+      steps:
+      - id: STEP-REQ-10.1-02-01
+        Given: An anonymous visitor has UI-published isolated Page 10.1.2 with Page content 10.1.2. under isolated Book 10.1.2.
+        When: Open the page from the parent Page list, click Delete, click Cancel, and reload the page.
+        Then: The page remains with its saved heading and body. The parent Page list contains it exactly once, and Recently Updated Pages still contains it. Reload preserves the page.
+        references:
+        - \ref[requirement](REQ-6.1)
+        - \ref[image](IMG-PAGE)
+        - \ref[image](IMG-BOOK)
+    children: []
+  - id: REQ-10.2
+    name: Delete a chapter
+    description:
+      text: |-
+        On a chapter's detail view, "Delete"(role=button) opens a confirmation with "Confirm Delete"(role=button) and "Cancel"(role=button). Confirming removes that chapter and its pages, and returns to the parent book. The chapter is absent from "Chapter list"(role=region); its pages are not readable from their former URLs and are absent from the book "Page list"(role=region) and from "Recently Updated Pages"(role=region), favorites and recently viewed. Pages directly under the book or belonging to another chapter remain. Cancel keeps the chapter and its pages. Deletion persists across reload.
+      image:
+      - id: IMG-CHAPTER
+        reference: reference/chapter.png
+        page: chapter
+      - id: IMG-BOOK
+        reference: reference/book.png
+        page: book
+    scenarios:
+    - id: SCN-REQ-10.2-01
+      name: Confirm chapter deletion
+      steps:
+      - id: STEP-REQ-10.2-01-01
+        Given: |-
+          The verified account is authenticated and has UI-created isolated Book 10.2.1 with Chapter 10.2.1 containing Page 10.2.1-A and Page 10.2.1-B, plus root Page 10.2.1-Root and Chapter 10.2.1-Other containing Page 10.2.1-Other-Page. Chapter 10.2.1 and Page 10.2.1-A are favorited and have been opened in the current session.
+          Seed prerequisites (prepared before this scenario):
+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+        When: Open Chapter 10.2.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.2.1-Other; open the homepage, attempt the former Page 10.2.1-A URL, and reload.
+        Then: Chapter list no longer contains Chapter 10.2.1 and still contains Chapter 10.2.1-Other. The former chapter pages are absent from the parent book's Page list and are not readable from their former URLs; Page 10.2.1-Root and Page 10.2.1-Other-Page remain. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Chapter 10.2.1 or Page 10.2.1-A. Reload preserves the chapter's absence.
+        references:
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.3)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+        - \ref[image](IMG-CHAPTER)
+        - \ref[image](IMG-BOOK)
+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
+    - id: SCN-REQ-10.2-02
+      name: Cancel chapter deletion
+      steps:
+      - id: STEP-REQ-10.2-02-01
+        Given: An anonymous visitor has UI-published isolated Chapter 10.2.2 with Page 10.2.2 under isolated Book 10.2.2.
+        When: Open the chapter, click Delete, click Cancel, and reload the chapter.
+        Then: The chapter remains with its saved heading and description, and its Page list still contains the saved page. No chapter or page is deleted.
+        references:
+        - \ref[requirement](REQ-6.3)
+        - \ref[image](IMG-CHAPTER)
+        - \ref[image](IMG-BOOK)
     children: []

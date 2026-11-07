@@ -32,7 +32,7 @@
       "title": "REQ-1.1.1: View and Open a Workbook - Scenario 1",
       "project": "sheet-direct",
       "status": "failed",
-      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1793962967644-ywlm3f\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n"
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n"
     },
     {
       "title": "REQ-2.2.3: Directly Add a User as an Organization Member - Scenario 1",

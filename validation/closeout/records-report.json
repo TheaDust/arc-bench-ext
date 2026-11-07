@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\records.config.ts",
-    "rootDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout",
+    "configFile": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\records.config.ts",
+    "rootDir": "E:/my-works/coding/arc-bench-ext/validation/closeout",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -27,7 +27,7 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -35,7 +35,7 @@
         },
         "id": "sheet-sibling",
         "name": "sheet-sibling",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/sheet/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/sheet/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-1.1.1.spec.ts"
@@ -43,7 +43,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -51,7 +51,7 @@
         },
         "id": "sheet-nested",
         "name": "sheet-nested",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/sheet/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/sheet/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-1.1.1.spec.ts"
@@ -59,7 +59,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -67,7 +67,7 @@
         },
         "id": "sheet-direct",
         "name": "sheet-direct",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/sheet/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/sheet/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-1.1.1.spec.ts"
@@ -75,7 +75,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -83,7 +83,7 @@
         },
         "id": "member-ok",
         "name": "member-ok",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/github/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-2.2.3.spec.ts"
@@ -91,7 +91,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -99,7 +99,7 @@
         },
         "id": "member-role",
         "name": "member-role",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/github/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-2.2.3.spec.ts"
@@ -107,7 +107,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -115,7 +115,7 @@
         },
         "id": "member-persist",
         "name": "member-persist",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/github/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-2.2.3.spec.ts"
@@ -123,7 +123,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -131,7 +131,7 @@
         },
         "id": "member-access",
         "name": "member-access",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/github/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/github/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-2.2.3.spec.ts"
@@ -139,7 +139,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -147,7 +147,7 @@
         },
         "id": "book-ok",
         "name": "book-ok",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/bookstack/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/bookstack/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-7.1.spec.ts",
@@ -157,7 +157,7 @@
         "timeout": 15000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/validation/closeout/record-oracle-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/closeout/record-oracle-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
@@ -165,7 +165,7 @@
         },
         "id": "book-uncapped",
         "name": "book-uncapped",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/benchmark-closeout-20261106/benchmark/arc-bench/bookstack/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/bookstack/tests",
         "testIgnore": [],
         "testMatch": [
           "REQ-7.1.spec.ts",
@@ -206,12 +206,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1299,
+                  "duration": 1399,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:36.740Z",
+                  "startTime": "2026-11-07T13:19:44.004Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -221,7 +221,7 @@
           ],
           "id": "dfcaeeb5172cba9f7773-c72274cb56ada82faeab",
           "file": "../../arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
-          "line": 45,
+          "line": 46,
           "column": 5
         },
         {
@@ -240,12 +240,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1700,
+                  "duration": 1723,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:38.607Z",
+                  "startTime": "2026-11-07T13:19:45.959Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -255,7 +255,7 @@
           ],
           "id": "dfcaeeb5172cba9f7773-1ce2f2078423ebd75dc5",
           "file": "../../arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
-          "line": 79,
+          "line": 80,
           "column": 5
         },
         {
@@ -274,12 +274,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1429,
+                  "duration": 1409,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:41.702Z",
+                  "startTime": "2026-11-07T13:19:49.074Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -289,7 +289,7 @@
           ],
           "id": "dfcaeeb5172cba9f7773-21c133e68c17f556e243",
           "file": "../../arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
-          "line": 45,
+          "line": 46,
           "column": 5
         },
         {
@@ -308,12 +308,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1693,
+                  "duration": 1764,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:43.645Z",
+                  "startTime": "2026-11-07T13:19:51.068Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -323,7 +323,7 @@
           ],
           "id": "dfcaeeb5172cba9f7773-17f883a4f8c4898f807f",
           "file": "../../arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
-          "line": 79,
+          "line": 80,
           "column": 5
         },
         {
@@ -342,43 +342,43 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1899,
+                  "duration": 1820,
                   "error": {
-                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1793962967644-ywlm3f\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1793962967644-ywlm3f\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:34:48)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:76:3",
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
                       "column": 48,
-                      "line": 34
+                      "line": 35
                     },
-                    "snippet": "  32 |     await expect(reopenedPage.getByText(workbookName, { exact: true })).toBeVisible();\n  33 |     await expect(reopenedPage.getByText(lastUpdatedText, { exact: true })).toBeVisible();\n> 34 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);\n     |                                                ^\n  35 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');\n  36 |   } finally {\n  37 |     await context.close();"
+                    "snippet": "\u001b[0m \u001b[90m 33 |\u001b[39m     \u001b[36mawait\u001b[39m expectText(reopenedPage\u001b[33m,\u001b[39m workbookName\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m     \u001b[36mawait\u001b[39m expectText(reopenedPage\u001b[33m,\u001b[39m lastUpdatedText\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 35 |\u001b[39m     \u001b[36mawait\u001b[39m expect(gridCell(reopenedPage\u001b[33m,\u001b[39m \u001b[32m'A1'\u001b[39m))\u001b[33m.\u001b[39mtoHaveText(cellValue)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 36 |\u001b[39m     \u001b[36mawait\u001b[39m expectActiveWorksheet(reopenedPage\u001b[33m,\u001b[39m \u001b[32m'Sheet1'\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 37 |\u001b[39m   } \u001b[36mfinally\u001b[39m {\n \u001b[90m 38 |\u001b[39m     \u001b[36mawait\u001b[39m context\u001b[33m.\u001b[39mclose()\u001b[33m;\u001b[39m\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
                         "column": 48,
-                        "line": 34
+                        "line": 35
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1793962967644-ywlm3f\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n\n  32 |     await expect(reopenedPage.getByText(workbookName, { exact: true })).toBeVisible();\n  33 |     await expect(reopenedPage.getByText(lastUpdatedText, { exact: true })).toBeVisible();\n> 34 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);\n     |                                                ^\n  35 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');\n  36 |   } finally {\n  37 |     await context.close();\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:34:48)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:76:3"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n\n  33 |     await expectText(reopenedPage, workbookName, { exact: true });\n  34 |     await expectText(reopenedPage, lastUpdatedText, { exact: true });\n> 35 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);\n     |                                                ^\n  36 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');\n  37 |   } finally {\n  38 |     await context.close();\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:46.777Z",
+                  "startTime": "2026-11-07T13:19:54.285Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-1.1.1-REQ-1-1-1-View-and-Open-a-Workbook---Scenario-1-sheet-direct\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-1.1.1-REQ-1-1-1-View-and-Open-a-Workbook---Scenario-1-sheet-direct\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
                     "column": 48,
-                    "line": 34
+                    "line": 35
                   }
                 }
               ],
@@ -387,7 +387,7 @@
           ],
           "id": "dfcaeeb5172cba9f7773-08057fe7857e6d568192",
           "file": "../../arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
-          "line": 45,
+          "line": 46,
           "column": 5
         }
       ]
@@ -414,12 +414,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2051,
+                  "duration": 2093,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:50.668Z",
+                  "startTime": "2026-11-07T13:19:58.111Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -448,12 +448,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 862,
+                  "duration": 893,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:53.250Z",
+                  "startTime": "2026-11-07T13:20:00.854Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -482,41 +482,41 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1730,
+                  "duration": 1691,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:35:61",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:35:61",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                       "column": 61,
                       "line": 35
                     },
-                    "snippet": "  33 |   await expect(record).toHaveCount(1);\n  34 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n> 35 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n     |                                                             ^\n  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n  38 |   await expect(record).toHaveCount(1);"
+                    "snippet": "\u001b[0m \u001b[90m 33 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 34 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record\u001b[33m.\u001b[39mgetByText(newMember\u001b[33m.\u001b[39musername\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 35 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record\u001b[33m.\u001b[39mgetByText(\u001b[32m'Member'\u001b[39m\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                             \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 36 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Pending invitation'\u001b[39m\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 37 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mreload()\u001b[33m;\u001b[39m\n \u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                         "column": 61,
                         "line": 35
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n\n\n  33 |   await expect(record).toHaveCount(1);\n  34 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n> 35 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n     |                                                             ^\n  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n  38 |   await expect(record).toHaveCount(1);\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:35:61"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n\n\n  33 |   await expect(record).toHaveCount(1);\n  34 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n> 35 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n     |                                                             ^\n  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n  38 |   await expect(record).toHaveCount(1);\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:35:61"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:55.549Z",
+                  "startTime": "2026-11-07T13:20:03.152Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-role\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-role\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                     "column": 61,
                     "line": 35
                   }
@@ -546,41 +546,41 @@
                   "workerIndex": 5,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1705,
+                  "duration": 1735,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:38:24",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:38:24",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                       "column": 24,
                       "line": 38
                     },
-                    "snippet": "  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n> 38 |   await expect(record).toHaveCount(1);\n     |                        ^\n  39 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n  40 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n  41 |"
+                    "snippet": "\u001b[0m \u001b[90m 36 |\u001b[39m   \u001b[36mawait\u001b[39m expect(page\u001b[33m.\u001b[39mgetByText(\u001b[32m'Pending invitation'\u001b[39m\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 37 |\u001b[39m   \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mreload()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 38 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record)\u001b[33m.\u001b[39mtoHaveCount(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                        \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 39 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record\u001b[33m.\u001b[39mgetByText(newMember\u001b[33m.\u001b[39musername\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 40 |\u001b[39m   \u001b[36mawait\u001b[39m expect(record\u001b[33m.\u001b[39mgetByText(\u001b[32m'Member'\u001b[39m\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m 41 |\u001b[39m\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                         "column": 24,
                         "line": 38
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n> 38 |   await expect(record).toHaveCount(1);\n     |                        ^\n  39 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n  40 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n  41 |\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:38:24"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  36 |   await expect(page.getByText('Pending invitation', { exact: true })).toHaveCount(0);\n  37 |   await page.reload();\n> 38 |   await expect(record).toHaveCount(1);\n     |                        ^\n  39 |   await expect(record.getByText(newMember.username, { exact: true })).toBeVisible();\n  40 |   await expect(record.getByText('Member', { exact: true })).toBeVisible();\n  41 |\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:38:24"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:02:59.300Z",
+                  "startTime": "2026-11-07T13:20:06.763Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-persist\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-persist\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
                     "column": 24,
                     "line": 38
                   }
@@ -610,42 +610,42 @@
                   "workerIndex": 6,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 2566,
+                  "duration": 2613,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:56:72",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:56:74",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
-                      "column": 72,
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                      "column": 74,
                       "line": 56
                     },
-                    "snippet": "  54 |   await memberPage.getByRole('link', { name: 'Repositories', exact: true }).click();\n  55 |   await memberPage.goto(privateRepositoryUrl);\n> 56 |   await expect(memberPage.getByText('Access denied', { exact: true })).toBeVisible();\n     |                                                                        ^\n  57 |   } finally { await memberContext.close(); }\n  58 | });\n  59 |"
+                    "snippet": "\u001b[0m \u001b[90m 54 |\u001b[39m     \u001b[36mawait\u001b[39m memberPage\u001b[33m.\u001b[39mgetByRole(\u001b[32m'link'\u001b[39m\u001b[33m,\u001b[39m { name\u001b[33m:\u001b[39m \u001b[32m'Repositories'\u001b[39m\u001b[33m,\u001b[39m exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m })\u001b[33m.\u001b[39mclick()\u001b[33m;\u001b[39m\n \u001b[90m 55 |\u001b[39m     \u001b[36mawait\u001b[39m memberPage\u001b[33m.\u001b[39mgoto(privateRepositoryUrl)\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 56 |\u001b[39m     \u001b[36mawait\u001b[39m expect(memberPage\u001b[33m.\u001b[39mgetByText(\u001b[32m'Access denied'\u001b[39m\u001b[33m,\u001b[39m { exact\u001b[33m:\u001b[39m \u001b[36mtrue\u001b[39m }))\u001b[33m.\u001b[39mtoBeVisible()\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                                                                          \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 57 |\u001b[39m   } \u001b[36mfinally\u001b[39m { \u001b[36mawait\u001b[39m memberContext\u001b[33m.\u001b[39mclose()\u001b[33m;\u001b[39m }\n \u001b[90m 58 |\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m 59 |\u001b[39m\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
-                        "column": 72,
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                        "column": 74,
                         "line": 56
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n\n\n  54 |   await memberPage.getByRole('link', { name: 'Repositories', exact: true }).click();\n  55 |   await memberPage.goto(privateRepositoryUrl);\n> 56 |   await expect(memberPage.getByText('Access denied', { exact: true })).toBeVisible();\n     |                                                                        ^\n  57 |   } finally { await memberContext.close(); }\n  58 | });\n  59 |\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:56:72"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n\n\n  54 |     await memberPage.getByRole('link', { name: 'Repositories', exact: true }).click();\n  55 |     await memberPage.goto(privateRepositoryUrl);\n> 56 |     await expect(memberPage.getByText('Access denied', { exact: true })).toBeVisible();\n     |                                                                          ^\n  57 |   } finally { await memberContext.close(); }\n  58 | });\n  59 |\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:56:74"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:02.928Z",
+                  "startTime": "2026-11-07T13:20:10.432Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-access\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-2.2.3-REQ-2-2-3-Direct-7205d-ization-Member---Scenario-1-member-access\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
-                    "column": 72,
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts",
+                    "column": 74,
                     "line": 56
                   }
                 }
@@ -682,12 +682,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 7870,
+                  "duration": 8151,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:07.340Z",
+                  "startTime": "2026-11-07T13:20:15.092Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -697,7 +697,7 @@
           ],
           "id": "3e555ff8125373696c08-13302781ad63887dd32c",
           "file": "../../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 5
         },
         {
@@ -716,12 +716,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1223,
+                  "duration": 1260,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:15.725Z",
+                  "startTime": "2026-11-07T13:20:23.814Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -731,7 +731,7 @@
           ],
           "id": "3e555ff8125373696c08-8e6f1061c8f2017f51ca",
           "file": "../../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-          "line": 27,
+          "line": 28,
           "column": 5
         },
         {
@@ -750,43 +750,43 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 7303,
+                  "duration": 6620,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-7.1.spec.ts:22:20",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-7.1.spec.ts:23:20",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                       "column": 17,
-                      "line": 9
+                      "line": 12
                     },
-                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {"
+                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m   \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m records\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m   expect(count)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(limit)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m   \u001b[36mconst\u001b[39m prepared\u001b[33m:\u001b[39m { target\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m;\u001b[39m name\u001b[33m:\u001b[39m string }[] \u001b[33m=\u001b[39m []\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m name \u001b[36mof\u001b[39m names) expect(\u001b[36mawait\u001b[39m entry(collection\u001b[33m,\u001b[39m name)\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m record \u001b[36mof\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mall()) {\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                         "column": 17,
-                        "line": 9
+                        "line": 12
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-7.1.spec.ts:22:20"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n  10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n  11 |   const count = await records.count();\n> 12 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  13 |   const prepared: { target: Locator; name: string }[] = [];\n  14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  15 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-7.1.spec.ts:23:20"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:25.188Z",
+                  "startTime": "2026-11-07T13:20:33.252Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-7.1-REQ-7-1-Record-shelf-visit-book-uncapped\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-7.1-REQ-7-1-Record-shelf-visit-book-uncapped\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                     "column": 17,
-                    "line": 9
+                    "line": 12
                   }
                 }
               ],
@@ -795,7 +795,7 @@
           ],
           "id": "3e555ff8125373696c08-476523cd4992b6b70a00",
           "file": "../../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 5
         }
       ]
@@ -822,12 +822,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3278,
+                  "duration": 3125,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:16.964Z",
+                  "startTime": "2026-11-07T13:20:25.088Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -856,43 +856,43 @@
                   "workerIndex": 9,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 2964,
+                  "duration": 3446,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-8.2.spec.ts:26:20",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-8.2.spec.ts:26:20",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                       "column": 17,
-                      "line": 9
+                      "line": 12
                     },
-                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {"
+                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m   \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m records\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m   expect(count)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(limit)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m   \u001b[36mconst\u001b[39m prepared\u001b[33m:\u001b[39m { target\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m;\u001b[39m name\u001b[33m:\u001b[39m string }[] \u001b[33m=\u001b[39m []\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m name \u001b[36mof\u001b[39m names) expect(\u001b[36mawait\u001b[39m entry(collection\u001b[33m,\u001b[39m name)\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m record \u001b[36mof\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mall()) {\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                         "column": 17,
-                        "line": 9
+                        "line": 12
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-8.2.spec.ts:26:20"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n  10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n  11 |   const count = await records.count();\n> 12 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  13 |   const prepared: { target: Locator; name: string }[] = [];\n  14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  15 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-8.2.spec.ts:26:20"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:34.345Z",
+                  "startTime": "2026-11-07T13:20:41.751Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-8.2-REQ-8-2-Open-favorited-book-book-uncapped\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-8.2-REQ-8-2-Open-favorited-book-book-uncapped\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                     "column": 17,
-                    "line": 9
+                    "line": 12
                   }
                 }
               ],
@@ -928,12 +928,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3561,
+                  "duration": 3602,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:20.256Z",
+                  "startTime": "2026-11-07T13:20:28.228Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -943,7 +943,7 @@
           ],
           "id": "cd17f0bc5642ed41f690-928471c3eb53822cd7e5",
           "file": "../../arc-bench/bookstack/tests/REQ-9.1.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 5
         },
         {
@@ -962,43 +962,43 @@
                   "workerIndex": 10,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 3239,
+                  "duration": 3113,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-9.1.spec.ts:19:20",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-9.1.spec.ts:20:20",
                     "location": {
-                      "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                      "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                       "column": 17,
-                      "line": 9
+                      "line": 12
                     },
-                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {"
+                    "snippet": "\u001b[90m   at \u001b[39m..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m   \u001b[36mawait\u001b[39m expect\u001b[33m.\u001b[39mpoll(() \u001b[33m=>\u001b[39m records\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeGreaterThan(\u001b[35m0\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36mconst\u001b[39m count \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mcount()\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m   expect(count)\u001b[33m.\u001b[39mtoBeLessThanOrEqual(limit)\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m   \u001b[36mconst\u001b[39m prepared\u001b[33m:\u001b[39m { target\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m;\u001b[39m name\u001b[33m:\u001b[39m string }[] \u001b[33m=\u001b[39m []\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m name \u001b[36mof\u001b[39m names) expect(\u001b[36mawait\u001b[39m entry(collection\u001b[33m,\u001b[39m name)\u001b[33m.\u001b[39mcount())\u001b[33m.\u001b[39mtoBeLessThanOrEqual(\u001b[35m1\u001b[39m)\u001b[33m;\u001b[39m\n \u001b[90m 15 |\u001b[39m   \u001b[36mfor\u001b[39m (\u001b[36mconst\u001b[39m record \u001b[36mof\u001b[39m \u001b[36mawait\u001b[39m records\u001b[33m.\u001b[39mall()) {\u001b[0m"
                   },
                   "errors": [
                     {
                       "location": {
-                        "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                        "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                         "column": 17,
-                        "line": 9
+                        "line": 12
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9\n\n   7 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n   8 |   const count = await records.count();\n>  9 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  10 |   const prepared: { target: Locator; name: string }[] = [];\n  11 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  12 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:9:17)\n    at E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\REQ-9.1.spec.ts:19:20"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m\n\n   at ..\\..\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12\n\n  10 |   await expect.poll(() => records.count()).toBeGreaterThan(0);\n  11 |   const count = await records.count();\n> 12 |   expect(count).toBeLessThanOrEqual(limit);\n     |                 ^\n  13 |   const prepared: { target: Locator; name: string }[] = [];\n  14 |   for (const name of names) expect(await entry(collection, name).count()).toBeLessThanOrEqual(1);\n  15 |   for (const record of await records.all()) {\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-9.1.spec.ts:20:20"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-06T11:03:39.229Z",
+                  "startTime": "2026-11-07T13:20:47.101Z",
                   "annotations": [],
                   "attachments": [
                     {
                       "name": "error-context",
                       "contentType": "text/markdown",
-                      "path": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\validation\\closeout\\record-oracle-results\\REQ-9.1-REQ-9-1-Open-recently-published-page-book-uncapped\\error-context.md"
+                      "path": "E:\\my-works\\coding\\arc-bench-ext\\validation\\closeout\\record-oracle-results\\REQ-9.1-REQ-9-1-Open-recently-published-page-book-uncapped\\error-context.md"
                     }
                   ],
                   "errorLocation": {
-                    "file": "E:\\my-works\\coding\\ShallowCode\\outputs\\benchmark-closeout-20261106\\benchmark\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
+                    "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts",
                     "column": 17,
-                    "line": 9
+                    "line": 12
                   }
                 }
               ],
@@ -1007,7 +1007,7 @@
           ],
           "id": "cd17f0bc5642ed41f690-563301869f8673e65f3d",
           "file": "../../arc-bench/bookstack/tests/REQ-9.1.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 5
         }
       ]
@@ -1015,8 +1015,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-06T11:02:35.586Z",
-    "duration": 67720.936,
+    "startTime": "2026-11-07T13:19:42.801Z",
+    "duration": 68320.589,
     "expected": 10,
     "skipped": 0,
     "unexpected": 7,

@@ -1,12 +1,23 @@
 import { formField } from './support/public-controls';
-import { expect, type Locator, type Page, type TestInfo } from '@playwright/test';
+import { expect, type Browser, type Locator, type Page, type TestInfo } from '@playwright/test';
 import { randomBytes } from 'node:crypto';
 
 const runId = randomBytes(8).toString('hex');
 
-export const ACCOUNT = {
+export interface Account {
+  nickname: string;
+  email: string;
+  password: string;
+}
+
+export const ACCOUNT: Account = {
   nickname: 'BookStack User',
   email: 'bookstack_user@example.com',
+  password: 'Password123!',
+};
+export const REVIEWER_ACCOUNT: Account = {
+  nickname: 'BookStack Reviewer',
+  email: 'bookstack_reviewer@example.com',
   password: 'Password123!',
 };
 export const BOOTSTRAP_SHELF = 'Benchmark Bootstrap Shelf';
@@ -66,15 +77,23 @@ export async function expectKeyboardEntry(page: Page, target: Locator) {
   }
   await expect(target).toBeFocused();
 }
-export async function login(page: Page, remember = false) {
+export async function login(page: Page, remember = false, account: Account = ACCOUNT) {
   await go(page, 'Login');
-  await page.getByRole('textbox', { name: 'Email', exact: true }).fill(ACCOUNT.email);
+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill(account.email);
   await expect(formField(page, 'Password')).toHaveAttribute('type', 'password');
-  await formField(page, 'Password').fill(ACCOUNT.password);
+  await formField(page, 'Password').fill(account.password);
   if (remember) await page.getByRole('checkbox', { name: 'Remember Me', exact: true }).check();
   await button(page, 'Login').click();
-  await text(page, ACCOUNT.nickname);
+  await text(page, account.nickname);
   await expect(region(page, 'My Recent Drafts')).toBeVisible();
+}
+
+export async function newContextFor(browser: Browser, baseURL: string, account?: Account) {
+  const context = await browser.newContext({ baseURL });
+  const page = await context.newPage();
+  await page.goto('/');
+  if (account) await login(page, false, account);
+  return { context, page };
 }
 export async function metadata(page: Page, name: string, description: string, tags: string) {
   await page.getByRole('textbox', { name: 'Name', exact: true }).fill(name);
@@ -147,4 +166,83 @@ export async function createPage(page: Page, id: string, book: string, base: str
   await expect(opening).toHaveCount(1);
   await expect(opening).toBeVisible();
   return name;
+}
+
+export async function createChapter(page: Page, id: string, book: string, base: string,
+  description = 'Chapter created by corresponding prerequisite behavior.') {
+  await openBook(page, book);
+  await button(page, 'New Chapter').click();
+  const name = named(id, base);
+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill(name);
+  await page.getByRole('textbox', { name: 'Description', exact: true }).fill(description);
+  await button(page, 'Save Chapter').click();
+  await openBook(page, book);
+  await expect(button(region(page, 'Chapter list'), name)).toHaveCount(1);
+  return name;
+}
+
+export async function openChapter(page: Page, book: string, name: string) {
+  await openBook(page, book);
+  await button(region(page, 'Chapter list'), name).click();
+  await heading(page, name);
+}
+
+export async function createPageInChapter(page: Page, id: string, book: string, chapter: string,
+  base: string, content: string) {
+  await openChapter(page, book, chapter);
+  await button(page, 'New Page').click();
+  const name = named(id, base);
+  await page.getByRole('textbox', { name: 'Page title', exact: true }).fill(name);
+  await page.getByRole('textbox', { name: 'Write your page content here...', exact: true }).fill(content);
+  await button(page, 'Save Page').click();
+  await openBook(page, book);
+  await expect(entry(region(page, 'Page list'), name)).toHaveCount(1);
+  return name;
+}
+
+export async function openPage(page: Page, book: string, name: string) {
+  await openBook(page, book);
+  await entry(region(page, 'Page list'), name).click();
+  await heading(page, name);
+}
+
+export async function openPageInChapter(page: Page, book: string, chapter: string, name: string) {
+  await openChapter(page, book, chapter);
+  await entry(region(page, 'Page list'), name).click();
+  await heading(page, name);
+}
+
+export async function favorite(page: Page) {
+  await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
+  await button(page, 'Favorite').click();
+  await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');
+}
+
+export function membership(page: Page, name: string) {
+  return page.getByRole('checkbox', { name, exact: true });
+}
+
+export async function expectMembership(page: Page, name: string, checked: boolean) {
+  const control = membership(page, name);
+  await expect(control).toHaveCount(1);
+  if (checked) await expect(control).toBeChecked();
+  else await expect(control).not.toBeChecked();
+}
+
+export async function setMembership(page: Page, name: string, checked: boolean) {
+  const control = membership(page, name);
+  await expect(control).toHaveCount(1);
+  if (checked) await control.check();
+  else await control.uncheck();
+}
+
+export async function expectUnavailablePage(page: Page, title: string, body: string) {
+  await expect(page.getByRole('heading', { name: title, exact: true })).toHaveCount(0);
+  await expect(page.getByText(body, { exact: true })).toHaveCount(0);
+  await expect(page.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
+  await expect(page.getByRole('textbox', { name: 'Write your page content here...', exact: true })).toHaveCount(0);
+}
+
+export async function expectNoVisibleText(page: Page, value: string) {
+  await expect.poll(() => page.getByText(value, { exact: true }).filter({ visible: true }).count()).toBe(0);
 }

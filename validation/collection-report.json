@@ -1,7 +1,7 @@
 {
   "config": {
-    "configFile": "E:\\my-works\\coding\\ShallowCode\\outputs\\arc-bench-reviewed-20261107\\validation\\collection.config.ts",
-    "rootDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/validation",
+    "configFile": "E:\\my-works\\coding\\arc-bench-ext\\validation\\collection.config.ts",
+    "rootDir": "E:/my-works/coding/arc-bench-ext/validation",
     "forbidOnly": false,
     "fullyParallel": false,
     "globalSetup": null,
@@ -24,13 +24,13 @@
     "quiet": false,
     "projects": [
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "12306",
         "name": "12306",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/12306/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/12306/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -38,13 +38,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "bookstack",
         "name": "bookstack",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/bookstack/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/bookstack/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -52,13 +52,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "ctrip",
         "name": "ctrip",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/ctrip/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/ctrip/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -66,13 +66,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "github",
         "name": "github",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/github/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/github/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -80,13 +80,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "keep",
         "name": "keep",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/keep/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/keep/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -94,13 +94,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "prestashop",
         "name": "prestashop",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/prestashop/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/prestashop/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -108,13 +108,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "sheet",
         "name": "sheet",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/sheet/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/sheet/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -122,13 +122,13 @@
         "timeout": 60000
       },
       {
-        "outputDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/test-results",
+        "outputDir": "E:/my-works/coding/arc-bench-ext/test-results",
         "repeatEach": 1,
         "retries": 0,
         "metadata": {},
         "id": "stackoverflow",
         "name": "stackoverflow",
-        "testDir": "E:/my-works/coding/ShallowCode/outputs/arc-bench-reviewed-20261107/arc-bench/stackoverflow/tests",
+        "testDir": "E:/my-works/coding/arc-bench-ext/arc-bench/stackoverflow/tests",
         "testIgnore": [],
         "testMatch": [
           "**/*.spec.ts"
@@ -3786,6 +3786,102 @@
       ]
     },
     {
+      "title": "..\\arc-bench\\bookstack\\tests\\REQ-10.1.spec.ts",
+      "file": "../arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-10.1: Confirm page deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "686c2308edb86073a6bd-7407e8e90a25187ae7df",
+          "file": "../arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-10.1: Cancel page deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "686c2308edb86073a6bd-8348d186ce5cbae7d521",
+          "file": "../arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+          "line": 43,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\bookstack\\tests\\REQ-10.2.spec.ts",
+      "file": "../arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-10.2: Confirm chapter deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc461ab942a4baff1d97-b43d66ac4850e240b71d",
+          "file": "../arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-10.2: Cancel chapter deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cc461ab942a4baff1d97-a21e20fabe6ab8b8c157",
+          "file": "../arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+          "line": 56,
+          "column": 5
+        }
+      ]
+    },
+    {
       "title": "..\\arc-bench\\bookstack\\tests\\REQ-2.1.spec.ts",
       "file": "../arc-bench/bookstack/tests/REQ-2.1.spec.ts",
       "column": 0,
@@ -4018,6 +4114,26 @@
           "file": "../arc-bench/bookstack/tests/REQ-4.4.spec.ts",
           "line": 21,
           "column": 5
+        },
+        {
+          "title": "REQ-4.4: Retain books after shelf deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "72719cfc9f88eeeb5aee-335a952f3d64c031dcea",
+          "file": "../arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+          "line": 32,
+          "column": 5
         }
       ]
     },
@@ -4044,7 +4160,7 @@
           ],
           "id": "d0b58c1baf36b4b8638f-4a4e058edf2050112db2",
           "file": "../arc-bench/bookstack/tests/REQ-4.5.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 5
         },
         {
@@ -4064,7 +4180,27 @@
           ],
           "id": "d0b58c1baf36b4b8638f-0c6739990c8a2781d748",
           "file": "../arc-bench/bookstack/tests/REQ-4.5.spec.ts",
-          "line": 27,
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.5: Edit related books",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d0b58c1baf36b4b8638f-1de23f478bcf0b9cea4e",
+          "file": "../arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+          "line": 46,
           "column": 5
         }
       ]
@@ -4216,7 +4352,7 @@
           ],
           "id": "4b1166b6cbfe877a3333-96620ef62b962cbcb41e",
           "file": "../arc-bench/bookstack/tests/REQ-5.4.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 5
         },
         {
@@ -4236,7 +4372,27 @@
           ],
           "id": "4b1166b6cbfe877a3333-649da34fd33dc49ba337",
           "file": "../arc-bench/bookstack/tests/REQ-5.4.spec.ts",
-          "line": 27,
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.4: Propagate renamed book",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4b1166b6cbfe877a3333-489c6d19e522b6ed3ec9",
+          "file": "../arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+          "line": 46,
           "column": 5
         }
       ]
@@ -4264,7 +4420,7 @@
           ],
           "id": "79feeab4d9832e694edc-3c9f1de70ba3e085646f",
           "file": "../arc-bench/bookstack/tests/REQ-5.5.spec.ts",
-          "line": 5,
+          "line": 7,
           "column": 5
         },
         {
@@ -4284,7 +4440,27 @@
           ],
           "id": "79feeab4d9832e694edc-1101e89d1b1991023289",
           "file": "../arc-bench/bookstack/tests/REQ-5.5.spec.ts",
-          "line": 21,
+          "line": 23,
+          "column": 5
+        },
+        {
+          "title": "REQ-5.5: Delete contained chapters and pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "79feeab4d9832e694edc-df3b2445352eb4302747",
+          "file": "../arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+          "line": 34,
           "column": 5
         }
       ]
@@ -4340,7 +4516,7 @@
           ],
           "id": "06feb607fb2e9cf36aee-4a441c3831a29517c163",
           "file": "../arc-bench/bookstack/tests/REQ-6.1.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 5
         },
         {
@@ -4360,7 +4536,47 @@
           ],
           "id": "06feb607fb2e9cf36aee-9dc2b9d7db1d3461e510",
           "file": "../arc-bench/bookstack/tests/REQ-6.1.spec.ts",
-          "line": 14,
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Publish an owned draft",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-f3ad3aae433e113df714",
+          "file": "../arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Keep drafts private to their owner",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-159c0108097f49cd235c",
+          "file": "../arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+          "line": 60,
           "column": 5
         }
       ]
@@ -4444,7 +4660,7 @@
           ],
           "id": "38e1c349a589e47c372b-cd00201faedb13155d46",
           "file": "../arc-bench/bookstack/tests/REQ-6.4.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 5
         },
         {
@@ -4464,7 +4680,27 @@
           ],
           "id": "38e1c349a589e47c372b-db63944b19bec50a5746",
           "file": "../arc-bench/bookstack/tests/REQ-6.4.spec.ts",
-          "line": 15,
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Save edited page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-57f107fedb52675836a1",
+          "file": "../arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+          "line": 28,
           "column": 5
         }
       ]
@@ -4492,7 +4728,7 @@
           ],
           "id": "3e555ff8125373696c08-3df7346fbbe1e4159241",
           "file": "../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-          "line": 6,
+          "line": 7,
           "column": 5
         },
         {
@@ -4512,7 +4748,27 @@
           ],
           "id": "3e555ff8125373696c08-0458c30bb517c2b361ba",
           "file": "../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
-          "line": 27,
+          "line": 28,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.1: Deduplicate and isolate recent views",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3e555ff8125373696c08-3684277e2025791853a9",
+          "file": "../arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+          "line": 42,
           "column": 5
         }
       ]
@@ -4540,7 +4796,7 @@
           ],
           "id": "c6ebf0de0a530ee2db2a-75f0587f9c26983841e6",
           "file": "../arc-bench/bookstack/tests/REQ-8.1.spec.ts",
-          "line": 5,
+          "line": 6,
           "column": 5
         },
         {
@@ -4560,7 +4816,27 @@
           ],
           "id": "c6ebf0de0a530ee2db2a-bee225f059863c29ad7c",
           "file": "../arc-bench/bookstack/tests/REQ-8.1.spec.ts",
-          "line": 15,
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "REQ-8.1: Keep favorites personal and remove deleted content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "c6ebf0de0a530ee2db2a-368848438d0da992a1b1",
+          "file": "../arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+          "line": 33,
           "column": 5
         }
       ]
@@ -4616,7 +4892,27 @@
           ],
           "id": "cd17f0bc5642ed41f690-b5a35a4976c515f3fb22",
           "file": "../arc-bench/bookstack/tests/REQ-9.1.spec.ts",
-          "line": 6,
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "REQ-9.1: Edit updates recently updated page",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "cd17f0bc5642ed41f690-422101f74df2fd335dd7",
+          "file": "../arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+          "line": 26,
           "column": 5
         }
       ]
@@ -17692,10 +17988,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-07T10:12:25.394Z",
-    "duration": 1073.1260000000002,
+    "startTime": "2026-11-07T13:26:05.485Z",
+    "duration": 1101.2230000000002,
     "expected": 0,
-    "skipped": 714,
+    "skipped": 728,
     "unexpected": 0,
     "flaky": 0
   }

@@ -66,6 +66,7 @@ npm run test:closeout
   - `benchmark: <revision>`
 - 每轮发布使用日期型修订标签，例如：
   - `2026-11-07-per-task-semantic-review`
+  - `2026-11-07-bookstack-lifecycle`
   - `2027-xx-xx-<short-description>`
 - 不要强制推送或改写已发布的 benchmark 标签；需要修正时新增修订。
 

@@ -2,12 +2,13 @@ const http=require('node:http');
 const html=String.raw`<!doctype html><html><head><style>[role=gridcell]{min-width:100px;min-height:24px}section{min-height:20px}</style></head><body><main id="app"></main><script>
 const mode=__ORACLE_MODE__,kind=mode.split('-')[0],base='/'+mode+'/';
 const esc=v=>String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const field=(name,type='text')=>'<label>'+esc(name)+'<input aria-label="'+esc(name)+'" type="'+type+'"></label>';
+const field=(name,type='text',value='')=>'<label>'+esc(name)+'<input aria-label="'+esc(name)+'" type="'+type+'" value="'+esc(value)+'"></label>';
 const val=name=>document.querySelector('[aria-label="'+name+'"]').value;
 const link=(name,route)=>'<a href="#'+esc(route)+'">'+esc(name)+'</a>';
 const button=(name,command,extra='')=>'<button '+extra+' onclick="act(\''+command+'\')">'+esc(name)+'</button>';
 const region=(name,body)=>'<section aria-label="'+name+'">'+body+'</section>';
 const record=(name,route)=>'<div role="listitem">'+link(name,route)+'</div>';
+const pageButton=(name,route)=>'<div role="listitem"><button onclick="nav(\''+esc(route)+'\')">'+esc(name)+'</button></div>';
 const nav=route=>{if(location.hash.slice(1)===route)render();else location.hash=route;};
 let state=JSON.parse(localStorage.getItem('state')||'null')||{user:'',books:[],pages:[],shelves:['Benchmark Bootstrap Shelf'],views:[]},data={workbooks:[],members:['existing-member']};
 let popup='',error='';
@@ -19,7 +20,7 @@ async function render(){
  if(kind==='sheet'){
   const book=data.workbooks.find(b=>b.id===parts[1]);
   if(parts[0]==='workbook'&&book&&!(mode==='sheet-direct'&&!sessionStorage.visited)){
-   out='<h1>'+esc(book.name)+'</h1><p>Last updated: 2026-11-06T10:00:00Z</p>'+button('Rename workbook','rename')+'<button role="tab" aria-selected="true">Sheet1</button><div role="grid" aria-label="Worksheet grid" aria-multiselectable="true"><div role="gridcell" aria-label="A1" aria-selected="true">'+esc(book.value)+'</div></div>'+field('Formula bar');
+   out='<h1>'+esc(book.name)+'</h1><p>Last updated: 2026-11-06T10:00:00Z</p>'+button('Rename workbook','rename')+'<button role="tab" aria-selected="true">Sheet1</button><div role="grid" aria-label="Worksheet grid" aria-multiselectable="true"><div role="gridcell" aria-label="A1" aria-selected="true">'+esc(book.value)+'</div></div>'+field('Formula bar','text',book.value);
    if(popup==='rename')out+=field('Workbook name')+button('Save','renameSave');
   }else{
    out=button('New blank workbook','blank');if(popup==='blank')out+=button('Create','createWorkbook');
@@ -44,12 +45,12 @@ async function render(){
   if(state.user)out+='<span>BookStack User</span>'+region('My Recent Drafts','');
   if(route==='login')out+=field('Email')+field('Password','password')+'<label><input type="checkbox">Remember Me</label>'+button('Login','bookLogin');
   else if(route==='shelves')out+=region('Shelf list',state.shelves.map(n=>record(n,'shelf/'+encodeURIComponent(n))).join(''));
-  else if(route==='books')out+=link('Create New Book','newbook')+region('Book list',state.books.map(b=>record(b.name,'book/'+encodeURIComponent(b.name))).join(''));
+  else if(route==='books')out+=button('Create New Book','newBook')+region('Book list',state.books.map(b=>record(b.name,'book/'+encodeURIComponent(b.name))).join(''));
   else if(route==='newshelf'||route==='newbook')out+=field('Name')+field('Description')+field('Tags')+button(route==='newshelf'?'Save Shelf':'Save Book',route==='newshelf'?'saveShelf':'saveBook');
-  else if(parts[0]==='shelf')out+='<h1>'+esc(decodeURIComponent(parts[1]))+'</h1>'+link('New Shelf','newshelf');
+  else if(parts[0]==='shelf')out+='<h1>'+esc(decodeURIComponent(parts[1]))+'</h1>'+button('New Shelf','newShelf');
   else if(parts[0]==='book'){
    const name=decodeURIComponent(parts[1]),b=state.books.find(b=>b.name===name);
-   out+='<h1>'+esc(name)+'</h1>'+button(b.favorite?'Unfavorite':'Favorite','favorite','aria-pressed="'+!!b.favorite+'"')+button('New Page','newpage')+region('Page list',state.pages.filter(p=>p.book===name).map(p=>record(p.name,'page/'+encodeURIComponent(p.name))).join(''));
+   out+='<h1>'+esc(name)+'</h1>'+button(b.favorite?'Unfavorite':'Favorite','favorite','aria-pressed="'+!!b.favorite+'"')+button('New Page','newpage')+region('Page list',state.pages.filter(p=>p.book===name).map(p=>pageButton(p.name,'page/'+encodeURIComponent(p.name))).join(''));
   }else if(parts[0]==='newpage')out+=field('Page title')+field('Write your page content here...')+button('Save Page','savePage');
   else if(parts[0]==='page'){const p=state.pages.find(p=>p.name===decodeURIComponent(parts[1]));out+='<h1>'+esc(p.name)+'</h1><p>'+esc(p.body)+'</p>';}
   else if(route==='home'){
@@ -69,6 +70,8 @@ async function act(command){
  const route=location.hash.slice(1)||'home',parts=route.split('/');
  if(command==='blank'){popup='blank';render();return;}
  if(command==='createWorkbook'){await shared('create');popup='';nav('workbook/'+data.workbooks.at(-1).id);return;}
+ if(command==='newShelf'){nav('newshelf');return;}
+ if(command==='newBook'){nav('newbook');return;}
  if(command==='rename'){popup='rename';render();return;}
  if(command==='renameSave'){await shared('rename',{id:parts[1],name:val('Workbook name')});popup='';render();return;}
  if(command==='memberLogin'){state.user=val('Username or email').split('@')[0];popup='';save();nav('home');return;}

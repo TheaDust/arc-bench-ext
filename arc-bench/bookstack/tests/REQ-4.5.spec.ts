@@ -1,6 +1,7 @@
 // requirement: REQ-4.5
 import { test, expect } from '@playwright/test';
-import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createShelf, openShelf } from './helpers';
+import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createShelf, createShelfBook,
+  openShelf, openBook, expectAbsentEntry, expectMembership, setMembership } from './helpers';
 
 test("REQ-4.5: Save metadata changes", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -40,4 +41,36 @@ test("REQ-4.5: Cancel metadata changes", async ({ page }, testInfo) => {
   await page.reload();
   await button(page, 'Edit').click();
   await expectMetadata(page, original, 'Reference shelf description.', 'knowledge-base, docs');
+});
+
+test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
+  const id = identity(testInfo);
+  await enter(page);
+  const shelfA = await createShelf(page, id, 'Shelf 4.5.3-T', 'Reference shelf description.');
+  const bookA = await createShelfBook(page, id, shelfA, 'Book 4.5.3-A');
+  const shelfB = await createShelf(page, id, 'Shelf 4.5.3-S', 'Reference shelf description.');
+  const bookB = await createShelfBook(page, id, shelfB, 'Book 4.5.3-B');
+  await openShelf(page, shelfB);
+  await button(page, 'Edit').click();
+  await expectMembership(page, bookB, true);
+  await expectMembership(page, bookA, false);
+  await setMembership(page, bookA, true);
+  await setMembership(page, bookB, false);
+  await button(page, 'Save Shelf').click();
+  await heading(page, shelfB);
+  await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
+  await expectAbsentEntry(region(page, 'Book list'), bookB);
+  await openBook(page, bookB);
+  await heading(page, bookB);
+  await text(page, 'Book created by corresponding prerequisite behavior.');
+  await expect(entry(page, shelfB)).toHaveCount(0);
+  await openBook(page, bookA);
+  await heading(page, bookA);
+  await expect(entry(page, shelfA)).toHaveCount(1);
+  await openShelf(page, shelfA);
+  await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
+  await openShelf(page, shelfB);
+  await button(page, 'Edit').click();
+  await expectMembership(page, bookA, true);
+  await expectMembership(page, bookB, false);
 });
