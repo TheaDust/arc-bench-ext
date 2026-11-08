@@ -1,3 +1,7 @@
+# 2026-11-08: Sheet 事务和 GitHub 提交守卫
+
+修订 `2026-11-08-sheet-github-transaction-guards`，父版本 `2026-11-08-keep-bookstack-interactions`。Sheet 增加原子剪切、重叠引用重写和完整 Undo/Redo；GitHub 增加当前提交审查、权限降级与重复合并保护。新增 4 条原子需求和 8 个场景；合计 421 条原子需求、751 个场景。所有既有场景和测试标题保留。场景与分组评分见 [audit/transaction-guards.md](audit/transaction-guards.md)。不同修订的分数不可混算。
+
 # 2026-11-08: Keep 与 BookStack 组合约束扩展
 
 修订 `2026-11-08-keep-bookstack-interactions`，父版本 `2026-11-07-bookstack-lifecycle`。Keep 新增 4 条原子需求、8 个场景；BookStack 新增 3 条原子需求、7 个场景。所有既有 ID 与正式测试标题保留。新增验收围绕同名身份、过期编辑、局部 Undo、私有修订和跨书移动。场景矩阵及分组评分见 [audit/interactions.md](audit/interactions.md)。

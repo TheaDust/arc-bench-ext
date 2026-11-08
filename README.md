@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-08-keep-bookstack-interactions`
+> 当前修订：`2026-11-08-sheet-github-transaction-guards`
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -21,25 +21,25 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 | 12306 | 93 | 142 |
 | bookstack | 29 | 56 |
 | ctrip | 97 | 152 |
-| github | 47 | 100 |
+| github | 49 | 104 |
 | keep | 20 | 41 |
 | prestashop | 55 | 86 |
-| sheet | 24 | 100 |
+| sheet | 26 | 104 |
 | stackoverflow | 52 | 66 |
-| **合计** | **417** | **743** |
+| **合计** | **421** | **751** |
 
-当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。历史审查见 [audit/README.md](audit/README.md)。本轮再为 Keep 与 BookStack 新增 7 条需求、15 个组合约束场景，见 [扩展场景与分组评分](audit/interactions.md)。
+当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。历史审查见 [audit/README.md](audit/README.md)。上一轮为 Keep 与 BookStack 新增 7 条需求、15 个组合约束场景，见 [Keep / BookStack 扩展](audit/interactions.md)。本轮为 Sheet 与 GitHub 新增 4 条需求、8 个场景，见 [Sheet / GitHub 扩展与分组评分](audit/transaction-guards.md)。
 
 ## 当前状态
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-08-keep-bookstack-interactions` |
-| 父版本 | `2026-11-07-bookstack-lifecycle` |
+| 修订 | `2026-11-08-sheet-github-transaction-guards` |
+| 父版本 | `2026-11-08-keep-bookstack-interactions` |
 | 质量状态 | 已验证输入、收集与公开控件合同；新业务场景待候选执行 |
 | 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
-| 新增业务场景 | 15 个，尚未对真实候选执行 |
-| 历史参考验证 | 父版 BookStack 49/49；不计入本轮 |
+| 本轮新增业务场景 | 8 个，尚未对真实候选执行 |
+| 历史参考验证 | BookStack 生命周期版本 49/49；不计入本轮 |
 | 验证记录 | [validation.json](validation.json) |
 
 本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量。具体边界见 [QUALITY.md](QUALITY.md) 和 [audit/README.md](audit/README.md)。

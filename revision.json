@@ -1,8 +1,8 @@
 {
-  "version": 7,
+  "version": 8,
   "sourceRepository": "E:\\my-works\\coding\\arc-bench",
   "sourceCommit": "e59696bbc68578c3b3da1ad47f9a0ac07e581184",
-  "revision": "2026-11-08-keep-bookstack-interactions",
+  "revision": "2026-11-08-sheet-github-transaction-guards",
   "tasks": {
     "12306": {
       "atomicRequirements": 93,
@@ -63,14 +63,8 @@
         "arc-bench/bookstack/tests/helpers.ts",
         "arc-bench/bookstack/tests/support/page-revisions.ts"
       ],
-      "changedFilesSinceParent": [
-        "arc-bench/bookstack/requirements/requirements.yaml",
-        "arc-bench/bookstack/tests/REQ-11.1.spec.ts",
-        "arc-bench/bookstack/tests/REQ-11.2.spec.ts",
-        "arc-bench/bookstack/tests/REQ-11.3.spec.ts",
-        "arc-bench/bookstack/tests/support/page-revisions.ts"
-      ],
-      "requirementsChangedSinceParent": true,
+      "changedFilesSinceParent": [],
+      "requirementsChangedSinceParent": false,
       "review": "audit/bookstack.json",
       "extensionReview": "audit/interactions.md"
     },
@@ -115,9 +109,9 @@
       "review": "audit/ctrip.json"
     },
     "github": {
-      "atomicRequirements": 47,
-      "scenarios": 100,
-      "testFiles": 47,
+      "atomicRequirements": 49,
+      "scenarios": 104,
+      "testFiles": 49,
       "changedFiles": [
         "arc-bench/github/requirements/requirements.yaml",
         "arc-bench/github/tests/REQ-1.1.1.spec.ts",
@@ -166,15 +160,24 @@
         "arc-bench/github/tests/REQ-6.4.spec.ts",
         "arc-bench/github/tests/REQ-6.5.spec.ts",
         "arc-bench/github/tests/REQ-6.6.spec.ts",
+        "arc-bench/github/tests/REQ-7.1.spec.ts",
+        "arc-bench/github/tests/REQ-7.2.spec.ts",
         "arc-bench/github/tests/support/branch-state.ts",
+        "arc-bench/github/tests/support/confirmation-guards.ts",
         "arc-bench/github/tests/support/e2e.ts",
         "arc-bench/github/tests/support/membership.ts",
         "arc-bench/github/tests/support/observations.ts",
         "arc-bench/github/tests/support/public-controls.ts"
       ],
-      "changedFilesSinceParent": [],
-      "requirementsChangedSinceParent": false,
-      "review": "audit/github.json"
+      "changedFilesSinceParent": [
+        "arc-bench/github/requirements/requirements.yaml",
+        "arc-bench/github/tests/REQ-7.1.spec.ts",
+        "arc-bench/github/tests/REQ-7.2.spec.ts",
+        "arc-bench/github/tests/support/confirmation-guards.ts"
+      ],
+      "requirementsChangedSinceParent": true,
+      "review": "audit/github.json",
+      "extensionReview": "audit/transaction-guards.md"
     },
     "keep": {
       "atomicRequirements": 20,
@@ -200,15 +203,8 @@
         "arc-bench/keep/tests/helpers.ts",
         "arc-bench/keep/tests/support/note-identity.ts"
       ],
-      "changedFilesSinceParent": [
-        "arc-bench/keep/requirements/requirements.yaml",
-        "arc-bench/keep/tests/REQ-6.1.spec.ts",
-        "arc-bench/keep/tests/REQ-6.2.spec.ts",
-        "arc-bench/keep/tests/REQ-6.3.spec.ts",
-        "arc-bench/keep/tests/REQ-6.4.spec.ts",
-        "arc-bench/keep/tests/support/note-identity.ts"
-      ],
-      "requirementsChangedSinceParent": true,
+      "changedFilesSinceParent": [],
+      "requirementsChangedSinceParent": false,
       "review": "audit/keep.json",
       "extensionReview": "audit/interactions.md"
     },
@@ -277,9 +273,9 @@
       "review": "audit/prestashop.json"
     },
     "sheet": {
-      "atomicRequirements": 24,
-      "scenarios": 100,
-      "testFiles": 24,
+      "atomicRequirements": 26,
+      "scenarios": 104,
+      "testFiles": 26,
       "changedFiles": [
         "arc-bench/sheet/requirements/requirements.yaml",
         "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
@@ -306,14 +302,23 @@
         "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
         "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
         "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-6.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-6.2.spec.ts",
         "arc-bench/sheet/tests/support/e2e.ts",
         "arc-bench/sheet/tests/support/observations.ts",
         "arc-bench/sheet/tests/support/public-controls.ts",
+        "arc-bench/sheet/tests/support/transactional-cut.ts",
         "arc-bench/sheet/tests/support/workbook-record.ts"
       ],
-      "changedFilesSinceParent": [],
-      "requirementsChangedSinceParent": false,
-      "review": "audit/sheet.json"
+      "changedFilesSinceParent": [
+        "arc-bench/sheet/requirements/requirements.yaml",
+        "arc-bench/sheet/tests/REQ-6.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-6.2.spec.ts",
+        "arc-bench/sheet/tests/support/transactional-cut.ts"
+      ],
+      "requirementsChangedSinceParent": true,
+      "review": "audit/sheet.json",
+      "extensionReview": "audit/transaction-guards.md"
     },
     "stackoverflow": {
       "atomicRequirements": 52,
@@ -721,7 +726,7 @@
     "arc-bench/github/requirements/reference/github-sign-in.png": "9a99407eddbf4161c0243393deb066bc2be59123a12f09f991e2966c70e5b42f",
     "arc-bench/github/requirements/reference/github-sign-up.png": "85687655e0bec8f95f174c9fdb061e147134b930f557f515d08e9fb0fd5b0ffe",
     "arc-bench/github/requirements/reference/github-web-file-editor.png": "c81a617730dfccbb32892a598a86c8b7a472755bdfc54de0df4d7b1de1a25a5d",
-    "arc-bench/github/requirements/requirements.yaml": "a6e2cfae0774123657fbb2d23805319a21a18324c810fff78024a236833a215b",
+    "arc-bench/github/requirements/requirements.yaml": "93b1e84361f1ad9ea529b06fc994632b1a9cfb72c9d997eecc3d6499485e2b55",
     "arc-bench/github/tests/REQ-1.1.1.spec.ts": "7626d610d74f8f050d455c224e44986800e9d4fa1997123796489df6eed8e0ec",
     "arc-bench/github/tests/REQ-1.1.2.spec.ts": "94b422a522721688e60899b67ffa97a300ad57ada3604393a01906def3c5ae6a",
     "arc-bench/github/tests/REQ-1.1.3.spec.ts": "6e8fb7e10df399a88c2ebaec0a1a2479c155c2fcc53f08c97296ed8c2087b357",
@@ -769,7 +774,10 @@
     "arc-bench/github/tests/REQ-6.4.spec.ts": "9f91cd0dd84773088fb06d29aa7c043e64b88a77ef61bc6c2058d37d65ea5360",
     "arc-bench/github/tests/REQ-6.5.spec.ts": "08f3dca9ba72dabee0bd9f691b85d2aa8d572de767f2235e965b46500eacbb41",
     "arc-bench/github/tests/REQ-6.6.spec.ts": "7b203b31e54a5ce82b906d7b61d90c2ca608af4edb3a2221a106c0fb375fc655",
+    "arc-bench/github/tests/REQ-7.1.spec.ts": "bb994a07b9444647c830de577a5aca9e2ce77d87bad23dc30e264230f981395e",
+    "arc-bench/github/tests/REQ-7.2.spec.ts": "d0f13f9050dec5321340a9db3df649dc9e60499c5781585939f52c82e380e07e",
     "arc-bench/github/tests/support/branch-state.ts": "1764ea2b48309ce36e9ba36b0abd24c0952ddad54d251d461ea599975b029c5c",
+    "arc-bench/github/tests/support/confirmation-guards.ts": "9681c610c1974f033e3b9eb029a1420f3402c945de10ecec7f08236f06ceb9fb",
     "arc-bench/github/tests/support/e2e.ts": "9e47db0e7c079078df5c408ef9c65195a890baf279afd4a4fce47e62e59d4467",
     "arc-bench/github/tests/support/membership.ts": "5971d553c8a4c3bb15177eb731e807f30b4d7d62acc61f96d5b0cc20c4cf2d99",
     "arc-bench/github/tests/support/observations.ts": "f144c16fa7267de177608cc85ff61bac40f04adefc64776c8a73dde0de7a4e29",
@@ -924,7 +932,7 @@
     "arc-bench/sheet/requirements/reference/workbook-home.png": "b1cceb9fb430ab35b059f86f07abdeb6065305e004e7f43b9fd6966673e9a577",
     "arc-bench/sheet/requirements/reference/worksheet-lifecycle.png": "bcff393226d23557eb4d63ac3afb52fb320ef2aace7cdd9c52599ccc4d2dd5ae",
     "arc-bench/sheet/requirements/reference/worksheet-overview.png": "413a5baa064ee00d825694937c11ccfeeba4388a1ef7468c063e82287b3965e3",
-    "arc-bench/sheet/requirements/requirements.yaml": "5649bf9482449cd0474e95f0b42a5227c84a1655e8d181dec691db6267afba6e",
+    "arc-bench/sheet/requirements/requirements.yaml": "2177dd539d64ce1716f0e09d1433b08c2d37818bd514fa01b0538fe141a913e8",
     "arc-bench/sheet/tests/REQ-1.1.1.spec.ts": "6fe2e002623bd6407e488708b48d0a33f4e175080ad8a061b4dadf6e7c02c81e",
     "arc-bench/sheet/tests/REQ-1.2.1.spec.ts": "12ad16b289ff82ff4e5510f4b7b37f2129ff0e857335f19f879b91d0267a782e",
     "arc-bench/sheet/tests/REQ-1.2.2.spec.ts": "84adc4c32ec5b3d72f6ef5cbd5996f766618874f953940d8a5c066389ff13bec",
@@ -949,9 +957,12 @@
     "arc-bench/sheet/tests/REQ-5.1.2.spec.ts": "dfd3601e99c751ce012a1e1c37b9ff1980d3d6b2cb4b239ca260fd0e4968d161",
     "arc-bench/sheet/tests/REQ-5.2.1.spec.ts": "88c1d5efdc3d03bd692d7fc2af2c2d166274983a43406144150dc54b6acdb68d",
     "arc-bench/sheet/tests/REQ-5.3.1.spec.ts": "be31516d54f977f46d7c1c5dac686178ba1fec36e2c3f6a0b164651ef86151fa",
+    "arc-bench/sheet/tests/REQ-6.1.spec.ts": "b481344cbfcb065f5172b4e7ab875498f4d0b63896386c38e5088ba84251f18b",
+    "arc-bench/sheet/tests/REQ-6.2.spec.ts": "bab86bda944ca08ddaadf6c4de8f42cf8f59fd027de01270c08ba2e204ef505a",
     "arc-bench/sheet/tests/support/e2e.ts": "a8df35cc1c2523e4864a285d02ff0b283dd4a930b1d7be96926da4653192d6b8",
     "arc-bench/sheet/tests/support/observations.ts": "75444d9e865d6396d729daa33e4e97ceee8febe41a639f3ee5d18ee8863b1ab0",
     "arc-bench/sheet/tests/support/public-controls.ts": "2e8be0cc06b7e8ed066fd48f356f3b1f03acfdf23de77fca1d7ea123daa1e0ca",
+    "arc-bench/sheet/tests/support/transactional-cut.ts": "92393a142dcd2000727c3c331b162c9f5695b7a815cab5a6d3936572e70ba088",
     "arc-bench/sheet/tests/support/workbook-record.ts": "479c5f8c2b108fbe2841c14cee332cc31f18fc003473d9584617785476eb37c1",
     "arc-bench/stackoverflow/requirements/reference/add-comment.jpeg": "635abf82b2e2fed9adc3add829c696ab43a9e6d709ae0d459cd0255ec561a82e",
     "arc-bench/stackoverflow/requirements/reference/ask-question-page.jpeg": "d4a259c42b0790026767f330f8e7449441a8d6c1596aaf88c95e5c5f30f3c408",
@@ -1056,6 +1067,7 @@
     "audit/stackoverflow.md": "1653d94c55f865d936b648cdf214e645d898693abcfd025a1b271e2993550c66",
     "audit/summarize.mjs": "c34ab5fc60a1f12d6ad8a400b42f881483ce46a3686c43f739d2ce68a31ec04d",
     "audit/summary.json": "51f175d05a6d20bfbcb6dd89cdccd44423e4b2df1539c1028cd803e0eb242f08",
+    "audit/transaction-guards.md": "fa978a1e6695495573ee6849da8e4f0cef44f3d3504cedd7e0c33597e2bfa746",
     "audit/tsconfig.json": "80dd48a1141f90704aa4146560ee032981a00f09781fe56a4f24596b74940552",
     "audit/validated-inputs.json": "9344a8c625a4706d3118b5cf7c347eca23935c363c46352112a71d374d074d0c",
     "audit/validation/12306.spec.ts": "731ecd3af05b51cd3e799851ba93b28625b1dc9eb40090e8b4c5654bffd64ae4",
@@ -1067,12 +1079,12 @@
     "audit/validation/prestashop.spec.ts": "56f17862202b18769f01153cb142b1ef0843fca9ddd1f962774f61a22f1e202a",
     "audit/validation/sheet.spec.ts": "1a98afdd4d864930ef679ddd4a48f734e3c1e1fd232881b8ec7ad6655952ad46",
     "audit/validation/stackoverflow.spec.ts": "e5429ea16c6676a019296beb1f1f554535f51b3ce6920a016d9a8e8951b2259e",
-    "CHANGES.md": "90a67cf9e5bc17420aae9fce52469f5b2ffdd63dfa3ba2e3f1d9265faa38ccf1",
+    "CHANGES.md": "3f3580a785e3d5e160a45f0d4c2ec5fc2b07aae04d292ac39fb801d872a26a0a",
     "CONSISTENCY.md": "7c607bcbff001ba428ce58429923d3e923cd570f425e6dc28f5a4b45d51e1070",
     "evaluate-project.mjs": "2c38aa1238612b7bdd0952f9c4c8780127478a87fee5759b6e125968fce68e1b",
     "package.json": "46d2bcc17d46ac503fce49f6d343831ddd6c9c23ca6885b7995f32bedc206bfd",
-    "QUALITY.md": "386de04e9bf7a13257b9e6e3737c1db629e89ca3f8f25074fd864a7b8be82fcc",
-    "README.md": "a5317866407146cc03bbd184bcd286708877a1316f49ac0132c86c35e296ef77",
+    "QUALITY.md": "878da8466edc54467661e5f9807a6ef381ca762b05dc582be65df79632a81221",
+    "README.md": "63632594506b2629d040f75c93c0622bb019419c50627cb0ab5fc7048954704c",
     "review.patch": "675d74d22a991b85be873d9ef1b7de688ea9c9b5e15060fc335d627f884e704d",
     "setup-playwright.cjs": "495b04365ebec4f5de207094326410212aa5f9044de1689b4fbfd0eba01d137a",
     "setup-playwright.ps1": "e4ae1f20a32b401427147c1635bd974f5e398cfba633b69770fb4e22226b912e",
@@ -1098,13 +1110,14 @@
     "validation/oracle-probes/run-oracle-probes.mjs": "e41441a02266d1b095508a784818b88c0b4eff73fd2d35da7196d6de91de63d0",
     "validation/public-controls.ts": "2e8be0cc06b7e8ed066fd48f356f3b1f03acfdf23de77fca1d7ea123daa1e0ca",
     "validation/selector-contracts.spec.ts": "52e701d29a7ef85a3da17e31ba0da32f509ca87c107c41529719970cc81cba22",
-    "validation/summarize-interactions.mjs": "081fb81be3b8ee438a6658793b2e764fbcb4f649fc16bbfdd199776457012995"
+    "validation/summarize-interactions.mjs": "27c8ba250a32d7f00521a88da5a76464310468bd9027aacc31b98d4e3809be62",
+    "validation/transaction-guards-contracts.spec.ts": "d9baec26a229709d846c7b34a73bee77e2c0064e649dc6ec84c3bd52211b38c1"
   },
-  "parentRevision": "2026-11-07-bookstack-lifecycle",
-  "parentManifestSha256": "9816b0ca90b6a88ea39aa9e342ff63031d7cdf8b1c3164a42f4316e0ecfb8d35",
+  "parentRevision": "2026-11-08-keep-bookstack-interactions",
+  "parentManifestSha256": "5ee52e462243acc9cc3a904e7bb046aa41ac824d028d7d7d5e18c40b721e7947",
   "reviewedAt": "2026-11-08",
   "qualityStatus": "interaction-scenarios-pending-candidate-execution",
-  "consistencyReview": "audit/interactions.md",
+  "consistencyReview": "audit/transaction-guards.md",
   "evaluation": {
     "protocol": "application-per-scenario-v1",
     "entrypoint": "evaluate-project.mjs",
@@ -1134,9 +1147,9 @@
     "allBusinessScenariosExecuted": false,
     "evidence": "audit/README.md"
   },
-  "parentCommit": "1a566b306b27df04961515ab2746d0b619e8954e",
+  "parentCommit": "acff3cf755c958d150794e1d9ac2890eb7620201",
   "extension": {
-    "documentation": "audit/interactions.md",
+    "documentation": "audit/transaction-guards.md",
     "tasks": {
       "keep": {
         "requirements": [
@@ -1161,7 +1174,29 @@
           "SCN-REQ-11.2-01"
         ],
         "addedScenarios": 7
+      },
+      "sheet": {
+        "requirements": [
+          "REQ-6.1",
+          "REQ-6.2"
+        ],
+        "basicScenarios": [
+          "SCN-REQ-6.1-02"
+        ],
+        "addedScenarios": 4
+      },
+      "github": {
+        "requirements": [
+          "REQ-7.1",
+          "REQ-7.2"
+        ],
+        "basicScenarios": [],
+        "addedScenarios": 4
       }
-    }
+    },
+    "documents": [
+      "audit/interactions.md",
+      "audit/transaction-guards.md"
+    ]
   }
 }

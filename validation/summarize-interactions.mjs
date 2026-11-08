@@ -8,7 +8,7 @@ const json = async path => JSON.parse(await readFile(path, 'utf8'));
 const revision = await json(new URL('../revision.json', import.meta.url));
 const extension = revision.extension.tasks[task];
 if (!extension || !directory) {
-  console.error('Usage: node validation/summarize-interactions.mjs <keep|bookstack> <evaluation directory>');
+  console.error('Usage: node validation/summarize-interactions.mjs <keep|bookstack|sheet|github> <evaluation directory>');
   process.exit(2);
 }
 
@@ -59,7 +59,7 @@ assert.equal(added.size, extensionCases.size, 'Report is missing extension cases
 const summarize = rows => {
   const count = (...statuses) => rows.filter(row => statuses.includes(row.status)).length;
   const total = rows.length, passed = count('passed'), skipped = count('skipped'), notRun = count('not_run', 'interrupted');
-  return { total, passed, failed: total - passed - skipped - notRun, skipped, notRun, passRate: passed / total };
+  return { total, passed, failed: total - passed - skipped - notRun, skipped, notRun, passRate: total ? passed / total : null };
 };
 console.log(JSON.stringify({
   revision: revision.revision, task,

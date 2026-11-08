@@ -1,6 +1,6 @@
 # Benchmark 质量与验收边界
 
-本轮修订为 `2026-11-08-keep-bookstack-interactions`，在父版生命周期扩展基础上，新增 Keep 和 BookStack 共 7 条原子需求和 15 个组合约束场景。新增场景与计分方式见 [audit/interactions.md](audit/interactions.md)。八题子智能体审查、定向修订与限制见 [audit/README.md](audit/README.md)。这是模型辅助的需求—断言审查；部分需求措辞得到澄清，必须连同修订后的需求一起冻结供所有方法使用。新增正反浏览器检查只证明相应观察边界，不能证明所有实现的真实误判率。
+本轮修订为 `2026-11-08-sheet-github-transaction-guards`，新增 Sheet 和 GitHub 的 4 条原子需求与 8 个场景。规则和分组评分见 [Sheet / GitHub 扩展](audit/transaction-guards.md)；上一轮 Keep / BookStack 的记录见 [audit/interactions.md](audit/interactions.md)。浏览器合同只验证可观察断言边界，不能替代新题面的候选应用执行。
 
 本版依据需求中的用户可观察行为建立断言。精确角色、名称、身份、权限和结果保留；普通可见文本不被额外限定为链接，原生和 ARIA 下拉通过各自公开交互选择相同标签。
 

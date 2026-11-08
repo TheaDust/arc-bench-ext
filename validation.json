@@ -1,22 +1,22 @@
 {
-  "revision": "2026-11-08-keep-bookstack-interactions",
-  "parentRevision": "2026-11-07-bookstack-lifecycle",
-  "manifestSha256": "5ee52e462243acc9cc3a904e7bb046aa41ac824d028d7d7d5e18c40b721e7947",
-  "recordedAt": "2026-11-08T11:25:01.341Z",
+  "revision": "2026-11-08-sheet-github-transaction-guards",
+  "parentRevision": "2026-11-08-keep-bookstack-interactions",
+  "manifestSha256": "0ed4712dba614451cd77a7344a7920089b3640cd44818e4a321c5d86796947be",
+  "recordedAt": "2026-11-08T12:29:29.890Z",
   "status": "inputs-and-contracts-verified-candidate-execution-pending",
   "scope": {
     "tasks": 8,
-    "atomicRequirements": 417,
-    "scenarios": 743,
+    "atomicRequirements": 421,
+    "scenarios": 751,
     "preservedExistingScenarioIdsAndContent": true,
     "extensionAdded": {
-      "keep": {
-        "atomicRequirements": 4,
-        "scenarios": 8
+      "sheet": {
+        "atomicRequirements": 2,
+        "scenarios": 4
       },
-      "bookstack": {
-        "atomicRequirements": 3,
-        "scenarios": 7
+      "github": {
+        "atomicRequirements": 2,
+        "scenarios": 4
       }
     }
   },
@@ -26,34 +26,23 @@
   },
   "collection": {
     "passed": true,
-    "scenarios": 743,
-    "newScenarioTitlesMatched": 15
+    "scenarios": 751,
+    "newScenarioTitlesMatched": 8
   },
   "sourceIntegrity": {
-    "frozenFiles": 729,
-    "lfAndCrlfCheckoutAccepted": true,
-    "binaryAndChangedTextRejected": true
+    "frozenFiles": 737
   },
   "contracts": {
-    "passed": 78,
+    "passed": 81,
     "failed": 0,
     "skipped": 0,
-    "newInteractionContractsPassed": 5,
-    "initialRun": {
-      "passed": 77,
-      "failed": 1,
-      "failure": "Existing Sheet popup click timed out at 1000 ms on the initial run; full rerun passed."
-    }
-  },
-  "closeout": {
-    "positivePassed": 14,
-    "mutantsRejected": 14
+    "newTransactionGuardContractsPassed": 3
   },
   "experimentPrepare": {
     "passed": true,
     "tasks": {
-      "keep": 41,
-      "bookstack": 56
+      "sheet": 104,
+      "github": 104
     },
     "methods": [
       "baseline",
@@ -61,26 +50,16 @@
     ],
     "modelCalled": false
   },
-  "independentEvaluationInputChecks": {
-    "passed": true,
-    "tasks": [
-      "keep",
-      "bookstack"
-    ],
-    "scope": "Controller/task digests and output directory guard only"
-  },
   "reportingFixtures": {
     "passed": true,
     "tasks": [
-      "keep",
-      "bookstack"
+      "sheet",
+      "github"
     ],
     "checked": [
       "complete denominators",
-      "passed",
-      "failed",
-      "skipped",
-      "not_run"
+      "partial runs",
+      "empty basic group"
     ]
   },
   "applications": {
@@ -90,11 +69,27 @@
     "pairedExperimentExecuted": false
   },
   "parentValidation": {
-    "commit": "1a566b306b27df04961515ab2746d0b619e8954e",
+    "commit": "acff3cf755c958d150794e1d9ac2890eb7620201",
     "path": "validation.json"
   },
   "limitations": [
-    "Browser contracts and prepared catalogs do not establish that any candidate passes the 15 new business scenarios.",
-    "Do not compare the new denominators directly with historical scores."
-  ]
+    "New business scenarios have been collected but have not been run against a candidate or reference application.",
+    "Do not compare scores from this revision directly with historical denominators."
+  ],
+  "requirementTestConsistency": {
+    "reviewedScenarios": 8,
+    "reviewedParts": [
+      "Given",
+      "When",
+      "Then"
+    ],
+    "mapping": "audit/transaction-guards.md",
+    "exactTitlesMatchedInExperimentCatalog": true,
+    "strengthened": [
+      "validation rule retention and rejected-edit rollback",
+      "unchanged branches immediately after rejected review",
+      "direct grants before and after team downgrade",
+      "commit graph before and after second merge confirmation"
+    ]
+  }
 }
