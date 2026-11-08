@@ -19,7 +19,7 @@ children:
   name: Application entry and navigation
   description:
     text: |-
-      The logged-out homepage provides search input and links to Login, Shelves and Books. These entry points are available throughout the content flows. Visual layout follows the supplied references; search behavior is not specified by this source.
+      The logged-out homepage provides search input and links to Login, Shelves and Books. These entry points are available throughout the content flows. Visual layout follows the supplied references; published-page search is specified by REQ-11.1.
 
       Content metadata and personal preferences persist across navigation and reload.
   scenarios: []
@@ -30,7 +30,7 @@ children:
       text: |-
         Opening the application homepage at / while logged out displays "Login"(role=link), "Shelves"(role=link), and "Books"(role=link) as its public entry points.
 
-        The logged-out homepage also provides a search input; search behavior is not specified. Login, Shelves, and Books entry points remain available throughout the content flows.
+        The logged-out homepage also provides a search input; published-page search is specified by REQ-11.1. Login, Shelves, and Books entry points remain available throughout the content flows.
       image:
       - id: IMG-INDEX
         reference: reference/index.png
@@ -1313,4 +1313,138 @@ children:
         - \ref[requirement](REQ-6.3)
         - \ref[image](IMG-CHAPTER)
         - \ref[image](IMG-BOOK)
+    children: []
+- id: REQ-11
+  name: Published revisions, content moves and stale edits
+  description:
+    text: |-
+      Public content retains identity across private revision drafts, cross-book moves and overlapping edits. Use the two initialized verified accounts for independent author sessions.
+  scenarios: []
+  children:
+  - id: REQ-11.1
+    name: Isolate private revisions of a published page
+    description:
+      text: |-
+        An authenticated user can click "Save Draft"(role=button) in an existing published page editor without changing its public title, body, identity or parent. A successful save displays "Revision draft saved"(role=status) before the author navigates away. A revision draft is private to its author and is reopenable through an exact title link or button in "My Recent Drafts"(role=region), where it appears once. This does not require changing how new unpublished pages are reopened. The anonymous reading view, parent Page list and Recently Updated Pages show only the published version. For published pages, entering a full title in "Search"(role=searchbox) and pressing Enter shows exact title entries (link or button) in "Search results"(role=region); revision drafts are excluded. An exact-title search without a match shows "No matching pages" in that region after the search completes. A successful publish updates all public projections, keeps existing saved references usable, and clears only the publishing author's draft. A different author's draft stays private and retains its original base version. A stale draft's Save Page follows the conflict rule in \ref[requirement](REQ-11.3).
+    scenarios:
+    - id: SCN-REQ-11.1-01
+      name: Keep a saved revision private until its author publishes
+      steps:
+      - id: STEP-REQ-11.1-01-01
+        Given: |-
+          Author A publishes a page with V1 title and body; an anonymous reader can open it and A favorites it.
+        When: |-
+          A edits title and body, clicks Save Draft, and opens the homepage. Inspect anonymous reading, book listing, exact-title search and recent updates before publication. A reopens the draft and publishes; recheck public projections and the favorite.
+        Then: |-
+          Before publication A alone can reopen the draft with its exact fields; all public views still show V1 and omit the draft. After publication the public reading view, list, search and recent updates show V2 once and no V1 entry; the saved reading URL still resolves to the same page, and the renamed favorite opens it. A's published draft is gone.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-8.1)
+        - \ref[requirement](REQ-9.1)
+    - id: SCN-REQ-11.1-02
+      name: Keep a second author's revision private and reject its stale publish
+      steps:
+      - id: STEP-REQ-11.1-02-01
+        Given: |-
+          Author A publishes V1. A and author B use separate signed-in contexts and each saves a revision draft with a different title and body based on V1.
+        When: |-
+          Inspect each author's drafts and book list, and the anonymous V1 and its lists, then A publishes. B reopens B's saved draft, attempts Save Page and chooses Keep editing in the conflict. Inspect B's draft again and the anonymous published reading and recent updates.
+        Then: |-
+          Each author can reopen only their own exact draft fields, and the other revision title is absent from the book list. Before A publishes, anonymous reading and lists expose only V1. A's draft clears after publish. B's draft remains unchanged and private after A publishes and after B declines to overwrite. Anonymous reading and recent updates show A's published version and never show B's draft.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-8.1)
+        - \ref[requirement](REQ-9.1)
+    children: []
+  - id: REQ-11.2
+    name: Move a chapter between books without breaking references
+    description:
+      text: |-
+        On the chapter reading view, "Move Chapter"(role=button) opens "Move Chapter"(role=dialog). Choose "Destination book"(role=combobox) and "Placement"(role=combobox, values "First" and "Last"), then click "Move"(role=button). The moved chapter and all of its pages keep their identities, body content and internal page order. Same-title chapters and pages in distinct parents are valid. When a book contains same-title chapters, each chapter opening control in "Chapter list"(role=region) is inside its own listitem or row with the chapter's visible description, which distinguishes the two. The chapter and page reading views have "Breadcrumb"(role=navigation) with the current ancestor names as links or buttons in book-then-chapter order. A page's "Chapter pages"(role=navigation) links to its chapter's other pages, excluding pages of the namesake chapter. The destination book Page list shows one entry per page, including when titles repeat across chapters. Old bookmarked URLs may redirect; personal favorites and recent entries still open the moved objects, and placement, parents and identities survive reload.
+    scenarios:
+    - id: SCN-REQ-11.2-01
+      name: Move a chapter without changing its pages
+      steps:
+      - id: STEP-REQ-11.2-01-01
+        Given: |-
+          Create a source and target book and a source chapter with one published page; save the page's reading URL.
+        When: |-
+          Move the chapter to the target as Last and reload the target chapter. Open the page using the target chapter and its saved URL.
+        Then: |-
+          Only the target book lists the chapter and its page. The saved URL still opens the page with the same body, with breadcrumbs to the target book and moved chapter.
+        references:
+        - \ref[requirement](REQ-5.3)
+        - \ref[requirement](REQ-6.3)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+    - id: SCN-REQ-11.2-02
+      name: Move a same-title chapter and preserve its order and references
+      steps:
+      - id: STEP-REQ-11.2-02-01
+        Given: |-
+          Create one same-title chapter in each of two books with different descriptions. Each chapter contains a same-title page with a different body; the source chapter also has a second page. Favorite and visit the source page, and record its chapter page order.
+        When: |-
+          Move the source chapter to First in the target book. Reload and open each namesake by its description; navigate between the moved pages, open the moved page from Favorites and Recently Viewed, and follow its chapter and book breadcrumb links.
+        Then: |-
+          The source no longer lists the moved chapter or pages. In the target the moved chapter is first and the other remains intact. Both chapters contain their own pages in their original order. The moved pages show the new book and chapter in breadcrumbs and their own chapter navigation, and the breadcrumb links open the correct parents. Personal entries open the moved page with its original body.
+        references:
+        - \ref[requirement](REQ-5.3)
+        - \ref[requirement](REQ-6.3)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-8.1)
+    children: []
+  - id: REQ-11.3
+    name: Protect published pages from stale editors
+    description:
+      text: |-
+        For an existing page, Save Page after another publication based on a newer version opens "Page edit conflict"(role=dialog) without publishing or losing unsaved fields. "Keep editing"(role=button) returns to the editor with those fields; "Overwrite"(role=button) explicitly publishes the entered title and body to the same existing page. A successful Save Page or Overwrite opens the updated reading view; existing reading URLs still resolve to it. A move alone does not conflict with editing text: the text save uses the current parent, with no duplicate and no return to the former parent. The existing reading URL still resolves to that page (a redirect is allowed), and its Breadcrumb navigation names the destination book. For a standalone published page, "Move Page"(role=button) opens "Move Page"(role=dialog) with "Destination book"(role=combobox) and "Move"(role=button) to move it to the destination book root. After deletion a stale save shows "Page deleted"(role=alert), leaves the unsaved fields available, and offers "Back to book"(role=button) to leave without saving. A deleted page cannot be revived by either text or draft publication.
+    scenarios:
+    - id: SCN-REQ-11.3-01
+      name: Protect a newer publication from a stale editor
+      steps:
+      - id: STEP-REQ-11.3-01-01
+        Given: |-
+          A and B open the same published V1 in separate authenticated editors.
+        When: |-
+          A enters new text but does not save. B publishes different text. A clicks Save Page, chooses Keep editing, then explicitly confirms Overwrite after retrying.
+        Then: |-
+          Before overwrite, public reading still shows B's version and A's unsaved text is retained. After overwrite the same page shows A's text, with exactly one entry in the parent list.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-10.1)
+    - id: SCN-REQ-11.3-02
+      name: Save stale editor text to the page's new book
+      steps:
+      - id: STEP-REQ-11.3-02-01
+        Given: |-
+          A opens an editor for a standalone published page and changes its text. B opens the same published page.
+        When: |-
+          B moves the page to another book. A submits the original editor with Save Page, then reloads and checks both books.
+        Then: |-
+          Only the destination book has the page; it has A's new content, appears once, and its breadcrumb identifies the destination book.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-10.1)
+    - id: SCN-REQ-11.3-03
+      name: Reject a stale page save after deletion
+      steps:
+      - id: STEP-REQ-11.3-03-01
+        Given: |-
+          A opens an editor for a published page and changes its text. B opens the same published page.
+        When: |-
+          B deletes and confirms deletion. A clicks Save Page, checks the refusal and the entered fields, then uses Back to book.
+        Then: |-
+          The deletion alert appears and A's input remains available until leaving. The book and Recently Updated Pages have no entry under either title. The old reading URL does not expose either version.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-6.4)
+        - \ref[requirement](REQ-10.1)
     children: []

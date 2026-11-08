@@ -773,3 +773,163 @@ children:
         - \ref[image](IMG-HOME-PAGE)
         - \ref[image](IMG-LIST-VIEW)
     children: []
+- id: REQ-6
+  name: Note identity and concurrent changes
+  description:
+    text: |-
+      Personal notes and labels preserve identity across their lifecycle and across overlapping actions. The same workspace can be opened in two tabs.
+  scenarios: []
+  children:
+  - id: REQ-6.1
+    name: Keep same-title notes independent
+    description:
+      text: |-
+        Separate notes may have exactly the same title. Title, list position and layout do not identify a note. Each note is its own title-named region with its own visible body, labels and note actions. Edits, archive, Trash and restoration address only the selected note. Deleting an archived note puts it in Trash; its card offers "Restore {title}"(role=button), which returns it to its pre-deletion collection. Unarchive then explicitly returns it to Notes. Preserve content, labels, color and pin state across these transitions. Label and search views return each matching note once.
+    scenarios:
+    - id: SCN-REQ-6.1-01
+      name: Show both same-title notes independently in search and layouts
+      steps:
+      - id: STEP-REQ-6.1-01-01
+        Given: |-
+          Create two active Twin memo notes with distinct visible bodies, one pinned and one regular.
+        When: |-
+          Search for Twin memo, clear search, switch to List view and reload Notes.
+        Then: |-
+          Search shows exactly the two notes with their own bodies. List view and reload retain exactly one of each; only the pinned note is in Pinned notes and the other is in Other notes.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+        - \ref[requirement](REQ-2.5)
+        - \ref[requirement](REQ-2.6)
+        - \ref[requirement](REQ-2.7)
+        - \ref[requirement](REQ-2.8)
+        - \ref[requirement](REQ-2.9)
+        - \ref[requirement](REQ-3.2)
+        - \ref[requirement](REQ-4.1)
+        - \ref[requirement](REQ-5.2)
+    - id: SCN-REQ-6.1-02
+      name: Edit and restore the correct same-title note across collections
+      steps:
+      - id: STEP-REQ-6.1-02-01
+        Given: |-
+          Create two Twin memo notes with distinct bodies and labels. The first is pinned and light green; the second is regular and uses the default color.
+        When: |-
+          In the first label view rename the first note. Archive the second, delete it from Archived, restore it from Trash, then explicitly unarchive it. Search the original title, clear search, switch to List view and reload Notes.
+        Then: |-
+          Each intermediate collection contains only the appropriate note, and the second returns to Archived before unarchiving. Search returns only the second note. After reload both notes appear exactly once in their correct pin sections with the right titles, bodies, labels and colors.
+        references:
+        - \ref[requirement](REQ-2.2)
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+        - \ref[requirement](REQ-2.5)
+        - \ref[requirement](REQ-2.6)
+        - \ref[requirement](REQ-2.7)
+        - \ref[requirement](REQ-2.8)
+        - \ref[requirement](REQ-2.9)
+        - \ref[requirement](REQ-3.2)
+        - \ref[requirement](REQ-4.1)
+        - \ref[requirement](REQ-5.2)
+    children: []
+  - id: REQ-6.2
+    name: Do not revive deleted label identity
+    description:
+      text: |-
+        Deleting a label removes its memberships from active, archived and trashed notes. A new label with the same text is a distinct object with no inherited memberships. An editor opened before deletion may save text but cannot restore a deleted label or attach its replacement without an explicit assignment. Preserve all other labels and content. In a second tab, reloading the workspace shows changes committed by the first; the open editor is not reloaded.
+    scenarios:
+    - id: SCN-REQ-6.2-01
+      name: Recreate a label without inheriting old memberships
+      steps:
+      - id: STEP-REQ-6.2-01-01
+        Given: |-
+          Create Project and Retained labels. Assign both to three distinct notes and leave one active, one archived and one in Trash.
+        When: |-
+          Open the active note in tab A and change its content without closing. In tab B delete Project and create Project again. Close the old editor in A; restore the trashed note and unarchive the archived note. Explicitly assign the new Project to the restored note only; reload.
+        Then: |-
+          The recreated label initially has no notes. The stale save persists the new content and does not reattach Project. Neither restoration nor unarchive reattaches Project. All three notes keep Retained and their correct bodies. After explicit assignment and reload only the restored note appears under Project.
+        references:
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-3.1)
+        - \ref[requirement](REQ-3.3)
+        - \ref[requirement](REQ-6.1)
+    children: []
+  - id: REQ-6.3
+    name: Undo deletion without reverting later changes
+    description:
+      text: |-
+        The Undo in a "Note deleted"(role=status) reverses only that note's deletion and restores its prior collection and pin state. It uses the current label identities and names, and leaves later changes to other records intact. Editing a note or renaming a label does not dismiss, replace, or retarget this notification. Its Undo remains available for those intervening actions without depending on a timer. Dismissing the notification still removes its Undo.
+    scenarios:
+    - id: SCN-REQ-6.3-01
+      name: Undo a deletion after a label rename and another note edit
+      steps:
+      - id: STEP-REQ-6.3-01-01
+        Given: |-
+          Create a pinned note with a label, and a separate active note with different text.
+        When: |-
+          Delete the pinned note. Without dismissing the notification, rename its label and edit the other note's content, then use Undo in the original deletion notification and reload.
+        Then: |-
+          The deleted note is restored once to Pinned notes with its original content and current label name, and absent from Trash. The renamed label remains in the sidebar, the old name is absent, and the other note retains its later edit.
+        references:
+        - \ref[requirement](REQ-2.4)
+        - \ref[requirement](REQ-2.9)
+        - \ref[requirement](REQ-3.3)
+    children: []
+  - id: REQ-6.4
+    name: Resolve stale note edits without losing changes
+    description:
+      text: |-
+        Two tabs of the same personal workspace can open the same note. For existing notes, Close submits the changed Title and Content fields; fields unchanged by that editor retain newer saved values. Saving overlapping divergent changes opens "Note edit conflict"(role=dialog) and retains the unsaved input. "Keep editing"(role=button) closes the conflict dialog and returns to the editor with that input. "Reload latest"(role=button) returns to Note editor with the latest values; "Overwrite"(role=button) saves only the fields changed by this editor and preserves newer untouched fields. If the note has been deleted, Close instead shows "Note deleted elsewhere"(role=alert) with the input intact; "Discard changes"(role=button) closes the editor without restoring the note.
+    scenarios:
+    - id: SCN-REQ-6.4-01
+      name: Merge independent title and content edits from two tabs
+      steps:
+      - id: STEP-REQ-6.4-01-01
+        Given: |-
+          Open the same active note with its initial title and body in editors A and B in two tabs.
+        When: |-
+          Change the title in A without closing. Change the body in B and close B; confirm B's save. Close A, then reload Notes.
+        Then: |-
+          Exactly one note has A's new title and B's new body. The previous title is absent.
+        references:
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+    - id: SCN-REQ-6.4-02
+      name: Reload the latest note after a conflicting edit
+      steps:
+      - id: STEP-REQ-6.4-02-01
+        Given: |-
+          Open the same active note in editors A and B.
+        When: |-
+          Enter different bodies in A and B, close B, then close A. Choose Keep editing and inspect the unsaved input. Submit again and choose Reload latest.
+        Then: |-
+          A's unsaved body is retained when returning from the conflict to the editor. Reload latest keeps the editor open with B's body; the saved note still has B's body after closing and reload.
+        references:
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+    - id: SCN-REQ-6.4-03
+      name: Explicitly overwrite only conflicting note fields
+      steps:
+      - id: STEP-REQ-6.4-03-01
+        Given: |-
+          Open the same active note in editors A and B.
+        When: |-
+          Change the body in A. Change both title and body in B, close B, then close A. Choose Overwrite and reload.
+        Then: |-
+          The conflict does not silently publish A's body. Explicit overwrite saves A's body, preserves B's new title, and leaves exactly one note.
+        references:
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+    - id: SCN-REQ-6.4-04
+      name: Reject a stale save after another tab deletes the note
+      steps:
+      - id: STEP-REQ-6.4-04-01
+        Given: |-
+          Open a note in tab A and load the same saved note in tab B.
+        When: |-
+          Edit its body without closing in A. Delete the note in B, then click Close in A and inspect the refusal. Discard changes and reload both collections.
+        Then: |-
+          A receives the deletion alert and retains its unsaved input until discard. Notes does not contain the note; Trash contains exactly one note with the original body.
+        references:
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-2.4)
+    children: []

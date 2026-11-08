@@ -1,3 +1,9 @@
+# 2026-11-08: Keep 与 BookStack 组合约束扩展
+
+修订 `2026-11-08-keep-bookstack-interactions`，父版本 `2026-11-07-bookstack-lifecycle`。Keep 新增 4 条原子需求、8 个场景；BookStack 新增 3 条原子需求、7 个场景。所有既有 ID 与正式测试标题保留。新增验收围绕同名身份、过期编辑、局部 Undo、私有修订和跨书移动。场景矩阵及分组评分见 [audit/interactions.md](audit/interactions.md)。
+
+Windows Git checkout 的文本 CRLF 转换不再误触发冻结摘要拒绝；实质内容与二进制仍按冻结摘要校验。合计 417 条原子需求、743 个场景。受影响题目需要使用同版输入重新生成并评测，旧分数不可混用。
+
 # 2026-11-07: BookStack 生命周期与关系一致性扩展
 
 修订 `2026-11-07-bookstack-lifecycle`，父版本 `2026-11-07-per-task-semantic-review`。保留 BookStack 原 24 条原子需求、35 个场景及全部身份，新增 2 条原子需求和 14 个场景：

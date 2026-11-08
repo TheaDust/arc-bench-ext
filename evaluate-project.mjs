@@ -15,7 +15,6 @@ if (!controller || !task || !application || !output || !['baseline','shallow','a
 import { readFile,mkdir,writeFile } from 'node:fs/promises';
 import { resolve,join,dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { createHash } from 'node:crypto';
 import assert from 'node:assert/strict';
 try {
 const [controller,bench,name,application,directory,method]=process.argv.slice(1);
@@ -23,24 +22,27 @@ const load=path=>import(pathToFileURL(join(controller,path)).href);
 const {executeWorker}=await load('src/experiments/worker.ts');
 const {discoverArcTasks,implementationDigest,inside}=await load('src/experiments/protocol.ts');
 const {snapshotFiles}=await load('src/run-record.ts');
-const sha=bytes=>createHash('sha256').update(bytes).digest('hex');
+const {sha256,canonicalBytes,matchesFrozenHash}=await import(pathToFileURL(join(bench,'validation/frozen-inputs.mjs')).href);
 const revisionBytes=await readFile(join(bench,'revision.json'));
 const revision=JSON.parse(revisionBytes);
 assert.equal(revision.evaluation.protocol,'application-per-scenario-v1');
-for(const [path,expected] of Object.entries(revision.evaluation.controllerFiles))assert.equal(sha(await readFile(join(controller,path))),expected,'Controller changed: '+path);
+for(const [path,expected] of Object.entries(revision.evaluation.controllerFiles))assert.ok(matchesFrozenHash(path,await readFile(join(controller,path)),expected),'Controller changed: '+path);
 assert.ok(!inside(application,directory)&&!inside(directory,application),'Evaluation and application directories must be disjoint');
 const task=(await discoverArcTasks(bench)).find(task=>task.id===name);
 assert.ok(task,'Unknown task: '+name);
 for(const [kind,files] of [['requirements',task.requirementFiles],['tests',task.testFiles]]){
  const prefix='arc-bench/'+name+'/'+kind+'/';
  const expected=Object.fromEntries(Object.entries(revision.files).filter(([path])=>path.startsWith(prefix)).map(([path,hash])=>[path.slice(prefix.length),hash]));
- assert.deepEqual(files,expected,'Frozen '+kind+' changed');
+ assert.deepEqual(Object.keys(files).sort(),Object.keys(expected).sort(),'Frozen '+kind+' file set changed');
+ for(const [path,hash] of Object.entries(expected)){
+  if(files[path]!==hash)assert.ok(matchesFrozenHash(path,await readFile(join(bench,prefix,path)),hash),'Frozen file changed: '+prefix+path);
+ }
 }
 const setupScript=join(bench,'setup-playwright.cjs');
-assert.equal(sha(await readFile(setupScript)),revision.files['setup-playwright.cjs']);
+assert.ok(matchesFrozenHash(setupScript,await readFile(setupScript),revision.files['setup-playwright.cjs']),'Frozen Playwright setup changed');
 await mkdir(dirname(directory),{recursive:true});await mkdir(directory);
 const initial=await snapshotFiles(application);
-await writeFile(join(directory,'manifest.json'),JSON.stringify({revision:revision.revision,revisionSha256:sha(revisionBytes),
+await writeFile(join(directory,'manifest.json'),JSON.stringify({revision:revision.revision,revisionSha256:sha256(canonicalBytes('revision.json',revisionBytes)),
  protocol:revision.evaluation.protocol,controllerDigest:await implementationDigest(),node:process.version,
  task,method,application,applicationFiles:initial},null,2)+'\n');
 const catalogDir=join(directory,'catalog'),evaluationDir=join(directory,'evaluation');

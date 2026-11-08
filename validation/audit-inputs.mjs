@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
+import { canonicalBytes, matchesFrozenHash } from './frozen-inputs.mjs';
 import { readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,7 +22,9 @@ if (collectionPath) {
         const task = test.projectName || owner;
         assert.ok(revision.tasks[task], `Missing task for ${spec.title}`);
         const key = `${task}:${id}`;
-        collected.set(key, (collected.get(key) ?? 0) + 1);
+        const titles = collected.get(key) ?? [];
+        titles.push(spec.title);
+        collected.set(key, titles);
       }
     }
     for (const child of suite.suites ?? []) visit(child, owner);
@@ -64,8 +66,13 @@ for (const [task, expected] of Object.entries(revision.tasks)) {
       atoms++;
       assert.ok(node.scenarios?.length, `${task}: leaf ${node.id} has no scenario`);
       if (collectionPath) {
-        assert.equal(collected.get(`${task}:${node.id}`), node.scenarios.length,
+        const titles = collected.get(`${task}:${node.id}`) ?? [];
+        assert.equal(titles.length, node.scenarios.length,
           `${task}: ${node.id} requirement/scenario vs collected-test coverage differs`);
+        if (revision.extension?.tasks[task]?.requirements.includes(node.id)) {
+          const expectedTitles = node.scenarios.map(scenario => `${node.id}: ${scenario.name}`);
+          assert.deepEqual(titles.sort(), expectedTitles.sort(), `${task}: extension scenario titles differ`);
+        }
         collected.delete(`${task}:${node.id}`);
       }
     } else assert.equal(node.scenarios?.length ?? 0, 0, `${task}: non-leaf scenarios are unsupported`);
@@ -104,11 +111,13 @@ for (const [task, expected] of Object.entries(revision.tasks)) {
 assert.equal(collected.size, 0, `Collected tests have no matching atomic requirement: ${[...collected.keys()]}`);
 for (const [name, expected] of Object.entries(revision.files)) {
   const data = await readFile(resolve(root, name));
-  assert.equal(createHash('sha256').update(data).digest('hex'), expected, `Frozen file changed: ${name}`);
+  assert.ok(matchesFrozenHash(name, data, expected), `Frozen file changed: ${name}`);
 }
-const template = await readFile(resolve(root, 'validation/public-controls.ts'), 'utf8');
+const templatePath = 'validation/public-controls.ts';
+const template = canonicalBytes(templatePath, await readFile(resolve(root, templatePath)));
 for (const task of Object.keys(revision.tasks).filter(task => task !== 'keep')) {
-  assert.equal(await readFile(resolve(root, 'arc-bench', task, 'tests/support/public-controls.ts'), 'utf8'), template,
+  const copy = resolve(root, 'arc-bench', task, 'tests/support/public-controls.ts');
+  assert.ok(canonicalBytes(copy, await readFile(copy)).equals(template),
     `${task}: standalone public controls diverged from the validated template`);
 }
 console.log(JSON.stringify(summary, null, 2));
