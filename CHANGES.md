@@ -1,8 +1,28 @@
+# 2026-11-08: Keep / BookStack 生命周期与组合约束合并修订
+
+修订 `2026-11-08-keep-bookstack-lifecycle-interactions`，父版本 `2026-11-07-bookstack-lifecycle`。本版合并 `2026-11-08-keep-bookstack-interactions` 与 `2026-11-08-keep-lifecycle`（含 `2026-11-08-keep-notification-oracle` 测试修正）：Keep 新增 6 条原子需求、16 个场景，BookStack 新增 3 条原子需求、7 个场景。既有需求 ID、场景 ID 与正式测试标题保留。合计 **419 条原子需求、751 个场景**（Keep 22/49，BookStack 29/56）。
+
+组合约束场景围绕同名身份、过期编辑、局部 Undo、私有修订和跨书移动，矩阵见 [audit/interactions.md](audit/interactions.md)；Keep 生命周期与 BookStack 观察点补强见 [audit/keep.md](audit/keep.md) 与 [audit/bookstack.md](audit/bookstack.md)。合并后的冻结输入已重新收集并通过类型检查与公开合同；新增业务场景尚未对真实候选执行，旧分数不可混用。
+
+Windows Git checkout 的文本 CRLF 转换不再误触发冻结摘要拒绝；实质内容与二进制仍按冻结摘要校验。
+
 # 2026-11-08: Keep 与 BookStack 组合约束扩展
 
-修订 `2026-11-08-keep-bookstack-interactions`，父版本 `2026-11-07-bookstack-lifecycle`。Keep 新增 4 条原子需求、8 个场景；BookStack 新增 3 条原子需求、7 个场景。所有既有 ID 与正式测试标题保留。新增验收围绕同名身份、过期编辑、局部 Undo、私有修订和跨书移动。场景矩阵及分组评分见 [audit/interactions.md](audit/interactions.md)。
+组件修订 `2026-11-08-keep-bookstack-interactions`。Keep 新增 4 条原子需求、8 个场景；BookStack 新增 3 条原子需求、7 个场景。所有既有 ID 与正式测试标题保留。该修订的独立分母为 417 条原子需求、743 个场景。
 
-Windows Git checkout 的文本 CRLF 转换不再误触发冻结摘要拒绝；实质内容与二进制仍按冻结摘要校验。合计 417 条原子需求、743 个场景。受影响题目需要使用同版输入重新生成并评测，旧分数不可混用。
+# 2026-11-08: Keep 通知定位 oracle 修正
+
+通知按 role=status 与精确可见消息定位，存在性检查要求唯一且可见；Undo 和 Dismiss 继续限定在对应通知内。需求、场景身份与分母不变。新增命名/未命名通知正例，以及错误角色、错误或隐藏消息、重复身份和跨通知动作反例。本项是测试修正，标识为 `2026-11-08-keep-notification-oracle`；测试哈希随清单更新。原实验成绩保留，修订后的定向复评单独记录。
+
+验证：通知合同 8/8 通过；同版测试对原 Shallow、baseline 应用分别定向复评 16/16 通过，均保持逐场景应用/数据隔离。类型、41 项场景收集及输入完整性检查通过。其余 25 项未重跑，不据此重写全量分数。详见 [验证记录](validation/keep-notification-oracle.json)。
+
+# 2026-11-08: Keep 生命周期扩展与 BookStack 观察点补强
+
+修订 `2026-11-08-keep-lifecycle`，父版本 `2026-11-07-bookstack-lifecycle`。Keep 新增 REQ-2.10/REQ-2.11 与 8 个场景：逐条恢复（保留属性、归档来源）、永久删除确认/取消、笔记重命名、标签跨活跃/归档/已删状态传播、生命周期搜索。Keep 由 16/33 变为 18/41；全库由 410/728 变为 412/736。已有场景/步骤身份与标题保留，所有新增行为、角色和名称同步写回需求。
+
+BookStack 不改分母，补强书籍删除后章节/页面旧地址、双用户共同收藏后单方取消，以及书架成员保存后的刷新和反向关联。同步各场景 When/Then。
+
+组件修订的独立范围为 412 条原子需求、736 个场景；当时仅完成静态核对与定向 TypeScript 检查。父版 49/49 等记录单独归档，未将历史通过结果转移给该组件输入。合并修订已重新收集全部输入并执行公开合同。
 
 # 2026-11-07: BookStack 生命周期与关系一致性扩展
 

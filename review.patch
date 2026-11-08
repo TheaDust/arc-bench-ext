@@ -1,1167 +1,1970 @@
 diff --git a/arc-bench/bookstack/requirements/requirements.yaml b/arc-bench/bookstack/requirements/requirements.yaml
-index 68c4cd5..c107735 100644
+index c107735..3e2281c 100644
 --- a/arc-bench/bookstack/requirements/requirements.yaml
 +++ b/arc-bench/bookstack/requirements/requirements.yaml
-@@ -11,6 +11,8 @@ description:
-     For session and personal dashboard state: Established through login, opening content, favoriting content, or saving pages/drafts. No private storage injection.
-     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
+@@ -19,7 +19,7 @@ children:
+   name: Application entry and navigation
+   description:
+     text: |-
+-      The logged-out homepage provides search input and links to Login, Shelves and Books. These entry points are available throughout the content flows. Visual layout follows the supplied references; search behavior is not specified by this source.
++      The logged-out homepage provides search input and links to Login, Shelves and Books. These entry points are available throughout the content flows. Visual layout follows the supplied references; published-page search is specified by REQ-11.1.
  
-+    The initialized application contains two verified accounts: BookStack User (bookstack_user@example.com / Password123!) and BookStack Reviewer (bookstack_reviewer@example.com / Password123!). Scenarios that require cross-user isolation use the named account; other scenarios use BookStack User.
+       Content metadata and personal preferences persist across navigation and reload.
+   scenarios: []
+@@ -30,7 +30,7 @@ children:
+       text: |-
+         Opening the application homepage at / while logged out displays "Login"(role=link), "Shelves"(role=link), and "Books"(role=link) as its public entry points.
+ 
+-        The logged-out homepage also provides a search input; search behavior is not specified. Login, Shelves, and Books entry points remain available throughout the content flows.
++        The logged-out homepage also provides a search input; published-page search is specified by REQ-11.1. Login, Shelves, and Books entry points remain available throughout the content flows.
+       image:
+       - id: IMG-INDEX
+         reference: reference/index.png
+@@ -311,6 +311,8 @@ children:
+         On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button) discards all pending changes and returns to the unchanged details.
+ 
+         Related-book editing is supported. The shelf edit form exposes one checkbox per available book, named by that book's exact name and checked exactly when the book belongs to the shelf. Saving adds every checked book to this shelf and removes every unchecked book from this shelf only; removing a book neither deletes it nor removes it from another shelf. The same book may belong to multiple shelves.
 +
- scenarios: []
- children:
- - id: REQ-1
-@@ -305,10 +307,10 @@ children:
-   - id: REQ-4.5
-     name: Edit or abandon shelf metadata
-     description:
--      text: On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox),
--        and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf
--        and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button)
--        discards all pending changes and returns to the unchanged details. Related-book editing is also supported.
-+      text: |-
-+        On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button) discards all pending changes and returns to the unchanged details.
-+
-+        Related-book editing is supported. The shelf edit form exposes one checkbox per available book, named by that book's exact name and checked exactly when the book belongs to the shelf. Saving adds every checked book to this shelf and removes every unchecked book from this shelf only; removing a book neither deletes it nor removes it from another shelf. The same book may belong to multiple shelves.
++        Saved membership survives reload and is reflected by the parent shelf actions on each related book as well as each shelf's Book list.
        image:
        - id: IMG-SHELF
          reference: reference/shelf.png
-@@ -350,14 +352,31 @@ children:
+@@ -360,8 +362,8 @@ children:
+           An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.
+           Seed prerequisites (prepared before this scenario):
+           - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
+-        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
+-        Then: Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
++        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; reload the shelf, open both books, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
++        Then: After reload Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. Both books remain reachable through the global Book list. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A exposes each of shelves 4.5.3-T and 4.5.3-S exactly once. Shelf 4.5.3-T Book list still contains Book 4.5.3-A. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
+         references:
          - \ref[requirement](REQ-4.2)
-         - \ref[image](IMG-SHELF)
-         - \ref[image](IMG-EDIT-SHELVE)
-+    - id: SCN-REQ-4.5-03
-+      name: Edit related books
-+      steps:
-+      - id: STEP-REQ-4.5-03-01
-+        Given: |-
-+          An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.
-+          Seed prerequisites (prepared before this scenario):
-+          - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
-+        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
-+        Then: Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
-+        references:
-+        - \ref[requirement](REQ-4.2)
-+        - \ref[requirement](REQ-5.2)
-+        - \ref[requirement](REQ-5.6)
-+        - \ref[image](IMG-SHELF)
-+        - \ref[image](IMG-EDIT-SHELVE)
-+        - \ref[image](IMG-BOOKS)
-     children: []
-   - id: REQ-4.4
-     name: Delete or retain shelf
-     description:
--      text: Clicking "Delete"(role=button) on a selected shelf opens confirmation. "Confirm Delete"(role=button)
--        removes that shelf and returns to "Shelf list"(role=region), where its entry is absent; the
--        deletion remains effective across navigation. "Cancel"(role=button) keeps the shelf and preserves its original
--        heading and description.
-+      text: |-
-+        Clicking "Delete"(role=button) on a selected shelf opens confirmation. "Confirm Delete"(role=button) removes that shelf and returns to "Shelf list"(role=region), where its entry is absent; the deletion remains effective across navigation. "Cancel"(role=button) keeps the shelf and preserves its original heading and description.
-+
-+        Deleting a shelf does not delete the books it contains. Contained books remain in the global Book list with their saved metadata, and the deleted shelf no longer appears as a parent action on those books.
-       image:
-       - id: IMG-DELETE-SHELVES
-         reference: reference/delete_shelves.png
-@@ -396,6 +415,22 @@ children:
-         - \ref[requirement](REQ-4.2)
-         - \ref[image](IMG-DELETE-SHELVES)
-         - \ref[image](IMG-SHELVES)
-+    - id: SCN-REQ-4.4-03
-+      name: Retain books after shelf deletion
-+      steps:
-+      - id: STEP-REQ-4.4-03-01
-+        Given: |-
-+          An anonymous visitor has UI-created isolated Shelf 4.4.3 containing isolated Book 4.4.3 through that shelf's Create New Book form; the book is also available in the global Book list.
-+          Seed prerequisites (prepared before this scenario):
-+          - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
-+        When: Open the shelf, click Delete, click Confirm Delete, then open Books and the isolated book; reload the book detail.
-+        Then: Shelf list no longer contains the deleted shelf. Book list still contains the isolated book exactly once, and its heading and saved description remain after reload. The book detail no longer exposes the deleted shelf as a parent action.
-+        references:
-+        - \ref[requirement](REQ-4.2)
-+        - \ref[requirement](REQ-5.6)
-+        - \ref[image](IMG-DELETE-SHELVES)
-+        - \ref[image](IMG-BOOKS)
-+        - \ref[image](IMG-BOOK)
-     children: []
- - id: REQ-5
-   name: Manage books
-@@ -535,6 +570,8 @@ children:
-         On the selected book's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with their saved values. "Save Book"(role=button) changes that same book and returns to its details with the updated heading and description, persisting after reload. "Cancel"(role=button) returns to the unchanged details and discards all pending edits.
- 
-         Book metadata editing also retains the rich-text description, optional cover image and selected default page template. Cover format and the template catalog are unspecified; saving or cancelling follows the same persistence rules as the other metadata.
-+
-+        A saved rename is reflected by every list and personal projection that identifies the book: the global Book list, every containing shelf's Book list, My Most Viewed Favorites, and My Recently Viewed use the new name and no longer use the old name. Renaming does not create a second book.
-       image:
-       - id: IMG-BOOK
-         reference: reference/book.png
-@@ -571,13 +608,32 @@ children:
          - \ref[requirement](REQ-5.2)
-         - \ref[image](IMG-BOOK)
-         - \ref[image](IMG-EDIT-BOOK)
-+    - id: SCN-REQ-5.4-03
-+      name: Propagate renamed book
-+      steps:
-+      - id: STEP-REQ-5.4-03-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Shelf 5.4.3 containing Book 5.4.3 with Page 5.4.3; the book is favorited and has been opened in the current session.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+        When: Rename the book to isolated Book Renamed 5.4.3 and save, reload the book; open Books, the containing shelf, and the homepage.
-+        Then: The book heading uses the new name. Book list and the containing shelf's Book list contain the new name exactly once and do not contain the old name. My Most Viewed Favorites and My Recently Viewed contain the new name exactly once and do not contain the old name. Reload preserves the new name and a single book identity.
-+        references:
-+        - \ref[requirement](REQ-4.2)
-+        - \ref[requirement](REQ-5.2)
-+        - \ref[requirement](REQ-7.1)
-+        - \ref[requirement](REQ-8.1)
-+        - \ref[image](IMG-BOOK)
-+        - \ref[image](IMG-BOOKS)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-     children: []
-   - id: REQ-5.5
-     name: Delete or retain book
-     description:
--      text: Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button)
--        removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent
--        navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
-+      text: |-
-+        Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button) removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
+@@ -634,6 +636,8 @@ children:
+         Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button) removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
+ 
+         Confirming also removes that book's chapters and pages from the hierarchy, the containing shelf's Book list, Recently Updated Pages, favorites and recently viewed entries. Books on the same shelf and other shelves remain.
 +
-+        Confirming also removes that book's chapters and pages from the hierarchy, the containing shelf's Book list, Recently Updated Pages, favorites and recently viewed entries. Books on the same shelf and other shelves remain.
++        Deleted books, their chapters and their pages cannot be read or edited through their previously observed URLs. Deletion removes the objects, not only the links that list them.
        image:
        - id: IMG-DELETE-BOOK
          reference: reference/delete_book.png
-@@ -608,6 +664,25 @@ children:
-         - \ref[requirement](REQ-5.2)
-         - \ref[image](IMG-DELETE-BOOK)
-         - \ref[image](IMG-BOOKS)
-+    - id: SCN-REQ-5.5-03
-+      name: Delete contained chapters and pages
-+      steps:
-+      - id: STEP-REQ-5.5-03-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+        When: Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload.
-+        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence.
-+        references:
-+        - \ref[requirement](REQ-4.2)
-+        - \ref[requirement](REQ-5.6)
-+        - \ref[requirement](REQ-6.3)
-+        - \ref[requirement](REQ-7.1)
-+        - \ref[requirement](REQ-8.1)
-+        - \ref[image](IMG-DELETE-BOOK)
-+        - \ref[image](IMG-BOOKS)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-     children: []
-   - id: REQ-5.6
-     name: Create a book in a shelf
-@@ -664,6 +739,8 @@ children:
-         Dates and time-dependent content use UTC and the shared clock 2026-10-06T12:00:00Z.
- 
-         Published pages can be organized under a chapter belonging to their parent book. Saving keeps the book/chapter association so that the page is readable from the appropriate chapter Page list as well as its book context. Drafts belong to the authenticated author and their parent book.
-+
-+        An owned draft is visible only to its author. Anonymous visitors do not see it in the parent book's Page list, and the anonymous homepage does not contain its title. Other verified users do not see it in the parent book's Page list or in My Recent Drafts. Neither can open the draft. The author can open the draft and click "Save Page"(role=button) to publish it under the same parent book; publishing removes it from My Recent Drafts, adds it exactly once to the parent book's Page list, makes it readable anonymously, and places it in Recently Updated Pages without creating a duplicate page.
-       image:
-       - id: IMG-BOOK
-         reference: reference/book.png
-@@ -708,6 +785,39 @@ children:
-         - \ref[image](IMG-BOOK)
-         - \ref[image](IMG-PAGE-DRAFT)
-         - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+    - id: SCN-REQ-6.1-03
-+      name: Publish an owned draft
-+      steps:
-+      - id: STEP-REQ-6.1-03-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Book 6.1.3 with owned draft Page Draft 6.1.3. A fresh anonymous browser has that book open in a separate context.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+        When: In the anonymous context, inspect the book's Page list. In the authenticated context, open the draft from the parent book's Page list, click Save Page, then open the book and the homepage; reload the anonymous book.
-+        Then: Before publishing, the anonymous Page list does not contain the draft. After publishing, the draft is absent from My Recent Drafts, appears exactly once in the parent book's Page list and in Recently Updated Pages, and the anonymous browser can open it and read its saved body. Reload preserves the published page and does not create a duplicate.
-+        references:
-+        - \ref[requirement](REQ-2.2)
-+        - \ref[requirement](REQ-5.3)
-+        - \ref[requirement](REQ-9.1)
-+        - \ref[image](IMG-PAGE-DRAFT)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+        - \ref[image](IMG-PAGE)
-+    - id: SCN-REQ-6.1-04
-+      name: Keep drafts private to their owner
-+      steps:
-+      - id: STEP-REQ-6.1-04-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Book 6.1.4 with owned draft Page Draft 6.1.4. A fresh anonymous browser and a second verified account have that book open in separate contexts.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
-+        When: Inspect the book's Page list and My Recent Drafts as the anonymous visitor and as the second verified account; attempt to open the draft by the URL observed for its owner; then reopen the parent book as the owner.
-+        Then: Neither the anonymous visitor nor the second account sees the draft in the parent book's Page list; the second account's My Recent Drafts does not contain it and the anonymous homepage does not contain the draft title. Neither can open the draft editor or read its body from the observed URL. The owner still sees the draft exactly once in the parent book's Page list and in My Recent Drafts.
-+        references:
-+        - \ref[requirement](REQ-2.2)
-+        - \ref[requirement](REQ-5.3)
-+        - \ref[image](IMG-PAGE-DRAFT)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-     children: []
-   - id: REQ-6.2
-     name: Delete an owned draft
-@@ -779,10 +889,10 @@ children:
-   - id: REQ-6.4
-     name: Read a page or reopen its editor
-     description:
--      text: Selecting "{page title}"(role=button) from a book or chapter's "Page list"(role=region) displays the
--        published page's title heading and saved body. "Edit"(role=button) on the reading page opens an editor prefilled
--        with the current title in "Page title"(role=textbox) and body in "Write your page content here..."(role=textbox),
--        with "Save Page"(role=button) available to save the page.
-+      text: |-
-+        Selecting "{page title}"(role=button) from a book or chapter's "Page list"(role=region) displays the published page's title heading and saved body. "Edit"(role=button) on the reading page opens an editor prefilled with the current title in "Page title"(role=textbox) and body in "Write your page content here..."(role=textbox), with "Save Page"(role=button) available to save the page.
-+
-+        Saving the editor persists the new title and body; the reading page, the parent Page list and Recently Updated Pages use the new title, and the old title and body no longer identify the page. Changes survive reload.
-       image:
-       - id: IMG-BOOK
-         reference: reference/book.png
-@@ -826,6 +936,19 @@ children:
-         - \ref[image](IMG-CHAPTER)
-         - \ref[image](IMG-PAGE)
-         - \ref[image](IMG-PAGE-DRAFT)
-+    - id: SCN-REQ-6.4-03
-+      name: Save edited page
-+      steps:
-+      - id: STEP-REQ-6.4-03-01
-+        Given: An anonymous visitor has UI-published isolated Page 6.3.3 with Reading content for Page 6.3.3. under isolated Book 6.3.3.
-+        When: Open that page from the parent Page list, click Edit, replace Page title with isolated Page Updated 6.3.3 and the body with Updated content for Page 6.3.3., click Save Page, then open the parent book and the homepage and reload the page.
-+        Then: The page heading and body show the updated values before and after reload. The parent Page list contains the updated title exactly once and does not contain the old title. Recently Updated Pages contains the updated title exactly once and does not contain the old title.
-+        references:
-+        - \ref[requirement](REQ-6.1)
-+        - \ref[requirement](REQ-9.1)
-+        - \ref[image](IMG-BOOK)
-+        - \ref[image](IMG-PAGE)
-+        - \ref[image](IMG-PAGE-DRAFT)
-     children: []
- - id: REQ-7
-   name: Recently viewed content
-@@ -912,6 +1035,22 @@ children:
-         - \ref[image](IMG-CHAPTER)
-         - \ref[image](IMG-PAGE)
-         - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+    - id: SCN-REQ-7.1-03
-+      name: Deduplicate and isolate recent views
-+      steps:
-+      - id: STEP-REQ-7.1-03-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Shelf 7.3-A; a second verified account has UI-created isolated Shelf 7.3-B. Both shelves are available from the shared Shelf list.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
-+        When: Open Shelf 7.3-A twice as the verified account, then open Shelf 7.3-B as the second account; open the homepage as each account and reload the verified account's homepage.
-+        Then: The verified account's My Recently Viewed contains Shelf 7.3-A exactly once and not Shelf 7.3-B. The second account's My Recently Viewed contains Shelf 7.3-B and not Shelf 7.3-A. Both regions contain no more than ten records; the verified account's single entry survives reload.
-+        references:
-+        - \ref[requirement](REQ-2.2)
-+        - \ref[requirement](REQ-4.2)
-+        - \ref[image](IMG-SHELF)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-     children: []
- - id: REQ-8
-   name: Personal favorites
-@@ -927,7 +1066,7 @@ children:
-       text: |-
+@@ -672,8 +676,8 @@ children:
+           The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.
+           Seed prerequisites (prepared before this scenario):
+           - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+-        When: Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload.
+-        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence.
++        When: Before deletion, open the book, its chapter and all three pages, verify the pages are readable and record their public URLs. Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload. Revisit the recorded URLs and reload each page URL, then open Book 5.5.3-Other.
++        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists and is readable with its saved description. Reload preserves the deleted book's absence. The former book and chapter URLs do not display their original detail headings; none of the three former page URLs displays its original title heading, saved body or page editor, including after reload.
+         references:
+         - \ref[requirement](REQ-4.2)
+         - \ref[requirement](REQ-5.6)
+@@ -1067,6 +1071,8 @@ children:
          On an authenticated shelf, book, chapter, or page details view, "Favorite"(role=button) initially exposes aria-pressed=false. Clicking it stores a personal favorite and changes the action to "Unfavorite"(role=button) with aria-pressed=true. Clicking Unfavorite removes the preference and restores Favorite with aria-pressed=false. The selected state persists after reload and follows the same behavior for all four content types.
  
--        Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload.
-+        Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload. Deleting favorited content removes it from the owner's favorite projections.
+         Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload. Deleting favorited content removes it from the owner's favorite projections.
++
++        When two accounts favorite the same object, one account unfavoriting it does not change the other account's saved selection. Deleting that object removes its projections for every account that favorited it.
        image:
        - id: IMG-BOOK
          reference: reference/book.png
-@@ -972,6 +1111,24 @@ children:
+@@ -1120,8 +1126,8 @@ children:
+           Seed prerequisites (prepared before this scenario):
+           - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
+           - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
+-        When: As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage.
+-        Then: The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence.
++        When: As the second account, open the book and inspect the Favorite control and homepage, then favorite it and verify its homepage entry. As the first account, unfavorite the book; reload the second account and inspect its entry and pressed state. Favorite the book again as the first account, then Delete and Confirm Delete; open the first homepage, reload the second homepage and inspect Books.
++        Then: Initially the first account has exactly one favorite entry and the second has Favorite pressed=false and no favorite entry. After both favorite the book, the first account's removal leaves its own favorites empty for that book, while the second retains exactly one favorite and Unfavorite pressed=true after reload. After the first account favorites again and deletes the book, both accounts' favorites and Book list exclude it; the second account's reloaded homepage preserves the absence.
+         references:
+         - \ref[requirement](REQ-2.2)
+         - \ref[requirement](REQ-5.3)
+@@ -1314,3 +1320,137 @@ children:
+         - \ref[image](IMG-CHAPTER)
          - \ref[image](IMG-BOOK)
-         - \ref[image](IMG-FAVOURITES)
-         - \ref[image](IMG-INDEX)
-+    - id: SCN-REQ-8.1-03
-+      name: Keep favorites personal and remove deleted content
-+      steps:
-+      - id: STEP-REQ-8.1-03-01
-+        Given: |-
-+          The verified account is authenticated and has UI-created isolated Book 8.1.3; the book is favorited by that account. A second verified account has not favorited it.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+          - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
-+        When: As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage.
-+        Then: The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence.
-+        references:
-+        - \ref[requirement](REQ-2.2)
-+        - \ref[requirement](REQ-5.3)
-+        - \ref[requirement](REQ-5.5)
-+        - \ref[image](IMG-BOOK)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+        - \ref[image](IMG-BOOKS)
      children: []
-   - id: REQ-8.2
-     name: Open a homepage favorite
-@@ -1048,4 +1205,112 @@ children:
-         - \ref[requirement](REQ-6.1)
-         - \ref[image](IMG-INDEX)
-         - \ref[image](IMG-PAGE)
-+    - id: SCN-REQ-9.1-02
-+      name: Edit updates recently updated page
-+      steps:
-+      - id: STEP-REQ-9.1-02-01
-+        Given: An anonymous visitor has UI-published isolated Page 9.1.2 with Reading content for Page 9.1.2. under isolated Book 9.1.2.
-+        When: Open the page from the parent Page list, click Edit, replace its title with isolated Page Updated 9.1.2 and body with Updated content for Page 9.1.2., click Save Page, open the homepage, and activate the updated page entry.
-+        Then: Recently Updated Pages contains the updated title exactly once and does not contain the old title; selecting the entry opens the page with its updated heading and body. The region contains no more than five records; reload preserves the result.
-+        references:
-+        - \ref[requirement](REQ-6.4)
-+        - \ref[image](IMG-INDEX)
-+        - \ref[image](IMG-PAGE)
-+    children: []
-+- id: REQ-10
-+  name: Content lifecycle and relational integrity
++- id: REQ-11
++  name: Published revisions, content moves and stale edits
 +  description:
 +    text: |-
-+      Published pages and chapters can be deleted with confirmation. Deletion and membership changes keep the hierarchy, global lists, personal projections and homepage regions consistent, and do not remove unrelated content.
++      Public content retains identity across private revision drafts, cross-book moves and overlapping edits. Use the two initialized verified accounts for independent author sessions.
 +  scenarios: []
 +  children:
-+  - id: REQ-10.1
-+    name: Delete a published page
++  - id: REQ-11.1
++    name: Isolate private revisions of a published page
 +    description:
 +      text: |-
-+        On a published page's reading view, "Delete"(role=button) opens a confirmation with "Confirm Delete"(role=button) and "Cancel"(role=button). Confirming removes that page and returns to its parent book. The page is not readable from its former URL and is absent from the book and chapter "Page list"(role=region), from "Recently Updated Pages"(role=region), and from the author's favorites and recently viewed entries. Cancel keeps the page with its saved title and body. Deletion persists across reload and does not remove sibling pages.
-+      image:
-+      - id: IMG-PAGE
-+        reference: reference/page.png
-+        page: page
-+      - id: IMG-BOOK
-+        reference: reference/book.png
-+        page: book
-+      - id: IMG-INDEX-AFTER-LOGIN
-+        reference: reference/index_after_login.png
-+        page: home
++        An authenticated user can click "Save Draft"(role=button) in an existing published page editor without changing its public title, body, identity or parent. A successful save displays "Revision draft saved"(role=status) before the author navigates away. A revision draft is private to its author and is reopenable through an exact title link or button in "My Recent Drafts"(role=region), where it appears once. This does not require changing how new unpublished pages are reopened. The anonymous reading view, parent Page list and Recently Updated Pages show only the published version. For published pages, entering a full title in "Search"(role=searchbox) and pressing Enter shows exact title entries (link or button) in "Search results"(role=region); revision drafts are excluded. An exact-title search without a match shows "No matching pages" in that region after the search completes. A successful publish updates all public projections, keeps existing saved references usable, and clears only the publishing author's draft. A different author's draft stays private and retains its original base version. A stale draft's Save Page follows the conflict rule in \ref[requirement](REQ-11.3).
 +    scenarios:
-+    - id: SCN-REQ-10.1-01
-+      name: Confirm page deletion
++    - id: SCN-REQ-11.1-01
++      name: Keep a saved revision private until its author publishes
 +      steps:
-+      - id: STEP-REQ-10.1-01-01
++      - id: STEP-REQ-11.1-01-01
 +        Given: |-
-+          The verified account is authenticated and has UI-created isolated Book 10.1.1 with Chapter 10.1.1 and Page 10.1.1 and sibling Page 10.1.1-Sibling. Page 10.1.1 is favorited and has been opened in the current session.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+        When: Open Page 10.1.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.1.1; open the homepage and reload the book.
-+        Then: The parent book returns with Page 10.1.1 absent from its Page list and Page 10.1.1-Sibling present; Chapter 10.1.1's Page list no longer contains Page 10.1.1. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Page 10.1.1. Reload preserves the page's absence.
++          Author A publishes a page with V1 title and body; an anonymous reader can open it and A favorites it.
++        When: |-
++          A edits title and body, clicks Save Draft, and opens the homepage. Inspect anonymous reading, book listing, exact-title search and recent updates before publication. A reopens the draft and publishes; recheck public projections and the favorite.
++        Then: |-
++          Before publication A alone can reopen the draft with its exact fields; all public views still show V1 and omit the draft. After publication the public reading view, list, search and recent updates show V2 once and no V1 entry; the saved reading URL still resolves to the same page, and the renamed favorite opens it. A's published draft is gone.
++        references:
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-8.1)
++        - \ref[requirement](REQ-9.1)
++    - id: SCN-REQ-11.1-02
++      name: Keep a second author's revision private and reject its stale publish
++      steps:
++      - id: STEP-REQ-11.1-02-01
++        Given: |-
++          Author A publishes V1. A and author B use separate signed-in contexts and each saves a revision draft with a different title and body based on V1.
++        When: |-
++          Inspect each author's drafts and book list, and the anonymous V1 and its lists, then A publishes. B reopens B's saved draft, attempts Save Page and chooses Keep editing in the conflict. Inspect B's draft again and the anonymous published reading and recent updates.
++        Then: |-
++          Each author can reopen only their own exact draft fields, and the other revision title is absent from the book list. Before A publishes, anonymous reading and lists expose only V1. A's draft clears after publish. B's draft remains unchanged and private after A publishes and after B declines to overwrite. Anonymous reading and recent updates show A's published version and never show B's draft.
++        references:
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-8.1)
++        - \ref[requirement](REQ-9.1)
++    children: []
++  - id: REQ-11.2
++    name: Move a chapter between books without breaking references
++    description:
++      text: |-
++        On the chapter reading view, "Move Chapter"(role=button) opens "Move Chapter"(role=dialog). Choose "Destination book"(role=combobox) and "Placement"(role=combobox, values "First" and "Last"), then click "Move"(role=button). The moved chapter and all of its pages keep their identities, body content and internal page order. Same-title chapters and pages in distinct parents are valid. When a book contains same-title chapters, each chapter opening control in "Chapter list"(role=region) is inside its own listitem or row with the chapter's visible description, which distinguishes the two. The chapter and page reading views have "Breadcrumb"(role=navigation) with the current ancestor names as links or buttons in book-then-chapter order. A page's "Chapter pages"(role=navigation) links to its chapter's other pages, excluding pages of the namesake chapter. The destination book Page list shows one entry per page, including when titles repeat across chapters. Old bookmarked URLs may redirect; personal favorites and recent entries still open the moved objects, and placement, parents and identities survive reload.
++    scenarios:
++    - id: SCN-REQ-11.2-01
++      name: Move a chapter without changing its pages
++      steps:
++      - id: STEP-REQ-11.2-01-01
++        Given: |-
++          Create a source and target book and a source chapter with one published page; save the page's reading URL.
++        When: |-
++          Move the chapter to the target as Last and reload the target chapter. Open the page using the target chapter and its saved URL.
++        Then: |-
++          Only the target book lists the chapter and its page. The saved URL still opens the page with the same body, with breadcrumbs to the target book and moved chapter.
 +        references:
 +        - \ref[requirement](REQ-5.3)
-+        - \ref[requirement](REQ-6.1)
 +        - \ref[requirement](REQ-6.3)
++        - \ref[requirement](REQ-6.4)
 +        - \ref[requirement](REQ-7.1)
 +        - \ref[requirement](REQ-8.1)
-+        - \ref[image](IMG-PAGE)
-+        - \ref[image](IMG-BOOK)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+    - id: SCN-REQ-10.1-02
-+      name: Cancel page deletion
++    - id: SCN-REQ-11.2-02
++      name: Move a same-title chapter and preserve its order and references
 +      steps:
-+      - id: STEP-REQ-10.1-02-01
-+        Given: An anonymous visitor has UI-published isolated Page 10.1.2 with Page content 10.1.2. under isolated Book 10.1.2.
-+        When: Open the page from the parent Page list, click Delete, click Cancel, and reload the page.
-+        Then: The page remains with its saved heading and body. The parent Page list contains it exactly once, and Recently Updated Pages still contains it. Reload preserves the page.
++      - id: STEP-REQ-11.2-02-01
++        Given: |-
++          Create one same-title chapter in each of two books with different descriptions. Each chapter contains a same-title page with a different body; the source chapter also has a second page. Favorite and visit the source page, and record its chapter page order.
++        When: |-
++          Move the source chapter to First in the target book. Reload and open each namesake by its description; navigate between the moved pages, open the moved page from Favorites and Recently Viewed, and follow its chapter and book breadcrumb links.
++        Then: |-
++          The source no longer lists the moved chapter or pages. In the target the moved chapter is first and the other remains intact. Both chapters contain their own pages in their original order. The moved pages show the new book and chapter in breadcrumbs and their own chapter navigation, and the breadcrumb links open the correct parents. Personal entries open the moved page with its original body.
 +        references:
-+        - \ref[requirement](REQ-6.1)
-+        - \ref[image](IMG-PAGE)
-+        - \ref[image](IMG-BOOK)
++        - \ref[requirement](REQ-5.3)
++        - \ref[requirement](REQ-6.3)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-7.1)
++        - \ref[requirement](REQ-8.1)
 +    children: []
-+  - id: REQ-10.2
-+    name: Delete a chapter
++  - id: REQ-11.3
++    name: Protect published pages from stale editors
 +    description:
 +      text: |-
-+        On a chapter's detail view, "Delete"(role=button) opens a confirmation with "Confirm Delete"(role=button) and "Cancel"(role=button). Confirming removes that chapter and its pages, and returns to the parent book. The chapter is absent from "Chapter list"(role=region); its pages are not readable from their former URLs and are absent from the book "Page list"(role=region) and from "Recently Updated Pages"(role=region), favorites and recently viewed. Pages directly under the book or belonging to another chapter remain. Cancel keeps the chapter and its pages. Deletion persists across reload.
-+      image:
-+      - id: IMG-CHAPTER
-+        reference: reference/chapter.png
-+        page: chapter
-+      - id: IMG-BOOK
-+        reference: reference/book.png
-+        page: book
++        For an existing page, Save Page after another publication based on a newer version opens "Page edit conflict"(role=dialog) without publishing or losing unsaved fields. "Keep editing"(role=button) returns to the editor with those fields; "Overwrite"(role=button) explicitly publishes the entered title and body to the same existing page. A successful Save Page or Overwrite opens the updated reading view; existing reading URLs still resolve to it. A move alone does not conflict with editing text: the text save uses the current parent, with no duplicate and no return to the former parent. The existing reading URL still resolves to that page (a redirect is allowed), and its Breadcrumb navigation names the destination book. For a standalone published page, "Move Page"(role=button) opens "Move Page"(role=dialog) with "Destination book"(role=combobox) and "Move"(role=button) to move it to the destination book root. After deletion a stale save shows "Page deleted"(role=alert), leaves the unsaved fields available, and offers "Back to book"(role=button) to leave without saving. A deleted page cannot be revived by either text or draft publication.
 +    scenarios:
-+    - id: SCN-REQ-10.2-01
-+      name: Confirm chapter deletion
++    - id: SCN-REQ-11.3-01
++      name: Protect a newer publication from a stale editor
 +      steps:
-+      - id: STEP-REQ-10.2-01-01
++      - id: STEP-REQ-11.3-01-01
 +        Given: |-
-+          The verified account is authenticated and has UI-created isolated Book 10.2.1 with Chapter 10.2.1 containing Page 10.2.1-A and Page 10.2.1-B, plus root Page 10.2.1-Root and Chapter 10.2.1-Other containing Page 10.2.1-Other-Page. Chapter 10.2.1 and Page 10.2.1-A are favorited and have been opened in the current session.
-+          Seed prerequisites (prepared before this scenario):
-+          - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-+        When: Open Chapter 10.2.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.2.1-Other; open the homepage, attempt the former Page 10.2.1-A URL, and reload.
-+        Then: Chapter list no longer contains Chapter 10.2.1 and still contains Chapter 10.2.1-Other. The former chapter pages are absent from the parent book's Page list and are not readable from their former URLs; Page 10.2.1-Root and Page 10.2.1-Other-Page remain. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Chapter 10.2.1 or Page 10.2.1-A. Reload preserves the chapter's absence.
++          A and B open the same published V1 in separate authenticated editors.
++        When: |-
++          A enters new text but does not save. B publishes different text. A clicks Save Page, chooses Keep editing, then explicitly confirms Overwrite after retrying.
++        Then: |-
++          Before overwrite, public reading still shows B's version and A's unsaved text is retained. After overwrite the same page shows A's text, with exactly one entry in the parent list.
 +        references:
-+        - \ref[requirement](REQ-6.1)
-+        - \ref[requirement](REQ-6.3)
-+        - \ref[requirement](REQ-7.1)
-+        - \ref[requirement](REQ-8.1)
-+        - \ref[image](IMG-CHAPTER)
-+        - \ref[image](IMG-BOOK)
-+        - \ref[image](IMG-INDEX-AFTER-LOGIN)
-+    - id: SCN-REQ-10.2-02
-+      name: Cancel chapter deletion
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-10.1)
++    - id: SCN-REQ-11.3-02
++      name: Save stale editor text to the page's new book
 +      steps:
-+      - id: STEP-REQ-10.2-02-01
-+        Given: An anonymous visitor has UI-published isolated Chapter 10.2.2 with Page 10.2.2 under isolated Book 10.2.2.
-+        When: Open the chapter, click Delete, click Cancel, and reload the chapter.
-+        Then: The chapter remains with its saved heading and description, and its Page list still contains the saved page. No chapter or page is deleted.
++      - id: STEP-REQ-11.3-02-01
++        Given: |-
++          A opens an editor for a standalone published page and changes its text. B opens the same published page.
++        When: |-
++          B moves the page to another book. A submits the original editor with Save Page, then reloads and checks both books.
++        Then: |-
++          Only the destination book has the page; it has A's new content, appears once, and its breadcrumb identifies the destination book.
 +        references:
-+        - \ref[requirement](REQ-6.3)
-+        - \ref[image](IMG-CHAPTER)
-+        - \ref[image](IMG-BOOK)
-     children: []
-diff --git a/arc-bench/bookstack/tests/REQ-10.1.spec.ts b/arc-bench/bookstack/tests/REQ-10.1.spec.ts
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-10.1)
++    - id: SCN-REQ-11.3-03
++      name: Reject a stale page save after deletion
++      steps:
++      - id: STEP-REQ-11.3-03-01
++        Given: |-
++          A opens an editor for a published page and changes its text. B opens the same published page.
++        When: |-
++          B deletes and confirms deletion. A clicks Save Page, checks the refusal and the entered fields, then uses Back to book.
++        Then: |-
++          The deletion alert appears and A's input remains available until leaving. The book and Recently Updated Pages have no entry under either title. The old reading URL does not expose either version.
++        references:
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-6.4)
++        - \ref[requirement](REQ-10.1)
++    children: []
+diff --git a/arc-bench/bookstack/tests/REQ-11.1.spec.ts b/arc-bench/bookstack/tests/REQ-11.1.spec.ts
 new file mode 100644
-index 0000000..b2ebb19
+index 0000000..d727326
 --- /dev/null
-+++ b/arc-bench/bookstack/tests/REQ-10.1.spec.ts
-@@ -0,0 +1,61 @@
-+// requirement: REQ-10.1
-+import { test, expect } from '@playwright/test';
-+import { button, createBook, createChapter, createPage, createPageInChapter, enter, entry, expectAbsentEntry, favorite,
-+  heading, home, identity, login, openBook, openChapter, openPageInChapter, region, text } from './helpers';
++++ b/arc-bench/bookstack/tests/REQ-11.1.spec.ts
+@@ -0,0 +1,152 @@
++// requirement: REQ-11.1
++import { test, expect, type Locator, type Page } from '@playwright/test';
++import { button, createBook, createPage, enter, entry, expectAbsentEntry, favorite, home, identity, login, named,
++  newContextFor, openBook, openPage, region, REVIEWER_ACCOUNT } from './helpers';
++import { editPage, expectEditor, expectReading, fillEditor, openRevision, pageConflict } from './support/page-revisions';
 +
-+test("REQ-10.1: Confirm page deletion", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
++const v1 = 'Initial public body';
++const v2 = 'First author revised body';
++const draftB = 'Second author private body';
++
++async function expectSearch(page: Page, title: string, present: boolean) {
++  await home(page);
++  const search = page.getByRole('searchbox', { name: 'Search', exact: true });
++  await search.fill(title);
++  await search.press('Enter');
++  const results = region(page, 'Search results');
++  if (present) {
++    const result = entry(results, title);
++    await expect(result).toHaveCount(1);
++    await expect(result).toBeVisible();
++  } else {
++    await expect(results.getByText('No matching pages', { exact: true })).toBeVisible();
++    await expectAbsentEntry(results, title);
++  }
++}
++
++async function saveRevision(page: Page, title: string, body: string) {
++  await fillEditor(page, title, body);
++  await button(page, 'Save Draft').click();
++  await expect(page.getByRole('status', { name: 'Revision draft saved', exact: true })).toBeVisible();
++  await home(page);
++  await expect(entry(region(page, 'My Recent Drafts'), title)).toHaveCount(1);
++}
++
++async function expectNoTitle(scope: Locator, title: string) {
++  await expectAbsentEntry(scope, title);
++  await expect(scope.getByText(title, { exact: true }).filter({ visible: true })).toHaveCount(0);
++}
++
++async function expectPublicLists(page: Page, book: string, visible: string, ...hidden: string[]) {
++  await openBook(page, book);
++  const pages = region(page, 'Page list');
++  await expect(entry(pages, visible)).toHaveCount(1);
++  for (const title of hidden) await expectNoTitle(pages, title);
++  await home(page);
++  const updated = region(page, 'Recently Updated Pages');
++  await expect(entry(updated, visible)).toHaveCount(1);
++  for (const title of hidden) await expectNoTitle(updated, title);
++}
++
++test('REQ-11.1: Keep a saved revision private until its author publishes', async ({ page, browser, baseURL }, info) => {
++  const id = identity(info);
++  const revised = named(id, 'Published revision V2');
 +  await enter(page);
 +  await login(page);
-+  const book = await createBook(page, id, 'Book 10.1.1');
-+  const chapter = await createChapter(page, id, book, 'Chapter 10.1.1');
-+  const pageA = await createPageInChapter(page, id, book, chapter, 'Page 10.1.1', 'Page content 10.1.1.');
-+  const sibling = await createPage(page, id, book, 'Page 10.1.1-Sibling', 'Sibling content 10.1.1.');
-+  await openPageInChapter(page, book, chapter, pageA);
++  const book = await createBook(page, id, 'Revision source');
++  const original = await createPage(page, id, book, 'Published revision V1', v1);
++  await openPage(page, book, original);
++  const readingUrl = page.url();
 +  await favorite(page);
-+  const pageUrl = page.url();
-+  await home(page);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), pageA)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Recently Viewed'), pageA)).toHaveCount(1);
-+  await expect(entry(region(page, 'Recently Updated Pages'), pageA)).toHaveCount(1);
-+  await openPageInChapter(page, book, chapter, pageA);
-+  await button(page, 'Delete').click();
-+  await expect(button(page, 'Cancel')).toBeVisible();
-+  await expect(button(page, 'Confirm Delete')).toBeVisible();
-+  await button(page, 'Confirm Delete').click();
-+  await heading(page, book);
-+  await expectAbsentEntry(region(page, 'Page list'), pageA);
-+  await expect(entry(region(page, 'Page list'), sibling)).toHaveCount(1);
-+  await openChapter(page, book, chapter);
-+  await expectAbsentEntry(region(page, 'Page list'), pageA);
-+  await home(page);
-+  await expectAbsentEntry(region(page, 'Recently Updated Pages'), pageA);
-+  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), pageA);
-+  await expectAbsentEntry(region(page, 'My Recently Viewed'), pageA);
-+  await page.goto(pageUrl);
-+  await expect(page.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
-+  await expect(page.getByText('Page content 10.1.1.', { exact: true })).toHaveCount(0);
-+  await openBook(page, book);
-+  await page.reload();
-+  await expectAbsentEntry(region(page, 'Page list'), pageA);
++  const reader = await newContextFor(browser, baseURL!);
++  try {
++    await reader.page.goto(readingUrl);
++    await expectReading(reader.page, original, v1);
++    await editPage(page, original, v1);
++    await saveRevision(page, revised, v2);
++    await reader.page.reload();
++    await expectReading(reader.page, original, v1);
++    await expect(reader.page.getByText(v2, { exact: true })).toHaveCount(0);
++    await expectPublicLists(reader.page, book, original, revised);
++    await expectSearch(reader.page, original, true);
++    await expectSearch(reader.page, revised, false);
++    await openRevision(page, revised, v2);
++    await button(page, 'Save Page').click();
++    await expectReading(page, revised, v2);
++    await home(page);
++    await expectNoTitle(region(page, 'My Recent Drafts'), revised);
++    const saved = entry(region(page, 'My Most Viewed Favorites'), revised);
++    await expect(saved).toHaveCount(1);
++    await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), original);
++    await saved.click();
++    await expectReading(page, revised, v2);
++    await reader.page.goto(readingUrl);
++    await expectReading(reader.page, revised, v2);
++    await expect(reader.page.getByText(v1, { exact: true })).toHaveCount(0);
++    await expectPublicLists(reader.page, book, revised, original);
++    await expectSearch(reader.page, revised, true);
++    await entry(region(reader.page, 'Search results'), revised).click();
++    await expectReading(reader.page, revised, v2);
++    await expectSearch(reader.page, original, false);
++  } finally {
++    await reader.context.close();
++  }
 +});
 +
-+test("REQ-10.1: Cancel page deletion", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const book = await createBook(page, id, 'Book 10.1.2');
-+  const pageA = await createPage(page, id, book, 'Page 10.1.2', 'Page content 10.1.2.');
-+  await openBook(page, book);
-+  await button(region(page, 'Page list'), pageA).click();
-+  await button(page, 'Delete').click();
-+  await button(page, 'Cancel').click();
-+  await heading(page, pageA);
-+  await text(page, 'Page content 10.1.2.');
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), pageA)).toHaveCount(1);
-+  await home(page);
-+  await expect(entry(region(page, 'Recently Updated Pages'), pageA)).toHaveCount(1);
-+  await page.reload();
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), pageA)).toHaveCount(1);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-10.2.spec.ts b/arc-bench/bookstack/tests/REQ-10.2.spec.ts
-new file mode 100644
-index 0000000..e7610a5
---- /dev/null
-+++ b/arc-bench/bookstack/tests/REQ-10.2.spec.ts
-@@ -0,0 +1,71 @@
-+// requirement: REQ-10.2
-+import { test, expect } from '@playwright/test';
-+import { button, createBook, createChapter, createPage, createPageInChapter, enter, entry, expectAbsentEntry, favorite,
-+  heading, home, identity, login, openBook, openChapter, openPageInChapter, region, text } from './helpers';
-+
-+test("REQ-10.2: Confirm chapter deletion", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
++test("REQ-11.1: Keep a second author's revision private and reject its stale publish", async ({ page, browser, baseURL }, info) => {
++  const id = identity(info);
++  const revised = named(id, 'Revision by A');
++  const second = named(id, 'Revision by B');
 +  await enter(page);
 +  await login(page);
-+  const book = await createBook(page, id, 'Book 10.2.1');
-+  const chapter = await createChapter(page, id, book, 'Chapter 10.2.1');
-+  const pageA = await createPageInChapter(page, id, book, chapter, 'Page 10.2.1-A', 'Page content 10.2.1-A.');
-+  const pageB = await createPageInChapter(page, id, book, chapter, 'Page 10.2.1-B', 'Page content 10.2.1-B.');
-+  const root = await createPage(page, id, book, 'Page 10.2.1-Root', 'Root content 10.2.1.');
-+  const otherChapter = await createChapter(page, id, book, 'Chapter 10.2.1-Other');
-+  const otherPage = await createPageInChapter(page, id, book, otherChapter, 'Page 10.2.1-Other-Page', 'Other content 10.2.1.');
-+  await openChapter(page, book, chapter);
-+  await favorite(page);
-+  await openPageInChapter(page, book, chapter, pageA);
-+  await favorite(page);
-+  const pageUrl = page.url();
-+  await home(page);
-+  await expect(entry(region(page, 'Recently Updated Pages'), pageA)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), chapter)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), pageA)).toHaveCount(1);
-+  await openChapter(page, book, chapter);
-+  await button(page, 'Delete').click();
-+  await expect(button(page, 'Cancel')).toBeVisible();
-+  await expect(button(page, 'Confirm Delete')).toBeVisible();
-+  await button(page, 'Confirm Delete').click();
-+  await heading(page, book);
++  const book = await createBook(page, id, 'Shared revision book');
++  const original = await createPage(page, id, book, 'Shared published page', v1);
++  await openPage(page, book, original);
++  const readingUrl = page.url();
++  const reviewer = await newContextFor(browser, baseURL!, REVIEWER_ACCOUNT);
++  const reader = await newContextFor(browser, baseURL!);
++  try {
++    await editPage(page, original, v1);
++    await saveRevision(page, revised, v2);
++    await reviewer.page.goto(readingUrl);
++    await editPage(reviewer.page, original, v1);
++    await saveRevision(reviewer.page, second, draftB);
++    await page.reload();
++    await expectNoTitle(region(page, 'My Recent Drafts'), second);
++    await expectNoTitle(region(reviewer.page, 'My Recent Drafts'), revised);
++    await openBook(page, book);
++    await expectNoTitle(region(page, 'Page list'), second);
++    await home(page);
++    await openBook(reviewer.page, book);
++    await expectNoTitle(region(reviewer.page, 'Page list'), revised);
++    await home(reviewer.page);
++    await reader.page.goto(readingUrl);
++    await expectReading(reader.page, original, v1);
++    await expectPublicLists(reader.page, book, original, revised, second);
++    await openRevision(reviewer.page, second, draftB);
++    await home(reviewer.page);
++    await openRevision(page, revised, v2);
++    await button(page, 'Save Page').click();
++    await expectReading(page, revised, v2);
++    await home(page);
++    await expectNoTitle(region(page, 'My Recent Drafts'), revised);
++    await expectNoTitle(region(page, 'My Recent Drafts'), second);
++    await reviewer.page.reload();
++    await openRevision(reviewer.page, second, draftB);
++    await button(reviewer.page, 'Save Page').click();
++    const conflict = pageConflict(reviewer.page);
++    await expect(conflict).toBeVisible();
++    await button(conflict, 'Keep editing').click();
++    await expectEditor(reviewer.page, second, draftB);
++    await home(reviewer.page);
++    await openRevision(reviewer.page, second, draftB);
++    await reader.page.goto(readingUrl);
++    await expectReading(reader.page, revised, v2);
++    await expect(reader.page.getByText(draftB, { exact: true })).toHaveCount(0);
++    await expectPublicLists(reader.page, book, revised, second);
++    await expectSearch(reader.page, second, false);
++  } finally {
++    await reviewer.context.close();
++    await reader.context.close();
++  }
++});
+diff --git a/arc-bench/bookstack/tests/REQ-11.2.spec.ts b/arc-bench/bookstack/tests/REQ-11.2.spec.ts
+new file mode 100644
+index 0000000..2ecf2ce
+--- /dev/null
++++ b/arc-bench/bookstack/tests/REQ-11.2.spec.ts
+@@ -0,0 +1,127 @@
++// requirement: REQ-11.2
++import { test, expect, type Page } from '@playwright/test';
++import { createBook, createChapter, createPageInChapter, enter, entry, expectAbsentEntry, favorite, heading,
++  home, identity, login, openBook, openChapter, openPageInChapter, records, region, text } from './helpers';
++import { chapterRecord, expectBreadcrumb, expectReading, moveContent } from './support/page-revisions';
++
++const movedDescription = 'Source chapter with original pages.';
++const otherDescription = 'Target chapter with independent pages.';
++const originalBody = 'Body of the moved namesake page.';
++const otherBody = 'Body of the target namesake page.';
++const followupBody = 'Second page in the moved chapter.';
++
++async function expectSourceEmpty(page: Page, source: string, chapter: string, ...titles: string[]) {
++  await openBook(page, source);
 +  await expectAbsentEntry(region(page, 'Chapter list'), chapter);
-+  await expect(entry(region(page, 'Chapter list'), otherChapter)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Page list'), pageA);
-+  await expectAbsentEntry(region(page, 'Page list'), pageB);
-+  await expect(entry(region(page, 'Page list'), root)).toHaveCount(1);
-+  await openChapter(page, book, otherChapter);
-+  await expect(entry(region(page, 'Page list'), otherPage)).toHaveCount(1);
-+  await home(page);
-+  await expectAbsentEntry(region(page, 'Recently Updated Pages'), pageA);
-+  await expectAbsentEntry(region(page, 'Recently Updated Pages'), pageB);
-+  await expect(entry(region(page, 'Recently Updated Pages'), root)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), chapter);
-+  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), pageA);
-+  await expectAbsentEntry(region(page, 'My Recently Viewed'), chapter);
-+  await expectAbsentEntry(region(page, 'My Recently Viewed'), pageA);
-+  await page.goto(pageUrl);
-+  await expect(page.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
-+  await expect(page.getByText('Page content 10.2.1-A.', { exact: true })).toHaveCount(0);
-+  await openBook(page, book);
++  for (const title of titles) await expectAbsentEntry(region(page, 'Page list'), title);
++}
++
++test('REQ-11.2: Move a chapter without changing its pages', async ({ page }, info) => {
++  const id = identity(info);
++  await enter(page);
++  await login(page);
++  const source = await createBook(page, id, 'Original book');
++  const target = await createBook(page, id, 'Receiving book');
++  const chapter = await createChapter(page, id, source, 'Movable chapter', movedDescription);
++  const title = await createPageInChapter(page, id, source, chapter, 'Movable page', originalBody);
++  await openPageInChapter(page, source, chapter, title);
++  await expectReading(page, title, originalBody);
++  const readingUrl = page.url();
++  await openChapter(page, source, chapter);
++  await moveContent(page, 'Chapter', target, 'Last');
++  await expectSourceEmpty(page, source, chapter, title);
++  await openBook(page, target);
++  await expect(entry(region(page, 'Page list'), title)).toHaveCount(1);
++  await openChapter(page, target, chapter);
 +  await page.reload();
-+  await expectAbsentEntry(region(page, 'Chapter list'), chapter);
-+  await expectAbsentEntry(region(page, 'Page list'), pageA);
++  await expectBreadcrumb(page, target, undefined, source);
++  await text(page, movedDescription);
++  await expect(entry(region(page, 'Page list'), title)).toHaveCount(1);
++  await entry(region(page, 'Page list'), title).click();
++  await expectReading(page, title, originalBody);
++  await page.goto(readingUrl);
++  await expectReading(page, title, originalBody);
++  await expectBreadcrumb(page, target, chapter, source);
 +});
 +
-+test("REQ-10.2: Cancel chapter deletion", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
++test('REQ-11.2: Move a same-title chapter and preserve its order and references', async ({ page }, info) => {
++  const id = identity(info);
 +  await enter(page);
-+  const book = await createBook(page, id, 'Book 10.2.2');
-+  const chapter = await createChapter(page, id, book, 'Chapter 10.2.2');
-+  const pageA = await createPageInChapter(page, id, book, chapter, 'Page 10.2.2', 'Page content 10.2.2.');
-+  await openChapter(page, book, chapter);
-+  await button(page, 'Delete').click();
-+  await button(page, 'Cancel').click();
-+  await heading(page, chapter);
-+  await text(page, 'Chapter created by corresponding prerequisite behavior.');
-+  await expect(entry(region(page, 'Page list'), pageA)).toHaveCount(1);
++  await login(page);
++  const source = await createBook(page, id, 'Source book');
++  const target = await createBook(page, id, 'Target book');
++  const chapter = await createChapter(page, id, source, 'Namesake chapter', movedDescription);
++  const targetChapter = await createChapter(page, id, target, 'Namesake chapter', otherDescription);
++  expect(targetChapter).toBe(chapter);
++  const title = await createPageInChapter(page, id, source, chapter, 'Namesake page', originalBody);
++  const followup = await createPageInChapter(page, id, source, chapter, 'Followup page', followupBody);
++  const targetTitle = await createPageInChapter(page, id, target, chapter, 'Namesake page', otherBody);
++  expect(targetTitle).toBe(title);
++  await openPageInChapter(page, source, chapter, title);
++  await expectReading(page, title, originalBody);
++  const readingUrl = page.url();
++  await favorite(page);
++  await openChapter(page, source, chapter);
++  const chaptersPages = region(page, 'Page list');
++  const chapterPageOrder = () => entry(chaptersPages, title).or(entry(chaptersPages, followup));
++  await expect(chapterPageOrder()).toHaveCount(2);
++  const before = await chapterPageOrder().allTextContents();
++  await moveContent(page, 'Chapter', target, 'First');
++  await expectSourceEmpty(page, source, chapter, title, followup);
++  await openBook(page, target);
 +  await page.reload();
++  const list = region(page, 'Chapter list');
++  const moved = chapterRecord(page, movedDescription);
++  const other = chapterRecord(page, otherDescription);
++  await expect(moved).toHaveCount(1);
++  await expect(other).toHaveCount(1);
++  await expect(records(list)).toHaveCount(2);
++  await expect(records(list).nth(0)).toContainText(movedDescription);
++  await expect(entry(list, chapter)).toHaveCount(2);
++  await expect(entry(region(page, 'Page list'), title)).toHaveCount(2);
++  await expect(entry(region(page, 'Page list'), followup)).toHaveCount(1);
++  await entry(moved, chapter).click();
 +  await heading(page, chapter);
-+  await expect(entry(region(page, 'Page list'), pageA)).toHaveCount(1);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-4.4.spec.ts b/arc-bench/bookstack/tests/REQ-4.4.spec.ts
-index 22b90af..05072f2 100644
---- a/arc-bench/bookstack/tests/REQ-4.4.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-4.4.spec.ts
-@@ -1,6 +1,6 @@
- // requirement: REQ-4.4
- import { test, expect } from '@playwright/test';
--import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createShelf, openShelf } from './helpers';
-+import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createShelf, createShelfBook, openShelf, openBook } from './helpers';
- 
- test("REQ-4.4: Confirm deletion", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -28,3 +28,23 @@ test("REQ-4.4: Cancel deletion", async ({ page }, testInfo) => {
-   await heading(page, name);
-   await text(page, 'Reference shelf description.');
- });
++  await text(page, movedDescription);
++  await expectBreadcrumb(page, target, undefined, source);
++  await expect(chapterPageOrder()).toHaveCount(2);
++  await expect.poll(() => chapterPageOrder().allTextContents()).toEqual(before);
++  await entry(chaptersPages, followup).click();
++  await expectReading(page, followup, followupBody);
++  await expectBreadcrumb(page, target, chapter, source);
++  const chapterNav = page.getByRole('navigation', { name: 'Chapter pages', exact: true });
++  await expect(entry(chapterNav, title)).toHaveCount(1);
++  await entry(chapterNav, title).click();
++  await expectReading(page, title, originalBody);
++  await expectBreadcrumb(page, target, chapter, source);
++  await expect(entry(chapterNav, followup)).toHaveCount(1);
++  await page.goto(readingUrl);
++  await expectReading(page, title, originalBody);
++  for (const area of ['My Most Viewed Favorites', 'My Recently Viewed']) {
++    await home(page);
++    const saved = entry(region(page, area), title);
++    await expect(saved).toHaveCount(1);
++    await saved.click();
++    await expectReading(page, title, originalBody);
++    await expectBreadcrumb(page, target, chapter, source);
++  }
 +
-+test("REQ-4.4: Retain books after shelf deletion", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
++  const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb', exact: true });
++  await entry(breadcrumb, chapter).click();
++  await text(page, movedDescription);
++  await entry(breadcrumb, target).click();
++  await heading(page, target);
++
++  // Open the other same-title chapter after checking the moved page's personal entries.
++  await openBook(page, target);
++  await entry(other, chapter).click();
++  await text(page, otherDescription);
++  await expectBreadcrumb(page, target);
++  await expect(entry(chaptersPages, title)).toHaveCount(1);
++  await expectAbsentEntry(chaptersPages, followup);
++  await entry(chaptersPages, title).click();
++  await expectReading(page, title, otherBody);
++  await expectBreadcrumb(page, target, chapter, source);
++  await expect(page.getByText(originalBody, { exact: true })).toHaveCount(0);
++  await expect(entry(chapterNav, followup)).toHaveCount(0);
++});
+diff --git a/arc-bench/bookstack/tests/REQ-11.3.spec.ts b/arc-bench/bookstack/tests/REQ-11.3.spec.ts
+new file mode 100644
+index 0000000..b6dd26f
+--- /dev/null
++++ b/arc-bench/bookstack/tests/REQ-11.3.spec.ts
+@@ -0,0 +1,116 @@
++// requirement: REQ-11.3
++import { test, expect, type Browser, type Page } from '@playwright/test';
++import { button, createBook, createPage, enter, entry, expectAbsentEntry, heading, home, identity,
++  login, named, newContextFor, openBook, openPage, region, REVIEWER_ACCOUNT } from './helpers';
++import { editPage, expectBreadcrumb, expectEditor, expectReading, fillEditor, moveContent,
++  pageConflict } from './support/page-revisions';
++
++const originalBody = 'Initial published body.';
++const changedA = 'Unsaved text entered by editor A.';
++const changedB = 'New public text saved by editor B.';
++
++async function prepare(page: Page, browser: Browser, baseURL: string, id: string, destination = false) {
 +  await enter(page);
-+  const shelf = await createShelf(page, id, 'Shelf 4.4.3', 'Reference shelf description.');
-+  const book = await createShelfBook(page, id, shelf, 'Book 4.4.3');
-+  await openShelf(page, shelf);
-+  await button(page, 'Delete').click();
-+  await button(page, 'Confirm Delete').click();
-+  await expectAbsentEntry(region(page, 'Shelf list'), shelf);
-+  await openBook(page, book);
-+  await heading(page, book);
-+  await text(page, 'Book created by corresponding prerequisite behavior.');
-+  await expect(entry(page, shelf)).toHaveCount(0);
-+  await page.reload();
-+  await heading(page, book);
-+  await text(page, 'Book created by corresponding prerequisite behavior.');
-+  await go(page, 'Books');
-+  await expect(entry(region(page, 'Book list'), book)).toHaveCount(1);
++  await login(page);
++  const source = await createBook(page, id, 'Source edit book');
++  const target = destination ? await createBook(page, id, 'Destination edit book') : source;
++  const title = await createPage(page, id, source, 'Published edit page', originalBody);
++  await openPage(page, source, title);
++  const readingUrl = page.url();
++  const second = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
++  await second.page.goto(readingUrl);
++  await expectReading(second.page, title, originalBody);
++  await editPage(page, title, originalBody);
++  const revised = named(id, 'Title entered by editor A');
++  await fillEditor(page, revised, changedA);
++  return { source, target, title, revised, readingUrl, second };
++}
++
++test('REQ-11.3: Protect a newer publication from a stale editor', async ({ page, browser, baseURL }, info) => {
++  const id = identity(info);
++  const { source, title, revised, readingUrl, second } = await prepare(page, browser, baseURL!, id);
++  const bTitle = named(id, 'Published title from editor B');
++  try {
++    await editPage(second.page, title, originalBody);
++    await fillEditor(second.page, bTitle, changedB);
++    await button(second.page, 'Save Page').click();
++    await expectReading(second.page, bTitle, changedB);
++    await second.page.goto(readingUrl);
++    await expectReading(second.page, bTitle, changedB);
++
++    await button(page, 'Save Page').click();
++    const conflict = pageConflict(page);
++    await expect(conflict).toBeVisible();
++    await button(conflict, 'Keep editing').click();
++    await expect(conflict).toBeHidden();
++    await expectEditor(page, revised, changedA);
++    await second.page.reload();
++    await expectReading(second.page, bTitle, changedB);
++    await expect(second.page.getByText(changedA, { exact: true })).toHaveCount(0);
++    await button(page, 'Save Page').click();
++    await expect(conflict).toBeVisible();
++    await button(conflict, 'Overwrite').click();
++    await expect(conflict).toBeHidden();
++    await expectReading(page, revised, changedA);
++    await second.page.goto(readingUrl);
++    await expectReading(second.page, revised, changedA);
++    await openBook(page, source);
++    const pages = region(page, 'Page list');
++    await expect(entry(pages, revised)).toHaveCount(1);
++    await expectAbsentEntry(pages, title);
++    await expectAbsentEntry(pages, bTitle);
++  } finally {
++    await second.context.close();
++  }
++});
++
++test("REQ-11.3: Save stale editor text to the page's new book", async ({ page, browser, baseURL }, info) => {
++  const { source, target, title, revised, readingUrl, second } = await prepare(page, browser, baseURL!, identity(info), true);
++  try {
++    await moveContent(second.page, 'Page', target);
++    await openBook(second.page, target);
++    await expect(entry(region(second.page, 'Page list'), title)).toHaveCount(1);
++    await button(page, 'Save Page').click();
++    await expect(pageConflict(page)).toBeHidden();
++    await expectReading(page, revised, changedA);
++    await page.goto(readingUrl);
++    await expectReading(page, revised, changedA);
++    await expectBreadcrumb(page, target, undefined, source);
++    await openBook(page, source);
++    await expectAbsentEntry(region(page, 'Page list'), title);
++    await expectAbsentEntry(region(page, 'Page list'), revised);
++    await openBook(page, target);
++    await page.reload();
++    await expect(entry(region(page, 'Page list'), revised)).toHaveCount(1);
++    await expectAbsentEntry(region(page, 'Page list'), title);
++    await entry(region(page, 'Page list'), revised).click();
++    await expectReading(page, revised, changedA);
++    await expectBreadcrumb(page, target, undefined, source);
++  } finally {
++    await second.context.close();
++  }
++});
++
++test('REQ-11.3: Reject a stale page save after deletion', async ({ page, browser, baseURL }, info) => {
++  const { source, title, revised, readingUrl, second } = await prepare(page, browser, baseURL!, identity(info));
++  try {
++    await button(second.page, 'Delete').click();
++    await button(second.page, 'Confirm Delete').click();
++    await heading(second.page, source);
++    await expectAbsentEntry(region(second.page, 'Page list'), title);
++    await button(page, 'Save Page').click();
++    await expect(page.getByRole('alert', { name: 'Page deleted', exact: true })).toBeVisible();
++    await expectEditor(page, revised, changedA);
++    await button(page, 'Back to book').click();
++    await heading(page, source);
++    await page.reload();
++    for (const name of [title, revised]) await expectAbsentEntry(region(page, 'Page list'), name);
++    await home(page);
++    for (const name of [title, revised]) await expectAbsentEntry(region(page, 'Recently Updated Pages'), name);
++    await page.goto(readingUrl);
++    for (const name of [title, revised]) await expect(page.getByRole('heading', { name, exact: true })).toHaveCount(0);
++    for (const body of [originalBody, changedA]) await expect(page.getByText(body, { exact: true })).toHaveCount(0);
++  } finally {
++    await second.context.close();
++  }
 +});
 diff --git a/arc-bench/bookstack/tests/REQ-4.5.spec.ts b/arc-bench/bookstack/tests/REQ-4.5.spec.ts
-index e08a0bb..48ca20b 100644
+index 48ca20b..a44643f 100644
 --- a/arc-bench/bookstack/tests/REQ-4.5.spec.ts
 +++ b/arc-bench/bookstack/tests/REQ-4.5.spec.ts
-@@ -1,6 +1,7 @@
- // requirement: REQ-4.5
- import { test, expect } from '@playwright/test';
--import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createShelf, openShelf } from './helpers';
-+import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createShelf, createShelfBook,
-+  openShelf, openBook, expectAbsentEntry, expectMembership, setMembership } from './helpers';
- 
- test("REQ-4.5: Save metadata changes", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -41,3 +42,35 @@ test("REQ-4.5: Cancel metadata changes", async ({ page }, testInfo) => {
-   await button(page, 'Edit').click();
-   await expectMetadata(page, original, 'Reference shelf description.', 'knowledge-base, docs');
- });
-+
-+test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const shelfA = await createShelf(page, id, 'Shelf 4.5.3-T', 'Reference shelf description.');
-+  const bookA = await createShelfBook(page, id, shelfA, 'Book 4.5.3-A');
-+  const shelfB = await createShelf(page, id, 'Shelf 4.5.3-S', 'Reference shelf description.');
-+  const bookB = await createShelfBook(page, id, shelfB, 'Book 4.5.3-B');
-+  await openShelf(page, shelfB);
-+  await button(page, 'Edit').click();
-+  await expectMembership(page, bookB, true);
-+  await expectMembership(page, bookA, false);
-+  await setMembership(page, bookA, true);
-+  await setMembership(page, bookB, false);
-+  await button(page, 'Save Shelf').click();
+@@ -58,6 +58,8 @@ test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
+   await setMembership(page, bookB, false);
+   await button(page, 'Save Shelf').click();
+   await heading(page, shelfB);
++  await page.reload();
 +  await heading(page, shelfB);
-+  await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Book list'), bookB);
-+  await openBook(page, bookB);
-+  await heading(page, bookB);
-+  await text(page, 'Book created by corresponding prerequisite behavior.');
-+  await expect(entry(page, shelfB)).toHaveCount(0);
-+  await openBook(page, bookA);
-+  await heading(page, bookA);
-+  await expect(entry(page, shelfA)).toHaveCount(1);
-+  await openShelf(page, shelfA);
-+  await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
-+  await openShelf(page, shelfB);
-+  await button(page, 'Edit').click();
-+  await expectMembership(page, bookA, true);
-+  await expectMembership(page, bookB, false);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-5.4.spec.ts b/arc-bench/bookstack/tests/REQ-5.4.spec.ts
-index 32d8203..3be9756 100644
---- a/arc-bench/bookstack/tests/REQ-5.4.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-5.4.spec.ts
-@@ -1,6 +1,7 @@
- // requirement: REQ-5.4
- import { test, expect } from '@playwright/test';
--import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createBook, openBook } from './helpers';
-+import { go, region, entry, expectMetadata, identity, named, enter, button, heading, text, metadata, createBook, createShelf,
-+  createShelfBook, createPage, favorite, home, login, openBook, openShelf, expectAbsentEntry } from './helpers';
- 
- test("REQ-5.4: Save metadata changes", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -41,3 +42,38 @@ test("REQ-5.4: Cancel metadata changes", async ({ page }, testInfo) => {
-   await button(page, 'Edit').click();
-   await expectMetadata(page, original, 'Reference book description.', 'manual, handbook');
- });
-+
-+test("REQ-5.4: Propagate renamed book", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  await login(page);
-+  const shelf = await createShelf(page, id, 'Shelf 5.4.3', 'Reference shelf description.');
-+  const original = await createShelfBook(page, id, shelf, 'Book 5.4.3');
-+  await createPage(page, id, original, 'Page 5.4.3', 'Page content 5.4.3.');
-+  await openBook(page, original);
-+  await favorite(page);
-+  await home(page);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), original)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Recently Viewed'), original)).toHaveCount(1);
-+  await openBook(page, original);
-+  await button(page, 'Edit').click();
-+  const updated = named(id, 'Book Renamed 5.4.3');
-+  await metadata(page, updated, 'Reference book description.', 'manual, handbook');
-+  await button(page, 'Save Book').click();
-+  await heading(page, updated);
-+  await page.reload();
-+  await heading(page, updated);
-+  await go(page, 'Books');
-+  await expect(entry(region(page, 'Book list'), updated)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Book list'), original);
-+  await openShelf(page, shelf);
-+  await expect(entry(region(page, 'Book list'), updated)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Book list'), original);
-+  await home(page);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), updated)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Recently Viewed'), updated)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), original);
-+  await expectAbsentEntry(region(page, 'My Recently Viewed'), original);
-+  await page.reload();
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), updated)).toHaveCount(1);
-+});
+   await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
+   await expectAbsentEntry(region(page, 'Book list'), bookB);
+   await openBook(page, bookB);
+@@ -67,6 +69,7 @@ test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
+   await openBook(page, bookA);
+   await heading(page, bookA);
+   await expect(entry(page, shelfA)).toHaveCount(1);
++  await expect(entry(page, shelfB)).toHaveCount(1);
+   await openShelf(page, shelfA);
+   await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
+   await openShelf(page, shelfB);
 diff --git a/arc-bench/bookstack/tests/REQ-5.5.spec.ts b/arc-bench/bookstack/tests/REQ-5.5.spec.ts
-index d917410..b980fd4 100644
+index b980fd4..fe20e6e 100644
 --- a/arc-bench/bookstack/tests/REQ-5.5.spec.ts
 +++ b/arc-bench/bookstack/tests/REQ-5.5.spec.ts
-@@ -1,6 +1,8 @@
- // requirement: REQ-5.5
+@@ -2,7 +2,7 @@
  import { test, expect } from '@playwright/test';
--import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createBook, openBook } from './helpers';
-+import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createBook, createShelf,
-+  createShelfBook, createChapter, createPage, createPageInChapter, favorite, home, login, openBook, openChapter,
-+  openPageInChapter, openShelf } from './helpers';
+ import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createBook, createShelf,
+   createShelfBook, createChapter, createPage, createPageInChapter, favorite, home, login, openBook, openChapter,
+-  openPageInChapter, openShelf } from './helpers';
++  openPage, openPageInChapter, openShelf, expectUnavailablePage } from './helpers';
  
  test("REQ-5.5: Confirm deletion", async ({ page }, testInfo) => {
    const id = identity(testInfo);
-@@ -28,3 +30,48 @@ test("REQ-5.5: Cancel deletion", async ({ page }, testInfo) => {
-   await heading(page, name);
-   await text(page, 'Reference book description.');
- });
-+
-+test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  await login(page);
-+  const shelf = await createShelf(page, id, 'Shelf 5.5.3', 'Reference shelf description.');
-+  const book = await createShelfBook(page, id, shelf, 'Book 5.5.3');
-+  const other = await createShelfBook(page, id, shelf, 'Book 5.5.3-Other');
-+  const chapter = await createChapter(page, id, book, 'Chapter 5.5.3');
-+  const pageA = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-A', 'Page content 5.5.3-A.');
-+  const pageB = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-B', 'Page content 5.5.3-B.');
-+  const root = await createPage(page, id, book, 'Page 5.5.3-Root', 'Page content 5.5.3-Root.');
-+  await openBook(page, book);
-+  await favorite(page);
-+  await openChapter(page, book, chapter);
-+  await favorite(page);
-+  await openPageInChapter(page, book, chapter, pageA);
-+  await favorite(page);
-+  await home(page);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), book)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), chapter)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), pageA)).toHaveCount(1);
-+  await expect(entry(region(page, 'My Recently Viewed'), pageA)).toHaveCount(1);
-+  await expect(entry(region(page, 'Recently Updated Pages'), pageA)).toHaveCount(1);
-+  await openBook(page, book);
-+  await button(page, 'Delete').click();
-+  await button(page, 'Confirm Delete').click();
-+  await heading(page, 'Books');
-+  await expectAbsentEntry(region(page, 'Book list'), book);
-+  await openShelf(page, shelf);
-+  await expectAbsentEntry(region(page, 'Book list'), book);
-+  await expect(entry(region(page, 'Book list'), other)).toHaveCount(1);
-+  await home(page);
-+  for (const name of [book, chapter, pageA, pageB, root]) {
-+    await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), name);
-+    await expectAbsentEntry(region(page, 'My Recently Viewed'), name);
+@@ -42,9 +42,18 @@ test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo)
+   const pageA = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-A', 'Page content 5.5.3-A.');
+   const pageB = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-B', 'Page content 5.5.3-B.');
+   const root = await createPage(page, id, book, 'Page 5.5.3-Root', 'Page content 5.5.3-Root.');
++  const pageUrls: { url: string; title: string; body: string }[] = [];
++  for (const [title, body] of [[pageA, 'Page content 5.5.3-A.'], [pageB, 'Page content 5.5.3-B.'],
++    [root, 'Page content 5.5.3-Root.']]) {
++    await openPage(page, book, title);
++    await text(page, body);
++    pageUrls.push({ url: page.url(), title, body });
 +  }
-+  for (const name of [pageA, pageB, root]) {
-+    await expectAbsentEntry(region(page, 'Recently Updated Pages'), name);
+   await openBook(page, book);
++  const bookUrl = page.url();
+   await favorite(page);
+   await openChapter(page, book, chapter);
++  const chapterUrl = page.url();
+   await favorite(page);
+   await openPageInChapter(page, book, chapter, pageA);
+   await favorite(page);
+@@ -74,4 +83,16 @@ test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo)
+   await go(page, 'Books');
+   await expectAbsentEntry(region(page, 'Book list'), book);
+   await expect(entry(region(page, 'Book list'), other)).toHaveCount(1);
++  for (const saved of pageUrls) {
++    await page.goto(saved.url);
++    await expectUnavailablePage(page, saved.title, saved.body);
++    await page.reload();
++    await expectUnavailablePage(page, saved.title, saved.body);
 +  }
-+  await page.reload();
-+  await go(page, 'Books');
-+  await expectAbsentEntry(region(page, 'Book list'), book);
-+  await expect(entry(region(page, 'Book list'), other)).toHaveCount(1);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-6.1.spec.ts b/arc-bench/bookstack/tests/REQ-6.1.spec.ts
-index ae3004c..d8b0140 100644
---- a/arc-bench/bookstack/tests/REQ-6.1.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-6.1.spec.ts
-@@ -1,6 +1,7 @@
- // requirement: REQ-6.1
- import { test, expect } from '@playwright/test';
--import { identity, enter, region, entry, home, login, heading, createBook, createPage } from './helpers';
-+import { identity, enter, region, entry, home, login, heading, text, createBook, createPage, button, expectAbsentEntry,
-+  expectFieldValue, newContextFor, openBook, REVIEWER_ACCOUNT } from './helpers';
- 
- test("REQ-6.1: Publish a page", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -22,3 +23,73 @@ test("REQ-6.1: Save an owned recent draft", async ({ page }, testInfo) => {
-   await expect(recentDraft).toHaveCount(1);
-   await expect(recentDraft).toBeVisible();
++  await page.goto(chapterUrl);
++  await expect(page.getByRole('heading', { name: chapter, exact: true })).toHaveCount(0);
++  await page.goto(bookUrl);
++  await expect(page.getByRole('heading', { name: book, exact: true })).toHaveCount(0);
++  await openBook(page, other);
++  await text(page, 'Book created by corresponding prerequisite behavior.');
  });
-+
-+test("REQ-6.1: Publish an owned draft", async ({ page, browser }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const baseURL = new URL(page.url()).origin;
-+  await login(page);
-+  const book = await createBook(page, id, 'Book 6.1.3');
-+  const draft = await createPage(page, id, book, 'Page Draft 6.1.3', 'Draft content 6.1.3.', true);
-+  const anonymous = await newContextFor(browser, baseURL);
-+  const anonymousPage = anonymous.page;
-+  await openBook(anonymousPage, book);
-+  await expectAbsentEntry(region(anonymousPage, 'Page list'), draft);
-+  await openBook(page, book);
-+  await entry(region(page, 'Page list'), draft).click();
-+  await expectFieldValue(page.getByRole('textbox', { name: 'Page title', exact: true }), draft);
-+  await expectFieldValue(page.getByRole('textbox', { name: 'Write your page content here...', exact: true }), 'Draft content 6.1.3.');
-+  await button(page, 'Save Page').click();
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), draft)).toHaveCount(1);
-+  await entry(region(page, 'Page list'), draft).click();
-+  await heading(page, draft);
-+  await text(page, 'Draft content 6.1.3.');
-+  await home(page);
-+  await expect(region(page, 'My Recent Drafts').getByText(draft, { exact: true }).filter({ visible: true })).toHaveCount(0);
-+  await expect(entry(region(page, 'Recently Updated Pages'), draft)).toHaveCount(1);
-+  await anonymousPage.reload();
-+  await openBook(anonymousPage, book);
-+  await expect(entry(region(anonymousPage, 'Page list'), draft)).toHaveCount(1);
-+  await entry(region(anonymousPage, 'Page list'), draft).click();
-+  await heading(anonymousPage, draft);
-+  await text(anonymousPage, 'Draft content 6.1.3.');
-+  await anonymous.context.close();
-+});
-+
-+test("REQ-6.1: Keep drafts private to their owner", async ({ page, browser }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const baseURL = new URL(page.url()).origin;
-+  await login(page);
-+  const book = await createBook(page, id, 'Book 6.1.4');
-+  const draft = await createPage(page, id, book, 'Page Draft 6.1.4', 'Draft content 6.1.4.', true);
-+  await openBook(page, book);
-+  await entry(region(page, 'Page list'), draft).click();
-+  const draftUrl = page.url();
-+  await expectFieldValue(page.getByRole('textbox', { name: 'Page title', exact: true }), draft);
-+  await expectFieldValue(page.getByRole('textbox', { name: 'Write your page content here...', exact: true }), 'Draft content 6.1.4.');
-+  const anonymous = await newContextFor(browser, baseURL);
-+  const anonymousPage = anonymous.page;
-+  await openBook(anonymousPage, book);
-+  await expectAbsentEntry(region(anonymousPage, 'Page list'), draft);
-+  await anonymousPage.goto(baseURL);
-+  await expect(anonymousPage.getByText(draft, { exact: true }).filter({ visible: true })).toHaveCount(0);
-+  await anonymousPage.goto(draftUrl);
-+  await expect(anonymousPage.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
-+  await expect(anonymousPage.getByText('Draft content 6.1.4.', { exact: true })).toHaveCount(0);
-+  await anonymous.context.close();
-+  const reviewer = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
-+  const reviewerPage = reviewer.page;
-+  await openBook(reviewerPage, book);
-+  await expectAbsentEntry(region(reviewerPage, 'Page list'), draft);
-+  await expect(region(reviewerPage, 'My Recent Drafts').getByText(draft, { exact: true }).filter({ visible: true })).toHaveCount(0);
-+  await reviewerPage.goto(draftUrl);
-+  await expect(reviewerPage.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
-+  await expect(reviewerPage.getByText('Draft content 6.1.4.', { exact: true })).toHaveCount(0);
-+  await reviewer.context.close();
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), draft)).toHaveCount(1);
-+  await home(page);
-+  await expect(region(page, 'My Recent Drafts').getByText(draft, { exact: true }).filter({ visible: true })).toHaveCount(1);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-6.4.spec.ts b/arc-bench/bookstack/tests/REQ-6.4.spec.ts
-index 86ade3c..967bdb2 100644
---- a/arc-bench/bookstack/tests/REQ-6.4.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-6.4.spec.ts
-@@ -1,6 +1,7 @@
- // requirement: REQ-6.4
- import { test, expect } from '@playwright/test';
--import { expectFieldValue, identity, enter, region, entry, button, heading, text, createBook, createPage } from './helpers';
-+import { expectFieldValue, identity, named, enter, region, entry, button, heading, text, home, createBook, createPage,
-+  openBook, expectAbsentEntry } from './helpers';
- 
- test("REQ-6.4: Read selected page", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -23,3 +24,28 @@ test("REQ-6.4: Reopen page editor", async ({ page }, testInfo) => {
-   await expectFieldValue(page.getByRole('textbox', { name: 'Write your page content here...', exact: true }), 'Reading content for Page 6.3.2.');
-   await expect(button(page, 'Save Page')).toBeVisible();
- });
-+
-+test("REQ-6.4: Save edited page", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const book = await createBook(page, id, 'Book 6.3.3');
-+  const original = await createPage(page, id, book, 'Page 6.3.3', 'Reading content for Page 6.3.3.');
-+  await openBook(page, book);
-+  await button(region(page, 'Page list'), original).click();
-+  await button(page, 'Edit').click();
-+  const updated = named(id, 'Page Updated 6.3.3');
-+  await page.getByRole('textbox', { name: 'Page title', exact: true }).fill(updated);
-+  await page.getByRole('textbox', { name: 'Write your page content here...', exact: true }).fill('Updated content for Page 6.3.3.');
-+  await button(page, 'Save Page').click();
-+  await heading(page, updated);
-+  await text(page, 'Updated content for Page 6.3.3.');
-+  await page.reload();
-+  await heading(page, updated);
-+  await text(page, 'Updated content for Page 6.3.3.');
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), updated)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Page list'), original);
-+  await home(page);
-+  await expect(entry(region(page, 'Recently Updated Pages'), updated)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'Recently Updated Pages'), original);
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-7.1.spec.ts b/arc-bench/bookstack/tests/REQ-7.1.spec.ts
-index 79b8d3e..901bbba 100644
---- a/arc-bench/bookstack/tests/REQ-7.1.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-7.1.spec.ts
-@@ -1,7 +1,8 @@
- import { cappedEntry } from './support/list-cap';
- // requirement: REQ-7.1
- import { test, expect } from '@playwright/test';
--import { identity, enter, region, entry, home, login, heading, createShelf, openShelf } from './helpers';
-+import { identity, enter, region, entry, home, login, heading, createShelf, openShelf, expectAbsentEntry,
-+  newContextFor, records, REVIEWER_ACCOUNT } from './helpers';
- 
- test("REQ-7.1: Record shelf visit", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -37,3 +38,28 @@ test("REQ-7.1: Reopen visited shelf", async ({ page }, testInfo) => {
-   await entry(collection, shelf).click();
-   await heading(page, shelf);
- });
-+
-+test("REQ-7.1: Deduplicate and isolate recent views", async ({ page, browser }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const baseURL = new URL(page.url()).origin;
-+  await login(page);
-+  const shelfA = await createShelf(page, id, 'Shelf 7.3-A');
-+  await openShelf(page, shelfA);
-+  await openShelf(page, shelfA);
-+  await home(page);
-+  await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);
-+  expect(await records(region(page, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
-+  const reviewer = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
-+  const reviewerPage = reviewer.page;
-+  const shelfB = await createShelf(reviewerPage, id, 'Shelf 7.3-B');
-+  await openShelf(reviewerPage, shelfB);
-+  await home(reviewerPage);
-+  await expect(entry(region(reviewerPage, 'My Recently Viewed'), shelfB)).toHaveCount(1);
-+  expect(await records(region(reviewerPage, 'My Recently Viewed')).count()).toBeLessThanOrEqual(10);
-+  await expectAbsentEntry(region(reviewerPage, 'My Recently Viewed'), shelfA);
-+  await page.reload();
-+  await expect(entry(region(page, 'My Recently Viewed'), shelfA)).toHaveCount(1);
-+  await expectAbsentEntry(region(page, 'My Recently Viewed'), shelfB);
-+  await reviewer.context.close();
-+});
 diff --git a/arc-bench/bookstack/tests/REQ-8.1.spec.ts b/arc-bench/bookstack/tests/REQ-8.1.spec.ts
-index 5aa87fd..b89c265 100644
+index b89c265..65a68be 100644
 --- a/arc-bench/bookstack/tests/REQ-8.1.spec.ts
 +++ b/arc-bench/bookstack/tests/REQ-8.1.spec.ts
-@@ -1,6 +1,7 @@
- // requirement: REQ-8.1
- import { test, expect } from '@playwright/test';
--import { expectAbsentEntry, identity, enter, region, entry, button, home, login, createBook } from './helpers';
-+import { expectAbsentEntry, identity, enter, region, entry, button, home, login, createBook, favorite, go, heading,
-+  openBook, newContextFor, REVIEWER_ACCOUNT } from './helpers';
- 
- test("REQ-8.1: Favorite a book", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -28,3 +29,33 @@ test("REQ-8.1: Persist removal of a favorite", async ({ page }, testInfo) => {
-   await home(page);
-   await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), book);
- });
-+
-+test("REQ-8.1: Keep favorites personal and remove deleted content", async ({ page, browser }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const baseURL = new URL(page.url()).origin;
-+  await login(page);
-+  const book = await createBook(page, id, 'Book 8.1.3');
-+  await openBook(page, book);
-+  await favorite(page);
-+  await home(page);
-+  await expect(entry(region(page, 'My Most Viewed Favorites'), book)).toHaveCount(1);
-+  const reviewer = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
-+  const reviewerPage = reviewer.page;
+@@ -46,6 +46,24 @@ test("REQ-8.1: Keep favorites personal and remove deleted content", async ({ pag
+   await expect(button(reviewerPage, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
+   await home(reviewerPage);
+   await expectAbsentEntry(region(reviewerPage, 'My Most Viewed Favorites'), book);
 +  await openBook(reviewerPage, book);
-+  await expect(button(reviewerPage, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
++  await favorite(reviewerPage);
 +  await home(reviewerPage);
-+  await expectAbsentEntry(region(reviewerPage, 'My Most Viewed Favorites'), book);
++  await expect(entry(region(reviewerPage, 'My Most Viewed Favorites'), book)).toHaveCount(1);
 +  await openBook(page, book);
-+  await button(page, 'Delete').click();
-+  await button(page, 'Confirm Delete').click();
-+  await heading(page, 'Books');
-+  await expectAbsentEntry(region(page, 'Book list'), book);
++  await button(page, 'Unfavorite').click();
++  await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
 +  await home(page);
 +  await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), book);
 +  await reviewerPage.reload();
-+  await expectAbsentEntry(region(reviewerPage, 'My Most Viewed Favorites'), book);
-+  await go(reviewerPage, 'Books');
-+  await expectAbsentEntry(region(reviewerPage, 'Book list'), book);
-+  await reviewer.context.close();
-+});
-diff --git a/arc-bench/bookstack/tests/REQ-9.1.spec.ts b/arc-bench/bookstack/tests/REQ-9.1.spec.ts
-index 5f60c28..fefa5da 100644
---- a/arc-bench/bookstack/tests/REQ-9.1.spec.ts
-+++ b/arc-bench/bookstack/tests/REQ-9.1.spec.ts
-@@ -1,7 +1,8 @@
- import { cappedEntry } from './support/list-cap';
- // requirement: REQ-9.1
- import { test, expect } from '@playwright/test';
--import { identity, enter, region, entry, home, heading, text, createBook, createPage } from './helpers';
-+import { identity, named, enter, region, entry, home, heading, text, button, createBook, createPage, openBook,
-+  expectAbsentEntry, records } from './helpers';
++  await expect(entry(region(reviewerPage, 'My Most Viewed Favorites'), book)).toHaveCount(1);
++  await openBook(reviewerPage, book);
++  await expect(button(reviewerPage, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');
++  await home(reviewerPage);
++  await openBook(page, book);
++  await favorite(page);
++  await home(page);
++  await expect(entry(region(page, 'My Most Viewed Favorites'), book)).toHaveCount(1);
+   await openBook(page, book);
+   await button(page, 'Delete').click();
+   await button(page, 'Confirm Delete').click();
+diff --git a/arc-bench/bookstack/tests/support/page-revisions.ts b/arc-bench/bookstack/tests/support/page-revisions.ts
+new file mode 100644
+index 0000000..b002a62
+--- /dev/null
++++ b/arc-bench/bookstack/tests/support/page-revisions.ts
+@@ -0,0 +1,69 @@
++import { expect, type Page } from '@playwright/test';
++import { button, entry, expectFieldValue, heading, records, region, text } from '../helpers';
++import { formField, selectChoice } from './public-controls';
++
++export const pageTitle = (page: Page) => page.getByRole('textbox', { name: 'Page title', exact: true });
++export const pageBody = (page: Page) => page.getByRole('textbox', { name: 'Write your page content here...', exact: true });
++export const pageConflict = (page: Page) => page.getByRole('dialog', { name: 'Page edit conflict', exact: true });
++
++export async function expectReading(page: Page, title: string, body: string) {
++  await heading(page, title);
++  await text(page, body);
++}
++
++export async function expectEditor(page: Page, title: string, body: string) {
++  await expectFieldValue(pageTitle(page), title);
++  await expectFieldValue(pageBody(page), body);
++}
++
++export async function editPage(page: Page, title: string, body: string) {
++  await expectReading(page, title, body);
++  await button(page, 'Edit').click();
++  await expectEditor(page, title, body);
++}
++
++export async function fillEditor(page: Page, title: string, body: string) {
++  await pageTitle(page).fill(title);
++  await pageBody(page).fill(body);
++}
++
++export async function moveContent(page: Page, kind: 'Chapter' | 'Page', destination: string,
++  placement?: 'First' | 'Last') {
++  const name = `Move ${kind}`;
++  await button(page, name).click();
++  const dialog = page.getByRole('dialog', { name, exact: true });
++  await expect(dialog).toBeVisible();
++  await selectChoice(formField(dialog, 'Destination book', 'combobox'), { label: destination });
++  if (placement) await selectChoice(formField(dialog, 'Placement', 'combobox'), { label: placement });
++  await button(dialog, 'Move').click();
++  await expect(dialog).toBeHidden();
++}
++
++export async function expectBreadcrumb(page: Page, book: string, chapter?: string, formerBook?: string) {
++  const breadcrumb = page.getByRole('navigation', { name: 'Breadcrumb', exact: true });
++  const bookEntry = entry(breadcrumb, book);
++  await expect(bookEntry).toHaveCount(1);
++  await expect(bookEntry).toBeVisible();
++  if (formerBook) await expect(entry(breadcrumb, formerBook)).toHaveCount(0);
++  if (chapter) {
++    const chapterEntry = entry(breadcrumb, chapter);
++    await expect(chapterEntry).toHaveCount(1);
++    await expect(chapterEntry).toBeVisible();
++    // The contract specifies the order of the two ancestor controls.
++    const names = await bookEntry.or(chapterEntry).all();
++    await expect(names[0]).toHaveAccessibleName(book);
++    await expect(names[1]).toHaveAccessibleName(chapter);
++  }
++}
++
++export const chapterRecord = (page: Page, description: string) =>
++  records(region(page, 'Chapter list')).filter({
++    has: page.getByText(description, { exact: true }).filter({ visible: true }),
++  });
++
++export async function openRevision(page: Page, title: string, body: string) {
++  const draft = entry(region(page, 'My Recent Drafts'), title);
++  await expect(draft).toHaveCount(1);
++  await draft.click();
++  await expectEditor(page, title, body);
++}
+diff --git a/arc-bench/keep/requirements/requirements.yaml b/arc-bench/keep/requirements/requirements.yaml
+index 36c2dbf..7557738 100644
+--- a/arc-bench/keep/requirements/requirements.yaml
++++ b/arc-bench/keep/requirements/requirements.yaml
+@@ -170,6 +170,8 @@ children:
+         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
  
- test("REQ-9.1: Open recently published page", async ({ page }, testInfo) => {
-   const id = identity(testInfo);
-@@ -21,3 +22,28 @@ test("REQ-9.1: Open recently published page", async ({ page }, testInfo) => {
-   await heading(page, selected.name);
-   await text(page, selected.name === name ? 'Page content created by corresponding prerequisite behavior.' : 'Cap page body');
+         Note titles accept the source example name plus a deterministic run/worker/case suffix. Notes and their mutable action states are produced by the described note interactions.
++
++        Users may also replace Title and Content together. Closing saves the same note under the new title, updates its region name and title-bearing action names, and removes the old title and content from the note. Its pin state and assigned labels remain unchanged; the renamed note is unique in its pinned/regular section and label filters. Reopening shows the new saved values. Other notes are unaffected and changes survive reload.
+       image:
+       - id: IMG-NOTE-EDITING
+         reference: reference/note_editing.png
+@@ -188,6 +190,19 @@ children:
+         references:
+         - \ref[requirement](REQ-2.2)
+         - \ref[image](IMG-NOTE-EDITING)
++    - id: SCN-REQ-2.3-02
++      name: Rename a note without losing its attributes
++      steps:
++        - id: STEP-REQ-2.3-02-01
++          Given: Create isolated Project label, a pinned Original project title note with Original project content assigned that label, and an unlabelled regular Rename control note with Unchanged control content through the UI.
++          When: Open the original note, verify its saved Title and Content, replace them with isolated Renamed project title and Renamed project content, Close and reload. Select Project label, reopen the renamed note and close it, then return to Notes.
++          Then: The old note region is absent; the renamed note exists exactly once in Pinned notes and not Other notes, shows replacement content without Original project content, retains its label and Unpin pressed=true. Rename control retains its content. The label view contains the renamed note once and excludes the unlabelled control; reopened Title and Content contain the new values. Returning to Notes still shows one renamed note and no original note.
++          references:
++            - \ref[requirement](REQ-2.2)
++            - \ref[requirement](REQ-2.8)
++            - \ref[requirement](REQ-2.9)
++            - \ref[requirement](REQ-3.1)
++            - \ref[requirement](REQ-3.2)
+     children: []
+   - id: REQ-2.4
+     name: Delete notes and recover through notification Undo
+@@ -200,6 +215,8 @@ children:
+         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
+ 
+         Note titles accept the source example name plus a deterministic run/worker/case suffix. Notes and their mutable action states are produced by the described note interactions.
++
++        The same More options / Delete Note action is available on archived notes. Moving an active or archived note to Trash retains its last active/archived state, pin state, background color and label membership for restoration. Only the selected note changes state.
+       image:
+       - id: IMG-NOTE-MORE-OPTIONS-DROPDOWN
+         reference: reference/note_more_options_dropdown.png
+@@ -525,6 +542,70 @@ children:
+         - \ref[requirement](REQ-2.2)
+         - \ref[image](IMG-PIN-BUTTON)
+     children: []
++  - id: REQ-2.10
++    name: Restore individually deleted notes
++    description:
++      text: Trash exposes "Restore {title}"(role=button) within each deleted note region. Restoring removes only that note from Deleted notes and returns it to its last active or archived state before deletion. Title, content, pin state, background color and current label assignments survive deletion and restoration. Active restored notes return to the proper Pinned notes / Other notes section and their active label filters; restored archived notes stay excluded from Notes and active label filters until unarchived. Other deleted notes are unchanged. Restoration persists across navigation and reload. Restore leaves Trash open, so remaining Deleted notes members can still be inspected.
++    scenarios:
++      - id: SCN-REQ-2.10-01
++        name: Restore an active note with its saved attributes
++        steps:
++          - id: STEP-REQ-2.10-01-01
++            Given: Create isolated Restore label and a pinned light-green Restore pinned note with Restore all saved attributes assigned that label. Create Keep in Trash with Other deleted content; delete both notes through UI and open Trash.
++            When: Verify both Deleted notes members, hover Restore pinned note and click its Restore action. Open Notes and reload, inspect the restored note and its label filter, then inspect Archived and Trash.
++            Then: Restore removes only the selected note from Deleted notes. After reload the restored note exists exactly once in Pinned notes and not Other notes, retains its title, content, visible label, Unpin pressed=true and visibly light-green surface with the matching background action name. Its label filter contains it once and excludes the other deleted note. Archived and Trash exclude the restored note; Keep in Trash remains once in Deleted notes with its content.
++            references:
++              - \ref[requirement](REQ-2.2)
++              - \ref[requirement](REQ-2.4)
++              - \ref[requirement](REQ-2.7)
++              - \ref[requirement](REQ-2.8)
++              - \ref[requirement](REQ-2.9)
++              - \ref[requirement](REQ-3.1)
++              - \ref[requirement](REQ-3.2)
++      - id: SCN-REQ-2.10-02
++        name: Restore a deleted archived note to Archived
++        steps:
++          - id: STEP-REQ-2.10-02-01
++            Given: Create isolated Archived restore label, Restore archived note with Return to the archived collection assigned that label, and unlabelled Active restore control with Keep this active note. Archive the labelled note, then delete it from Archived and open Trash.
++            When: Restore the labelled note, open Archived and reload. Inspect its label filter and Notes, then unarchive the restored note and inspect its label filter and Trash.
++            Then: Trash removes the restored note. After reload Archived notes contains it exactly once with saved title, content and label, excluding the active control. Before unarchiving, the restored note is absent from Notes and its active label filter while Notes retains the active control. After unarchiving the label filter contains the restored note once with its content and label, excluding the unlabelled control, and Trash still excludes the restored note.
++            references:
++              - \ref[requirement](REQ-2.2)
++              - \ref[requirement](REQ-2.4)
++              - \ref[requirement](REQ-2.6)
++              - \ref[requirement](REQ-2.8)
++              - \ref[requirement](REQ-3.1)
++              - \ref[requirement](REQ-3.2)
++    children: []
++  - id: REQ-2.11
++    name: Permanently delete an individual trashed note
++    description:
++      text: Each deleted note exposes "Delete forever {title}"(role=button) in Trash. It opens "Delete note forever"(role=dialog) with "Delete forever"(role=button) and "Cancel"(role=button). Confirming permanently removes only the selected note, closes the dialog and leaves Trash open. It cannot subsequently be restored; other deleted notes and all active and archived notes retain their saved content and state. Cancel closes the dialog while preserving the selected deleted note and its Restore action. Both confirmation and cancellation outcomes persist across reload. This is independent of the existing Empty Trash bulk action.
++    scenarios:
++      - id: SCN-REQ-2.11-01
++        name: Permanently delete only the selected trashed note
++        steps:
++          - id: STEP-REQ-2.11-01-01
++            Given: UI-create Delete forever target with Remove this content permanently, Keep deleted sibling with Keep other deleted content, Keep active sibling with Keep active content, and Keep archived sibling with Keep archived content. Archive the fourth note; delete the first two and open Trash.
++            When: On the target note click Delete forever {title}, inspect the Delete note forever dialog and its Cancel action, then click Delete forever within that dialog. Reload Trash, inspect the other deleted note, and open Notes and Archived.
++            Then: The dialog closes. The target is absent from Trash before and after reload, while the other deleted note remains exactly once in Deleted notes with its content and Restore action. Notes retains the active control once and excludes the target and archived control. Archived notes retains the archived control once and excludes the target and active control.
++            references:
++              - \ref[requirement](REQ-2.2)
++              - \ref[requirement](REQ-2.4)
++              - \ref[requirement](REQ-2.6)
++              - \ref[requirement](REQ-2.10)
++      - id: SCN-REQ-2.11-02
++        name: Cancel permanent deletion and restore the note
++        steps:
++          - id: STEP-REQ-2.11-02-01
++            Given: UI-create isolated Cancel permanent deletion with Canceled deletion retains this content, delete it through More options / Delete Note and open Trash.
++            When: Click Delete forever {title}, verify the Delete note forever dialog and Delete forever confirmation action, then Cancel. Reload Trash, restore the note, select Notes and reload, then inspect Trash.
++            Then: Cancel closes the dialog and preserves exactly one Deleted notes member with its saved title and content before and after reload. Restore remains usable and removes the note from Trash; after reload Notes contains the same saved note exactly once, and Trash continues to exclude it.
++            references:
++              - \ref[requirement](REQ-2.2)
++              - \ref[requirement](REQ-2.4)
++              - \ref[requirement](REQ-2.10)
++    children: []
+ - id: REQ-3
+   name: Organize with labels
+   description:
+@@ -627,6 +708,8 @@ children:
+         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
+ 
+         User-label names accept the source example name plus a deterministic run/worker/case suffix. User labels are created through Edit Labels, while the default Reminders label already exists.
++
++        Label renames and deletions apply to active, archived and trashed notes, including their visible label text. Rename preserves membership for all three states. Deletion removes only that label assignment, retaining every note's title, content, lifecycle state and other label assignments. Restoring or unarchiving a note uses the current label names and memberships; a removed label never reappears. The Note labels chooser no longer offers deleted labels and retains the other checked labels.
+       image:
+       - id: IMG-MANAGE-LABELS
+         reference: reference/manage_labels.png
+@@ -657,6 +740,34 @@ children:
+         references:
+         - \ref[requirement](REQ-2.8)
+         - \ref[image](IMG-MANAGE-LABELS)
++    - id: SCN-REQ-3.3-03
++      name: Rename a label across active archived and deleted notes
++      steps:
++        - id: STEP-REQ-3.3-03-01
++          Given: Create isolated Lifecycle label and three notes assigned it, Labeled active note, Labeled archived note and Labeled deleted note, each with Retain this membership. Archive the second note and delete the third through UI.
++          When: Rename Lifecycle label to isolated Renamed lifecycle label in Edit Labels, click Save label with the original name and Done, then reload. Inspect Notes, Archived and Trash, restore the deleted note and select the renamed sidebar label.
++          Then: Sidebar contains the renamed label once and no original label. Each note appears exactly once with unchanged content only in its proper Other notes, Archived notes or Deleted notes collection, showing the renamed label and no old label. The renamed label filter includes the active and restored notes once each, with the restored note displaying the renamed label, and excludes the still-archived note.
++          references:
++            - \ref[requirement](REQ-2.4)
++            - \ref[requirement](REQ-2.6)
++            - \ref[requirement](REQ-2.8)
++            - \ref[requirement](REQ-2.10)
++            - \ref[requirement](REQ-3.1)
++            - \ref[requirement](REQ-3.2)
++    - id: SCN-REQ-3.3-04
++      name: Delete a label across active archived and deleted notes
++      steps:
++        - id: STEP-REQ-3.3-04-01
++          Given: Create isolated Remove lifecycle label and Keep lifecycle label. Create Active label removal, Archived label removal and Deleted label removal notes, each with Preserve this content and both labels assigned. Archive the second and delete the third.
++          When: Delete Remove lifecycle label through Edit Labels, click Done and reload. Inspect Notes, Archived and Trash; restore the deleted note, unarchive the archived note and select Keep lifecycle label. Open the restored note's Note labels chooser, close it and the editor, then reload and return to Notes.
++          Then: Sidebar loses only the removed label and retains Keep lifecycle label once. Each note initially stays in its proper collection with its title, content and retained label unchanged and no removed label. After restoration and unarchiving all three appear exactly once in the retained-label filter. The chooser has no removed-label checkbox and retains the checked Keep lifecycle label. After reload all three notes and their content remain in Notes and none displays the removed label.
++          references:
++            - \ref[requirement](REQ-2.4)
++            - \ref[requirement](REQ-2.6)
++            - \ref[requirement](REQ-2.8)
++            - \ref[requirement](REQ-2.10)
++            - \ref[requirement](REQ-3.1)
++            - \ref[requirement](REQ-3.2)
+     children: []
+ - id: REQ-4
+   name: Find personal notes
+@@ -673,6 +784,8 @@ children:
+         The current search is produced by Search input or Suggested filters selection; no search state is preloaded.
+ 
+         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
++
++        Keyword search from Notes excludes archived and trashed notes even when their titles or content match. Unarchiving an archived note or restoring a note deleted from Notes makes it eligible for search again; each active matching note appears once and unrelated notes remain excluded. These lifecycle changes survive reload.
+       image:
+       - id: IMG-SEARCH-SUGGESTED-FILTERS
+         reference: reference/search_suggested_filters.png
+@@ -704,6 +817,18 @@ children:
+         references:
+         - \ref[requirement](REQ-2.8)
+         - \ref[image](IMG-SEARCH-SUGGESTED-FILTERS)
++    - id: SCN-REQ-4.1-03
++      name: Exclude archived and deleted matches from search
++      steps:
++        - id: STEP-REQ-4.1-03-01
++          Given: UI-create Visible search note, Archived search note and Deleted search note with Lifecyclekeyword searchable content, and Unrelated search control with Unrelated content. Archive the second and delete the third.
++          When: Select Notes, reload and search LIFECYCLEKEYWORD. Clear Search and select Notes; inspect Archived and unarchive the matching note, inspect Trash and restore the deleted note. Select Notes, reload and repeat the search.
++          Then: Initially only the active matching note appears, exactly once with a correct case-insensitive Highlight LIFECYCLEKEYWORD fragment; archived, deleted and unrelated notes are excluded. Clearing restores the active and unrelated notes with saved content, excluding archived and deleted notes. Archived and Trash retain their respective matching notes and content before the actions. After unarchiving, restoring and reload, search includes all three matching notes exactly once with correct highlights and excludes the unrelated note.
++          references:
++            - \ref[requirement](REQ-2.2)
++            - \ref[requirement](REQ-2.4)
++            - \ref[requirement](REQ-2.6)
++            - \ref[requirement](REQ-2.10)
+     children: []
+ - id: REQ-5
+   name: Configure the workspace
+@@ -773,3 +898,163 @@ children:
+         - \ref[image](IMG-HOME-PAGE)
+         - \ref[image](IMG-LIST-VIEW)
+     children: []
++- id: REQ-6
++  name: Note identity and concurrent changes
++  description:
++    text: |-
++      Personal notes and labels preserve identity across their lifecycle and across overlapping actions. The same workspace can be opened in two tabs.
++  scenarios: []
++  children:
++  - id: REQ-6.1
++    name: Keep same-title notes independent
++    description:
++      text: |-
++        Separate notes may have exactly the same title. Title, list position and layout do not identify a note. Each note is its own title-named region with its own visible body, labels and note actions. Edits, archive, Trash and restoration address only the selected note. Deleting an archived note puts it in Trash; its card offers "Restore {title}"(role=button), which returns it to its pre-deletion collection. Unarchive then explicitly returns it to Notes. Preserve content, labels, color and pin state across these transitions. Label and search views return each matching note once.
++    scenarios:
++    - id: SCN-REQ-6.1-01
++      name: Show both same-title notes independently in search and layouts
++      steps:
++      - id: STEP-REQ-6.1-01-01
++        Given: |-
++          Create two active Twin memo notes with distinct visible bodies, one pinned and one regular.
++        When: |-
++          Search for Twin memo, clear search, switch to List view and reload Notes.
++        Then: |-
++          Search shows exactly the two notes with their own bodies. List view and reload retain exactly one of each; only the pinned note is in Pinned notes and the other is in Other notes.
++        references:
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++        - \ref[requirement](REQ-2.5)
++        - \ref[requirement](REQ-2.6)
++        - \ref[requirement](REQ-2.7)
++        - \ref[requirement](REQ-2.8)
++        - \ref[requirement](REQ-2.9)
++        - \ref[requirement](REQ-3.2)
++        - \ref[requirement](REQ-4.1)
++        - \ref[requirement](REQ-5.2)
++    - id: SCN-REQ-6.1-02
++      name: Edit and restore the correct same-title note across collections
++      steps:
++      - id: STEP-REQ-6.1-02-01
++        Given: |-
++          Create two Twin memo notes with distinct bodies and labels. The first is pinned and light green; the second is regular and uses the default color.
++        When: |-
++          In the first label view rename the first note. Archive the second, delete it from Archived, restore it from Trash, then explicitly unarchive it. Search the original title, clear search, switch to List view and reload Notes.
++        Then: |-
++          Each intermediate collection contains only the appropriate note, and the second returns to Archived before unarchiving. Search returns only the second note. After reload both notes appear exactly once in their correct pin sections with the right titles, bodies, labels and colors.
++        references:
++        - \ref[requirement](REQ-2.2)
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++        - \ref[requirement](REQ-2.5)
++        - \ref[requirement](REQ-2.6)
++        - \ref[requirement](REQ-2.7)
++        - \ref[requirement](REQ-2.8)
++        - \ref[requirement](REQ-2.9)
++        - \ref[requirement](REQ-3.2)
++        - \ref[requirement](REQ-4.1)
++        - \ref[requirement](REQ-5.2)
++    children: []
++  - id: REQ-6.2
++    name: Do not revive deleted label identity
++    description:
++      text: |-
++        Deleting a label removes its memberships from active, archived and trashed notes. A new label with the same text is a distinct object with no inherited memberships. An editor opened before deletion may save text but cannot restore a deleted label or attach its replacement without an explicit assignment. Preserve all other labels and content. In a second tab, reloading the workspace shows changes committed by the first; the open editor is not reloaded.
++    scenarios:
++    - id: SCN-REQ-6.2-01
++      name: Recreate a label without inheriting old memberships
++      steps:
++      - id: STEP-REQ-6.2-01-01
++        Given: |-
++          Create Project and Retained labels. Assign both to three distinct notes and leave one active, one archived and one in Trash.
++        When: |-
++          Open the active note in tab A and change its content without closing. In tab B delete Project and create Project again. Close the old editor in A; restore the trashed note and unarchive the archived note. Explicitly assign the new Project to the restored note only; reload.
++        Then: |-
++          The recreated label initially has no notes. The stale save persists the new content and does not reattach Project. Neither restoration nor unarchive reattaches Project. All three notes keep Retained and their correct bodies. After explicit assignment and reload only the restored note appears under Project.
++        references:
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-3.1)
++        - \ref[requirement](REQ-3.3)
++        - \ref[requirement](REQ-6.1)
++    children: []
++  - id: REQ-6.3
++    name: Undo deletion without reverting later changes
++    description:
++      text: |-
++        The Undo in a "Note deleted"(role=status) reverses only that note's deletion and restores its prior collection and pin state. It uses the current label identities and names, and leaves later changes to other records intact. Editing a note or renaming a label does not dismiss, replace, or retarget this notification. Its Undo remains available for those intervening actions without depending on a timer. Dismissing the notification still removes its Undo.
++    scenarios:
++    - id: SCN-REQ-6.3-01
++      name: Undo a deletion after a label rename and another note edit
++      steps:
++      - id: STEP-REQ-6.3-01-01
++        Given: |-
++          Create a pinned note with a label, and a separate active note with different text.
++        When: |-
++          Delete the pinned note. Without dismissing the notification, rename its label and edit the other note's content, then use Undo in the original deletion notification and reload.
++        Then: |-
++          The deleted note is restored once to Pinned notes with its original content and current label name, and absent from Trash. The renamed label remains in the sidebar, the old name is absent, and the other note retains its later edit.
++        references:
++        - \ref[requirement](REQ-2.4)
++        - \ref[requirement](REQ-2.9)
++        - \ref[requirement](REQ-3.3)
++    children: []
++  - id: REQ-6.4
++    name: Resolve stale note edits without losing changes
++    description:
++      text: |-
++        Two tabs of the same personal workspace can open the same note. For existing notes, Close submits the changed Title and Content fields; fields unchanged by that editor retain newer saved values. Saving overlapping divergent changes opens "Note edit conflict"(role=dialog) and retains the unsaved input. "Keep editing"(role=button) closes the conflict dialog and returns to the editor with that input. "Reload latest"(role=button) returns to Note editor with the latest values; "Overwrite"(role=button) saves only the fields changed by this editor and preserves newer untouched fields. If the note has been deleted, Close instead shows "Note deleted elsewhere"(role=alert) with the input intact; "Discard changes"(role=button) closes the editor without restoring the note.
++    scenarios:
++    - id: SCN-REQ-6.4-01
++      name: Merge independent title and content edits from two tabs
++      steps:
++      - id: STEP-REQ-6.4-01-01
++        Given: |-
++          Open the same active note with its initial title and body in editors A and B in two tabs.
++        When: |-
++          Change the title in A without closing. Change the body in B and close B; confirm B's save. Close A, then reload Notes.
++        Then: |-
++          Exactly one note has A's new title and B's new body. The previous title is absent.
++        references:
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++    - id: SCN-REQ-6.4-02
++      name: Reload the latest note after a conflicting edit
++      steps:
++      - id: STEP-REQ-6.4-02-01
++        Given: |-
++          Open the same active note in editors A and B.
++        When: |-
++          Enter different bodies in A and B, close B, then close A. Choose Keep editing and inspect the unsaved input. Submit again and choose Reload latest.
++        Then: |-
++          A's unsaved body is retained when returning from the conflict to the editor. Reload latest keeps the editor open with B's body; the saved note still has B's body after closing and reload.
++        references:
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++    - id: SCN-REQ-6.4-03
++      name: Explicitly overwrite only conflicting note fields
++      steps:
++      - id: STEP-REQ-6.4-03-01
++        Given: |-
++          Open the same active note in editors A and B.
++        When: |-
++          Change the body in A. Change both title and body in B, close B, then close A. Choose Overwrite and reload.
++        Then: |-
++          The conflict does not silently publish A's body. Explicit overwrite saves A's body, preserves B's new title, and leaves exactly one note.
++        references:
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++    - id: SCN-REQ-6.4-04
++      name: Reject a stale save after another tab deletes the note
++      steps:
++      - id: STEP-REQ-6.4-04-01
++        Given: |-
++          Open a note in tab A and load the same saved note in tab B.
++        When: |-
++          Edit its body without closing in A. Delete the note in B, then click Close in A and inspect the refusal. Discard changes and reload both collections.
++        Then: |-
++          A receives the deletion alert and retains its unsaved input until discard. Notes does not contain the note; Trash contains exactly one note with the original body.
++        references:
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-2.4)
++    children: []
+diff --git a/arc-bench/keep/tests/REQ-2.10.spec.ts b/arc-bench/keep/tests/REQ-2.10.spec.ts
+new file mode 100644
+index 0000000..30c7c31
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-2.10.spec.ts
+@@ -0,0 +1,82 @@
++// requirement: REQ-2.10
++import { test, expect, action, note, section, openHome, navigate, createNote, createLabel, deleteNote,
++  archiveNote, expectNote, expectNoteInCollection, expectVisibleText } from './helpers';
++import { identity } from './fixtures/data';
++import { expectLightGreenSurface } from './visual';
++
++test('REQ-2.10: Restore an active note with its saved attributes', async ({ page }, info) => {
++  await openHome(page);
++  const title = identity(info, 'Restore pinned note');
++  const other = identity(info, 'Keep in Trash');
++  const label = identity(info, 'Restore label');
++  await createLabel(page, label);
++  await createNote(page, title, 'Restore all saved attributes', { pinned: true, green: true, labels: [label] });
++  await createNote(page, other, 'Other deleted content');
++  await deleteNote(page, title);
++  await deleteNote(page, other);
++  await navigate(page, 'Trash');
++  await expectNoteInCollection(page, 'Deleted notes', title, 'Restore all saved attributes');
++  await expectNoteInCollection(page, 'Deleted notes', other, 'Other deleted content');
++  await note(page, title).hover();
++  await action(note(page, title), `Restore ${title}`).click();
++  await expect(note(page, title)).toBeHidden();
++  await expectNoteInCollection(page, 'Deleted notes', other, 'Other deleted content');
++  await navigate(page, 'Notes');
++  await page.reload();
++  await expectNoteInCollection(page, 'Pinned notes', title, 'Restore all saved attributes');
++  await expect(section(page, 'Other notes').getByRole('region', { name: title, exact: true })).toHaveCount(0);
++  await expectVisibleText(note(page, title), label);
++  await note(page, title).hover();
++  await expect(action(note(page, title), `Unpin ${title}`)).toHaveAttribute('aria-pressed', 'true');
++  await expect(action(note(page, title), `Background color ${title}: Light green`)).toBeVisible();
++  await expectLightGreenSurface(note(page, title));
++  await navigate(page, label);
++  await expectNote(page, title, 'Restore all saved attributes');
++  await expect(note(page, other)).toBeHidden();
++  await navigate(page, 'Archived');
++  await expect(section(page, 'Archived notes')).toHaveCount(1);
++  await expect(note(page, title)).toBeHidden();
++  await navigate(page, 'Trash');
++  await expect(section(page, 'Deleted notes')).toHaveCount(1);
++  await expect(note(page, title)).toBeHidden();
++  await expectNoteInCollection(page, 'Deleted notes', other, 'Other deleted content');
++});
++
++test('REQ-2.10: Restore a deleted archived note to Archived', async ({ page }, info) => {
++  await openHome(page);
++  const title = identity(info, 'Restore archived note');
++  const active = identity(info, 'Active restore control');
++  const label = identity(info, 'Archived restore label');
++  await createLabel(page, label);
++  await createNote(page, title, 'Return to the archived collection', { labels: [label] });
++  await createNote(page, active, 'Keep this active note');
++  await archiveNote(page, title);
++  await navigate(page, 'Archived');
++  await expectNoteInCollection(page, 'Archived notes', title, 'Return to the archived collection');
++  await deleteNote(page, title);
++  await navigate(page, 'Trash');
++  await expectNoteInCollection(page, 'Deleted notes', title, 'Return to the archived collection');
++  await note(page, title).hover();
++  await action(note(page, title), `Restore ${title}`).click();
++  await expect(note(page, title)).toBeHidden();
++  await navigate(page, 'Archived');
++  await page.reload();
++  await expectNoteInCollection(page, 'Archived notes', title, 'Return to the archived collection');
++  await expectVisibleText(note(page, title), label);
++  await expect(note(page, active)).toBeHidden();
++  await navigate(page, label);
++  await expect(note(page, title)).toBeHidden();
++  await navigate(page, 'Notes');
++  await expect(note(page, title)).toBeHidden();
++  await expectNote(page, active, 'Keep this active note');
++  await navigate(page, 'Archived');
++  await note(page, title).hover();
++  await action(note(page, title), `Unarchive ${title}`).click();
++  await navigate(page, label);
++  await expectNote(page, title, 'Return to the archived collection');
++  await expectVisibleText(note(page, title), label);
++  await expect(note(page, active)).toBeHidden();
++  await navigate(page, 'Trash');
++  await expect(section(page, 'Deleted notes')).toHaveCount(1);
++  await expect(note(page, title)).toBeHidden();
++});
+diff --git a/arc-bench/keep/tests/REQ-2.11.spec.ts b/arc-bench/keep/tests/REQ-2.11.spec.ts
+new file mode 100644
+index 0000000..81847c3
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-2.11.spec.ts
+@@ -0,0 +1,71 @@
++// requirement: REQ-2.11
++import { test, expect, action, note, section, openHome, navigate, createNote, deleteNote, archiveNote,
++  expectNote, expectNoteInCollection } from './helpers';
++import { identity } from './fixtures/data';
++
++test('REQ-2.11: Permanently delete only the selected trashed note', async ({ page }, info) => {
++  await openHome(page);
++  const target = identity(info, 'Delete forever target');
++  const other = identity(info, 'Keep deleted sibling');
++  const active = identity(info, 'Keep active sibling');
++  const archived = identity(info, 'Keep archived sibling');
++  await createNote(page, target, 'Remove this content permanently');
++  await createNote(page, other, 'Keep other deleted content');
++  await createNote(page, active, 'Keep active content');
++  await createNote(page, archived, 'Keep archived content');
++  await archiveNote(page, archived);
++  await deleteNote(page, target);
++  await deleteNote(page, other);
++  await navigate(page, 'Trash');
++  await expectNoteInCollection(page, 'Deleted notes', target, 'Remove this content permanently');
++  await note(page, target).hover();
++  await action(note(page, target), `Delete forever ${target}`).click();
++  const dialog = page.getByRole('dialog', { name: 'Delete note forever', exact: true });
++  await expect(dialog).toBeVisible();
++  await expect(action(dialog, 'Cancel')).toBeVisible();
++  await action(dialog, 'Delete forever').click();
++  await expect(dialog).toBeHidden();
++  await expect(note(page, target)).toBeHidden();
++  await expectNoteInCollection(page, 'Deleted notes', other, 'Keep other deleted content');
++  await page.reload();
++  await expect(note(page, target)).toBeHidden();
++  await expectNoteInCollection(page, 'Deleted notes', other, 'Keep other deleted content');
++  await note(page, other).hover();
++  await expect(action(note(page, other), `Restore ${other}`)).toBeVisible();
++  await navigate(page, 'Notes');
++  await expectNote(page, active, 'Keep active content');
++  await expect(note(page, target)).toBeHidden();
++  await expect(note(page, archived)).toBeHidden();
++  await navigate(page, 'Archived');
++  await expectNoteInCollection(page, 'Archived notes', archived, 'Keep archived content');
++  await expect(note(page, target)).toBeHidden();
++  await expect(note(page, active)).toBeHidden();
++});
++
++test('REQ-2.11: Cancel permanent deletion and restore the note', async ({ page }, info) => {
++  await openHome(page);
++  const title = identity(info, 'Cancel permanent deletion');
++  await createNote(page, title, 'Canceled deletion retains this content');
++  await deleteNote(page, title);
++  await navigate(page, 'Trash');
++  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
++  await note(page, title).hover();
++  await action(note(page, title), `Delete forever ${title}`).click();
++  const dialog = page.getByRole('dialog', { name: 'Delete note forever', exact: true });
++  await expect(dialog).toBeVisible();
++  await expect(action(dialog, 'Delete forever')).toBeVisible();
++  await action(dialog, 'Cancel').click();
++  await expect(dialog).toBeHidden();
++  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
++  await page.reload();
++  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
++  await note(page, title).hover();
++  await action(note(page, title), `Restore ${title}`).click();
++  await expect(note(page, title)).toBeHidden();
++  await navigate(page, 'Notes');
++  await page.reload();
++  await expectNote(page, title, 'Canceled deletion retains this content');
++  await navigate(page, 'Trash');
++  await expect(section(page, 'Deleted notes')).toHaveCount(1);
++  await expect(note(page, title)).toBeHidden();
++});
+diff --git a/arc-bench/keep/tests/REQ-2.3.spec.ts b/arc-bench/keep/tests/REQ-2.3.spec.ts
+index 262e933..e951f6a 100644
+--- a/arc-bench/keep/tests/REQ-2.3.spec.ts
++++ b/arc-bench/keep/tests/REQ-2.3.spec.ts
+@@ -1,5 +1,6 @@
+ // requirement: REQ-2.3
+-import { test, expect, action, note, editor, openHome, createNote, expectNote } from './helpers';
++import { test, expect, action, note, editor, section, openHome, navigate, createNote, createLabel,
++  expectNote, expectNoteInCollection, expectVisibleText } from './helpers';
+ import { identity } from './fixtures/data';
+ 
+ test('REQ-2.3: Save an edited note', async ({ page }, info) => {
+@@ -17,3 +18,42 @@ test('REQ-2.3: Save an edited note', async ({ page }, info) => {
+   await expectNote(page, title, 'Updated editable content');
+   await expect(note(page, title).getByText('Initial editable content', { exact: true }).filter({ visible: true })).toHaveCount(0);
  });
 +
-+test("REQ-9.1: Edit updates recently updated page", async ({ page }, testInfo) => {
-+  const id = identity(testInfo);
-+  await enter(page);
-+  const book = await createBook(page, id, 'Book 9.1.2');
-+  const original = await createPage(page, id, book, 'Page 9.1.2', 'Reading content for Page 9.1.2.');
-+  await openBook(page, book);
-+  await button(region(page, 'Page list'), original).click();
-+  await button(page, 'Edit').click();
-+  const updated = named(id, 'Page Updated 9.1.2');
-+  await page.getByRole('textbox', { name: 'Page title', exact: true }).fill(updated);
-+  await page.getByRole('textbox', { name: 'Write your page content here...', exact: true }).fill('Updated content for Page 9.1.2.');
-+  await button(page, 'Save Page').click();
-+  await home(page);
-+  const recent = region(page, 'Recently Updated Pages');
-+  await expect(entry(recent, updated)).toHaveCount(1);
-+  expect(await records(recent).count()).toBeLessThanOrEqual(5);
-+  await expectAbsentEntry(recent, original);
-+  await entry(recent, updated).click();
-+  await heading(page, updated);
-+  await text(page, 'Updated content for Page 9.1.2.');
++test('REQ-2.3: Rename a note without losing its attributes', async ({ page }, info) => {
++  await openHome(page);
++  const original = identity(info, 'Original project title');
++  const renamed = identity(info, 'Renamed project title');
++  const other = identity(info, 'Rename control');
++  const label = identity(info, 'Project label');
++  await createLabel(page, label);
++  await createNote(page, original, 'Original project content', { pinned: true, labels: [label] });
++  await createNote(page, other, 'Unchanged control content');
++  await action(note(page, original), `Open ${original}`).click();
++  await expect(editor(page).getByRole('textbox', { name: 'Title', exact: true })).toHaveValue(original);
++  await expect(editor(page).getByRole('textbox', { name: 'Content', exact: true })).toHaveValue('Original project content');
++  await editor(page).getByRole('textbox', { name: 'Title', exact: true }).fill(renamed);
++  await editor(page).getByRole('textbox', { name: 'Content', exact: true }).fill('Renamed project content');
++  await action(editor(page), 'Close').click();
++  await expect(editor(page)).toBeHidden();
 +  await page.reload();
-+  await home(page);
-+  await expect(entry(region(page, 'Recently Updated Pages'), updated)).toHaveCount(1);
++  await expect(note(page, original)).toHaveCount(0);
++  await expectNoteInCollection(page, 'Pinned notes', renamed, 'Renamed project content');
++  await expect(section(page, 'Other notes').getByRole('region', { name: renamed, exact: true })).toHaveCount(0);
++  await expect(note(page, renamed).getByText('Original project content', { exact: true }).filter({ visible: true })).toHaveCount(0);
++  await expectVisibleText(note(page, renamed), label);
++  await note(page, renamed).hover();
++  await expect(action(note(page, renamed), `Unpin ${renamed}`)).toHaveAttribute('aria-pressed', 'true');
++  await expectNote(page, other, 'Unchanged control content');
++  await navigate(page, label);
++  await expectNote(page, renamed, 'Renamed project content');
++  await expect(note(page, original)).toHaveCount(0);
++  await expect(note(page, other)).toBeHidden();
++  await action(note(page, renamed), `Open ${renamed}`).click();
++  await expect(editor(page).getByRole('textbox', { name: 'Title', exact: true })).toHaveValue(renamed);
++  await expect(editor(page).getByRole('textbox', { name: 'Content', exact: true })).toHaveValue('Renamed project content');
++  await action(editor(page), 'Close').click();
++  await expect(editor(page)).toBeHidden();
++  await navigate(page, 'Notes');
++  await expectNote(page, renamed, 'Renamed project content');
++  await expect(note(page, original)).toHaveCount(0);
 +});
-diff --git a/arc-bench/bookstack/tests/helpers.ts b/arc-bench/bookstack/tests/helpers.ts
-index f52c035..a72c40b 100644
---- a/arc-bench/bookstack/tests/helpers.ts
-+++ b/arc-bench/bookstack/tests/helpers.ts
-@@ -1,14 +1,25 @@
- import { formField } from './support/public-controls';
--import { expect, type Locator, type Page, type TestInfo } from '@playwright/test';
-+import { expect, type Browser, type Locator, type Page, type TestInfo } from '@playwright/test';
- import { randomBytes } from 'node:crypto';
+diff --git a/arc-bench/keep/tests/REQ-3.3.spec.ts b/arc-bench/keep/tests/REQ-3.3.spec.ts
+index 633db1f..c8d48c7 100644
+--- a/arc-bench/keep/tests/REQ-3.3.spec.ts
++++ b/arc-bench/keep/tests/REQ-3.3.spec.ts
+@@ -1,5 +1,6 @@
+ // requirement: REQ-3.3
+-import { test, expect, action, note, openHome, navigate, createNote, createLabel, labelManager, expectNote, expectVisibleText } from './helpers';
++import { test, expect, action, note, openHome, navigate, createNote, createLabel, labelManager, expectNote,
++  expectNoteInCollection, expectVisibleText, archiveNote, deleteNote } from './helpers';
+ import { identity } from './fixtures/data';
  
- const runId = randomBytes(8).toString('hex');
+ test('REQ-3.3: Rename a label and retain membership', async ({ page }, info) => {
+@@ -23,6 +24,103 @@ test('REQ-3.3: Rename a label and retain membership', async ({ page }, info) =>
+   await expectNote(page, title, 'Retain label membership');
+ });
  
--export const ACCOUNT = {
-+export interface Account {
-+  nickname: string;
-+  email: string;
-+  password: string;
++test('REQ-3.3: Rename a label across active archived and deleted notes', async ({ page }, info) => {
++  await openHome(page);
++  const original = identity(info, 'Lifecycle label');
++  const renamed = identity(info, 'Renamed lifecycle label');
++  const active = identity(info, 'Labeled active note');
++  const archived = identity(info, 'Labeled archived note');
++  const deleted = identity(info, 'Labeled deleted note');
++  await createLabel(page, original);
++  for (const title of [active, archived, deleted]) await createNote(page, title, 'Retain this membership', { labels: [original] });
++  await archiveNote(page, archived);
++  await deleteNote(page, deleted);
++  const dialog = await labelManager(page);
++  await dialog.getByRole('textbox', { name: `Label name ${original}`, exact: true }).fill(renamed);
++  await action(dialog, `Save label ${original}`).click();
++  await action(dialog, 'Done').click();
++  await expect(dialog).toBeHidden();
++  await page.reload();
++  const sidebar = page.getByRole('navigation', { name: 'Sidebar', exact: true });
++  await expect(action(sidebar, original)).toHaveCount(0);
++  await expect(action(sidebar, renamed)).toHaveCount(1);
++  for (const [view, collection, title] of [['Notes', 'Other notes', active], ['Archived', 'Archived notes', archived],
++    ['Trash', 'Deleted notes', deleted]]) {
++    await navigate(page, view);
++    await expectNoteInCollection(page, collection, title, 'Retain this membership');
++    await expectVisibleText(note(page, title), renamed);
++    await expect(note(page, title).getByText(original, { exact: true }).filter({ visible: true })).toHaveCount(0);
++    for (const absent of [active, archived, deleted].filter(value => value !== title)) await expect(note(page, absent)).toBeHidden();
++  }
++  await note(page, deleted).hover();
++  await action(note(page, deleted), `Restore ${deleted}`).click();
++  await expect(note(page, deleted)).toBeHidden();
++  await navigate(page, renamed);
++  await expectNote(page, active, 'Retain this membership');
++  await expectNote(page, deleted, 'Retain this membership');
++  await expectVisibleText(note(page, deleted), renamed);
++  await expect(note(page, archived)).toBeHidden();
++});
++
++test('REQ-3.3: Delete a label across active archived and deleted notes', async ({ page }, info) => {
++  await openHome(page);
++  const removed = identity(info, 'Remove lifecycle label');
++  const retained = identity(info, 'Keep lifecycle label');
++  const active = identity(info, 'Active label removal');
++  const archived = identity(info, 'Archived label removal');
++  const deleted = identity(info, 'Deleted label removal');
++  await createLabel(page, removed);
++  await createLabel(page, retained);
++  for (const title of [active, archived, deleted]) await createNote(page, title, 'Preserve this content', { labels: [removed, retained] });
++  await archiveNote(page, archived);
++  await deleteNote(page, deleted);
++  const dialog = await labelManager(page);
++  await action(dialog, `Delete label ${removed}`).click();
++  await action(dialog, 'Done').click();
++  await expect(dialog).toBeHidden();
++  await page.reload();
++  const sidebar = page.getByRole('navigation', { name: 'Sidebar', exact: true });
++  await expect(action(sidebar, removed)).toHaveCount(0);
++  await expect(action(sidebar, retained)).toHaveCount(1);
++  for (const [view, collection, title] of [['Notes', 'Other notes', active], ['Archived', 'Archived notes', archived],
++    ['Trash', 'Deleted notes', deleted]]) {
++    await navigate(page, view);
++    await expectNoteInCollection(page, collection, title, 'Preserve this content');
++    await expect(note(page, title).getByText(removed, { exact: true }).filter({ visible: true })).toHaveCount(0);
++    await expectVisibleText(note(page, title), retained);
++    for (const absent of [active, archived, deleted].filter(value => value !== title)) await expect(note(page, absent)).toBeHidden();
++  }
++  await note(page, deleted).hover();
++  await action(note(page, deleted), `Restore ${deleted}`).click();
++  await expect(note(page, deleted)).toBeHidden();
++  await navigate(page, 'Archived');
++  await note(page, archived).hover();
++  await action(note(page, archived), `Unarchive ${archived}`).click();
++  await navigate(page, retained);
++  for (const title of [active, archived, deleted]) {
++    await expectNote(page, title, 'Preserve this content');
++    await expectVisibleText(note(page, title), retained);
++    await expect(note(page, title).getByText(removed, { exact: true }).filter({ visible: true })).toHaveCount(0);
++  }
++  await action(note(page, deleted), `Open ${deleted}`).click();
++  const edit = page.getByRole('dialog', { name: 'Note editor', exact: true });
++  await action(edit, 'Change labels').click();
++  const chooser = page.getByRole('dialog', { name: 'Note labels', exact: true });
++  await expect(chooser).toBeVisible();
++  await expect(chooser.getByRole('checkbox', { name: removed, exact: true })).toHaveCount(0);
++  await expect(chooser.getByRole('checkbox', { name: retained, exact: true })).toBeChecked();
++  await action(chooser, 'Done').click();
++  await expect(chooser).toBeHidden();
++  await action(edit, 'Close').click();
++  await expect(edit).toBeHidden();
++  await page.reload();
++  await navigate(page, 'Notes');
++  for (const title of [active, archived, deleted]) {
++    await expectNote(page, title, 'Preserve this content');
++    await expect(note(page, title).getByText(removed, { exact: true }).filter({ visible: true })).toHaveCount(0);
++  }
++});
++
+ test('REQ-3.3: Delete a label without deleting its note', async ({ page }, info) => {
+   await openHome(page);
+   const label = identity(info, 'Disposable label');
+diff --git a/arc-bench/keep/tests/REQ-4.1.spec.ts b/arc-bench/keep/tests/REQ-4.1.spec.ts
+index 4e7b68e..f3d45f5 100644
+--- a/arc-bench/keep/tests/REQ-4.1.spec.ts
++++ b/arc-bench/keep/tests/REQ-4.1.spec.ts
+@@ -1,5 +1,6 @@
+ // requirement: REQ-4.1
+-import { test, expect, action, note, section, openHome, navigate, createNote, expectNote, expectSearchHighlights } from './helpers';
++import { test, expect, action, note, section, openHome, navigate, createNote, expectNote, expectSearchHighlights,
++  archiveNote, deleteNote, expectNoteInCollection } from './helpers';
+ import { identity } from './fixtures/data';
+ 
+ test('REQ-4.1: Search title and content with highlights', async ({ page }, info) => {
+@@ -26,6 +27,46 @@ test('REQ-4.1: Search title and content with highlights', async ({ page }, info)
+   await expectNote(page, other, 'Calm blue waves');
+ });
+ 
++test('REQ-4.1: Exclude archived and deleted matches from search', async ({ page }, info) => {
++  await openHome(page);
++  const active = identity(info, 'Visible search note');
++  const archived = identity(info, 'Archived search note');
++  const deleted = identity(info, 'Deleted search note');
++  const unrelated = identity(info, 'Unrelated search control');
++  for (const title of [active, archived, deleted]) await createNote(page, title, 'Lifecyclekeyword searchable content');
++  await createNote(page, unrelated, 'Unrelated content');
++  await archiveNote(page, archived);
++  await deleteNote(page, deleted);
++  await navigate(page, 'Notes');
++  await page.reload();
++  const search = page.getByRole('searchbox', { name: 'Search', exact: true });
++  await search.fill('LIFECYCLEKEYWORD');
++  await expectNote(page, active);
++  await expectSearchHighlights(note(page, active), 'LIFECYCLEKEYWORD');
++  for (const title of [archived, deleted, unrelated]) await expect(note(page, title)).toBeHidden();
++  await search.fill('');
++  await navigate(page, 'Notes');
++  await expectNote(page, active, 'Lifecyclekeyword searchable content');
++  await expectNote(page, unrelated, 'Unrelated content');
++  for (const title of [archived, deleted]) await expect(note(page, title)).toBeHidden();
++  await navigate(page, 'Archived');
++  await expectNoteInCollection(page, 'Archived notes', archived, 'Lifecyclekeyword searchable content');
++  await note(page, archived).hover();
++  await action(note(page, archived), `Unarchive ${archived}`).click();
++  await navigate(page, 'Trash');
++  await expectNoteInCollection(page, 'Deleted notes', deleted, 'Lifecyclekeyword searchable content');
++  await note(page, deleted).hover();
++  await action(note(page, deleted), `Restore ${deleted}`).click();
++  await navigate(page, 'Notes');
++  await page.reload();
++  await search.fill('LIFECYCLEKEYWORD');
++  for (const title of [active, archived, deleted]) {
++    await expectNote(page, title);
++    await expectSearchHighlights(note(page, title), 'LIFECYCLEKEYWORD');
++  }
++  await expect(note(page, unrelated)).toBeHidden();
++});
++
+ test('REQ-4.1: Choose a suggested label filter', async ({ page }, info) => {
+   await openHome(page);
+   const matching = identity(info, 'Call dentist existing');
+diff --git a/arc-bench/keep/tests/REQ-6.1.spec.ts b/arc-bench/keep/tests/REQ-6.1.spec.ts
+new file mode 100644
+index 0000000..613876a
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-6.1.spec.ts
+@@ -0,0 +1,112 @@
++// requirement: REQ-6.1
++import type { Page } from '@playwright/test';
++import { test, expect, action, beginNote, editor, chooseLabels, openHome, createNote, createLabel,
++  note, section, navigate, expectNote, expectNotice } from './helpers';
++import { identity } from './fixtures/data';
++import { closeNote, field, noteWithBody, openNote, restoreNote, unarchiveNote, expectLabel } from './support/note-identity';
++import { expectLightGreenSurface } from './visual';
++
++const firstBody = 'Alpha body for the pinned note';
++const secondBody = 'Beta body for the regular note';
++const search = (page: Page) => page.getByRole('searchbox', { name: 'Search', exact: true });
++
++async function addTwin(page: Page, title: string, label?: string) {
++  await beginNote(page);
++  await field(page, 'Title').fill(title);
++  await field(page, 'Content').fill(secondBody);
++  if (label) {
++    await action(editor(page), 'Change labels').click();
++    await chooseLabels(page, [label]);
++  }
++  await closeNote(page);
++  await expect(note(page, title)).toHaveCount(2);
 +}
 +
-+export const ACCOUNT: Account = {
-   nickname: 'BookStack User',
-   email: 'bookstack_user@example.com',
-   password: 'Password123!',
- };
-+export const REVIEWER_ACCOUNT: Account = {
-+  nickname: 'BookStack Reviewer',
-+  email: 'bookstack_reviewer@example.com',
-+  password: 'Password123!',
++async function expectPins(page: Page, pinned: string, regular: string) {
++  await expect(noteWithBody(page, pinned, firstBody)).toBeVisible();
++  await expect(noteWithBody(page, regular, secondBody)).toBeVisible();
++  const pinnedCards = section(page, 'Pinned notes').getByRole('region', { name: pinned, exact: true });
++  const regularCards = section(page, 'Other notes').getByRole('region', { name: regular, exact: true });
++  await expect(pinnedCards).toHaveCount(1);
++  await expect(pinnedCards).toContainText(firstBody);
++  await expect(regularCards).toHaveCount(1);
++  await expect(regularCards).toContainText(secondBody);
++}
++
++test('REQ-6.1: Show both same-title notes independently in search and layouts', async ({ page }, info) => {
++  const title = identity(info, 'Twin memo');
++  await openHome(page);
++  await createNote(page, title, firstBody, { pinned: true });
++  await addTwin(page, title);
++  await expectPins(page, title, title);
++  await search(page).fill('Twin memo');
++  await expect(note(page, title)).toHaveCount(2);
++  await expect(noteWithBody(page, title, firstBody)).toBeVisible();
++  await expect(noteWithBody(page, title, secondBody)).toBeVisible();
++  await search(page).fill('');
++  await navigate(page, 'Notes');
++  await action(page, 'List view').click();
++  await expect(section(page, 'Notes')).toHaveAccessibleDescription(/List view/i);
++  await expectPins(page, title, title);
++  await page.reload();
++  await expect(note(page, title)).toHaveCount(2);
++  await expectPins(page, title, title);
++});
++
++test('REQ-6.1: Edit and restore the correct same-title note across collections', async ({ page }, info) => {
++  const title = identity(info, 'Twin memo');
++  const renamed = identity(info, 'Renamed first memo');
++  const firstLabel = identity(info, 'First twin label');
++  const secondLabel = identity(info, 'Second twin label');
++  await openHome(page);
++  await createLabel(page, firstLabel);
++  await createLabel(page, secondLabel);
++  await createNote(page, title, firstBody, { pinned: true, green: true, labels: [firstLabel] });
++  await addTwin(page, title, secondLabel);
++  await navigate(page, firstLabel);
++  await expect(note(page, title)).toHaveCount(1);
++  await openNote(page, title, firstBody);
++  await field(page, 'Title').fill(renamed);
++  await closeNote(page);
++  await expectNote(page, renamed, firstBody);
++  await expect(note(page, title)).toHaveCount(0);
++  await navigate(page, 'Notes');
++  await expectPins(page, renamed, title);
++  const second = noteWithBody(page, title, secondBody);
++  await second.hover();
++  await action(second, `Archive ${title}`).click();
++  await expectNotice(page, 'Note archived');
++  await expect(second).toHaveCount(0);
++  await expectNote(page, renamed, firstBody);
++  await navigate(page, 'Archived');
++  const archived = section(page, 'Archived notes').getByRole('region', { name: title, exact: true });
++  await expect(archived).toHaveCount(1);
++  await expect(archived).toContainText(secondBody);
++  await expect(note(page, renamed)).toHaveCount(0);
++  await archived.hover();
++  await action(archived, `More options ${title}`).click();
++  await page.getByRole('menuitem', { name: 'Delete Note', exact: true }).click();
++  await expect(archived).toHaveCount(0);
++  await restoreNote(page, title, secondBody);
++  await expect(note(page, renamed)).toHaveCount(0);
++  await unarchiveNote(page, title, secondBody);
++  await navigate(page, 'Notes');
++  await search(page).fill('Twin memo');
++  await expectNote(page, title, secondBody);
++  await expect(note(page, renamed)).toHaveCount(0);
++  await search(page).fill('');
++  await navigate(page, 'Notes');
++  await action(page, 'List view').click();
++  await expect(section(page, 'Notes')).toHaveAccessibleDescription(/List view/i);
++  await page.reload();
++  await expectNote(page, renamed, firstBody);
++  await expectNote(page, title, secondBody);
++  await expectPins(page, renamed, title);
++  await expectLabel(note(page, renamed), firstLabel, true);
++  await expectLabel(note(page, renamed), secondLabel, false);
++  await expectLabel(second, secondLabel, true);
++  await expectLabel(second, firstLabel, false);
++  await expectLightGreenSurface(note(page, renamed));
++  await second.hover();
++  await expect(action(second, `Background color ${title}`)).toBeVisible();
++});
+diff --git a/arc-bench/keep/tests/REQ-6.2.spec.ts b/arc-bench/keep/tests/REQ-6.2.spec.ts
+new file mode 100644
+index 0000000..183e61c
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-6.2.spec.ts
+@@ -0,0 +1,63 @@
++// requirement: REQ-6.2
++import { test, expect, action, openHome, createLabel, createNote, archiveNote, deleteNote,
++  labelManager, navigate, note, expectNote, assignLabels } from './helpers';
++import { identity } from './fixtures/data';
++import { closeNote, field, openNote, restoreNote, unarchiveNote, expectLabel } from './support/note-identity';
++
++test('REQ-6.2: Recreate a label without inheriting old memberships', async ({ page, context }, info) => {
++  const project = identity(info, 'Project');
++  const retained = identity(info, 'Retained');
++  const active = identity(info, 'Active project note');
++  const archived = identity(info, 'Archived project note');
++  const deleted = identity(info, 'Deleted project note');
++  const bodies = ['Active body', 'Archived body', 'Deleted body'];
++  const titles = [active, archived, deleted];
++  await openHome(page);
++  await createLabel(page, project);
++  await createLabel(page, retained);
++  for (const [i, title] of titles.entries()) {
++    await createNote(page, title, bodies[i], { labels: [project, retained] });
++    await expectLabel(note(page, title), project, true);
++    await expectLabel(note(page, title), retained, true);
++  }
++  await archiveNote(page, archived);
++  await deleteNote(page, deleted);
++  await openNote(page, active, bodies[0]);
++  const updated = 'Text saved by the stale editor';
++  await field(page, 'Content').fill(updated);
++
++  const other = await context.newPage();
++  try {
++    await openHome(other);
++    await expectNote(other, active, bodies[0]);
++    const dialog = await labelManager(other);
++    await action(dialog, `Delete label ${project}`).click();
++    await expect(dialog.getByRole('textbox', { name: `Label name ${project}`, exact: true })).toHaveCount(0);
++    await action(dialog, 'Done').click();
++    await createLabel(other, project);
++    await navigate(other, project);
++    for (const title of titles) await expect(note(other, title)).toHaveCount(0);
++    await closeNote(page);
++    await page.reload();
++    await expectNote(page, active, updated);
++    await expectLabel(note(page, active), project, false);
++    await restoreNote(page, deleted, bodies[2]);
++    await unarchiveNote(page, archived, bodies[1]);
++    await navigate(page, 'Notes');
++    for (const [i, title] of titles.entries()) {
++      await expectNote(page, title, i === 0 ? updated : bodies[i]);
++      await expectLabel(note(page, title), retained, true);
++      await expectLabel(note(page, title), project, false);
++    }
++    await assignLabels(page, deleted, [project]);
++    await navigate(page, project);
++    await page.reload();
++    await expectNote(page, deleted, bodies[2]);
++    await expectLabel(note(page, deleted), retained, true);
++    await expectLabel(note(page, deleted), project, true);
++    await expect(note(page, active)).toHaveCount(0);
++    await expect(note(page, archived)).toHaveCount(0);
++  } finally {
++    await other.close();
++  }
++});
+diff --git a/arc-bench/keep/tests/REQ-6.3.spec.ts b/arc-bench/keep/tests/REQ-6.3.spec.ts
+new file mode 100644
+index 0000000..7de94ac
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-6.3.spec.ts
+@@ -0,0 +1,42 @@
++// requirement: REQ-6.3
++import { test, expect, action, openHome, createLabel, createNote, labelManager, deleteNote, note, notice,
++  expectNote, expectNotice, navigate, section } from './helpers';
++import { identity } from './fixtures/data';
++import { closeNote, field, openNote, expectLabel } from './support/note-identity';
++
++test('REQ-6.3: Undo a deletion after a label rename and another note edit', async ({ page }, info) => {
++  const label = identity(info, 'Undo original label');
++  const renamed = identity(info, 'Undo renamed label');
++  const pinned = identity(info, 'Undo pinned note');
++  const other = identity(info, 'Independent note');
++  await openHome(page);
++  await createLabel(page, label);
++  await createNote(page, pinned, 'Original pinned body', { pinned: true, labels: [label] });
++  await createNote(page, other, 'Original separate body');
++  await expect(section(page, 'Pinned notes').getByRole('region', { name: pinned, exact: true })).toHaveCount(1);
++  await deleteNote(page, pinned);
++  const undo = action(notice(page, 'Note deleted'), 'Undo');
++  await expect(undo).toBeVisible();
++  const dialog = await labelManager(page);
++  await dialog.getByRole('textbox', { name: `Label name ${label}`, exact: true }).fill(renamed);
++  await action(dialog, `Save label ${label}`).click();
++  await action(dialog, 'Done').click();
++  await openNote(page, other, 'Original separate body');
++  await field(page, 'Content').fill('Later separate body');
++  await closeNote(page);
++  await expectNote(page, other, 'Later separate body');
++  await expect(note(page, pinned)).toHaveCount(0);
++  await undo.click();
++  await expectNotice(page, 'Action undone');
++  await page.reload();
++  await expectNote(page, pinned, 'Original pinned body');
++  await expect(section(page, 'Pinned notes').getByRole('region', { name: pinned, exact: true })).toHaveCount(1);
++  await expectLabel(note(page, pinned), renamed, true);
++  await expectLabel(note(page, pinned), label, false);
++  const sidebar = page.getByRole('navigation', { name: 'Sidebar', exact: true });
++  await expect(action(sidebar, renamed)).toBeVisible();
++  await expect(action(sidebar, label)).toHaveCount(0);
++  await expectNote(page, other, 'Later separate body');
++  await navigate(page, 'Trash');
++  await expect(note(page, pinned)).toHaveCount(0);
++});
+diff --git a/arc-bench/keep/tests/REQ-6.4.spec.ts b/arc-bench/keep/tests/REQ-6.4.spec.ts
+new file mode 100644
+index 0000000..767de3e
+--- /dev/null
++++ b/arc-bench/keep/tests/REQ-6.4.spec.ts
+@@ -0,0 +1,99 @@
++// requirement: REQ-6.4
++import type { Page } from '@playwright/test';
++import { test, expect, action, editor, openHome, createNote, note, expectNote, deleteNote, navigate,
++  expectNoteInCollection } from './helpers';
++import { identity } from './fixtures/data';
++import { closeNote, field, openNote } from './support/note-identity';
++
++const originalBody = 'Initially committed content';
++const otherBody = 'Body committed in tab B';
++const unsaved = 'Unsubmitted body in tab A';
++const conflict = (page: Page) => page.getByRole('dialog', { name: 'Note edit conflict', exact: true });
++
++async function openPair(page: Page, other: Page, title: string) {
++  await openHome(page);
++  await createNote(page, title, originalBody);
++  await openHome(other);
++  await openNote(page, title, originalBody);
++  await openNote(other, title, originalBody);
++}
++
++test('REQ-6.4: Merge independent title and content edits from two tabs', async ({ page, context }, info) => {
++  const title = identity(info, 'Merge note');
++  const renamed = identity(info, 'Title committed in tab A');
++  const other = await context.newPage();
++  await openPair(page, other, title);
++  await field(page, 'Title').fill(renamed);
++  await field(other, 'Content').fill(otherBody);
++  await closeNote(other);
++  await expectNote(other, title, otherBody);
++  await closeNote(page);
++  await page.reload();
++  await expectNote(page, renamed, otherBody);
++  await expect(note(page, title)).toHaveCount(0);
++});
++
++test('REQ-6.4: Reload the latest note after a conflicting edit', async ({ page, context }, info) => {
++  const title = identity(info, 'Conflicting note reload');
++  const other = await context.newPage();
++  await openPair(page, other, title);
++  await field(page, 'Content').fill(unsaved);
++  await field(other, 'Content').fill(otherBody);
++  await closeNote(other);
++  await expectNote(other, title, otherBody);
++  await action(editor(page), 'Close').click();
++  await expect(conflict(page)).toBeVisible();
++  await action(conflict(page), 'Keep editing').click();
++  await expect(conflict(page)).toBeHidden();
++  await expect(field(page, 'Content')).toHaveValue(unsaved);
++  await action(editor(page), 'Close').click();
++  await action(conflict(page), 'Reload latest').click();
++  await expect(conflict(page)).toBeHidden();
++  await expect(field(page, 'Content')).toHaveValue(otherBody);
++  await closeNote(page);
++  await page.reload();
++  await expectNote(page, title, otherBody);
++});
++
++test('REQ-6.4: Explicitly overwrite only conflicting note fields', async ({ page, context }, info) => {
++  const title = identity(info, 'Conflicting note overwrite');
++  const renamed = identity(info, 'Title committed in tab B');
++  const other = await context.newPage();
++  await openPair(page, other, title);
++  await field(page, 'Content').fill(unsaved);
++  await field(other, 'Title').fill(renamed);
++  await field(other, 'Content').fill(otherBody);
++  await closeNote(other);
++  await expectNote(other, renamed, otherBody);
++  await action(editor(page), 'Close').click();
++  await expect(conflict(page)).toBeVisible();
++  await other.reload();
++  await expectNote(other, renamed, otherBody);
++  await action(conflict(page), 'Overwrite').click();
++  await expect(conflict(page)).toBeHidden();
++  await page.reload();
++  await expectNote(page, renamed, unsaved);
++  await expect(note(page, title)).toHaveCount(0);
++});
++
++test('REQ-6.4: Reject a stale save after another tab deletes the note', async ({ page, context }, info) => {
++  const title = identity(info, 'Deleted during editing');
++  const other = await context.newPage();
++  await openHome(page);
++  await createNote(page, title, originalBody);
++  await openNote(page, title, originalBody);
++  await field(page, 'Content').fill(unsaved);
++  await openHome(other);
++  await expectNote(other, title, originalBody);
++  await deleteNote(other, title);
++  await action(editor(page), 'Close').click();
++  await expect(page.getByRole('alert', { name: 'Note deleted elsewhere', exact: true })).toBeVisible();
++  await expect(field(page, 'Content')).toHaveValue(unsaved);
++  await action(editor(page), 'Discard changes').click();
++  await expect(editor(page)).toBeHidden();
++  await page.reload();
++  await expect(note(page, title)).toHaveCount(0);
++  await navigate(page, 'Trash');
++  await page.reload();
++  await expectNoteInCollection(page, 'Deleted notes', title, originalBody);
++});
+diff --git a/arc-bench/keep/tests/helpers.ts b/arc-bench/keep/tests/helpers.ts
+index a1bfb83..6337302 100644
+--- a/arc-bench/keep/tests/helpers.ts
++++ b/arc-bench/keep/tests/helpers.ts
+@@ -7,14 +7,21 @@ export const note = (page: Page, title: string) =>
+ export const section = (page: Page, name: string) =>
+   page.getByRole('region', { name, exact: true });
+ export const editor = (page: Page) => page.getByRole('dialog', { name: 'Note editor', exact: true });
+-export const notice = (page: Page, name: string) => page.getByRole('status', { name, exact: true });
++/** Status identity comes from its exact visible message. */
++export const notice = (page: Page, message: string) => {
++  const status = page.getByRole('status');
++  const text = page.locator(`text=${JSON.stringify(message)}`).filter({ visible: true });
++  return status.and(text).or(status.filter({ has: text }));
 +};
- export const BOOTSTRAP_SHELF = 'Benchmark Bootstrap Shelf';
  
- // Literal scenario titles are unique in this package; normalize them to readable case ids.
-@@ -66,16 +77,24 @@ export async function expectKeyboardEntry(page: Page, target: Locator) {
-   }
-   await expect(target).toBeFocused();
+ /** Presence may have repeated visible copies; action and note identities stay unique. */
+ export async function expectVisibleText(scope: Page | Locator, value: string) {
+   await expect.poll(() => scope.getByText(value, { exact: true }).filter({ visible: true }).count()).toBeGreaterThan(0);
  }
--export async function login(page: Page, remember = false) {
-+export async function login(page: Page, remember = false, account: Account = ACCOUNT) {
-   await go(page, 'Login');
--  await page.getByRole('textbox', { name: 'Email', exact: true }).fill(ACCOUNT.email);
-+  await page.getByRole('textbox', { name: 'Email', exact: true }).fill(account.email);
-   await expect(formField(page, 'Password')).toHaveAttribute('type', 'password');
--  await formField(page, 'Password').fill(ACCOUNT.password);
-+  await formField(page, 'Password').fill(account.password);
-   if (remember) await page.getByRole('checkbox', { name: 'Remember Me', exact: true }).check();
-   await button(page, 'Login').click();
--  await text(page, ACCOUNT.nickname);
-+  await text(page, account.nickname);
-   await expect(region(page, 'My Recent Drafts')).toBeVisible();
+ export async function expectNotice(page: Page, name: string) {
+-  await expect.poll(() => notice(page, name).filter({ visible: true }).count()).toBeGreaterThan(0);
++  const notification = notice(page, name);
++  await expect(notification).toHaveCount(1);
++  await expect(notification).toBeVisible();
  }
+ export async function expectSearchHighlights(scope: Locator, keyword: string) {
+   const fragments = scope.getByRole('region', { name: `Highlight ${keyword}`, exact: true }).filter({ visible: true });
+diff --git a/arc-bench/keep/tests/support/note-identity.ts b/arc-bench/keep/tests/support/note-identity.ts
+new file mode 100644
+index 0000000..c2fbf85
+--- /dev/null
++++ b/arc-bench/keep/tests/support/note-identity.ts
+@@ -0,0 +1,45 @@
++import type { Locator, Page } from '@playwright/test';
++import { action, editor, expect, navigate, note, section } from '../helpers';
 +
-+export async function newContextFor(browser: Browser, baseURL: string, account?: Account) {
-+  const context = await browser.newContext({ baseURL });
-+  const page = await context.newPage();
-+  await page.goto('/');
-+  if (account) await login(page, false, account);
-+  return { context, page };
-+}
- export async function metadata(page: Page, name: string, description: string, tags: string) {
-   await page.getByRole('textbox', { name: 'Name', exact: true }).fill(name);
-   await page.getByRole('textbox', { name: 'Description', exact: true }).fill(description);
-@@ -148,3 +167,87 @@ export async function createPage(page: Page, id: string, book: string, base: str
-   await expect(opening).toBeVisible();
-   return name;
- }
++export const noteWithBody = (page: Page, title: string, body: string) =>
++  note(page, title).filter({ has: page.getByText(body, { exact: true }).filter({ visible: true }) });
 +
-+export async function createChapter(page: Page, id: string, book: string, base: string,
-+  description = 'Chapter created by corresponding prerequisite behavior.') {
-+  await openBook(page, book);
-+  await button(page, 'New Chapter').click();
-+  const name = named(id, base);
-+  await page.getByRole('textbox', { name: 'Name', exact: true }).fill(name);
-+  await page.getByRole('textbox', { name: 'Description', exact: true }).fill(description);
-+  await button(page, 'Save Chapter').click();
-+  await openBook(page, book);
-+  await expect(button(region(page, 'Chapter list'), name)).toHaveCount(1);
-+  return name;
++export const field = (page: Page, name: 'Title' | 'Content') =>
++  editor(page).getByRole('textbox', { name, exact: true });
++
++export async function openNote(page: Page, title: string, body: string) {
++  const card = noteWithBody(page, title, body);
++  await expect(card).toHaveCount(1);
++  await action(card, `Open ${title}`).click();
++  await expect(field(page, 'Title')).toHaveValue(title);
++  await expect(field(page, 'Content')).toHaveValue(body);
 +}
 +
-+export async function openChapter(page: Page, book: string, name: string) {
-+  await openBook(page, book);
-+  await button(region(page, 'Chapter list'), name).click();
-+  await heading(page, name);
++export async function closeNote(page: Page) {
++  await action(editor(page), 'Close').click();
++  await expect(editor(page)).toBeHidden();
 +}
 +
-+export async function createPageInChapter(page: Page, id: string, book: string, chapter: string,
-+  base: string, content: string) {
-+  await openChapter(page, book, chapter);
-+  await button(page, 'New Page').click();
-+  const name = named(id, base);
-+  await page.getByRole('textbox', { name: 'Page title', exact: true }).fill(name);
-+  await page.getByRole('textbox', { name: 'Write your page content here...', exact: true }).fill(content);
-+  await button(page, 'Save Page').click();
-+  await openBook(page, book);
-+  await expect(entry(region(page, 'Page list'), name)).toHaveCount(1);
-+  return name;
++export async function restoreNote(page: Page, title: string, body: string) {
++  await navigate(page, 'Trash');
++  const card = noteWithBody(page, title, body);
++  await expect(section(page, 'Deleted notes').getByRole('region', { name: title, exact: true })).toHaveCount(1);
++  await card.hover();
++  await action(card, `Restore ${title}`).click();
++  await expect(note(page, title)).toHaveCount(0);
 +}
 +
-+export async function openPage(page: Page, book: string, name: string) {
-+  await openBook(page, book);
-+  await entry(region(page, 'Page list'), name).click();
-+  await heading(page, name);
++export async function unarchiveNote(page: Page, title: string, body: string) {
++  await navigate(page, 'Archived');
++  const card = noteWithBody(page, title, body);
++  await expect(section(page, 'Archived notes').getByRole('region', { name: title, exact: true })).toHaveCount(1);
++  await card.hover();
++  await action(card, `Unarchive ${title}`).click();
++  await expect(note(page, title)).toHaveCount(0);
 +}
 +
-+export async function openPageInChapter(page: Page, book: string, chapter: string, name: string) {
-+  await openChapter(page, book, chapter);
-+  await entry(region(page, 'Page list'), name).click();
-+  await heading(page, name);
-+}
-+
-+export async function favorite(page: Page) {
-+  await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');
-+  await button(page, 'Favorite').click();
-+  await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');
-+}
-+
-+export function records(collection: Locator) {
-+  return collection.getByRole('listitem').or(collection.getByRole('row')
-+    .filter({ hasNot: collection.page().getByRole('columnheader') }));
-+}
-+
-+export function membership(page: Page, name: string) {
-+  return page.getByRole('checkbox', { name, exact: true });
-+}
-+
-+export async function expectMembership(page: Page, name: string, checked: boolean) {
-+  const control = membership(page, name);
-+  await expect(control).toHaveCount(1);
-+  if (checked) await expect(control).toBeChecked();
-+  else await expect(control).not.toBeChecked();
-+}
-+
-+export async function setMembership(page: Page, name: string, checked: boolean) {
-+  const control = membership(page, name);
-+  await expect(control).toHaveCount(1);
-+  if (checked) await control.check();
-+  else await control.uncheck();
-+}
-+
-+export async function expectUnavailablePage(page: Page, title: string, body: string) {
-+  await expect(page.getByRole('heading', { name: title, exact: true })).toHaveCount(0);
-+  await expect(page.getByText(body, { exact: true })).toHaveCount(0);
-+  await expect(page.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
-+  await expect(page.getByRole('textbox', { name: 'Write your page content here...', exact: true })).toHaveCount(0);
-+}
-+
-+export async function expectNoVisibleText(page: Page, value: string) {
-+  await expect.poll(() => page.getByText(value, { exact: true }).filter({ visible: true }).count()).toBe(0);
++export async function expectLabel(card: Locator, label: string, present: boolean) {
++  const badges = card.getByText(label, { exact: true }).filter({ visible: true });
++  if (present) await expect(badges).not.toHaveCount(0);
++  else await expect(badges).toHaveCount(0);
 +}

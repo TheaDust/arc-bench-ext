@@ -311,6 +311,8 @@ children:
         On the selected shelf's details, "Edit"(role=button) opens "Name"(role=textbox), "Description"(role=textbox), and "Tags"(role=textbox) prefilled with saved values. "Save Shelf"(role=button) updates that same shelf and returns to its details with the updated heading and description; changes survive reload. "Cancel"(role=button) discards all pending changes and returns to the unchanged details.
 
         Related-book editing is supported. The shelf edit form exposes one checkbox per available book, named by that book's exact name and checked exactly when the book belongs to the shelf. Saving adds every checked book to this shelf and removes every unchecked book from this shelf only; removing a book neither deletes it nor removes it from another shelf. The same book may belong to multiple shelves.
+
+        Saved membership survives reload and is reflected by the parent shelf actions on each related book as well as each shelf's Book list.
       image:
       - id: IMG-SHELF
         reference: reference/shelf.png
@@ -360,8 +362,8 @@ children:
           An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.
           Seed prerequisites (prepared before this scenario):
           - bootstrap shelf: {"name": "Benchmark Bootstrap Shelf", "description": "Entry shelf for the New Shelf creation action.", "tags": [], "books": []}
-        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
-        Then: Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
+        When: Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; reload the shelf, open both books, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S.
+        Then: After reload Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. Both books remain reachable through the global Book list. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A exposes each of shelves 4.5.3-T and 4.5.3-S exactly once. Shelf 4.5.3-T Book list still contains Book 4.5.3-A. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked.
         references:
         - \ref[requirement](REQ-4.2)
         - \ref[requirement](REQ-5.2)
@@ -634,6 +636,8 @@ children:
         Clicking "Delete"(role=button) on the selected book opens confirmation. "Confirm Delete"(role=button) removes that book and returns to Books, with its entry absent from "Book list"(role=region) across subsequent navigation. "Cancel"(role=button) keeps the book's original heading and description unchanged.
 
         Confirming also removes that book's chapters and pages from the hierarchy, the containing shelf's Book list, Recently Updated Pages, favorites and recently viewed entries. Books on the same shelf and other shelves remain.
+
+        Deleted books, their chapters and their pages cannot be read or edited through their previously observed URLs. Deletion removes the objects, not only the links that list them.
       image:
       - id: IMG-DELETE-BOOK
         reference: reference/delete_book.png
@@ -672,8 +676,8 @@ children:
           The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.
           Seed prerequisites (prepared before this scenario):
           - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
-        When: Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload.
-        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence.
+        When: Before deletion, open the book, its chapter and all three pages, verify the pages are readable and record their public URLs. Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload. Revisit the recorded URLs and reload each page URL, then open Book 5.5.3-Other.
+        Then: Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists and is readable with its saved description. Reload preserves the deleted book's absence. The former book and chapter URLs do not display their original detail headings; none of the three former page URLs displays its original title heading, saved body or page editor, including after reload.
         references:
         - \ref[requirement](REQ-4.2)
         - \ref[requirement](REQ-5.6)
@@ -1067,6 +1071,8 @@ children:
         On an authenticated shelf, book, chapter, or page details view, "Favorite"(role=button) initially exposes aria-pressed=false. Clicking it stores a personal favorite and changes the action to "Unfavorite"(role=button) with aria-pressed=true. Clicking Unfavorite removes the preference and restores Favorite with aria-pressed=false. The selected state persists after reload and follows the same behavior for all four content types.
 
         Favorites and unfavorites are scoped to the authenticated user; another account does not acquire the same personal preference. Saved preferences remain consistent across navigation as well as reload. Deleting favorited content removes it from the owner's favorite projections.
+
+        When two accounts favorite the same object, one account unfavoriting it does not change the other account's saved selection. Deleting that object removes its projections for every account that favorited it.
       image:
       - id: IMG-BOOK
         reference: reference/book.png
@@ -1120,8 +1126,8 @@ children:
           Seed prerequisites (prepared before this scenario):
           - verified account: {"nickname": "BookStack User", "email": "bookstack_user@example.com", "password": "Password123!"}
           - second verified account: {"nickname": "BookStack Reviewer", "email": "bookstack_reviewer@example.com", "password": "Password123!"}
-        When: As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage.
-        Then: The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence.
+        When: As the second account, open the book and inspect the Favorite control and homepage, then favorite it and verify its homepage entry. As the first account, unfavorite the book; reload the second account and inspect its entry and pressed state. Favorite the book again as the first account, then Delete and Confirm Delete; open the first homepage, reload the second homepage and inspect Books.
+        Then: Initially the first account has exactly one favorite entry and the second has Favorite pressed=false and no favorite entry. After both favorite the book, the first account's removal leaves its own favorites empty for that book, while the second retains exactly one favorite and Unfavorite pressed=true after reload. After the first account favorites again and deletes the book, both accounts' favorites and Book list exclude it; the second account's reloaded homepage preserves the absence.
         references:
         - \ref[requirement](REQ-2.2)
         - \ref[requirement](REQ-5.3)

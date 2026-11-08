@@ -1,0 +1,65 @@
+{
+  "id": "2026-11-08-keep-notification-oracle",
+  "recordedAt": "2026-11-08T02:30:40.291884+00:00",
+  "status": "passed",
+  "scope": "Keep notification locator and the 16 scenarios blocked by it in the original Shallow run",
+  "requirementsChanged": false,
+  "identitiesAndDenominatorPreserved": true,
+  "typecheck": {
+    "passed": true,
+    "command": "node node_modules/typescript/bin/tsc --project validation/tsconfig.json"
+  },
+  "contracts": {
+    "passed": 8,
+    "total": 8,
+    "report": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\contracts-verified.json",
+    "sha256": "a456f656f7f697dff03d58a2d1ffe190a003c0dfd2ff04462b86ec9c63c05b75"
+  },
+  "collection": {
+    "passed": true,
+    "scenarios": 41,
+    "selectedIdentitiesMatchOriginal": true
+  },
+  "inputAudit": {
+    "passed": true,
+    "report": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\input-audit-final.json"
+  },
+  "evaluations": {
+    "shallow": {
+      "score": {
+        "total": 16,
+        "passed": 16,
+        "skipped": 0,
+        "notRun": 0,
+        "failed": 0,
+        "passRate": 1,
+        "errors": []
+      },
+      "caseIsolation": "application-per-scenario",
+      "originalApplicationUnchanged": true,
+      "evaluation": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\final-shallow\\evaluation\\evaluation.json",
+      "evaluationSha256": "6ee177df916fcb2c58926cdddc793ef6a1e53421a3bc5275f338d904bed1b16e",
+      "manifest": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\final-shallow\\manifest.json",
+      "manifestSha256": "829118edd1167f2697d8ac627ff0c325a426cf55d0e6cfdb879731a347377d08"
+    },
+    "baseline": {
+      "score": {
+        "total": 16,
+        "passed": 16,
+        "skipped": 0,
+        "notRun": 0,
+        "failed": 0,
+        "passRate": 1,
+        "errors": []
+      },
+      "caseIsolation": "application-per-scenario",
+      "originalApplicationUnchanged": true,
+      "evaluation": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\final-baseline\\evaluation\\evaluation.json",
+      "evaluationSha256": "37453d92359b05b3c77ada932fad60f2edaed3539624090b4104078f1b389746",
+      "manifest": "E:\\my-works\\coding\\ShallowCode\\outputs\\keep-notification-oracle-20261108\\final-baseline\\manifest.json",
+      "manifestSha256": "99ed0dc3ed1d80f6cb83d1442116956fd1679e3354e090e67f7cc10f72bfbe1c"
+    }
+  },
+  "originalExperiment": "E:/my-works/coding/ShallowCode/outputs/keep-20261107T181957499Z",
+  "boundary": "Targeted re-evaluation only; the other 25 scenarios were not rerun. Original applications and experiment scores are preserved. This report does not assign a new full-suite score."
+}

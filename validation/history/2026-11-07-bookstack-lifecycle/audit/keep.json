@@ -1,0 +1,2949 @@
+{
+  "task": "keep",
+  "reviewedRequirements": 16,
+  "reviewedScenarios": 33,
+  "requirementsChanged": false,
+  "reviewScope": "All 16 leaf descriptions, inherited root/folder text, all 33 GWT scenarios, all 16 spec files, helper/visual oracle/identity fixture. No generated applications or scores read.",
+  "scenarios": [
+    {
+      "requirementId": "REQ-1.1",
+      "scenarioId": "SCN-REQ-1.1-01",
+      "scenarioName": "Open the workspace",
+      "testFile": "arc-bench/keep/tests/REQ-1.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:19",
+      "testLine": 4,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-1"
+        ],
+        "given": [
+          "A fresh browser opens the personal workspace without authentication; default label exists, the default layout is grid, and the sidebar starts expanded with Notes selected.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Open the application entry and inspect \"Sidebar\"(role=navigation), its Notes, Reminders, Archived, Trash and Edit Labels buttons, and the Search searchbox, Settings menu, List view and Take a note buttons."
+        ],
+        "then": [
+          "Sidebar is visible; Toggle sidebar reports expanded=true and Notes reports current=true. Each named sidebar action and each workspace control is visible, including the default Reminders action."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Workspace controls visible",
+            "evidence": "openHome + role/name visibility assertions"
+          },
+          {
+            "obligation": "Initial expanded and current states",
+            "evidence": "aria-expanded/aria-current assertions"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 5,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 7,
+            "code": "await expect(sidebar).toBeVisible();"
+          },
+          {
+            "line": 8,
+            "code": "await expect(action(page, 'Toggle sidebar')).toHaveAttribute('aria-expanded', 'true');"
+          },
+          {
+            "line": 10,
+            "code": "await expect(action(sidebar, name)).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(action(sidebar, 'Notes')).toHaveAttribute('aria-current', 'true');"
+          },
+          {
+            "line": 13,
+            "code": "await expect(page.getByRole('searchbox', { name: 'Search', exact: true })).toBeVisible();"
+          },
+          {
+            "line": 14,
+            "code": "await expect(action(page, 'Settings menu')).toBeVisible();"
+          },
+          {
+            "line": 15,
+            "code": "await expect(action(page, 'List view')).toBeVisible();"
+          }
+        ],
+        "review": "Entry ensures Take a note; Sidebar and each named action/search/settings/layout control are checked; expanded=true and Notes current=true are explicit.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-10",
+        "KEEP-11"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-1.1",
+      "scenarioId": "SCN-REQ-1.1-02",
+      "scenarioName": "Collapse and expand the sidebar",
+      "testFile": "arc-bench/keep/tests/REQ-1.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:19",
+      "testLine": 18,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-1"
+        ],
+        "given": [
+          "The entry workspace is open with Sidebar expanded, Notes selected, and Toggle sidebar reporting expanded=true.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Click \"Toggle sidebar\"(role=button), inspect sidebar text and accessible actions, then click the same button again."
+        ],
+        "then": [
+          "After collapse, expanded=false and the visible Notes text is hidden while Notes, Reminders, Archived and Trash remain accessible and visible as actions. After expansion, expanded=true and the Notes text is visible again."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Collapsed/expanded states",
+            "evidence": "Toggle sidebar aria-expanded before and after both clicks"
+          },
+          {
+            "obligation": "Text hidden then shown, accessible actions retained",
+            "evidence": "Notes getByText hidden/visible; named button visibility loop"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 19,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 22,
+            "code": "await expect(toggle).toHaveAttribute('aria-expanded', 'true');"
+          },
+          {
+            "line": 23,
+            "code": "await toggle.click();"
+          },
+          {
+            "line": 24,
+            "code": "await expect(toggle).toHaveAttribute('aria-expanded', 'false');"
+          },
+          {
+            "line": 25,
+            "code": "await expect(sidebar.getByText('Notes', { exact: true })).toBeHidden();"
+          },
+          {
+            "line": 27,
+            "code": "await expect(action(sidebar, name)).toBeVisible();"
+          },
+          {
+            "line": 29,
+            "code": "await toggle.click();"
+          },
+          {
+            "line": 30,
+            "code": "await expect(toggle).toHaveAttribute('aria-expanded', 'true');"
+          },
+          {
+            "line": 31,
+            "code": "await expect(sidebar.getByText('Notes', { exact: true })).toBeVisible();"
+          }
+        ],
+        "review": "Collapse/expand sequence checks state, hidden/reappearing Notes text and still-visible named sidebar actions. Text clipping and icons are broader visual risks.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-10",
+        "KEEP-11"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.1",
+      "scenarioId": "SCN-REQ-2.1-01",
+      "scenarioName": "Separate pinned and regular notes",
+      "testFile": "arc-bench/keep/tests/REQ-2.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:84",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes is open. Through Take a note, Title, Content and Close, create a case-isolated Sprint goals note with Finish the sprint and Pin note selected, and a regular Groceries note with Milk and bread."
+        ],
+        "when": [
+          "Inspect the \"Pinned notes\"(role=region) and \"Other notes\"(role=region) collections using each note's full isolated title."
+        ],
+        "then": [
+          "Each collection exists once. Sprint goals appears exactly once only in Pinned notes and Groceries exactly once only in Other notes; neither note is duplicated across sections and each remains visible with its saved content."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique collections and note placement",
+            "evidence": "Pinned notes/Other notes counts and scoped title regions"
+          },
+          {
+            "obligation": "No duplicates; saved content",
+            "evidence": "global note count and expectNote per title"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 9,
+            "code": "await createNote(page, pinned, 'Finish the sprint', { pinned: true });"
+          },
+          {
+            "line": 10,
+            "code": "await createNote(page, regular, 'Milk and bread');"
+          },
+          {
+            "line": 11,
+            "code": "await expect(section(page, 'Pinned notes')).toHaveCount(1);"
+          },
+          {
+            "line": 12,
+            "code": "await expect(section(page, 'Other notes')).toHaveCount(1);"
+          },
+          {
+            "line": 13,
+            "code": "await expect(section(page, 'Pinned notes').getByRole('region', { name: pinned, exact: true })).toHaveCount(1);"
+          },
+          {
+            "line": 14,
+            "code": "await expect(section(page, 'Other notes').getByRole('region', { name: regular, exact: true })).toHaveCount(1);"
+          },
+          {
+            "line": 15,
+            "code": "await expect(section(page, 'Other notes').getByRole('region', { name: pinned, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 16,
+            "code": "await expect(section(page, 'Pinned notes').getByRole('region', { name: regular, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 17,
+            "code": "await expect(note(page, pinned)).toHaveCount(1);"
+          },
+          {
+            "line": 18,
+            "code": "await expect(note(page, regular)).toHaveCount(1);"
+          },
+          {
+            "line": 19,
+            "code": "await expectNote(page, pinned, 'Finish the sprint');"
+          },
+          {
+            "line": 20,
+            "code": "await expectNote(page, regular, 'Milk and bread');"
+          }
+        ],
+        "review": "Two UI-created identities are checked once in the correct collection, absent from the other, globally unique, and retain their exact content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.2",
+      "scenarioId": "SCN-REQ-2.2-01",
+      "scenarioName": "Autosave on closing the editor",
+      "testFile": "arc-bench/keep/tests/REQ-2.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:115",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "The personal Notes workspace is open and the case-isolated New note title does not yet exist."
+        ],
+        "when": [
+          "Click \"Take a note\"(role=button); in \"Note editor\"(role=dialog), fill Title with the isolated New note name and Content with First line followed by a newline and Second line, then click Close without using any Save action."
+        ],
+        "then": [
+          "Note editor closes and exactly one visible note region with that title displays the entered title and both content lines."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Close autosaves and closes editor",
+            "evidence": "createNote Close + editor hidden"
+          },
+          {
+            "obligation": "One note displays entered title and both content lines",
+            "evidence": "expectNote title count/visibility and scoped content presence"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 7,
+            "code": "await createNote(page, identity(info, 'New note'), 'First line\\nSecond line');"
+          }
+        ],
+        "review": "Creation only fills Title/Content and closes; helper checks dialog closed and one visible note with title/content. Multiline display normalization remains a documented risk.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-11"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.2",
+      "scenarioId": "SCN-REQ-2.2-02",
+      "scenarioName": "Keep a created note after reload",
+      "testFile": "arc-bench/keep/tests/REQ-2.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:115",
+      "testLine": 10,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes is open and no note uses the case-isolated Persistent note title."
+        ],
+        "when": [
+          "Open Note editor through Take a note, enter the isolated Persistent note title and Saved personal content, click Close, and reload the page."
+        ],
+        "then": [
+          "The editor closes on save; after reload exactly one visible note region retains that title and Saved personal content."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Editor closes on save",
+            "evidence": "createNote editor hidden"
+          },
+          {
+            "obligation": "Persistent unique title/content",
+            "evidence": "page.reload then expectNote"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 11,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 13,
+            "code": "await createNote(page, title, 'Saved personal content');"
+          },
+          {
+            "line": 14,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 15,
+            "code": "await expectNote(page, title, 'Saved personal content');"
+          }
+        ],
+        "review": "Created note is checked after reload using the same isolated identity and saved content; no explicit Save is invoked.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-11"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.3",
+      "scenarioId": "SCN-REQ-2.3-01",
+      "scenarioName": "Save an edited note",
+      "testFile": "arc-bench/keep/tests/REQ-2.3.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:162",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains a UI-created case-isolated Project ideas note with Initial editable content, created through Take a note, Title, Content and Close."
+        ],
+        "when": [
+          "Click \"Open {title}\"(role=button) within that note; verify Title and Content are prefilled, replace Content with Updated editable content, click Close, and reload."
+        ],
+        "then": [
+          "The editor initially contains the saved title and content, then closes. After reload exactly one note retains the original title and replacement content, with no Initial editable content in that note."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Editor prefilled correctly",
+            "evidence": "Title/Content toHaveValue"
+          },
+          {
+            "obligation": "Closed and replacement survives on same identity",
+            "evidence": "editor hidden; reload; expectNote"
+          },
+          {
+            "obligation": "Old content absent",
+            "evidence": "visible scoped old-content count zero"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 8,
+            "code": "await createNote(page, title, 'Initial editable content');"
+          },
+          {
+            "line": 9,
+            "code": "await action(note(page, title), `Open ${title}`).click();"
+          },
+          {
+            "line": 10,
+            "code": "await expect(editor(page).getByRole('textbox', { name: 'Title', exact: true })).toHaveValue(title);"
+          },
+          {
+            "line": 12,
+            "code": "await expect(content).toHaveValue('Initial editable content');"
+          },
+          {
+            "line": 13,
+            "code": "await content.fill('Updated editable content');"
+          },
+          {
+            "line": 14,
+            "code": "await action(editor(page), 'Close').click();"
+          },
+          {
+            "line": 15,
+            "code": "await expect(editor(page)).toBeHidden();"
+          },
+          {
+            "line": 16,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 17,
+            "code": "await expectNote(page, title, 'Updated editable content');"
+          },
+          {
+            "line": 18,
+            "code": "await expect(note(page, title).getByText('Initial editable content', { exact: true }).filter({ visible: true })).toHaveCount(0);"
+          }
+        ],
+        "review": "Opening the target note checks both prefilled fields; replacement is closed and verified once after reload, with obsolete visible content excluded.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.4",
+      "scenarioId": "SCN-REQ-2.4-01",
+      "scenarioName": "Move a deleted note to Trash",
+      "testFile": "arc-bench/keep/tests/REQ-2.4.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:192",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains the UI-created isolated Delete me 2.3.1 note with Deletion preserves this content."
+        ],
+        "when": [
+          "Hover that note if necessary, click More options {title}, choose Delete Note from the menu, then click Trash in Sidebar."
+        ],
+        "then": [
+          "Deletion opens no confirmation dialog and removes the note from Notes immediately. Note deleted status exposes Undo, and Trash contains exactly one note with the same title and content."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "No confirmation; active note gone immediately",
+            "evidence": "deleteNote + dialog count zero + note hidden"
+          },
+          {
+            "obligation": "Notice exposes Undo",
+            "evidence": "named Note deleted status Undo button"
+          },
+          {
+            "obligation": "Trash retains one same note/content",
+            "evidence": "navigate Trash + expectNote"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 8,
+            "code": "await createNote(page, title, 'Deletion preserves this content');"
+          },
+          {
+            "line": 9,
+            "code": "await deleteNote(page, title);"
+          },
+          {
+            "line": 10,
+            "code": "await expect(page.getByRole('dialog')).toHaveCount(0);"
+          },
+          {
+            "line": 11,
+            "code": "await expect(action(notice(page, 'Note deleted'), 'Undo')).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          },
+          {
+            "line": 13,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 14,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', title, 'Deletion preserves this content');"
+          }
+        ],
+        "review": "Deletion invokes the specified note menu, hides the active note without confirmation, checks Undo in the status, then finds the same content in Trash.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-10",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.4",
+      "scenarioId": "SCN-REQ-2.4-02",
+      "scenarioName": "Undo deletion",
+      "testFile": "arc-bench/keep/tests/REQ-2.4.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:192",
+      "testLine": 17,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains the UI-created isolated Delete me 2.3.2 note with Undo restores this content."
+        ],
+        "when": [
+          "Use More options {title} and Delete Note, click Undo within Note deleted status, then open Trash."
+        ],
+        "then": [
+          "Action undone status appears and Notes again contains exactly one note with the same title and content. The restored note is absent from Trash."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Action undone and restored identity/content",
+            "evidence": "Action undone status + expectNote"
+          },
+          {
+            "obligation": "Restored note absent from Trash",
+            "evidence": "navigate Trash + note hidden"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 18,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 20,
+            "code": "await createNote(page, title, 'Undo restores this content');"
+          },
+          {
+            "line": 21,
+            "code": "await deleteNote(page, title);"
+          },
+          {
+            "line": 22,
+            "code": "await action(notice(page, 'Note deleted'), 'Undo').click();"
+          },
+          {
+            "line": 23,
+            "code": "await expect(notice(page, 'Action undone')).toBeVisible();"
+          },
+          {
+            "line": 24,
+            "code": "await expectNote(page, title, 'Undo restores this content');"
+          },
+          {
+            "line": 25,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 26,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          }
+        ],
+        "review": "Undo targets the named notification, restores the same note/content exactly once and excludes it from Trash. Reload persistence of Undo is not separately exercised.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-10"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.4",
+      "scenarioId": "SCN-REQ-2.4-03",
+      "scenarioName": "Dismiss deletion notifications",
+      "testFile": "arc-bench/keep/tests/REQ-2.4.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:192",
+      "testLine": 29,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains the UI-created isolated Manual dismissal note with Dismissal preserves deleted content."
+        ],
+        "when": [
+          "Delete the note through its menu, click Dismiss notification in Note deleted status, then open Trash and reload."
+        ],
+        "then": [
+          "The notification closes without Undo. The note stays absent from active Notes, while Trash retains exactly one note with the same title and content before and after reload."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Notice dismissed without restoration",
+            "evidence": "Dismiss notification click; status and active note hidden"
+          },
+          {
+            "obligation": "Trash contents persist",
+            "evidence": "expectNote before and after page.reload"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 30,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 32,
+            "code": "await createNote(page, title, 'Dismissal preserves deleted content');"
+          },
+          {
+            "line": 33,
+            "code": "await deleteNote(page, title);"
+          },
+          {
+            "line": 34,
+            "code": "await action(notice(page, 'Note deleted'), 'Dismiss notification').click();"
+          },
+          {
+            "line": 35,
+            "code": "await expect(notice(page, 'Note deleted')).toBeHidden();"
+          },
+          {
+            "line": 36,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          },
+          {
+            "line": 37,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 38,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', title, 'Dismissal preserves deleted content');"
+          },
+          {
+            "line": 39,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 40,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', title, 'Dismissal preserves deleted content');"
+          }
+        ],
+        "review": "Dismiss closes the notice without Undo, leaves active note absent, and retains the same content in Trash before and after reload.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-10",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.5",
+      "scenarioId": "SCN-REQ-2.5-01",
+      "scenarioName": "Keep a deleted note in Trash after reload",
+      "testFile": "arc-bench/keep/tests/REQ-2.5.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:250",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Through Take a note, Title, Content and Close, create the isolated Trash persistence note with Deleted content survives reload, then delete it through its More options menu."
+        ],
+        "when": [
+          "Open Trash in Sidebar, reload the page, then select Notes."
+        ],
+        "then": [
+          "Deleted notes contains exactly one note with the saved title and content after reload. The same deleted note remains absent from active Notes."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Persistent deleted collection entry",
+            "evidence": "Deleted notes visible + expectNote after reload"
+          },
+          {
+            "obligation": "Absent from active Notes",
+            "evidence": "navigate Notes + target hidden"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 8,
+            "code": "await createNote(page, title, 'Deleted content survives reload');"
+          },
+          {
+            "line": 9,
+            "code": "await deleteNote(page, title);"
+          },
+          {
+            "line": 10,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 11,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(section(page, 'Deleted notes')).toBeVisible();"
+          },
+          {
+            "line": 13,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', title, 'Deleted content survives reload');"
+          },
+          {
+            "line": 14,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 15,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          }
+        ],
+        "review": "Own UI-created deleted note is found after Trash reload, then remains hidden from Notes; named Deleted notes region is asserted.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-03",
+        "KEEP-04",
+        "KEEP-12",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.5",
+      "scenarioId": "SCN-REQ-2.5-02",
+      "scenarioName": "Show deleted notes separately",
+      "testFile": "arc-bench/keep/tests/REQ-2.5.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:250",
+      "testLine": 18,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Through normal note creation, create isolated Delete me 2.3.3 with Recently deleted content and Movie list with Active control content; delete only Delete me 2.3.3 through its menu."
+        ],
+        "when": [
+          "Click Trash in Sidebar and inspect Deleted notes."
+        ],
+        "then": [
+          "The deleted note appears exactly once with its saved content; the active Movie list note is absent from Trash."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Separate Trash collection",
+            "evidence": "Deleted notes visible + expectNote for deleted identity"
+          },
+          {
+            "obligation": "Active control excluded",
+            "evidence": "active note hidden within Trash view"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 19,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 22,
+            "code": "await createNote(page, deleted, 'Recently deleted content');"
+          },
+          {
+            "line": 23,
+            "code": "await createNote(page, active, 'Active control content');"
+          },
+          {
+            "line": 24,
+            "code": "await deleteNote(page, deleted);"
+          },
+          {
+            "line": 25,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 26,
+            "code": "await expect(section(page, 'Deleted notes')).toBeVisible();"
+          },
+          {
+            "line": 27,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', deleted, 'Recently deleted content');"
+          },
+          {
+            "line": 28,
+            "code": "await expect(note(page, active)).toBeHidden();"
+          }
+        ],
+        "review": "Deleted and active controls are both created via UI; Trash has the deleted note/content and hides the active control.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-03",
+        "KEEP-04",
+        "KEEP-12",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.5",
+      "scenarioId": "SCN-REQ-2.5-03",
+      "scenarioName": "Empty Trash without deleting active notes",
+      "testFile": "arc-bench/keep/tests/REQ-2.5.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:250",
+      "testLine": 31,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Create isolated Empty trash A with Discard A, Empty trash B with Discard B and Active control with Keep active content. Delete A and B through UI and open Trash, confirming both deleted notes are present."
+        ],
+        "when": [
+          "Click Empty Trash. If an Empty Trash dialog is offered, click its Empty Trash confirmation button. Reload Trash, then click Notes."
+        ],
+        "then": [
+          "Deleted notes contains no note regions before and after reload. Active control remains exactly once with its content, while deleted A and B remain absent from Notes."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "No deleted note regions before/after reload",
+            "evidence": "completeEmptyTrash + expectEmptyTrash after reload"
+          },
+          {
+            "obligation": "Active content preserved",
+            "evidence": "navigate Notes + expectNote(active)"
+          },
+          {
+            "obligation": "Deleted targets not restored",
+            "evidence": "deleted A/B hidden from Notes"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 32,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 36,
+            "code": "await createNote(page, deletedA, 'Discard A');"
+          },
+          {
+            "line": 37,
+            "code": "await createNote(page, deletedB, 'Discard B');"
+          },
+          {
+            "line": 38,
+            "code": "await createNote(page, active, 'Keep active content');"
+          },
+          {
+            "line": 39,
+            "code": "await deleteNote(page, deletedA);"
+          },
+          {
+            "line": 40,
+            "code": "await deleteNote(page, deletedB);"
+          },
+          {
+            "line": 41,
+            "code": "await navigate(page, 'Trash');"
+          },
+          {
+            "line": 42,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', deletedA, 'Discard A');"
+          },
+          {
+            "line": 43,
+            "code": "await expectNoteInCollection(page, 'Deleted notes', deletedB, 'Discard B');"
+          },
+          {
+            "line": 44,
+            "code": "await action(page, 'Empty Trash').click();"
+          },
+          {
+            "line": 45,
+            "code": "await completeEmptyTrash(page);"
+          },
+          {
+            "line": 46,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 47,
+            "code": "await expectEmptyTrash(page);"
+          },
+          {
+            "line": 48,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 49,
+            "code": "await expectNote(page, active, 'Keep active content');"
+          },
+          {
+            "line": 50,
+            "code": "await expect(note(page, deletedA)).toBeHidden();"
+          },
+          {
+            "line": 51,
+            "code": "await expect(note(page, deletedB)).toBeHidden();"
+          }
+        ],
+        "review": "Both prepared deleted notes exist before Empty Trash. Optional confirmation/direct outcome is polled without strict OR ambiguity; a unique accessible empty collection is required before and after reload; active control survives.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-03",
+        "KEEP-04",
+        "KEEP-12",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.6",
+      "scenarioId": "SCN-REQ-2.6-01",
+      "scenarioName": "Archive a note into its separate list",
+      "testFile": "arc-bench/keep/tests/REQ-2.6.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:312",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains UI-created isolated Travel plans 2.5.1 with Trip itinerary and Active archive control with Stay active."
+        ],
+        "when": [
+          "Hover Travel plans, click Archive {title}, open Archived in Sidebar, then return to Notes and reload."
+        ],
+        "then": [
+          "Note archived status exposes Undo; Archived notes contains exactly one Travel plans note with Trip itinerary and excludes the active control. After reload Notes excludes Travel plans and retains the active control with Stay active."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Archive status exposes Undo",
+            "evidence": "archiveNote + scoped Undo visibility"
+          },
+          {
+            "obligation": "Archived target/content and active exclusion",
+            "evidence": "Archived notes visible; expectNote target; active hidden"
+          },
+          {
+            "obligation": "Active list after reload",
+            "evidence": "target hidden; expectNote active"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 9,
+            "code": "await createNote(page, title, 'Trip itinerary');"
+          },
+          {
+            "line": 10,
+            "code": "await createNote(page, active, 'Stay active');"
+          },
+          {
+            "line": 11,
+            "code": "await archiveNote(page, title);"
+          },
+          {
+            "line": 12,
+            "code": "await expect(action(notice(page, 'Note archived'), 'Undo')).toBeVisible();"
+          },
+          {
+            "line": 13,
+            "code": "await navigate(page, 'Archived');"
+          },
+          {
+            "line": 14,
+            "code": "await expect(section(page, 'Archived notes')).toBeVisible();"
+          },
+          {
+            "line": 15,
+            "code": "await expectNoteInCollection(page, 'Archived notes', title, 'Trip itinerary');"
+          },
+          {
+            "line": 16,
+            "code": "await expect(note(page, active)).toBeHidden();"
+          },
+          {
+            "line": 17,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 18,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 19,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          },
+          {
+            "line": 20,
+            "code": "await expectNote(page, active, 'Stay active');"
+          }
+        ],
+        "review": "Archive notice has Undo; Archived contains only the target among the two controls; returning to Notes and reloading keeps target excluded and active control intact.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-10",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.6",
+      "scenarioId": "SCN-REQ-2.6-02",
+      "scenarioName": "Undo archiving",
+      "testFile": "arc-bench/keep/tests/REQ-2.6.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:312",
+      "testLine": 23,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains isolated Travel plans 2.5.2 with Return this itinerary."
+        ],
+        "when": [
+          "Click Archive {title}, then Undo in Note archived status, and inspect Archived."
+        ],
+        "then": [
+          "Action undone appears, Notes restores the same title and content exactly once, and Archived excludes the restored note."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Undo feedback and restoration",
+            "evidence": "Action undone status + expectNote"
+          },
+          {
+            "obligation": "No archived copy",
+            "evidence": "navigate Archived + target hidden"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 24,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 26,
+            "code": "await createNote(page, title, 'Return this itinerary');"
+          },
+          {
+            "line": 27,
+            "code": "await archiveNote(page, title);"
+          },
+          {
+            "line": 28,
+            "code": "await action(notice(page, 'Note archived'), 'Undo').click();"
+          },
+          {
+            "line": 29,
+            "code": "await expect(notice(page, 'Action undone')).toBeVisible();"
+          },
+          {
+            "line": 30,
+            "code": "await expectNote(page, title, 'Return this itinerary');"
+          },
+          {
+            "line": 31,
+            "code": "await navigate(page, 'Archived');"
+          },
+          {
+            "line": 32,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          }
+        ],
+        "review": "Notification Undo restores the target title/content and emits Action undone, while Archived excludes it. Broader reload durability is not separately asserted here.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-10"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.6",
+      "scenarioId": "SCN-REQ-2.6-03",
+      "scenarioName": "Unarchive the selected note",
+      "testFile": "arc-bench/keep/tests/REQ-2.6.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:312",
+      "testLine": 35,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Create isolated Travel plans 2.5.4 with Selected itinerary and Other archived note with Other itinerary, archive both through UI, and open Archived where both are visible."
+        ],
+        "when": [
+          "Hover only Travel plans, click its Unarchive {title}, then open Notes and reload."
+        ],
+        "then": [
+          "Archived removes only Travel plans and retains Other archived note with its content. Notes displays Travel plans exactly once with Selected itinerary after reload and excludes the other archived note."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Only chosen archive entry removed",
+            "evidence": "target hidden; expectNote(other) in Archived"
+          },
+          {
+            "obligation": "Correct restored persistent Notes state",
+            "evidence": "reload Notes; expectNote(target); other hidden"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 36,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 39,
+            "code": "await createNote(page, title, 'Selected itinerary');"
+          },
+          {
+            "line": 40,
+            "code": "await createNote(page, other, 'Other itinerary');"
+          },
+          {
+            "line": 41,
+            "code": "await archiveNote(page, title);"
+          },
+          {
+            "line": 42,
+            "code": "await archiveNote(page, other);"
+          },
+          {
+            "line": 43,
+            "code": "await navigate(page, 'Archived');"
+          },
+          {
+            "line": 44,
+            "code": "await expectNoteInCollection(page, 'Archived notes', title, 'Selected itinerary');"
+          },
+          {
+            "line": 45,
+            "code": "await expectNoteInCollection(page, 'Archived notes', other, 'Other itinerary');"
+          },
+          {
+            "line": 46,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 47,
+            "code": "await action(note(page, title), `Unarchive ${title}`).click();"
+          },
+          {
+            "line": 48,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          },
+          {
+            "line": 49,
+            "code": "await expectNoteInCollection(page, 'Archived notes', other, 'Other itinerary');"
+          },
+          {
+            "line": 50,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 51,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 52,
+            "code": "await expectNote(page, title, 'Selected itinerary');"
+          },
+          {
+            "line": 53,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          }
+        ],
+        "review": "Two archived objects establish identity-specific unarchive. Target disappears from archive, sibling remains, then Notes reload retains the target and excludes the sibling.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated.",
+        "collectionEvidence": "expectNoteInCollection binds the positive note result to the already-declared Deleted notes or Archived notes collection; a matching note elsewhere cannot satisfy membership."
+      },
+      "findings": [
+        "KEEP-02",
+        "KEEP-10",
+        "KEEP-13"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-2.7",
+      "scenarioId": "SCN-REQ-2.7-01",
+      "scenarioName": "Color an existing note",
+      "testFile": "arc-bench/keep/tests/REQ-2.7.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:377",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains isolated Garden tasks existing with Water the herbs, created through the normal editor."
+        ],
+        "when": [
+          "Hover that note, click Background color {title}, choose Light green, then reload and inspect the note and its color action."
+        ],
+        "then": [
+          "The same note and content persist. Its surface has a light-green background and its action reads Background color {title}: Light green; a changed action name alone is insufficient."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Same content survives reload",
+            "evidence": "page.reload + expectNote"
+          },
+          {
+            "obligation": "Selected action and actual green background",
+            "evidence": "Background color title: Light green + expectLightGreenSurface"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 7,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 9,
+            "code": "await createNote(page, title, 'Water the herbs');"
+          },
+          {
+            "line": 10,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 11,
+            "code": "await action(note(page, title), `Background color ${title}`).click();"
+          },
+          {
+            "line": 12,
+            "code": "await action(page, 'Light green').click();"
+          },
+          {
+            "line": 13,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 14,
+            "code": "await expectNote(page, title, 'Water the herbs');"
+          },
+          {
+            "line": 15,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 16,
+            "code": "await expect(action(note(page, title), `Background color ${title}: Light green`)).toBeVisible();"
+          },
+          {
+            "line": 17,
+            "code": "await expectLightGreenSurface(note(page, title));"
+          }
+        ],
+        "review": "Existing note is colored through its action, reloaded, checked for exact identity/content and selected action name; existing pixel oracle now verifies the actual light-green surface.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-05"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.7",
+      "scenarioId": "SCN-REQ-2.7-02",
+      "scenarioName": "Create a colored note",
+      "testFile": "arc-bench/keep/tests/REQ-2.7.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:377",
+      "testLine": 20,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes is open and no note uses the isolated Garden tasks created title."
+        ],
+        "when": [
+          "Click Take a note, enter that title and Plant spring herbs, click Background color in Note editor and choose Light green, then Close and reload."
+        ],
+        "then": [
+          "Exactly one note retains the entered content with a light-green surface and Background color {title}: Light green action after reload."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique saved note/content",
+            "evidence": "createNote(green) + reload + expectNote"
+          },
+          {
+            "obligation": "Persistent real background and action name",
+            "evidence": "selected action visibility + expectLightGreenSurface"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 21,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 23,
+            "code": "await createNote(page, title, 'Plant spring herbs', { green: true });"
+          },
+          {
+            "line": 24,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 25,
+            "code": "await expectNote(page, title, 'Plant spring herbs');"
+          },
+          {
+            "line": 26,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 27,
+            "code": "await expect(action(note(page, title), `Background color ${title}: Light green`)).toBeVisible();"
+          },
+          {
+            "line": 28,
+            "code": "await expectLightGreenSurface(note(page, title));"
+          }
+        ],
+        "review": "Creation chooses green within the editor; reload checks one saved note, content, color action, and rendered surface rather than feedback alone.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-05"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.8",
+      "scenarioId": "SCN-REQ-2.8-01",
+      "scenarioName": "Assign multiple labels and filter by either",
+      "testFile": "arc-bench/keep/tests/REQ-2.8.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:418",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Through Edit Labels, New label and Create label, create isolated Work and Personal labels. Create isolated Team retro add label with Retro decisions and no assigned labels."
+        ],
+        "when": [
+          "On that note choose More options {title} then Change labels; check Work and Personal in Note labels, click Done, reload, and select each label in Sidebar in turn."
+        ],
+        "then": [
+          "Both labels are visible on the note after reload. Either sidebar selection displays exactly one matching note with the same title and Retro decisions."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Both label badges persist",
+            "evidence": "reload + scoped expectVisibleText for each label"
+          },
+          {
+            "obligation": "Either label filter retains the note once",
+            "evidence": "navigate(label) + expectNote within loop"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 10,
+            "code": "await createLabel(page, work);"
+          },
+          {
+            "line": 11,
+            "code": "await createLabel(page, personal);"
+          },
+          {
+            "line": 12,
+            "code": "await createNote(page, title, 'Retro decisions');"
+          },
+          {
+            "line": 13,
+            "code": "await assignLabels(page, title, [work, personal]);"
+          },
+          {
+            "line": 14,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 16,
+            "code": "await expectVisibleText(note(page, title), label);"
+          },
+          {
+            "line": 17,
+            "code": "await navigate(page, label);"
+          },
+          {
+            "line": 18,
+            "code": "await expectNote(page, title, 'Retro decisions');"
+          }
+        ],
+        "review": "Both labels are UI-created and assigned in the note chooser; after reload each visible label is asserted and either sidebar selection finds the same one note/content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.8",
+      "scenarioId": "SCN-REQ-2.8-02",
+      "scenarioName": "Remove an assigned label",
+      "testFile": "arc-bench/keep/tests/REQ-2.8.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:418",
+      "testLine": 22,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Create isolated Work and two notes through UI, Team retro remove label with Remove membership and Other Work note with Keep membership; assign Work to both through the editor's Change labels chooser."
+        ],
+        "when": [
+          "Open Change labels for Team retro, clear its Work checkbox and click Done; reload, then select Work in Sidebar."
+        ],
+        "then": [
+          "Work no longer appears on Team retro. The Work-filtered list excludes that note and retains Other Work note exactly once with Keep membership."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Target no longer displays Work",
+            "evidence": "visible scoped Work count zero"
+          },
+          {
+            "obligation": "Membership removal is selective",
+            "evidence": "navigate Work; target hidden; expectNote control"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 23,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 27,
+            "code": "await createLabel(page, work);"
+          },
+          {
+            "line": 28,
+            "code": "await createNote(page, title, 'Remove membership', { labels: [work] });"
+          },
+          {
+            "line": 29,
+            "code": "await createNote(page, control, 'Keep membership', { labels: [work] });"
+          },
+          {
+            "line": 30,
+            "code": "await assignLabels(page, title, [work], false);"
+          },
+          {
+            "line": 31,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 32,
+            "code": "await expect(note(page, title).getByText(work, { exact: true }).filter({ visible: true })).toHaveCount(0);"
+          },
+          {
+            "line": 33,
+            "code": "await navigate(page, work);"
+          },
+          {
+            "line": 34,
+            "code": "await expect(note(page, title)).toBeHidden();"
+          },
+          {
+            "line": 35,
+            "code": "await expectNote(page, control, 'Keep membership');"
+          }
+        ],
+        "review": "Two Work members establish selective removal. After unchecking and reload, target no longer visibly carries Work; filter excludes target while retaining sibling/content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.8",
+      "scenarioId": "SCN-REQ-2.8-03",
+      "scenarioName": "Create a note with Reminders",
+      "testFile": "arc-bench/keep/tests/REQ-2.8.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:418",
+      "testLine": 38,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "The default Reminders label exists and Notes is open; the isolated Call dentist created title is unused.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Open Note editor, enter that title and Arrange the appointment, choose Change labels, check Reminders, click Done and Close, then select Reminders in Sidebar."
+        ],
+        "then": [
+          "The saved note visibly carries Reminders and appears exactly once with Arrange the appointment in the Reminders-filtered list."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Label visibly assigned",
+            "evidence": "scoped Reminders presence"
+          },
+          {
+            "obligation": "Reminders-filtered result",
+            "evidence": "navigate Reminders + expectNote"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 39,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 41,
+            "code": "await createNote(page, title, 'Arrange the appointment', { labels: ['Reminders'] });"
+          },
+          {
+            "line": 42,
+            "code": "await expectVisibleText(note(page, title), 'Reminders');"
+          },
+          {
+            "line": 43,
+            "code": "await navigate(page, 'Reminders');"
+          },
+          {
+            "line": 44,
+            "code": "await expectNote(page, title, 'Arrange the appointment');"
+          }
+        ],
+        "review": "Creation selects Reminders through the same chooser; the note visibly shows Reminders and filtering retains its exact identity/content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.9",
+      "scenarioId": "SCN-REQ-2.9-01",
+      "scenarioName": "Pin an existing note",
+      "testFile": "arc-bench/keep/tests/REQ-2.9.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:478",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes contains isolated Meeting agenda 2.8.1 with Discuss the launch as a regular unpinned note."
+        ],
+        "when": [
+          "Hover it, click Pin {title}, reload, and inspect its section and pin action."
+        ],
+        "then": [
+          "The same note and content appear exactly once in Pinned notes and not Other notes. Unpin {title} exposes pressed=true."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique target in correct section",
+            "evidence": "expectNote + Pinned count1/Other count0"
+          },
+          {
+            "obligation": "Pin state persists",
+            "evidence": "reload; Unpin aria-pressed true"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 8,
+            "code": "await createNote(page, title, 'Discuss the launch');"
+          },
+          {
+            "line": 9,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 10,
+            "code": "await action(note(page, title), `Pin ${title}`).click();"
+          },
+          {
+            "line": 11,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 12,
+            "code": "await expectNote(page, title, 'Discuss the launch');"
+          },
+          {
+            "line": 13,
+            "code": "await expect(section(page, 'Pinned notes').getByRole('region', { name: title, exact: true })).toHaveCount(1);"
+          },
+          {
+            "line": 14,
+            "code": "await expect(section(page, 'Other notes').getByRole('region', { name: title, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 15,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 16,
+            "code": "await expect(action(note(page, title), `Unpin ${title}`)).toHaveAttribute('aria-pressed', 'true');"
+          }
+        ],
+        "review": "After pin and reload, target content is unique and appears only in Pinned notes; Unpin action exposes pressed=true.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-2.9",
+      "scenarioId": "SCN-REQ-2.9-02",
+      "scenarioName": "Unpin an existing note",
+      "testFile": "arc-bench/keep/tests/REQ-2.9.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:478",
+      "testLine": 19,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Create isolated Meeting agenda 2.8.2 with Keep meeting content through Note editor with Pin note selected."
+        ],
+        "when": [
+          "Hover the saved pinned note, click Unpin {title}, reload, and inspect its section and action."
+        ],
+        "then": [
+          "The note appears exactly once only in Other notes with unchanged content; Pin {title} exposes pressed=false."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique target/content only in Other notes",
+            "evidence": "expectNote + Pinned count0/Other count1"
+          },
+          {
+            "obligation": "Unpin persisted",
+            "evidence": "reload; Pin aria-pressed false"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 20,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 22,
+            "code": "await createNote(page, title, 'Keep meeting content', { pinned: true });"
+          },
+          {
+            "line": 23,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 24,
+            "code": "await action(note(page, title), `Unpin ${title}`).click();"
+          },
+          {
+            "line": 25,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 26,
+            "code": "await expectNote(page, title, 'Keep meeting content');"
+          },
+          {
+            "line": 27,
+            "code": "await expect(section(page, 'Pinned notes').getByRole('region', { name: title, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 28,
+            "code": "await expect(section(page, 'Other notes').getByRole('region', { name: title, exact: true })).toHaveCount(1);"
+          },
+          {
+            "line": 29,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 30,
+            "code": "await expect(action(note(page, title), `Pin ${title}`)).toHaveAttribute('aria-pressed', 'false');"
+          }
+        ],
+        "review": "Pinned setup is unpinned by its own action; reload retains content only in Other notes with Pin pressed=false.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-2.9",
+      "scenarioId": "SCN-REQ-2.9-03",
+      "scenarioName": "Create a pinned note",
+      "testFile": "arc-bench/keep/tests/REQ-2.9.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:478",
+      "testLine": 33,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "Notes is open and the isolated Pinned at creation title is unused."
+        ],
+        "when": [
+          "Open Note editor, enter that title and Pinned creation content, click Pin note, click Close, and reload."
+        ],
+        "then": [
+          "The note and content persist exactly once only in Pinned notes, and its Unpin {title} action exposes pressed=true."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique pinned content persists",
+            "evidence": "createNote(pinned) + reload + expectNote"
+          },
+          {
+            "obligation": "Section and pressed state",
+            "evidence": "Pinned count1/Other count0; Unpin pressed true"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 34,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 36,
+            "code": "await createNote(page, title, 'Pinned creation content', { pinned: true });"
+          },
+          {
+            "line": 37,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 38,
+            "code": "await expectNote(page, title, 'Pinned creation content');"
+          },
+          {
+            "line": 39,
+            "code": "await expect(section(page, 'Pinned notes').getByRole('region', { name: title, exact: true })).toHaveCount(1);"
+          },
+          {
+            "line": 40,
+            "code": "await expect(section(page, 'Other notes').getByRole('region', { name: title, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 41,
+            "code": "await note(page, title).hover();"
+          },
+          {
+            "line": 42,
+            "code": "await expect(action(note(page, title), `Unpin ${title}`)).toHaveAttribute('aria-pressed', 'true');"
+          }
+        ],
+        "review": "Editor Pin note creates the pinned state; after reload exact title/content, section exclusivity and pressed state are checked.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-3.1",
+      "scenarioId": "SCN-REQ-3.1-01",
+      "scenarioName": "Create a user label",
+      "testFile": "arc-bench/keep/tests/REQ-3.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:537",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Notes is open with the default Reminders label; the isolated New user label name does not exist.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Click Edit Labels, enter the isolated name in New label, click Create label and Done; reload, reopen Edit Labels and inspect Label name {label}."
+        ],
+        "then": [
+          "Sidebar exposes exactly one visible action with the new label name, and management exposes exactly one Label name {label} field containing that name. Done closes management."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Unique persistent sidebar and management identities",
+            "evidence": "sidebar label count1/visible; management field count1/value"
+          },
+          {
+            "obligation": "Done closes management",
+            "evidence": "Done click + dialog hidden"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 8,
+            "code": "await createLabel(page, label);"
+          },
+          {
+            "line": 9,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 11,
+            "code": "await expect(action(sidebar, label)).toHaveCount(1);"
+          },
+          {
+            "line": 12,
+            "code": "await expect(action(sidebar, label)).toBeVisible();"
+          },
+          {
+            "line": 15,
+            "code": "await expect(field).toHaveCount(1);"
+          },
+          {
+            "line": 16,
+            "code": "await expect(field).toHaveValue(label);"
+          },
+          {
+            "line": 17,
+            "code": "await action(dialog, 'Done').click();"
+          },
+          {
+            "line": 18,
+            "code": "await expect(dialog).toBeHidden();"
+          }
+        ],
+        "review": "After creation and reload, sidebar action and editable label field are each unique and contain the intended identity; final Done now explicitly checks dialog closed.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-08"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-3.2",
+      "scenarioId": "SCN-REQ-3.2-01",
+      "scenarioName": "Filter by a user label",
+      "testFile": "arc-bench/keep/tests/REQ-3.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:567",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Create isolated Work and two notes through UI, Design review with Work design decisions assigned Work and unlabeled Movie list with An unlabeled movie note."
+        ],
+        "when": [
+          "Select the Work button in Sidebar."
+        ],
+        "then": [
+          "Exactly one Design review note displays its saved content; Movie list is hidden and the selected Work action exposes current=true."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Only matching note/content",
+            "evidence": "expectNote matching; other hidden"
+          },
+          {
+            "obligation": "Selected navigation state",
+            "evidence": "Work aria-current true"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 10,
+            "code": "await createLabel(page, work);"
+          },
+          {
+            "line": 11,
+            "code": "await createNote(page, matching, 'Work design decisions', { labels: [work] });"
+          },
+          {
+            "line": 12,
+            "code": "await createNote(page, other, 'An unlabeled movie note');"
+          },
+          {
+            "line": 13,
+            "code": "await navigate(page, work);"
+          },
+          {
+            "line": 14,
+            "code": "await expectNote(page, matching, 'Work design decisions');"
+          },
+          {
+            "line": 15,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          },
+          {
+            "line": 16,
+            "code": "await expect(action(page.getByRole('navigation', { name: 'Sidebar', exact: true }), work)).toHaveAttribute('aria-current', 'true');"
+          }
+        ],
+        "review": "UI establishes labelled and unlabelled controls; Work filter shows one correct note/content, excludes the other, and marks Work current.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-3.2",
+      "scenarioId": "SCN-REQ-3.2-02",
+      "scenarioName": "Return to the complete notes list",
+      "testFile": "arc-bench/keep/tests/REQ-3.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:567",
+      "testLine": 19,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Create isolated Work, Design review with Design details assigned Work, and Movie list with Movie details. Select Work and verify Movie list is hidden."
+        ],
+        "when": [
+          "Click Notes in Sidebar."
+        ],
+        "then": [
+          "Both notes reappear exactly once with their saved contents, and Notes exposes current=true."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Both notes restored exactly once",
+            "evidence": "expectNote matching and other"
+          },
+          {
+            "obligation": "Notes selected",
+            "evidence": "Notes aria-current true"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 20,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 24,
+            "code": "await createLabel(page, work);"
+          },
+          {
+            "line": 25,
+            "code": "await createNote(page, matching, 'Design details', { labels: [work] });"
+          },
+          {
+            "line": 26,
+            "code": "await createNote(page, other, 'Movie details');"
+          },
+          {
+            "line": 27,
+            "code": "await navigate(page, work);"
+          },
+          {
+            "line": 28,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          },
+          {
+            "line": 29,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 30,
+            "code": "await expectNote(page, matching, 'Design details');"
+          },
+          {
+            "line": 31,
+            "code": "await expectNote(page, other, 'Movie details');"
+          },
+          {
+            "line": 32,
+            "code": "await expect(action(page.getByRole('navigation', { name: 'Sidebar', exact: true }), 'Notes')).toHaveAttribute('aria-current', 'true');"
+          }
+        ],
+        "review": "Work first hides the unlabelled control; Notes restores both exact note identities/content and its current state.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-3.2",
+      "scenarioId": "SCN-REQ-3.2-03",
+      "scenarioName": "Filter by the default Reminders label",
+      "testFile": "arc-bench/keep/tests/REQ-3.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:567",
+      "testLine": 35,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Create isolated Call dentist existing with Dentist details assigned Reminders and unlabeled Movie list with Movie details through the editor.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Click Reminders in Sidebar."
+        ],
+        "then": [
+          "The reminder note appears exactly once with Dentist details, Movie list is hidden, and Reminders exposes current=true."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Correct default-label membership",
+            "evidence": "expectNote matching; other hidden"
+          },
+          {
+            "obligation": "Selected navigation state",
+            "evidence": "Reminders aria-current true"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 36,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 39,
+            "code": "await createNote(page, matching, 'Dentist details', { labels: ['Reminders'] });"
+          },
+          {
+            "line": 40,
+            "code": "await createNote(page, other, 'Movie details');"
+          },
+          {
+            "line": 41,
+            "code": "await navigate(page, 'Reminders');"
+          },
+          {
+            "line": 42,
+            "code": "await expectNote(page, matching, 'Dentist details');"
+          },
+          {
+            "line": 43,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          },
+          {
+            "line": 44,
+            "code": "await expect(action(page.getByRole('navigation', { name: 'Sidebar', exact: true }), 'Reminders')).toHaveAttribute('aria-current', 'true');"
+          }
+        ],
+        "review": "Default Reminders assignment is created in editor. Sidebar filter retains the reminder identity/content, excludes unlabeled control and reports current=true.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [],
+      "disposition": "reviewed-no-mismatch-found"
+    },
+    {
+      "requirementId": "REQ-3.3",
+      "scenarioId": "SCN-REQ-3.3-01",
+      "scenarioName": "Rename a label and retain membership",
+      "testFile": "arc-bench/keep/tests/REQ-3.3.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:621",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Create isolated Work editable and a Label rename control note with Retain label membership assigned to it through UI."
+        ],
+        "when": [
+          "Open Edit Labels, replace Label name {original} with isolated Work renamed, click Save label {original} and Done; reload and select the renamed sidebar label."
+        ],
+        "then": [
+          "Sidebar contains the renamed label once and no original label. The note displays the new label without the old one, and filtering by the new name still finds the same note and content."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Rename persists in sidebar",
+            "evidence": "old action count0/new count1"
+          },
+          {
+            "obligation": "Note label changed",
+            "evidence": "old visible badge count0; new scoped visible presence"
+          },
+          {
+            "obligation": "Membership/content retained",
+            "evidence": "navigate renamed + expectNote"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 10,
+            "code": "await createLabel(page, original);"
+          },
+          {
+            "line": 11,
+            "code": "await createNote(page, title, 'Retain label membership', { labels: [original] });"
+          },
+          {
+            "line": 13,
+            "code": "await dialog.getByRole('textbox', { name: `Label name ${original}`, exact: true }).fill(renamed);"
+          },
+          {
+            "line": 14,
+            "code": "await action(dialog, `Save label ${original}`).click();"
+          },
+          {
+            "line": 15,
+            "code": "await action(dialog, 'Done').click();"
+          },
+          {
+            "line": 16,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 18,
+            "code": "await expect(action(sidebar, original)).toHaveCount(0);"
+          },
+          {
+            "line": 19,
+            "code": "await expect(action(sidebar, renamed)).toHaveCount(1);"
+          },
+          {
+            "line": 20,
+            "code": "await expect(note(page, title).getByText(original, { exact: true }).filter({ visible: true })).toHaveCount(0);"
+          },
+          {
+            "line": 21,
+            "code": "await expectVisibleText(note(page, title), renamed);"
+          },
+          {
+            "line": 22,
+            "code": "await navigate(page, renamed);"
+          },
+          {
+            "line": 23,
+            "code": "await expectNote(page, title, 'Retain label membership');"
+          }
+        ],
+        "review": "Original label field and Save action are addressed before rename; after reload old sidebar identity is gone, new unique identity and visible badge remain, and filtering preserves membership/content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-3.3",
+      "scenarioId": "SCN-REQ-3.3-02",
+      "scenarioName": "Delete a label without deleting its note",
+      "testFile": "arc-bench/keep/tests/REQ-3.3.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:621",
+      "testLine": 26,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "Create isolated Disposable label and Label delete control with Keep this labeled note assigned to that label."
+        ],
+        "when": [
+          "Open Edit Labels, click Delete label {label}, click Done, and reload."
+        ],
+        "then": [
+          "The deleted label is absent from Sidebar and the note, while the note remains exactly once with unchanged title and Keep this labeled note."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Label removed persistently",
+            "evidence": "reload; sidebar action count0; visible badge count0"
+          },
+          {
+            "obligation": "Note preserved",
+            "evidence": "expectNote original title/content"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 27,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 30,
+            "code": "await createLabel(page, label);"
+          },
+          {
+            "line": 31,
+            "code": "await createNote(page, title, 'Keep this labeled note', { labels: [label] });"
+          },
+          {
+            "line": 33,
+            "code": "await action(dialog, `Delete label ${label}`).click();"
+          },
+          {
+            "line": 34,
+            "code": "await action(dialog, 'Done').click();"
+          },
+          {
+            "line": 35,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 36,
+            "code": "await expect(action(page.getByRole('navigation', { name: 'Sidebar', exact: true }), label)).toHaveCount(0);"
+          },
+          {
+            "line": 37,
+            "code": "await expectNote(page, title, 'Keep this labeled note');"
+          },
+          {
+            "line": 38,
+            "code": "await expect(note(page, title).getByText(label, { exact: true }).filter({ visible: true })).toHaveCount(0);"
+          }
+        ],
+        "review": "UI-created assigned label is deleted by its original identity; reload excludes sidebar and visible badge but preserves one note with unchanged content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-01",
+        "KEEP-09"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.1",
+      "scenarioId": "SCN-REQ-4.1-01",
+      "scenarioName": "Search title and content with highlights",
+      "testFile": "arc-bench/keep/tests/REQ-4.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:667",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "Through UI create isolated Study schedule with Math on Monday, Reading plan with Read a story, and Ocean memo with Calm blue waves. Isolation suffixes cannot introduce the keyword st."
+        ],
+        "when": [
+          "Enter st in Search; inspect each matching note's Highlight st region. Clear Search and click Notes."
+        ],
+        "then": [
+          "Study schedule and Reading plan appear once while Ocean memo is hidden; each match has a visible highlight region whose text is only st, case-insensitively. Clearing restores all three notes with their contents."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Correct keyword inclusion/exclusion",
+            "evidence": "two note count1 checks; other hidden"
+          },
+          {
+            "obligation": "Each matching fragment correct",
+            "evidence": "expectSearchHighlights on each matched note"
+          },
+          {
+            "obligation": "Full list restored",
+            "evidence": "clear + Notes + expectNote for all three"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 10,
+            "code": "await createNote(page, titleMatch, 'Math on Monday');"
+          },
+          {
+            "line": 11,
+            "code": "await createNote(page, contentMatch, 'Read a story');"
+          },
+          {
+            "line": 12,
+            "code": "await createNote(page, other, 'Calm blue waves');"
+          },
+          {
+            "line": 14,
+            "code": "await search.fill('st');"
+          },
+          {
+            "line": 15,
+            "code": "await expect(note(page, titleMatch)).toHaveCount(1);"
+          },
+          {
+            "line": 16,
+            "code": "await expect(note(page, contentMatch)).toHaveCount(1);"
+          },
+          {
+            "line": 17,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          },
+          {
+            "line": 20,
+            "code": "await expectSearchHighlights(note(page, title), 'st');"
+          },
+          {
+            "line": 22,
+            "code": "await search.fill('');"
+          },
+          {
+            "line": 23,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 24,
+            "code": "await expectNote(page, titleMatch, 'Math on Monday');"
+          },
+          {
+            "line": 25,
+            "code": "await expectNote(page, contentMatch, 'Read a story');"
+          },
+          {
+            "line": 26,
+            "code": "await expectNote(page, other, 'Calm blue waves');"
+          }
+        ],
+        "review": "Three isolated notes distinguish title, content and no match. Both matching identities are unique and other hidden; every visible highlight fragment is exact st case-insensitively; clearing restores all content.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-07",
+        "KEEP-10"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-4.1",
+      "scenarioId": "SCN-REQ-4.1-02",
+      "scenarioName": "Choose a suggested label filter",
+      "testFile": "arc-bench/keep/tests/REQ-4.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:667",
+      "testLine": 29,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "Create isolated Call dentist existing with Reminder content assigned Reminders and unlabeled Movie list with Unlabeled content.\nSeed prerequisites (prepared before this scenario):\n- default label: {\"name\": \"Reminders\", \"icon\": \"distinct reminder icon\"}"
+        ],
+        "when": [
+          "Focus Search, click Reminders within Suggested filters, then clear Search and select Notes."
+        ],
+        "then": [
+          "Suggested filters is visible on focus; its Reminders choice includes only the reminder note. Clearing restores both notes exactly once with their saved contents."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Suggested filters appears on focus",
+            "evidence": "search.click + Suggested filters visibility"
+          },
+          {
+            "obligation": "Only Reminders membership",
+            "evidence": "matching expectNote; other hidden"
+          },
+          {
+            "obligation": "Clearing restores both",
+            "evidence": "clear + Notes + expectNote for both"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 30,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 33,
+            "code": "await createNote(page, matching, 'Reminder content', { labels: ['Reminders'] });"
+          },
+          {
+            "line": 34,
+            "code": "await createNote(page, other, 'Unlabeled content');"
+          },
+          {
+            "line": 36,
+            "code": "await search.click();"
+          },
+          {
+            "line": 37,
+            "code": "await expect(section(page, 'Suggested filters')).toBeVisible();"
+          },
+          {
+            "line": 38,
+            "code": "await action(section(page, 'Suggested filters'), 'Reminders').click();"
+          },
+          {
+            "line": 39,
+            "code": "await expectNote(page, matching, 'Reminder content');"
+          },
+          {
+            "line": 40,
+            "code": "await expect(note(page, other)).toBeHidden();"
+          },
+          {
+            "line": 41,
+            "code": "await search.fill('');"
+          },
+          {
+            "line": 42,
+            "code": "await navigate(page, 'Notes');"
+          },
+          {
+            "line": 43,
+            "code": "await expectNote(page, matching, 'Reminder content');"
+          },
+          {
+            "line": 44,
+            "code": "await expectNote(page, other, 'Unlabeled content');"
+          }
+        ],
+        "review": "Search focus exposes Suggested filters; scoped Reminders choice selects only the labeled control; clearing and Notes restores both exact content records.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-07",
+        "KEEP-10"
+      ],
+      "disposition": "reviewed-fixed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-5.1",
+      "scenarioId": "SCN-REQ-5.1-01",
+      "scenarioName": "Save settings and discard canceled changes",
+      "testFile": "arc-bench/keep/tests/REQ-5.1.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:714",
+      "testLine": 4,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "Notes is open. Open Settings menu, choose Settings and record the current Add new items to the bottom checkbox value; Move checked items to bottom, Save and Cancel are available."
+        ],
+        "when": [
+          "Toggle Add new items to the bottom to the opposite value and click Save. Reload and reopen Settings, toggle it back but click Cancel, then reopen once more."
+        ],
+        "then": [
+          "Save closes the dialog and the saved value survives reload. Cancel closes the dialog without committing its pending toggle; reopening still shows the previously saved value."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "Save closes and persists selected value",
+            "evidence": "Save; dialog hidden; reload; checked(saved)"
+          },
+          {
+            "obligation": "Cancel closes and discards pending edit",
+            "evidence": "Cancel; dialog hidden; reopen checked(saved)"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 5,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 7,
+            "code": "await expect(dialog.getByRole('checkbox', { name: 'Move checked items to bottom', exact: true })).toBeVisible();"
+          },
+          {
+            "line": 8,
+            "code": "await expect(action(dialog, 'Save')).toBeVisible();"
+          },
+          {
+            "line": 9,
+            "code": "await expect(action(dialog, 'Cancel')).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await option().setChecked(saved);"
+          },
+          {
+            "line": 13,
+            "code": "await action(dialog, 'Save').click();"
+          },
+          {
+            "line": 14,
+            "code": "await expect(dialog).toBeHidden();"
+          },
+          {
+            "line": 15,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 17,
+            "code": "await expect(option()).toBeChecked({ checked: saved });"
+          },
+          {
+            "line": 18,
+            "code": "await option().setChecked(!saved);"
+          },
+          {
+            "line": 19,
+            "code": "await action(dialog, 'Cancel').click();"
+          },
+          {
+            "line": 20,
+            "code": "await expect(dialog).toBeHidden();"
+          },
+          {
+            "line": 22,
+            "code": "await expect(option()).toBeChecked({ checked: saved });"
+          },
+          {
+            "line": 23,
+            "code": "await action(dialog, 'Cancel').click();"
+          }
+        ],
+        "review": "Current setting is recorded, opposite value saved and checked after reload, a subsequent pending reverse toggle is canceled, and reopening preserves saved state. The second setting is only checked available.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-10"
+      ],
+      "disposition": "reviewed-with-remaining-gaps"
+    },
+    {
+      "requirementId": "REQ-5.2",
+      "scenarioId": "SCN-REQ-5.2-01",
+      "scenarioName": "Switch grid to list and back",
+      "testFile": "arc-bench/keep/tests/REQ-5.2.spec.ts",
+      "source": "arc-bench/keep/requirements/requirements.yaml:746",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "At the evaluator desktop viewport, Notes starts with Grid view accessible description and List view action. Create isolated View alpha, View beta and View gamma notes, each with Layout content."
+        ],
+        "when": [
+          "Click List view and inspect the three note surfaces, then click Grid view and inspect them again."
+        ],
+        "then": [
+          "List mode reports List view, offers Grid view, and aligns nonoverlapping notes in one column; grid mode reports Grid view, offers List view and arranges populated cards across multiple columns. Both modes retain exactly one of each note and its content without prescribing exact pixel widths."
+        ],
+        "obligationEvidence": [
+          {
+            "obligation": "List state and one nonoverlapping column",
+            "evidence": "List view description; Grid view action; expectSingleColumn"
+          },
+          {
+            "obligation": "Grid restored across multiple columns",
+            "evidence": "Grid view description; List view action; expectMultipleColumns"
+          },
+          {
+            "obligation": "Identity/content preserved in both modes",
+            "evidence": "expectNote loops before and after mode restoration"
+          }
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await openHome(page);"
+          },
+          {
+            "line": 7,
+            "code": "await expect(action(page, 'List view')).toBeVisible();"
+          },
+          {
+            "line": 8,
+            "code": "await expect(section(page, 'Notes')).toHaveAccessibleDescription(/Grid view/i);"
+          },
+          {
+            "line": 11,
+            "code": "await action(page, 'List view').click();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(action(page, 'Grid view')).toBeVisible();"
+          },
+          {
+            "line": 13,
+            "code": "await expect(section(page, 'Notes')).toHaveAccessibleDescription(/List view/i);"
+          },
+          {
+            "line": 15,
+            "code": "await expectSingleColumn(titles.map(title => note(page, title)));"
+          },
+          {
+            "line": 17,
+            "code": "await action(page, 'Grid view').click();"
+          },
+          {
+            "line": 18,
+            "code": "await expect(action(page, 'List view')).toBeVisible();"
+          },
+          {
+            "line": 19,
+            "code": "await expect(section(page, 'Notes')).toHaveAccessibleDescription(/Grid view/i);"
+          },
+          {
+            "line": 21,
+            "code": "await expectMultipleColumns(titles.map(title => note(page, title)));"
+          }
+        ],
+        "review": "Three UI-created notes are observed in both modes. List mode now accepts different card widths/centered alignment while requiring a common vertical axis and no overlap; grid requires a side-by-side overlapping-height pair; descriptions/actions/content remain checked.",
+        "evidenceBoundary": "Source-to-test review and focused contract probes; no generated Keep application inspected or evaluated."
+      },
+      "findings": [
+        "KEEP-06"
+      ],
+      "disposition": "reviewed-fixed"
+    }
+  ],
+  "findings": [
+    {
+      "id": "KEEP-01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:84",
+        "arc-bench/keep/requirements/requirements.yaml:115",
+        "arc-bench/keep/requirements/requirements.yaml:162",
+        "arc-bench/keep/requirements/requirements.yaml:418",
+        "arc-bench/keep/requirements/requirements.yaml:621"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.1.spec.ts",
+        "arc-bench/keep/tests/REQ-2.2.spec.ts",
+        "arc-bench/keep/tests/REQ-2.3.spec.ts",
+        "arc-bench/keep/tests/REQ-2.8.spec.ts",
+        "arc-bench/keep/tests/REQ-3.3.spec.ts"
+      ],
+      "explanation": "Ordinary title/content/label presence was treated as one unique text node inside a unique note; duplicate visible copies of correct text were rejected.",
+      "resolution": "Scoped existential visible-text observations, retaining strict note region and action identities.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250",
+        "arc-bench/keep/requirements/requirements.yaml:312"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts"
+      ],
+      "explanation": "Multiple UI deletion/archive operations may leave multiple same-named live notifications; helper required globally unique feedback.",
+      "resolution": "Feedback presence accepts repeated visible statuses. Actual Undo/Dismiss action selection remains strict when exercised.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-03",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Zero child regions also passed when Deleted notes itself was absent.",
+      "resolution": "Require exactly one non-hidden accessible Deleted notes collection before checking zero contents, before and after reload; zero-area genuine empty collections remain valid.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-04",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Strict locator OR rejected coexisting optional confirmation and already-empty collection.",
+      "resolution": "Poll two public outcomes as booleans, confirm when shown, then assert empty named collection.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-05",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:377"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.7.spec.ts"
+      ],
+      "explanation": "Color tests only checked the renamed action although Then explicitly says that is insufficient.",
+      "resolution": "Connect the already existing rendered-pixel light-green surface oracle to both color scenarios; keep title/content/action/reload checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-06",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:746"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-5.2.spec.ts"
+      ],
+      "explanation": "List view enforced left edges within 3 pixels, rejecting valid single-column centered/different-width cards.",
+      "resolution": "Require shared vertical line through surfaces and pairwise vertical separation, keeping multiple-column grid check and state/content checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-07",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:667"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-4.1.spec.ts"
+      ],
+      "explanation": "Each matching fragment may occur more than once, but one global matching highlight locator had to be unique.",
+      "resolution": "Require at least one visible named fragment and check every visible fragment against the exact keyword, preserving the scoped note identity.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-08",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:537"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-3.1.spec.ts"
+      ],
+      "explanation": "Final Done click had no assertion that reopened management closes.",
+      "resolution": "Assert the named management dialog hidden after final Done.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-09",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:162",
+        "arc-bench/keep/requirements/requirements.yaml:418",
+        "arc-bench/keep/requirements/requirements.yaml:621"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.3.spec.ts",
+        "arc-bench/keep/tests/REQ-2.8.spec.ts",
+        "arc-bench/keep/tests/REQ-3.3.spec.ts"
+      ],
+      "explanation": "Removed plain-text content/labels were counted even in retained hidden markup.",
+      "resolution": "Only visible obsolete text must be absent, preserving saved-state and later filter/reload checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "id": "KEEP-10",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:19",
+        "arc-bench/keep/requirements/requirements.yaml:192",
+        "arc-bench/keep/requirements/requirements.yaml:312",
+        "arc-bench/keep/requirements/requirements.yaml:667",
+        "arc-bench/keep/requirements/requirements.yaml:714"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-1.1.spec.ts",
+        "arc-bench/keep/tests/REQ-2.4.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts",
+        "arc-bench/keep/tests/REQ-4.1.spec.ts",
+        "arc-bench/keep/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Broader prose obligations are not fully exercised: keyboard-accessible hover actions; icon uniqueness; visual emphasis of keyword regions; reload durability of Undo transitions; Save/Cancel behavior for the second checkbox.",
+      "resolution": "Keep these as coverage gaps rather than infer behavior from roles, feedback, or the scenario denominator. No new scenario IDs were invented.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "id": "KEEP-11",
+      "severity": "medium",
+      "category": "observation-risk",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:115",
+        "arc-bench/keep/requirements/requirements.yaml:19"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.2.spec.ts",
+        "arc-bench/keep/tests/REQ-1.1.spec.ts"
+      ],
+      "explanation": "Normalized DOM text may disagree with visible multiline content rendered as adjacent block nodes; clipped screen-reader-only sidebar text can also differ from Playwright text visibility.",
+      "resolution": "Source semantics retained; no arbitrary CSS fallback or content-internal access added. These representation cases require further independent implementations/probes.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "id": "KEEP-12",
+      "severity": "medium",
+      "category": "observation-risk",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Empty Trash currently counts nested region roles as note regions; an unspecified auxiliary named region inside Deleted notes could be rejected.",
+      "resolution": "Do not pretend region role alone uniquely distinguishes arbitrary note/auxiliary objects. Existing explicit note-region contract remains; further public identity disambiguation is needed for such auxiliary layouts.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "id": "KEEP-13",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.4",
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.5",
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.6"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.4.spec.ts",
+        "arc-bench/keep/tests/REQ-2.5.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts"
+      ],
+      "explanation": "A matching note elsewhere on the page could satisfy a required Trash/Archived collection member while the named collection was empty.",
+      "resolution": "Bind each positive Trash/Archived result to the existing named collection and exact note identity, retaining content and global uniqueness checks.",
+      "validation": "Positive in-collection member and matching out-of-collection preview negative contract added."
+    }
+  ],
+  "changedFiles": [
+    "arc-bench/keep/tests/REQ-2.3.spec.ts",
+    "arc-bench/keep/tests/REQ-2.4.spec.ts",
+    "arc-bench/keep/tests/REQ-2.5.spec.ts",
+    "arc-bench/keep/tests/REQ-2.6.spec.ts",
+    "arc-bench/keep/tests/REQ-2.7.spec.ts",
+    "arc-bench/keep/tests/REQ-2.8.spec.ts",
+    "arc-bench/keep/tests/REQ-3.1.spec.ts",
+    "arc-bench/keep/tests/REQ-3.3.spec.ts",
+    "arc-bench/keep/tests/REQ-4.1.spec.ts",
+    "arc-bench/keep/tests/REQ-5.2.spec.ts",
+    "arc-bench/keep/tests/helpers.ts"
+  ],
+  "limitations": [
+    "Source review and targeted contract probes do not establish measured real-application false-negative rates or all 33 business passes.",
+    "Existing explicit role/name contracts remain derivative benchmark conventions. No new ARIA structure or source semantics introduced.",
+    "Broader keyboard, icon, highlight visual emphasis, Undo reload and second-setting behavior are not fully tested.",
+    "Multiline DOM text, clipped accessible labels and auxiliary regions in an empty collection retain explicitly documented representation risks.",
+    "The existing broad light-green pixel threshold is a bounded visual oracle; it is not screenshot similarity or proof that every human-recognized light-green shade is accepted."
+  ],
+  "validation": {
+    "typecheck": "All Keep spec/helper/fixture/visual files plus new contract spec passed TypeScript; no controller source changed, so no controller full suite run.",
+    "browser": "Parent execution initial 17-case run identified two zero-area empty collection false negatives. Those are fixed without adding padding. Current suite has 21 cases, including hidden/duplicate collection and collection-membership counterexamples; final parent result authoritative."
+  }
+}

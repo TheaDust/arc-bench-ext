@@ -1,0 +1,56 @@
+{
+  "kind": "static-only; no Playwright tests executed",
+  "tasks": {
+    "bookstack": {
+      "requirements": 26,
+      "scenarios": 49,
+      "specs": 26,
+      "preservedScenarioIds": 49,
+      "exactTitleMapping": true,
+      "validReferences": true
+    },
+    "keep": {
+      "requirements": 18,
+      "scenarios": 41,
+      "specs": 18,
+      "preservedScenarioIds": 33,
+      "exactTitleMapping": true,
+      "validReferences": true
+    }
+  },
+  "typecheck": {
+    "passed": true,
+    "rootSpecs": 44,
+    "includes": "BookStack and Keep specs plus their imported dependencies",
+    "command": "node node_modules/typescript/bin/tsc --project validation/lifecycle.tsconfig.json"
+  },
+  "revision": "2026-11-08-keep-lifecycle",
+  "sourceReview": {
+    "reviewedScenarioIds": {
+      "bookstack": [
+        "SCN-REQ-4.5-03",
+        "SCN-REQ-5.5-03",
+        "SCN-REQ-8.1-03"
+      ],
+      "keep": [
+        "SCN-REQ-2.3-02",
+        "SCN-REQ-3.3-03",
+        "SCN-REQ-3.3-04",
+        "SCN-REQ-4.1-03",
+        "SCN-REQ-2.10-01",
+        "SCN-REQ-2.10-02",
+        "SCN-REQ-2.11-01",
+        "SCN-REQ-2.11-02"
+      ]
+    },
+    "boundary": "Static assertions mapped in audit/bookstack.json and audit/keep.json; not runtime evidence."
+  },
+  "sourceIntegrity": {
+    "passed": true,
+    "command": "node validation/audit-inputs.mjs",
+    "tasks": 8,
+    "requirements": 412,
+    "scenarios": 736,
+    "collectionChecked": false
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": [
+    "../arc-bench/bookstack/tests/**/*.ts",
+    "../arc-bench/keep/tests/**/*.ts"
+  ]
+}

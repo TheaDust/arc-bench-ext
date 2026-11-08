@@ -1,5 +1,5 @@
 {
-  "check": "review identity, completeness and nonempty coverage fields; not a semantic correctness proof",
+  "check": "Static source identities, GWT mirror and exact declared test-title mapping; not Playwright collection or browser execution",
   "tasks": {
     "12306": {
       "requirements": 93,
@@ -51,11 +51,10 @@
         "arc-bench/bookstack/tests/helpers.ts"
       ],
       "limitations": [
-        "This is a derivative benchmark source review, not an upstream official-score certification.",
-        "BOOK-09 broader prose coverage and BOOK-11 parent-entry/text-scope/tag-serialization ambiguities remain explicit.",
-        "Extension scenarios were executed against a manually extended reference fixture, not a ShallowCode-generated candidate; this validates oracle feasibility, not an official full-application pass rate.",
-        "Existing 24/35 identities were preserved; the revision now has 26 atomic requirements and 49 scenarios, so older scores are not directly comparable.",
-        "Draft-title activity leakage and page/chapter deletion are newly covered; full eight-task and multi-candidate behavior is outside this review."
+        "2026-11-08-keep-lifecycle: modified and new scenarios have not been executed against an application. Static review does not prove oracle feasibility or generated-model difficulty.",
+        "Parent 49/49 reference-fixture execution belongs to the parent inputs; BookStack remains 26 requirements / 49 scenarios.",
+        "BOOK-09 broader prose coverage and BOOK-11 repeated parent-entry/body/tag observation boundaries remain open.",
+        "Direct-URL checks inspect public headings, body text and editors; they do not certify private database deletion or API authorization."
       ]
     },
     "ctrip": {
@@ -148,8 +147,8 @@
       ]
     },
     "keep": {
-      "requirements": 16,
-      "scenarios": 33,
+      "requirements": 18,
+      "scenarios": 41,
       "findings": 13,
       "changedFiles": [
         "arc-bench/keep/tests/REQ-2.3.spec.ts",
@@ -162,14 +161,17 @@
         "arc-bench/keep/tests/REQ-3.3.spec.ts",
         "arc-bench/keep/tests/REQ-4.1.spec.ts",
         "arc-bench/keep/tests/REQ-5.2.spec.ts",
-        "arc-bench/keep/tests/helpers.ts"
+        "arc-bench/keep/tests/helpers.ts",
+        "arc-bench/keep/requirements/requirements.yaml",
+        "arc-bench/keep/tests/REQ-2.10.spec.ts",
+        "arc-bench/keep/tests/REQ-2.11.spec.ts"
       ],
       "limitations": [
-        "Source review and targeted contract probes do not establish measured real-application false-negative rates or all 33 business passes.",
-        "Existing explicit role/name contracts remain derivative benchmark conventions. No new ARIA structure or source semantics introduced.",
-        "Broader keyboard, icon, highlight visual emphasis, Undo reload and second-setting behavior are not fully tested.",
-        "Multiline DOM text, clipped accessible labels and auxiliary regions in an empty collection retain explicitly documented representation risks.",
-        "The existing broad light-green pixel threshold is a bounded visual oracle; it is not screenshot similarity or proof that every human-recognized light-green shade is accepted."
+        "2026-11-08-keep-lifecycle: modified and new scenarios have not been executed against an application. Static review does not prove oracle feasibility or generated-model difficulty.",
+        "Keep adds 2 atomic requirements / 8 scenarios, retaining all original 16/33 identities; current denominator is 18/41.",
+        "Existing keyboard/icon/highlight-visual/second-setting gaps and multiline/clipped-text/auxiliary-region observation risks remain.",
+        "Light-green observation reuses the existing screenshot surface oracle and retains its known color-threshold limitations.",
+        "A deleted archived note explicitly returns to Archived; new Restore and permanent-delete controls are public benchmark contracts."
       ]
     },
     "prestashop": {
@@ -315,6 +317,6 @@
       ]
     }
   },
-  "requirements": 410,
-  "scenarios": 728
+  "requirements": 412,
+  "scenarios": 736
 }

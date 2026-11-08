@@ -1,0 +1,99 @@
+{
+  "revision": "2026-11-07-bookstack-lifecycle",
+  "manifestSha256": "9816b0ca90b6a88ea39aa9e342ff63031d7cdf8b1c3164a42f4316e0ecfb8d35",
+  "recordedAt": "2026-11-07T13:21:31.768Z",
+  "status": "source-reviewed-targeted-validation-passed",
+  "scope": {
+    "tasks": 8,
+    "atomicRequirements": 410,
+    "scenarios": 728,
+    "allScenarioGwtReviewed": true,
+    "formalIdentitiesAndTitlesUnchanged": false,
+    "extensionAdded": {
+      "task": "bookstack",
+      "atomicRequirements": 2,
+      "scenarios": 14
+    }
+  },
+  "findings": {
+    "total": 112,
+    "fixed": 91,
+    "otherFindings": 21,
+    "source": "audit/summary.json"
+  },
+  "typecheck": {
+    "passed": true,
+    "command": "npm run typecheck"
+  },
+  "newContracts": {
+    "uniquePassed": 175,
+    "failed": 0,
+    "skipped": 0,
+    "report": "audit/contract-results.json",
+    "reportSha256": "69ea8854ebae295f089dda5f0cc3e83f7045a2ffe16f52ee6389453350106210",
+    "provenance": "audit/contracts-reuse.json"
+  },
+  "existingContracts": {
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0,
+    "report": "validation/contracts-report.json",
+    "reportSha256": "24f9fd0d8008beeb0dd363e5da5484baa419339420e7e724b6723c9b5eeb7b1a"
+  },
+  "collection": {
+    "passed": true,
+    "report": "validation/collection-report.json",
+    "reportSha256": "bf255b6a4b7badf1d96a491ce5d44be7d9a70011f8062888f45655b2478b3407"
+  },
+  "sourceIntegrity": {
+    "frozenFiles": 715,
+    "validationInputs": 664,
+    "parentFilesChecked": 739,
+    "parentUnchanged": false,
+    "patchApplyCheck": true
+  },
+  "requirementsChangedTasks": [
+    "bookstack",
+    "ctrip",
+    "github",
+    "prestashop",
+    "sheet"
+  ],
+  "applications": {
+    "generated": false,
+    "modified": false,
+    "completeBusinessScenariosExecuted": 0,
+    "referenceFixtureScenariosExecuted": 49
+  },
+  "controllerSourceModifiedByThisReview": false,
+  "limitations": [
+    "Static review and targeted synthetic browser contracts do not establish zero false negatives or full-application quality.",
+    "New public requirement conventions require the same updated inputs for all methods; old scores do not transfer.",
+    "175 unique contract results combine a full 174-case run with 25 StackOverflow supplemental cases; 150 unchanged cases retain their original evidence.",
+    "The 14 BookStack extension scenarios passed against a manually extended local reference fixture, not a ShallowCode-generated candidate; this is oracle feasibility evidence, not a candidate pass rate.",
+    "The reference fixture exposed and fixed a public activity leak of draft titles; this does not establish that all candidates implement the same privacy rule."
+  ],
+  "extension": {
+    "task": "bookstack",
+    "revision": "2026-11-07-bookstack-lifecycle",
+    "addedAtomicRequirements": 2,
+    "addedScenarios": 14,
+    "referenceFixture": "Existing generated BookStack app extended with page/chapter deletion UI, a second seeded account and draft-activity filtering; used only to validate oracle feasibility.",
+    "scenariosPassed": 49,
+    "scenariosTotal": 49
+  },
+  "closeout": {
+    "main": {
+      "positive": 4,
+      "mutants": 7,
+      "report": "validation/closeout/report.json",
+      "reportSha256": "a3916a1abf5ac9cf31e1497f34a0150d7916a22925105a2297cbfe02e57d7f40"
+    },
+    "records": {
+      "positive": 10,
+      "mutants": 7,
+      "report": "validation/closeout/records-summary.json",
+      "reportSha256": "91ad420617769d09fbd9e7781e7af63b6ae86d313919b251d8ce7c96e38242dc"
+    }
+  }
+}

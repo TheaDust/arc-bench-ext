@@ -3882,6 +3882,170 @@
       ]
     },
     {
+      "title": "..\\arc-bench\\bookstack\\tests\\REQ-11.1.spec.ts",
+      "file": "../arc-bench/bookstack/tests/REQ-11.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-11.1: Keep a saved revision private until its author publishes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f1481446b3dfbd00a02d-39a7dd47217f7d6215de",
+          "file": "../arc-bench/bookstack/tests/REQ-11.1.spec.ts",
+          "line": 51,
+          "column": 5
+        },
+        {
+          "title": "REQ-11.1: Keep a second author's revision private and reject its stale publish",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f1481446b3dfbd00a02d-1b482de965db47a4884c",
+          "file": "../arc-bench/bookstack/tests/REQ-11.1.spec.ts",
+          "line": 96,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\bookstack\\tests\\REQ-11.2.spec.ts",
+      "file": "../arc-bench/bookstack/tests/REQ-11.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-11.2: Move a chapter without changing its pages",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd8f888dd95709b8f659-37aee790897b26984024",
+          "file": "../arc-bench/bookstack/tests/REQ-11.2.spec.ts",
+          "line": 19,
+          "column": 5
+        },
+        {
+          "title": "REQ-11.2: Move a same-title chapter and preserve its order and references",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "fd8f888dd95709b8f659-edda5d6ccea1a682e649",
+          "file": "../arc-bench/bookstack/tests/REQ-11.2.spec.ts",
+          "line": 47,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\bookstack\\tests\\REQ-11.3.spec.ts",
+      "file": "../arc-bench/bookstack/tests/REQ-11.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-11.3: Protect a newer publication from a stale editor",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f3d54762f204988ae436-0df91deef38e4f85ecaf",
+          "file": "../arc-bench/bookstack/tests/REQ-11.3.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "REQ-11.3: Save stale editor text to the page's new book",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f3d54762f204988ae436-28b4f59d8acb8578c0bf",
+          "file": "../arc-bench/bookstack/tests/REQ-11.3.spec.ts",
+          "line": 67,
+          "column": 5
+        },
+        {
+          "title": "REQ-11.3: Reject a stale page save after deletion",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "bookstack",
+              "projectName": "bookstack",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "f3d54762f204988ae436-7b6d2ca85cf1bbaf688c",
+          "file": "../arc-bench/bookstack/tests/REQ-11.3.spec.ts",
+          "line": 94,
+          "column": 5
+        }
+      ]
+    },
+    {
       "title": "..\\arc-bench\\bookstack\\tests\\REQ-2.1.spec.ts",
       "file": "../arc-bench/bookstack/tests/REQ-2.1.spec.ts",
       "column": 0,
@@ -11186,6 +11350,102 @@
       ]
     },
     {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-2.10.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-2.10.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.10: Restore an active note with its saved attributes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c9947e94e8347c4cf74-e28257faaa8d92300e3f",
+          "file": "../arc-bench/keep/tests/REQ-2.10.spec.ts",
+          "line": 7,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.10: Restore a deleted archived note to Archived",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "9c9947e94e8347c4cf74-38bd103ad46bbe9881fa",
+          "file": "../arc-bench/keep/tests/REQ-2.10.spec.ts",
+          "line": 45,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-2.11.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-2.11.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-2.11: Permanently delete only the selected trashed note",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "80da186e99bb77844daa-9a0b859659abb14f9152",
+          "file": "../arc-bench/keep/tests/REQ-2.11.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.11: Cancel permanent deletion and restore the note",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "80da186e99bb77844daa-99555a30e7d22dc3d8cc",
+          "file": "../arc-bench/keep/tests/REQ-2.11.spec.ts",
+          "line": 45,
+          "column": 5
+        }
+      ]
+    },
+    {
       "title": "..\\arc-bench\\keep\\tests\\REQ-2.2.spec.ts",
       "file": "../arc-bench/keep/tests/REQ-2.2.spec.ts",
       "column": 0,
@@ -11256,7 +11516,27 @@
           ],
           "id": "d05b6e14a57e9b3a8c7b-e889b2384cf751170e64",
           "file": "../arc-bench/keep/tests/REQ-2.3.spec.ts",
-          "line": 5,
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-2.3: Rename a note without losing its attributes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "d05b6e14a57e9b3a8c7b-4b8e3b83d7be6b369680",
+          "file": "../arc-bench/keep/tests/REQ-2.3.spec.ts",
+          "line": 22,
           "column": 5
         }
       ]
@@ -11768,7 +12048,47 @@
           ],
           "id": "1988e87fdebb2dabc9a6-5b9c50f7ff664dd7f5e9",
           "file": "../arc-bench/keep/tests/REQ-3.3.spec.ts",
-          "line": 5,
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.3: Rename a label across active archived and deleted notes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1988e87fdebb2dabc9a6-200ad258424723e6c2d8",
+          "file": "../arc-bench/keep/tests/REQ-3.3.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "REQ-3.3: Delete a label across active archived and deleted notes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "1988e87fdebb2dabc9a6-562bd02e17bc87ae9448",
+          "file": "../arc-bench/keep/tests/REQ-3.3.spec.ts",
+          "line": 65,
           "column": 5
         },
         {
@@ -11788,7 +12108,7 @@
           ],
           "id": "1988e87fdebb2dabc9a6-3ee05af3147fdad8fecc",
           "file": "../arc-bench/keep/tests/REQ-3.3.spec.ts",
-          "line": 26,
+          "line": 124,
           "column": 5
         }
       ]
@@ -11816,7 +12136,27 @@
           ],
           "id": "de6caa8a5418b7d7e7a3-9953cb784850dbcd7e6e",
           "file": "../arc-bench/keep/tests/REQ-4.1.spec.ts",
-          "line": 5,
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "REQ-4.1: Exclude archived and deleted matches from search",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "de6caa8a5418b7d7e7a3-752c720d61760cdbc539",
+          "file": "../arc-bench/keep/tests/REQ-4.1.spec.ts",
+          "line": 30,
           "column": 5
         },
         {
@@ -11836,7 +12176,7 @@
           ],
           "id": "de6caa8a5418b7d7e7a3-1a8cf801fbaf7c4ebfff",
           "file": "../arc-bench/keep/tests/REQ-4.1.spec.ts",
-          "line": 29,
+          "line": 70,
           "column": 5
         }
       ]
@@ -11893,6 +12233,198 @@
           "id": "ccee854f3370ff90b810-f904168474bcead12b14",
           "file": "../arc-bench/keep/tests/REQ-5.2.spec.ts",
           "line": 5,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-6.1.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-6.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.1: Show both same-title notes independently in search and layouts",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-b4a19b95ac3f3836f221",
+          "file": "../arc-bench/keep/tests/REQ-6.1.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Edit and restore the correct same-title note across collections",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-ecbfe17372909f02d49f",
+          "file": "../arc-bench/keep/tests/REQ-6.1.spec.ts",
+          "line": 56,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-6.2.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-6.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2: Recreate a label without inheriting old memberships",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0c9474e3e44261237194-3200c84821d46f56af45",
+          "file": "../arc-bench/keep/tests/REQ-6.2.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-6.3.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-6.3.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.3: Undo a deletion after a label rename and another note edit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4f54f63c14ba8f981751-4dd2340d15e14fdb9134",
+          "file": "../arc-bench/keep/tests/REQ-6.3.spec.ts",
+          "line": 7,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\keep\\tests\\REQ-6.4.spec.ts",
+      "file": "../arc-bench/keep/tests/REQ-6.4.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.4: Merge independent title and content edits from two tabs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-4cb39db2d3fe9f1b219f",
+          "file": "../arc-bench/keep/tests/REQ-6.4.spec.ts",
+          "line": 21,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Reload the latest note after a conflicting edit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-3e276a8de0ac6b766a58",
+          "file": "../arc-bench/keep/tests/REQ-6.4.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Explicitly overwrite only conflicting note fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-389c587b6f5b1c3be171",
+          "file": "../arc-bench/keep/tests/REQ-6.4.spec.ts",
+          "line": 58,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.4: Reject a stale save after another tab deletes the note",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "keep",
+              "projectName": "keep",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "38e1c349a589e47c372b-6f41f3b53cdcd52bbe99",
+          "file": "../arc-bench/keep/tests/REQ-6.4.spec.ts",
+          "line": 79,
           "column": 5
         }
       ]
@@ -17988,10 +18520,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-07T13:26:05.485Z",
-    "duration": 1101.2230000000002,
+    "startTime": "2026-11-08T12:11:06.903Z",
+    "duration": 18098.526,
     "expected": 0,
-    "skipped": 728,
+    "skipped": 751,
     "unexpected": 0,
     "flaky": 0
   }

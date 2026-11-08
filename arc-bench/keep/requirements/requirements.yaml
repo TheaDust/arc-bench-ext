@@ -170,6 +170,8 @@ children:
         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
 
         Note titles accept the source example name plus a deterministic run/worker/case suffix. Notes and their mutable action states are produced by the described note interactions.
+
+        Users may also replace Title and Content together. Closing saves the same note under the new title, updates its region name and title-bearing action names, and removes the old title and content from the note. Its pin state and assigned labels remain unchanged; the renamed note is unique in its pinned/regular section and label filters. Reopening shows the new saved values. Other notes are unaffected and changes survive reload.
       image:
       - id: IMG-NOTE-EDITING
         reference: reference/note_editing.png
@@ -188,6 +190,19 @@ children:
         references:
         - \ref[requirement](REQ-2.2)
         - \ref[image](IMG-NOTE-EDITING)
+    - id: SCN-REQ-2.3-02
+      name: Rename a note without losing its attributes
+      steps:
+        - id: STEP-REQ-2.3-02-01
+          Given: Create isolated Project label, a pinned Original project title note with Original project content assigned that label, and an unlabelled regular Rename control note with Unchanged control content through the UI.
+          When: Open the original note, verify its saved Title and Content, replace them with isolated Renamed project title and Renamed project content, Close and reload. Select Project label, reopen the renamed note and close it, then return to Notes.
+          Then: The old note region is absent; the renamed note exists exactly once in Pinned notes and not Other notes, shows replacement content without Original project content, retains its label and Unpin pressed=true. Rename control retains its content. The label view contains the renamed note once and excludes the unlabelled control; reopened Title and Content contain the new values. Returning to Notes still shows one renamed note and no original note.
+          references:
+            - \ref[requirement](REQ-2.2)
+            - \ref[requirement](REQ-2.8)
+            - \ref[requirement](REQ-2.9)
+            - \ref[requirement](REQ-3.1)
+            - \ref[requirement](REQ-3.2)
     children: []
   - id: REQ-2.4
     name: Delete notes and recover through notification Undo
@@ -200,6 +215,8 @@ children:
         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
 
         Note titles accept the source example name plus a deterministic run/worker/case suffix. Notes and their mutable action states are produced by the described note interactions.
+
+        The same More options / Delete Note action is available on archived notes. Moving an active or archived note to Trash retains its last active/archived state, pin state, background color and label membership for restoration. Only the selected note changes state.
       image:
       - id: IMG-NOTE-MORE-OPTIONS-DROPDOWN
         reference: reference/note_more_options_dropdown.png
@@ -525,6 +542,70 @@ children:
         - \ref[requirement](REQ-2.2)
         - \ref[image](IMG-PIN-BUTTON)
     children: []
+  - id: REQ-2.10
+    name: Restore individually deleted notes
+    description:
+      text: Trash exposes "Restore {title}"(role=button) within each deleted note region. Restoring removes only that note from Deleted notes and returns it to its last active or archived state before deletion. Title, content, pin state, background color and current label assignments survive deletion and restoration. Active restored notes return to the proper Pinned notes / Other notes section and their active label filters; restored archived notes stay excluded from Notes and active label filters until unarchived. Other deleted notes are unchanged. Restoration persists across navigation and reload. Restore leaves Trash open, so remaining Deleted notes members can still be inspected.
+    scenarios:
+      - id: SCN-REQ-2.10-01
+        name: Restore an active note with its saved attributes
+        steps:
+          - id: STEP-REQ-2.10-01-01
+            Given: Create isolated Restore label and a pinned light-green Restore pinned note with Restore all saved attributes assigned that label. Create Keep in Trash with Other deleted content; delete both notes through UI and open Trash.
+            When: Verify both Deleted notes members, hover Restore pinned note and click its Restore action. Open Notes and reload, inspect the restored note and its label filter, then inspect Archived and Trash.
+            Then: Restore removes only the selected note from Deleted notes. After reload the restored note exists exactly once in Pinned notes and not Other notes, retains its title, content, visible label, Unpin pressed=true and visibly light-green surface with the matching background action name. Its label filter contains it once and excludes the other deleted note. Archived and Trash exclude the restored note; Keep in Trash remains once in Deleted notes with its content.
+            references:
+              - \ref[requirement](REQ-2.2)
+              - \ref[requirement](REQ-2.4)
+              - \ref[requirement](REQ-2.7)
+              - \ref[requirement](REQ-2.8)
+              - \ref[requirement](REQ-2.9)
+              - \ref[requirement](REQ-3.1)
+              - \ref[requirement](REQ-3.2)
+      - id: SCN-REQ-2.10-02
+        name: Restore a deleted archived note to Archived
+        steps:
+          - id: STEP-REQ-2.10-02-01
+            Given: Create isolated Archived restore label, Restore archived note with Return to the archived collection assigned that label, and unlabelled Active restore control with Keep this active note. Archive the labelled note, then delete it from Archived and open Trash.
+            When: Restore the labelled note, open Archived and reload. Inspect its label filter and Notes, then unarchive the restored note and inspect its label filter and Trash.
+            Then: Trash removes the restored note. After reload Archived notes contains it exactly once with saved title, content and label, excluding the active control. Before unarchiving, the restored note is absent from Notes and its active label filter while Notes retains the active control. After unarchiving the label filter contains the restored note once with its content and label, excluding the unlabelled control, and Trash still excludes the restored note.
+            references:
+              - \ref[requirement](REQ-2.2)
+              - \ref[requirement](REQ-2.4)
+              - \ref[requirement](REQ-2.6)
+              - \ref[requirement](REQ-2.8)
+              - \ref[requirement](REQ-3.1)
+              - \ref[requirement](REQ-3.2)
+    children: []
+  - id: REQ-2.11
+    name: Permanently delete an individual trashed note
+    description:
+      text: Each deleted note exposes "Delete forever {title}"(role=button) in Trash. It opens "Delete note forever"(role=dialog) with "Delete forever"(role=button) and "Cancel"(role=button). Confirming permanently removes only the selected note, closes the dialog and leaves Trash open. It cannot subsequently be restored; other deleted notes and all active and archived notes retain their saved content and state. Cancel closes the dialog while preserving the selected deleted note and its Restore action. Both confirmation and cancellation outcomes persist across reload. This is independent of the existing Empty Trash bulk action.
+    scenarios:
+      - id: SCN-REQ-2.11-01
+        name: Permanently delete only the selected trashed note
+        steps:
+          - id: STEP-REQ-2.11-01-01
+            Given: UI-create Delete forever target with Remove this content permanently, Keep deleted sibling with Keep other deleted content, Keep active sibling with Keep active content, and Keep archived sibling with Keep archived content. Archive the fourth note; delete the first two and open Trash.
+            When: On the target note click Delete forever {title}, inspect the Delete note forever dialog and its Cancel action, then click Delete forever within that dialog. Reload Trash, inspect the other deleted note, and open Notes and Archived.
+            Then: The dialog closes. The target is absent from Trash before and after reload, while the other deleted note remains exactly once in Deleted notes with its content and Restore action. Notes retains the active control once and excludes the target and archived control. Archived notes retains the archived control once and excludes the target and active control.
+            references:
+              - \ref[requirement](REQ-2.2)
+              - \ref[requirement](REQ-2.4)
+              - \ref[requirement](REQ-2.6)
+              - \ref[requirement](REQ-2.10)
+      - id: SCN-REQ-2.11-02
+        name: Cancel permanent deletion and restore the note
+        steps:
+          - id: STEP-REQ-2.11-02-01
+            Given: UI-create isolated Cancel permanent deletion with Canceled deletion retains this content, delete it through More options / Delete Note and open Trash.
+            When: Click Delete forever {title}, verify the Delete note forever dialog and Delete forever confirmation action, then Cancel. Reload Trash, restore the note, select Notes and reload, then inspect Trash.
+            Then: Cancel closes the dialog and preserves exactly one Deleted notes member with its saved title and content before and after reload. Restore remains usable and removes the note from Trash; after reload Notes contains the same saved note exactly once, and Trash continues to exclude it.
+            references:
+              - \ref[requirement](REQ-2.2)
+              - \ref[requirement](REQ-2.4)
+              - \ref[requirement](REQ-2.10)
+    children: []
 - id: REQ-3
   name: Organize with labels
   description:
@@ -627,6 +708,8 @@ children:
         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
 
         User-label names accept the source example name plus a deterministic run/worker/case suffix. User labels are created through Edit Labels, while the default Reminders label already exists.
+
+        Label renames and deletions apply to active, archived and trashed notes, including their visible label text. Rename preserves membership for all three states. Deletion removes only that label assignment, retaining every note's title, content, lifecycle state and other label assignments. Restoring or unarchiving a note uses the current label names and memberships; a removed label never reappears. The Note labels chooser no longer offers deleted labels and retains the other checked labels.
       image:
       - id: IMG-MANAGE-LABELS
         reference: reference/manage_labels.png
@@ -657,6 +740,34 @@ children:
         references:
         - \ref[requirement](REQ-2.8)
         - \ref[image](IMG-MANAGE-LABELS)
+    - id: SCN-REQ-3.3-03
+      name: Rename a label across active archived and deleted notes
+      steps:
+        - id: STEP-REQ-3.3-03-01
+          Given: Create isolated Lifecycle label and three notes assigned it, Labeled active note, Labeled archived note and Labeled deleted note, each with Retain this membership. Archive the second note and delete the third through UI.
+          When: Rename Lifecycle label to isolated Renamed lifecycle label in Edit Labels, click Save label with the original name and Done, then reload. Inspect Notes, Archived and Trash, restore the deleted note and select the renamed sidebar label.
+          Then: Sidebar contains the renamed label once and no original label. Each note appears exactly once with unchanged content only in its proper Other notes, Archived notes or Deleted notes collection, showing the renamed label and no old label. The renamed label filter includes the active and restored notes once each, with the restored note displaying the renamed label, and excludes the still-archived note.
+          references:
+            - \ref[requirement](REQ-2.4)
+            - \ref[requirement](REQ-2.6)
+            - \ref[requirement](REQ-2.8)
+            - \ref[requirement](REQ-2.10)
+            - \ref[requirement](REQ-3.1)
+            - \ref[requirement](REQ-3.2)
+    - id: SCN-REQ-3.3-04
+      name: Delete a label across active archived and deleted notes
+      steps:
+        - id: STEP-REQ-3.3-04-01
+          Given: Create isolated Remove lifecycle label and Keep lifecycle label. Create Active label removal, Archived label removal and Deleted label removal notes, each with Preserve this content and both labels assigned. Archive the second and delete the third.
+          When: Delete Remove lifecycle label through Edit Labels, click Done and reload. Inspect Notes, Archived and Trash; restore the deleted note, unarchive the archived note and select Keep lifecycle label. Open the restored note's Note labels chooser, close it and the editor, then reload and return to Notes.
+          Then: Sidebar loses only the removed label and retains Keep lifecycle label once. Each note initially stays in its proper collection with its title, content and retained label unchanged and no removed label. After restoration and unarchiving all three appear exactly once in the retained-label filter. The chooser has no removed-label checkbox and retains the checked Keep lifecycle label. After reload all three notes and their content remain in Notes and none displays the removed label.
+          references:
+            - \ref[requirement](REQ-2.4)
+            - \ref[requirement](REQ-2.6)
+            - \ref[requirement](REQ-2.8)
+            - \ref[requirement](REQ-2.10)
+            - \ref[requirement](REQ-3.1)
+            - \ref[requirement](REQ-3.2)
     children: []
 - id: REQ-4
   name: Find personal notes
@@ -673,6 +784,8 @@ children:
         The current search is produced by Search input or Suggested filters selection; no search state is preloaded.
 
         This is a personal workspace without authentication or a reminder scheduler; Reminders is a label, not a scheduled notification feature. The interface uses en-US.
+
+        Keyword search from Notes excludes archived and trashed notes even when their titles or content match. Unarchiving an archived note or restoring a note deleted from Notes makes it eligible for search again; each active matching note appears once and unrelated notes remain excluded. These lifecycle changes survive reload.
       image:
       - id: IMG-SEARCH-SUGGESTED-FILTERS
         reference: reference/search_suggested_filters.png
@@ -704,6 +817,18 @@ children:
         references:
         - \ref[requirement](REQ-2.8)
         - \ref[image](IMG-SEARCH-SUGGESTED-FILTERS)
+    - id: SCN-REQ-4.1-03
+      name: Exclude archived and deleted matches from search
+      steps:
+        - id: STEP-REQ-4.1-03-01
+          Given: UI-create Visible search note, Archived search note and Deleted search note with Lifecyclekeyword searchable content, and Unrelated search control with Unrelated content. Archive the second and delete the third.
+          When: Select Notes, reload and search LIFECYCLEKEYWORD. Clear Search and select Notes; inspect Archived and unarchive the matching note, inspect Trash and restore the deleted note. Select Notes, reload and repeat the search.
+          Then: Initially only the active matching note appears, exactly once with a correct case-insensitive Highlight LIFECYCLEKEYWORD fragment; archived, deleted and unrelated notes are excluded. Clearing restores the active and unrelated notes with saved content, excluding archived and deleted notes. Archived and Trash retain their respective matching notes and content before the actions. After unarchiving, restoring and reload, search includes all three matching notes exactly once with correct highlights and excludes the unrelated note.
+          references:
+            - \ref[requirement](REQ-2.2)
+            - \ref[requirement](REQ-2.4)
+            - \ref[requirement](REQ-2.6)
+            - \ref[requirement](REQ-2.10)
     children: []
 - id: REQ-5
   name: Configure the workspace

@@ -5,8 +5,8 @@
 - Upstream repository: <https://github.com/code-philia/arc-bench>
 - Imported source commit: `e59696bbc68578c3b3da1ad47f9a0ac07e581184`
 - Imported on: 2026-11-07
-- Current revision: `2026-11-07-bookstack-lifecycle`
-- Parent revision: `2026-11-07-per-task-semantic-review`
+- Current revision: `2026-11-08-keep-bookstack-lifecycle-interactions`
+- Parent revision: `2026-11-07-bookstack-lifecycle`
 
 ## Relationship
 
@@ -18,7 +18,7 @@ The upstream snapshot was imported into a local working directory and then re-in
 
 ## What changed
 
-The current revision keeps the established requirement/scenario identities and adds a BookStack lifecycle extension: 2 atomic requirements and 14 scenarios, for 410 atomic requirements and 728 scenarios total. It changes:
+The current revision merges the Keep lifecycle extension with the Keep/BookStack interaction extension. It strengthens BookStack lifecycle observations, adds 2 Keep atomic requirements / 8 lifecycle scenarios, and adds 7 interaction requirements / 15 scenarios across Keep and BookStack. Including the earlier BookStack extension, the benchmark now has 419 atomic requirements and 751 scenarios. Inputs, collection, typecheck, and public contracts are verified; new business scenarios await candidate execution. It changes:
 
 - requirement/test alignment and oracle assertions;
 - public observation contracts where the original text was ambiguous;

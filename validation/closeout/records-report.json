@@ -206,12 +206,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1399,
+                  "duration": 1423,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:44.004Z",
+                  "startTime": "2026-11-08T12:13:17.487Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -240,12 +240,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1723,
+                  "duration": 1957,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:45.959Z",
+                  "startTime": "2026-11-08T12:13:19.643Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -274,12 +274,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1409,
+                  "duration": 1998,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:49.074Z",
+                  "startTime": "2026-11-08T12:13:23.860Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -308,12 +308,12 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1764,
+                  "duration": 1911,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:51.068Z",
+                  "startTime": "2026-11-08T12:13:26.829Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -342,10 +342,10 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1820,
+                  "duration": 1951,
                   "error": {
-                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3",
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794140011609-mt5zgj\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794140011609-mt5zgj\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3",
                     "location": {
                       "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts",
                       "column": 48,
@@ -360,13 +360,13 @@
                         "column": 48,
                         "line": 35
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794057595098-nsulc1\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n\n  33 |     await expectText(reopenedPage, workbookName, { exact: true });\n  34 |     await expectText(reopenedPage, lastUpdatedText, { exact: true });\n> 35 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);\n     |                                                ^\n  36 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');\n  37 |   } finally {\n  38 |     await context.close();\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('gridcell', { name: 'A1', exact: true })\nExpected: \u001b[32m\"pw-open-value-1794140011609-mt5zgj\"\u001b[39m\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('gridcell', { name: 'A1', exact: true })\u001b[22m\n\n\n  33 |     await expectText(reopenedPage, workbookName, { exact: true });\n  34 |     await expectText(reopenedPage, lastUpdatedText, { exact: true });\n> 35 |     await expect(gridCell(reopenedPage, 'A1')).toHaveText(cellValue);\n     |                                                ^\n  36 |     await expectActiveWorksheet(reopenedPage, 'Sheet1');\n  37 |   } finally {\n  38 |     await context.close();\n    at expectWorkbookInNewSession (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:35:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\sheet\\tests\\REQ-1.1.1.spec.ts:77:3"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:54.285Z",
+                  "startTime": "2026-11-08T12:13:30.524Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -414,12 +414,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2093,
+                  "duration": 1952,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:19:58.111Z",
+                  "startTime": "2026-11-08T12:13:34.991Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -448,12 +448,12 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 893,
+                  "duration": 1022,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:00.854Z",
+                  "startTime": "2026-11-08T12:13:37.622Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -482,7 +482,7 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1691,
+                  "duration": 1813,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true }).getByText('Member', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:35:61",
@@ -506,7 +506,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:03.152Z",
+                  "startTime": "2026-11-08T12:13:40.564Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -546,7 +546,7 @@
                   "workerIndex": 5,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1735,
+                  "duration": 1720,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('group', { name: 'Member new-member', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  500ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByRole('group', { name: 'Member new-member', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:38:24",
@@ -570,7 +570,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:06.763Z",
+                  "startTime": "2026-11-08T12:13:44.907Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -610,7 +610,7 @@
                   "workerIndex": 6,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 2613,
+                  "duration": 2531,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: getByText('Access denied', { exact: true })\nExpected: visible\nTimeout: 500ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 500ms\u001b[22m\n\u001b[2m  - waiting for getByText('Access denied', { exact: true })\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-2.2.3.spec.ts:56:74",
@@ -634,7 +634,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:10.432Z",
+                  "startTime": "2026-11-08T12:13:49.294Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -682,12 +682,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 8151,
+                  "duration": 7285,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:15.092Z",
+                  "startTime": "2026-11-08T12:13:54.369Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -716,12 +716,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1260,
+                  "duration": 1236,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:23.814Z",
+                  "startTime": "2026-11-08T12:14:02.374Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -750,7 +750,7 @@
                   "workerIndex": 8,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 6620,
+                  "duration": 5646,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m10\u001b[39m\nReceived:    \u001b[31m12\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-7.1.spec.ts:23:20",
@@ -774,7 +774,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:33.252Z",
+                  "startTime": "2026-11-08T12:14:13.211Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -822,12 +822,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3125,
+                  "duration": 3498,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:25.088Z",
+                  "startTime": "2026-11-08T12:14:03.631Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -856,7 +856,7 @@
                   "workerIndex": 9,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 3446,
+                  "duration": 2736,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m4\u001b[39m\nReceived:    \u001b[31m5\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-8.2.spec.ts:26:20",
@@ -880,7 +880,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:41.751Z",
+                  "startTime": "2026-11-08T12:14:21.806Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -928,12 +928,12 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 3602,
+                  "duration": 3088,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:28.228Z",
+                  "startTime": "2026-11-08T12:14:07.149Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -962,7 +962,7 @@
                   "workerIndex": 10,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 3113,
+                  "duration": 2486,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m5\u001b[39m\nReceived:    \u001b[31m6\u001b[39m\n    at cappedEntry (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\support\\list-cap.ts:12:17)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\bookstack\\tests\\REQ-9.1.spec.ts:20:20",
@@ -986,7 +986,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-07T13:20:47.101Z",
+                  "startTime": "2026-11-08T12:14:27.116Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -1015,8 +1015,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-07T13:19:42.801Z",
-    "duration": 68320.589,
+    "startTime": "2026-11-08T12:13:15.876Z",
+    "duration": 74819.84300000001,
     "expected": 10,
     "skipped": 0,
     "unexpected": 7,

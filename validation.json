@@ -1,23 +1,31 @@
 {
-  "revision": "2026-11-08-keep-bookstack-interactions",
+  "revision": "2026-11-08-keep-bookstack-lifecycle-interactions",
   "parentRevision": "2026-11-07-bookstack-lifecycle",
-  "manifestSha256": "5ee52e462243acc9cc3a904e7bb046aa41ac824d028d7d7d5e18c40b721e7947",
-  "recordedAt": "2026-11-08T11:25:01.341Z",
+  "manifestSha256": "6548561114a6e5abe7be9fb5a33a735b76926be308d8fce4da47713f309ee249",
+  "recordedAt": "2026-11-08T12:17:14.289Z",
   "status": "inputs-and-contracts-verified-candidate-execution-pending",
   "scope": {
     "tasks": 8,
-    "atomicRequirements": 417,
-    "scenarios": 743,
+    "atomicRequirements": 419,
+    "scenarios": 751,
     "preservedExistingScenarioIdsAndContent": true,
-    "extensionAdded": {
-      "keep": {
+    "mergedExtensions": {
+      "keepLifecycle": {
+        "atomicRequirements": 2,
+        "scenarios": 8
+      },
+      "keepInteractions": {
         "atomicRequirements": 4,
         "scenarios": 8
       },
-      "bookstack": {
+      "bookstackInteractions": {
         "atomicRequirements": 3,
         "scenarios": 7
       }
+    },
+    "observationStrengthening": {
+      "task": "bookstack",
+      "scenarios": 3
     }
   },
   "typecheck": {
@@ -26,75 +34,130 @@
   },
   "collection": {
     "passed": true,
-    "scenarios": 743,
-    "newScenarioTitlesMatched": 15
+    "scenarios": 751,
+    "extensionTitlesMatched": 15,
+    "lifecycleScenarioCountsMatched": 8,
+    "report": "validation/collection-report.json"
   },
   "sourceIntegrity": {
-    "frozenFiles": 729,
+    "passed": true,
+    "command": "node validation/audit-inputs.mjs",
+    "tasks": 8,
+    "requirements": 419,
+    "scenarios": 751,
+    "frozenFiles": 744,
+    "collectionChecked": true,
     "lfAndCrlfCheckoutAccepted": true,
     "binaryAndChangedTextRejected": true
   },
   "contracts": {
-    "passed": 78,
+    "passed": 86,
     "failed": 0,
     "skipped": 0,
     "newInteractionContractsPassed": 5,
-    "initialRun": {
-      "passed": 77,
-      "failed": 1,
-      "failure": "Existing Sheet popup click timed out at 1000 ms on the initial run; full rerun passed."
-    }
+    "newNotificationContractsPassed": 8,
+    "report": "validation/contracts-report.json"
   },
   "closeout": {
     "positivePassed": 14,
-    "mutantsRejected": 14
+    "mutantsRejected": 14,
+    "report": "validation/closeout/summary.json",
+    "recordsReport": "validation/closeout/records-summary.json"
   },
-  "experimentPrepare": {
-    "passed": true,
-    "tasks": {
-      "keep": 41,
-      "bookstack": 56
+  "componentEvidence": {
+    "2026-11-08-keep-lifecycle": {
+      "sourceReview": "validation/lifecycle-static.json",
+      "boundary": "The component input was statically reviewed and typechecked at the user's request without Playwright or browser execution; that limitation does not transfer a pass to the merged input."
     },
-    "methods": [
-      "baseline",
-      "shallow"
-    ],
-    "modelCalled": false
+    "2026-11-08-keep-notification-oracle": {
+      "report": "validation/keep-notification-oracle.json",
+      "contracts": "8/8",
+      "targetedScenarios": {
+        "shallow": "16/16",
+        "baseline": "16/16"
+      },
+      "fullSuiteRerun": false
+    },
+    "2026-11-08-keep-bookstack-interactions": {
+      "closeout": "Re-executed on the merged input: 14 positive passed, 14 mutants rejected.",
+      "experimentPrepare": {
+        "passed": true,
+        "tasks": {
+          "keep": 41,
+          "bookstack": 56
+        },
+        "methods": [
+          "baseline",
+          "shallow"
+        ],
+        "modelCalled": false,
+        "inherited": true
+      },
+      "independentEvaluationInputChecks": {
+        "passed": true,
+        "tasks": [
+          "keep",
+          "bookstack"
+        ],
+        "scope": "Controller/task digests and output directory guard only",
+        "inherited": true
+      },
+      "reportingFixtures": {
+        "passed": true,
+        "tasks": [
+          "keep",
+          "bookstack"
+        ],
+        "checked": [
+          "complete denominators",
+          "passed",
+          "failed",
+          "skipped",
+          "not_run"
+        ],
+        "inherited": true
+      }
+    }
   },
-  "independentEvaluationInputChecks": {
-    "passed": true,
-    "tasks": [
-      "keep",
-      "bookstack"
-    ],
-    "scope": "Controller/task digests and output directory guard only"
-  },
-  "reportingFixtures": {
-    "passed": true,
-    "tasks": [
-      "keep",
-      "bookstack"
-    ],
-    "checked": [
-      "complete denominators",
-      "passed",
-      "failed",
-      "skipped",
-      "not_run"
-    ]
-  },
+  "oracleCorrections": [
+    {
+      "id": "2026-11-08-keep-notification-oracle",
+      "task": "keep",
+      "files": [
+        "arc-bench/keep/tests/helpers.ts",
+        "validation/keep-notification-contracts.spec.ts"
+      ],
+      "requirementsChanged": false,
+      "identitiesAndDenominatorPreserved": true,
+      "description": "Match status by exact visible message and require a unique visible notification; scope actions to it.",
+      "validation": "validation/keep-notification-oracle.json"
+    }
+  ],
   "applications": {
     "generated": false,
     "modified": false,
     "newBusinessScenariosExecuted": 0,
+    "completeBusinessScenariosExecuted": 0,
+    "referenceFixtureScenariosExecuted": 0,
     "pairedExperimentExecuted": false
   },
+  "controllerSourceModifiedByThisReview": false,
   "parentValidation": {
     "commit": "1a566b306b27df04961515ab2746d0b619e8954e",
     "path": "validation.json"
   },
+  "inheritedEvidence": {
+    "revision": "2026-11-07-bookstack-lifecycle",
+    "manifest": "validation/history/2026-11-07-bookstack-lifecycle/revision.json",
+    "validation": "validation/history/2026-11-07-bookstack-lifecycle/validation.json",
+    "boundary": "Parent BookStack 49/49 and contract reports retain their original input provenance. No changed or new scenario inherits a pass."
+  },
   "limitations": [
-    "Browser contracts and prepared catalogs do not establish that any candidate passes the 15 new business scenarios.",
-    "Do not compare the new denominators directly with historical scores."
+    "Browser contracts and prepared catalogs do not establish that any candidate passes the 23 new business scenarios.",
+    "New and strengthened scenarios are not browser-executed against real applications; runtime feasibility, timeout budget and model difficulty remain unmeasured.",
+    "Source-level mapping and typecheck do not establish zero false positives or false negatives.",
+    "Experiment preparation, independent evaluation input checks and reporting fixtures were verified on the interaction component and were not rerun after merging the lifecycle component.",
+    "New public contracts and changed requirements require identical versioned inputs for all methods; old scores do not transfer.",
+    "Known per-task observation boundaries remain documented in audit/bookstack.md and audit/keep.md."
   ]
 }

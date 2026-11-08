@@ -1,0 +1,2795 @@
+{
+  "revision": "2026-11-07-bookstack-lifecycle",
+  "scope": "Source-to-test review plus a BookStack lifecycle extension with a local reference-fixture execution; no complete eight-task real-application rerun or empirical zero-error claim",
+  "tasks": {
+    "12306": {
+      "requirements": 93,
+      "scenarios": 142,
+      "findings": 15,
+      "statusCounts": {
+        "fixed": 12,
+        "deferred": 3
+      },
+      "requirementsChanged": false,
+      "changedFiles": [
+        "arc-bench/12306/tests/REQ-1.1.spec.ts",
+        "arc-bench/12306/tests/REQ-2.2.1.spec.ts",
+        "arc-bench/12306/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/12306/tests/REQ-5.1.2.spec.ts",
+        "arc-bench/12306/tests/REQ-5.5.spec.ts",
+        "arc-bench/12306/tests/REQ-6.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-6.3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-6.5.spec.ts",
+        "arc-bench/12306/tests/REQ-7.1.spec.ts",
+        "arc-bench/12306/tests/REQ-7.4.spec.ts",
+        "arc-bench/12306/tests/REQ-8.1.1.spec.ts",
+        "arc-bench/12306/tests/REQ-8.4.spec.ts",
+        "arc-bench/12306/tests/REQ-9.2.3.spec.ts",
+        "arc-bench/12306/tests/REQ-9.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-9.3.2.spec.ts",
+        "arc-bench/12306/tests/helpers.ts"
+      ],
+      "limitations": [
+        "This is a reviewed derivative benchmark, not upstream official tests.",
+        "Existing scenario assertions and shared helpers were strengthened, without changing scenario identities, denominator, seeds, requirements or app implementations.",
+        "Presence text permits duplicates; named action/object identities remain strict.",
+        "Known missing business branches, exact fare serialization remain unresolved; this review does not claim zero false negatives or complete prose coverage.",
+        "Fixed clock synchronization, 60-second scenario runtime and real persistence/permissions require end-to-end testing; no full app was run by this reviewer."
+      ]
+    },
+    "bookstack": {
+      "requirements": 26,
+      "scenarios": 49,
+      "findings": 11,
+      "statusCounts": {
+        "fixed": 9,
+        "deferred": 2
+      },
+      "requirementsChanged": true,
+      "changedFiles": [
+        "arc-bench/bookstack/requirements/requirements.yaml",
+        "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+        "arc-bench/bookstack/tests/helpers.ts"
+      ],
+      "limitations": [
+        "This is a derivative benchmark source review, not an upstream official-score certification.",
+        "BOOK-09 broader prose coverage and BOOK-11 parent-entry/text-scope/tag-serialization ambiguities remain explicit.",
+        "Extension scenarios were executed against a manually extended reference fixture, not a ShallowCode-generated candidate; this validates oracle feasibility, not an official full-application pass rate.",
+        "Existing 24/35 identities were preserved; the revision now has 26 atomic requirements and 49 scenarios, so older scores are not directly comparable.",
+        "Draft-title activity leakage and page/chapter deletion are newly covered; full eight-task and multi-candidate behavior is outside this review."
+      ]
+    },
+    "ctrip": {
+      "requirements": 97,
+      "scenarios": 152,
+      "findings": 12,
+      "statusCounts": {
+        "fixed": 11,
+        "partly-fixed": 1
+      },
+      "requirementsChanged": true,
+      "changedFiles": [
+        "arc-bench/ctrip/requirements/requirements.yaml",
+        "arc-bench/ctrip/tests/REQ-2.16.spec.ts",
+        "arc-bench/ctrip/tests/REQ-2.3.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.13.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.14.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.15.spec.ts",
+        "arc-bench/ctrip/tests/REQ-4.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-4.7.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.17.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.18.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.9.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-7.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-7.6.spec.ts",
+        "arc-bench/ctrip/tests/REQ-8.2.spec.ts",
+        "arc-bench/ctrip/tests/helpers.ts"
+      ],
+      "limitations": [
+        "No generated Ctrip application was read or reevaluated; no claims of measured business pass rate or zero false negatives.",
+        "Explicit pre-existing public accessibility/record naming contracts remain; these are derivative benchmark conventions, not proof of upstream product necessity.",
+        "Remaining coverage finding CTRIP-11 must remain visible. CTRIP-10 and CTRIP-12 were resolved by disclosed description clarifications matching the existing scenarios; new inputs require versioned comparison.",
+        "Countdown syntax was retained because inherited contracts explicitly mandate MM:SS or HH:MM:SS.",
+        "Visual similarity and unspecified multi-city/fulfillment/phone-email-completion/context behaviors remain outside concrete scenario coverage."
+      ]
+    },
+    "github": {
+      "requirements": 47,
+      "scenarios": 100,
+      "findings": 18,
+      "statusCounts": {
+        "fixed": 14,
+        "open": 4
+      },
+      "requirementsChanged": true,
+      "changedFiles": [
+        "arc-bench/github/requirements/requirements.yaml",
+        "arc-bench/github/tests/REQ-1.1.1.spec.ts",
+        "arc-bench/github/tests/REQ-1.1.2.spec.ts",
+        "arc-bench/github/tests/REQ-1.1.3.spec.ts",
+        "arc-bench/github/tests/REQ-1.2.spec.ts",
+        "arc-bench/github/tests/REQ-1.3.spec.ts",
+        "arc-bench/github/tests/REQ-2.1.2.spec.ts",
+        "arc-bench/github/tests/REQ-2.2.1.spec.ts",
+        "arc-bench/github/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/github/tests/REQ-2.2.4.spec.ts",
+        "arc-bench/github/tests/REQ-2.3.spec.ts",
+        "arc-bench/github/tests/REQ-3.1.spec.ts",
+        "arc-bench/github/tests/REQ-3.2.1.spec.ts",
+        "arc-bench/github/tests/REQ-3.2.2.spec.ts",
+        "arc-bench/github/tests/REQ-3.2.3.spec.ts",
+        "arc-bench/github/tests/REQ-3.3.spec.ts",
+        "arc-bench/github/tests/REQ-3.4.spec.ts",
+        "arc-bench/github/tests/REQ-4.1.spec.ts",
+        "arc-bench/github/tests/REQ-4.2.1.spec.ts",
+        "arc-bench/github/tests/REQ-4.2.2.spec.ts",
+        "arc-bench/github/tests/REQ-4.2.3.spec.ts",
+        "arc-bench/github/tests/REQ-4.3.1.spec.ts",
+        "arc-bench/github/tests/REQ-4.3.2.spec.ts",
+        "arc-bench/github/tests/REQ-4.3.3.spec.ts",
+        "arc-bench/github/tests/REQ-4.4.spec.ts",
+        "arc-bench/github/tests/REQ-5.1.2.spec.ts",
+        "arc-bench/github/tests/REQ-5.2.1.spec.ts",
+        "arc-bench/github/tests/REQ-5.2.2.spec.ts",
+        "arc-bench/github/tests/REQ-5.2.3.spec.ts",
+        "arc-bench/github/tests/REQ-5.3.1.spec.ts",
+        "arc-bench/github/tests/REQ-5.3.2.spec.ts",
+        "arc-bench/github/tests/REQ-5.3.3.spec.ts",
+        "arc-bench/github/tests/REQ-5.4.spec.ts",
+        "arc-bench/github/tests/REQ-6.1.spec.ts",
+        "arc-bench/github/tests/REQ-6.2.2.spec.ts",
+        "arc-bench/github/tests/REQ-6.2.3.spec.ts",
+        "arc-bench/github/tests/REQ-6.2.4.spec.ts",
+        "arc-bench/github/tests/REQ-6.3.1.spec.ts",
+        "arc-bench/github/tests/REQ-6.3.2.spec.ts",
+        "arc-bench/github/tests/REQ-6.3.3.spec.ts",
+        "arc-bench/github/tests/REQ-6.3.4.spec.ts",
+        "arc-bench/github/tests/REQ-6.4.spec.ts",
+        "arc-bench/github/tests/REQ-6.5.spec.ts",
+        "arc-bench/github/tests/support/observations.ts"
+      ],
+      "limitations": [
+        "All 100 callbacks reviewed, but review is not 100 complete application executions.",
+        "Generic token/diff oracles and incomplete rejection/atomicity/permission cases remain open.",
+        "No screenshot equivalence claim; references used for context, not a hidden DOM schema.",
+        "No extra ARIA metadata group introduced. Existing public Branch state and membership groups are preserved. Assignee option selected state, distinct team-submit name and clone-value label/state are explicitly part of the new public observation contract.",
+        "The original external benchmark, all generated applications and prior scores remain unchanged."
+      ]
+    },
+    "keep": {
+      "requirements": 16,
+      "scenarios": 33,
+      "findings": 13,
+      "statusCounts": {
+        "fixed": 10,
+        "deferred": 3
+      },
+      "requirementsChanged": false,
+      "changedFiles": [
+        "arc-bench/keep/tests/REQ-2.3.spec.ts",
+        "arc-bench/keep/tests/REQ-2.4.spec.ts",
+        "arc-bench/keep/tests/REQ-2.5.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts",
+        "arc-bench/keep/tests/REQ-2.7.spec.ts",
+        "arc-bench/keep/tests/REQ-2.8.spec.ts",
+        "arc-bench/keep/tests/REQ-3.1.spec.ts",
+        "arc-bench/keep/tests/REQ-3.3.spec.ts",
+        "arc-bench/keep/tests/REQ-4.1.spec.ts",
+        "arc-bench/keep/tests/REQ-5.2.spec.ts",
+        "arc-bench/keep/tests/helpers.ts"
+      ],
+      "limitations": [
+        "Source review and targeted contract probes do not establish measured real-application false-negative rates or all 33 business passes.",
+        "Existing explicit role/name contracts remain derivative benchmark conventions. No new ARIA structure or source semantics introduced.",
+        "Broader keyboard, icon, highlight visual emphasis, Undo reload and second-setting behavior are not fully tested.",
+        "Multiline DOM text, clipped accessible labels and auxiliary regions in an empty collection retain explicitly documented representation risks.",
+        "The existing broad light-green pixel threshold is a bounded visual oracle; it is not screenshot similarity or proof that every human-recognized light-green shade is accepted."
+      ]
+    },
+    "prestashop": {
+      "requirements": 55,
+      "scenarios": 86,
+      "findings": 17,
+      "statusCounts": {
+        "fixed": 15,
+        "boundary": 2
+      },
+      "requirementsChanged": true,
+      "changedFiles": [
+        "arc-bench/prestashop/requirements/requirements.yaml",
+        "arc-bench/prestashop/tests/REQ-1.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.2.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.3.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.4.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.5.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.6.spec.ts",
+        "arc-bench/prestashop/tests/REQ-1.7.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.10.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.2.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.3.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.5.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.6.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.7.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.8.spec.ts",
+        "arc-bench/prestashop/tests/REQ-2.9.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.2.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.3.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.4.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.5.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.6.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.7.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.8.spec.ts",
+        "arc-bench/prestashop/tests/REQ-3.9.spec.ts",
+        "arc-bench/prestashop/tests/REQ-4.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-4.2.spec.ts",
+        "arc-bench/prestashop/tests/REQ-4.3.spec.ts",
+        "arc-bench/prestashop/tests/REQ-4.4.spec.ts",
+        "arc-bench/prestashop/tests/REQ-4.5.spec.ts",
+        "arc-bench/prestashop/tests/REQ-5.4.spec.ts",
+        "arc-bench/prestashop/tests/REQ-5.6.spec.ts",
+        "arc-bench/prestashop/tests/REQ-5.8.spec.ts",
+        "arc-bench/prestashop/tests/REQ-6.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-6.2.spec.ts",
+        "arc-bench/prestashop/tests/REQ-7.1.spec.ts",
+        "arc-bench/prestashop/tests/REQ-7.11.spec.ts",
+        "arc-bench/prestashop/tests/REQ-7.5.spec.ts",
+        "arc-bench/prestashop/tests/REQ-7.6.spec.ts",
+        "arc-bench/prestashop/tests/REQ-7.9.spec.ts",
+        "arc-bench/prestashop/tests/helpers.ts",
+        "audit/prestashop.json",
+        "audit/prestashop.md",
+        "audit/validation/prestashop.spec.ts"
+      ],
+      "limitations": [
+        "Derivative benchmark review only; untouched upstream official tests and scores are not changed by this review.",
+        "Two disclosed ROOT clarifications affect historical comparability. Denominator remains 55 requirements/86 scenarios.",
+        "No complete generated application was evaluated. Synthetic helper contracts do not prove business completion or benchmark score improvement.",
+        "Reference-image pixels/layout were not audited. Source/name/caption transitions do not fully prove visual content or enlarged-image content. Distinct high-resolution image URLs are legitimate.",
+        "Anonymous hidden wishlist persistence is not observable through the scoped permission prompt; no adding-membership workflow or private API is invented.",
+        "Remember-me lifetime, actual mailbox delivery and guest completion remain unspecified.",
+        "Invoice oracle checks filename/reference and PDF header, not full PDF document parsing/content.",
+        "An automatic carousel transition may coincide with Next activation.",
+        "Monetary associations are bounded to disclosed public forms with selected-record identity and strict visible ambiguity; arbitrary global numbers/first matches are not accepted."
+      ]
+    },
+    "sheet": {
+      "requirements": 24,
+      "scenarios": 100,
+      "findings": 14,
+      "statusCounts": {
+        "fixed": 12,
+        "deferred": 1,
+        "retained": 1
+      },
+      "requirementsChanged": true,
+      "changedFiles": [
+        "arc-bench/sheet/requirements/requirements.yaml",
+        "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-1.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-1.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.1.3.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.1.3.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-4.1.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-4.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+        "arc-bench/sheet/tests/support/e2e.ts",
+        "arc-bench/sheet/tests/support/observations.ts"
+      ],
+      "limitations": [
+        "Static semantic review and synthetic contract tests are not execution of a complete spreadsheet application and do not establish a quantitative false-negative rate.",
+        "The fixed 100 scenarios do not exercise every conditional infrastructure failure without a public reproducible trigger, arbitrary larger datasets or every combination of operations.",
+        "The visible grid/sample dataset is observed; unrendered offscreen cells cannot be directly inspected by the public-DOM oracle.",
+        "Existing explicit ARIA roles/names are retained benchmark contracts; screenshot similarity and excluded collaboration/authentication features are not scored.",
+        "CSV serialization/numeric presentation were clarified and one existing CSV fixture now covers already-required UTF-8 Chinese; old outcomes are not transferred to this version."
+      ]
+    },
+    "stackoverflow": {
+      "requirements": 52,
+      "scenarios": 66,
+      "findings": 12,
+      "statusCounts": {
+        "fixed": 8,
+        "deferred": 4
+      },
+      "requirementsChanged": false,
+      "changedFiles": [
+        "arc-bench/stackoverflow/tests/helpers.ts",
+        "arc-bench/stackoverflow/tests/REQ-1.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.4.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.6.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.6.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.7.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.8.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.6.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.7.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.8.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-7.4.spec.ts"
+      ],
+      "limitations": [
+        "This is a model-assisted review of a derivative benchmark, not upstream official certification or human annotation.",
+        "No generated applications or scores were consulted; no application/controller/source-requirement data was modified.",
+        "The 66-scenario denominator is preserved. Expired-comment boundaries and identified broader editor/rendering/history behaviors remain unmeasured.",
+        "Public UI privacy/ownership checks do not certify private endpoint authorization or internal database retention.",
+        "Date/time parsers cover stated UTC and ordinary English presentations; this does not establish zero false negatives across all international display formats.",
+        "Role/name conventions explicitly stated in the benchmark remain scoring contracts; passing them is not a complete real-world quality metric."
+      ]
+    }
+  },
+  "findings": [
+    {
+      "task": "12306",
+      "id": "12306-F01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.1.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.2.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.1.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.2.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.2.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.2.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.5",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.5",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.6",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.3.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.5",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.7",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.8.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.1.3.spec.ts",
+        "arc-bench/12306/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/12306/tests/REQ-2.3.spec.ts",
+        "arc-bench/12306/tests/REQ-2.4.spec.ts",
+        "arc-bench/12306/tests/REQ-3.1.3.spec.ts",
+        "arc-bench/12306/tests/REQ-3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-5.2.2.spec.ts",
+        "arc-bench/12306/tests/REQ-5.2.3.spec.ts",
+        "arc-bench/12306/tests/REQ-5.2.4.spec.ts",
+        "arc-bench/12306/tests/REQ-5.5.spec.ts",
+        "arc-bench/12306/tests/REQ-6.4.spec.ts",
+        "arc-bench/12306/tests/REQ-6.5.spec.ts",
+        "arc-bench/12306/tests/REQ-6.6.spec.ts",
+        "arc-bench/12306/tests/REQ-7.2.spec.ts",
+        "arc-bench/12306/tests/REQ-7.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-7.4.spec.ts",
+        "arc-bench/12306/tests/REQ-8.3.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-8.4.spec.ts",
+        "arc-bench/12306/tests/REQ-8.5.spec.ts",
+        "arc-bench/12306/tests/REQ-8.7.spec.ts",
+        "arc-bench/12306/tests/REQ-8.8.1.spec.ts"
+      ],
+      "explanation": "Repeated visible feedback, route or mailbox text need not be globally unique. Shared text() formerly used strict toBeVisible on all exact matches.",
+      "resolution": "text() now checks at least one visible match; action locators stay strict.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.2.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.5"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/12306/tests/REQ-5.5.spec.ts"
+      ],
+      "explanation": "Login/refund feedback prose did not explicitly require an ARIA status role; status-only lookup rejects plain visible feedback.",
+      "resolution": "Use visible feedback containing required success wording and retain real downstream identity/state assertions.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F03",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.4.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.4.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.5.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.5.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.5.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.6.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.6.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.6.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.6.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-4.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.4.1.spec.ts",
+        "arc-bench/12306/tests/REQ-3.4.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.5.1.spec.ts",
+        "arc-bench/12306/tests/REQ-3.5.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.5.3.spec.ts",
+        "arc-bench/12306/tests/REQ-3.6.1.spec.ts",
+        "arc-bench/12306/tests/REQ-3.6.2.spec.ts",
+        "arc-bench/12306/tests/REQ-3.6.3.spec.ts",
+        "arc-bench/12306/tests/REQ-3.6.4.spec.ts",
+        "arc-bench/12306/tests/REQ-4.1.spec.ts"
+      ],
+      "explanation": "Result membership was read only from rows having Book; an extra displayed train lacking that action disappeared from the oracle.",
+      "resolution": "Enumerate displayed rows by the independently identifiable train number, including rows lacking Book.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F04",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-1.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-1.1.spec.ts"
+      ],
+      "explanation": "Homepage presence/count did not prove visible search fields, and carousel could accumulate all banners.",
+      "resolution": "Require field visibility and previous banner hidden after each change.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F05",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.2.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.1.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.1.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.2.1.spec.ts",
+        "arc-bench/12306/tests/REQ-5.1.2.spec.ts",
+        "arc-bench/12306/tests/REQ-8.1.1.spec.ts"
+      ],
+      "explanation": "Opening Login could authenticate by navigation; anonymous personal center and quick booking entry omitted explicit negative content checks.",
+      "resolution": "Assert missing Sign Out after Login navigation and missing protected center/booking content on intercepted entry.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F06",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-7.1.spec.ts"
+      ],
+      "explanation": "Zero holder Delete controls also passed when the account-holder passenger row was absent.",
+      "resolution": "Require visible holder row before verifying its Delete action is absent.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F07",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-9.2.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-9.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-9.3.2"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-9.2.3.spec.ts",
+        "arc-bench/12306/tests/REQ-9.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-9.3.2.spec.ts"
+      ],
+      "explanation": "Question heading in any panel or global page could satisfy destination even when selected category did not contain it.",
+      "resolution": "Bind unique selected known category to its exact named panel and scoped target heading; preserve implementation-defined category mapping for three quick questions.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F08",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.5"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-6.5.spec.ts"
+      ],
+      "explanation": "Mailbox outcome used global email presence, allowing unrelated profile/header text to satisfy security-mailbox result.",
+      "resolution": "Scope expected saved/original address to Security mailbox region before/after reload.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F09",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.4"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-6.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-6.3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-7.4.spec.ts"
+      ],
+      "explanation": "Reload did not recheck restored Edit, and batch deletion never checked persisted result.",
+      "resolution": "Add named Edit after reload for contact/passenger-type updates; add persisted batch absence and retained holder.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F10",
+      "severity": "high",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.4.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.7.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.6",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.2.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.3.2"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.4.spec.ts",
+        "arc-bench/12306/tests/REQ-5.4.3.spec.ts",
+        "arc-bench/12306/tests/REQ-5.7.3.spec.ts",
+        "arc-bench/12306/tests/REQ-6.2.spec.ts",
+        "arc-bench/12306/tests/REQ-6.6.spec.ts",
+        "arc-bench/12306/tests/REQ-7.2.spec.ts",
+        "arc-bench/12306/tests/REQ-7.4.spec.ts",
+        "arc-bench/12306/tests/REQ-8.2.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-8.3.2.spec.ts"
+      ],
+      "explanation": "Described branches have no scenarios: successful password recovery, essential-profile update, mobile update/cancel, booking-date mode, passenger invalid mobile/cancel, selected-subset/cancel batch deletion, Child and standing-ticket choices.",
+      "resolution": "Disclosed; adding scenario IDs and branch specifications changes benchmark denominator and needs a new explicit expansion rather than pretending 142 scenarios cover all prose.",
+      "validation": "Static source review; explicitly unresolved"
+    },
+    {
+      "task": "12306",
+      "id": "12306-F11",
+      "severity": "medium",
+      "category": "ambiguity",
+      "status": "deferred",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.2.2"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-8.2.2.spec.ts"
+      ],
+      "explanation": "Selected-train fare examples are asserted as whole concatenated text; equivalent table/line presentation can fail despite correct values/associations.",
+      "resolution": "No arbitrary CSS/ancestor or unassociated global-number fallback added. Needs an association-preserving public-DOM oracle or source-reviewed fare presentation clarification.",
+      "validation": "Static source review; explicitly unresolved"
+    },
+    {
+      "task": "12306",
+      "id": "12306-F12",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.3"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.5.1.spec.ts",
+        "arc-bench/12306/tests/REQ-2.5.2.spec.ts",
+        "arc-bench/12306/tests/REQ-2.5.3.spec.ts"
+      ],
+      "explanation": "openAgreement selected the first visible link although its source explicitly requires exactly one link of each name.",
+      "resolution": "Restore strict unique named link click; duplicates are rejected, without changing other presence checks.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "12306",
+      "id": "12306-F13",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.1.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.2.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.5.3",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-3.4.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-4.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-5.7.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-6.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-7.3.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.2.4",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.3.2",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-9.1",
+        "arc-bench/12306/requirements/requirements.yaml#REQ-9.2.2"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.1.3.spec.ts",
+        "arc-bench/12306/tests/REQ-2.2.3.spec.ts",
+        "arc-bench/12306/tests/REQ-2.5.1.spec.ts",
+        "arc-bench/12306/tests/REQ-2.5.2.spec.ts",
+        "arc-bench/12306/tests/REQ-2.5.3.spec.ts",
+        "arc-bench/12306/tests/REQ-3.4.1.spec.ts",
+        "arc-bench/12306/tests/REQ-4.1.spec.ts",
+        "arc-bench/12306/tests/REQ-5.7.2.spec.ts",
+        "arc-bench/12306/tests/REQ-6.1.spec.ts",
+        "arc-bench/12306/tests/REQ-6.4.spec.ts",
+        "arc-bench/12306/tests/REQ-7.3.1.spec.ts",
+        "arc-bench/12306/tests/REQ-8.2.4.spec.ts",
+        "arc-bench/12306/tests/REQ-8.3.2.spec.ts",
+        "arc-bench/12306/tests/REQ-9.1.spec.ts",
+        "arc-bench/12306/tests/REQ-9.2.2.spec.ts"
+      ],
+      "explanation": "Some description-level identity, no-mutation, details and permissions obligations are weaker than existing scenario assertions.",
+      "resolution": "Keep narrower scenario coverage explicit; do not infer correct account storage, full profile values, unrelated-record preservation or account isolation merely from labels/feedback.",
+      "validation": "Static source review; explicitly unresolved"
+    },
+    {
+      "task": "12306",
+      "id": "12306-F14",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-8.4"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-8.4.spec.ts"
+      ],
+      "explanation": "Payment countdown scenario reads Total from the entire page and omits Payment information visibility; matching unrelated total could satisfy amount outcome.",
+      "resolution": "Parent review: existing scenario explicitly places Total in Order details, so bind all required identity and total values to that declared region and require already-declared Payment information visibility. No new UI convention.",
+      "validation": "Three additional positive/negative browser contracts added; pending final combined execution"
+    },
+    {
+      "task": "12306",
+      "id": "12306-F15",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/12306/requirements/requirements.yaml#REQ-2.2.1"
+      ],
+      "test": [
+        "arc-bench/12306/tests/REQ-2.2.1.spec.ts"
+      ],
+      "explanation": "Login entry accepted an unmasked text input despite shared source requiring a password input.",
+      "resolution": "Assert type=password in the dedicated public login entry scenario.",
+      "validation": "audit/validation/12306.spec.ts: 11/11 passed in parent centralized execution; audit/contract-results.json. All 93 task specs and new contract spec typechecked; full app execution pending."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-1.2",
+        "REQ-2.1",
+        "REQ-2.2",
+        "REQ-4.1",
+        "REQ-5.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:48",
+        "arc-bench/bookstack/requirements/requirements.yaml:85",
+        "arc-bench/bookstack/requirements/requirements.yaml:112",
+        "arc-bench/bookstack/requirements/requirements.yaml:192",
+        "arc-bench/bookstack/requirements/requirements.yaml:409"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-1.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Public navigation was required to use a navigation landmark with both Books and Shelves although source only declares public links.",
+      "resolution": "Use identified semantic navigation when present; otherwise require a unique exact public page link. No arbitrary first match; duplicates remain errors.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.2",
+        "REQ-4.2",
+        "REQ-4.4",
+        "REQ-4.5",
+        "REQ-5.2",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-5.5",
+        "REQ-6.3",
+        "REQ-6.4",
+        "REQ-9.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:112",
+        "arc-bench/bookstack/requirements/requirements.yaml:222",
+        "arc-bench/bookstack/requirements/requirements.yaml:354",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:436",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:575",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779",
+        "arc-bench/bookstack/requirements/requirements.yaml:1019"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-9.1.spec.ts"
+      ],
+      "explanation": "Ordinary visible text and nickname were treated as strict unique locators; legitimate repeated copies fail. Hidden draft-title copies were counted despite visible-title requirement.",
+      "resolution": "Existential exact visible-text check for ordinary prose/nickname; recent draft uniqueness counts visible copies only. Named action/object identities remain strict.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-03",
+      "severity": "high",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.3",
+        "REQ-4.5",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-6.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:252",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:779"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts"
+      ],
+      "explanation": "toHaveValue rejects legitimate contenteditable role=textbox rich-text descriptions/page bodies.",
+      "resolution": "Read native input/textarea value or contenteditable innerText under required textbox role; compare exact saved text. No app-private access.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-04",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-7.1",
+        "REQ-8.2",
+        "REQ-9.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:838",
+        "arc-bench/bookstack/requirements/requirements.yaml:976",
+        "arc-bench/bookstack/requirements/requirements.yaml:1019"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-9.1.spec.ts"
+      ],
+      "explanation": "Dashboard cap counted standard column-header rows as business records.",
+      "resolution": "Exclude columnheader rows from row-record count, retaining listitems and data/custom rows, strict business identities and actual cap.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-05",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.1",
+        "REQ-5.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:192",
+        "arc-bench/bookstack/requirements/requirements.yaml:409"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Programmatic focus did not establish keyboard reachability; Book list only counted identity and omitted visible/keyboard Then clauses.",
+      "resolution": "Traverse actual Tab sequence to the uniquely identified visible opening entry. Source roles/identity retained.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-06",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.1",
+        "REQ-4.4",
+        "REQ-5.5",
+        "REQ-6.2",
+        "REQ-8.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:85",
+        "arc-bench/bookstack/requirements/requirements.yaml:354",
+        "arc-bench/bookstack/requirements/requirements.yaml:575",
+        "arc-bench/bookstack/requirements/requirements.yaml:712",
+        "arc-bench/bookstack/requirements/requirements.yaml:924"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.1.spec.ts"
+      ],
+      "explanation": "Missing list regions could satisfy zero-target absence; book deletion omitted immediate absence and confirmation Cancel visibility. Remember Me lacked visible-state observation.",
+      "resolution": "Require a unique accessible semantic collection before absence, allowing a legitimate zero-area empty container; check book immediate/reloaded absence, both confirmation actions and visible Remember Me. Missing/hidden collections remain invalid.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-07",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-5.6"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:612"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts"
+      ],
+      "explanation": "Shelf association checked visible entry but not the explicit exactly-once clause.",
+      "resolution": "Require count one and visible entry in the selected shelf Book list.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-08",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.3",
+        "REQ-5.3",
+        "REQ-5.6",
+        "REQ-6.1",
+        "REQ-6.3",
+        "REQ-6.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:252",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:612",
+        "arc-bench/bookstack/requirements/requirements.yaml:658",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts"
+      ],
+      "explanation": "Generic entry union accepted link where source explicitly declares a button for creation/published-page/chapter controls.",
+      "resolution": "Use exact button locators for those controls; retain button/link equivalence only for source-permitted openings and unspecified draft opening role.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-09",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "requirements": [
+        "REQ-1.1",
+        "REQ-3.1",
+        "REQ-4.5",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-6.1",
+        "REQ-6.3",
+        "REQ-6.4",
+        "REQ-7.1",
+        "REQ-8.1",
+        "REQ-8.2"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:25",
+        "arc-bench/bookstack/requirements/requirements.yaml:151",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:658",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779",
+        "arc-bench/bookstack/requirements/requirements.yaml:838",
+        "arc-bench/bookstack/requirements/requirements.yaml:924",
+        "arc-bench/bookstack/requirements/requirements.yaml:976"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-1.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-3.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.2.spec.ts"
+      ],
+      "explanation": "Broader descriptions exceed 35 concrete scenarios: homepage search input, related-book editing, cover/default-template/rich-text formatting, chapter-specific page membership, all viewed/favorited content types, second-user preference/draft isolation, complete favorites page and dashboard activity.",
+      "resolution": "Keep those requirements; disclose unsampled branches rather than invent unprovided fixtures, names or policies. No new scenario IDs or denominator.",
+      "validation": "Static complete source/test review; not closed by execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-10",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.5",
+        "REQ-5.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:531"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts"
+      ],
+      "explanation": "Rename could create a second object leaving old identity, and Cancel could show old details while persisting pending changes.",
+      "resolution": "After saved-field/reload checks, verify new list identity once and old absent; after Cancel reload/reopen metadata and compare originals.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "task": "bookstack",
+      "id": "BOOK-11",
+      "severity": "medium",
+      "category": "ambiguity",
+      "status": "deferred",
+      "requirements": [
+        "REQ-5.2",
+        "REQ-5.6"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:436",
+        "arc-bench/bookstack/requirements/requirements.yaml:612"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts"
+      ],
+      "explanation": "Parent entry has exact business name but no declared public scope; valid repeated breadcrumb/sidebar parent links can make global action ambiguous. Text detail/body scope and tag serialization semantics are also not fully defined.",
+      "resolution": "Do not pick arbitrary first link or invent a wrapper role. Retain strict action identity and record this remaining false-negative/weak-observation boundary for future public-contract clarification.",
+      "validation": "Static complete source/test review; not closed by execution."
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-01",
+      "severity": "high",
+      "category": "false-negative",
+      "requirements": [
+        "REQ-4.1",
+        "REQ-5.1"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:2025",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-4.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Account entry roles and ARIA menu container were required only by tests, although the concrete source does not declare them.",
+      "status": "fixed",
+      "resolution": "accountEntry preserves exact identity/uniqueness and permits button/link/menuitem; removed undeclared ARIA menu check.",
+      "validation": "account-entry presentation positives and wrong/duplicate identity negatives"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-02",
+      "severity": "high",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-3.13",
+        "REQ-3.14",
+        "REQ-3.15"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:1922",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-3.13.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.14.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.15.spec.ts"
+      ],
+      "explanation": "A missing Fee details region satisfied child text count=0. Hidden retained markup could also fail a valid removal.",
+      "status": "fixed",
+      "resolution": "Require visible uniquely named details region and no visible exact removed fee.",
+      "validation": "visible empty/hidden historical fee pass; absent summary/stale visible fee reject"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-03",
+      "severity": "medium",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-2.3"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:828",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-2.3.spec.ts"
+      ],
+      "explanation": "July 21 fare was checked globally and could be supplied by an unrelated date or page region.",
+      "status": "fixed",
+      "resolution": "Assert ¥460 within the declared July 21 button.",
+      "validation": "correct date fare pass; wrong date fare with global decoy cannot satisfy"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-04",
+      "severity": "medium",
+      "category": "false-negative",
+      "requirements": [
+        "REQ-6.4"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:3252",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-6.4.spec.ts"
+      ],
+      "explanation": "New-password retry assumed legal checkbox stayed checked after old-password rejection, a policy absent from source.",
+      "status": "fixed",
+      "resolution": "Explicitly accept terms for the second login attempt.",
+      "validation": "source/action inspection; semantic state-reset browser example below"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-05",
+      "severity": "medium",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-7.4"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:3606",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-7.4.spec.ts"
+      ],
+      "explanation": "History reuse omitted the explicit July 21 restoration outcome.",
+      "status": "fixed",
+      "resolution": "Assert restored Departure date value after using history.",
+      "validation": "source-to-assertion inspection; no full app execution"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-06",
+      "severity": "high",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-4.7",
+        "REQ-5.17",
+        "REQ-5.18"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:2303",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-4.7.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.17.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.18.spec.ts"
+      ],
+      "explanation": "Zero-record tests also passed if the declared list region was missing entirely.",
+      "status": "fixed",
+      "resolution": "Require exactly one public named list region and zero business records. Parent correction permits legitimate zero-area empty regions, while hidden/missing/duplicate regions remain invalid.",
+      "validation": "Added 3 zero-area positive contracts and missing/hidden/populated negative contracts; pending final combined execution."
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-07",
+      "severity": "medium",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-7.6"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:3670",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-7.6.spec.ts"
+      ],
+      "explanation": "No-query-on-mode-switch was observed only after the second switch, missing a query triggered by Route selection.",
+      "status": "fixed",
+      "resolution": "Check absence of both results regions immediately after Route as well as after Flight number.",
+      "validation": "source-to-assertion inspection; no generated app evaluation"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-08",
+      "severity": "medium",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-8.2"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:3823",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-8.2.spec.ts"
+      ],
+      "explanation": "Bare substring 365 did not establish the specified 365-day availability window.",
+      "status": "fixed",
+      "resolution": "Require 365 with a day/days unit, allowing spaces or hyphen.",
+      "validation": "valid day window and unrelated number negative"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-09",
+      "severity": "medium",
+      "category": "false-positive",
+      "requirements": [
+        "REQ-1.2",
+        "REQ-1.3",
+        "REQ-1.4",
+        "REQ-1.5",
+        "REQ-1.6",
+        "REQ-1.7",
+        "REQ-1.8",
+        "REQ-1.10",
+        "REQ-1.11",
+        "REQ-1.12",
+        "REQ-1.13",
+        "REQ-1.14",
+        "REQ-3.4",
+        "REQ-6.1",
+        "REQ-6.2",
+        "REQ-6.4",
+        "REQ-6.5",
+        "REQ-6.7",
+        "REQ-6.8",
+        "REQ-7.1",
+        "REQ-7.7",
+        "REQ-8.3",
+        "REQ-9.1",
+        "REQ-9.4"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:54",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-1.2.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.3.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.5.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.6.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.7.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.8.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.10.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.11.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.12.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.13.spec.ts",
+        "arc-bench/ctrip/tests/REQ-1.14.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.2.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.5.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.7.spec.ts",
+        "arc-bench/ctrip/tests/REQ-6.8.spec.ts",
+        "arc-bench/ctrip/tests/REQ-7.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-7.7.spec.ts",
+        "arc-bench/ctrip/tests/REQ-8.3.spec.ts",
+        "arc-bench/ctrip/tests/REQ-9.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-9.4.spec.ts"
+      ],
+      "explanation": "Generic action union accepted wrong roles even where source explicitly declares them; field helper accepted plaintext password textboxes outside login().",
+      "status": "fixed",
+      "resolution": "Honor explicitly declared action roles in helper and intersect password controls with input[type=password]. Unknown action roles remain generic.",
+      "validation": "correct/wrong explicit roles and masked/plaintext controls"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-10",
+      "severity": "medium",
+      "category": "source-ambiguity",
+      "requirements": [
+        "REQ-2.2"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:781",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-2.2.spec.ts"
+      ],
+      "explanation": "Description declares a City selection button; concrete When requires clicking Origin/Destination. The tests exercise only the latter. Whether both entry mechanisms are obligatory is not explicit.",
+      "status": "fixed",
+      "resolution": "Parent review clarified the description to match its explicit Origin/Destination-click scenarios, retaining existing dialog and category-tab behavior. The extra City selection button requirement was removed as a versioned source clarification; no new business behavior.",
+      "validation": "YAML/input/collection integrity checks; no code behavior change beyond previously reviewed tests"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-11",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "requirements": [
+        "REQ-2.4",
+        "REQ-2.12",
+        "REQ-3.3",
+        "REQ-3.9",
+        "REQ-5.1",
+        "REQ-5.5",
+        "REQ-5.9"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:897",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-2.4.spec.ts",
+        "arc-bench/ctrip/tests/REQ-2.12.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.3.spec.ts",
+        "arc-bench/ctrip/tests/REQ-3.9.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.1.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.5.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.9.spec.ts"
+      ],
+      "explanation": "Some broader description obligations exceed concrete checked Then clauses: complete initial flight facts, retained Economy label, ad-hoc passenger non-persistence, exact new-order lineage, initially collapsed Common information, address mobile persistence and exact invoice count after reload.",
+      "status": "partly-fixed",
+      "resolution": "Added deterministic initial-collapse and invoice-reload count observations where already publicly observable. Exact new-order lineage and Economy observation require a clarified public outcome rather than private internals; address mobile need not be displayed in its list row, so no invented row field was added. Remaining breadth is disclosed in each row.",
+      "validation": "static full-source review; app-level identity lineage unresolved"
+    },
+    {
+      "task": "ctrip",
+      "id": "CTRIP-12",
+      "severity": "medium",
+      "category": "source-ambiguity",
+      "requirements": [
+        "REQ-5.11",
+        "REQ-5.13"
+      ],
+      "source": "arc-bench/ctrip/requirements/requirements.yaml:2808",
+      "test": [
+        "arc-bench/ctrip/tests/REQ-5.11.spec.ts",
+        "arc-bench/ctrip/tests/REQ-5.13.spec.ts"
+      ],
+      "explanation": "Description additionally names Delete addresses/Delete invoice titles buttons, while concrete scenario goes from Delete selected directly to confirmation dialog.",
+      "status": "fixed",
+      "resolution": "Parent review clarified both descriptions: Delete selected directly opens the existing named confirmation dialog, matching both concrete scenarios. Removed the contradictory extra intermediate action. This is a disclosed requirement change.",
+      "validation": "YAML/input/collection integrity checks; no code behavior change beyond previously reviewed tests"
+    },
+    {
+      "task": "github",
+      "id": "GH-01",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-1.3",
+          "line": 315
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-1.3.spec.ts",
+      "explanation": "Same authenticated context was reused to seek Sign in, rejecting valid retained sessions.",
+      "status": "fixed",
+      "resolution": "Fresh BrowserContext for credential verification; source scenario explicitly says fresh unauthenticated session.",
+      "validation": "Fresh-context browser contract."
+    },
+    {
+      "task": "github",
+      "id": "GH-02",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-3.4",
+          "line": 1116
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-3.4.spec.ts",
+      "explanation": "Cookie clearing was treated as logout, rejecting legitimate sessionStorage/localStorage authentication.",
+      "status": "fixed",
+      "resolution": "Independent visitor BrowserContext; no authentication transport imposed.",
+      "validation": "Fresh-context browser contract and typecheck."
+    },
+    {
+      "task": "github",
+      "id": "GH-03",
+      "severity": "medium",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "ROOT",
+          "line": 1
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Ordinary visible text used strict single-locator assertions; duplicate correct public text failed.",
+      "status": "fixed",
+      "resolution": "Existential visible-text checks preserve each original string/regex/exact option; action locators remain strict.",
+      "validation": "Duplicate text, hidden-only/wrong value and duplicate action contracts."
+    },
+    {
+      "task": "github",
+      "id": "GH-04",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-4.2.3",
+          "line": 1298
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-4.2.3.spec.ts",
+      "explanation": "Literal search phrase was required to occupy a complete standalone DOM text node despite saved longer content.",
+      "status": "fixed",
+      "resolution": "Literal substring presence, with source clarification that phrase may be embedded in file content.",
+      "validation": "Embedded phrase contract; content-specific scope remains GH-13."
+    },
+    {
+      "task": "github",
+      "id": "GH-05",
+      "severity": "medium",
+      "category": "false-positive",
+      "source": [
+        {
+          "requirementId": "REQ-2.1.2",
+          "line": 471
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-2.1.2.spec.ts",
+      "explanation": "Invalid-identifier/blank-display scenario omitted required display-name error.",
+      "status": "fixed",
+      "resolution": "Assert both messages and retained attempted identifier.",
+      "validation": "Typecheck; source/test inspection."
+    },
+    {
+      "task": "github",
+      "id": "GH-06",
+      "severity": "high",
+      "category": "false-positive",
+      "source": [
+        {
+          "requirementId": "REQ-5.2.3",
+          "line": 1875
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-5.2.3.spec.ts",
+      "explanation": "Author could be satisfied by account-menu username even if stored comment had wrong author.",
+      "status": "fixed",
+      "resolution": "Bind exact body and username to the same article; assert both after reload.",
+      "validation": "Correct and wrong-article-author contracts."
+    },
+    {
+      "task": "github",
+      "id": "GH-07",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-6.4",
+          "line": 2586
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-6.4.spec.ts",
+      "explanation": "Global reviewer name disappearance forbade append-only activity or submitted review mentions.",
+      "status": "fixed",
+      "resolution": "Use already specified Remove username control for current pending relationship, including reload; no new ARIA group.",
+      "validation": "Historical mention, hidden old control and retained request contracts."
+    },
+    {
+      "task": "github",
+      "id": "GH-08",
+      "severity": "high",
+      "category": "ambiguous-scenario",
+      "source": [
+        {
+          "requirementId": "REQ-1.2",
+          "line": 268
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-1.2.spec.ts",
+      "explanation": "Conditional/generic sign-out scenarios did not isolate confirm versus cancel or actually record/reopen a protected page.",
+      "status": "fixed",
+      "resolution": "Explicit confirm/protected-navigation scenario and separate cancel/preserved-session scenario; same two scenario IDs.",
+      "validation": "Typecheck and direct source/assertion review; real application execution pending."
+    },
+    {
+      "task": "github",
+      "id": "GH-09",
+      "severity": "high",
+      "category": "coverage-gap",
+      "source": [
+        {
+          "requirementId": "REQ-1",
+          "line": 18
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Rejected registrations/logins and old/new credential refusal are incompletely checked; messages alone do not prove no authenticated session/account.",
+      "status": "open",
+      "resolution": "Keep expected business obligations; add independently observable account/session checks in a subsequent protocol pass.",
+      "validation": "No full app/mutant coverage claim."
+    },
+    {
+      "task": "github",
+      "id": "GH-10",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-2.2.2",
+          "line": 608
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-2.2.2.spec.ts",
+      "explanation": "Team Add member launcher and submit can both remain visible; source declares neither a form scope nor launcher disappearance.",
+      "status": "fixed",
+      "resolution": "Publicly distinguish launcher Add member from submit Add member to team; no wrapper role imposed. This changes an explicit control-name contract, so historical applications are incompatible unless regenerated under the revised input.",
+      "validation": "Both visible launcher and submit browser contract; exact action identity remains strict."
+    },
+    {
+      "task": "github",
+      "id": "GH-11",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-5.3.1",
+          "line": 1938
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-5.3.1.spec.ts",
+      "explanation": "Global assignee text absence after unassignment conflicts with required append-only assignment activity.",
+      "status": "fixed",
+      "resolution": "Clarify selected state of existing option as the public current-relationship observation; check true after assignment/reload and false after removal/reload. No new ARIA group imposed; historical mentions are allowed.",
+      "validation": "Positive selected/unselected history and retained-selection negative contracts."
+    },
+    {
+      "task": "github",
+      "id": "GH-12",
+      "severity": "high",
+      "category": "false-positive",
+      "source": [
+        {
+          "requirementId": "REQ-3.2.3",
+          "line": 1043
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-3.2.3.spec.ts",
+      "explanation": "Copy tests assert feedback rather than actual clipboard value and protocol.",
+      "status": "fixed",
+      "resolution": "Declare public Clone value label (read-only input or static labeled output), read selected protocol/address, initialize unrelated browser clipboard and require actual copied equality. Host is implementation-defined; no private endpoint used. New observation labels/states are versioned public inputs.",
+      "validation": "Real browser clipboard positive for HTTPS input/SSH output and feedback-only negative."
+    },
+    {
+      "task": "github",
+      "id": "GH-13",
+      "severity": "high",
+      "category": "weak-observation",
+      "source": [
+        {
+          "requirementId": "REQ-4.2",
+          "line": 1211
+        },
+        {
+          "requirementId": "REQ-6.2",
+          "line": 2175
+        },
+        {
+          "requirementId": "REQ-6.3",
+          "line": 2368
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Generic commit/activity tokens can match navigation; diff checks validate numeric formatting rather than expected numbers; record attribution is sometimes global.",
+      "status": "open",
+      "resolution": "Supply declared independent seed expectations and appropriate public record scopes before claiming complete semantic coverage.",
+      "validation": "Each affected scenario identifies the exact weakness."
+    },
+    {
+      "task": "github",
+      "id": "GH-14",
+      "severity": "high",
+      "category": "coverage-gap",
+      "source": [
+        {
+          "requirementId": "REQ-2",
+          "line": 390
+        },
+        {
+          "requirementId": "REQ-3",
+          "line": 817
+        },
+        {
+          "requirementId": "REQ-4",
+          "line": 1162
+        },
+        {
+          "requirementId": "REQ-5",
+          "line": 1598
+        },
+        {
+          "requirementId": "REQ-6",
+          "line": 2093
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Several invalid/mutation cases do not compare unchanged persisted records, sibling fields, cascade permissions or current-role effects.",
+      "status": "open",
+      "resolution": "Retain full domain obligations and report gaps; complete isolated positive/negative application implementations before stronger validity claims.",
+      "validation": "Per-scenario matrix distinguishes exercised outcomes from missing assertions."
+    },
+    {
+      "task": "github",
+      "id": "GH-15",
+      "severity": "high",
+      "category": "coverage-gap",
+      "source": [
+        {
+          "requirementId": "REQ-4.4",
+          "line": 1539
+        },
+        {
+          "requirementId": "REQ-6",
+          "line": 2093
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Inherited stale-review/outdated-comment, terminal merged, complete permission matrix and atomicity policies exceed the fixed 100 scenario callbacks.",
+      "status": "open",
+      "resolution": "No assertion that scenario count equals complete behavioral coverage; would require separately versioned additional scenarios.",
+      "validation": "No new scenarios inserted silently."
+    },
+    {
+      "task": "github",
+      "id": "GH-16",
+      "severity": "medium",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-3.4",
+          "line": 1116
+        },
+        {
+          "requirementId": "REQ-4.3.3",
+          "line": 1490
+        }
+      ],
+      "test": "arc-bench/github/tests/(see matrix)",
+      "explanation": "Non-actionable was implemented as absent/not-visible, rejecting valid disabled controls.",
+      "status": "fixed",
+      "resolution": "Require no enabled visible action; stronger explicitly absent controls remain absent.",
+      "validation": "Absent/hidden/disabled positive and enabled negative contracts."
+    },
+    {
+      "task": "github",
+      "id": "GH-17",
+      "severity": "medium",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-6.2.2",
+          "line": 2239
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-6.2.2.spec.ts",
+      "explanation": "Source allowed identical or no-differences wording but test accepted only identical.",
+      "status": "fixed",
+      "resolution": "Accept both explicitly allowed phrasings while preserving prevention of creation.",
+      "validation": "Source/test review and typecheck."
+    },
+    {
+      "task": "github",
+      "id": "GH-18",
+      "severity": "high",
+      "category": "false-negative",
+      "source": [
+        {
+          "requirementId": "REQ-6.2.4",
+          "line": 2341
+        }
+      ],
+      "test": "arc-bench/github/tests/REQ-6.2.4.spec.ts",
+      "explanation": "Ready-for-review test globally forbids Draft text even though append-only activity can preserve prior Draft state.",
+      "status": "fixed",
+      "resolution": "Observe Open and disappearance of existing Ready for review transition action, retaining title/branches and reload checks; explicitly allow historical Draft text.",
+      "validation": "Open current state with retained Draft history browser contract."
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:84",
+        "arc-bench/keep/requirements/requirements.yaml:115",
+        "arc-bench/keep/requirements/requirements.yaml:162",
+        "arc-bench/keep/requirements/requirements.yaml:418",
+        "arc-bench/keep/requirements/requirements.yaml:621"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.1.spec.ts",
+        "arc-bench/keep/tests/REQ-2.2.spec.ts",
+        "arc-bench/keep/tests/REQ-2.3.spec.ts",
+        "arc-bench/keep/tests/REQ-2.8.spec.ts",
+        "arc-bench/keep/tests/REQ-3.3.spec.ts"
+      ],
+      "explanation": "Ordinary title/content/label presence was treated as one unique text node inside a unique note; duplicate visible copies of correct text were rejected.",
+      "resolution": "Scoped existential visible-text observations, retaining strict note region and action identities.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250",
+        "arc-bench/keep/requirements/requirements.yaml:312"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts"
+      ],
+      "explanation": "Multiple UI deletion/archive operations may leave multiple same-named live notifications; helper required globally unique feedback.",
+      "resolution": "Feedback presence accepts repeated visible statuses. Actual Undo/Dismiss action selection remains strict when exercised.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-03",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Zero child regions also passed when Deleted notes itself was absent.",
+      "resolution": "Require exactly one non-hidden accessible Deleted notes collection before checking zero contents, before and after reload; zero-area genuine empty collections remain valid.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-04",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Strict locator OR rejected coexisting optional confirmation and already-empty collection.",
+      "resolution": "Poll two public outcomes as booleans, confirm when shown, then assert empty named collection.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-05",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:377"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.7.spec.ts"
+      ],
+      "explanation": "Color tests only checked the renamed action although Then explicitly says that is insufficient.",
+      "resolution": "Connect the already existing rendered-pixel light-green surface oracle to both color scenarios; keep title/content/action/reload checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-06",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:746"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-5.2.spec.ts"
+      ],
+      "explanation": "List view enforced left edges within 3 pixels, rejecting valid single-column centered/different-width cards.",
+      "resolution": "Require shared vertical line through surfaces and pairwise vertical separation, keeping multiple-column grid check and state/content checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-07",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:667"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-4.1.spec.ts"
+      ],
+      "explanation": "Each matching fragment may occur more than once, but one global matching highlight locator had to be unique.",
+      "resolution": "Require at least one visible named fragment and check every visible fragment against the exact keyword, preserving the scoped note identity.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-08",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:537"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-3.1.spec.ts"
+      ],
+      "explanation": "Final Done click had no assertion that reopened management closes.",
+      "resolution": "Assert the named management dialog hidden after final Done.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-09",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:162",
+        "arc-bench/keep/requirements/requirements.yaml:418",
+        "arc-bench/keep/requirements/requirements.yaml:621"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.3.spec.ts",
+        "arc-bench/keep/tests/REQ-2.8.spec.ts",
+        "arc-bench/keep/tests/REQ-3.3.spec.ts"
+      ],
+      "explanation": "Removed plain-text content/labels were counted even in retained hidden markup.",
+      "resolution": "Only visible obsolete text must be absent, preserving saved-state and later filter/reload checks.",
+      "validation": "Task-specific positive/negative contracts; TypeScript passed; browser result recorded by parent"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-10",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:19",
+        "arc-bench/keep/requirements/requirements.yaml:192",
+        "arc-bench/keep/requirements/requirements.yaml:312",
+        "arc-bench/keep/requirements/requirements.yaml:667",
+        "arc-bench/keep/requirements/requirements.yaml:714"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-1.1.spec.ts",
+        "arc-bench/keep/tests/REQ-2.4.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts",
+        "arc-bench/keep/tests/REQ-4.1.spec.ts",
+        "arc-bench/keep/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Broader prose obligations are not fully exercised: keyboard-accessible hover actions; icon uniqueness; visual emphasis of keyword regions; reload durability of Undo transitions; Save/Cancel behavior for the second checkbox.",
+      "resolution": "Keep these as coverage gaps rather than infer behavior from roles, feedback, or the scenario denominator. No new scenario IDs were invented.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-11",
+      "severity": "medium",
+      "category": "observation-risk",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:115",
+        "arc-bench/keep/requirements/requirements.yaml:19"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.2.spec.ts",
+        "arc-bench/keep/tests/REQ-1.1.spec.ts"
+      ],
+      "explanation": "Normalized DOM text may disagree with visible multiline content rendered as adjacent block nodes; clipped screen-reader-only sidebar text can also differ from Playwright text visibility.",
+      "resolution": "Source semantics retained; no arbitrary CSS fallback or content-internal access added. These representation cases require further independent implementations/probes.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-12",
+      "severity": "medium",
+      "category": "observation-risk",
+      "status": "deferred",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml:250"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.5.spec.ts"
+      ],
+      "explanation": "Empty Trash currently counts nested region roles as note regions; an unspecified auxiliary named region inside Deleted notes could be rejected.",
+      "resolution": "Do not pretend region role alone uniquely distinguishes arbitrary note/auxiliary objects. Existing explicit note-region contract remains; further public identity disambiguation is needed for such auxiliary layouts.",
+      "validation": "Static source review; explicitly not closed"
+    },
+    {
+      "task": "keep",
+      "id": "KEEP-13",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.4",
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.5",
+        "arc-bench/keep/requirements/requirements.yaml#REQ-2.6"
+      ],
+      "test": [
+        "arc-bench/keep/tests/REQ-2.4.spec.ts",
+        "arc-bench/keep/tests/REQ-2.5.spec.ts",
+        "arc-bench/keep/tests/REQ-2.6.spec.ts"
+      ],
+      "explanation": "A matching note elsewhere on the page could satisfy a required Trash/Archived collection member while the named collection was empty.",
+      "resolution": "Bind each positive Trash/Archived result to the existing named collection and exact note identity, retaining content and global uniqueness checks.",
+      "validation": "Positive in-collection member and matching out-of-collection preview negative contract added."
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F01",
+      "severity": "high",
+      "category": "false-negative / action identity",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:1621",
+        "arc-bench/prestashop/requirements/requirements.yaml:1"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:43",
+        "arc-bench/prestashop/tests/REQ-6.1.spec.ts:7"
+      ],
+      "explanation": "Persistent navigation and sign-in content can both expose the required Sign in button. A global button locator is ambiguous; requiring an undeclared main/form would invent structure.",
+      "resolution": "signInSubmit excludes native/ARIA navigation and preserves exact case-insensitive button identity and duplicate-submit strictness.",
+      "validation": "audit/validation/prestashop.spec.ts: Native and ARIA navigation positives; duplicate-submit and navigation-only negatives.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F02",
+      "severity": "high",
+      "category": "false-positive / explicit roles",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:1",
+        "arc-bench/prestashop/requirements/requirements.yaml:29",
+        "arc-bench/prestashop/requirements/requirements.yaml:335",
+        "arc-bench/prestashop/requirements/requirements.yaml:1905"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:25"
+      ],
+      "explanation": "Action helpers must preserve explicitly declared button/link roles rather than accepting either by matching name.",
+      "resolution": "action dispatches declared actions to their correct role and exact case-insensitive identity. Only Cart admits the disclosed numeric suffix.",
+      "validation": "audit/validation/prestashop.spec.ts: Wrong Save/Men role and Cart settings negatives.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F03",
+      "severity": "high",
+      "category": "ambiguity / false-negative",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:1",
+        "arc-bench/prestashop/requirements/requirements.yaml:273",
+        "arc-bench/prestashop/requirements/requirements.yaml:1016",
+        "arc-bench/prestashop/requirements/requirements.yaml:1222"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:31",
+        "arc-bench/prestashop/requirements/requirements.yaml:7"
+      ],
+      "explanation": "Most monetary field names do not explicitly declare role=region, yet prior checks demanded it. The inherited phrase amount region was ambiguous; global numeric fallback would lose field/record ownership.",
+      "resolution": "Clarify ROOT and accept visible named region/group/status-output or native dt/dd association inside the selected record. Keep one current candidate, ignore hidden historical values and reject visible ambiguity.",
+      "validation": "audit/validation/prestashop.spec.ts: Four public presentations pass; wrong record/value, duplicate named fields/dd, missing per-card price and hidden-history negatives.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F04",
+      "severity": "high",
+      "category": "false-positive / false-negative",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:1",
+        "arc-bench/prestashop/requirements/requirements.yaml:29",
+        "arc-bench/prestashop/requirements/requirements.yaml:751",
+        "arc-bench/prestashop/requirements/requirements.yaml:1154",
+        "arc-bench/prestashop/requirements/requirements.yaml:2144"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:48"
+      ],
+      "explanation": "Substring counts can accept 10 for one, while exact unsuffixed Cart can reject conventional numeric accessible names. Accessible and visible counts can also disagree.",
+      "resolution": "Disclose optional Cart numeric suffix and require each supplied visible/accessibility count to be one exact expected integer on that exact link.",
+      "validation": "audit/validation/prestashop.spec.ts: Cart/Cart 3/Cart (3)/accessible-only positives; wrong 10/1, conflicting counts and duplicate Cart negatives.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F05",
+      "severity": "high",
+      "category": "false-negative / false-positive",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:138"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-1.4.spec.ts:6",
+        "arc-bench/prestashop/tests/helpers.ts:123"
+      ],
+      "explanation": "OR-union visibility assertions become strict for a valid category exposing both category and product headings; a stale product-card heading alone can also pass without navigation.",
+      "resolution": "Use separate product-detail and category destination predicates, retaining exact product identity and Product information/Product list context.",
+      "validation": "audit/validation/prestashop.spec.ts: Category with both headings and real detail pass; homepage-only, wrong card and wrong Product information fail.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F06",
+      "severity": "medium",
+      "category": "false-negative / invented structure",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:245"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-1.7.spec.ts:7",
+        "arc-bench/prestashop/tests/helpers.ts:117"
+      ],
+      "explanation": "Quick view requires product and price 24 but does not declare a named Sale price region.",
+      "resolution": "Observe exact monetary text within the product-specific preview dialog; preserve amount 24 and reject neighboring/global evidence.",
+      "validation": "audit/validation/prestashop.spec.ts: Scoped unlabeled price positive; wrong preview price plus desired amount elsewhere negative.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F07",
+      "severity": "medium",
+      "category": "false-negative / informational presence",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:29",
+        "arc-bench/prestashop/requirements/requirements.yaml:109",
+        "arc-bench/prestashop/requirements/requirements.yaml:185",
+        "arc-bench/prestashop/requirements/requirements.yaml:906",
+        "arc-bench/prestashop/requirements/requirements.yaml:960",
+        "arc-bench/prestashop/requirements/requirements.yaml:1671"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:57",
+        "arc-bench/prestashop/tests/REQ-1.1.spec.ts:6"
+      ],
+      "explanation": "Repeated informational text/headings need not imply ambiguous actions. Popular Products is explicitly a named region, without a separately required heading.",
+      "resolution": "Use visible existence for scoped text/headings and require named Popular Products on home return. Keep declared heading role, exact identity and strict action selection.",
+      "validation": "audit/validation/prestashop.spec.ts: Repeated visible text/heading positives; hidden-only text and nonheading text negatives.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F08",
+      "severity": "medium",
+      "category": "false-negative / missing GWT execution",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:284"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-2.1.spec.ts:6"
+      ],
+      "explanation": "Description need not repeat literal Men; count must be numeric. Parent Men keyboard access was omitted and Women setup skipped the stated breadcrumb return.",
+      "resolution": "Require nonempty visible description/numeric count, Tab to parent Men, and enter Women after the actual Men-to-CLOTHES breadcrumb return.",
+      "validation": "Static complete-GWT source/action comparison. No application run was used; existing public keyboard traversal remains.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F09",
+      "severity": "high",
+      "category": "false-positive / incomplete membership",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:382",
+        "arc-bench/prestashop/requirements/requirements.yaml:507",
+        "arc-bench/prestashop/requirements/requirements.yaml:536",
+        "arc-bench/prestashop/requirements/requirements.yaml:565",
+        "arc-bench/prestashop/requirements/requirements.yaml:594",
+        "arc-bench/prestashop/requirements/requirements.yaml:623"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:145",
+        "arc-bench/prestashop/tests/REQ-2.3.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-2.6.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-2.7.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-2.8.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-2.9.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-2.10.spec.ts:7"
+      ],
+      "explanation": "Two card witnesses and an arbitrary count change can pass despite missing eligible products or surviving ineligible products.",
+      "resolution": "Compare the complete eligible public identity set from the declared 13-product catalog and exact filtered totals where stated; require each visible priced card to expose its own amount.",
+      "validation": "audit/validation/prestashop.spec.ts: Wrong membership despite plausible count, duplicate identity, missing per-card price and mutable incidental-text contracts. Expected sets recomputed from public seed attributes.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F10",
+      "severity": "medium",
+      "category": "false-negative / false-positive",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:478",
+        "arc-bench/prestashop/requirements/requirements.yaml:623"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:65",
+        "arc-bench/prestashop/tests/REQ-2.5.spec.ts:7"
+      ],
+      "explanation": "Literal item(s) rejects normal plural items; full card text can misidentify products when incidental price/text/order changes.",
+      "resolution": "Accept item/items/item(s) and hyphen/en-dash, preserving exact numeric range/total. Compare product-region identities, rejecting duplicates, for pagination and restored sets.",
+      "validation": "audit/validation/prestashop.spec.ts: Plural/en-dash positive; wrong range/total and duplicate identities negative; identity independent of incidental text.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F11",
+      "severity": "medium",
+      "category": "false-negative / capitalization",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:810"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-3.4.spec.ts:5"
+      ],
+      "explanation": "Lowercase cotton rejects normal Cotton capitalization; strict word boundaries can fail adjacent DOM label/value concatenation.",
+      "resolution": "Require cotton case-insensitively inside exact Product Details panel; retain Reference/HB-DETAIL/Data sheet/Features/regular-fit assertions.",
+      "validation": "audit/validation/prestashop.spec.ts: Composition/Cotton/Features adjacent-markup positive, Polyester negative.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F12",
+      "severity": "high",
+      "category": "false-positive / numeric prefix",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:850",
+        "arc-bench/prestashop/requirements/requirements.yaml:1454"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-3.5.spec.ts:5",
+        "arc-bench/prestashop/tests/REQ-5.6.spec.ts:7"
+      ],
+      "explanation": "Prior numeric regexes allowed 40 or 4.5 for rating four and 10 for Quantity one.",
+      "resolution": "Add numeric suffix guards in the declared rating/quantity contexts.",
+      "validation": "Direct JavaScript regex positives/negatives and static assertion review; no full browser application is needed.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F13",
+      "severity": "medium",
+      "category": "false-positive / missing result",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:662",
+        "arc-bench/prestashop/requirements/requirements.yaml:906"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-3.1.spec.ts:7",
+        "arc-bench/prestashop/tests/REQ-3.6.spec.ts:6"
+      ],
+      "explanation": "Thumbnail availability and related-product keyboard reachability were explicit results; prior tests checked only Zoom and some visible related link.",
+      "resolution": "Require Front/Back thumbnail buttons and actually Tab to one different named published Men product link. Such any-product witness is explicitly existential; duplicate chosen actions remain strict.",
+      "validation": "Complete-GWT static mapping and existing public keyboard helper; no model or full application evaluation.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F14",
+      "severity": "high",
+      "category": "false-positive / stale source location",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:662",
+        "arc-bench/prestashop/requirements/requirements.yaml:698",
+        "arc-bench/prestashop/requirements/requirements.yaml:987"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/helpers.ts:94"
+      ],
+      "explanation": "An informational product heading can already exist in the card before opening detail. Heading alone is insufficient destination evidence for setup.",
+      "resolution": "openProduct also requires visible Product information identifying the exact selected product, without private route or implementation selectors.",
+      "validation": "audit/validation/prestashop.spec.ts: A clicked link leaving only the existing card heading must fail openProduct.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F15",
+      "severity": "medium",
+      "category": "false-positive / empty assigned reference",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:1454"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-5.6.spec.ts:7"
+      ],
+      "explanation": "An Order reference region containing only its label is nonempty but has no assigned reference.",
+      "resolution": "Keep nonempty requirement and reject bare Order reference label; do not prescribe the assigned reference format.",
+      "validation": "Static source/assertion comparison; no reference is predetermined from the historical order.",
+      "status": "fixed"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F16",
+      "severity": "info",
+      "category": "evidence-boundary",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:138",
+        "arc-bench/prestashop/requirements/requirements.yaml:933",
+        "arc-bench/prestashop/requirements/requirements.yaml:960"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-1.4.spec.ts:6",
+        "arc-bench/prestashop/tests/REQ-3.7.spec.ts:6",
+        "arc-bench/prestashop/tests/REQ-3.8.spec.ts:7"
+      ],
+      "explanation": "Public image source/name/caption state does not prove distinct visual pixels or the correct enlarged back-view image.",
+      "resolution": "Disclose the unclosed visual boundary. Allow a distinct high-resolution enlargement URL; do not require equality to main-image src.",
+      "validation": "Static review only; no image content or pixel QA was performed.",
+      "status": "boundary"
+    },
+    {
+      "task": "prestashop",
+      "id": "prestashop-F17",
+      "severity": "info",
+      "category": "evidence-boundary",
+      "source": [
+        "arc-bench/prestashop/requirements/requirements.yaml:850"
+      ],
+      "test": [
+        "arc-bench/prestashop/tests/REQ-3.5.spec.ts:5"
+      ],
+      "explanation": "Anonymous Wishlist prompt and signed-out navigation do not prove absence of private membership. No authenticated membership-adding flow or named success signal is defined.",
+      "resolution": "Preserve visible permission assertions and limit the conclusion; do not invent private APIs, success wording or an adding-membership workflow.",
+      "validation": "Static observability analysis; no hidden storage/application was inspected.",
+      "status": "boundary"
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-01",
+      "severity": "high",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-3.1.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/support/e2e.ts"
+      ],
+      "explanation": "The commit helper required displayed text to change on every accepted edit, rejecting idempotent edits and formulas yielding the previous result.",
+      "resolution": "Read the accepted raw value/formula back through the declared Formula bar. Invalid-edit paths explicitly skip acceptance readback and retain their own error/unchanged-value assertions.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-1.1.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/support/observations.ts"
+      ],
+      "explanation": "Ordinary visible text was forced to be globally unique; absence of other-workbook/history text was checked outside its worksheet scope.",
+      "resolution": "Use visible existential text presence, preserve strict named actions, and scope data-absence assertions to the active declared grid.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-03",
+      "severity": "medium",
+      "category": "ambiguity",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-1.3.2"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-1.3.2.spec.ts"
+      ],
+      "explanation": "Raw CSV equality rejected equivalent legal quoting, BOM and record separators rather than measuring exported cell values.",
+      "resolution": "Clarify decoded-cell equivalence in inherited REQ-1.3 and one Then; compare full ordered decoded fields, preserving significant spaces, empty fields, quotes, newline positions and raw leading zeros.",
+      "requirementsChanged": true,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-04",
+      "severity": "high",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-5.1.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/support/e2e.ts"
+      ],
+      "explanation": "Filtered-range preparation required role locators for intermediate hidden rows, rejecting valid hidden or unmounted filtered records.",
+      "resolution": "Keep both visible endpoint selections and every observable interior cell strict. Hidden record preservation is checked independently by the ensuing complete-range sort, export and pivot business outcomes.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-05",
+      "severity": "high",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-1.2.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-1.2.1.spec.ts"
+      ],
+      "explanation": "Checking active Sheet1 and empty A1 allowed extra worksheets or unwanted data elsewhere in the initially blank grid.",
+      "resolution": "Require exactly one Sheet1, the declared sole A1 selection, explicit public selection states and blank observable cells before/after refresh.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-06",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-3.1.3"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-3.1.3.spec.ts"
+      ],
+      "explanation": "The rectangle test sampled outside C-column cells, allowing additional selected cells elsewhere.",
+      "resolution": "Compare the complete selected-cell count with the explicitly required coordinates and require public true/false selection state on all observable gridcells.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-07",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-2.1.2"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-2.1.2.spec.ts"
+      ],
+      "explanation": "Sheet switching accepted any nonempty formula result rather than the required numeric 4.",
+      "resolution": "Observe exact raw formula and required calculated numeric value in each restored worksheet state.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-08",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-2.1.3"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-2.1.3.spec.ts"
+      ],
+      "explanation": "Worksheet rename used Enter although its source only declared Save and did not require keyboard submission.",
+      "resolution": "Click the declared Save button. Workbook rename retains Enter because its own GWT explicitly requires it.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-09",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-1.3.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-1.3.1.spec.ts"
+      ],
+      "explanation": "Whitespace-normalizing text assertions concealed lost embedded newlines; expected multiline text also introduced an absent space, and no existing input actually exercised declared Chinese support.",
+      "resolution": "Use exact cell text with CRLF/LF line-break equivalence, synchronize the original multiline field, include English/Chinese UTF-8 in the existing field fixture/source, and check all stated persisted cells.",
+      "requirementsChanged": true,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-10",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-3.1.2"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-3.1.2.spec.ts"
+      ],
+      "explanation": "Several Then persistence clauses rechecked only a diagonal/first row or grid result, omitting other required fields, raw formulas or retained validation controls.",
+      "resolution": "Add the omitted post-refresh tuple fields, sentinels, raw formulas, rule reapplication and declared affordances in the existing scenarios; IDs and denominator remain unchanged.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-11",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-1.2.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-1.2.1.spec.ts"
+      ],
+      "explanation": "Conditional create/add/rename/structural/sort/pivot infrastructure-failure branches lack reproducible public failure-trigger scenarios.",
+      "resolution": "Keep the 100-scenario scope explicit. Do not invent private API fault injection or claim these conditional failures, all boundary datasets or arbitrary workbook sizes are covered. A future expansion needs declared public failure preconditions.",
+      "requirementsChanged": false,
+      "validation": "Source-level gap retained; not a proved behavior pass."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-12",
+      "severity": "low",
+      "category": "measurement-scope",
+      "status": "retained",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#ROOT"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/support/e2e.ts"
+      ],
+      "explanation": "The task explicitly measures named ARIA grid/tab/control/record contracts in addition to spreadsheet business behavior; screenshots and excluded collaboration are not evaluated.",
+      "resolution": "Retain these source-explicit accessibility identities; do not silently relax them to fit an application. Sharing/authentication permission probes are outside this task ROOT scope.",
+      "requirementsChanged": false,
+      "validation": "Source-explicit scope retained; no application inspected."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-13",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-4.1.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/support/observations.ts"
+      ],
+      "explanation": "Calculated numeric correctness was coupled to one textual numeric formatter, so 4.0 or 1,800 could fail despite correct arithmetic.",
+      "resolution": "Clarify numeric presentation equivalence and apply it only to reviewed formula/pivot output cells. CSV numeric equivalence is limited to known E2/E3/B1 calculated positions; ordinary input and raw expressions stay unchanged.",
+      "requirementsChanged": true,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "sheet",
+      "id": "SHEET-14",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "source": [
+        "arc-bench/sheet/requirements/requirements.yaml#REQ-2.1.1"
+      ],
+      "test": [
+        "arc-bench/sheet/tests/REQ-2.1.1.spec.ts"
+      ],
+      "explanation": "Single-column CSV observed A1/A4 without explicitly checking active Sheet1, and added Sheet2 blankness was sampled only at A1.",
+      "resolution": "Add active Sheet1 before/after refresh in the CSV scenario; require visible A1 and blank text for every observable new-sheet gridcell before/after refresh. Only the two formal specs change; existing helpers, IDs and UI contracts stay unchanged.",
+      "requirementsChanged": false,
+      "validation": "Targeted TypeScript passed. Parent combined 110/110 contract execution passed, including this task final 30 positive/negative cases."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.1",
+        "REQ-2.2",
+        "REQ-2.4",
+        "REQ-3.3",
+        "REQ-4.5",
+        "REQ-7.4"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:155",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:254",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:348",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:530",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1043",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1995"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-2.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.4.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-7.4.spec.ts"
+      ],
+      "explanation": "Ordinary visible feedback/text used strict unique locators, rejecting repeated correct text.",
+      "resolution": "Use visible existential text checks without changing expected strings or relaxing action uniqueness.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-02",
+      "severity": "high",
+      "category": "false-negative-and-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-3.5",
+        "REQ-6.1",
+        "REQ-6.5",
+        "REQ-6.6"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:655",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1616",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1751",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1784"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-3.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.6.spec.ts"
+      ],
+      "explanation": "Membership/discovery assumed the first feed page; excluded records on later pages could be missed.",
+      "resolution": "Traverse declared public Next page controls, check all relevant pages, and stop traversal after opening the exact selected question.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-03",
+      "severity": "medium",
+      "category": "false-negative-and-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-1.3",
+        "REQ-3.5",
+        "REQ-4.6",
+        "REQ-6.2",
+        "REQ-6.7",
+        "REQ-6.8"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:103",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:655",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1104",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1652",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1822",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1853"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-1.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.5.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.6.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.7.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.8.spec.ts"
+      ],
+      "explanation": "Empty result/list region either had an unjustified area requirement or could disappear while child count=0 passed.",
+      "resolution": "Require one publicly exposed named region, allowing zero-area empty content; hidden/missing regions cannot satisfy semantic lookup.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-04",
+      "severity": "high",
+      "category": "false-negative-and-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-3.2"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:488"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-3.2.spec.ts"
+      ],
+      "explanation": "Question timestamps/views were read globally and date matching rejected ordinary equivalent UTC spellings.",
+      "resolution": "Bind outputs to their owning Question post excluding nested Answers; compare parsed UTC calendar dates and preserve strict output uniqueness.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-05",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-5.2",
+        "REQ-5.7"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1301",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1469"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-5.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.7.spec.ts"
+      ],
+      "explanation": "Comment timestamp checks accepted only year 2026/ago/just now and rejected valid clock/month-day/native time presentation.",
+      "resolution": "Accept visible public time metadata and common UTC clock/date/relative text; retain scoped author/body and persistence checks. This is timestamp presence, not proof of its exact instant.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-06",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.6"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1104"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-4.6.spec.ts"
+      ],
+      "explanation": "Deleting an answer required old body text to be absent from DOM even though source only requires public disappearance.",
+      "resolution": "Exclude hidden retained text from deletion observations; visible stale text and wrong answer counts still fail.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-07",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.1",
+        "REQ-2.4",
+        "REQ-4.3",
+        "REQ-5.2",
+        "REQ-5.6",
+        "REQ-5.8",
+        "REQ-6.2"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:155",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:348",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:964",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1301",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1436",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1503",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1652"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-2.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.4.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.6.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.8.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.2.spec.ts"
+      ],
+      "explanation": "Several explicit retained-state, initial-state and post-reload result clauses were only partially checked.",
+      "resolution": "Recheck recovery/signup after password toggles; profile data and second acceptance after reload; persisted comment author/time/reply mention; initial comment pressed=false and no downvote at every stage; persisted unwatch.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-08",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-1.2",
+        "REQ-2.1",
+        "REQ-2.2",
+        "REQ-2.3",
+        "REQ-3.2",
+        "REQ-3.3",
+        "REQ-4.2",
+        "REQ-5.6"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:63",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:155",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:254",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:314",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:488",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:530",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:933",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1436"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-1.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-2.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.6.spec.ts"
+      ],
+      "explanation": "Shared action union accepted links for explicitly declared fixed-name business buttons; reputation regex merely contained digits.",
+      "resolution": "Known explicit control names retain button role and exact identity; unrestricted navigational identities retain the prior alternatives. Reputation outputs must be whole integers.",
+      "validation": "Task-only TypeScript passed; new positive/negative browser contracts delegated to parent for execution."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-09",
+      "severity": "high",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "requirements": [
+        "REQ-5.4"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1367"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-5.4.spec.ts"
+      ],
+      "explanation": "Descriptions mention an independent expired-comment scenario at 12:06, but the current 66 scenarios contain only within-window editing.",
+      "resolution": "Keep five-minute product rule intact and disclose missing expired/boundary cases; do not claim the phantom scenario was executed or silently expand this denominator.",
+      "validation": "Complete static source/scenario review; explicitly unresolved."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-10",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "requirements": [
+        "REQ-3.3",
+        "REQ-3.4",
+        "REQ-4.3",
+        "REQ-6.1",
+        "REQ-6.5"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:530",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:613",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:964",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1616",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1751"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-3.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-3.4.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-4.3.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-6.5.spec.ts"
+      ],
+      "explanation": "Complete Markdown rendering, question editor toolbar/revision selection/cancel, green acceptance rendering, paginated tag catalog and nontrivial filtered Newest ordering exceed current assertions/fixtures.",
+      "resolution": "Disclose concrete unmeasured behavior. Do not invent ranking data, mandatory DOM wrappers, screenshot thresholds or extra cases in this revision.",
+      "validation": "Complete static source/scenario review; explicitly unresolved."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-11",
+      "severity": "high",
+      "category": "weak-observation",
+      "status": "deferred",
+      "requirements": [
+        "REQ-7.1",
+        "REQ-7.4"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1901",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1995"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-7.1.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-7.4.spec.ts"
+      ],
+      "explanation": "History reasons, signed changes and parent titles are observed globally within a history view; swapped event attribution may pass.",
+      "resolution": "Needs a source-grounded association-preserving record oracle/independent event fixtures. No test-only container role added.",
+      "validation": "Complete static source/scenario review; explicitly unresolved."
+    },
+    {
+      "task": "stackoverflow",
+      "id": "SO-12",
+      "severity": "medium",
+      "category": "weak-observation",
+      "status": "deferred",
+      "requirements": [
+        "REQ-3.2",
+        "REQ-5.2",
+        "REQ-5.7"
+      ],
+      "source": [
+        "arc-bench/stackoverflow/requirements/requirements.yaml:488",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1301",
+        "arc-bench/stackoverflow/requirements/requirements.yaml:1469"
+      ],
+      "test": [
+        "arc-bench/stackoverflow/tests/REQ-3.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.2.spec.ts",
+        "arc-bench/stackoverflow/tests/REQ-5.7.spec.ts"
+      ],
+      "explanation": "Author badge/time checks and comment timestamp presence do not fully establish exact source values or semantic visual content.",
+      "resolution": "Keep public existence checks honest; precise timestamp, author-record fields and visual avatar/green-marker quality require further independent verification.",
+      "validation": "Complete static source/scenario review; explicitly unresolved."
+    }
+  ]
+}

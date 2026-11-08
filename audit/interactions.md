@@ -1,6 +1,6 @@
 # Keep / BookStack 组合约束扩展
 
-修订：`2026-11-08-keep-bookstack-interactions`。父版 `2026-11-07-bookstack-lifecycle` 的需求、场景和测试标题保持原有身份。新增场景通过公开界面建立数据，不向应用注入私有状态。Keep 使用同一工作区的两页；BookStack 使用现有两个验证账号和独立匿名会话。操作顺序固定，测试不靠延时制造冲突。
+修订：组合扩展引入于 `2026-11-08-keep-bookstack-interactions`，并纳入当前合并修订 `2026-11-08-keep-bookstack-lifecycle-interactions`。父版 `2026-11-07-bookstack-lifecycle` 的需求、场景和测试标题保持原有身份。新增场景通过公开界面建立数据，不向应用注入私有状态。Keep 使用同一工作区的两页；BookStack 使用现有两个验证账号和独立匿名会话。操作顺序固定，测试不靠延时制造冲突。
 
 | 题目 / 需求 | 基础能力 | 新场景和关键失败模式 |
 | --- | --- | --- |

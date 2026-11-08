@@ -33,14 +33,14 @@ Running 11 tests using 1 worker
 
     Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoHaveCount[2m([22m[32mexpected[39m[2m)[22m failed
 
-    Locator:  getByRole('link', { name: 'pw-repository-62025-xcv24c', exact: true })
+    Locator:  getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })
     Expected: [32m1[39m
     Received: [31m0[39m
     Timeout:  400ms
 
     Call log:
     [2m  - Expect "toHaveCount" with timeout 400ms[22m
-    [2m  - waiting for getByRole('link', { name: 'pw-repository-62025-xcv24c', exact: true })[22m
+    [2m  - waiting for getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })[22m
     [2m    4 × locator resolved to 0 elements[22m
     [2m      - unexpected value "0"[22m
 
@@ -229,4 +229,4 @@ Running 11 tests using 1 worker
     [merge-status] › arc-bench\github\tests\REQ-6.5.spec.ts:13:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
     [merge-parents] › arc-bench\github\tests\REQ-6.5.spec.ts:13:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 1 
     [refusal-write] › arc-bench\github\tests\REQ-6.5.spec.ts:59:5 › REQ-6.5: Merge an Eligible Pull Request - Scenario 2 
-  4 passed (32.3s)
+  4 passed (41.7s)

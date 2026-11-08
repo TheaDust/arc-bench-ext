@@ -58,6 +58,8 @@ test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
   await setMembership(page, bookB, false);
   await button(page, 'Save Shelf').click();
   await heading(page, shelfB);
+  await page.reload();
+  await heading(page, shelfB);
   await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
   await expectAbsentEntry(region(page, 'Book list'), bookB);
   await openBook(page, bookB);
@@ -67,6 +69,7 @@ test("REQ-4.5: Edit related books", async ({ page }, testInfo) => {
   await openBook(page, bookA);
   await heading(page, bookA);
   await expect(entry(page, shelfA)).toHaveCount(1);
+  await expect(entry(page, shelfB)).toHaveCount(1);
   await openShelf(page, shelfA);
   await expect(entry(region(page, 'Book list'), bookA)).toHaveCount(1);
   await openShelf(page, shelfB);

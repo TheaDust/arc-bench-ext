@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createBook, createShelf,
   createShelfBook, createChapter, createPage, createPageInChapter, favorite, home, login, openBook, openChapter,
-  openPageInChapter, openShelf } from './helpers';
+  openPage, openPageInChapter, openShelf, expectUnavailablePage } from './helpers';
 
 test("REQ-5.5: Confirm deletion", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -42,9 +42,18 @@ test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo) 
   const pageA = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-A', 'Page content 5.5.3-A.');
   const pageB = await createPageInChapter(page, id, book, chapter, 'Page 5.5.3-B', 'Page content 5.5.3-B.');
   const root = await createPage(page, id, book, 'Page 5.5.3-Root', 'Page content 5.5.3-Root.');
+  const pageUrls: { url: string; title: string; body: string }[] = [];
+  for (const [title, body] of [[pageA, 'Page content 5.5.3-A.'], [pageB, 'Page content 5.5.3-B.'],
+    [root, 'Page content 5.5.3-Root.']]) {
+    await openPage(page, book, title);
+    await text(page, body);
+    pageUrls.push({ url: page.url(), title, body });
+  }
   await openBook(page, book);
+  const bookUrl = page.url();
   await favorite(page);
   await openChapter(page, book, chapter);
+  const chapterUrl = page.url();
   await favorite(page);
   await openPageInChapter(page, book, chapter, pageA);
   await favorite(page);
@@ -74,4 +83,16 @@ test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo) 
   await go(page, 'Books');
   await expectAbsentEntry(region(page, 'Book list'), book);
   await expect(entry(region(page, 'Book list'), other)).toHaveCount(1);
+  for (const saved of pageUrls) {
+    await page.goto(saved.url);
+    await expectUnavailablePage(page, saved.title, saved.body);
+    await page.reload();
+    await expectUnavailablePage(page, saved.title, saved.body);
+  }
+  await page.goto(chapterUrl);
+  await expect(page.getByRole('heading', { name: chapter, exact: true })).toHaveCount(0);
+  await page.goto(bookUrl);
+  await expect(page.getByRole('heading', { name: book, exact: true })).toHaveCount(0);
+  await openBook(page, other);
+  await text(page, 'Book created by corresponding prerequisite behavior.');
 });

@@ -7,14 +7,21 @@ export const note = (page: Page, title: string) =>
 export const section = (page: Page, name: string) =>
   page.getByRole('region', { name, exact: true });
 export const editor = (page: Page) => page.getByRole('dialog', { name: 'Note editor', exact: true });
-export const notice = (page: Page, name: string) => page.getByRole('status', { name, exact: true });
+/** Status identity comes from its exact visible message. */
+export const notice = (page: Page, message: string) => {
+  const status = page.getByRole('status');
+  const text = page.locator(`text=${JSON.stringify(message)}`).filter({ visible: true });
+  return status.and(text).or(status.filter({ has: text }));
+};
 
 /** Presence may have repeated visible copies; action and note identities stay unique. */
 export async function expectVisibleText(scope: Page | Locator, value: string) {
   await expect.poll(() => scope.getByText(value, { exact: true }).filter({ visible: true }).count()).toBeGreaterThan(0);
 }
 export async function expectNotice(page: Page, name: string) {
-  await expect.poll(() => notice(page, name).filter({ visible: true }).count()).toBeGreaterThan(0);
+  const notification = notice(page, name);
+  await expect(notification).toHaveCount(1);
+  await expect(notification).toBeVisible();
 }
 export async function expectSearchHighlights(scope: Locator, keyword: string) {
   const fragments = scope.getByRole('region', { name: `Highlight ${keyword}`, exact: true }).filter({ visible: true });

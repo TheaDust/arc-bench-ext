@@ -1,0 +1,71 @@
+// requirement: REQ-2.11
+import { test, expect, action, note, section, openHome, navigate, createNote, deleteNote, archiveNote,
+  expectNote, expectNoteInCollection } from './helpers';
+import { identity } from './fixtures/data';
+
+test('REQ-2.11: Permanently delete only the selected trashed note', async ({ page }, info) => {
+  await openHome(page);
+  const target = identity(info, 'Delete forever target');
+  const other = identity(info, 'Keep deleted sibling');
+  const active = identity(info, 'Keep active sibling');
+  const archived = identity(info, 'Keep archived sibling');
+  await createNote(page, target, 'Remove this content permanently');
+  await createNote(page, other, 'Keep other deleted content');
+  await createNote(page, active, 'Keep active content');
+  await createNote(page, archived, 'Keep archived content');
+  await archiveNote(page, archived);
+  await deleteNote(page, target);
+  await deleteNote(page, other);
+  await navigate(page, 'Trash');
+  await expectNoteInCollection(page, 'Deleted notes', target, 'Remove this content permanently');
+  await note(page, target).hover();
+  await action(note(page, target), `Delete forever ${target}`).click();
+  const dialog = page.getByRole('dialog', { name: 'Delete note forever', exact: true });
+  await expect(dialog).toBeVisible();
+  await expect(action(dialog, 'Cancel')).toBeVisible();
+  await action(dialog, 'Delete forever').click();
+  await expect(dialog).toBeHidden();
+  await expect(note(page, target)).toBeHidden();
+  await expectNoteInCollection(page, 'Deleted notes', other, 'Keep other deleted content');
+  await page.reload();
+  await expect(note(page, target)).toBeHidden();
+  await expectNoteInCollection(page, 'Deleted notes', other, 'Keep other deleted content');
+  await note(page, other).hover();
+  await expect(action(note(page, other), `Restore ${other}`)).toBeVisible();
+  await navigate(page, 'Notes');
+  await expectNote(page, active, 'Keep active content');
+  await expect(note(page, target)).toBeHidden();
+  await expect(note(page, archived)).toBeHidden();
+  await navigate(page, 'Archived');
+  await expectNoteInCollection(page, 'Archived notes', archived, 'Keep archived content');
+  await expect(note(page, target)).toBeHidden();
+  await expect(note(page, active)).toBeHidden();
+});
+
+test('REQ-2.11: Cancel permanent deletion and restore the note', async ({ page }, info) => {
+  await openHome(page);
+  const title = identity(info, 'Cancel permanent deletion');
+  await createNote(page, title, 'Canceled deletion retains this content');
+  await deleteNote(page, title);
+  await navigate(page, 'Trash');
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
+  await note(page, title).hover();
+  await action(note(page, title), `Delete forever ${title}`).click();
+  const dialog = page.getByRole('dialog', { name: 'Delete note forever', exact: true });
+  await expect(dialog).toBeVisible();
+  await expect(action(dialog, 'Delete forever')).toBeVisible();
+  await action(dialog, 'Cancel').click();
+  await expect(dialog).toBeHidden();
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
+  await page.reload();
+  await expectNoteInCollection(page, 'Deleted notes', title, 'Canceled deletion retains this content');
+  await note(page, title).hover();
+  await action(note(page, title), `Restore ${title}`).click();
+  await expect(note(page, title)).toBeHidden();
+  await navigate(page, 'Notes');
+  await page.reload();
+  await expectNote(page, title, 'Canceled deletion retains this content');
+  await navigate(page, 'Trash');
+  await expect(section(page, 'Deleted notes')).toHaveCount(1);
+  await expect(note(page, title)).toBeHidden();
+});

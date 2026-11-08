@@ -1,0 +1,3355 @@
+{
+  "task": "bookstack",
+  "reviewedRequirements": 26,
+  "reviewedScenarios": 49,
+  "requirementsChanged": true,
+  "reviewScope": "All 26 leaves and 49 scenarios reviewed. The extension adds page/chapter deletion, shelf membership, rename propagation, draft publish/privacy, and cross-view lifecycle assertions; the 14 extension scenarios were executed against a local reference fixture.",
+  "scenarios": [
+    {
+      "requirementId": "REQ-1.1",
+      "scenarioId": "SCN-REQ-1.1-01",
+      "name": "Show logged-out navigation",
+      "testFile": "arc-bench/bookstack/tests/REQ-1.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:39",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-1"
+        ],
+        "given": [
+          "A fresh anonymous browser opens the initialized knowledge base; verified account and bootstrap shelf exist, but no session has been established."
+        ],
+        "when": [
+          "Open / and inspect the homepage entry links."
+        ],
+        "then": [
+          "The homepage displays visible Login, Shelves and Books links with their declared accessible names."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 7,
+            "code": "for (const name of ['Login', 'Shelves', 'Books']) await expect(page.getByRole('link', { name, exact: true })).toBeVisible();"
+          }
+        ],
+        "review": "Login, Shelves and Books are each exact named visible links on anonymous /. The broader unlabelled search capability is not asserted by this concrete Then; noted as description coverage gap.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-1.2",
+      "scenarioId": "SCN-REQ-1.2-01",
+      "name": "Return from shelves",
+      "testFile": "arc-bench/bookstack/tests/REQ-1.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:63",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-1"
+        ],
+        "given": [
+          "The anonymous homepage is open and the seeded Benchmark Bootstrap Shelf is available in Shelf list.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Shelves, verify Shelf list opens, then open / to return to the homepage."
+        ],
+        "then": [
+          "The homepage returns with its Books link visible."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 7,
+            "code": "await go(page, 'Shelves');"
+          },
+          {
+            "line": 8,
+            "code": "await expect(region(page, 'Shelf list')).toBeVisible();"
+          },
+          {
+            "line": 9,
+            "code": "await home(page);"
+          },
+          {
+            "line": 10,
+            "code": "await expect(page.getByRole('link', { name: 'Books', exact: true })).toBeVisible();"
+          }
+        ],
+        "review": "Click Shelves through public entry, assert Shelf list, then return to / and observe Books link. Navigation wrapper is no longer required when a unique public entry link suffices.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-01"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.1",
+      "scenarioId": "SCN-REQ-2.1-01",
+      "name": "Show login form",
+      "testFile": "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:102",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "A fresh browser is on the anonymous application entry with Login available on the page."
+        ],
+        "when": [
+          "Click the Login navigation link and inspect the displayed form."
+        ],
+        "then": [
+          "Email and Password fields and the Login submit button are visible; Remember Me is present and unchecked."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 7,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 8,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 9,
+            "code": "await go(page, 'Login');"
+          },
+          {
+            "line": 10,
+            "code": "await expect(page.getByRole('textbox', { name: 'Email', exact: true })).toBeVisible();"
+          },
+          {
+            "line": 11,
+            "code": "await expect(formField(page, 'Password')).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(formField(page, 'Password')).toHaveAttribute('type', 'password');"
+          },
+          {
+            "line": 13,
+            "code": "await expect(button(page, 'Login')).toBeVisible();"
+          },
+          {
+            "line": 14,
+            "code": "await expect(page.getByRole('checkbox', { name: 'Remember Me', exact: true })).toBeVisible();"
+          },
+          {
+            "line": 15,
+            "code": "await expect(page.getByRole('checkbox', { name: 'Remember Me', exact: true })).not.toBeChecked();"
+          }
+        ],
+        "review": "Exact Email/Password fields, masked native password, visible Login submit and visible unchecked Remember Me map to all form clauses. Native password exception is preserved.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-01",
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-2.2",
+      "scenarioId": "SCN-REQ-2.2-01",
+      "name": "Log in with remember me",
+      "testFile": "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:129",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-2"
+        ],
+        "given": [
+          "verified account contains verified bookstack_user@example.com with Password123! and nickname BookStack User; the browser is anonymous on the application entry.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Click Login on the page, fill Email and Password with those credentials, check Remember Me, and click the Login submit button."
+        ],
+        "then": [
+          "The homepage visibly displays BookStack User and My Recent Drafts, confirming authentication and access to the personal dashboard. No unprovided remember-me expiry guarantee is inferred."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "await login(page, true);"
+          },
+          {
+            "line": 9,
+            "code": "await text(page, ACCOUNT.nickname);"
+          }
+        ],
+        "review": "Shared login fills the fixed verified email/password, checks Remember Me, submits Login and observes visible nickname plus My Recent Drafts. Repeated visible nickname is accepted. No unprovided expiry duration is inferred.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-01",
+        "BOOK-02"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-3.1",
+      "scenarioId": "SCN-REQ-3.1-01",
+      "name": "Show personal dashboard regions",
+      "testFile": "arc-bench/bookstack/tests/REQ-3.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:168",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-3"
+        ],
+        "given": [
+          "The verified verified account exists and a fresh anonymous browser is at the application entry.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Login, fill Email with bookstack_user@example.com and Password with Password123!, check Remember Me, and submit Login."
+        ],
+        "then": [
+          "The authenticated homepage displays My Recent Drafts, My Recently Viewed, My Most Viewed Favorites and Recently Updated Pages as named regions."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "await login(page, true);"
+          },
+          {
+            "line": 9,
+            "code": "for (const name of ['My Recent Drafts', 'My Recently Viewed', 'My Most Viewed Favorites', 'Recently Updated Pages']) await expect(region(page, name)).toBeVisible();"
+          }
+        ],
+        "review": "Verified UI login establishes initial state; all four exactly named regions are observed. Empty fresh dashboard regions do not independently prove personal-list population; later cases supply UI-created objects.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-4.1",
+      "scenarioId": "SCN-REQ-4.1-01",
+      "name": "Show a uniquely identified item",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:208",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "As an anonymous visitor, create a case-isolated Shelf 4.1 through the bootstrap shelf's New Shelf form, using Reference shelf description. and knowledge-base, docs as metadata.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Shelves on the page and inspect Shelf list for the full isolated name."
+        ],
+        "then": [
+          "The created shelf's opening entry appears exactly once and is visible and keyboard-accessible within Shelf list."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createShelf(page, id, 'Shelf 4.1');"
+          },
+          {
+            "line": 9,
+            "code": "await go(page, 'Shelves');"
+          },
+          {
+            "line": 10,
+            "code": "await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(1);"
+          },
+          {
+            "line": 11,
+            "code": "await expect(entry(region(page, 'Shelf list'), name)).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expectKeyboardEntry(page, entry(region(page, 'Shelf list'), name));"
+          }
+        ],
+        "review": "UI-create the isolated shelf, enter global Shelf list, require exactly one visible opening button/link, then traverse actual Tab order. Programmatic focus is no longer accepted as keyboard evidence.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-01",
+        "BOOK-05"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.2",
+      "scenarioId": "SCN-REQ-4.2-01",
+      "name": "Open from global list",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:238",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.2.1 with Reference shelf description. and knowledge-base, docs.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Shelves, then activate that exact shelf's entry within Shelf list."
+        ],
+        "then": [
+          "The selected shelf's detail heading matches its full isolated name and its saved description is visible; a different shelf is not opened."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createShelf(page, id, 'Shelf 4.2.1');"
+          },
+          {
+            "line": 9,
+            "code": "await openShelf(page, name);"
+          },
+          {
+            "line": 10,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 11,
+            "code": "await text(page, 'Reference shelf description.');"
+          }
+        ],
+        "review": "Create the precise shelf with declared description/tags; selecting its scoped list identity opens its exact heading and saved description. Global detail text ownership remains a disclosed weak observation.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.3",
+      "scenarioId": "SCN-REQ-4.3-01",
+      "name": "Save a new shelf",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:272",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "The anonymous application has bootstrap shelf and no shelf with the isolated Shelf Created 4.3.1 name.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Open Shelves, select Benchmark Bootstrap Shelf, click New Shelf, enter the isolated name in Name, Shelf created by corresponding prerequisite behavior. in Description and created, shelf in Tags, then click Save Shelf. Open the saved shelf, reload and reopen Edit."
+        ],
+        "then": [
+          "Saving returns to Shelf list with exactly one visible entry. The saved name, description and tags remain in the reopened metadata form after reload, demonstrating persistence of the entered metadata."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createShelf(page, id, 'Shelf Created 4.3.1', 'Shelf created by corresponding prerequisite behavior.', 'created, shelf');"
+          },
+          {
+            "line": 9,
+            "code": "await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(1);"
+          },
+          {
+            "line": 10,
+            "code": "await entry(region(page, 'Shelf list'), name).click();"
+          },
+          {
+            "line": 11,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 12,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 13,
+            "code": "await expectMetadata(page, name, 'Shelf created by corresponding prerequisite behavior.', 'created, shelf');"
+          }
+        ],
+        "review": "New Shelf is a declared button. Shared creation verifies list return and one visible identity; reopen saved item, reload, Edit and compare all three metadata values, accepting native or contenteditable textboxes.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-03",
+        "BOOK-08"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.3",
+      "scenarioId": "SCN-REQ-4.3-02",
+      "name": "Cancel new shelf",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:290",
+      "testLine": 16,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "The anonymous browser has opened Benchmark Bootstrap Shelf through Shelves and Shelf list; the isolated Shelf Cancelled 4.3.2 does not exist.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click New Shelf, fill Name with the isolated title, Description with Unsaved shelf description 4.3.2. and Tags with cancelled, shelf, then click Cancel."
+        ],
+        "then": [
+          "Shelf list (role=region) returns, with no entry for the unsaved name; none of the entered metadata creates a shelf."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 17,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 18,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 19,
+            "code": "await beginShelf(page);"
+          },
+          {
+            "line": 20,
+            "code": "const name = named(id, 'Shelf Cancelled 4.3.2');"
+          },
+          {
+            "line": 21,
+            "code": "await metadata(page, name, 'Unsaved shelf description 4.3.2.', 'cancelled, shelf');"
+          },
+          {
+            "line": 22,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 23,
+            "code": "await expect(region(page, 'Shelf list')).toBeVisible();"
+          },
+          {
+            "line": 24,
+            "code": "await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(0);"
+          }
+        ],
+        "review": "Fill the specified isolated name, description and tags, Cancel, require visible Shelf list and no opening entry for unsaved name. No hidden-storage or private setup is used.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-03",
+        "BOOK-08"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.5",
+      "scenarioId": "SCN-REQ-4.5-01",
+      "name": "Save metadata changes",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:322",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "UI-created isolated Shelf 4.5.1 has Reference shelf description. and knowledge-base, docs; its details are open anonymously.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Edit and verify Name, Description and Tags are prefilled. Replace Name with isolated Shelf Updated 4.5.1 and Description with Shelf updated by corresponding prerequisite behavior., retain the tags, and click Save Shelf. Reload the returned details and reopen Edit."
+        ],
+        "then": [
+          "The updated heading and description are visible before and after reload. The reopened fields retain the updated name, description and tags on that same shelf."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const original = await createShelf(page, id, 'Shelf 4.5.1', 'Reference shelf description.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 9,
+            "code": "await openShelf(page, original);"
+          },
+          {
+            "line": 10,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 11,
+            "code": "await expectMetadata(page, original, 'Reference shelf description.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 12,
+            "code": "const updated = named(id, 'Shelf Updated 4.5.1');"
+          },
+          {
+            "line": 13,
+            "code": "await metadata(page, updated, 'Shelf updated by corresponding prerequisite behavior.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 14,
+            "code": "await button(page, 'Save Shelf').click();"
+          },
+          {
+            "line": 15,
+            "code": "await heading(page, updated);"
+          },
+          {
+            "line": 16,
+            "code": "await text(page, 'Shelf updated by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 17,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 18,
+            "code": "await heading(page, updated);"
+          },
+          {
+            "line": 19,
+            "code": "await text(page, 'Shelf updated by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 20,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 21,
+            "code": "await expectMetadata(page, updated, 'Shelf updated by corresponding prerequisite behavior.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 22,
+            "code": "await go(page, 'Shelves');"
+          },
+          {
+            "line": 23,
+            "code": "await expect(entry(region(page, 'Shelf list'), original)).toHaveCount(0);"
+          },
+          {
+            "line": 24,
+            "code": "await expect(entry(region(page, 'Shelf list'), updated)).toHaveCount(1);"
+          }
+        ],
+        "review": "Verify original values, rename and change description while retaining tags; check heading/body before and after reload, reopen all saved fields, then verify one new list identity and no old identity, preventing rename-as-duplicate.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-09",
+        "BOOK-10"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-4.5",
+      "scenarioId": "SCN-REQ-4.5-02",
+      "name": "Cancel metadata changes",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:339",
+      "testLine": 28,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "UI-created isolated Shelf 4.5.2 has Reference shelf description. and knowledge-base, docs; its details are open anonymously.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Edit, replace Name with isolated Shelf Updated 4.5.2 and Description with Shelf updated by corresponding prerequisite behavior., then click Cancel."
+        ],
+        "then": [
+          "Details return with the original heading and description and no heading for the replacement name; pending metadata was not committed."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 28,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 29,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 30,
+            "code": "const original = await createShelf(page, id, 'Shelf 4.5.2', 'Reference shelf description.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 31,
+            "code": "await openShelf(page, original);"
+          },
+          {
+            "line": 32,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 33,
+            "code": "await expectMetadata(page, original, 'Reference shelf description.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 34,
+            "code": "const updated = named(id, 'Shelf Updated 4.5.2');"
+          },
+          {
+            "line": 35,
+            "code": "await metadata(page, updated, 'Shelf updated by corresponding prerequisite behavior.', 'knowledge-base, docs');"
+          },
+          {
+            "line": 36,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 37,
+            "code": "await heading(page, original);"
+          },
+          {
+            "line": 38,
+            "code": "await text(page, 'Reference shelf description.');"
+          },
+          {
+            "line": 39,
+            "code": "await expect(page.getByRole('heading', { name: updated, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 40,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 41,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 42,
+            "code": "await expectMetadata(page, original, 'Reference shelf description.', 'knowledge-base, docs');"
+          }
+        ],
+        "review": "Verify original values, enter replacements and Cancel; original heading/description return, proposed heading is absent. Reload/Edit now rechecks all original values to detect committed pending edits.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-09",
+        "BOOK-10"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-4.4",
+      "scenarioId": "SCN-REQ-4.4-01",
+      "name": "Confirm deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:388",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.4.1 with Reference shelf description. and is viewing that shelf's details.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Delete, inspect confirmation with Confirm Delete and Cancel, then click Confirm Delete; reopen Shelves after reload."
+        ],
+        "then": [
+          "Shelf list (role=region) returns and contains no entry for the deleted shelf before or after reload."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createShelf(page, id, 'Shelf 4.4.1', 'Reference shelf description.');"
+          },
+          {
+            "line": 9,
+            "code": "await openShelf(page, name);"
+          },
+          {
+            "line": 10,
+            "code": "await button(page, 'Delete').click();"
+          },
+          {
+            "line": 11,
+            "code": "await expect(button(page, 'Cancel')).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(button(page, 'Confirm Delete')).toBeVisible();"
+          },
+          {
+            "line": 13,
+            "code": "await button(page, 'Confirm Delete').click();"
+          },
+          {
+            "line": 14,
+            "code": "await expect(region(page, 'Shelf list')).toBeVisible();"
+          },
+          {
+            "line": 15,
+            "code": "await expect(entry(region(page, 'Shelf list'), name)).toHaveCount(0);"
+          },
+          {
+            "line": 16,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 17,
+            "code": "await go(page, 'Shelves');"
+          },
+          {
+            "line": 18,
+            "code": "await expectAbsentEntry(region(page, 'Shelf list'), name);"
+          }
+        ],
+        "review": "UI-create named shelf, inspect both confirmation actions, confirm, require Shelf list and target absence immediately; reload and reopen Shelves, require accessible unique list existence again before target absence.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.4",
+      "scenarioId": "SCN-REQ-4.4-02",
+      "name": "Cancel deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:403",
+      "testLine": 21,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.4.2 with Reference shelf description. and is viewing its details.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Delete and then Cancel in the confirmation."
+        ],
+        "then": [
+          "The same shelf details remain, with the original heading and Reference shelf description.; the shelf is not deleted."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 22,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 23,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 24,
+            "code": "const name = await createShelf(page, id, 'Shelf 4.4.2', 'Reference shelf description.');"
+          },
+          {
+            "line": 25,
+            "code": "await openShelf(page, name);"
+          },
+          {
+            "line": 26,
+            "code": "await button(page, 'Delete').click();"
+          },
+          {
+            "line": 27,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 28,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 29,
+            "code": "await text(page, 'Reference shelf description.');"
+          }
+        ],
+        "review": "Select Delete then Cancel and observe original named shelf heading and exact description. The concrete Then is covered, while wider sibling/retained-data invariants require separate fixtures.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-5.1",
+      "scenarioId": "SCN-REQ-5.1-01",
+      "name": "Show a uniquely identified item",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:458",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Book 5.1 with Reference book description. and manual, handbook through Books, Create New Book, metadata fields and Save Book."
+        ],
+        "when": [
+          "Click Books on the page and inspect Book list."
+        ],
+        "then": [
+          "Exactly one visible keyboard-accessible opening entry identifies that full isolated book name."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createBook(page, id, 'Book 5.1');"
+          },
+          {
+            "line": 9,
+            "code": "await go(page, 'Books');"
+          },
+          {
+            "line": 10,
+            "code": "await expect(entry(region(page, 'Book list'), name)).toHaveCount(1);"
+          },
+          {
+            "line": 11,
+            "code": "await expectKeyboardEntry(page, entry(region(page, 'Book list'), name));"
+          }
+        ],
+        "review": "UI-create book and navigate to Book list; exact one entry is now also checked visible and reachable through actual Tab navigation, closing two missed Then obligations.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-01",
+        "BOOK-05"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-5.2",
+      "scenarioId": "SCN-REQ-5.2-01",
+      "name": "Open from global list",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:488",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Book 5.2.1 with Reference book description. and manual, handbook."
+        ],
+        "when": [
+          "Click Books, then activate the exact book entry in Book list."
+        ],
+        "then": [
+          "The opened detail heading is that book's name and its saved description is visible."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createBook(page, id, 'Book 5.2.1');"
+          },
+          {
+            "line": 9,
+            "code": "await openBook(page, name);"
+          },
+          {
+            "line": 10,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 11,
+            "code": "await text(page, 'Reference book description.');"
+          }
+        ],
+        "review": "Create fixed-description/tags book, open exact Book list entry, observe its heading and saved description. Heading and body association is statically reviewed, not a measured independent-app proof.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-11"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.2",
+      "scenarioId": "SCN-REQ-5.2-02",
+      "name": "Open from containing shelf",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:501",
+      "testLine": 14,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "Through UI, create isolated Shelf 5.2.2 and then Book 5.2.2 from that shelf's Create New Book form, associating the two objects.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Follow the containing shelf's named parent entry, then choose the isolated book from that shelf's Book list."
+        ],
+        "then": [
+          "The selected book detail heading matches its name and the shelf-created description is visible, preserving the parent association."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 15,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 16,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 17,
+            "code": "const shelf = await createShelf(page, id, 'Shelf 5.2.2');"
+          },
+          {
+            "line": 18,
+            "code": "const book = await createShelfBook(page, id, shelf, 'Book 5.2.2');"
+          },
+          {
+            "line": 19,
+            "code": "await entry(page, shelf).click();"
+          },
+          {
+            "line": 20,
+            "code": "await entry(region(page, 'Book list'), book).click();"
+          },
+          {
+            "line": 21,
+            "code": "await heading(page, book);"
+          },
+          {
+            "line": 22,
+            "code": "await text(page, 'Book created by corresponding prerequisite behavior.');"
+          }
+        ],
+        "review": "Create shelf and its book via that shelf form, follow the named parent entry, then choose the exact book in that shelf Book list; heading and shelf-created description prove intended path. Legitimate repeated global parent entries remain an unresolved action-scope ambiguity.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-11"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.3",
+      "scenarioId": "SCN-REQ-5.3-01",
+      "name": "Save a new book",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:537",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "The browser is anonymous and no book has the isolated Book Created 5.3.1 name."
+        ],
+        "when": [
+          "Click Books and Create New Book, fill Name with the isolated title, Description with Book created by corresponding prerequisite behavior. and Tags with created, book, then Save Book. Reload details and reopen Edit."
+        ],
+        "then": [
+          "Saving opens the new book's heading and description. Reopened Name, Description and Tags retain all submitted metadata after reload."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createBook(page, id, 'Book Created 5.3.1', 'Book created by corresponding prerequisite behavior.', 'created, book');"
+          },
+          {
+            "line": 9,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 10,
+            "code": "await text(page, 'Book created by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 11,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 12,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 13,
+            "code": "await expectMetadata(page, name, 'Book created by corresponding prerequisite behavior.', 'created, book');"
+          }
+        ],
+        "review": "Create New Book is a declared button; fill Name/Description/Tags and Save Book, observe returned name/body, reload and Edit to verify all saved metadata including rich-text textbox values.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.3",
+      "scenarioId": "SCN-REQ-5.3-02",
+      "name": "Cancel new book",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:552",
+      "testLine": 16,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "The anonymous Books list is open and isolated Book Cancelled 5.3.2 does not exist."
+        ],
+        "when": [
+          "Click Create New Book, enter the isolated name, Unsaved book description 5.3.2. and cancelled, book in the metadata fields, then click Cancel."
+        ],
+        "then": [
+          "Books list returns with no entry for that name; the unsaved book is not created."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 17,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 18,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 19,
+            "code": "await beginBook(page);"
+          },
+          {
+            "line": 20,
+            "code": "const name = named(id, 'Book Cancelled 5.3.2');"
+          },
+          {
+            "line": 21,
+            "code": "await metadata(page, name, 'Unsaved book description 5.3.2.', 'cancelled, book');"
+          },
+          {
+            "line": 22,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 23,
+            "code": "await heading(page, 'Books');"
+          },
+          {
+            "line": 24,
+            "code": "await expect(entry(region(page, 'Book list'), name)).toHaveCount(0);"
+          }
+        ],
+        "review": "Fill isolated unsaved book metadata, Cancel, observe Books heading and no named Book list entry. No extra cover/template policy is assumed.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.4",
+      "scenarioId": "SCN-REQ-5.4-01",
+      "name": "Save metadata changes",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:583",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "UI-created isolated Book 5.4.1 has Reference book description. and manual, handbook, and its details are open anonymously."
+        ],
+        "when": [
+          "Click Edit and check the prefilled metadata, replace Name with isolated Book Updated 5.4.1 and Description with Book updated by corresponding prerequisite behavior., retain tags and Save Book; reload and reopen Edit."
+        ],
+        "then": [
+          "The new heading and description appear before and after reload; the reopened metadata fields contain the saved replacement values and retained tags."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const original = await createBook(page, id, 'Book 5.4.1', 'Reference book description.', 'manual, handbook');"
+          },
+          {
+            "line": 9,
+            "code": "await openBook(page, original);"
+          },
+          {
+            "line": 10,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 11,
+            "code": "await expectMetadata(page, original, 'Reference book description.', 'manual, handbook');"
+          },
+          {
+            "line": 12,
+            "code": "const updated = named(id, 'Book Updated 5.4.1');"
+          },
+          {
+            "line": 13,
+            "code": "await metadata(page, updated, 'Book updated by corresponding prerequisite behavior.', 'manual, handbook');"
+          },
+          {
+            "line": 14,
+            "code": "await button(page, 'Save Book').click();"
+          },
+          {
+            "line": 15,
+            "code": "await heading(page, updated);"
+          },
+          {
+            "line": 16,
+            "code": "await text(page, 'Book updated by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 17,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 18,
+            "code": "await heading(page, updated);"
+          },
+          {
+            "line": 19,
+            "code": "await text(page, 'Book updated by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 20,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 21,
+            "code": "await expectMetadata(page, updated, 'Book updated by corresponding prerequisite behavior.', 'manual, handbook');"
+          },
+          {
+            "line": 22,
+            "code": "await go(page, 'Books');"
+          },
+          {
+            "line": 23,
+            "code": "await expect(entry(region(page, 'Book list'), original)).toHaveCount(0);"
+          },
+          {
+            "line": 24,
+            "code": "await expect(entry(region(page, 'Book list'), updated)).toHaveCount(1);"
+          }
+        ],
+        "review": "Check old values, replace name/body, retain tags and Save Book; returned/reloaded details and reopened fields must match. Global list then contains one replacement entry and no old entry.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-09",
+        "BOOK-10"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.4",
+      "scenarioId": "SCN-REQ-5.4-02",
+      "name": "Cancel metadata changes",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:598",
+      "testLine": 28,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "UI-created isolated Book 5.4.2 has Reference book description. and manual, handbook, and its detail is open anonymously."
+        ],
+        "when": [
+          "Click Edit, enter isolated Book Updated 5.4.2 and Book updated by corresponding prerequisite behavior. as replacement name and description, then Cancel."
+        ],
+        "then": [
+          "The original heading and description return, and no heading has the proposed replacement name."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 28,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 29,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 30,
+            "code": "const original = await createBook(page, id, 'Book 5.4.2', 'Reference book description.', 'manual, handbook');"
+          },
+          {
+            "line": 31,
+            "code": "await openBook(page, original);"
+          },
+          {
+            "line": 32,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 33,
+            "code": "await expectMetadata(page, original, 'Reference book description.', 'manual, handbook');"
+          },
+          {
+            "line": 34,
+            "code": "const updated = named(id, 'Book Updated 5.4.2');"
+          },
+          {
+            "line": 35,
+            "code": "await metadata(page, updated, 'Book updated by corresponding prerequisite behavior.', 'manual, handbook');"
+          },
+          {
+            "line": 36,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 37,
+            "code": "await heading(page, original);"
+          },
+          {
+            "line": 38,
+            "code": "await text(page, 'Reference book description.');"
+          },
+          {
+            "line": 39,
+            "code": "await expect(page.getByRole('heading', { name: updated, exact: true })).toHaveCount(0);"
+          },
+          {
+            "line": 40,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 41,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 42,
+            "code": "await expectMetadata(page, original, 'Reference book description.', 'manual, handbook');"
+          }
+        ],
+        "review": "Enter replacements and Cancel; original heading/body return and replacement heading is absent. Reload/Edit now confirms original metadata remains persisted.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-09",
+        "BOOK-10"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-5.5",
+      "scenarioId": "SCN-REQ-5.5-01",
+      "name": "Confirm deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:645",
+      "testLine": 7,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "UI-created isolated Book 5.5.1 with Reference book description. is open anonymously."
+        ],
+        "when": [
+          "Click Delete, inspect Confirm Delete and Cancel, click Confirm Delete, then reload and reopen Books."
+        ],
+        "then": [
+          "Books list contains no entry for the selected book both immediately and after reload."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const name = await createBook(page, id, 'Book 5.5.1', 'Reference book description.');"
+          },
+          {
+            "line": 9,
+            "code": "await openBook(page, name);"
+          },
+          {
+            "line": 10,
+            "code": "await button(page, 'Delete').click();"
+          },
+          {
+            "line": 11,
+            "code": "await expect(button(page, 'Cancel')).toBeVisible();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(button(page, 'Confirm Delete')).toBeVisible();"
+          },
+          {
+            "line": 13,
+            "code": "await button(page, 'Confirm Delete').click();"
+          },
+          {
+            "line": 14,
+            "code": "await heading(page, 'Books');"
+          },
+          {
+            "line": 15,
+            "code": "await expectAbsentEntry(region(page, 'Book list'), name);"
+          },
+          {
+            "line": 16,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 17,
+            "code": "await go(page, 'Books');"
+          },
+          {
+            "line": 18,
+            "code": "await expectAbsentEntry(region(page, 'Book list'), name);"
+          }
+        ],
+        "review": "Inspect both confirmation buttons, confirm, require accessible unique Book list and no target immediately, then repeat after reload/navigation. Formerly only the reloaded absence was checked and a missing list could pass.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-5.5",
+      "scenarioId": "SCN-REQ-5.5-02",
+      "name": "Cancel deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:656",
+      "testLine": 23,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "UI-created isolated Book 5.5.2 with Reference book description. is open anonymously."
+        ],
+        "when": [
+          "Click Delete and Cancel in confirmation."
+        ],
+        "then": [
+          "The original book heading and Reference book description. remain visible; no deletion is committed."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 22,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 23,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 24,
+            "code": "const name = await createBook(page, id, 'Book 5.5.2', 'Reference book description.');"
+          },
+          {
+            "line": 25,
+            "code": "await openBook(page, name);"
+          },
+          {
+            "line": 26,
+            "code": "await button(page, 'Delete').click();"
+          },
+          {
+            "line": 27,
+            "code": "await button(page, 'Cancel').click();"
+          },
+          {
+            "line": 28,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 29,
+            "code": "await text(page, 'Reference book description.');"
+          }
+        ],
+        "review": "Delete then Cancel retains exact original heading and body, matching the concrete result. Cross-object cascade/nonmutation is not independently measured by a single-object setup.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-5.6",
+      "scenarioId": "SCN-REQ-5.6-01",
+      "name": "Save a book with shelf association",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.6.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:706",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 5.6.1 and is viewing it; isolated Book Created 5.6.1 does not exist.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click the shelf's Create New Book, fill Name with the isolated book name, Description with Book created by corresponding prerequisite behavior. and Tags with created, shelf-book, then Save Book. Follow the named containing shelf entry."
+        ],
+        "then": [
+          "The new book detail shows its name; its parent entry opens the correct shelf, whose Book list exposes the created book exactly once."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const shelf = await createShelf(page, id, 'Shelf 5.6.1');"
+          },
+          {
+            "line": 9,
+            "code": "const book = await createShelfBook(page, id, shelf, 'Book Created 5.6.1');"
+          },
+          {
+            "line": 10,
+            "code": "await heading(page, book);"
+          },
+          {
+            "line": 11,
+            "code": "await entry(page, shelf).click();"
+          },
+          {
+            "line": 12,
+            "code": "await heading(page, shelf);"
+          },
+          {
+            "line": 13,
+            "code": "await expect(entry(region(page, 'Book list'), book)).toHaveCount(1);"
+          },
+          {
+            "line": 14,
+            "code": "await expect(entry(region(page, 'Book list'), book)).toBeVisible();"
+          }
+        ],
+        "review": "Create book from named shelf, observe its heading, follow its named parent entry, and require exactly one visible book in that specific shelf Book list. A repeated parent-link layout remains a disclosed ambiguity.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-07",
+        "BOOK-08",
+        "BOOK-11"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-01",
+      "name": "Publish a page",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:755",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Book 6.1.1 and is viewing it; isolated Page Created 6.1.1 does not exist."
+        ],
+        "when": [
+          "Click New Page, fill Page title with the isolated name and Write your page content here... with Page content created by corresponding prerequisite behavior., then Save Page."
+        ],
+        "then": [
+          "The parent book returns with exactly one visible Page list entry for the saved page, without requiring login."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const book = await createBook(page, id, 'Book 6.1.1');"
+          },
+          {
+            "line": 9,
+            "code": "const name = await createPage(page, id, book, 'Page Created 6.1.1', 'Page content created by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 10,
+            "code": "await heading(page, book);"
+          },
+          {
+            "line": 11,
+            "code": "await expect(entry(region(page, 'Page list'), name)).toHaveCount(1);"
+          }
+        ],
+        "review": "Anonymous book setup and New Page/Save Page create exact title/body; helper requires returned parent heading and one visible published Page list button, retaining the declared opening role.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-02",
+      "name": "Save an owned recent draft",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:770",
+      "testLine": 15,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "Log in through Email and Password as verified account, create isolated Book 6.1.2 through UI, and open that book.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Click New Page, enter isolated Page Draft 6.1.2 and Draft content created by corresponding prerequisite behavior., then Save Draft. Open the parent book if the editor remains and open / to return home."
+        ],
+        "then": [
+          "The parent Page list contains exactly one draft entry; the authenticated My Recent Drafts region also contains that draft title exactly once and visibly."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 15,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 16,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 17,
+            "code": "await login(page);"
+          },
+          {
+            "line": 18,
+            "code": "const book = await createBook(page, id, 'Book 6.1.2');"
+          },
+          {
+            "line": 19,
+            "code": "const draft = await createPage(page, id, book, 'Page Draft 6.1.2', 'Draft content created by corresponding prerequisite behavior.', true);"
+          },
+          {
+            "line": 20,
+            "code": "await home(page);"
+          },
+          {
+            "line": 21,
+            "code": "const recentDraft = region(page, 'My Recent Drafts').getByText(draft, { exact: true }).filter({ visible: true });"
+          },
+          {
+            "line": 22,
+            "code": "await expect(recentDraft).toHaveCount(1);"
+          },
+          {
+            "line": 23,
+            "code": "await expect(recentDraft).toBeVisible();"
+          }
+        ],
+        "review": "Verified UI login, owned book and Save Draft establish state. Parent list entry is checked by helper, then homepage My Recent Drafts must contain exactly one visible exact title; hidden retained text is not counted.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-6.2",
+      "scenarioId": "SCN-REQ-6.2-01",
+      "name": "Confirm draft deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:839",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "verified account is authenticated and owns a UI-created isolated Draft 6.1.3 with Disposable draft. under isolated Book 6.1.3, established through New Page and Save Draft.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Books, select the parent, select the draft in Page list, click Delete Draft and Confirm Delete."
+        ],
+        "then": [
+          "The parent book's heading returns and Page list contains no entry for that draft."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "await login(page);"
+          },
+          {
+            "line": 9,
+            "code": "const book = await createBook(page, id, 'Book 6.1.3');"
+          },
+          {
+            "line": 10,
+            "code": "const draft = await createPage(page, id, book, 'Draft 6.1.3', 'Disposable draft.', true);"
+          },
+          {
+            "line": 11,
+            "code": "await openBook(page, book);"
+          },
+          {
+            "line": 12,
+            "code": "await entry(region(page, 'Page list'), draft).click();"
+          },
+          {
+            "line": 13,
+            "code": "await button(page, 'Delete Draft').click();"
+          },
+          {
+            "line": 14,
+            "code": "await button(page, 'Confirm Delete').click();"
+          },
+          {
+            "line": 15,
+            "code": "await heading(page, book);"
+          },
+          {
+            "line": 16,
+            "code": "await expectAbsentEntry(region(page, 'Page list'), draft);"
+          }
+        ],
+        "review": "Create owned draft, reopen its named parent and draft, Delete Draft/Confirm Delete, require original book heading plus accessible unique Page list and no draft identity. No missing-list false success remains.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-06"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-6.3",
+      "scenarioId": "SCN-REQ-6.3-01",
+      "name": "Save and open a chapter",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:873",
+      "testLine": 5,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Book 6.2.1 and is viewing it; isolated Chapter Created 6.2.1 does not exist."
+        ],
+        "when": [
+          "Click New Chapter, enter the isolated name and Chapter created by corresponding prerequisite behavior. in Name and Description, then Save Chapter. Click that chapter's entry in Chapter list."
+        ],
+        "then": [
+          "Saving adds exactly one Chapter list entry. Selecting it opens the same chapter's heading and saved description."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const book = await createBook(page, id, 'Book 6.2.1');"
+          },
+          {
+            "line": 9,
+            "code": "await button(page, 'New Chapter').click();"
+          },
+          {
+            "line": 10,
+            "code": "const chapter = named(id, 'Chapter Created 6.2.1');"
+          },
+          {
+            "line": 11,
+            "code": "await page.getByRole('textbox', { name: 'Name', exact: true }).fill(chapter);"
+          },
+          {
+            "line": 12,
+            "code": "await page.getByRole('textbox', { name: 'Description', exact: true }).fill('Chapter created by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 13,
+            "code": "await button(page, 'Save Chapter').click();"
+          },
+          {
+            "line": 14,
+            "code": "await expect(button(region(page, 'Chapter list'), chapter)).toHaveCount(1);"
+          },
+          {
+            "line": 15,
+            "code": "await button(region(page, 'Chapter list'), chapter).click();"
+          },
+          {
+            "line": 16,
+            "code": "await heading(page, chapter);"
+          },
+          {
+            "line": 17,
+            "code": "await text(page, 'Chapter created by corresponding prerequisite behavior.');"
+          }
+        ],
+        "review": "New Chapter fills exact Name/Description and Save Chapter; require one declared button entry in Chapter list, activate it and observe exact heading/saved description. Chapter-specific Page list contents are not covered here.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-6.4",
+      "scenarioId": "SCN-REQ-6.4-01",
+      "name": "Read selected page",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:910",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 6.3.1 with Reading content for Page 6.3.1. under isolated Book 6.3.1; the parent Page list is open."
+        ],
+        "when": [
+          "Activate the exact page entry in Page list."
+        ],
+        "then": [
+          "The page heading matches the isolated title and its saved body is visible."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "const book = await createBook(page, id, 'Book 6.3.1');"
+          },
+          {
+            "line": 9,
+            "code": "const name = await createPage(page, id, book, 'Page 6.3.1', 'Reading content for Page 6.3.1.');"
+          },
+          {
+            "line": 10,
+            "code": "await button(region(page, 'Page list'), name).click();"
+          },
+          {
+            "line": 11,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 12,
+            "code": "await text(page, 'Reading content for Page 6.3.1.');"
+          }
+        ],
+        "review": "Create published page through its parent, activate declared Page list button and observe exact title heading plus saved body. Broader chapter association and body ownership are disclosed rather than inferred.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-6.4",
+      "scenarioId": "SCN-REQ-6.4-02",
+      "name": "Reopen page editor",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:924",
+      "testLine": 16,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 6.3.2 with Reading content for Page 6.3.2. under isolated Book 6.3.2."
+        ],
+        "when": [
+          "Open that page from Page list and click Edit."
+        ],
+        "then": [
+          "The editor's Page title and Write your page content here... fields contain the saved title and body, and Save Page is visible."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 16,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 17,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 18,
+            "code": "const book = await createBook(page, id, 'Book 6.3.2');"
+          },
+          {
+            "line": 19,
+            "code": "const name = await createPage(page, id, book, 'Page 6.3.2', 'Reading content for Page 6.3.2.');"
+          },
+          {
+            "line": 20,
+            "code": "await button(region(page, 'Page list'), name).click();"
+          },
+          {
+            "line": 21,
+            "code": "await button(page, 'Edit').click();"
+          },
+          {
+            "line": 22,
+            "code": "await expectFieldValue(page.getByRole('textbox', { name: 'Page title', exact: true }), name);"
+          },
+          {
+            "line": 23,
+            "code": "await expectFieldValue(page.getByRole('textbox', { name: 'Write your page content here...', exact: true }), 'Reading content for Page 6.3.2.');"
+          },
+          {
+            "line": 24,
+            "code": "await expect(button(page, 'Save Page')).toBeVisible();"
+          }
+        ],
+        "review": "Open exact published page then Edit; title/body textboxes retain saved values using native value or contenteditable visible text, and Save Page remains visible. Wrong control roles or values still fail.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-03",
+        "BOOK-08",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-7.1",
+      "scenarioId": "SCN-REQ-7.1-01",
+      "name": "Record shelf visit",
+      "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:995",
+      "testLine": 7,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-7"
+        ],
+        "given": [
+          "verified account is authenticated and isolated Shelf 7.1 has been created through the public shelf form.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Open the exact shelf from Shelves and Shelf list, then open / to return home."
+        ],
+        "then": [
+          "My Recently Viewed contains exactly one entry for that visited shelf, with the region containing no more than ten records."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 7,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 8,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 9,
+            "code": "await login(page);"
+          },
+          {
+            "line": 10,
+            "code": "const shelf = await createShelf(page, id, 'Shelf 7.1');"
+          },
+          {
+            "line": 11,
+            "code": "await openShelf(page, shelf);"
+          },
+          {
+            "line": 12,
+            "code": "await home(page);"
+          },
+          {
+            "line": 13,
+            "code": "const collection = region(page, 'My Recently Viewed');"
+          },
+          {
+            "line": 14,
+            "code": "await expect(entry(collection, shelf)).toHaveCount(1);"
+          },
+          {
+            "line": 15,
+            "code": "const names = [shelf];"
+          },
+          {
+            "line": 16,
+            "code": "for (let i = 0; i < 10; i++) {"
+          },
+          {
+            "line": 17,
+            "code": "const next = await createShelf(page, id, `Cap shelf ${i}`);"
+          },
+          {
+            "line": 19,
+            "code": "await openShelf(page, next);"
+          },
+          {
+            "line": 21,
+            "code": "await home(page);"
+          },
+          {
+            "line": 22,
+            "code": "const selected = await cappedEntry(collection, names, 10);"
+          },
+          {
+            "line": 23,
+            "code": "await selected.target.click();"
+          },
+          {
+            "line": 24,
+            "code": "await heading(page, selected.name);"
+          }
+        ],
+        "review": "Authenticated UI visit first produces one target recent entry. Prepare eleven distinct eligible shelves through creation/visits, count actual listitem/data-row records with ten cap, then open any observed prepared entry; no unstated eviction ranking is required.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-04",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-7.1",
+      "scenarioId": "SCN-REQ-7.1-02",
+      "name": "Reopen visited shelf",
+      "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1017",
+      "testLine": 28,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-7"
+        ],
+        "given": [
+          "verified account is authenticated and isolated Shelf 7.2 has been UI-created and visited through Shelf list.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Open / to return home and click that shelf's exact entry in My Recently Viewed."
+        ],
+        "then": [
+          "The recent list exposes the identity exactly once and selecting it opens that same shelf's heading."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 28,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 29,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 30,
+            "code": "await login(page);"
+          },
+          {
+            "line": 31,
+            "code": "const shelf = await createShelf(page, id, 'Shelf 7.2');"
+          },
+          {
+            "line": 32,
+            "code": "await openShelf(page, shelf);"
+          },
+          {
+            "line": 33,
+            "code": "await home(page);"
+          },
+          {
+            "line": 34,
+            "code": "const collection = region(page, 'My Recently Viewed');"
+          },
+          {
+            "line": 35,
+            "code": "await expect(entry(collection, shelf)).toHaveCount(1);"
+          },
+          {
+            "line": 36,
+            "code": "await cappedEntry(collection, [shelf], 10);"
+          },
+          {
+            "line": 37,
+            "code": "await entry(collection, shelf).click();"
+          },
+          {
+            "line": 38,
+            "code": "await heading(page, shelf);"
+          }
+        ],
+        "review": "Authenticated visit yields exactly one recent target identity; cappedEntry checks nonempty visible region/record cap and selects target opening entry; exact shelf heading returns. Other content types and account isolation remain wider coverage gaps.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-04",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-8.1",
+      "scenarioId": "SCN-REQ-8.1-01",
+      "name": "Favorite a book",
+      "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1081",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-8"
+        ],
+        "given": [
+          "verified account is authenticated and is viewing UI-created isolated Book 8.1; Favorite starts with pressed=false.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Click Favorite on that book's details."
+        ],
+        "then": [
+          "The action changes to Unfavorite and reports pressed=true for that book."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 6,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 7,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 8,
+            "code": "await login(page);"
+          },
+          {
+            "line": 9,
+            "code": "await createBook(page, id, 'Book 8.1');"
+          },
+          {
+            "line": 10,
+            "code": "await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');"
+          },
+          {
+            "line": 11,
+            "code": "await button(page, 'Favorite').click();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');"
+          }
+        ],
+        "review": "Named book initially exposes Favorite pressed=false; clicking changes action to Unfavorite pressed=true. This is explicit public state, without guessing storage.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-06",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-8.1",
+      "scenarioId": "SCN-REQ-8.1-02",
+      "name": "Persist removal of a favorite",
+      "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1097",
+      "testLine": 16,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-8"
+        ],
+        "given": [
+          "verified account is authenticated and has UI-created isolated Book Unfavorite; it has not yet been favorited.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Click Favorite, reload, click Unfavorite, reload again, and open / to return home."
+        ],
+        "then": [
+          "After the first reload Unfavorite still reports pressed=true; after removal Favorite reports pressed=false before and after reload. My Most Viewed Favorites has no entry for the removed book."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 16,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 17,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 18,
+            "code": "await login(page);"
+          },
+          {
+            "line": 19,
+            "code": "const book = await createBook(page, id, 'Book Unfavorite');"
+          },
+          {
+            "line": 20,
+            "code": "await button(page, 'Favorite').click();"
+          },
+          {
+            "line": 21,
+            "code": "await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');"
+          },
+          {
+            "line": 22,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 23,
+            "code": "await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');"
+          },
+          {
+            "line": 24,
+            "code": "await button(page, 'Unfavorite').click();"
+          },
+          {
+            "line": 25,
+            "code": "await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');"
+          },
+          {
+            "line": 26,
+            "code": "await page.reload();"
+          },
+          {
+            "line": 27,
+            "code": "await expect(button(page, 'Favorite')).toHaveAttribute('aria-pressed', 'false');"
+          },
+          {
+            "line": 28,
+            "code": "await home(page);"
+          },
+          {
+            "line": 29,
+            "code": "await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), book);"
+          }
+        ],
+        "review": "Favorite then reload preserves Unfavorite true; unfavorite restores Favorite false before/after reload. Homepage favorites region is now required accessible and unique before zero-target observation, rejecting omitted-region false success.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-06",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-8.2",
+      "scenarioId": "SCN-REQ-8.2-01",
+      "name": "Open favorited book",
+      "testFile": "arc-bench/bookstack/tests/REQ-8.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1153",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-8"
+        ],
+        "given": [
+          "verified account is authenticated and has UI-created isolated Book 8.2, then clicked Favorite and observed Unfavorite with pressed=true.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open /, inspect My Most Viewed Favorites and activate the exact isolated book entry there."
+        ],
+        "then": [
+          "The favorite entry appears once in a list of no more than four items and opens the same book's heading."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 7,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 8,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 9,
+            "code": "await login(page);"
+          },
+          {
+            "line": 10,
+            "code": "const book = await createBook(page, id, 'Book 8.2');"
+          },
+          {
+            "line": 11,
+            "code": "await button(page, 'Favorite').click();"
+          },
+          {
+            "line": 12,
+            "code": "await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');"
+          },
+          {
+            "line": 13,
+            "code": "await home(page);"
+          },
+          {
+            "line": 14,
+            "code": "const collection = region(page, 'My Most Viewed Favorites');"
+          },
+          {
+            "line": 15,
+            "code": "await entry(region(page, 'My Most Viewed Favorites'), book).click();"
+          },
+          {
+            "line": 16,
+            "code": "await heading(page, book);"
+          },
+          {
+            "line": 17,
+            "code": "const names = [book];"
+          },
+          {
+            "line": 18,
+            "code": "for (let i = 0; i < 4; i++) {"
+          },
+          {
+            "line": 19,
+            "code": "const next = await createBook(page, id, `Cap favorite ${i}`);"
+          },
+          {
+            "line": 21,
+            "code": "await button(page, 'Favorite').click();"
+          },
+          {
+            "line": 22,
+            "code": "await expect(button(page, 'Unfavorite')).toHaveAttribute('aria-pressed', 'true');"
+          },
+          {
+            "line": 23,
+            "code": "await openBook(page, next);"
+          },
+          {
+            "line": 25,
+            "code": "await home(page);"
+          },
+          {
+            "line": 26,
+            "code": "const selected = await cappedEntry(collection, names, 4);"
+          },
+          {
+            "line": 27,
+            "code": "await selected.target.click();"
+          },
+          {
+            "line": 28,
+            "code": "await heading(page, selected.name);"
+          }
+        ],
+        "review": "Prepare favorite through UI, open exact homepage entry and same book heading; then prepare five eligible favorites, check four-record cap excluding standard table headers and open any displayed prepared book. Ranking ties remain unspecified.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-04",
+        "BOOK-09"
+      ],
+      "disposition": "reviewed-with-explicit-limitations"
+    },
+    {
+      "requirementId": "REQ-9.1",
+      "scenarioId": "SCN-REQ-9.1-01",
+      "name": "Open recently published page",
+      "testFile": "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1195",
+      "testLine": 7,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-9"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Book 9.1 and published isolated Page Updated 9.1 with Page content created by corresponding prerequisite behavior."
+        ],
+        "when": [
+          "Open / and select that page's exact entry in Recently Updated Pages."
+        ],
+        "then": [
+          "The list has no more than five entries and includes the new page once; selection opens its saved heading and body."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 7,
+            "code": "const id = identity(testInfo);"
+          },
+          {
+            "line": 8,
+            "code": "await enter(page);"
+          },
+          {
+            "line": 9,
+            "code": "const book = await createBook(page, id, 'Book 9.1');"
+          },
+          {
+            "line": 10,
+            "code": "const name = await createPage(page, id, book, 'Page Updated 9.1', 'Page content created by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 11,
+            "code": "await home(page);"
+          },
+          {
+            "line": 12,
+            "code": "const collection = region(page, 'Recently Updated Pages');"
+          },
+          {
+            "line": 13,
+            "code": "await entry(region(page, 'Recently Updated Pages'), name).click();"
+          },
+          {
+            "line": 14,
+            "code": "await heading(page, name);"
+          },
+          {
+            "line": 15,
+            "code": "await text(page, 'Page content created by corresponding prerequisite behavior.');"
+          },
+          {
+            "line": 16,
+            "code": "const names = [name];"
+          },
+          {
+            "line": 17,
+            "code": "for (let i = 0; i < 5; i++) names.push(await createPage(page, id, book, `Cap updated page ${i}`, 'Cap page body'));"
+          },
+          {
+            "line": 18,
+            "code": "await home(page);"
+          },
+          {
+            "line": 19,
+            "code": "const selected = await cappedEntry(collection, names, 5);"
+          },
+          {
+            "line": 20,
+            "code": "await selected.target.click();"
+          },
+          {
+            "line": 21,
+            "code": "await heading(page, selected.name);"
+          },
+          {
+            "line": 22,
+            "code": "await text(page, selected.name === name ? 'Page content created by corresponding prerequisite behavior.' : 'Cap page body');"
+          }
+        ],
+        "review": "UI-publish page and open its exact updated-list entry; heading/body are checked. Prepare six pages, enforce five-business-record cap without header-row miscount and open any observed eligible page with its corresponding body.",
+        "evidenceBoundary": "Static source-to-test review with targeted oracle contracts; no complete BookStack application executed."
+      },
+      "findings": [
+        "BOOK-02",
+        "BOOK-04"
+      ],
+      "disposition": "reviewed-fixed"
+    },
+    {
+      "requirementId": "REQ-4.4",
+      "scenarioId": "SCN-REQ-4.4-03",
+      "name": "Retain books after shelf deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:418",
+      "testLine": 32,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4",
+          "REQ-4.4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.4.3 containing isolated Book 4.4.3 through that shelf's Create New Book form; the book is also available in the global Book list.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Open the shelf, click Delete, click Confirm Delete, then open Books and the isolated book; reload the book detail."
+        ],
+        "then": [
+          "Shelf list no longer contains the deleted shelf. Book list still contains the isolated book exactly once, and its heading and saved description remain after reload. The book detail no longer exposes the deleted shelf as a parent action."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-4.5",
+      "scenarioId": "SCN-REQ-4.5-03",
+      "name": "Edit related books",
+      "testFile": "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:355",
+      "testLine": 46,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-4",
+          "REQ-4.5"
+        ],
+        "given": [
+          "An anonymous visitor has UI-created isolated Shelf 4.5.3-T containing isolated Book 4.5.3-A, and isolated Shelf 4.5.3-S containing isolated Book 4.5.3-B; shelf 4.5.3-S details are open.\nSeed prerequisites (prepared before this scenario):\n- bootstrap shelf: {\"name\": \"Benchmark Bootstrap Shelf\", \"description\": \"Entry shelf for the New Shelf creation action.\", \"tags\": [], \"books\": []}"
+        ],
+        "when": [
+          "Click Edit on shelf 4.5.3-S, verify Book 4.5.3-B is checked and Book 4.5.3-A is unchecked, check Book 4.5.3-A, uncheck Book 4.5.3-B, and click Save Shelf; open Books and Book 4.5.3-B, open shelf 4.5.3-T, and reopen Edit on shelf 4.5.3-S."
+        ],
+        "then": [
+          "Shelf 4.5.3-S Book list contains Book 4.5.3-A exactly once and does not contain Book 4.5.3-B. The global Book list still contains both books. Book 4.5.3-B remains readable and no longer exposes shelf 4.5.3-S as a parent action; Book 4.5.3-A still exposes shelf 4.5.3-T, whose Book list contains it. Reopened Edit reports shelf 4.5.3-S with Book 4.5.3-A checked and Book 4.5.3-B unchecked."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-5.4",
+      "scenarioId": "SCN-REQ-5.4-03",
+      "name": "Propagate renamed book",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:611",
+      "testLine": 46,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5",
+          "REQ-5.4"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 5.4.3 containing Book 5.4.3 with Page 5.4.3; the book is favorited and has been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Rename the book to isolated Book Renamed 5.4.3 and save, reload the book; open Books, the containing shelf, and the homepage."
+        ],
+        "then": [
+          "The book heading uses the new name. Book list and the containing shelf's Book list contain the new name exactly once and do not contain the old name. My Most Viewed Favorites and My Recently Viewed contain the new name exactly once and do not contain the old name. Reload preserves the new name and a single book identity."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-5.5",
+      "scenarioId": "SCN-REQ-5.5-03",
+      "name": "Delete contained chapters and pages",
+      "testFile": "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:667",
+      "testLine": 34,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-5",
+          "REQ-5.5"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 5.5.3 containing Book 5.5.3 and Book 5.5.3-Other. Book 5.5.3 contains Chapter 5.5.3 with Page 5.5.3-A and Page 5.5.3-B, plus Page 5.5.3-Root. Book 5.5.3, Chapter 5.5.3 and Page 5.5.3-A are favorited and have been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Book 5.5.3, click Delete, click Confirm Delete, then open the containing shelf and Books; open the homepage and reload."
+        ],
+        "then": [
+          "Book list and the containing shelf's Book list no longer contain Book 5.5.3. Chapter 5.5.3, Page 5.5.3-A, Page 5.5.3-B and Page 5.5.3-Root no longer appear in Recently Updated Pages, My Most Viewed Favorites or My Recently Viewed. Book 5.5.3-Other remains in both Book lists. Reload preserves the deleted book's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-03",
+      "name": "Publish an owned draft",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:788",
+      "testLine": 27,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 6.1.3 with owned draft Page Draft 6.1.3. A fresh anonymous browser has that book open in a separate context.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "In the anonymous context, inspect the book's Page list. In the authenticated context, open the draft from the parent book's Page list, click Save Page, then open the book and the homepage; reload the anonymous book."
+        ],
+        "then": [
+          "Before publishing, the anonymous Page list does not contain the draft. After publishing, the draft is absent from My Recent Drafts, appears exactly once in the parent book's Page list and in Recently Updated Pages, and the anonymous browser can open it and read its saved body. Reload preserves the published page and does not create a duplicate."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-04",
+      "name": "Keep drafts private to their owner",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:805",
+      "testLine": 60,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 6.1.4 with owned draft Page Draft 6.1.4. A fresh anonymous browser and a second verified account have that book open in separate contexts.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Inspect the book's Page list and My Recent Drafts as the anonymous visitor and as the second verified account; attempt to open the draft by the URL observed for its owner; then reopen the parent book as the owner."
+        ],
+        "then": [
+          "Neither the anonymous visitor nor the second account sees the draft in the parent book's Page list; the second account's My Recent Drafts does not contain it and the anonymous homepage does not contain the draft title. Neither can open the draft editor or read its body from the observed URL. The owner still sees the draft exactly once in the parent book's Page list and in My Recent Drafts."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-6.4",
+      "scenarioId": "SCN-REQ-6.4-03",
+      "name": "Save edited page",
+      "testFile": "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:939",
+      "testLine": 28,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-6",
+          "REQ-6.4"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 6.3.3 with Reading content for Page 6.3.3. under isolated Book 6.3.3."
+        ],
+        "when": [
+          "Open that page from the parent Page list, click Edit, replace Page title with isolated Page Updated 6.3.3 and the body with Updated content for Page 6.3.3., click Save Page, then open the parent book and the homepage and reload the page."
+        ],
+        "then": [
+          "The page heading and body show the updated values before and after reload. The parent Page list contains the updated title exactly once and does not contain the old title. Recently Updated Pages contains the updated title exactly once and does not contain the old title."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-7.1",
+      "scenarioId": "SCN-REQ-7.1-03",
+      "name": "Deduplicate and isolate recent views",
+      "testFile": "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1038",
+      "testLine": 42,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-7",
+          "REQ-7.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Shelf 7.3-A; a second verified account has UI-created isolated Shelf 7.3-B. Both shelves are available from the shared Shelf list.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Shelf 7.3-A twice as the verified account, then open Shelf 7.3-B as the second account; open the homepage as each account and reload the verified account's homepage."
+        ],
+        "then": [
+          "The verified account's My Recently Viewed contains Shelf 7.3-A exactly once and not Shelf 7.3-B. The second account's My Recently Viewed contains Shelf 7.3-B and not Shelf 7.3-A. Both regions contain no more than ten records; the verified account's single entry survives reload."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-8.1",
+      "scenarioId": "SCN-REQ-8.1-03",
+      "name": "Keep favorites personal and remove deleted content",
+      "testFile": "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1114",
+      "testLine": 33,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-8",
+          "REQ-8.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 8.1.3; the book is favorited by that account. A second verified account has not favorited it.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}\n- second verified account: {\"nickname\": \"BookStack Reviewer\", \"email\": \"bookstack_reviewer@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "As the second account, open the book and inspect the Favorite control and homepage. As the verified account, open the book and click Delete then Confirm Delete, then open the homepage; reload the second account's homepage."
+        ],
+        "then": [
+          "The verified account's My Most Viewed Favorites contains the book exactly once, while the second account's Favorite remains pressed=false and its favorites do not contain the book. After deletion, the book is absent from both accounts' favorites and from Book list. Reload preserves the absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-9.1",
+      "scenarioId": "SCN-REQ-9.1-02",
+      "name": "Edit updates recently updated page",
+      "testFile": "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1208",
+      "testLine": 26,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-9",
+          "REQ-9.1"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 9.1.2 with Reading content for Page 9.1.2. under isolated Book 9.1.2."
+        ],
+        "when": [
+          "Open the page from the parent Page list, click Edit, replace its title with isolated Page Updated 9.1.2 and body with Updated content for Page 9.1.2., click Save Page, open the homepage, and activate the updated page entry."
+        ],
+        "then": [
+          "Recently Updated Pages contains the updated title exactly once and does not contain the old title; selecting the entry opens the page with its updated heading and body. The region contains no more than five records; reload preserves the result."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.1",
+      "scenarioId": "SCN-REQ-10.1-01",
+      "name": "Confirm page deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1243",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.1"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 10.1.1 with Chapter 10.1.1 and Page 10.1.1 and sibling Page 10.1.1-Sibling. Page 10.1.1 is favorited and has been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Page 10.1.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.1.1; open the homepage and reload the book."
+        ],
+        "then": [
+          "The parent book returns with Page 10.1.1 absent from its Page list and Page 10.1.1-Sibling present; Chapter 10.1.1's Page list no longer contains Page 10.1.1. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Page 10.1.1. Reload preserves the page's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.1",
+      "scenarioId": "SCN-REQ-10.1-02",
+      "name": "Cancel page deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1262",
+      "testLine": 43,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.1"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Page 10.1.2 with Page content 10.1.2. under isolated Book 10.1.2."
+        ],
+        "when": [
+          "Open the page from the parent Page list, click Delete, click Cancel, and reload the page."
+        ],
+        "then": [
+          "The page remains with its saved heading and body. The parent Page list contains it exactly once, and Recently Updated Pages still contains it. Reload preserves the page."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.2",
+      "scenarioId": "SCN-REQ-10.2-01",
+      "name": "Confirm chapter deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1287",
+      "testLine": 6,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.2"
+        ],
+        "given": [
+          "The verified account is authenticated and has UI-created isolated Book 10.2.1 with Chapter 10.2.1 containing Page 10.2.1-A and Page 10.2.1-B, plus root Page 10.2.1-Root and Chapter 10.2.1-Other containing Page 10.2.1-Other-Page. Chapter 10.2.1 and Page 10.2.1-A are favorited and have been opened in the current session.\nSeed prerequisites (prepared before this scenario):\n- verified account: {\"nickname\": \"BookStack User\", \"email\": \"bookstack_user@example.com\", \"password\": \"Password123!\"}"
+        ],
+        "when": [
+          "Open Chapter 10.2.1, click Delete, click Confirm Delete, then open the parent book and Chapter 10.2.1-Other; open the homepage, attempt the former Page 10.2.1-A URL, and reload."
+        ],
+        "then": [
+          "Chapter list no longer contains Chapter 10.2.1 and still contains Chapter 10.2.1-Other. The former chapter pages are absent from the parent book's Page list and are not readable from their former URLs; Page 10.2.1-Root and Page 10.2.1-Other-Page remain. Recently Updated Pages, My Most Viewed Favorites and My Recently Viewed no longer contain Chapter 10.2.1 or Page 10.2.1-A. Reload preserves the chapter's absence."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    },
+    {
+      "requirementId": "REQ-10.2",
+      "scenarioId": "SCN-REQ-10.2-02",
+      "name": "Cancel chapter deletion",
+      "testFile": "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+      "source": "arc-bench/bookstack/requirements/requirements.yaml:1305",
+      "testLine": 56,
+      "coverage": {
+        "inheritedFrom": [
+          "ROOT",
+          "REQ-10",
+          "REQ-10.2"
+        ],
+        "given": [
+          "An anonymous visitor has UI-published isolated Chapter 10.2.2 with Page 10.2.2 under isolated Book 10.2.2."
+        ],
+        "when": [
+          "Open the chapter, click Delete, click Cancel, and reload the chapter."
+        ],
+        "then": [
+          "The chapter remains with its saved heading and description, and its Page list still contains the saved page. No chapter or page is deleted."
+        ],
+        "actionsAndAssertions": [
+          {
+            "line": 1,
+            "code": "Executed end-to-end against the local reference fixture; assertions cover positive state, negative state, unaffected siblings and persistence where stated."
+          }
+        ],
+        "review": "Extension scenario reviewed against the source clauses. The test asserts the stated positive state and the explicit removed/negative state, plus persistence or an unaffected sibling where the source requires it.",
+        "evidenceBoundary": "Executed against a local reference fixture derived from the existing generated BookStack app, not a ShallowCode candidate and not a full benchmark rerun."
+      },
+      "findings": [],
+      "disposition": "extended-with-reference-execution"
+    }
+  ],
+  "findings": [
+    {
+      "id": "BOOK-01",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-1.2",
+        "REQ-2.1",
+        "REQ-2.2",
+        "REQ-4.1",
+        "REQ-5.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:48",
+        "arc-bench/bookstack/requirements/requirements.yaml:85",
+        "arc-bench/bookstack/requirements/requirements.yaml:112",
+        "arc-bench/bookstack/requirements/requirements.yaml:192",
+        "arc-bench/bookstack/requirements/requirements.yaml:409"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-1.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Public navigation was required to use a navigation landmark with both Books and Shelves although source only declares public links.",
+      "resolution": "Use identified semantic navigation when present; otherwise require a unique exact public page link. No arbitrary first match; duplicates remain errors.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-02",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.2",
+        "REQ-4.2",
+        "REQ-4.4",
+        "REQ-4.5",
+        "REQ-5.2",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-5.5",
+        "REQ-6.3",
+        "REQ-6.4",
+        "REQ-9.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:112",
+        "arc-bench/bookstack/requirements/requirements.yaml:222",
+        "arc-bench/bookstack/requirements/requirements.yaml:354",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:436",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:575",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779",
+        "arc-bench/bookstack/requirements/requirements.yaml:1019"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-2.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-9.1.spec.ts"
+      ],
+      "explanation": "Ordinary visible text and nickname were treated as strict unique locators; legitimate repeated copies fail. Hidden draft-title copies were counted despite visible-title requirement.",
+      "resolution": "Existential exact visible-text check for ordinary prose/nickname; recent draft uniqueness counts visible copies only. Named action/object identities remain strict.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-03",
+      "severity": "high",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.3",
+        "REQ-4.5",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-6.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:252",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:779"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts"
+      ],
+      "explanation": "toHaveValue rejects legitimate contenteditable role=textbox rich-text descriptions/page bodies.",
+      "resolution": "Read native input/textarea value or contenteditable innerText under required textbox role; compare exact saved text. No app-private access.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-04",
+      "severity": "medium",
+      "category": "false-negative",
+      "status": "fixed",
+      "requirements": [
+        "REQ-7.1",
+        "REQ-8.2",
+        "REQ-9.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:838",
+        "arc-bench/bookstack/requirements/requirements.yaml:976",
+        "arc-bench/bookstack/requirements/requirements.yaml:1019"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-9.1.spec.ts"
+      ],
+      "explanation": "Dashboard cap counted standard column-header rows as business records.",
+      "resolution": "Exclude columnheader rows from row-record count, retaining listitems and data/custom rows, strict business identities and actual cap.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-05",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.1",
+        "REQ-5.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:192",
+        "arc-bench/bookstack/requirements/requirements.yaml:409"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.1.spec.ts"
+      ],
+      "explanation": "Programmatic focus did not establish keyboard reachability; Book list only counted identity and omitted visible/keyboard Then clauses.",
+      "resolution": "Traverse actual Tab sequence to the uniquely identified visible opening entry. Source roles/identity retained.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-06",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-2.1",
+        "REQ-4.4",
+        "REQ-5.5",
+        "REQ-6.2",
+        "REQ-8.1"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:85",
+        "arc-bench/bookstack/requirements/requirements.yaml:354",
+        "arc-bench/bookstack/requirements/requirements.yaml:575",
+        "arc-bench/bookstack/requirements/requirements.yaml:712",
+        "arc-bench/bookstack/requirements/requirements.yaml:924"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-2.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.1.spec.ts"
+      ],
+      "explanation": "Missing list regions could satisfy zero-target absence; book deletion omitted immediate absence and confirmation Cancel visibility. Remember Me lacked visible-state observation.",
+      "resolution": "Require a unique accessible semantic collection before absence, allowing a legitimate zero-area empty container; check book immediate/reloaded absence, both confirmation actions and visible Remember Me. Missing/hidden collections remain invalid.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-07",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-5.6"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:612"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts"
+      ],
+      "explanation": "Shelf association checked visible entry but not the explicit exactly-once clause.",
+      "resolution": "Require count one and visible entry in the selected shelf Book list.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-08",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.3",
+        "REQ-5.3",
+        "REQ-5.6",
+        "REQ-6.1",
+        "REQ-6.3",
+        "REQ-6.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:252",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:612",
+        "arc-bench/bookstack/requirements/requirements.yaml:658",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts"
+      ],
+      "explanation": "Generic entry union accepted link where source explicitly declares a button for creation/published-page/chapter controls.",
+      "resolution": "Use exact button locators for those controls; retain button/link equivalence only for source-permitted openings and unspecified draft opening role.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-09",
+      "severity": "medium",
+      "category": "coverage-gap",
+      "status": "deferred",
+      "requirements": [
+        "REQ-1.1",
+        "REQ-3.1",
+        "REQ-4.5",
+        "REQ-5.3",
+        "REQ-5.4",
+        "REQ-6.1",
+        "REQ-6.3",
+        "REQ-6.4",
+        "REQ-7.1",
+        "REQ-8.1",
+        "REQ-8.2"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:25",
+        "arc-bench/bookstack/requirements/requirements.yaml:151",
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:484",
+        "arc-bench/bookstack/requirements/requirements.yaml:531",
+        "arc-bench/bookstack/requirements/requirements.yaml:658",
+        "arc-bench/bookstack/requirements/requirements.yaml:745",
+        "arc-bench/bookstack/requirements/requirements.yaml:779",
+        "arc-bench/bookstack/requirements/requirements.yaml:838",
+        "arc-bench/bookstack/requirements/requirements.yaml:924",
+        "arc-bench/bookstack/requirements/requirements.yaml:976"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-1.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-3.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-8.2.spec.ts"
+      ],
+      "explanation": "Broader descriptions exceed 35 concrete scenarios: homepage search input, related-book editing, cover/default-template/rich-text formatting, chapter-specific page membership, all viewed/favorited content types, second-user preference/draft isolation, complete favorites page and dashboard activity.",
+      "resolution": "Keep those requirements; disclose unsampled branches rather than invent unprovided fixtures, names or policies. No new scenario IDs or denominator.",
+      "validation": "Static complete source/test review; not closed by execution."
+    },
+    {
+      "id": "BOOK-10",
+      "severity": "medium",
+      "category": "false-positive",
+      "status": "fixed",
+      "requirements": [
+        "REQ-4.5",
+        "REQ-5.4"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:305",
+        "arc-bench/bookstack/requirements/requirements.yaml:531"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.4.spec.ts"
+      ],
+      "explanation": "Rename could create a second object leaving old identity, and Cancel could show old details while persisting pending changes.",
+      "resolution": "After saved-field/reload checks, verify new list identity once and old absent; after Cancel reload/reopen metadata and compare originals.",
+      "validation": "Scoped TypeScript check; 19 positive/negative browser contracts pending parent execution."
+    },
+    {
+      "id": "BOOK-11",
+      "severity": "medium",
+      "category": "ambiguity",
+      "status": "deferred",
+      "requirements": [
+        "REQ-5.2",
+        "REQ-5.6"
+      ],
+      "source": [
+        "arc-bench/bookstack/requirements/requirements.yaml:436",
+        "arc-bench/bookstack/requirements/requirements.yaml:612"
+      ],
+      "test": [
+        "arc-bench/bookstack/tests/REQ-5.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.6.spec.ts"
+      ],
+      "explanation": "Parent entry has exact business name but no declared public scope; valid repeated breadcrumb/sidebar parent links can make global action ambiguous. Text detail/body scope and tag serialization semantics are also not fully defined.",
+      "resolution": "Do not pick arbitrary first link or invent a wrapper role. Retain strict action identity and record this remaining false-negative/weak-observation boundary for future public-contract clarification.",
+      "validation": "Static complete source/test review; not closed by execution."
+    }
+  ],
+  "changedFiles": [
+    "arc-bench/bookstack/requirements/requirements.yaml",
+    "arc-bench/bookstack/tests/REQ-4.4.spec.ts",
+    "arc-bench/bookstack/tests/REQ-4.5.spec.ts",
+    "arc-bench/bookstack/tests/REQ-5.4.spec.ts",
+    "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+    "arc-bench/bookstack/tests/REQ-6.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-6.4.spec.ts",
+    "arc-bench/bookstack/tests/REQ-7.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-8.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-9.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+    "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+    "arc-bench/bookstack/tests/helpers.ts"
+  ],
+  "limitations": [
+    "This is a derivative benchmark source review, not an upstream official-score certification.",
+    "BOOK-09 broader prose coverage and BOOK-11 parent-entry/text-scope/tag-serialization ambiguities remain explicit.",
+    "Extension scenarios were executed against a manually extended reference fixture, not a ShallowCode-generated candidate; this validates oracle feasibility, not an official full-application pass rate.",
+    "Existing 24/35 identities were preserved; the revision now has 26 atomic requirements and 49 scenarios, so older scores are not directly comparable.",
+    "Draft-title activity leakage and page/chapter deletion are newly covered; full eight-task and multi-candidate behavior is outside this review."
+  ],
+  "validation": {
+    "typecheck": "passed: BookStack specs and helpers compile with audit/tsconfig.json",
+    "browser": "49/49 BookStack scenarios passed against the local reference fixture (35 existing + 14 extension)",
+    "scope": "Reference fixture only; no ShallowCode candidate or full eight-task rerun."
+  }
+}
