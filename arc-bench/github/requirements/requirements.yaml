@@ -2730,3 +2730,88 @@ children:
         - \ref[requirement](REQ-6.3.1)
         - \ref[requirement](REQ-1.1.2)
     children: []
+- id: REQ-7
+  name: Revalidate open reviews and merge confirmations
+  description:
+    text: |-
+      All roles use normal browser login in independent sessions against one shared application instance. Changes are driven by UI operations in a fixed order.
+  scenarios: []
+  children:
+  - id: REQ-7.1
+    name: Bind review and check decisions to the current commit
+    description:
+      text: |-
+        For this extension, seed four independent public repositories named head-guard, review-guard, access-guard and race-guard with exact repository-name links on the signed-in home. Their respective PR links on that page are Head guard PR, Review guard PR, Access guard PR and Race guard PR. Each PR is Open, compare feature-guard to protected main with one required non-author approval and test success, and starts eligible without conflicts. Base files are base.md with Base content and shared.md with Shared content; the compare tree includes both plus change.txt with Original feature. Branch state exposes a valid parent graph; commit identifiers are observed through the UI. Accounts use the existing verified account convention: pr-author (Write and PR author), pr-reviewer (Write, non-author), pr-maintainer and guard-maintainer (Maintain), and protection-admin (Admin), all using the existing seed password Valid-password-123!. The organization guard-org owns access-guard. Its guard-team includes pr-maintainer, who has direct Read and inherits Maintain only through that team. guard-maintainer has a direct Maintain grant independent of guard-team. The initial approval is by pr-reviewer on the initial compare commit, and that commit has test: success. Head guard PR also has pr-reviewer's inline comment Keep this original comment on change.txt line 1 of the initial compare commit. This text is historical, not a pending review.
+
+        On the PR Conversation view, "Review history"(role=table) has cells Reviewer, Commit, Decision, State in that order, and "Inline review comments"(role=table) has Author, Commit, Path, Line, Comment, State. Show full original commit identifiers, the original line, and a Stale or Outdated state as applicable; a current approval or inline comment has State Current. On Checks show "Check commit"(role=status) with the current full compare identifier and "test status"(role=status) with pending or success. A new compare commit starts with pending test, regardless of prior results. Admin can choose success in "test status"(role=combobox) and use "Save check"(role=button) on the current Checks view. Non-author eligible reviewers open "Review changes"(role=button) from Files changed, then use "Approve"(role=radio) and "Submit review"(role=button). Successful submission opens Conversation with the current approval visible. A stale review editor cannot record a review or approve a commit it did not display. A stale merge or review displays "Merge blocked" or "Review blocked"(role=alert) respectively with exact reason Compare branch changed. It may reject on submission or invalidate the open confirmation/editor proactively with the same alert.
+    scenarios:
+    - id: SCN-REQ-7.1-01
+      name: Reject stale merge then require both fresh approval and fresh check
+      steps:
+      - id: STEP-REQ-7.1-01-01
+        Given: |-
+          Open Head guard PR as pr-maintainer and open merge confirmation. Observe its eligible state and both branch graphs. In a separate pr-author session open the Compare branch.
+        When: |-
+          Commit a new file next.txt with Next feature and message Advance compare. Attempt the old confirmation if still active. On fresh views inspect the review, inline comment and check. Approve the new commit as pr-reviewer before Admin records its successful check, then merge as pr-maintainer.
+        Then: |-
+          The old confirmation is refused and does not change either branch or PR. The old approval becomes Stale and the inline comment stays on the original commit and line, marked Outdated. The new commit shows pending even after the new approval, so merge is still blocked until the new check succeeds. The eventual merge creates exactly one new target commit with the original target head and the new compare head as parents, includes next.txt, and leaves the compare branch unchanged.
+        references:
+        - \ref[requirement](REQ-4.4)
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.3.3)
+        - \ref[requirement](REQ-6.3.4)
+        - \ref[requirement](REQ-6.5)
+    - id: SCN-REQ-7.1-02
+      name: Refuse approval from an editor opened on an older commit
+      steps:
+      - id: STEP-REQ-7.1-02-01
+        Given: |-
+          In Review guard PR, pr-reviewer opens Review changes on the original compare commit and selects Approve. pr-author has a separate session.
+        When: |-
+          Advance the compare branch with next.txt, whose content is Next feature, using commit message Advance compare. Attempt the old review submission if still active. Inspect the review history and both branches immediately. Admin then records a successful test for the new head; inspect the PR. Reopen the review from the new Files changed view and submit a fresh approval.
+        Then: |-
+          The old submission is refused without adding any review. The only old review is Stale on the original commit. A successful new check does not allow merge without a fresh approval. A fresh approval belongs to the new head and makes merge eligible. Neither attempted review changes a branch.
+        references:
+        - \ref[requirement](REQ-4.4)
+        - \ref[requirement](REQ-6.1)
+        - \ref[requirement](REQ-6.3.3)
+        - \ref[requirement](REQ-6.3.4)
+        - \ref[requirement](REQ-6.5)
+    children: []
+  - id: REQ-7.2
+    name: Recheck authority and terminal state when confirming a merge
+    description:
+      text: |-
+        A merge confirmation never reserves merge authority or makes a PR mergeable for the lifetime of the tab. Recheck current repository grants and PR state at confirmation. In access-guard, repository Settings → Manage access lets Admin change guard-team from Maintain to Read with its unique row, "Role"(role=combobox) and "Save"(role=button). Manage access also exposes separate rows for the direct grantees pr-maintainer and guard-maintainer; each row includes the grantee name and its selected "Role"(role=combobox). A saved grant change shows "Access saved"(role=status); pr-maintainer's remaining direct Read grant keeps the PR readable but cannot merge. Losing Maintain is visible on reload and does not affect independently granted users or the approval/check. In race-guard, two authorized sessions may open confirmation for the same PR, but only the first valid merge writes a commit and immutable merge metadata. An invalidated open confirmation shows "Merge blocked"(role=alert) with reason Merge permission required or Pull request already merged as applicable, whether proactively or on submitting "Confirm merge"(role=button).
+    scenarios:
+    - id: SCN-REQ-7.2-01
+      name: Reject a stale merge after a team grant is downgraded
+      steps:
+      - id: STEP-REQ-7.2-01-01
+        Given: |-
+          In Access guard PR, pr-maintainer has team-derived Maintain and direct Read, opens confirmation, and observes both branch graphs. Admin signs in separately.
+        When: |-
+          Admin changes guard-team from Maintain to Read in Manage access and reloads. Attempt the old confirmation if still active. Reload the PR as the downgraded user, then open it as guard-maintainer.
+        Then: |-
+          The team grant persists as Read; the two direct grants remain Read and Maintain respectively. The old confirmation is refused. The downgraded user still reads the Open PR but cannot merge; neither branch, nor the review or current successful check changes. The independent maintainer can still open a merge confirmation.
+        references:
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-6.5)
+        - \ref[requirement](REQ-6.6)
+    - id: SCN-REQ-7.2-02
+      name: Commit one merge when two valid confirmations were opened
+      steps:
+      - id: STEP-REQ-7.2-02-01
+        Given: |-
+          In Race guard PR, pr-maintainer and guard-maintainer both open merge confirmations before either submits. Record both branch graphs.
+        When: |-
+          Confirm as pr-maintainer, then observe its new commit and both branch graphs before trying guard-maintainer's old confirmation if still active. Inspect fresh PR views in both sessions and both branches again.
+        Then: |-
+          Only the first confirmation creates a commit and moves the target. The second is refused as already merged. Both sessions show the same commit, timestamp and first merger; the complete target history contains exactly one new merge with the original branch parents, and the compare branch is unchanged.
+        references:
+        - \ref[requirement](REQ-7.1)
+        - \ref[requirement](REQ-2.3)
+        - \ref[requirement](REQ-6.5)
+        - \ref[requirement](REQ-6.6)
+    children: []

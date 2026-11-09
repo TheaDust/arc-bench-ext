@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-08-keep-bookstack-lifecycle-interactions`
+> 当前修订：`2026-11-08-keep-bookstack-lifecycle-transaction-guards`
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -21,31 +21,29 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 | 12306 | 93 | 142 |
 | bookstack | 29 | 56 |
 | ctrip | 97 | 152 |
-| github | 47 | 100 |
+| github | 49 | 104 |
 | keep | 22 | 49 |
 | prestashop | 55 | 86 |
-| sheet | 24 | 100 |
+| sheet | 26 | 104 |
 | stackoverflow | 52 | 66 |
-| **合计** | **419** | **751** |
+| **合计** | **423** | **759** |
 
-当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。历史审查见 [audit/README.md](audit/README.md)。
-
-本轮合并两组扩展：Keep 生命周期扩展新增 REQ-2.10/REQ-2.11 与 8 个生命周期/标签/搜索场景；Keep 与 BookStack 组合约束扩展新增 7 条需求、15 个场景，见 [扩展场景与分组评分](audit/interactions.md)。同时补强 BookStack 级联删除、双用户收藏与书架成员的观察点。Keep 原 16/33 与 BookStack 全部身份保持不变，旧分数不能直接比较。
+当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。Keep 生命周期扩展新增 REQ-2.10/REQ-2.11 与 8 个生命周期/标签/搜索场景；Keep 与 BookStack 组合约束新增 7 条需求、15 个场景，见 [audit/interactions.md](audit/interactions.md)。本版合并的 Sheet 与 GitHub 事务守卫新增 4 条需求、8 个场景，见 [audit/transaction-guards.md](audit/transaction-guards.md)。历史审查见 [audit/README.md](audit/README.md)。
 
 ## 当前状态
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-08-keep-bookstack-lifecycle-interactions` |
-| 父版本 | `2026-11-07-bookstack-lifecycle` |
-| 需求 / 场景 | 419 / 751 |
+| 修订 | `2026-11-08-keep-bookstack-lifecycle-transaction-guards` |
+| 父版本 | `2026-11-08-keep-bookstack-lifecycle-interactions`（合并 `2026-11-08-sheet-github-transaction-guards`） |
+| 需求 / 场景 | 423 / 759 |
 | 质量状态 | 已验证输入、收集与公开合同；新业务场景待候选执行 |
-| 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；组合约束扩展新增 13 类记录 |
-| 新增业务场景 | 23 个（Keep 16、BookStack 7），尚未对真实候选执行 |
+| 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
+| 本轮新增业务场景 | 31 个（Keep 16、BookStack 7、Sheet 4、GitHub 4），尚未对真实候选执行 |
 | 历史参考验证 | 父版 BookStack 49/49；不计入本轮 |
 | 验证记录 | [validation.json](validation.json)、[父版记录](validation/history/2026-11-07-bookstack-lifecycle/README.md) |
 
-完整产品行为与模型区分度尚需实际执行；当前证据边界见 [QUALITY.md](QUALITY.md)。
+本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量；完整产品行为与模型区分度尚需实际执行，具体边界见 [QUALITY.md](QUALITY.md) 与 [audit/README.md](audit/README.md)。
 
 ## 目录结构
 
@@ -131,7 +129,7 @@ npm run test:closeout
 
 - 上游：<https://github.com/code-philia/arc-bench>
 - 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`
-- 本仓库当前修订：`2026-11-08-keep-bookstack-lifecycle-interactions`
+- 本仓库当前修订：`2026-11-08-keep-bookstack-lifecycle-transaction-guards`
 
 上游快照中没有 `LICENSE` 文件；本仓库目前也没有单独声明开源许可证。公开分发或再利用上游材料前，请先确认上游作者的授权。详见 [NOTICE](NOTICE) 和 [UPSTREAM.md](UPSTREAM.md)。
 

@@ -16,8 +16,8 @@
       "images": 46
     },
     "github": {
-      "atomicRequirements": 47,
-      "scenarios": 100,
+      "atomicRequirements": 49,
+      "scenarios": 104,
       "images": 24
     },
     "keep": {
@@ -31,8 +31,8 @@
       "images": 22
     },
     "sheet": {
-      "atomicRequirements": 24,
-      "scenarios": 100,
+      "atomicRequirements": 26,
+      "scenarios": 104,
       "images": 8
     },
     "stackoverflow": {
@@ -41,7 +41,7 @@
       "images": 15
     }
   },
-  "atomicRequirements": 419,
-  "scenarios": 751,
+  "atomicRequirements": 423,
+  "scenarios": 759,
   "collectionChecked": true
 }

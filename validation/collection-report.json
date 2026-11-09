@@ -11274,6 +11274,102 @@
       ]
     },
     {
+      "title": "..\\arc-bench\\github\\tests\\REQ-7.1.spec.ts",
+      "file": "../arc-bench/github/tests/REQ-7.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.1: Reject stale merge then require both fresh approval and fresh check",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "github",
+              "projectName": "github",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3e555ff8125373696c08-10c2a97922699673fade",
+          "file": "../arc-bench/github/tests/REQ-7.1.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.1: Refuse approval from an editor opened on an older commit",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "github",
+              "projectName": "github",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "3e555ff8125373696c08-fc64a95c72e32f09be35",
+          "file": "../arc-bench/github/tests/REQ-7.1.spec.ts",
+          "line": 57,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\github\\tests\\REQ-7.2.spec.ts",
+      "file": "../arc-bench/github/tests/REQ-7.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-7.2: Reject a stale merge after a team grant is downgraded",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "github",
+              "projectName": "github",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-d654e4b57bb74cae798a",
+          "file": "../arc-bench/github/tests/REQ-7.2.spec.ts",
+          "line": 8,
+          "column": 5
+        },
+        {
+          "title": "REQ-7.2: Commit one merge when two valid confirmations were opened",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "github",
+              "projectName": "github",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "4584923e89d6398ed6eb-b1cc2a3b3591167bb047",
+          "file": "../arc-bench/github/tests/REQ-7.2.spec.ts",
+          "line": 58,
+          "column": 5
+        }
+      ]
+    },
+    {
       "title": "..\\arc-bench\\keep\\tests\\REQ-1.1.spec.ts",
       "file": "../arc-bench/keep/tests/REQ-1.1.spec.ts",
       "column": 0,
@@ -16782,6 +16878,102 @@
       ]
     },
     {
+      "title": "..\\arc-bench\\sheet\\tests\\REQ-6.1.spec.ts",
+      "file": "../arc-bench/sheet/tests/REQ-6.1.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.1: Refuse a final-cell validation failure without consuming undo",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sheet",
+              "projectName": "sheet",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-a55f7689cb6021375363",
+          "file": "../arc-bench/sheet/tests/REQ-6.1.spec.ts",
+          "line": 25,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.1: Undo and redo a validated move with chained external dependencies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sheet",
+              "projectName": "sheet",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "06feb607fb2e9cf36aee-8fbbf5a9dec271186abe",
+          "file": "../arc-bench/sheet/tests/REQ-6.1.spec.ts",
+          "line": 46,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "..\\arc-bench\\sheet\\tests\\REQ-6.2.spec.ts",
+      "file": "../arc-bench/sheet/tests/REQ-6.2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "REQ-6.2: Move an overlapping rectangle without chasing rewritten references",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sheet",
+              "projectName": "sheet",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0c9474e3e44261237194-df632ab526b32156ecde",
+          "file": "../arc-bench/sheet/tests/REQ-6.2.spec.ts",
+          "line": 36,
+          "column": 5
+        },
+        {
+          "title": "REQ-6.2: Validate an overlapping move against its calculated final values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 60000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "sheet",
+              "projectName": "sheet",
+              "results": [],
+              "status": "skipped"
+            }
+          ],
+          "id": "0c9474e3e44261237194-275d851494a9a551fd65",
+          "file": "../arc-bench/sheet/tests/REQ-6.2.spec.ts",
+          "line": 41,
+          "column": 5
+        }
+      ]
+    },
+    {
       "title": "..\\arc-bench\\stackoverflow\\tests\\REQ-1.1.spec.ts",
       "file": "../arc-bench/stackoverflow/tests/REQ-1.1.spec.ts",
       "column": 0,
@@ -18520,10 +18712,10 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-08T12:11:06.903Z",
-    "duration": 18098.526,
+    "startTime": "2026-11-09T06:29:14.617Z",
+    "duration": 16551.527,
     "expected": 0,
-    "skipped": 751,
+    "skipped": 759,
     "unexpected": 0,
     "flaky": 0
   }

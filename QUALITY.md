@@ -1,10 +1,10 @@
 # Benchmark 质量与验收边界
 
-当前修订 `2026-11-08-keep-bookstack-lifecycle-interactions`，父修订 `2026-11-07-bookstack-lifecycle`。本版合并 Keep 生命周期扩展（REQ-2.10/REQ-2.11 与 8 个场景）和 Keep/BookStack 组合约束扩展（7 条原子需求、15 个场景）：全库 **419 条原子需求、751 个场景**；Keep 22/49，BookStack 29/56。组合场景与分组评分见 [audit/interactions.md](audit/interactions.md)，生命周期与观察点补强见 [audit/keep.md](audit/keep.md)、[audit/bookstack.md](audit/bookstack.md)。八题既有审查、定向修订与限制见 [audit/README.md](audit/README.md)。
+当前修订 `2026-11-08-keep-bookstack-lifecycle-transaction-guards`，由 `2026-11-08-keep-bookstack-lifecycle-interactions` 与 `2026-11-08-sheet-github-transaction-guards` 合并而来。全库 **423 条原子需求、759 个场景**：Keep 22/49，BookStack 29/56，Sheet 26/104，GitHub 49/104。Keep 生命周期扩展（REQ-2.10/REQ-2.11 与 8 个场景）和 Keep/BookStack 组合约束扩展（7 条原子需求、15 个场景）见 [audit/interactions.md](audit/interactions.md)、[audit/keep.md](audit/keep.md)、[audit/bookstack.md](audit/bookstack.md)；Sheet/GitHub 事务守卫扩展（4 条原子需求、8 个场景）见 [audit/transaction-guards.md](audit/transaction-guards.md)。八题既有审查、定向修订与限制见 [audit/README.md](audit/README.md)。
 
 ## 当前证据
 
-本轮完成源码语义审查、YAML 身份/引用核对、场景与测试标题映射、类型检查、全部场景收集和公开合同回归。新增业务场景（Keep 16 个、BookStack 7 个）尚未对真实候选执行，状态为 `inputs-and-contracts-verified-candidate-execution-pending`。合同与收集只证明输入、身份和公开观察边界，不证明新增行为已通过或已量化难度。
+本轮完成源码语义审查、YAML 身份/引用核对、场景与测试标题映射、类型检查、全部场景收集和公开合同回归。新增业务场景（Keep 16 个、BookStack 7 个、Sheet 4 个、GitHub 4 个）尚未对真实候选执行，状态为 `inputs-and-contracts-verified-candidate-execution-pending`。合同与收集只证明输入、身份和公开观察边界，不证明新增行为已通过或已量化难度。浏览器合同只验证可观察断言边界，不能替代新题面的候选应用执行。
 
 Keep 通知定位的 oracle 修正按 role=status 与精确可见消息定位，另有 8/8 合同和原 Shallow、baseline 应用各 16/16 定向复评；该修正不改变需求、场景身份或分母。
 
@@ -36,4 +36,4 @@ StackOverflow 评论入口以认证用户为初态；徽章目录从公开 Users
 
 ## 本轮复查状态
 
-当前状态为 `inputs-and-contracts-verified-candidate-execution-pending`：419 条叶需求、751 个场景已完成输入、身份和收集核对；合并前的生命周期组件矩阵仍单独标注缺口和未决解释。前轮五组定向验证保留在 [CONSISTENCY.md](CONSISTENCY.md)。BookStack 父版扩展的 14 个场景已在本地参考实现上执行，其余既有场景的真实应用重验和所有复合条件的完整故障覆盖尚未完成，不能据此宣称零假阴性或完整满足所有产品描述。公开测评合同与原始业务需要分开解释；旧分数保持其原版本归属。
+当前状态为 `inputs-and-contracts-verified-candidate-execution-pending`：423 条叶需求、759 个场景已完成输入、身份和收集核对；合并前的生命周期组件矩阵仍单独标注缺口和未决解释。前轮五组定向验证保留在 [CONSISTENCY.md](CONSISTENCY.md)。BookStack 父版扩展的 14 个场景已在本地参考实现上执行，其余既有场景的真实应用重验和所有复合条件的完整故障覆盖尚未完成，不能据此宣称零假阴性或完整满足所有产品描述。公开测评合同与原始业务需要分开解释；旧分数保持其原版本归属。

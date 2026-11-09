@@ -1,3 +1,11 @@
+# 2026-11-08: Keep / BookStack 生命周期扩展与 Sheet / GitHub 事务守卫合并修订
+
+修订 `2026-11-08-keep-bookstack-lifecycle-transaction-guards`，合并 `2026-11-08-keep-bookstack-lifecycle-interactions` 与 `2026-11-08-sheet-github-transaction-guards`。全库合计 **423 条原子需求、759 个场景**：Keep 22/49，BookStack 29/56，Sheet 26/104，GitHub 49/104。既有需求 ID、场景 ID、场景名称和正式测试标题全部保留。
+
+本版合并三组扩展：Keep 生命周期（REQ-2.10/REQ-2.11 与 8 个场景）、Keep/BookStack 组合约束（7 条原子需求、15 个场景，见 [audit/interactions.md](audit/interactions.md)）和 Sheet/GitHub 事务守卫（4 条原子需求、8 个场景，见 [audit/transaction-guards.md](audit/transaction-guards.md)）。Keep 通知定位 oracle 修正保留。冻结输入已重新收集并通过类型检查、759 场景收集、89 项公开合同与输入完整性检查；新增业务场景尚未对真实候选执行，不同修订的分数不可混算。
+
+Windows Git checkout 的文本 CRLF 转换不再误触发冻结摘要拒绝；实质内容与二进制仍按冻结摘要校验。
+
 # 2026-11-08: Keep / BookStack 生命周期与组合约束合并修订
 
 修订 `2026-11-08-keep-bookstack-lifecycle-interactions`，父版本 `2026-11-07-bookstack-lifecycle`。本版合并 `2026-11-08-keep-bookstack-interactions` 与 `2026-11-08-keep-lifecycle`（含 `2026-11-08-keep-notification-oracle` 测试修正）：Keep 新增 6 条原子需求、16 个场景，BookStack 新增 3 条原子需求、7 个场景。既有需求 ID、场景 ID 与正式测试标题保留。合计 **419 条原子需求、751 个场景**（Keep 22/49，BookStack 29/56）。
@@ -5,6 +13,10 @@
 组合约束场景围绕同名身份、过期编辑、局部 Undo、私有修订和跨书移动，矩阵见 [audit/interactions.md](audit/interactions.md)；Keep 生命周期与 BookStack 观察点补强见 [audit/keep.md](audit/keep.md) 与 [audit/bookstack.md](audit/bookstack.md)。合并后的冻结输入已重新收集并通过类型检查与公开合同；新增业务场景尚未对真实候选执行，旧分数不可混用。
 
 Windows Git checkout 的文本 CRLF 转换不再误触发冻结摘要拒绝；实质内容与二进制仍按冻结摘要校验。
+
+# 2026-11-08: Sheet 事务和 GitHub 提交守卫
+
+修订 `2026-11-08-sheet-github-transaction-guards`，父版本 `2026-11-08-keep-bookstack-interactions`。Sheet 增加原子剪切、重叠引用重写和完整 Undo/Redo；GitHub 增加当前提交审查、权限降级与重复合并保护。新增 4 条原子需求和 8 个场景；合计 421 条原子需求、751 个场景。所有既有场景和测试标题保留。场景与分组评分见 [audit/transaction-guards.md](audit/transaction-guards.md)。不同修订的分数不可混算。
 
 # 2026-11-08: Keep 与 BookStack 组合约束扩展
 

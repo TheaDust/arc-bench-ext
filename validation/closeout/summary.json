@@ -23,7 +23,7 @@
       "title": "REQ-3.2.1: Create a Repository with Owner, Visibility, and Initialization Options - Scenario 1",
       "project": "init-list",
       "status": "failed",
-      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n"
+      "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n"
     },
     {
       "title": "REQ-3.2.2: Fork a Repository into Another Namespace - Scenario 1",

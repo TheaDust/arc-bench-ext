@@ -1,13 +1,14 @@
 {
-  "revision": "2026-11-08-keep-bookstack-lifecycle-interactions",
-  "parentRevision": "2026-11-07-bookstack-lifecycle",
-  "manifestSha256": "6548561114a6e5abe7be9fb5a33a735b76926be308d8fce4da47713f309ee249",
-  "recordedAt": "2026-11-08T12:17:14.289Z",
+  "revision": "2026-11-08-keep-bookstack-lifecycle-transaction-guards",
+  "parentRevision": "2026-11-08-keep-bookstack-lifecycle-interactions",
+  "mergedRevision": "2026-11-08-sheet-github-transaction-guards",
+  "manifestSha256": "aad1830bc36cc91d22521dfba66ef83c26d00f2ed6e687bf8a0a4a77f34545d4",
+  "recordedAt": "2026-11-09T06:32:20.058Z",
   "status": "inputs-and-contracts-verified-candidate-execution-pending",
   "scope": {
     "tasks": 8,
-    "atomicRequirements": 419,
-    "scenarios": 751,
+    "atomicRequirements": 423,
+    "scenarios": 759,
     "preservedExistingScenarioIdsAndContent": true,
     "mergedExtensions": {
       "keepLifecycle": {
@@ -21,6 +22,14 @@
       "bookstackInteractions": {
         "atomicRequirements": 3,
         "scenarios": 7
+      },
+      "sheetTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      },
+      "githubTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
       }
     },
     "observationStrengthening": {
@@ -34,28 +43,29 @@
   },
   "collection": {
     "passed": true,
-    "scenarios": 751,
-    "extensionTitlesMatched": 15,
+    "scenarios": 759,
+    "extensionTitlesMatched": 23,
     "lifecycleScenarioCountsMatched": 8,
     "report": "validation/collection-report.json"
   },
   "sourceIntegrity": {
     "passed": true,
-    "command": "node validation/audit-inputs.mjs",
+    "command": "npm run test:collect",
     "tasks": 8,
-    "requirements": 419,
-    "scenarios": 751,
-    "frozenFiles": 744,
+    "requirements": 423,
+    "scenarios": 759,
+    "frozenFiles": 752,
     "collectionChecked": true,
     "lfAndCrlfCheckoutAccepted": true,
     "binaryAndChangedTextRejected": true
   },
   "contracts": {
-    "passed": 86,
+    "passed": 89,
     "failed": 0,
     "skipped": 0,
     "newInteractionContractsPassed": 5,
     "newNotificationContractsPassed": 8,
+    "newTransactionGuardContractsPassed": 3,
     "report": "validation/contracts-report.json"
   },
   "closeout": {
@@ -117,6 +127,37 @@
         ],
         "inherited": true
       }
+    },
+    "2026-11-08-sheet-github-transaction-guards": {
+      "sourceReview": "audit/transaction-guards.md",
+      "contracts": "3/3",
+      "experimentPrepare": {
+        "passed": true,
+        "tasks": {
+          "sheet": 104,
+          "github": 104
+        },
+        "methods": [
+          "baseline",
+          "shallow"
+        ],
+        "modelCalled": false,
+        "inherited": true
+      },
+      "reportingFixtures": {
+        "passed": true,
+        "tasks": [
+          "sheet",
+          "github"
+        ],
+        "checked": [
+          "complete denominators",
+          "partial runs",
+          "empty basic group"
+        ],
+        "inherited": true
+      },
+      "candidateExecution": "Not executed; the merged collection and contracts were rerun, but the 8 new business scenarios have no candidate or reference-application result."
     }
   },
   "oracleCorrections": [
@@ -143,7 +184,7 @@
   },
   "controllerSourceModifiedByThisReview": false,
   "parentValidation": {
-    "commit": "1a566b306b27df04961515ab2746d0b619e8954e",
+    "commit": "7226dd96c6e1890401f6d767b3c4855ad92d05e3",
     "path": "validation.json"
   },
   "inheritedEvidence": {
@@ -153,11 +194,28 @@
     "boundary": "Parent BookStack 49/49 and contract reports retain their original input provenance. No changed or new scenario inherits a pass."
   },
   "limitations": [
-    "Browser contracts and prepared catalogs do not establish that any candidate passes the 23 new business scenarios.",
+    "Browser contracts and prepared catalogs do not establish that any candidate passes the 31 new business scenarios.",
     "New and strengthened scenarios are not browser-executed against real applications; runtime feasibility, timeout budget and model difficulty remain unmeasured.",
     "Source-level mapping and typecheck do not establish zero false positives or false negatives.",
-    "Experiment preparation, independent evaluation input checks and reporting fixtures were verified on the interaction component and were not rerun after merging the lifecycle component.",
+    "Experiment preparation, independent evaluation input checks and reporting fixtures were verified on the component revisions and were not rerun after merging.",
     "New public contracts and changed requirements require identical versioned inputs for all methods; old scores do not transfer.",
-    "Known per-task observation boundaries remain documented in audit/bookstack.md and audit/keep.md."
-  ]
+    "Known per-task observation boundaries remain documented in audit/bookstack.md, audit/keep.md and audit/transaction-guards.md.",
+    "Do not compare scores from this revision directly with historical denominators."
+  ],
+  "requirementTestConsistency": {
+    "reviewedScenarios": 8,
+    "reviewedParts": [
+      "Given",
+      "When",
+      "Then"
+    ],
+    "mapping": "audit/transaction-guards.md",
+    "exactTitlesMatchedInExperimentCatalog": true,
+    "strengthened": [
+      "validation rule retention and rejected-edit rollback",
+      "unchanged branches immediately after rejected review",
+      "direct grants before and after team downgrade",
+      "commit graph before and after second merge confirmation"
+    ]
+  }
 }

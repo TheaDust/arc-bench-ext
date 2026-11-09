@@ -1968,3 +1968,732 @@ index 0000000..c2fbf85
 +  if (present) await expect(badges).not.toHaveCount(0);
 +  else await expect(badges).toHaveCount(0);
 +}
+
+diff --git a/arc-bench/github/requirements/requirements.yaml b/arc-bench/github/requirements/requirements.yaml
+index a4eaa68..28c5278 100644
+--- a/arc-bench/github/requirements/requirements.yaml
++++ b/arc-bench/github/requirements/requirements.yaml
+@@ -2730,3 +2730,88 @@ children:
+         - \ref[requirement](REQ-6.3.1)
+         - \ref[requirement](REQ-1.1.2)
+     children: []
++- id: REQ-7
++  name: Revalidate open reviews and merge confirmations
++  description:
++    text: |-
++      All roles use normal browser login in independent sessions against one shared application instance. Changes are driven by UI operations in a fixed order.
++  scenarios: []
++  children:
++  - id: REQ-7.1
++    name: Bind review and check decisions to the current commit
++    description:
++      text: |-
++        For this extension, seed four independent public repositories named head-guard, review-guard, access-guard and race-guard with exact repository-name links on the signed-in home. Their respective PR links on that page are Head guard PR, Review guard PR, Access guard PR and Race guard PR. Each PR is Open, compare feature-guard to protected main with one required non-author approval and test success, and starts eligible without conflicts. Base files are base.md with Base content and shared.md with Shared content; the compare tree includes both plus change.txt with Original feature. Branch state exposes a valid parent graph; commit identifiers are observed through the UI. Accounts use the existing verified account convention: pr-author (Write and PR author), pr-reviewer (Write, non-author), pr-maintainer and guard-maintainer (Maintain), and protection-admin (Admin), all using the existing seed password Valid-password-123!. The organization guard-org owns access-guard. Its guard-team includes pr-maintainer, who has direct Read and inherits Maintain only through that team. guard-maintainer has a direct Maintain grant independent of guard-team. The initial approval is by pr-reviewer on the initial compare commit, and that commit has test: success. Head guard PR also has pr-reviewer's inline comment Keep this original comment on change.txt line 1 of the initial compare commit. This text is historical, not a pending review.
++
++        On the PR Conversation view, "Review history"(role=table) has cells Reviewer, Commit, Decision, State in that order, and "Inline review comments"(role=table) has Author, Commit, Path, Line, Comment, State. Show full original commit identifiers, the original line, and a Stale or Outdated state as applicable; a current approval or inline comment has State Current. On Checks show "Check commit"(role=status) with the current full compare identifier and "test status"(role=status) with pending or success. A new compare commit starts with pending test, regardless of prior results. Admin can choose success in "test status"(role=combobox) and use "Save check"(role=button) on the current Checks view. Non-author eligible reviewers open "Review changes"(role=button) from Files changed, then use "Approve"(role=radio) and "Submit review"(role=button). Successful submission opens Conversation with the current approval visible. A stale review editor cannot record a review or approve a commit it did not display. A stale merge or review displays "Merge blocked" or "Review blocked"(role=alert) respectively with exact reason Compare branch changed. It may reject on submission or invalidate the open confirmation/editor proactively with the same alert.
++    scenarios:
++    - id: SCN-REQ-7.1-01
++      name: Reject stale merge then require both fresh approval and fresh check
++      steps:
++      - id: STEP-REQ-7.1-01-01
++        Given: |-
++          Open Head guard PR as pr-maintainer and open merge confirmation. Observe its eligible state and both branch graphs. In a separate pr-author session open the Compare branch.
++        When: |-
++          Commit a new file next.txt with Next feature and message Advance compare. Attempt the old confirmation if still active. On fresh views inspect the review, inline comment and check. Approve the new commit as pr-reviewer before Admin records its successful check, then merge as pr-maintainer.
++        Then: |-
++          The old confirmation is refused and does not change either branch or PR. The old approval becomes Stale and the inline comment stays on the original commit and line, marked Outdated. The new commit shows pending even after the new approval, so merge is still blocked until the new check succeeds. The eventual merge creates exactly one new target commit with the original target head and the new compare head as parents, includes next.txt, and leaves the compare branch unchanged.
++        references:
++        - \ref[requirement](REQ-4.4)
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-6.3.3)
++        - \ref[requirement](REQ-6.3.4)
++        - \ref[requirement](REQ-6.5)
++    - id: SCN-REQ-7.1-02
++      name: Refuse approval from an editor opened on an older commit
++      steps:
++      - id: STEP-REQ-7.1-02-01
++        Given: |-
++          In Review guard PR, pr-reviewer opens Review changes on the original compare commit and selects Approve. pr-author has a separate session.
++        When: |-
++          Advance the compare branch with next.txt, whose content is Next feature, using commit message Advance compare. Attempt the old review submission if still active. Inspect the review history and both branches immediately. Admin then records a successful test for the new head; inspect the PR. Reopen the review from the new Files changed view and submit a fresh approval.
++        Then: |-
++          The old submission is refused without adding any review. The only old review is Stale on the original commit. A successful new check does not allow merge without a fresh approval. A fresh approval belongs to the new head and makes merge eligible. Neither attempted review changes a branch.
++        references:
++        - \ref[requirement](REQ-4.4)
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-6.3.3)
++        - \ref[requirement](REQ-6.3.4)
++        - \ref[requirement](REQ-6.5)
++    children: []
++  - id: REQ-7.2
++    name: Recheck authority and terminal state when confirming a merge
++    description:
++      text: |-
++        A merge confirmation never reserves merge authority or makes a PR mergeable for the lifetime of the tab. Recheck current repository grants and PR state at confirmation. In access-guard, repository Settings → Manage access lets Admin change guard-team from Maintain to Read with its unique row, "Role"(role=combobox) and "Save"(role=button). Manage access also exposes separate rows for the direct grantees pr-maintainer and guard-maintainer; each row includes the grantee name and its selected "Role"(role=combobox). A saved grant change shows "Access saved"(role=status); pr-maintainer's remaining direct Read grant keeps the PR readable but cannot merge. Losing Maintain is visible on reload and does not affect independently granted users or the approval/check. In race-guard, two authorized sessions may open confirmation for the same PR, but only the first valid merge writes a commit and immutable merge metadata. An invalidated open confirmation shows "Merge blocked"(role=alert) with reason Merge permission required or Pull request already merged as applicable, whether proactively or on submitting "Confirm merge"(role=button).
++    scenarios:
++    - id: SCN-REQ-7.2-01
++      name: Reject a stale merge after a team grant is downgraded
++      steps:
++      - id: STEP-REQ-7.2-01-01
++        Given: |-
++          In Access guard PR, pr-maintainer has team-derived Maintain and direct Read, opens confirmation, and observes both branch graphs. Admin signs in separately.
++        When: |-
++          Admin changes guard-team from Maintain to Read in Manage access and reloads. Attempt the old confirmation if still active. Reload the PR as the downgraded user, then open it as guard-maintainer.
++        Then: |-
++          The team grant persists as Read; the two direct grants remain Read and Maintain respectively. The old confirmation is refused. The downgraded user still reads the Open PR but cannot merge; neither branch, nor the review or current successful check changes. The independent maintainer can still open a merge confirmation.
++        references:
++        - \ref[requirement](REQ-7.1)
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-6.5)
++        - \ref[requirement](REQ-6.6)
++    - id: SCN-REQ-7.2-02
++      name: Commit one merge when two valid confirmations were opened
++      steps:
++      - id: STEP-REQ-7.2-02-01
++        Given: |-
++          In Race guard PR, pr-maintainer and guard-maintainer both open merge confirmations before either submits. Record both branch graphs.
++        When: |-
++          Confirm as pr-maintainer, then observe its new commit and both branch graphs before trying guard-maintainer's old confirmation if still active. Inspect fresh PR views in both sessions and both branches again.
++        Then: |-
++          Only the first confirmation creates a commit and moves the target. The second is refused as already merged. Both sessions show the same commit, timestamp and first merger; the complete target history contains exactly one new merge with the original branch parents, and the compare branch is unchanged.
++        references:
++        - \ref[requirement](REQ-7.1)
++        - \ref[requirement](REQ-2.3)
++        - \ref[requirement](REQ-6.5)
++        - \ref[requirement](REQ-6.6)
++    children: []
+diff --git a/arc-bench/github/tests/REQ-7.1.spec.ts b/arc-bench/github/tests/REQ-7.1.spec.ts
+new file mode 100644
+index 0000000..707a19e
+--- /dev/null
++++ b/arc-bench/github/tests/REQ-7.1.spec.ts
+@@ -0,0 +1,93 @@
++// requirement: REQ-7.1
++import { expect } from '@playwright/test';
++import { expectText } from './support/observations';
++import { advanceCompare, button, expectApproval, expectBranch, expectCheck, expectHistoricalComment, expectMergedBranches,
++  expectOldActionBlocked, expectOpen, historyRows, link, mergeMetadata, observeBranches, openApproval, openConfirmation,
++  openPullRequest, passCheck, test } from './support/confirmation-guards';
++
++test('REQ-7.1: Reject stale merge then require both fresh approval and fresh check', async ({ session }) => {
++  const maintainer = await session('PR_MAINTAINER');
++  const pr = await openPullRequest(maintainer, 'Head guard PR');
++  const branches = await observeBranches(maintainer, pr);
++  await expectApproval(maintainer, branches.compare.head, 'Current');
++  await expectHistoricalComment(maintainer, branches.compare.head, 'Current');
++  await link(maintainer, 'Checks').click();
++  await expectCheck(maintainer, branches.compare.head, 'success');
++  await maintainer.goto(pr);
++  await openConfirmation(maintainer);
++
++  const author = await session('PR_AUTHOR');
++  const next = await advanceCompare(author, pr, branches.compare);
++  await expectOldActionBlocked(maintainer, 'Confirm merge', 'Compare branch changed');
++  await expectBranch(author, branches.baseUrl, branches.base);
++  await expectBranch(author, branches.compareUrl, next);
++  await maintainer.goto(pr);
++  await expectOpen(maintainer);
++  await expectApproval(maintainer, branches.compare.head, 'Stale');
++  await expectHistoricalComment(maintainer, branches.compare.head, 'Outdated');
++  await expect(historyRows(maintainer, 'Review history')).toHaveCount(1);
++  await expect(button(maintainer, 'Merge pull request')).toBeDisabled();
++  await link(maintainer, 'Checks').click();
++  await expectCheck(maintainer, next.head, 'pending');
++
++  const reviewer = await session('PR_REVIEWER');
++  const submit = await openApproval(reviewer, pr);
++  await submit.click();
++  await expectApproval(reviewer, next.head, 'Current');
++  await maintainer.goto(pr);
++  await expectApproval(maintainer, next.head, 'Current');
++  await expectApproval(maintainer, branches.compare.head, 'Stale');
++  await expect(historyRows(maintainer, 'Review history')).toHaveCount(2);
++  await expect(button(maintainer, 'Merge pull request')).toBeDisabled();
++  await link(maintainer, 'Checks').click();
++  await expectCheck(maintainer, next.head, 'pending');
++
++  const admin = await session('PROTECTION_ADMIN');
++  await passCheck(admin, pr, next.head);
++  await maintainer.goto(pr);
++  await openConfirmation(maintainer);
++  await button(maintainer, 'Confirm merge').click();
++  const result = await mergeMetadata(maintainer);
++  expect(result.author).toBe('pr-maintainer');
++  await expectMergedBranches(maintainer, branches.baseUrl, branches.base, branches.compareUrl, next, result);
++  await maintainer.goto(pr);
++  expect(await mergeMetadata(maintainer)).toEqual(result);
++});
++
++test('REQ-7.1: Refuse approval from an editor opened on an older commit', async ({ session }) => {
++  const reviewer = await session('PR_REVIEWER');
++  const pr = await openPullRequest(reviewer, 'Review guard PR');
++  const branches = await observeBranches(reviewer, pr);
++  await expectApproval(reviewer, branches.compare.head, 'Current');
++  await openApproval(reviewer, pr);
++  const author = await session('PR_AUTHOR');
++  const next = await advanceCompare(author, pr, branches.compare);
++  await expectOldActionBlocked(reviewer, 'Submit review', 'Compare branch changed');
++  await reviewer.goto(pr);
++  await expectOpen(reviewer);
++  await expectApproval(reviewer, branches.compare.head, 'Stale');
++  await expect(historyRows(reviewer, 'Review history')).toHaveCount(1);
++  await expectBranch(reviewer, branches.baseUrl, branches.base);
++  await expectBranch(reviewer, branches.compareUrl, next);
++  const admin = await session('PROTECTION_ADMIN');
++  await passCheck(admin, pr, next.head);
++
++  const maintainer = await session('PR_MAINTAINER');
++  await maintainer.goto(pr);
++  await expectOpen(maintainer);
++  await expectApproval(maintainer, branches.compare.head, 'Stale');
++  await expect(historyRows(maintainer, 'Review history')).toHaveCount(1);
++  await expectText(maintainer, 'Review required by branch protection', { exact: true });
++  await expect(button(maintainer, 'Merge pull request')).toBeDisabled();
++
++  const freshSubmit = await openApproval(reviewer, pr);
++  await freshSubmit.click();
++  await expectApproval(reviewer, next.head, 'Current');
++  await maintainer.reload();
++  await expectApproval(maintainer, branches.compare.head, 'Stale');
++  await expectApproval(maintainer, next.head, 'Current');
++  await expect(historyRows(maintainer, 'Review history')).toHaveCount(2);
++  await expect(button(maintainer, 'Merge pull request')).toBeEnabled();
++  await expectBranch(maintainer, branches.baseUrl, branches.base);
++  await expectBranch(maintainer, branches.compareUrl, next);
++});
+diff --git a/arc-bench/github/tests/REQ-7.2.spec.ts b/arc-bench/github/tests/REQ-7.2.spec.ts
+new file mode 100644
+index 0000000..4fad3b0
+--- /dev/null
++++ b/arc-bench/github/tests/REQ-7.2.spec.ts
+@@ -0,0 +1,77 @@
++// requirement: REQ-7.2
++import { expect } from '@playwright/test';
++import { clickVisibleTarget, openVisibleRepository } from './support/e2e';
++import { selectChoice, expectSelectedChoice } from './support/public-controls';
++import { button, expectApproval, expectBranch, expectCheck, expectMergedBranches, expectOldActionBlocked, expectOpen,
++  historyRows, link, mergeMetadata, observeBranches, openConfirmation, openPullRequest, test } from './support/confirmation-guards';
++
++test('REQ-7.2: Reject a stale merge after a team grant is downgraded', async ({ session }) => {
++  const maintainer = await session('PR_MAINTAINER');
++  const pr = await openPullRequest(maintainer, 'Access guard PR');
++  const branches = await observeBranches(maintainer, pr);
++  await expectApproval(maintainer, branches.compare.head, 'Current');
++  await openConfirmation(maintainer);
++
++  const admin = await session('PROTECTION_ADMIN');
++  await openVisibleRepository(admin, 'access-guard');
++  await clickVisibleTarget(admin, 'Settings');
++  await clickVisibleTarget(admin, 'Manage access');
++  const grant = (name: string) => admin.getByRole('row').filter({ has: admin.getByRole('cell', { name, exact: true }) });
++  const direct = (name: string) => grant(name).getByRole('combobox', { name: 'Role', exact: true });
++  const team = grant('guard-team');
++  await expect(team).toHaveCount(1);
++  const role = team.getByRole('combobox', { name: 'Role', exact: true });
++  await expectSelectedChoice(role, 'Maintain');
++  await expectSelectedChoice(direct('pr-maintainer'), 'Read');
++  await expectSelectedChoice(direct('guard-maintainer'), 'Maintain');
++  await selectChoice(role, { label: 'Read' });
++  await button(team, 'Save').click();
++  await expect(admin.getByRole('status', { name: 'Access saved', exact: true })).toBeVisible();
++  await admin.reload();
++  await expectSelectedChoice(role, 'Read');
++  await expectSelectedChoice(direct('pr-maintainer'), 'Read');
++  await expectSelectedChoice(direct('guard-maintainer'), 'Maintain');
++
++  await expectOldActionBlocked(maintainer, 'Confirm merge', 'Merge permission required');
++  await maintainer.goto(pr);
++  await expect(maintainer.getByRole('heading', { name: 'Access guard PR', exact: true })).toBeVisible();
++  await expectOpen(maintainer);
++  const merge = button(maintainer, 'Merge pull request');
++  // Read-only users may see a disabled action or no merge action at all.
++  await expect.poll(async () => {
++    const visible = merge.filter({ visible: true });
++    const count = await visible.count();
++    return count === 0 || (count === 1 && await visible.isDisabled());
++  }).toBe(true);
++  await expectApproval(maintainer, branches.compare.head, 'Current');
++  await expect(historyRows(maintainer, 'Review history')).toHaveCount(1);
++  await link(maintainer, 'Checks').click();
++  await expectCheck(maintainer, branches.compare.head, 'success');
++  await expectBranch(maintainer, branches.baseUrl, branches.base);
++  await expectBranch(maintainer, branches.compareUrl, branches.compare);
++
++  const independent = await session('GUARD_MAINTAINER');
++  await independent.goto(pr);
++  await openConfirmation(independent);
++});
++
++test('REQ-7.2: Commit one merge when two valid confirmations were opened', async ({ session }) => {
++  const first = await session('PR_MAINTAINER');
++  const second = await session('GUARD_MAINTAINER');
++  const pr = await openPullRequest(first, 'Race guard PR');
++  const branches = await observeBranches(first, pr);
++  await second.goto(pr);
++  await openConfirmation(first);
++  await openConfirmation(second);
++  await button(first, 'Confirm merge').click();
++  const result = await mergeMetadata(first);
++  expect(result.author).toBe('pr-maintainer');
++  await expectMergedBranches(first, branches.baseUrl, branches.base, branches.compareUrl, branches.compare, result);
++
++  await expectOldActionBlocked(second, 'Confirm merge', 'Pull request already merged');
++  await second.goto(pr);
++  expect(await mergeMetadata(second)).toEqual(result);
++  await first.goto(pr);
++  expect(await mergeMetadata(first)).toEqual(result);
++  await expectMergedBranches(first, branches.baseUrl, branches.base, branches.compareUrl, branches.compare, result);
++});
+diff --git a/arc-bench/github/tests/support/confirmation-guards.ts b/arc-bench/github/tests/support/confirmation-guards.ts
+new file mode 100644
+index 0000000..45d73bb
+--- /dev/null
++++ b/arc-bench/github/tests/support/confirmation-guards.ts
+@@ -0,0 +1,182 @@
++import { expect, test as base, type Locator, type Page } from '@playwright/test';
++import { branchState, createFile, output } from './branch-state';
++import { openVisibleTarget, seedAccount, signIn } from './e2e';
++import { expectText } from './observations';
++import { selectChoice } from './public-controls';
++
++type State = Awaited<ReturnType<typeof branchState>>;
++export const test = base.extend<{ session: (account: string) => Promise<Page> }>({
++  session: async ({ browser }, use, info) => {
++    const contexts: Awaited<ReturnType<typeof browser.newContext>>[] = [];
++    try {
++      await use(async account => {
++        const context = await browser.newContext();
++        contexts.push(context);
++        const page = await context.newPage();
++        await signIn(page, seedAccount(info, account));
++        return page;
++      });
++    } finally {
++      await Promise.all(contexts.map(context => context.close()));
++    }
++  },
++});
++
++export const button = (page: Page | Locator, name: string) => page.getByRole('button', { name, exact: true });
++export const link = (page: Page, name: string) => page.getByRole('link', { name, exact: true });
++
++export async function openPullRequest(page: Page, title: string) {
++  await openVisibleTarget(page, title);
++  await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
++  return page.url();
++}
++
++export async function expectOpen(page: Page) {
++  await expectText(page, 'Open', { exact: true });
++  await expect(page.getByRole('region', { name: 'Merge result', exact: true })).toHaveCount(0);
++}
++
++export async function observeBranches(page: Page, pr: string) {
++  await page.goto(pr);
++  await expectOpen(page);
++  await link(page, 'Base branch').click();
++  const baseUrl = page.url();
++  const base = await branchState(page);
++  await page.goto(pr);
++  await link(page, 'Compare branch').click();
++  const compareUrl = page.url();
++  const compare = await branchState(page);
++  expect(base.branch).toBe('main');
++  expect(compare.branch).toBe('feature-guard');
++  expect(base.head).not.toBe(compare.head);
++  expect(base.files).toEqual([['base.md', 'Base content'], ['shared.md', 'Shared content']]);
++  expect(compare.files).toEqual([['base.md', 'Base content'], ['change.txt', 'Original feature'], ['shared.md', 'Shared content']]);
++  await page.goto(pr);
++  return { baseUrl, base, compareUrl, compare };
++}
++
++export async function expectBranch(page: Page, url: string, expected: State) {
++  await page.goto(url);
++  expect(await branchState(page)).toEqual(expected);
++}
++
++export async function advanceCompare(author: Page, pr: string, previous: State) {
++  await author.goto(pr);
++  await link(author, 'Compare branch').click();
++  const url = author.url();
++  expect(await branchState(author)).toEqual(previous);
++  await createFile(author, 'next.txt', 'Next feature', 'Advance compare');
++  await expectText(author, 'Next feature', { exact: true });
++  await author.goto(url);
++  const next = await branchState(author);
++  expect(next.owner).toBe(previous.owner);
++  expect(next.branch).toBe(previous.branch);
++  expect(next.head).not.toBe(previous.head);
++  expect(next.files).toEqual([...previous.files, ['next.txt', 'Next feature']].sort((a, b) => a[0].localeCompare(b[0])));
++  expect(next.commits.find(row => row[0] === next.head)).toEqual([next.head, previous.head, 'pr-author', 'Advance compare']);
++  expect(next.commits.filter(row => row[0] !== next.head)).toEqual(previous.commits);
++  return next;
++}
++
++export function historyRows(page: Page, name: 'Review history' | 'Inline review comments') {
++  return page.getByRole('table', { name, exact: true }).getByRole('row').filter({ has: page.getByRole('cell') });
++}
++
++export function historyRow(page: Page, name: 'Review history' | 'Inline review comments', identity: string[]) {
++  return identity.reduce((rows, value) => rows.filter({ has: page.getByRole('cell', { name: value, exact: true }) }),
++    historyRows(page, name));
++}
++
++export async function expectApproval(page: Page, commit: string, state: 'Current' | 'Stale') {
++  const row = historyRow(page, 'Review history', ['pr-reviewer', commit]);
++  await expect(row).toHaveCount(1);
++  await expect(row.getByRole('cell')).toHaveText(['pr-reviewer', commit, 'Approve', state]);
++}
++
++export async function expectHistoricalComment(page: Page, original: string, state: 'Current' | 'Outdated') {
++  const row = historyRow(page, 'Inline review comments', ['pr-reviewer', original, 'Keep this original comment']);
++  await expect(row).toHaveCount(1);
++  await expect(row.getByRole('cell')).toHaveText(['pr-reviewer', original, 'change.txt', '1', 'Keep this original comment', state]);
++  await expect(historyRows(page, 'Inline review comments')).toHaveCount(1);
++}
++
++export async function expectCheck(page: Page, commit: string, state: 'pending' | 'success') {
++  await expect(page.getByRole('status', { name: 'Check commit', exact: true })).toHaveText(commit);
++  await expect(page.getByRole('status', { name: 'test status', exact: true })).toHaveText(state);
++}
++
++export async function passCheck(admin: Page, pr: string, commit: string) {
++  await admin.goto(pr);
++  await link(admin, 'Checks').click();
++  await expectCheck(admin, commit, 'pending');
++  await selectChoice(admin.getByRole('combobox', { name: 'test status', exact: true }), { label: 'success' });
++  await button(admin, 'Save check').click();
++  await expectCheck(admin, commit, 'success');
++  await admin.reload();
++  await expectCheck(admin, commit, 'success');
++}
++
++export async function openApproval(page: Page, pr: string) {
++  await page.goto(pr);
++  await link(page, 'Files changed').click();
++  await button(page, 'Review changes').click();
++  await page.getByRole('radio', { name: 'Approve', exact: true }).check();
++  const submit = button(page, 'Submit review');
++  await expect(submit).toBeEnabled();
++  return submit;
++}
++
++export async function openConfirmation(page: Page) {
++  await expectOpen(page);
++  await selectChoice(page.getByRole('combobox', { name: 'Merge method', exact: true }), { label: 'Create a merge commit' });
++  const open = button(page, 'Merge pull request');
++  await expect(open).toBeEnabled();
++  await open.click();
++  await expect(button(page, 'Confirm merge')).toBeEnabled();
++}
++
++export async function expectOldActionBlocked(page: Page, action: 'Confirm merge' | 'Submit review', reason: string) {
++  const submit = button(page, action);
++  const alert = page.getByRole('alert', { name: action === 'Confirm merge' ? 'Merge blocked' : 'Review blocked', exact: true });
++  await expect.poll(async () => await alert.isVisible() || (await submit.isVisible() && await submit.isEnabled())).toBe(true);
++  if (!await alert.isVisible()) {
++    // A live UI may invalidate the dialog between observation and click.
++    try {
++      await submit.click({ timeout: 2000 });
++    } catch (error) {
++      if (!await alert.isVisible()) throw error;
++    }
++  }
++  await expect(alert).toBeVisible();
++  await expect(alert).toContainText(reason);
++}
++
++export async function mergeMetadata(page: Page) {
++  await expectText(page, 'Merged', { exact: true });
++  const result = {
++    commit: await output(page, 'Merge commit', 'Merge result'),
++    author: await output(page, 'Merged by', 'Merge result'),
++    time: await output(page, 'Merged at', 'Merge result'),
++  };
++  expect(result.time).toMatch(/^\d{4}-\d{2}-\d{2}T.*Z$/);
++  expect(Number.isFinite(Date.parse(result.time))).toBe(true);
++  return result;
++}
++
++export async function expectMergedBranches(page: Page, baseUrl: string, base: State, compareUrl: string, compare: State,
++  result: Awaited<ReturnType<typeof mergeMetadata>>) {
++  await page.goto(baseUrl);
++  const merged = await branchState(page);
++  expect(merged.owner).toBe(base.owner);
++  expect(merged.branch).toBe(base.branch);
++  expect(merged.head).toBe(result.commit);
++  expect(merged.files).toEqual(compare.files);
++  const newCommit = merged.commits.find(row => row[0] === result.commit);
++  expect(newCommit).toBeDefined();
++  expect(newCommit![1].split(',').map(value => value.trim())).toEqual([base.head, compare.head]);
++  expect(newCommit![2]).toBe(result.author);
++  const previous = new Map([...base.commits, ...compare.commits].map(row => [row[0], row]));
++  expect(previous.has(result.commit)).toBe(false);
++  expect(merged.commits.filter(row => row[0] !== result.commit)).toEqual([...previous.values()].sort((a, b) => a[0].localeCompare(b[0])));
++  await expectBranch(page, compareUrl, compare);
++}
+diff --git a/arc-bench/sheet/requirements/requirements.yaml b/arc-bench/sheet/requirements/requirements.yaml
+index 6c28398..e0bdd80 100644
+--- a/arc-bench/sheet/requirements/requirements.yaml
++++ b/arc-bench/sheet/requirements/requirements.yaml
+@@ -1624,3 +1624,82 @@ children:
+           - \ref[requirement](REQ-3.1.3)
+           - \ref[requirement](REQ-5.1.2)
+       children: []
++- id: REQ-6
++  name: Transactional edits and formula identity
++  description:
++    text: |-
++      Use deterministic small worksheets to verify cut and paste, reference mapping, validation and history as a single user operation.
++  scenarios: []
++  children:
++  - id: REQ-6.1
++    name: Make validated cuts atomic across formulas and history
++    description:
++      text: |-
++        Cut and Paste of a rectangular range is one transaction. Validate the entire proposed final worksheet before saving, including values produced by formulas in validated destination cells. Numeric rules test the calculated numeric value, not the raw formula text. If any destination fails its rule, leave all source and destination values, formulas, validation rules and dependent results unchanged. A refused paste adds no undo entry and does not clear existing redo history. On success the destination is written and only source cells outside it are cleared. A reference to a moved source cell follows its new coordinate, even if the formula itself does not move; preserve dollar markers. A reference to a cell outside the source keeps its coordinate. Recalculate all dependent values before the edit is observable. One Undo restores the complete prior worksheet; one Redo reapplies the complete move. Saved worksheet state persists across reload; history across reload is not required.
++    scenarios:
++    - id: SCN-REQ-6.1-01
++      name: Refuse a final-cell validation failure without consuming undo
++      steps:
++      - id: STEP-REQ-6.1-01-01
++        Given: |-
++          A1:B2 contains 10, 20, =A1+B1, 120 in row order; D1:E2 contains 1, 2, 3, 4. G1 is =A2+D2 and H1 is =G1+E2. Apply a 0–100 numeric rule to E2, then enter History marker in H2 as a separate edit.
++        When: |-
++          Cut A1:B2 and paste at D1. Inspect the validation error and worksheet, click Undo once, repeat the rejected cut, then Redo once and reload.
++        Then: |-
++          The 120 in the final destination cell causes rejection. All eight source/target cells, both downstream formulas and their results (33 and 37), and the marker initially remain unchanged. Undo removes only the marker. The second failed cut leaves the marker blank and preserves the redo entry; Redo restores only the marker. After reload the same values and formulas remain, and E2 still rejects 101.
++        references:
++        - \ref[requirement](REQ-3.2.1)
++        - \ref[requirement](REQ-3.2.2)
++        - \ref[requirement](REQ-4.2.1)
++        - \ref[requirement](REQ-5.2.1)
++    - id: SCN-REQ-6.1-02
++      name: Undo and redo a validated move with chained external dependencies
++      steps:
++      - id: STEP-REQ-6.1-02-01
++        Given: |-
++          A1:B2 contains 10, 20, =A1+B1, 60 in row order; D1:E2 contains 1, 2, 3, 4. G1 is =A2+D2 and H1 is =G1+E2. H2 is blank and E2 has an inclusive 0–100 numeric rule.
++        When: |-
++          Cut A1:B2 and paste at D1. Undo once, Redo once, then reload.
++        Then: |-
++          A1:B2 becomes blank and D1:E2 becomes 10, 20, =D1+E1, 60. G1 becomes =D2+D2 with result 60; H1 retains =G1+E2 and becomes 120. Undo restores the complete pre-move worksheet including G1=33 and H1=37; Redo and reload retain the complete moved state. The 0–100 validation at E2 remains enforced.
++        references:
++        - \ref[requirement](REQ-3.2.1)
++        - \ref[requirement](REQ-3.2.2)
++        - \ref[requirement](REQ-4.2.1)
++        - \ref[requirement](REQ-5.2.1)
++    children: []
++  - id: REQ-6.2
++    name: Resolve overlapping cuts using original cell identities
++    description:
++      text: |-
++        A same-worksheet cut can overlap its destination. Read the entire source before applying the move; each destination receives its original source cell, and only source cells outside the destination are cleared. Retarget each reference to an original source cell to that cell's new coordinate, including references in unmoved formulas and absolute references, preserving their dollar markers. References to cells outside the source retain their coordinates even in moved formulas. Apply these mappings once; do not recursively retarget the coordinates already produced by the move. Validate against the resulting proposed worksheet, and treat the whole move and its derived updates as one undoable transaction.
++    scenarios:
++    - id: SCN-REQ-6.2-01
++      name: Move an overlapping rectangle without chasing rewritten references
++      steps:
++      - id: STEP-REQ-6.2-01-01
++        Given: |-
++          A1=4, B1=7, A2 is =A1+$E$1, B2 is =A2+$B$1, C1=90, C2=9 and E1=10. F1 is =A2+B2+C1 and G1 is =F1*2.
++        When: |-
++          Cut A1:B2, paste at B1, inspect, then Undo once, Redo once and reload.
++        Then: |-
++          A1:A2 is cleared. B1:C2 holds 4, 7, =B1+$E$1 and =B2+$C$1 in row order, with calculated results 14 and 21. E1 stays 10. F1 becomes =B2+C2+C1 and shows 42, and G1 shows 84. Undo restores the original values and formulas, including F1=125 and G1=250. Redo and reload restore the same moved state.
++        references:
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-4.1.2)
++        - \ref[requirement](REQ-4.2.1)
++    - id: SCN-REQ-6.2-02
++      name: Validate an overlapping move against its calculated final values
++      steps:
++      - id: STEP-REQ-6.2-02-01
++        Given: |-
++          A1=4, B1=7, A2 is =A1+$E$1, B2 is =A2+$B$1, C1=90, C2=9 and E1=10. F1 is =A2+B2+C1 and G1 is =F1*2. C2 has an inclusive numeric range 0–20. Moving A1:B2 to B1 would yield 21 in C2.
++        When: |-
++          Cut A1:B2 and paste at B1; inspect the refusal. Then change A1 to 2, cut the same range again and paste at B1. Undo once, Redo once and reload. Try entering 21 directly in C2.
++        Then: |-
++          The failed paste keeps all original raw values, formulas and results. The retry succeeds with results B2=12, C2=19, F1=38 and G1=76 and the same rewritten formulas as the valid overlap. Undo restores the pre-retry worksheet (A1=2, F1=121, G1=242), not the original A1=4. Redo and reload keep the complete moved state. C2 still rejects 21; its saved formula and all dependent results remain intact.
++        references:
++        - \ref[requirement](REQ-6.1)
++        - \ref[requirement](REQ-4.1.2)
++        - \ref[requirement](REQ-4.2.1)
++    children: []
+diff --git a/arc-bench/sheet/tests/REQ-6.1.spec.ts b/arc-bench/sheet/tests/REQ-6.1.spec.ts
+new file mode 100644
+index 0000000..aacc4ce
+--- /dev/null
++++ b/arc-bench/sheet/tests/REQ-6.1.spec.ts
+@@ -0,0 +1,58 @@
++// requirement: REQ-6.1
++import { test, type Page } from '@playwright/test';
++import { commitCellThroughFormulaBar, configureNumberValidation } from './support/e2e';
++import { cutTo, expectCells, expectNumberRejected, expectRangeRejection, history, openWorksheet,
++  type Cells } from './support/transactional-cut';
++
++function before(last: string): Cells {
++  return {
++    A1: '10', B1: '20', A2: ['=A1+B1', 30], B2: last,
++    D1: '1', E1: '2', D2: '3', E2: '4', G1: ['=A2+D2', 33], H1: ['=G1+E2', 37],
++  };
++}
++
++const moved: Cells = {
++  A1: '', B1: '', A2: '', B2: '', D1: '10', E1: '20', D2: ['=D1+E1', 30], E2: '60',
++  G1: ['=D2+D2', 60], H1: ['=G1+E2', 120], H2: '',
++};
++
++async function prepare(page: Page, last: string) {
++  await openWorksheet(page, ['10\t20\t\t1\t2\t\t=A2+D2\t=G1+E2', `=A1+B1\t${last}\t\t3\t4\t\t\t`].join('\n'));
++  await expectCells(page, before(last));
++  await configureNumberValidation(page, 'E2', 'E2', '0', '100');
++}
++
++test('REQ-6.1: Refuse a final-cell validation failure without consuming undo', async ({ page }) => {
++  await prepare(page, '120');
++  await commitCellThroughFormulaBar(page, 'H2', 'History marker');
++  await cutTo(page, 'D1');
++  await expectRangeRejection(page, 100);
++  await expectCells(page, { ...before('120'), H2: 'History marker' });
++  await history(page, 'Undo');
++  await expectCells(page, { ...before('120'), H2: '' });
++
++  // A refused mutation must also preserve the redo entry created by that Undo.
++  await cutTo(page, 'D1');
++  await expectRangeRejection(page, 100);
++  await expectCells(page, { ...before('120'), H2: '' });
++  await history(page, 'Redo');
++  await expectCells(page, { ...before('120'), H2: 'History marker' });
++  await page.reload();
++  await expectCells(page, { ...before('120'), H2: 'History marker' });
++  await expectNumberRejected(page, 'E2', 101, 100);
++  await expectCells(page, { ...before('120'), H2: 'History marker' });
++});
++
++test('REQ-6.1: Undo and redo a validated move with chained external dependencies', async ({ page }) => {
++  await prepare(page, '60');
++  await cutTo(page, 'D1');
++  await expectCells(page, moved);
++  await history(page, 'Undo');
++  await expectCells(page, { ...before('60'), H2: '' });
++  await history(page, 'Redo');
++  await expectCells(page, moved);
++  await page.reload();
++  await expectCells(page, moved);
++  await expectNumberRejected(page, 'E2', 101, 100);
++  await expectCells(page, moved);
++});
+diff --git a/arc-bench/sheet/tests/REQ-6.2.spec.ts b/arc-bench/sheet/tests/REQ-6.2.spec.ts
+new file mode 100644
+index 0000000..84b91c0
+--- /dev/null
++++ b/arc-bench/sheet/tests/REQ-6.2.spec.ts
+@@ -0,0 +1,53 @@
++// requirement: REQ-6.2
++import { test, type Page } from '@playwright/test';
++import { commitCellThroughFormulaBar, configureNumberValidation } from './support/e2e';
++import { cutTo, expectCells, expectNumberRejected, expectRangeRejection, history, openWorksheet, type Cells } from './support/transactional-cut';
++
++function before(a1: number): Cells {
++  return {
++    A1: String(a1), B1: '7', C1: '90', A2: ['=A1+$E$1', a1 + 10], B2: ['=A2+$B$1', a1 + 17],
++    C2: '9', E1: '10', F1: ['=A2+B2+C1', 2 * a1 + 117], G1: ['=F1*2', 4 * a1 + 234],
++  };
++}
++
++function after(a1: number): Cells {
++  return {
++    A1: '', A2: '', B1: String(a1), C1: '7', B2: ['=B1+$E$1', a1 + 10], C2: ['=B2+$C$1', a1 + 17],
++    E1: '10', F1: ['=B2+C2+C1', 2 * a1 + 34], G1: ['=F1*2', 4 * a1 + 68],
++  };
++}
++
++async function prepare(page: Page) {
++  await openWorksheet(page, ['4\t7\t90\t\t10\t=A2+B2+C1\t=F1*2', '=A1+$E$1\t=A2+$B$1\t9\t\t\t\t'].join('\n'));
++  await expectCells(page, before(4));
++}
++
++async function roundTrip(page: Page, a1: number) {
++  await cutTo(page, 'B1');
++  await expectCells(page, after(a1));
++  await history(page, 'Undo');
++  await expectCells(page, before(a1));
++  await history(page, 'Redo');
++  await expectCells(page, after(a1));
++  await page.reload();
++  await expectCells(page, after(a1));
++}
++
++test('REQ-6.2: Move an overlapping rectangle without chasing rewritten references', async ({ page }) => {
++  await prepare(page);
++  await roundTrip(page, 4);
++});
++
++test('REQ-6.2: Validate an overlapping move against its calculated final values', async ({ page }) => {
++  await prepare(page);
++  await configureNumberValidation(page, 'C2', 'C2', '0', '20');
++  await cutTo(page, 'B1');
++  await expectRangeRejection(page, 20);
++  await expectCells(page, before(4));
++
++  await commitCellThroughFormulaBar(page, 'A1', '2');
++  await expectCells(page, before(2));
++  await roundTrip(page, 2);
++  await expectNumberRejected(page, 'C2', 21, 20);
++  await expectCells(page, after(2));
++});
+diff --git a/arc-bench/sheet/tests/support/transactional-cut.ts b/arc-bench/sheet/tests/support/transactional-cut.ts
+new file mode 100644
+index 0000000..61293af
+--- /dev/null
++++ b/arc-bench/sheet/tests/support/transactional-cut.ts
+@@ -0,0 +1,49 @@
++import { expect, type Page } from '@playwright/test';
++import { baseUrl, createBlankWorkbook, formulaBar, gridCell, selectCellRange, setClipboardText } from './e2e';
++import { expectCalculatedNumber, expectText } from './observations';
++
++export type Cells = Record<string, string | readonly [expression: string, result: number]>;
++
++export async function openWorksheet(page: Page, table: string) {
++  await page.goto(baseUrl());
++  await createBlankWorkbook(page);
++  await setClipboardText(page, table);
++  await gridCell(page, 'A1').click();
++  await page.keyboard.press('Control+V');
++}
++
++export async function expectCells(page: Page, cells: Cells) {
++  for (const [coordinate, value] of Object.entries(cells)) {
++    const cell = gridCell(page, coordinate);
++    if (typeof value === 'string') {
++      await expect(cell, coordinate).toHaveText(value);
++    } else {
++      const [formula, result] = value;
++      await expectCalculatedNumber(cell, result);
++      await cell.click();
++      await expect(formulaBar(page), coordinate).toHaveValue(formula);
++    }
++  }
++}
++
++export async function cutTo(page: Page, destination: string) {
++  await selectCellRange(page, 'A1', 'B2');
++  await page.keyboard.press('Control+X');
++  await gridCell(page, destination).click();
++  await page.keyboard.press('Control+V');
++}
++
++export async function history(page: Page, action: 'Undo' | 'Redo') {
++  await page.getByRole('button', { name: action, exact: true }).click();
++}
++
++export async function expectRangeRejection(page: Page, maximum: number) {
++  await expectText(page, `Please enter a number between 0 and ${maximum}`, { exact: true });
++}
++
++export async function expectNumberRejected(page: Page, coordinate: string, attempted: number, maximum: number) {
++  await gridCell(page, coordinate).click();
++  await formulaBar(page).fill(String(attempted));
++  await formulaBar(page).press('Enter');
++  await expectRangeRejection(page, maximum);
++}

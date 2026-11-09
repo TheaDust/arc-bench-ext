@@ -202,12 +202,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2599,
+                  "duration": 1274,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:33.455Z",
+                  "startTime": "2026-11-09T06:30:21.672Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -236,7 +236,7 @@
                   "workerIndex": 1,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1082,
+                  "duration": 895,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m\n    at branchState (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\support\\branch-state.ts:33:48)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:27:19",
@@ -260,7 +260,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:45.070Z",
+                  "startTime": "2026-11-09T06:30:29.846Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -300,10 +300,10 @@
                   "workerIndex": 2,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1772,
+                  "duration": 1528,
                   "error": {
-                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n",
-                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:40:24",
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:40:24",
                     "location": {
                       "file": "E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts",
                       "column": 24,
@@ -318,13 +318,13 @@
                         "column": 24,
                         "line": 40
                       },
-                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-69776-3yk15s', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  38 |   await page.reload();\n  39 |   const listed = page.getByRole('link', { name: repositoryName, exact: true });\n> 40 |   await expect(listed).toHaveCount(1);\n     |                        ^\n  41 |   await listed.click();\n  42 |   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();\n  43 |   expect(await branchState(page)).toEqual(initial);\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:40:24"
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveCount\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator:  getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\nExpected: \u001b[32m1\u001b[39m\nReceived: \u001b[31m0\u001b[39m\nTimeout:  400ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveCount\" with timeout 400ms\u001b[22m\n\u001b[2m  - waiting for getByRole('link', { name: 'pw-repository-33435-58hy3c', exact: true })\u001b[22m\n\u001b[2m    4 × locator resolved to 0 elements\u001b[22m\n\u001b[2m      - unexpected value \"0\"\u001b[22m\n\n\n  38 |   await page.reload();\n  39 |   const listed = page.getByRole('link', { name: repositoryName, exact: true });\n> 40 |   await expect(listed).toHaveCount(1);\n     |                        ^\n  41 |   await listed.click();\n  42 |   await expect(page.getByRole('heading', { name: new RegExp(repositoryName, 'i') })).toBeVisible();\n  43 |   expect(await branchState(page)).toEqual(initial);\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.1.spec.ts:40:24"
                     }
                   ],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:48.644Z",
+                  "startTime": "2026-11-09T06:30:32.639Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -372,12 +372,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2140,
+                  "duration": 1819,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:37.118Z",
+                  "startTime": "2026-11-09T06:30:23.430Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -406,7 +406,7 @@
                   "workerIndex": 3,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1227,
+                  "duration": 1286,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 4\u001b[39m\n\u001b[31m+ Received  + 0\u001b[39m\n\n\u001b[33m@@ -17,13 +17,9 @@\u001b[39m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[32m-     Array [\u001b[39m\n\u001b[32m-       \"src/README.md\",\u001b[39m\n\u001b[32m-       \"Document search flow\",\u001b[39m\n\u001b[32m-     ],\u001b[39m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"head\": \"source-2\",\u001b[22m\n\u001b[2m    \"owner\": \"fork-user\",\u001b[22m\n\u001b[2m  }\u001b[22m\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:37:35",
@@ -430,7 +430,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:53.008Z",
+                  "startTime": "2026-11-09T06:30:36.106Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -470,7 +470,7 @@
                   "workerIndex": 4,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 2317,
+                  "duration": 2048,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[33m@@ -1,9 +1,15 @@\u001b[39m\n\u001b[2m  Object {\u001b[22m\n\u001b[2m    \"branch\": \"main\",\u001b[22m\n\u001b[2m    \"commits\": Array [\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[31m+       \"fork-3\",\u001b[39m\n\u001b[31m+       \"source-2\",\u001b[39m\n\u001b[31m+       \"fork-user\",\u001b[39m\n\u001b[31m+       \"Change fork independently\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     Array [\u001b[39m\n\u001b[2m        \"source-1\",\u001b[22m\n\u001b[2m        \"\",\u001b[22m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Initialize acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[33m@@ -13,17 +19,21 @@\u001b[39m\n\u001b[2m        \"alice-dev\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[2m    \"files\": Array [\u001b[22m\n\u001b[31m+     Array [\u001b[39m\n\u001b[31m+       \"fork-only.md\",\u001b[39m\n\u001b[31m+       \"Independent fork content\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"README.md\",\u001b[22m\n\u001b[2m        \"Acme docs\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m      Array [\u001b[22m\n\u001b[2m        \"src/README.md\",\u001b[22m\n\u001b[2m        \"Document search flow\",\u001b[22m\n\u001b[2m      ],\u001b[22m\n\u001b[2m    ],\u001b[22m\n\u001b[32m-   \"head\": \"source-2\",\u001b[39m\n\u001b[31m+   \"head\": \"fork-3\",\u001b[39m\n\u001b[2m    \"owner\": \"repo-owner\",\u001b[22m\n\u001b[2m  }\u001b[22m\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-3.2.2.spec.ts:56:35",
@@ -494,7 +494,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:57.045Z",
+                  "startTime": "2026-11-09T06:30:39.239Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -542,12 +542,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2371,
+                  "duration": 1784,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:39.292Z",
+                  "startTime": "2026-11-09T06:30:25.268Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -576,12 +576,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 1580,
+                  "duration": 1363,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:12:41.681Z",
+                  "startTime": "2026-11-09T06:30:27.063Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -610,7 +610,7 @@
                   "workerIndex": 5,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1648,
+                  "duration": 1559,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"\u001b[7mmerg\u001b[27me-1\"\u001b[39m\nReceived: \u001b[31m\"\u001b[7mbas\u001b[27me-1\"\u001b[39m\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:38:25",
@@ -634,7 +634,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:13:02.195Z",
+                  "startTime": "2026-11-09T06:30:43.206Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -674,7 +674,7 @@
                   "workerIndex": 6,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1790,
+                  "duration": 1555,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 1\u001b[39m\n\u001b[31m+ Received  + 1\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"base-1\",\u001b[39m\n\u001b[2m    \"compare-1\",\u001b[22m\n\u001b[31m+   \"base-1\",\u001b[39m\n\u001b[2m  ]\u001b[22m\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:43:58",
@@ -698,7 +698,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:13:06.545Z",
+                  "startTime": "2026-11-09T06:30:46.636Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -738,7 +738,7 @@
                   "workerIndex": 7,
                   "parallelIndex": 0,
                   "status": "failed",
-                  "duration": 1492,
+                  "duration": 1561,
                   "error": {
                     "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m",
                     "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m4\u001b[39m\nReceived: \u001b[31m3\u001b[39m\n    at branchState (E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\support\\branch-state.ts:31:50)\n    at E:\\my-works\\coding\\arc-bench-ext\\arc-bench\\github\\tests\\REQ-6.5.spec.ts:76:12",
@@ -762,7 +762,7 @@
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-11-08T12:13:10.995Z",
+                  "startTime": "2026-11-09T06:30:50.085Z",
                   "annotations": [],
                   "attachments": [
                     {
@@ -791,8 +791,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-08T12:12:31.878Z",
-    "duration": 41686.975,
+    "startTime": "2026-11-09T06:30:20.519Z",
+    "duration": 31930.616,
     "expected": 4,
     "skipped": 0,
     "unexpected": 7,
