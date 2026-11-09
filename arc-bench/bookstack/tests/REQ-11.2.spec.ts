@@ -1,7 +1,7 @@
 // requirement: REQ-11.2
 import { test, expect, type Page } from '@playwright/test';
 import { createBook, createChapter, createPageInChapter, enter, entry, expectAbsentEntry, favorite, heading,
-  home, identity, login, openBook, openChapter, openPageInChapter, records, region, text } from './helpers';
+  home, identity, login, openBook, openChapter, openPageInChapter, openUrl, records, region, text } from './helpers';
 import { chapterRecord, expectBreadcrumb, expectReading, moveContent } from './support/page-revisions';
 
 const movedDescription = 'Source chapter with original pages.';
@@ -39,7 +39,7 @@ test('REQ-11.2: Move a chapter without changing its pages', async ({ page }, inf
   await expect(entry(region(page, 'Page list'), title)).toHaveCount(1);
   await entry(region(page, 'Page list'), title).click();
   await expectReading(page, title, originalBody);
-  await page.goto(readingUrl);
+  await openUrl(page, readingUrl);
   await expectReading(page, title, originalBody);
   await expectBreadcrumb(page, target, chapter, source);
 });
@@ -95,7 +95,7 @@ test('REQ-11.2: Move a same-title chapter and preserve its order and references'
   await expectReading(page, title, originalBody);
   await expectBreadcrumb(page, target, chapter, source);
   await expect(entry(chapterNav, followup)).toHaveCount(1);
-  await page.goto(readingUrl);
+  await openUrl(page, readingUrl);
   await expectReading(page, title, originalBody);
   for (const area of ['My Most Viewed Favorites', 'My Recently Viewed']) {
     await home(page);

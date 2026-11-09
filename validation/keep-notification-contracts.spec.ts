@@ -27,10 +27,11 @@ test('Keep rejects wrong-role, hidden-status and hidden-message notifications', 
   await expect(notice(page, 'Note deleted')).toHaveCount(0);
 });
 
-test('Keep rejects duplicate notification identities', async ({ page }) => {
+test('Keep accepts repeated notification feedback while action scoping stays strict', async ({ page }) => {
   await page.setContent(`<div role="status"><span>Note deleted</span><button>Undo</button></div>
     <div role="status"><span>Note deleted</span><button>Undo</button></div>`);
-  await expect(expectNotice(page, 'Note deleted')).rejects.toThrow();
+  await expectNotice(page, 'Note deleted');
+  await expect(action(notice(page, 'Note deleted'), 'Undo').click()).rejects.toThrow(/strict mode/);
 });
 
 test('Keep scopes notification actions to the matching message', async ({ page }) => {

@@ -1,0 +1,15 @@
+{
+  "strictTasks": [
+    "keep",
+    "bookstack"
+  ],
+  "rules": {
+    "requirement-header": "error",
+    "live-region-name": "error",
+    "direct-navigation": "error",
+    "timed-wait": "error",
+    "focused-test": "error",
+    "message-traceability": "error",
+    "arbitrary-index": "warning"
+  }
+}

@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-08-keep-bookstack-lifecycle-transaction-guards`
+> 当前修订：`2026-11-09-sheet-requirements-r1`
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -34,13 +34,13 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-08-keep-bookstack-lifecycle-transaction-guards` |
-| 父版本 | `2026-11-08-keep-bookstack-lifecycle-interactions`（合并 `2026-11-08-sheet-github-transaction-guards`） |
+| 修订 | `2026-11-09-sheet-requirements-r1` |
+| 父版本 | `2026-11-09-keep-bookstack-observation-fixes` |
 | 需求 / 场景 | 423 / 759 |
-| 质量状态 | 已验证输入、收集与公开合同；新业务场景待候选执行 |
+| 质量状态 | Sheet 需求第一轮打磨完成；静态检查通过，测试待对齐与执行 |
 | 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
-| 本轮新增业务场景 | 31 个（Keep 16、BookStack 7、Sheet 4、GitHub 4），尚未对真实候选执行 |
-| 历史参考验证 | 父版 BookStack 49/49；不计入本轮 |
+| 本轮变更 | Sheet 共享状态与操作语义澄清；五个已有场景补齐明确输入和预期；需求输入域仍有未决项 |
+| 历史参考验证（修复前） | 父版 BookStack 49/49；观测修复在既有 `pi` 候选定向复验：BookStack 5/5（REQ-11.1/11.3），Keep 7/7（REQ-2.4/6.4）；BookStack REQ-5.4 Cancel 仍为真实实现缺陷 |
 | 验证记录 | [validation.json](validation.json)、[父版记录](validation/history/2026-11-07-bookstack-lifecycle/README.md) |
 
 本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量；完整产品行为与模型区分度尚需实际执行，具体边界见 [QUALITY.md](QUALITY.md) 与 [audit/README.md](audit/README.md)。
@@ -61,6 +61,7 @@ arc-bench-ext/
 ├── revision.json          # 冻结清单：任务、文件哈希、修订信息
 ├── validation.json        # 本版验证结果
 ├── CHANGES.md             # 修订历史
+├── TESTING.md             # 观测合同、共享 helper、静态策略与扩展清单
 ├── QUALITY.md             # 质量与证据边界
 ├── CONSISTENCY.md         # 历史一致性收口记录
 ├── UPSTREAM.md            # 上游来源与同步策略
@@ -105,16 +106,26 @@ npm install --no-audit --no-fund
 npx playwright install chromium
 npm run typecheck
 npm run test:contracts
+npm run test:policy
 npm run test:collect
 npm run test:inputs
 npm run test:closeout
 ```
+
+单个题目对参考实现或候选应用做定向回归：
+
+```powershell
+node validation/run-task-suite.mjs <task> <base-url> [--grep <pattern>]
+```
+
+该入口共用一个应用实例，只用于观测合同与定向修复；正式计分使用 `evaluate-project.mjs` 的逐场景隔离协议。详见 [TESTING.md](TESTING.md)。
 
 这些检查覆盖类型、场景收集、输入完整性、公共控件合同和合成应用探针；它们不能替代 8 题真实应用的完整业务重验。
 
 ## 文档
 
 - [UPSTREAM.md](UPSTREAM.md)：上游来源、导入 commit、同步策略
+- [TESTING.md](TESTING.md)：观测合同、共享通知/导航 helper、静态策略和扩展清单
 - [CHANGES.md](CHANGES.md)：逐轮修订记录
 - [QUALITY.md](QUALITY.md)：质量状态、证据范围和限制
 - [CONSISTENCY.md](CONSISTENCY.md)：历史一致性收口记录
@@ -129,7 +140,7 @@ npm run test:closeout
 
 - 上游：<https://github.com/code-philia/arc-bench>
 - 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`
-- 本仓库当前修订：`2026-11-08-keep-bookstack-lifecycle-transaction-guards`
+- 本仓库当前修订：`2026-11-09-sheet-requirements-r1`
 
 上游快照中没有 `LICENSE` 文件；本仓库目前也没有单独声明开源许可证。公开分发或再利用上游材料前，请先确认上游作者的授权。详见 [NOTICE](NOTICE) 和 [UPSTREAM.md](UPSTREAM.md)。
 

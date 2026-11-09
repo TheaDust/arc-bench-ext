@@ -5,8 +5,8 @@
 - Upstream repository: <https://github.com/code-philia/arc-bench>
 - Imported source commit: `e59696bbc68578c3b3da1ad47f9a0ac07e581184`
 - Imported on: 2026-11-07
-- Current revision: `2026-11-08-keep-bookstack-lifecycle-interactions`
-- Parent revision: `2026-11-07-bookstack-lifecycle`
+- Current revision: `2026-11-09-sheet-requirements-r1`
+- Parent revision: `2026-11-09-keep-bookstack-observation-fixes`
 
 ## Relationship
 

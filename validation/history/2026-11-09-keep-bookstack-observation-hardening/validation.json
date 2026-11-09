@@ -1,0 +1,312 @@
+{
+  "revision": "2026-11-09-keep-bookstack-observation-hardening",
+  "parentRevision": "2026-11-08-keep-bookstack-lifecycle-transaction-guards",
+  "mergedRevision": "2026-11-08-sheet-github-transaction-guards",
+  "manifestSha256": "657b5ecfa0f9d99086bc5bb9946e7c9ce7d49f98a2e82404d1b7656a1ec2da3d",
+  "recordedAt": "2026-11-09T13:42:56.454Z",
+  "status": "observation-hardening-contracts-verified-candidate-execution-pending",
+  "scope": {
+    "tasks": 8,
+    "atomicRequirements": 423,
+    "scenarios": 759,
+    "preservedExistingScenarioIdsAndContent": true,
+    "mergedExtensions": {
+      "keepLifecycle": {
+        "atomicRequirements": 2,
+        "scenarios": 8
+      },
+      "keepInteractions": {
+        "atomicRequirements": 4,
+        "scenarios": 8
+      },
+      "bookstackInteractions": {
+        "atomicRequirements": 3,
+        "scenarios": 7
+      },
+      "sheetTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      },
+      "githubTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      }
+    },
+    "observationStrengthening": {
+      "task": "bookstack",
+      "scenarios": 3
+    }
+  },
+  "typecheck": {
+    "passed": true,
+    "command": "npm run typecheck"
+  },
+  "collection": {
+    "passed": true,
+    "scenarios": 759,
+    "extensionTitlesMatched": 23,
+    "lifecycleScenarioCountsMatched": 8,
+    "report": "validation/collection-report.json"
+  },
+  "sourceIntegrity": {
+    "passed": true,
+    "command": "npm run test:collect",
+    "tasks": 8,
+    "requirements": 423,
+    "scenarios": 759,
+    "frozenFiles": 762,
+    "collectionChecked": true,
+    "lfAndCrlfCheckoutAccepted": true,
+    "binaryAndChangedTextRejected": true
+  },
+  "contracts": {
+    "passed": 110,
+    "failed": 0,
+    "skipped": 0,
+    "newInteractionContractsPassed": 5,
+    "newNotificationContractsPassed": 8,
+    "newTransactionGuardContractsPassed": 3,
+    "report": "validation/contracts-report.json",
+    "newObservationContractsPassed": 21
+  },
+  "closeout": {
+    "positivePassed": 14,
+    "mutantsRejected": 14,
+    "report": "validation/closeout/summary.json",
+    "recordsReport": "validation/closeout/records-summary.json"
+  },
+  "componentEvidence": {
+    "2026-11-08-keep-lifecycle": {
+      "sourceReview": "validation/lifecycle-static.json",
+      "boundary": "The component input was statically reviewed and typechecked at the user's request without Playwright or browser execution; that limitation does not transfer a pass to the merged input."
+    },
+    "2026-11-08-keep-notification-oracle": {
+      "report": "validation/keep-notification-oracle.json",
+      "contracts": "8/8",
+      "targetedScenarios": {
+        "shallow": "16/16",
+        "baseline": "16/16"
+      },
+      "fullSuiteRerun": false
+    },
+    "2026-11-08-keep-bookstack-interactions": {
+      "closeout": "Re-executed on the merged input: 14 positive passed, 14 mutants rejected.",
+      "experimentPrepare": {
+        "passed": true,
+        "tasks": {
+          "keep": 41,
+          "bookstack": 56
+        },
+        "methods": [
+          "baseline",
+          "shallow"
+        ],
+        "modelCalled": false,
+        "inherited": true
+      },
+      "independentEvaluationInputChecks": {
+        "passed": true,
+        "tasks": [
+          "keep",
+          "bookstack"
+        ],
+        "scope": "Controller/task digests and output directory guard only",
+        "inherited": true
+      },
+      "reportingFixtures": {
+        "passed": true,
+        "tasks": [
+          "keep",
+          "bookstack"
+        ],
+        "checked": [
+          "complete denominators",
+          "passed",
+          "failed",
+          "skipped",
+          "not_run"
+        ],
+        "inherited": true
+      }
+    },
+    "2026-11-08-sheet-github-transaction-guards": {
+      "sourceReview": "audit/transaction-guards.md",
+      "contracts": "3/3",
+      "experimentPrepare": {
+        "passed": true,
+        "tasks": {
+          "sheet": 104,
+          "github": 104
+        },
+        "methods": [
+          "baseline",
+          "shallow"
+        ],
+        "modelCalled": false,
+        "inherited": true
+      },
+      "reportingFixtures": {
+        "passed": true,
+        "tasks": [
+          "sheet",
+          "github"
+        ],
+        "checked": [
+          "complete denominators",
+          "partial runs",
+          "empty basic group"
+        ],
+        "inherited": true
+      },
+      "candidateExecution": "Not executed; the merged collection and contracts were rerun, but the 8 new business scenarios have no candidate or reference-application result."
+    }
+  },
+  "oracleCorrections": [
+    {
+      "id": "2026-11-08-keep-notification-oracle",
+      "task": "keep",
+      "files": [
+        "arc-bench/keep/tests/helpers.ts",
+        "validation/keep-notification-contracts.spec.ts"
+      ],
+      "requirementsChanged": false,
+      "identitiesAndDenominatorPreserved": true,
+      "description": "Match status by exact visible message and require a unique visible notification; scope actions to it.",
+      "validation": "validation/keep-notification-oracle.json"
+    },
+    {
+      "id": "2026-11-09-keep-bookstack-observation-hardening",
+      "task": "keep/bookstack",
+      "files": [
+        "arc-bench/keep/tests/helpers.ts",
+        "arc-bench/keep/tests/support/observable.ts",
+        "arc-bench/keep/tests/REQ-6.4.spec.ts",
+        "arc-bench/bookstack/tests/helpers.ts",
+        "arc-bench/bookstack/tests/support/observable.ts",
+        "arc-bench/bookstack/tests/REQ-11.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-11.2.spec.ts",
+        "arc-bench/bookstack/tests/REQ-11.3.spec.ts",
+        "arc-bench/bookstack/tests/REQ-5.5.spec.ts",
+        "arc-bench/bookstack/tests/REQ-10.1.spec.ts",
+        "arc-bench/bookstack/tests/REQ-10.2.spec.ts",
+        "validation/observable-contracts.ts",
+        "validation/observable-contracts.spec.ts",
+        "validation/navigation-contracts.spec.ts",
+        "validation/keep-notification-contracts.spec.ts"
+      ],
+      "requirementsChanged": false,
+      "identitiesAndDenominatorPreserved": true,
+      "description": "Live regions use the exact declared visible message instead of an undeclared accessible name; repeated feedback is accepted; saved URLs reload on identical or hash-only navigation.",
+      "validation": "validation.json"
+    }
+  ],
+  "applications": {
+    "generated": false,
+    "modified": false,
+    "newBusinessScenariosExecuted": 0,
+    "completeBusinessScenariosExecuted": 0,
+    "referenceFixtureScenariosExecuted": 0,
+    "pairedExperimentExecuted": false,
+    "targetedObservationRecheck": {
+      "bookstack": {
+        "candidate": "pi",
+        "scenarios": 5,
+        "passed": 5,
+        "failed": 0
+      },
+      "keep": {
+        "candidate": "pi",
+        "scenarios": 7,
+        "passed": 7,
+        "failed": 0
+      },
+      "method": "validation/run-task-suite.mjs"
+    }
+  },
+  "controllerSourceModifiedByThisReview": false,
+  "parentValidation": {
+    "commit": "7226dd96c6e1890401f6d767b3c4855ad92d05e3",
+    "path": "validation.json"
+  },
+  "inheritedEvidence": {
+    "revision": "2026-11-07-bookstack-lifecycle",
+    "manifest": "validation/history/2026-11-07-bookstack-lifecycle/revision.json",
+    "validation": "validation/history/2026-11-07-bookstack-lifecycle/validation.json",
+    "boundary": "Parent BookStack 49/49 and contract reports retain their original input provenance. No changed or new scenario inherits a pass."
+  },
+  "limitations": [
+    "Browser contracts and prepared catalogs do not establish that any candidate passes the 31 new business scenarios.",
+    "New and strengthened scenarios are not browser-executed against real applications; runtime feasibility, timeout budget and model difficulty remain unmeasured.",
+    "Source-level mapping and typecheck do not establish zero false positives or false negatives.",
+    "Experiment preparation, independent evaluation input checks and reporting fixtures were verified on the component revisions and were not rerun after merging.",
+    "New public contracts and changed requirements require identical versioned inputs for all methods; old scores do not transfer.",
+    "Known per-task observation boundaries remain documented in audit/bookstack.md, audit/keep.md and audit/transaction-guards.md.",
+    "Do not compare scores from this revision directly with historical denominators.",
+    "Observation hardening was not followed by a full per-scenario re-evaluation of all methods; the shared-instance suite is not a score.",
+    "expectNotice/expectAlert currently require a contiguous visible text node; inline markup that splits the message is outside the accepted variants."
+  ],
+  "requirementTestConsistency": {
+    "reviewedScenarios": 8,
+    "reviewedParts": [
+      "Given",
+      "When",
+      "Then"
+    ],
+    "mapping": "audit/transaction-guards.md",
+    "exactTitlesMatchedInExperimentCatalog": true,
+    "strengthened": [
+      "validation rule retention and rejected-edit rollback",
+      "unchanged branches immediately after rejected review",
+      "direct grants before and after team downgrade",
+      "commit graph before and after second merge confirmation"
+    ]
+  },
+  "observationHardening": {
+    "template": "validation/observable-contracts.ts",
+    "copies": [
+      "arc-bench/keep/tests/support/observable.ts",
+      "arc-bench/bookstack/tests/support/observable.ts"
+    ],
+    "policy": {
+      "config": "validation/oracle-policy.json",
+      "report": "validation/oracle-policy-report.json",
+      "strictTasks": [
+        "keep",
+        "bookstack"
+      ],
+      "errors": 0,
+      "warnings": 90
+    },
+    "contracts": [
+      "validation/observable-contracts.spec.ts",
+      "validation/navigation-contracts.spec.ts",
+      "validation/keep-notification-contracts.spec.ts"
+    ],
+    "auditContracts": {
+      "passed": 175,
+      "failed": 0
+    },
+    "targetedCandidate": {
+      "bookstack": {
+        "candidate": "pi",
+        "scenarios": [
+          "REQ-11.1",
+          "REQ-11.3"
+        ],
+        "passed": 5,
+        "failed": 0,
+        "remainingFailure": "REQ-5.4 Cancel metadata changes (genuine implementation defect)"
+      },
+      "keep": {
+        "candidate": "pi",
+        "scenarios": [
+          "REQ-2.4",
+          "REQ-6.4"
+        ],
+        "passed": 7,
+        "failed": 0
+      }
+    },
+    "boundary": "The shared-instance full suite is not a per-scenario score; it showed 51/56 with cross-scenario favorite-cap pollution."
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "revision": "2026-11-09-keep-bookstack-observation-fixes",
+  "parentRevision": "2026-11-09-keep-bookstack-observation-hardening",
+  "manifestSha256": "f803f12748c830ae7b9207a6e6d3f589bf7f563eb2cc1207f40c5deb15c926bf",
+  "recordedAt": "2026-11-09T14:40:21.104Z",
+  "status": "static-review-complete-runtime-validation-not-run",
+  "scope": {
+    "tasks": 8,
+    "atomicRequirements": 423,
+    "scenarios": 759,
+    "preservedExistingScenarioIdsAndContent": true,
+    "mergedExtensions": {
+      "keepLifecycle": {
+        "atomicRequirements": 2,
+        "scenarios": 8
+      },
+      "keepInteractions": {
+        "atomicRequirements": 4,
+        "scenarios": 8
+      },
+      "bookstackInteractions": {
+        "atomicRequirements": 3,
+        "scenarios": 7
+      },
+      "sheetTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      },
+      "githubTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      }
+    },
+    "observationStrengthening": {
+      "task": "bookstack",
+      "scenarios": 3
+    }
+  },
+  "testsExecuted": false,
+  "reason": "User requested implementation without rerunning tests.",
+  "contracts": {
+    "status": "not-run",
+    "passed": null,
+    "failed": null,
+    "report": null,
+    "addedCases": 14,
+    "source": "validation/observable-contracts.spec.ts"
+  },
+  "historicalEvidence": {
+    "manifest": "validation/history/2026-11-09-keep-bookstack-observation-hardening/revision.json",
+    "validation": "validation/history/2026-11-09-keep-bookstack-observation-hardening/validation.json",
+    "reportedContractsPassed": 110,
+    "fullContractsReportAvailable": false,
+    "overwrittenByProbe": "validation/history/2026-11-09-keep-bookstack-observation-hardening/probe-contracts-report.json",
+    "boundary": "Historical claims are retained as recorded and are not results for this revision."
+  },
+  "staticChecks": {
+    "typecheck": {
+      "passed": true,
+      "command": "npm run typecheck"
+    },
+    "runnerSyntax": {
+      "passed": true,
+      "command": "node --check validation/run-task-suite.mjs"
+    },
+    "frozenManifest": {
+      "passed": true,
+      "files": 766
+    },
+    "standaloneHelpers": {
+      "passed": true,
+      "copies": [
+        "keep",
+        "bookstack"
+      ]
+    }
+  },
+  "applications": {
+    "generated": false,
+    "modified": false,
+    "businessScenariosExecuted": 0
+  },
+  "limitations": [
+    "The changed selector engine and added contracts have not been executed.",
+    "No complete report supporting the parent 110/110 claim could be recovered from the workspace."
+  ]
+}

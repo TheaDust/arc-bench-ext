@@ -1,10 +1,32 @@
 # Benchmark 质量与验收边界
 
-当前修订 `2026-11-08-keep-bookstack-lifecycle-transaction-guards`，由 `2026-11-08-keep-bookstack-lifecycle-interactions` 与 `2026-11-08-sheet-github-transaction-guards` 合并而来。全库 **423 条原子需求、759 个场景**：Keep 22/49，BookStack 29/56，Sheet 26/104，GitHub 49/104。Keep 生命周期扩展（REQ-2.10/REQ-2.11 与 8 个场景）和 Keep/BookStack 组合约束扩展（7 条原子需求、15 个场景）见 [audit/interactions.md](audit/interactions.md)、[audit/keep.md](audit/keep.md)、[audit/bookstack.md](audit/bookstack.md)；Sheet/GitHub 事务守卫扩展（4 条原子需求、8 个场景）见 [audit/transaction-guards.md](audit/transaction-guards.md)。八题既有审查、定向修订与限制见 [audit/README.md](audit/README.md)。
+## 2026-11-09: Sheet 需求打磨第一轮
 
-## 当前证据
+修订 `2026-11-09-sheet-requirements-r1`，父版本 `2026-11-09-keep-bookstack-observation-fixes`。Sheet 保持 26 条原子需求、104 个场景；全库保持 423/759。澄清插入位置、存储公式与计算结果、剪切外部引用、历史事务边界、筛选与排序关系及 pivot 已应用状态；五个已有场景补齐坐标、数据和总计。测试尚未对齐或执行；对 OpenCode 的区分度尚未测量。审查与未决输入域见 [Sheet 需求记录](audit/sheet-requirements-20261109.md)。历史结果不转移。
 
-本轮完成源码语义审查、YAML 身份/引用核对、场景与测试标题映射、类型检查、全部场景收集和公开合同回归。新增业务场景（Keep 16 个、BookStack 7 个、Sheet 4 个、GitHub 4 个）尚未对真实候选执行，状态为 `inputs-and-contracts-verified-candidate-execution-pending`。合同与收集只证明输入、身份和公开观察边界，不证明新增行为已通过或已量化难度。浏览器合同只验证可观察断言边界，不能替代新题面的候选应用执行。
+
+## 2026-11-09: Keep / BookStack 观测复核修正
+
+修订 `2026-11-09-keep-bookstack-observation-fixes`，父版本 `2026-11-09-keep-bookstack-observation-hardening`。需求与场景分母保持 423/759。消息匹配支持内联标签拆分，排除隐藏及 aria-hidden 内容和按钮文案；新增相应正反例合同用例。单题套件拒绝已有输出目录；合同报告逐次保存到 validation/.tmp，避免临时探针覆盖完整结果。父版 110/110 完整报告未找到可恢复副本，原声明和覆盖它的探针单独归档。按用户要求未运行测试；当前修改的运行时结果待验证，历史通过数不转移。
+
+
+## 历史记录：2026-11-09 观测合同加固
+
+历史修订 `2026-11-09-keep-bookstack-observation-hardening`，父版本 `2026-11-08-keep-bookstack-lifecycle-transaction-guards`。本版不改变需求、场景或分母，只修正 Keep/BookStack 的观测合同：
+
+- `status` / `alert` 按需求声明的角色和精确可见消息定位，不再要求需求未声明的 accessible name；重复通知允许存在，动作作用域仍保持唯一。
+- 保存 URL 通过 `openUrl` 重新打开；相同 URL 或仅 hash 变化会显式重新加载，修复 hash 路由下不刷新导致的假阴性。
+- 新增 `validation/observable-contracts.ts` 模板、Keep/BookStack 独立副本、通知与导航正反例合同，以及 `npm run test:policy` 静态策略。Keep 与 BookStack 为严格题目，当前 0 error；其余题目的 90 条 warning 作为迁移清单。
+- 验证结果：`npm run test:contracts` 110/110，`audit/validation` 175/175。既有 `pi` 候选在定向隔离检查中 BookStack REQ-11.1/REQ-11.3 共 5/5、Keep REQ-2.4/REQ-6.4 共 7/7 通过；BookStack REQ-5.4 Cancel 仍失败，属于真实实现缺陷。共享单实例全量运行出现收藏上限等跨场景污染，不作为 56 场景分数。
+- 边界：尚未用逐场景隔离协议对三种方法全量重评；`expectNotice` / `expectAlert` 目前要求连续可见文本节点，拆分布局不在接受范围；合同与静态策略不证明所有合法 UI 变体均被接受。
+
+---
+
+父版本 `2026-11-08-keep-bookstack-lifecycle-transaction-guards`，由 `2026-11-08-keep-bookstack-lifecycle-interactions` 与 `2026-11-08-sheet-github-transaction-guards` 合并而来。全库 **423 条原子需求、759 个场景**：Keep 22/49，BookStack 29/56，Sheet 26/104，GitHub 49/104。Keep 生命周期扩展（REQ-2.10/REQ-2.11 与 8 个场景）和 Keep/BookStack 组合约束扩展（7 条原子需求、15 个场景）见 [audit/interactions.md](audit/interactions.md)、[audit/keep.md](audit/keep.md)、[audit/bookstack.md](audit/bookstack.md)；Sheet/GitHub 事务守卫扩展（4 条原子需求、8 个场景）见 [audit/transaction-guards.md](audit/transaction-guards.md)。八题既有审查、定向修订与限制见 [audit/README.md](audit/README.md)。
+
+## 父版本证据
+
+以下为父版本记录，不作为当前修订的执行结果。本轮完成源码语义审查、YAML 身份/引用核对、场景与测试标题映射、类型检查、全部场景收集和公开合同回归。新增业务场景（Keep 16 个、BookStack 7 个、Sheet 4 个、GitHub 4 个）尚未对真实候选执行，状态为 `inputs-and-contracts-verified-candidate-execution-pending`。合同与收集只证明输入、身份和公开观察边界，不证明新增行为已通过或已量化难度。浏览器合同只验证可观察断言边界，不能替代新题面的候选应用执行。
 
 Keep 通知定位的 oracle 修正按 role=status 与精确可见消息定位，另有 8/8 合同和原 Shallow、baseline 应用各 16/16 定向复评；该修正不改变需求、场景身份或分母。
 

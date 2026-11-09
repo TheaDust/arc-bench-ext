@@ -2,7 +2,7 @@
 import { test, expect } from '@playwright/test';
 import { expectAbsentEntry, identity, enter, region, entry, button, heading, text, go, createBook, createShelf,
   createShelfBook, createChapter, createPage, createPageInChapter, favorite, home, login, openBook, openChapter,
-  openPage, openPageInChapter, openShelf, expectUnavailablePage } from './helpers';
+  openPage, openPageInChapter, openShelf, expectUnavailablePage, openUrl } from './helpers';
 
 test("REQ-5.5: Confirm deletion", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -84,14 +84,14 @@ test("REQ-5.5: Delete contained chapters and pages", async ({ page }, testInfo) 
   await expectAbsentEntry(region(page, 'Book list'), book);
   await expect(entry(region(page, 'Book list'), other)).toHaveCount(1);
   for (const saved of pageUrls) {
-    await page.goto(saved.url);
+    await openUrl(page, saved.url);
     await expectUnavailablePage(page, saved.title, saved.body);
     await page.reload();
     await expectUnavailablePage(page, saved.title, saved.body);
   }
-  await page.goto(chapterUrl);
+  await openUrl(page, chapterUrl);
   await expect(page.getByRole('heading', { name: chapter, exact: true })).toHaveCount(0);
-  await page.goto(bookUrl);
+  await openUrl(page, bookUrl);
   await expect(page.getByRole('heading', { name: book, exact: true })).toHaveCount(0);
   await openBook(page, other);
   await text(page, 'Book created by corresponding prerequisite behavior.');

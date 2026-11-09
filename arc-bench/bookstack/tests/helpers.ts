@@ -1,6 +1,7 @@
 import { formField } from './support/public-controls';
 import { expect, type Browser, type Locator, type Page, type TestInfo } from '@playwright/test';
 import { randomBytes } from 'node:crypto';
+export { alertMessage, expectAlert, expectNotice, liveRegion, notice, openUrl, reopen, visibleMessage } from './support/observable';
 
 const runId = randomBytes(8).toString('hex');
 

@@ -29,7 +29,7 @@ test('keep duplicate named note or action remains ambiguous', async ({ page }) =
 });
 
 test('keep multiple independently created notifications may have the same feedback', async ({ page }) => {
-  await page.setContent('<p role="status" aria-label="Note deleted">Deleted Project</p><p role="status" aria-label="Note deleted">Deleted Other</p>');
+  await page.setContent('<p role="status">Note deleted</p><p role="status">Note deleted</p>');
   await expectNotice(page, 'Note deleted');
 });
 

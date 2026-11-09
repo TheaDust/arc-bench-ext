@@ -7,3 +7,5 @@ docker-output/
 .env
 .env.*
 project/
+validation/.tmp/
+validation/suites/

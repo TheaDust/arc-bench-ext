@@ -1,7 +1,7 @@
 // requirement: REQ-11.1
 import { test, expect, type Locator, type Page } from '@playwright/test';
-import { button, createBook, createPage, enter, entry, expectAbsentEntry, favorite, home, identity, login, named,
-  newContextFor, openBook, openPage, region, REVIEWER_ACCOUNT } from './helpers';
+import { button, createBook, createPage, enter, entry, expectAbsentEntry, expectNotice, favorite, home, identity, login,
+  named, newContextFor, openBook, openPage, openUrl, region, REVIEWER_ACCOUNT } from './helpers';
 import { editPage, expectEditor, expectReading, fillEditor, openRevision, pageConflict } from './support/page-revisions';
 
 const v1 = 'Initial public body';
@@ -27,7 +27,7 @@ async function expectSearch(page: Page, title: string, present: boolean) {
 async function saveRevision(page: Page, title: string, body: string) {
   await fillEditor(page, title, body);
   await button(page, 'Save Draft').click();
-  await expect(page.getByRole('status', { name: 'Revision draft saved', exact: true })).toBeVisible();
+  await expectNotice(page, 'Revision draft saved');
   await home(page);
   await expect(entry(region(page, 'My Recent Drafts'), title)).toHaveCount(1);
 }
@@ -60,7 +60,7 @@ test('REQ-11.1: Keep a saved revision private until its author publishes', async
   await favorite(page);
   const reader = await newContextFor(browser, baseURL!);
   try {
-    await reader.page.goto(readingUrl);
+    await openUrl(reader.page, readingUrl);
     await expectReading(reader.page, original, v1);
     await editPage(page, original, v1);
     await saveRevision(page, revised, v2);
@@ -80,7 +80,7 @@ test('REQ-11.1: Keep a saved revision private until its author publishes', async
     await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), original);
     await saved.click();
     await expectReading(page, revised, v2);
-    await reader.page.goto(readingUrl);
+    await openUrl(reader.page, readingUrl);
     await expectReading(reader.page, revised, v2);
     await expect(reader.page.getByText(v1, { exact: true })).toHaveCount(0);
     await expectPublicLists(reader.page, book, revised, original);
@@ -108,7 +108,7 @@ test("REQ-11.1: Keep a second author's revision private and reject its stale pub
   try {
     await editPage(page, original, v1);
     await saveRevision(page, revised, v2);
-    await reviewer.page.goto(readingUrl);
+    await openUrl(reviewer.page, readingUrl);
     await editPage(reviewer.page, original, v1);
     await saveRevision(reviewer.page, second, draftB);
     await page.reload();
@@ -120,7 +120,7 @@ test("REQ-11.1: Keep a second author's revision private and reject its stale pub
     await openBook(reviewer.page, book);
     await expectNoTitle(region(reviewer.page, 'Page list'), revised);
     await home(reviewer.page);
-    await reader.page.goto(readingUrl);
+    await openUrl(reader.page, readingUrl);
     await expectReading(reader.page, original, v1);
     await expectPublicLists(reader.page, book, original, revised, second);
     await openRevision(reviewer.page, second, draftB);
@@ -140,7 +140,7 @@ test("REQ-11.1: Keep a second author's revision private and reject its stale pub
     await expectEditor(reviewer.page, second, draftB);
     await home(reviewer.page);
     await openRevision(reviewer.page, second, draftB);
-    await reader.page.goto(readingUrl);
+    await openUrl(reader.page, readingUrl);
     await expectReading(reader.page, revised, v2);
     await expect(reader.page.getByText(draftB, { exact: true })).toHaveCount(0);
     await expectPublicLists(reader.page, book, revised, second);

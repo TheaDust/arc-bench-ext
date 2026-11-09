@@ -120,5 +120,12 @@ for (const task of Object.keys(revision.tasks).filter(task => task !== 'keep')) 
   assert.ok(canonicalBytes(copy, await readFile(copy)).equals(template),
     `${task}: standalone public controls diverged from the validated template`);
 }
+const observablePath = 'validation/observable-contracts.ts';
+const observable = canonicalBytes(observablePath, await readFile(resolve(root, observablePath)));
+for (const task of ['keep', 'bookstack']) {
+  const copy = resolve(root, 'arc-bench', task, 'tests/support/observable.ts');
+  assert.ok(canonicalBytes(copy, await readFile(copy)).equals(observable),
+    `${task}: standalone observable helpers diverged from the validated template`);
+}
 console.log(JSON.stringify(summary, null, 2));
 if (reportPath) await writeFile(resolve(reportPath), JSON.stringify(summary, null, 2) + '\n');

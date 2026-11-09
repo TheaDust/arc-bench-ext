@@ -4,6 +4,7 @@
   "scripts": {
     "typecheck": "tsc --project validation/tsconfig.json",
     "test:contracts": "playwright test --config validation/contracts.config.ts",
+    "test:policy": "node validation/lint-oracles.mjs",
     "test:inputs": "node validation/audit-inputs.mjs",
     "test:collect": "node validation/collect.mjs",
     "test:oracles": "node validation/oracle-probes/run-oracle-probes.mjs",

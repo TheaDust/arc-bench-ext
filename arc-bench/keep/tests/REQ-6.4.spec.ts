@@ -1,7 +1,7 @@
 // requirement: REQ-6.4
 import type { Page } from '@playwright/test';
 import { test, expect, action, editor, openHome, createNote, note, expectNote, deleteNote, navigate,
-  expectNoteInCollection } from './helpers';
+  expectNoteInCollection, expectAlert } from './helpers';
 import { identity } from './fixtures/data';
 import { closeNote, field, openNote } from './support/note-identity';
 
@@ -87,7 +87,7 @@ test('REQ-6.4: Reject a stale save after another tab deletes the note', async ({
   await expectNote(other, title, originalBody);
   await deleteNote(other, title);
   await action(editor(page), 'Close').click();
-  await expect(page.getByRole('alert', { name: 'Note deleted elsewhere', exact: true })).toBeVisible();
+  await expectAlert(page, 'Note deleted elsewhere');
   await expect(field(page, 'Content')).toHaveValue(unsaved);
   await action(editor(page), 'Discard changes').click();
   await expect(editor(page)).toBeHidden();

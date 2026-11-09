@@ -1,0 +1,863 @@
+{
+  "policy": "validation/oracle-policy.json",
+  "strictTasks": [
+    "keep",
+    "bookstack"
+  ],
+  "summary": {
+    "12306": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 0
+    },
+    "bookstack": {
+      "strict": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "ctrip": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 0
+    },
+    "github": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 58
+    },
+    "keep": {
+      "strict": true,
+      "errors": 0,
+      "warnings": 0
+    },
+    "prestashop": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 5
+    },
+    "sheet": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 27
+    },
+    "stackoverflow": {
+      "strict": false,
+      "errors": 0,
+      "warnings": 0
+    }
+  },
+  "errors": 0,
+  "warnings": 90,
+  "findings": [
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-1.2.spec.ts",
+      "line": 24,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(protectedUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.1.1.spec.ts",
+      "line": 6,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.1.2.spec.ts",
+      "line": 7,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.2.1.spec.ts",
+      "line": 7,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.2.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.2.3.spec.ts",
+      "line": 13,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.2.4.spec.ts",
+      "line": 7,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-2.3.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.1.spec.ts",
+      "line": 6,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.2.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.2.2.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.2.2.spec.ts",
+      "line": 46,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(forkUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.2.2.spec.ts",
+      "line": 54,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(sourceUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.2.3.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.3.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-3.4.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.2.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.2.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.2.3.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.3.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.3.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.3.3.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.3.3.spec.ts",
+      "line": 25,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-4.4.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.1.1.spec.ts",
+      "line": 7,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.1.2.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.1.2.spec.ts",
+      "line": 42,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.2.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.2.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.2.3.spec.ts",
+      "line": 10,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.3.1.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.3.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.3.3.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-5.4.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.1.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.2.1.spec.ts",
+      "line": 7,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.2.1.spec.ts",
+      "line": 41,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.2.2.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.2.3.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.2.4.spec.ts",
+      "line": 9,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.1.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.1.spec.ts",
+      "line": 43,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.2.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.3.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.3.spec.ts",
+      "line": 19,
+      "rule": "arbitrary-index",
+      "severity": "warning",
+      "message": "Prefer semantic scoping; first()/last() can select an unrelated record.",
+      "source": "await page.getByRole('button', { name: 'Add comment', exact: true }).first().click();"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.3.spec.ts",
+      "line": 35,
+      "rule": "arbitrary-index",
+      "severity": "warning",
+      "message": "Prefer semantic scoping; first()/last() can select an unrelated record.",
+      "source": "await page.getByRole('button', { name: /add.*comment/i }).first().click();"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.3.4.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.4.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 10,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 33,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(before.baseUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 47,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(before.compareUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 50,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(prUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 74,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(url);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 87,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(prUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.5.spec.ts",
+      "line": 94,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(prUrl);"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-6.6.spec.ts",
+      "line": 8,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "github",
+      "file": "arc-bench/github/tests/REQ-7.2.spec.ts",
+      "line": 29,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "prestashop",
+      "file": "arc-bench/prestashop/tests/REQ-3.9.spec.ts",
+      "line": 13,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "prestashop",
+      "file": "arc-bench/prestashop/tests/REQ-3.9.spec.ts",
+      "line": 16,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "prestashop",
+      "file": "arc-bench/prestashop/tests/REQ-6.3.spec.ts",
+      "line": 8,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "prestashop",
+      "file": "arc-bench/prestashop/tests/REQ-7.2.spec.ts",
+      "line": 9,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "prestashop",
+      "file": "arc-bench/prestashop/tests/REQ-7.2.spec.ts",
+      "line": 11,
+      "rule": "live-region-name",
+      "severity": "warning",
+      "message": "Live regions do not derive accessible names from content; match the exact visible message with expectNotice/expectAlert.",
+      "source": "getByRole('status', { name:"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
+      "line": 43,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
+      "line": 106,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(secondEditorUrl);"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.2.1.spec.ts",
+      "line": 12,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.2.2.spec.ts",
+      "line": 13,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+      "line": 18,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+      "line": 28,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.1.1.spec.ts",
+      "line": 15,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "line": 33,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.1.3.spec.ts",
+      "line": 24,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+      "line": 24,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "line": 16,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "line": 16,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+      "line": 15,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "line": 15,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.1.3.spec.ts",
+      "line": 11,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+      "line": 15,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "line": 18,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "line": 208,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "line": 212,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "line": 13,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-4.1.2.spec.ts",
+      "line": 12,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-4.2.1.spec.ts",
+      "line": 16,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "line": 14,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "line": 41,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "line": 38,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "line": 31,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    },
+    {
+      "task": "sheet",
+      "file": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "line": 40,
+      "rule": "direct-navigation",
+      "severity": "warning",
+      "message": "Use openUrl(page, url) for saved URLs: page.goto to an identical hash URL is a same-document navigation and does not reload.",
+      "source": "await page.goto(baseUrl());"
+    }
+  ]
+}

@@ -1,15 +1,14 @@
 {
-  "revision": "2026-11-08-keep-bookstack-lifecycle-transaction-guards",
-  "parentRevision": "2026-11-08-keep-bookstack-lifecycle-interactions",
-  "mergedRevision": "2026-11-08-sheet-github-transaction-guards",
-  "manifestSha256": "aad1830bc36cc91d22521dfba66ef83c26d00f2ed6e687bf8a0a4a77f34545d4",
-  "recordedAt": "2026-11-09T06:32:20.058Z",
-  "status": "inputs-and-contracts-verified-candidate-execution-pending",
+  "revision": "2026-11-09-sheet-requirements-r1",
+  "parentRevision": "2026-11-09-keep-bookstack-observation-fixes",
+  "manifestSha256": "d461fab83bebc61ec82e9da1f4578fbdca8579bc3b6a4396fb71ef6681248a76",
+  "recordedAt": "2026-11-09T15:02:49.546Z",
+  "status": "sheet-requirements-refined-tests-alignment-and-execution-pending",
   "scope": {
     "tasks": 8,
     "atomicRequirements": 423,
     "scenarios": 759,
-    "preservedExistingScenarioIdsAndContent": true,
+    "preservedExistingScenarioIdsAndContent": false,
     "mergedExtensions": {
       "keepLifecycle": {
         "atomicRequirements": 2,
@@ -35,187 +34,67 @@
     "observationStrengthening": {
       "task": "bookstack",
       "scenarios": 3
-    }
-  },
-  "typecheck": {
-    "passed": true,
-    "command": "npm run typecheck"
-  },
-  "collection": {
-    "passed": true,
-    "scenarios": 759,
-    "extensionTitlesMatched": 23,
-    "lifecycleScenarioCountsMatched": 8,
-    "report": "validation/collection-report.json"
-  },
-  "sourceIntegrity": {
-    "passed": true,
-    "command": "npm run test:collect",
-    "tasks": 8,
-    "requirements": 423,
-    "scenarios": 759,
-    "frozenFiles": 752,
-    "collectionChecked": true,
-    "lfAndCrlfCheckoutAccepted": true,
-    "binaryAndChangedTextRejected": true
-  },
-  "contracts": {
-    "passed": 89,
-    "failed": 0,
-    "skipped": 0,
-    "newInteractionContractsPassed": 5,
-    "newNotificationContractsPassed": 8,
-    "newTransactionGuardContractsPassed": 3,
-    "report": "validation/contracts-report.json"
-  },
-  "closeout": {
-    "positivePassed": 14,
-    "mutantsRejected": 14,
-    "report": "validation/closeout/summary.json",
-    "recordsReport": "validation/closeout/records-summary.json"
-  },
-  "componentEvidence": {
-    "2026-11-08-keep-lifecycle": {
-      "sourceReview": "validation/lifecycle-static.json",
-      "boundary": "The component input was statically reviewed and typechecked at the user's request without Playwright or browser execution; that limitation does not transfer a pass to the merged input."
     },
-    "2026-11-08-keep-notification-oracle": {
-      "report": "validation/keep-notification-oracle.json",
-      "contracts": "8/8",
-      "targetedScenarios": {
-        "shallow": "16/16",
-        "baseline": "16/16"
-      },
-      "fullSuiteRerun": false
-    },
-    "2026-11-08-keep-bookstack-interactions": {
-      "closeout": "Re-executed on the merged input: 14 positive passed, 14 mutants rejected.",
-      "experimentPrepare": {
-        "passed": true,
-        "tasks": {
-          "keep": 41,
-          "bookstack": 56
-        },
-        "methods": [
-          "baseline",
-          "shallow"
-        ],
-        "modelCalled": false,
-        "inherited": true
-      },
-      "independentEvaluationInputChecks": {
-        "passed": true,
-        "tasks": [
-          "keep",
-          "bookstack"
-        ],
-        "scope": "Controller/task digests and output directory guard only",
-        "inherited": true
-      },
-      "reportingFixtures": {
-        "passed": true,
-        "tasks": [
-          "keep",
-          "bookstack"
-        ],
-        "checked": [
-          "complete denominators",
-          "passed",
-          "failed",
-          "skipped",
-          "not_run"
-        ],
-        "inherited": true
-      }
-    },
-    "2026-11-08-sheet-github-transaction-guards": {
-      "sourceReview": "audit/transaction-guards.md",
-      "contracts": "3/3",
-      "experimentPrepare": {
-        "passed": true,
-        "tasks": {
-          "sheet": 104,
-          "github": 104
-        },
-        "methods": [
-          "baseline",
-          "shallow"
-        ],
-        "modelCalled": false,
-        "inherited": true
-      },
-      "reportingFixtures": {
-        "passed": true,
-        "tasks": [
-          "sheet",
-          "github"
-        ],
-        "checked": [
-          "complete denominators",
-          "partial runs",
-          "empty basic group"
-        ],
-        "inherited": true
-      },
-      "candidateExecution": "Not executed; the merged collection and contracts were rerun, but the 8 new business scenarios have no candidate or reference-application result."
-    }
+    "preservedExistingScenarioIds": true,
+    "changedExistingScenarioContent": [
+      "SCN-REQ-1.3.1-01",
+      "SCN-REQ-3.1.1-03",
+      "SCN-REQ-4.1.1-02",
+      "SCN-REQ-5.3.1-03",
+      "SCN-REQ-5.3.1-09"
+    ]
   },
-  "oracleCorrections": [
-    {
-      "id": "2026-11-08-keep-notification-oracle",
-      "task": "keep",
-      "files": [
-        "arc-bench/keep/tests/helpers.ts",
-        "validation/keep-notification-contracts.spec.ts"
-      ],
-      "requirementsChanged": false,
-      "identitiesAndDenominatorPreserved": true,
-      "description": "Match status by exact visible message and require a unique visible notification; scope actions to it.",
-      "validation": "validation/keep-notification-oracle.json"
-    }
-  ],
-  "applications": {
-    "generated": false,
-    "modified": false,
-    "newBusinessScenariosExecuted": 0,
-    "completeBusinessScenariosExecuted": 0,
-    "referenceFixtureScenariosExecuted": 0,
-    "pairedExperimentExecuted": false
+  "testsExecuted": false,
+  "testsChanged": false,
+  "staticChecks": {
+    "yamlUniqueKeys": true,
+    "identitiesTitlesImagesAndReferencesPreserved": true,
+    "sheetRequirements": 26,
+    "sheetScenarios": 104,
+    "completeGwt": true,
+    "sheetTestsByteIdentical": true,
+    "otherTaskRequirementsByteIdentical": true,
+    "frozenFiles": 770,
+    "unmodifiedYamlFormattingPreserved": true
   },
-  "controllerSourceModifiedByThisReview": false,
-  "parentValidation": {
-    "commit": "7226dd96c6e1890401f6d767b3c4855ad92d05e3",
-    "path": "validation.json"
+  "requirementReview": {
+    "task": "sheet",
+    "documentation": "audit/sheet-requirements-20261109.md",
+    "changedDescriptions": [
+      "ROOT",
+      "REQ-2.2.1",
+      "REQ-2.2.2",
+      "REQ-3.2.1",
+      "REQ-3.2.2",
+      "REQ-4.2.1",
+      "REQ-5.1.1",
+      "REQ-5.1.2",
+      "REQ-5.3.1"
+    ],
+    "changedScenarios": [
+      "SCN-REQ-1.3.1-01",
+      "SCN-REQ-3.1.1-03",
+      "SCN-REQ-4.1.1-02",
+      "SCN-REQ-5.3.1-03",
+      "SCN-REQ-5.3.1-09"
+    ],
+    "preservedIdsAndTitles": true,
+    "requirements": 26,
+    "scenarios": 104,
+    "testsChanged": false,
+    "testsExecuted": false,
+    "openCodeDifficultyMeasured": false
   },
-  "inheritedEvidence": {
-    "revision": "2026-11-07-bookstack-lifecycle",
-    "manifest": "validation/history/2026-11-07-bookstack-lifecycle/revision.json",
-    "validation": "validation/history/2026-11-07-bookstack-lifecycle/validation.json",
-    "boundary": "Parent BookStack 49/49 and contract reports retain their original input provenance. No changed or new scenario inherits a pass."
+  "historicalEvidence": {
+    "manifest": "validation/history/2026-11-09-keep-bookstack-observation-fixes/revision.json",
+    "validation": "validation/history/2026-11-09-keep-bookstack-observation-fixes/validation.json",
+    "originalSheetRequirements": "validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml",
+    "resultsTransferred": false
   },
   "limitations": [
-    "Browser contracts and prepared catalogs do not establish that any candidate passes the 31 new business scenarios.",
-    "New and strengthened scenarios are not browser-executed against real applications; runtime feasibility, timeout budget and model difficulty remain unmeasured.",
-    "Source-level mapping and typecheck do not establish zero false positives or false negatives.",
-    "Experiment preparation, independent evaluation input checks and reporting fixtures were verified on the component revisions and were not rerun after merging.",
-    "New public contracts and changed requirements require identical versioned inputs for all methods; old scores do not transfer.",
-    "Known per-task observation boundaries remain documented in audit/bookstack.md, audit/keep.md and audit/transaction-guards.md.",
-    "Do not compare scores from this revision directly with historical denominators."
-  ],
-  "requirementTestConsistency": {
-    "reviewedScenarios": 8,
-    "reviewedParts": [
-      "Given",
-      "When",
-      "Then"
-    ],
-    "mapping": "audit/transaction-guards.md",
-    "exactTitlesMatchedInExperimentCatalog": true,
-    "strengthened": [
-      "validation rule retention and rejected-edit rollback",
-      "unchanged branches immediately after rejected review",
-      "direct grants before and after team downgrade",
-      "commit graph before and after second merge confirmation"
-    ]
-  }
+    "Existing Sheet tests have not been aligned clause by clause with the refined requirements.",
+    "The input-domain and boundary questions listed in the requirement review remain unresolved.",
+    "No Sheet generation or OpenCode comparison was run; potential discriminative power remains a hypothesis.",
+    "The parent Keep/BookStack selector changes remain without runtime verification."
+  ]
 }

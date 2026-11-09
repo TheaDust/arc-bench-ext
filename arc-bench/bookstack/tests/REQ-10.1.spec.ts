@@ -1,7 +1,7 @@
 // requirement: REQ-10.1
 import { test, expect } from '@playwright/test';
 import { button, createBook, createChapter, createPage, createPageInChapter, enter, entry, expectAbsentEntry, favorite,
-  heading, home, identity, login, openBook, openChapter, openPageInChapter, region, text } from './helpers';
+  heading, home, identity, login, openBook, openChapter, openPageInChapter, openUrl, region, text } from './helpers';
 
 test("REQ-10.1: Confirm page deletion", async ({ page }, testInfo) => {
   const id = identity(testInfo);
@@ -32,7 +32,7 @@ test("REQ-10.1: Confirm page deletion", async ({ page }, testInfo) => {
   await expectAbsentEntry(region(page, 'Recently Updated Pages'), pageA);
   await expectAbsentEntry(region(page, 'My Most Viewed Favorites'), pageA);
   await expectAbsentEntry(region(page, 'My Recently Viewed'), pageA);
-  await page.goto(pageUrl);
+  await openUrl(page, pageUrl);
   await expect(page.getByRole('textbox', { name: 'Page title', exact: true })).toHaveCount(0);
   await expect(page.getByText('Page content 10.1.1.', { exact: true })).toHaveCount(0);
   await openBook(page, book);

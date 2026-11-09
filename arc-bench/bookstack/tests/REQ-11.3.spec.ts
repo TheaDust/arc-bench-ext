@@ -1,7 +1,7 @@
 // requirement: REQ-11.3
 import { test, expect, type Browser, type Page } from '@playwright/test';
-import { button, createBook, createPage, enter, entry, expectAbsentEntry, heading, home, identity,
-  login, named, newContextFor, openBook, openPage, region, REVIEWER_ACCOUNT } from './helpers';
+import { button, createBook, createPage, enter, entry, expectAbsentEntry, expectAlert, heading, home, identity,
+  login, named, newContextFor, openBook, openPage, openUrl, region, REVIEWER_ACCOUNT } from './helpers';
 import { editPage, expectBreadcrumb, expectEditor, expectReading, fillEditor, moveContent,
   pageConflict } from './support/page-revisions';
 
@@ -18,7 +18,7 @@ async function prepare(page: Page, browser: Browser, baseURL: string, id: string
   await openPage(page, source, title);
   const readingUrl = page.url();
   const second = await newContextFor(browser, baseURL, REVIEWER_ACCOUNT);
-  await second.page.goto(readingUrl);
+  await openUrl(second.page, readingUrl);
   await expectReading(second.page, title, originalBody);
   await editPage(page, title, originalBody);
   const revised = named(id, 'Title entered by editor A');
@@ -35,7 +35,7 @@ test('REQ-11.3: Protect a newer publication from a stale editor', async ({ page,
     await fillEditor(second.page, bTitle, changedB);
     await button(second.page, 'Save Page').click();
     await expectReading(second.page, bTitle, changedB);
-    await second.page.goto(readingUrl);
+    await openUrl(second.page, readingUrl);
     await expectReading(second.page, bTitle, changedB);
 
     await button(page, 'Save Page').click();
@@ -52,7 +52,7 @@ test('REQ-11.3: Protect a newer publication from a stale editor', async ({ page,
     await button(conflict, 'Overwrite').click();
     await expect(conflict).toBeHidden();
     await expectReading(page, revised, changedA);
-    await second.page.goto(readingUrl);
+    await openUrl(second.page, readingUrl);
     await expectReading(second.page, revised, changedA);
     await openBook(page, source);
     const pages = region(page, 'Page list');
@@ -73,7 +73,7 @@ test("REQ-11.3: Save stale editor text to the page's new book", async ({ page, b
     await button(page, 'Save Page').click();
     await expect(pageConflict(page)).toBeHidden();
     await expectReading(page, revised, changedA);
-    await page.goto(readingUrl);
+    await openUrl(page, readingUrl);
     await expectReading(page, revised, changedA);
     await expectBreadcrumb(page, target, undefined, source);
     await openBook(page, source);
@@ -99,7 +99,7 @@ test('REQ-11.3: Reject a stale page save after deletion', async ({ page, browser
     await heading(second.page, source);
     await expectAbsentEntry(region(second.page, 'Page list'), title);
     await button(page, 'Save Page').click();
-    await expect(page.getByRole('alert', { name: 'Page deleted', exact: true })).toBeVisible();
+    await expectAlert(page, 'Page deleted');
     await expectEditor(page, revised, changedA);
     await button(page, 'Back to book').click();
     await heading(page, source);
@@ -107,7 +107,7 @@ test('REQ-11.3: Reject a stale page save after deletion', async ({ page, browser
     for (const name of [title, revised]) await expectAbsentEntry(region(page, 'Page list'), name);
     await home(page);
     for (const name of [title, revised]) await expectAbsentEntry(region(page, 'Recently Updated Pages'), name);
-    await page.goto(readingUrl);
+    await openUrl(page, readingUrl);
     for (const name of [title, revised]) await expect(page.getByRole('heading', { name, exact: true })).toHaveCount(0);
     for (const body of [originalBody, changedA]) await expect(page.getByText(body, { exact: true })).toHaveCount(0);
   } finally {
