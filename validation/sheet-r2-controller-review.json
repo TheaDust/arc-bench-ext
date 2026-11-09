@@ -1,0 +1,30 @@
+{
+  "previousCommit": "cfb5b629eaf46c98e5fb79f9443e4a31e26e6b9d",
+  "currentCommit": "7af8f39d63e3235af7bc551a60934ba7bd22e6bd",
+  "changedFrozenFiles": [
+    {
+      "path": "src/experiments/worker.ts",
+      "previousSha256": "d94336d3a0a921f459f3a5306d077813971650d52e7fd6193d680a8ed4902831",
+      "sha256": "575aa82c30581a4a4e526d90bb2c6b49f12c77d6a723b359884e696358b77ad1"
+    },
+    {
+      "path": "src/experiments/protocol.ts",
+      "previousSha256": "f193978920eb025a4c87360737c8f2577c3cb4ab4fa8838f14275fef0540b9ae",
+      "sha256": "cfd22950aa71fa1bf1c1126a0de599e9ed4dd037c76e2bdd69ee16e0ec56b62f"
+    }
+  ],
+  "workerEvaluationTailByteIdentical": true,
+  "protocolFunctionsByteIdentical": [
+    "discoverArcTasks",
+    "reportEntries",
+    "scoreReport"
+  ],
+  "changes": "Pi rename, OpenCode generation routing and metadata, implementation digest expansion, scheduling order and usage reporting.",
+  "methodCapabilities": {
+    "opencode": "One top-level invocation; native subagent tool available. Delegation is recorded by the baseline.",
+    "pi": "One Pi development session",
+    "shallow": "Grouper/Builder/Verifier pipeline"
+  },
+  "generatedApplicationsConsulted": false,
+  "modelCalled": false
+}

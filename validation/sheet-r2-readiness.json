@@ -1,0 +1,32 @@
+{
+  "revision": "2026-11-09-sheet-experiment-r2",
+  "task": "sheet",
+  "requirements": 26,
+  "scenarios": 104,
+  "requirementsAndOracleContracts": "reviewed-with-explicit-input-domain",
+  "typecheck": true,
+  "formalScenariosCollected": 104,
+  "isolatedRunnerCatalog": {
+    "method": "opencode",
+    "entries": 104,
+    "modelCalled": false,
+    "applicationStarted": false,
+    "report": "validation/sheet-r2-catalog.json"
+  },
+  "domContracts": {
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "report": "validation/sheet-r2-contracts-report.json",
+    "browserChannel": "chrome"
+  },
+  "controllerCompatibility": "evaluation path and scoring functions unchanged; current method identities accepted",
+  "referenceApplicationRun": {
+    "status": "pending",
+    "expectedScenarios": 104,
+    "perScenarioBudgetMs": 60000
+  },
+  "paidExperimentStarted": false,
+  "formalExperimentReady": false,
+  "nextGate": "Run all 104 scenarios against a compliant reference application with application-per-scenario isolation and confirm timing; then freeze the paired experiment plan."
+}

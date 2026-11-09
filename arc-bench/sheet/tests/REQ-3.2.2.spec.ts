@@ -1,3 +1,4 @@
+import { expectStoredCell } from './support/experiment-observations';
 import { expectCalculatedNumber } from './support/observations';
 import { expectText } from './support/observations';
 import { baseUrl } from './support/e2e';
@@ -48,6 +49,17 @@ test('REQ-3.2.2: Undo and Redo Recent Operations - Scenario 2', async ({ page })
   await expect(gridCell(page, 'A1')).toHaveText('');
   await expect(page.getByRole('button', { name: /^Redo$/ })).toBeEnabled();
 
+  await gridCell(page, 'A1').dblclick();
+  const cancelled = page.getByRole('textbox', { name: 'Edit A1', exact: true });
+  await cancelled.fill('Cancelled branch edit');
+  await cancelled.press('Escape');
+  await expect(cancelled).toHaveCount(0);
+  await expectStoredCell(page, 'A1', '');
+  await expect(page.getByRole('button', { name: /^Redo$/ })).toBeEnabled();
+  await page.getByRole('button', { name: /^Redo$/ }).click();
+  await expectStoredCell(page, 'A1', oldBranchValue);
+  await page.getByRole('button', { name: /^Undo$/ }).click();
+  await expectStoredCell(page, 'A1', '');
   await commitCellThroughFormulaBar(page, 'A1', newBranchValue);
   await expect(gridCell(page, 'A1')).toHaveText(newBranchValue);
   await expect(page.getByRole('button', { name: /^Redo$/ })).toBeDisabled();

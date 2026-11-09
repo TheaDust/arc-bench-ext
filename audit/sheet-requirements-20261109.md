@@ -1,10 +1,12 @@
 # Sheet 需求打磨：第一轮
 
+本文件保留R1记录；当前规则与输入域决定见 [sheet-r2.md](sheet-r2.md)。
+
 选择 Sheet：当前 26 条原子需求、104 个场景。它的工作区、公式、范围操作、结构、校验与汇总有明确的依赖关系，功能面集中，适合中等规模的实验。复杂度来自共享状态下的行为一致性。当前没有 Sheet 的 OpenCode 实验结果，因此“可能区分单会话实现”是待检验假设；支持的库或实现方式不受额外限制。
 
 ## 本轮范围
 
-只修改需求正文与五个已有场景的步骤表述，保留所有需求、场景、步骤、标题、图片与引用身份，保持 26/104。测试和生成应用不变。本轮未调用模型或运行测试。原文存于 `validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml`。
+只修改需求正文与五个已有场景的步骤表述，保留所有需求/场景/步骤 ID、标题、图片与引用身份，保持 26/104。测试和生成应用不变。本轮未调用模型或运行测试。原文存于 `validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml`。
 
 ## 已明确的规则
 

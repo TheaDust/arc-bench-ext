@@ -14920,7 +14920,7 @@
           ],
           "id": "1ed1a211ab5a8791cda0-5e45f2de21d630f4e804",
           "file": "../arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
-          "line": 31,
+          "line": 32,
           "column": 5
         },
         {
@@ -14940,7 +14940,7 @@
           ],
           "id": "1ed1a211ab5a8791cda0-51c6ec72bbb5eb6856e8",
           "file": "../arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
-          "line": 69,
+          "line": 72,
           "column": 5
         },
         {
@@ -14960,7 +14960,7 @@
           ],
           "id": "1ed1a211ab5a8791cda0-0829656be68b34066f99",
           "file": "../arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
-          "line": 89,
+          "line": 92,
           "column": 5
         },
         {
@@ -14980,7 +14980,7 @@
           ],
           "id": "1ed1a211ab5a8791cda0-47e1ae9a25ee37574c33",
           "file": "../arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
-          "line": 99,
+          "line": 102,
           "column": 5
         }
       ]
@@ -15320,7 +15320,7 @@
           ],
           "id": "a131a33dd7a4cda0e68f-f0b6b3a213ed20736eb8",
           "file": "../arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
-          "line": 19,
+          "line": 20,
           "column": 5
         },
         {
@@ -15340,7 +15340,7 @@
           ],
           "id": "a131a33dd7a4cda0e68f-6f8071101fa8fb1bc2d6",
           "file": "../arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
-          "line": 48,
+          "line": 59,
           "column": 5
         },
         {
@@ -15360,7 +15360,7 @@
           ],
           "id": "a131a33dd7a4cda0e68f-53dfead88448f97e675c",
           "file": "../arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
-          "line": 70,
+          "line": 98,
           "column": 5
         },
         {
@@ -15380,7 +15380,7 @@
           ],
           "id": "a131a33dd7a4cda0e68f-8539895962db23d96228",
           "file": "../arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
-          "line": 87,
+          "line": 115,
           "column": 5
         },
         {
@@ -15400,7 +15400,7 @@
           ],
           "id": "a131a33dd7a4cda0e68f-baf745b856633a872fa4",
           "file": "../arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
-          "line": 107,
+          "line": 135,
           "column": 5
         }
       ]
@@ -15428,7 +15428,7 @@
           ],
           "id": "f874ef67be2cda98476a-a18ae1b7fd3cd28ff0af",
           "file": "../arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
-          "line": 19,
+          "line": 20,
           "column": 5
         },
         {
@@ -15448,7 +15448,7 @@
           ],
           "id": "f874ef67be2cda98476a-63c5a4a0c3e577d87112",
           "file": "../arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
-          "line": 43,
+          "line": 55,
           "column": 5
         },
         {
@@ -15468,7 +15468,7 @@
           ],
           "id": "f874ef67be2cda98476a-87f787e50e1b08bd0a88",
           "file": "../arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
-          "line": 72,
+          "line": 94,
           "column": 5
         },
         {
@@ -15488,7 +15488,7 @@
           ],
           "id": "f874ef67be2cda98476a-3d36395ae2f09c7f95cc",
           "file": "../arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
-          "line": 89,
+          "line": 111,
           "column": 5
         },
         {
@@ -15508,7 +15508,7 @@
           ],
           "id": "f874ef67be2cda98476a-921414dd90ce18a81588",
           "file": "../arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
-          "line": 109,
+          "line": 131,
           "column": 5
         }
       ]
@@ -15536,7 +15536,7 @@
           ],
           "id": "2e170d858b1900f11777-28eea3ad73e43498de53",
           "file": "../arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
-          "line": 18,
+          "line": 19,
           "column": 5
         },
         {
@@ -15556,7 +15556,7 @@
           ],
           "id": "2e170d858b1900f11777-64f4b923c381fc4b253e",
           "file": "../arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
-          "line": 46,
+          "line": 47,
           "column": 5
         },
         {
@@ -15576,7 +15576,7 @@
           ],
           "id": "2e170d858b1900f11777-2bfaf858945e3755f98f",
           "file": "../arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
-          "line": 65,
+          "line": 66,
           "column": 5
         },
         {
@@ -15596,7 +15596,7 @@
           ],
           "id": "2e170d858b1900f11777-0ddbbaefe727314c36ed",
           "file": "../arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
-          "line": 100,
+          "line": 103,
           "column": 5
         }
       ]
@@ -15868,7 +15868,7 @@
           ],
           "id": "4045999c6be1fccff049-c5f68c50278514b30f34",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 21,
+          "line": 22,
           "column": 5
         },
         {
@@ -15888,7 +15888,7 @@
           ],
           "id": "4045999c6be1fccff049-ce125552da6b8de4334b",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 41,
+          "line": 42,
           "column": 5
         },
         {
@@ -15908,7 +15908,7 @@
           ],
           "id": "4045999c6be1fccff049-732516c5bfac8269dfd9",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 64,
+          "line": 76,
           "column": 5
         },
         {
@@ -15928,7 +15928,7 @@
           ],
           "id": "4045999c6be1fccff049-17f7c03e152f4681433a",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 90,
+          "line": 102,
           "column": 5
         },
         {
@@ -15948,7 +15948,7 @@
           ],
           "id": "4045999c6be1fccff049-a1a231217f25a31f6ab8",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 116,
+          "line": 128,
           "column": 5
         },
         {
@@ -15968,7 +15968,7 @@
           ],
           "id": "4045999c6be1fccff049-d4690de3a4b830f66831",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 147,
+          "line": 159,
           "column": 5
         },
         {
@@ -15988,7 +15988,7 @@
           ],
           "id": "4045999c6be1fccff049-f05c2f493724891edbe0",
           "file": "../arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
-          "line": 187,
+          "line": 199,
           "column": 5
         }
       ]
@@ -16056,7 +16056,7 @@
           ],
           "id": "36b59a4870427800e470-a85389f8b2fea54adfb4",
           "file": "../arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
-          "line": 64,
+          "line": 76,
           "column": 5
         },
         {
@@ -16076,7 +16076,7 @@
           ],
           "id": "36b59a4870427800e470-9ec10b23ba5836648983",
           "file": "../arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
-          "line": 90,
+          "line": 102,
           "column": 5
         },
         {
@@ -16096,7 +16096,7 @@
           ],
           "id": "36b59a4870427800e470-7ee66fea8e273afb11d9",
           "file": "../arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
-          "line": 114,
+          "line": 126,
           "column": 5
         }
       ]
@@ -16712,7 +16712,7 @@
           ],
           "id": "c676d43c4e52096cd584-9c48fdd0b5d681f8d58d",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 43,
+          "line": 44,
           "column": 5
         },
         {
@@ -16732,7 +16732,7 @@
           ],
           "id": "c676d43c4e52096cd584-ff81551dd2f5f9afa309",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 106,
+          "line": 107,
           "column": 5
         },
         {
@@ -16752,7 +16752,7 @@
           ],
           "id": "c676d43c4e52096cd584-8f6bdde85fa016d1d6cd",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 153,
+          "line": 154,
           "column": 5
         },
         {
@@ -16772,7 +16772,7 @@
           ],
           "id": "c676d43c4e52096cd584-56c03728b644d7e8c593",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 201,
+          "line": 207,
           "column": 5
         },
         {
@@ -16792,7 +16792,7 @@
           ],
           "id": "c676d43c4e52096cd584-0b923ff9385b9cb297fc",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 247,
+          "line": 253,
           "column": 5
         },
         {
@@ -16812,7 +16812,7 @@
           ],
           "id": "c676d43c4e52096cd584-3af2f99b2de87b730f45",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 294,
+          "line": 305,
           "column": 5
         },
         {
@@ -16832,7 +16832,7 @@
           ],
           "id": "c676d43c4e52096cd584-a8e84809d87c900167f2",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 340,
+          "line": 351,
           "column": 5
         },
         {
@@ -16852,7 +16852,7 @@
           ],
           "id": "c676d43c4e52096cd584-e1919dab6fa85822008b",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 401,
+          "line": 412,
           "column": 5
         },
         {
@@ -16872,7 +16872,7 @@
           ],
           "id": "c676d43c4e52096cd584-8181b6f2d703e301f63b",
           "file": "../arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
-          "line": 452,
+          "line": 472,
           "column": 5
         }
       ]
@@ -18712,8 +18712,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-11-09T13:49:29.698Z",
-    "duration": 1095.859,
+    "startTime": "2026-11-09T15:56:19.763Z",
+    "duration": 1746.8339999999998,
     "expected": 0,
     "skipped": 759,
     "unexpected": 0,

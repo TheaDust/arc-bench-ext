@@ -1,0 +1,1686 @@
+{
+  "config": {
+    "configFile": "E:\\my-works\\coding\\arc-bench-ext\\validation\\.tmp\\sheet-r2-contracts-1794239081799\\playwright.config.ts",
+    "rootDir": "E:/my-works/coding/arc-bench-ext",
+    "forbidOnly": true,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "E:/my-works/coding/arc-bench-ext/validation/.tmp/sheet-r2-contracts-1794239081799/report.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "E:/my-works/coding/arc-bench-ext/validation/.tmp/sheet-r2-contracts-1794239081799/artifacts",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "E:/my-works/coding/arc-bench-ext",
+        "testIgnore": [],
+        "testMatch": [
+          "**/validation/sheet-experiment-contracts.spec.ts",
+          "**/audit/validation/sheet.spec.ts"
+        ],
+        "timeout": 10000
+      }
+    ],
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.57.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "audit\\validation\\sheet.spec.ts",
+      "file": "audit/validation/sheet.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "sheet CSV accepts equivalent quoting, BOM and record separators",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 16,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:44.712Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-2c13568400993772bcfa",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "sheet CSV decodes escaped quotes and preserves field line breaks",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:44.756Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-fd7e2d5bae4db40d187c",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 10,
+          "column": 5
+        },
+        {
+          "title": "sheet CSV preserves UTF-8 Chinese text with quote and comma content",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:44.769Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-10d1fee3ef8cec0c1212",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 16,
+          "column": 5
+        },
+        {
+          "title": "sheet CSV numeric equivalence applies only to known calculated cells",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 13,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:44.798Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-39ad977c01d5dab949da",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 22,
+          "column": 5
+        },
+        {
+          "title": "sheet calculated numbers permit presentation differences and reject wrong values or units",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2106,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:44.822Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-5c934f2f1db5a9d5e70c",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 29,
+          "column": 5
+        },
+        {
+          "title": "sheet CSV rejects wrong numeric result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.075Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-688f66585f7d24fe743a",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects lost leading zero",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.089Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-a9055094c72fb31164f6",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects lost empty column",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.106Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-e8e0ebd856700a0981b8",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects removed hidden source row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.121Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-ae893073b8b3fc95b9d7",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects flattened quoted newline",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.134Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-228670b05a40a2106fda",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects added empty row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.149Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-0c2a2aca4b3bd3acf2d9",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects removed significant space",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.172Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-c93c388d7b6596cf04b1",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 49,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects malformed quoting \"a,\\\"unfinished\"",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.186Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-ab6442db325d242c8e32",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 53,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects malformed quoting \"\\\"a\\\"unexpected,b\"",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.198Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-ef3ad8a90a58d34c72b1",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 53,
+          "column": 7
+        },
+        {
+          "title": "sheet CSV rejects malformed quoting \"a\\\"b,c\"",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.210Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-6ffd0566023d1c2993d3",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 53,
+          "column": 7
+        },
+        {
+          "title": "sheet presence permits duplicate visible values while actions stay unique",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 280,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.222Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-49f16c676a73cc0d27e9",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 56,
+          "column": 5
+        },
+        {
+          "title": "sheet presence excludes hidden-only values",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 637,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:48.527Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-9d6b65bfb9cdc1d77435",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 62,
+          "column": 5
+        },
+        {
+          "title": "sheet exact cell text keeps meaningful newline and spaces",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 689,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:49.176Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-e54b43786d2e7d7f43d5",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 67,
+          "column": 5
+        },
+        {
+          "title": "sheet formula bar accepts a different formula with the same displayed result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:49.876Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-e3d174f074d3e0590302",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 94,
+          "column": 7
+        },
+        {
+          "title": "sheet formula bar still rejects an ignored raw formula change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 765,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:50.451Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-df06892d36e0d4434c38",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 100,
+          "column": 7
+        },
+        {
+          "title": "sheet inline grid accepts a different formula with the same displayed result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 443,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:51.231Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-a31899e776b2f82d0f89",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 94,
+          "column": 7
+        },
+        {
+          "title": "sheet inline grid still rejects an ignored raw formula change",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 753,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:51.685Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-893a2f94b55fe4a71009",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 100,
+          "column": 7
+        },
+        {
+          "title": "sheet blank workbook accepts exactly one genuinely blank selected worksheet",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 308,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:52.449Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-efb8a291a76c0a4021bf",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 108,
+          "column": 5
+        },
+        {
+          "title": "sheet blank workbook rejects extra worksheet",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 641,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:52.767Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-cf03706b24714fc115ed",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 119,
+          "column": 7
+        },
+        {
+          "title": "sheet blank workbook rejects data outside A1",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 683,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:53.419Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-262a737653afbb568f85",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 119,
+          "column": 7
+        },
+        {
+          "title": "sheet blank workbook rejects extra selected cell",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 660,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:54.112Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-360bc9b392265058a9bd",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 119,
+          "column": 7
+        },
+        {
+          "title": "sheet blank workbook rejects missing declared negative selected state",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 665,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:54.784Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-3ecde48ea5f3a9c1703c",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 119,
+          "column": 7
+        },
+        {
+          "title": "sheet full selection rejects an extra selected cell outside the declared rectangle",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 713,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:55.460Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-58bc703d8ca26f43ce9a",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 125,
+          "column": 5
+        },
+        {
+          "title": "sheet range action accepts a hidden filtered middle row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:56.183Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-4ea95e1c39997af7ed2a",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 133,
+          "column": 7
+        },
+        {
+          "title": "sheet range action accepts a unmounted filtered middle row",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 310,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:56.509Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "5900a4f1e5e4ca6ac14a-b2d33a060285838de60c",
+          "file": "audit/validation/sheet.spec.ts",
+          "line": 133,
+          "column": 7
+        }
+      ]
+    },
+    {
+      "title": "validation\\sheet-experiment-contracts.spec.ts",
+      "file": "validation/sheet-experiment-contracts.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "Sheet accepts the complete column COUNT result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 368,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:56.838Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-0490cdd96fb16eac40b6",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 17,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects an incorrect COUNT marginal total at B4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 722,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:57.217Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-a96ef59115a2431a90af",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 22,
+          "column": 7
+        },
+        {
+          "title": "Sheet rejects an incorrect COUNT marginal total at C4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 810,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:57.949Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-be3d7a4ecc283337bdf1",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 22,
+          "column": 7
+        },
+        {
+          "title": "Sheet rejects an incorrect COUNT marginal total at D4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 748,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:58.770Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-7b94115a9a02d78264bb",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 22,
+          "column": 7
+        },
+        {
+          "title": "Sheet accepts the complete text COUNT result",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 317,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:59.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-de143e528a6f5e937299",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 27,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects a missing text COUNT grand total at A5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 759,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:44:59.855Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-af052aacaee89f999501",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 32,
+          "column": 7
+        },
+        {
+          "title": "Sheet rejects a missing text COUNT grand total at B5",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 802,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:00.627Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-567261e0f56bb4bbd53e",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 32,
+          "column": 7
+        },
+        {
+          "title": "Sheet cannot borrow a total from outside the active grid",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 825,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:01.441Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-03496b018fdd10668b6c",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 37,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects a hidden or duplicate pivot cell",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1023,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:02.279Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-15ade062814dbdc05d2d",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 41,
+          "column": 5
+        },
+        {
+          "title": "Sheet accepts a rewritten stored expression with its calculated value",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 342,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:03.316Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-e0c5e67d3e8e5e016026",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 59,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects a stale stored expression even when the displayed result matches",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 838,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:03.670Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-8b156d4b77509b0d51f3",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 63,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects a restored cell whose own stored ordinary input is wrong",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 778,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:04.520Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-dafc51ba3d06d3a13b31",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 67,
+          "column": 5
+        },
+        {
+          "title": "Sheet distinguishes stored invalid references from a merely matching error display",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 769,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:05.309Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-dc581feb085076e6479c",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 71,
+          "column": 5
+        },
+        {
+          "title": "Sheet accepts saved COUNT fields in native controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 431,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:06.090Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-9aa176c8ec543ab9c835",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Sheet accepts saved COUNT fields in popup controls",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 392,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:06.531Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-7f9e22270dd041b9934c",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 85,
+          "column": 7
+        },
+        {
+          "title": "Sheet rejects a rejected SUM choice persisted as the applied method",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 782,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:06.934Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-d0c5517f2e2907975116",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 90,
+          "column": 5
+        },
+        {
+          "title": "Sheet rejects swapped saved row and value fields",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 10000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 721,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-11-09T15:45:07.726Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "428631b49a8822c28fbf-cbb29a9aa81e4d434d08",
+          "file": "validation/sheet-experiment-contracts.spec.ts",
+          "line": 94,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-11-09T15:44:43.304Z",
+    "duration": 25907.752999999997,
+    "expected": 47,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

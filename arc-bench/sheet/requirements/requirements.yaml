@@ -10,14 +10,24 @@ description:
 
     For calculation, sort, filter, pivot and export state: Produced through formula entry, sorting, filtering, pivot apply/refresh and export UI. Formula results, sorted rows and pivot aggregates are computed by the application, not supplied as initial values.
 
-    Calculated numeric results are compared by numeric value; harmless decimal trailing zeros, conventional three-digit grouping and scientific notation are equivalent presentations. This does not change ordinary entered/imported text: leading zeros, spaces, blank fields and raw formula expressions remain preserved as specified.
+    Calculated numeric results are compared by numeric value; harmless decimal trailing zeros, conventional three-digit grouping and scientific notation are equivalent presentations. This does not change ordinary entered/imported text: leading zeros, spaces, blank fields and stored formula expressions remain preserved as specified.
     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
 
-    State terminology: a cell's stored content is either its ordinary input text or its saved formula expression. The grid shows ordinary text or the current calculated result; the Formula bar shows stored content. "Original formula" means this stored expression, not an immutable copy of the first user input. Copy, cut and structural edits may rewrite references as explicitly required; after such an edit, the rewritten expression is the stored formula. Other text, function-name case and dollar markers remain preserved unless the stated transformation changes them.
+    State terminology: a cell's stored content is either its ordinary input text or its saved formula expression. The grid shows ordinary text or the current calculated result; the Formula bar shows stored content. The terms stored formula and stored expression denote this current unevaluated expression. Raw input means the stored input before calculation. Copy, cut and structural edits may rewrite references as explicitly required; after such an edit, the rewritten expression is the stored formula. Other text, function-name case and dollar markers remain preserved unless the stated transformation changes them.
 
     Successful data operations expose a coherent result: source and destination content, required reference rewrites, dependent calculations and applicable validation agree before the operation is considered complete. A refused edit preserves the last successful stored state and must not be represented as a successful partial edit. A saved formula error from REQ-4.2.2 is a calculated cell result, distinct from rejection by a validation rule.
 
     Persistence means that reopening or refreshing the same workbook entry directly restores its last successful workbook and worksheet state, including the active worksheet, saved selection rectangle, content, formulas, rules, filters and last applied pivot result where applicable. The required Undo/Redo history is session-local and need not survive reload. Persistence does not require a particular storage technology or URL format.
+
+    Input interpretation: a value beginning with = is a formula whether entered through the grid, Formula bar, table paste or CSV import. Other input is preserved as ordinary text, including leading zeros, spaces and line breaks. Numeric calculation accepts a complete finite decimal integer or fraction, with an optional sign and decimal exponent, ignoring surrounding whitespace for calculation only. TRUE, date text and other nonnumeric text are not numbers. Formula COUNT counts numeric values, including numeric formula results; pivot COUNT counts records with a nonempty value field, including nonnumeric values. These two COUNT operations have different semantics. For a formula aggregate range with no numeric values, SUM, COUNT, MIN and MAX return 0 and AVERAGE returns #DIV/0!.
+
+    Scored input domain: ranges are finite rectangles in one worksheet; partially locked references such as $A1 or A$1, cross-sheet formulas, string expressions and formulas combining different error causes are outside this version's input domain. Relative A1 and fully absolute $A$1 references may occur together in one formula. Sort keys in a column are homogeneous finite numbers, ISO YYYY-MM-DD dates, or English text, with nonempty keys and no case-only ties; mixed-type precedence, blank-key placement and locale collation are not evaluated. Pivot source headers are distinct and nonempty. Successful SUM/AVERAGE pivot groups in scored cases contain at least one numeric value; rejected nonnumeric summary attempts follow REQ-5.3.1. COUNT supports empty row/column combinations as specified.
+
+    Validation rules in scored scenarios are disjoint or edits to an existing rule's exact range, and existing content satisfies a newly saved rule. Partial overlaps between rule definitions and applying a new rule over existing invalid content are outside the scored input domain. Copy and cut transfer cell content and formulas, not validation/filter/pivot definitions; destination rules remain at their coordinates. Structural insertion/deletion moves or removes rule coverage with its original constrained cells. Blank cells may remain blank under a saved rule; a write of a nonempty value must satisfy it.
+
+    Well-formed external CSV/TSV tables in scored scenarios are rectangular; malformed CSV quoting is tested as the explicit rejection case in REQ-1.3.1. A single terminal record separator does not add an empty record; empty fields, including final columns, are retained. CSV quoting and embedded newlines follow REQ-1.3. Export uses a finite rectangle anchored at A1 that includes the imported or pasted rectangle and all subsequently stored nonempty content, including formula expressions whose results are empty. Visible spare grid rows/columns are not part of that extent. Erasing the final occupied edge of that rectangle and sorting outside its declared data region are outside the scored input domain.
+
+    Conditional infrastructure-failure behavior describes atomic failure handling when an actual failure occurs. Scored scenarios establish ordinary UI states and explicit validation failures; they do not require private fault injection or demonstrate every storage/network failure branch.
 
 scenarios: []
 children:
@@ -186,11 +196,11 @@ children:
             The visitor is on the workbook home page and has a CSV containing quoted commas, a quoted newline and quote escapes, UTF-8 English and Chinese text, numeric text including 007, and blank fields.
             The input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is "Name,Note,Count,Blank\r\nAlex,\"Harbor District, East\",42,\r\nJordan,\"They said\"\"hello\"\"\r\nnext line\",3,\r\nAlice,English text 中文,007,". In this notation, \r\n denotes CRLF and \n denotes LF; quoted CSV fields retain embedded line breaks.
           When: The user opens Import CSV, uploads the CSV, and confirms the import.
-          Then: A workbook named from the uploaded file opens on Sheet1. Every decoded CSV field occupies its original
-            row and column, including the header row. A2 is Alex, B2 is Harbor District, East, C2 is 42; A3 is Jordan
-            and B3 contains They said"hello" followed by the supplied line break and next line, with C3 equal to 3; A4
-            is Alice, B4 is English text 中文, and C4 remains the ordinary text 007. D2, D3 and D4 are empty. All decoded
-            cell content remains after refresh.
+          Then: The uploaded file opens as a workbook on Sheet1. A1:D1 contains Name, Note, Count, Blank in that order.
+            A2 is Alex; B2 is the single field Harbor District, East; C2 is 42 and D2 is empty. A3 is Jordan; B3
+            contains They said"hello" followed by the supplied line break and next line; C3 is 3 and D3 is empty. A4 is
+            Alice, B4 is English text 中文, C4 is the ordinary text 007 and D4 is empty. Every decoded cell remains at its
+            original coordinate after refresh.
       - id: SCN-REQ-1.3.1-02
         name: REQ-1.3.1 - Import CSV to Create a Workbook - Scenario 2
         steps:
@@ -331,7 +341,7 @@ children:
       name: Switch Worksheets
       description:
         text: |-
-          After the user clicks another ARIA tab, the grid, row and column structure, selected cell, text box labeled "Formula bar", filter buttons, validation entry points, and pivot table results all switch to the state of the target worksheet; the formula bar displays either the ordinary value or the original formula of the selected cell. A worksheet opened for the first time with no selection history selects A1. Switching must not modify the source worksheet; returning to it restores its most recent successful state. Reopening the workbook directly displays the last active tab and restores the last confirmed selected cell for each worksheet.
+          After the user clicks another ARIA tab, the grid, row and column structure, selected cell, text box labeled "Formula bar", filter buttons, validation entry points, and pivot table results all switch to the state of the target worksheet; the formula bar displays either the ordinary value or the stored formula of the selected cell. A worksheet opened for the first time with no selection history selects A1. Switching must not modify the source worksheet; returning to it restores its most recent successful state. Reopening the workbook directly displays the last active tab and restores the last confirmed selected cell for each worksheet.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
@@ -510,19 +520,31 @@ children:
   - id: REQ-2.2
     name: Row and Column Structure Management
     description:
-      text: Supports inserting and deleting rows and columns in the current active worksheet. After an operation,
-        grid values, formula bar, filter views, validation behavior, and pivot refresh results remain consistent
-        while other worksheets remain unchanged; the structure persists after refresh or reopening. Row numbers
-        use the ARIA rowheader role with the decimal row number as the accessible name; column headers use the ARIA
-        columnheader role with the column letter as the accessible name. Right-clicking a row number or column header
-        opens a menu whose commands use the ARIA menuitem role.
+      text: >-
+        Supports inserting and deleting rows and columns in the current active worksheet. After an operation, grid
+        values, formula bar, filter views, validation behavior, and pivot refresh results remain consistent while other
+        worksheets remain unchanged; the structure persists after refresh or reopening. Row numbers use the ARIA
+        rowheader role with the decimal row number as the accessible name; column headers use the ARIA columnheader role
+        with the column letter as the accessible name. Right-clicking a row number or column header opens a menu whose
+        commands use the ARIA menuitem role.
+
+
+        Reference transformation applies to both relative and absolute coordinates; dollar markers survive and do not
+        freeze structural positions. For a referenced interval [start,end], insertion before or at start shifts both
+        endpoints; insertion strictly after start and at or before end expands the interval; insertion immediately after
+        end leaves it unchanged. Deletion removes the deleted original cells from a range and maps the surviving
+        first/last cells to their new coordinates, shrinking a partially deleted range. If a direct reference's target
+        or every cell of a referenced range is deleted, the affected stored formula becomes =#REF! and its displayed
+        value is #REF!. These rules apply independently to row and column intervals. Pivot source ranges follow the same
+        interval mapping, while deletion of a selected header retains an unavailable field rather than selecting a
+        different current column. Recreating a deleted header identity is outside this version's scored input domain.
     scenarios: []
     children:
     - id: REQ-2.2.1
       name: Insert and Delete Rows
       description:
         text: |-
-          Users insert blank rows above or below a target row, or delete the target row, through the row-number menu in the current active worksheet. The row-number menu provides "Insert 1 row above", "Insert 1 row below", and "Delete row". Inserting above row r creates a blank row at r and shifts the former row r and later rows down; inserting below row r creates a blank row at r+1, leaves row r in place, and shifts the former row r+1 and later rows down. Stored records, validation rules and references follow the affected cells; on deletion, subsequent rows shift upward and rules on the target row are removed. Affected formulas display the adjusted original formulas and correct results, and direct references whose target cell was deleted display #REF!; filters continue to apply to the original data region. If a shifted 0-to-100 numeric validation rule rejects an out-of-range value, the page displays "Please enter a number between 0 and 100". If the change overlaps a pivot-table source range, the existing pivot result remains unchanged until "Refresh pivot table" is clicked, after which it is recomputed using the adjusted range. If the operation fails, an error is displayed and the grid immediately and after refresh retains the pre-operation structure; partial row movement is not allowed.
+          Users insert blank rows above or below a target row, or delete the target row, through the row-number menu in the current active worksheet. The row-number menu provides "Insert 1 row above", "Insert 1 row below", and "Delete row". Inserting above row r creates a blank row at r and shifts the former row r and later rows down; inserting below row r creates a blank row at r+1, leaves row r in place, and shifts the former row r+1 and later rows down. Stored records, validation rules and references follow the affected cells; on deletion, subsequent rows shift upward and rules on the target row are removed. Affected formulas display the adjusted stored formulas and correct results, and direct references whose target cell was deleted display #REF!; filters continue to apply to the original data region. If a shifted 0-to-100 numeric validation rule rejects an out-of-range value, the page displays "Please enter a number between 0 and 100". If the change overlaps a pivot-table source range, the existing pivot result remains unchanged until "Refresh pivot table" is clicked, after which it is recomputed using the adjusted range. If the operation fails, an error is displayed and the grid immediately and after refresh retains the pre-operation structure; partial row movement is not allowed.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
@@ -538,9 +560,12 @@ children:
         name: REQ-2.2.1 - Insert and Delete Rows - Scenario 1
         steps:
         - id: STEP-REQ-2.2.1-01-01
-          Given: A1:B3 contains Item/Amount, Alpha/10, and Beta/20.
+          Given: A1:B3 contains Item/Amount, Alpha/10, Beta/20. D1 is =SUM(B2:B3), E1 is =SUM($B$3:$B$3), and F1 is
+            =SUM(B2:B2), with results 30, 20 and 10.
           When: The user inserts one row above row 3 and refreshes.
-          Then: The inserted row 3 is blank, Beta/20 moves to row 4, and the result persists.
+          Then: Row 3 is blank and Beta/20 moves to row 4 while Alpha/10 stays in row 2. D1 becomes =SUM(B2:B4), E1
+            becomes =SUM($B$4:$B$4), and F1 retains =SUM(B2:B2); their results remain 30, 20 and 10. Values and stored
+            expressions persist after refresh.
           references:
           - \ref[requirement](REQ-1.1.1)
           - \ref[image](IMG-MANAGE-ROWS)
@@ -548,9 +573,12 @@ children:
         name: REQ-2.2.1 - Insert and Delete Rows - Scenario 2
         steps:
         - id: STEP-REQ-2.2.1-02-01
-          Given: A2:A4 contains Alpha, Remove me, and Beta.
+          Given: A2:B4 contains Alpha/10, Remove me/20, Beta/30. C1 is =B3, D1 is =SUM(B2:B4), and E1 is =SUM(B3:B3),
+            with results 20, 60 and 20.
           When: The user deletes row 3 and refreshes.
-          Then: Beta moves to A3, A4 is blank, and the result persists.
+          Then: "Beta/30 moves to A3:B3 and A4:B4 becomes blank, while Alpha/10 remains in row 2. C1 and E1 display
+            #REF! with stored expression =#REF!; D1 becomes =SUM(B2:B3) and displays 40. The cells and stored
+            expressions persist after refresh."
           references:
           - \ref[requirement](REQ-1.1.1)
           - \ref[image](IMG-MANAGE-ROWS)
@@ -589,7 +617,7 @@ children:
       name: Insert and Delete Columns
       description:
         text: |-
-          Users insert a blank column to the left or right of a target column, or delete the target column, through the column-header menu in the current active worksheet. The column-header menu provides "Insert 1 column left", "Insert 1 column right", and "Delete column". Inserting left of a column creates a blank column at its former coordinate and shifts that column and later columns right; inserting right leaves the target column in place, creates a blank column immediately after it, and shifts only the subsequent columns right. Stored records, validation rules and references follow the affected cells; on deletion, subsequent columns shift left and rules on the target column are removed. Data outside the deleted column is preserved; affected formulas display the adjusted original formulas and correct results, while direct references that cannot be preserved display #REF!; filters continue to apply to the adjusted region. If a shifted 0-to-100 numeric validation rule rejects an out-of-range value, the page displays "Please enter a number between 0 and 100". After pivot-table source columns move, existing results remain unchanged until "Refresh pivot table" is clicked, after which the moved fields are used. If a selected header is deleted, refreshing or opening the pivot table editor displays a visible error requiring the field to be reselected and preserves the last successful result. If the operation fails, an error is shown and the grid retains the pre-operation structure immediately and after refresh.
+          Users insert a blank column to the left or right of a target column, or delete the target column, through the column-header menu in the current active worksheet. The column-header menu provides "Insert 1 column left", "Insert 1 column right", and "Delete column". Inserting left of a column creates a blank column at its former coordinate and shifts that column and later columns right; inserting right leaves the target column in place, creates a blank column immediately after it, and shifts only the subsequent columns right. Stored records, validation rules and references follow the affected cells; on deletion, subsequent columns shift left and rules on the target column are removed. Data outside the deleted column is preserved; affected formulas display the adjusted stored formulas and correct results, while direct references that cannot be preserved display #REF!; filters continue to apply to the adjusted region. If a shifted 0-to-100 numeric validation rule rejects an out-of-range value, the page displays "Please enter a number between 0 and 100". After pivot-table source columns move, existing results remain unchanged until "Refresh pivot table" is clicked, after which the moved fields are used. If a selected header is deleted, refreshing or opening the pivot table editor displays a visible error requiring the field to be reselected and preserves the last successful result. If the operation fails, an error is shown and the grid retains the pre-operation structure immediately and after refresh.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
@@ -605,9 +633,12 @@ children:
         name: REQ-2.2.2 - Insert and Delete Columns - Scenario 1
         steps:
         - id: STEP-REQ-2.2.2-01-01
-          Given: A1:C1 contains Alpha, Beta, Gamma.
+          Given: A1:C1 contains Alpha, Beta, Gamma and A2:C2 contains 1, 2, 3. A4 is =SUM(A2:C2), A5 is =SUM($B$2:$C$2),
+            and A6 is =SUM(A2:A2), with results 6, 5 and 1.
           When: The user inserts one column left of B and refreshes.
-          Then: B1 is blank, Beta moves to C1, Gamma moves to D1, and the result persists.
+          Then: Column B is blank; Beta/2 moves to C and Gamma/3 moves to D while Alpha/1 remains in A. A4 becomes
+            =SUM(A2:D2), A5 becomes =SUM($C$2:$D$2), and A6 retains =SUM(A2:A2), with results 6, 5 and 1 before and
+            after refresh.
           references:
           - \ref[requirement](REQ-1.1.1)
           - \ref[image](IMG-MANAGE-COLUMNS)
@@ -615,9 +646,12 @@ children:
         name: REQ-2.2.2 - Insert and Delete Columns - Scenario 2
         steps:
         - id: STEP-REQ-2.2.2-02-01
-          Given: A1:C2 contains Unit price/Quantity/Total and 10/2/=A2*B2.
+          Given: A1:C2 contains Unit price/Quantity/Total and 10/2/=A2*B2. A3:C3 contains 1, 2, 3. A4 is =SUM(A3:C3)
+            with result 6 and A5 is =SUM(B3:B3) with result 2.
           When: The user deletes column B and refreshes.
-          Then: 'Total moves to B, its value is #REF!, C is blank, and the error persists.'
+          Then: "Total moves to column B; B2 displays #REF! with stored expression =#REF!. C1:C3 becomes blank, A3:B3
+            is 1/3, A4 becomes =SUM(A3:B3) and displays 4, and A5 displays #REF! with stored expression =#REF!. Values
+            and stored expressions persist after refresh."
           references:
           - \ref[requirement](REQ-1.1.1)
           - \ref[image](IMG-MANAGE-COLUMNS)
@@ -656,7 +690,7 @@ children:
     name: Direct Data Entry
     description:
       text: |-
-        Supports entering data through the current worksheet grid, the text box labeled "Formula bar", or the external clipboard. The grid, formula bar, and selection state must show consistent content for the same cell; ordinary values and original formulas persist after refresh. Double-clicking a grid cell displays an inline text box with the accessible name "Edit <cell coordinate>".
+        Supports entering data through the current worksheet grid, the text box labeled "Formula bar", or the external clipboard. The grid, formula bar, and selection state must show consistent content for the same cell; ordinary values and stored formulas persist after refresh. Double-clicking a grid cell displays an inline text box with the accessible name "Edit <cell coordinate>".
 
         For cell text, formulas and table data entered through UI: Entered through the grid, formula bar, clipboard paste or successful CSV import into the current worksheet. Coordinates and values are supplied by the caller; rejected edits do not create cell data.
     scenarios: []
@@ -665,13 +699,13 @@ children:
       name: Edit a Cell Through the Grid or Formula Bar
       description:
         text: |-
-          After selecting a cell in the current active worksheet, users can modify its content directly in the grid or formula bar. Cells support text, numbers, boolean-like values, date text, and formulas beginning with an equals sign. Pressing Enter or clicking another cell commits the change; pressing Escape cancels an uncommitted change. Ordinary cells show the same input in the grid and formula bar; formula cells show the calculated result in the grid and the original submitted formula in the formula bar. After a source value is committed, directly and indirectly dependent formulas update their results. Values, original formulas, and results persist after refresh. If a commit fails, an error is displayed, the grid and formula bar continue to show the last successful value or formula, and dependent results remain unchanged.
+          After selecting a cell in the current active worksheet, users can modify its content directly in the grid or formula bar. Cells support text, numbers, boolean-like values, date text, and formulas beginning with an equals sign. Pressing Enter or clicking another cell commits the change; pressing Escape cancels an uncommitted change. Ordinary cells show the same input in the grid and formula bar; formula cells show the calculated result in the grid and the currently stored formula in the formula bar. After a source value is committed, directly and indirectly dependent formulas update their results. Values, stored formulas, and results persist after refresh. If a commit fails, an error is displayed, the grid and formula bar continue to show the last successful value or formula, and dependent results remain unchanged.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
           The current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.
 
-          Double-clicking a grid cell opens an inline textbox named Edit <cell coordinate>. The textbox labeled Formula bar always shows the selected cell ordinary value or original formula.
+          Double-clicking a grid cell opens an inline textbox named Edit <cell coordinate>. The textbox labeled Formula bar always shows the selected cell ordinary value or stored formula.
       scenarios:
       - id: SCN-REQ-3.1.1-01
         name: REQ-3.1.1 - Edit a Cell Through the Grid or Formula Bar - Scenario 1
@@ -815,7 +849,7 @@ children:
       name: Copy, Cut, and Paste Cell Ranges
       description:
         text: |-
-          Users select a rectangular range by dragging from one corner to another in the current active worksheet, then copy or cut it and select a target location to paste; only operations within the same worksheet are supported. Copying leaves the source content unchanged. Starting a cut does not clear the source. A successful paste commits the complete move together: read the original rectangle before writing, fill the destination, and clear only source cells outside the destination. A rejected paste leaves both ranges unchanged; no intermediate half-move is a successful state. Values and formulas preserve their two-dimensional layout; when formulas are copied, relative references adjust according to the target offset while absolute references remain unchanged, and the formula bar displays the adjusted original formula. The source range, target range, and affected formulas must either all update and persist after refresh or all remain in their original state; when a target 0-to-100 numeric validation rule rejects the operation, the page displays "Please enter a number between 0 and 100". Cells outside the source and destination retain unrelated stored data and rules. Formula references to moved source cells may change outside those rectangles, and directly or indirectly dependent displayed results must recalculate; these are required effects of a cut, not unrelated edits. Cut reference mapping, overlapping destinations and destination validation follow REQ-6.1 and REQ-6.2. Copy reference adjustment remains distinct from cut reference mapping.
+          Users select a rectangular range by dragging from one corner to another in the current active worksheet, then copy or cut it and select a target location to paste; only operations within the same worksheet are supported. Copying leaves the source content unchanged. Starting a cut does not clear the source. On successful cut-and-paste, each destination cell contains the content of its corresponding pre-paste source cell, including when the rectangles overlap, and only source cells outside the destination become empty. Source, destination and required dependent updates form one committed result. A rejected paste leaves the complete prior state unchanged. A partially completed move must not be exposed as a committed result. Values and formulas preserve their two-dimensional layout; when formulas are copied, relative references adjust according to the target offset while absolute references remain unchanged, and the formula bar displays the adjusted stored formula. The source range, target range, and affected formulas must either all update and persist after refresh or all remain in their original state; when a target 0-to-100 numeric validation rule rejects the operation, the page displays "Please enter a number between 0 and 100". Cells outside the source and destination retain unrelated stored data and rules. Formula references to moved source cells may change outside those rectangles, and directly or indirectly dependent displayed results must recalculate; these are required effects of a cut, not unrelated edits. Cut reference mapping, overlapping destinations and destination validation follow REQ-6.1 and REQ-6.2. Copy reference adjustment remains distinct from cut reference mapping.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
@@ -876,7 +910,7 @@ children:
       name: Undo and Redo Recent Operations
       description:
         text: |-
-          Users can undo recent cell edits, bulk pastes, range moves, and row/column structure changes in the current workbook session. The toolbar provides buttons with the accessible names "Undo" and "Redo"; Ctrl+Z and Ctrl+Y perform the same operations. Undo restores the grid values, original formulas, row/column structure, rule ranges, pivot-result validity, and calculation results from before the operation; consecutive undo operations restore changes in reverse order, and redo reapplies the complete operation that was just undone. Undo in one workbook must not modify another workbook. The state after each undo or redo persists after refresh; the history itself only needs to exist within the current session and may be empty after reopening. If a new modification is made after an undo, the "Redo" button becomes disabled and Ctrl+Y cannot restore the old branch.
+          Users can undo recent cell edits, bulk pastes, range moves, and row/column structure changes in the current workbook session. The toolbar provides buttons with the accessible names "Undo" and "Redo"; Ctrl+Z and Ctrl+Y perform the same operations. Undo restores the grid values, stored formulas, row/column structure, rule ranges, pivot-result validity, and calculation results from before the operation; consecutive undo operations restore changes in reverse order, and redo reapplies the complete operation that was just undone. Undo in one workbook must not modify another workbook. The state after each undo or redo persists after refresh; the history itself only needs to exist within the current session and may be empty after reopening. If a new modification is made after an undo, the "Redo" button becomes disabled and Ctrl+Y cannot restore the old branch.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
@@ -902,8 +936,12 @@ children:
         steps:
         - id: STEP-REQ-3.2.2-02-01
           Given: A blank workbook is open.
-          When: The user enters an old value, undoes it, enters a new value, attempts Redo, and refreshes.
-          Then: The new value remains, Redo is disabled, and the old value is absent.
+          When: Enter a runtime-unique old value in A1 and undo it. Open the inline editor, enter a different unsaved
+            value, and press Escape. Redo the old edit and Undo it again. Enter a distinct runtime-unique new value,
+            attempt Redo and refresh.
+          Then: Escape closes the editor, leaves A1 and its stored input blank, and preserves the enabled redo branch.
+            Redo restores exactly the old value and Undo clears it again. The successful new edit then disables Redo;
+            toolbar and Ctrl+Y cannot restore the old branch, and the new value persists after refresh.
           references:
           - \ref[requirement](REQ-2.2.1)
           - \ref[requirement](REQ-2.2.2)
@@ -983,21 +1021,21 @@ children:
     name: Formula Input and Functions
     description:
       text: Supports entering basic expressions and aggregate functions through the grid and "Formula bar" from
-        REQ-3.1.1 and copying formulas through REQ-3.2.1. The formula bar always displays the original formula,
-        the grid displays results consistent with the current source data, and both persist after refresh.
+        REQ-3.1.1 and copying formulas through REQ-3.2.1. The formula bar always displays the stored formula, the grid
+        displays results consistent with the current source data, and both persist after refresh.
     scenarios: []
     children:
     - id: REQ-4.1.1
       name: Calculate Basic Expressions and Aggregate Functions
       description:
         text: |-
-          Users enter formulas beginning with an equals sign through the grid or formula bar in REQ-3.1.1. Formulas must support at least numeric constants, parentheses, addition, subtraction, multiplication, division, A1-style references within the same worksheet, and SUM, AVERAGE, COUNT, MIN, and MAX over contiguous ranges; cross-worksheet references are not required. The grid displays results calculated from the current source data, and when a formula cell is selected the formula bar displays the original expression entered by the user; both persist after refresh. Function names are case-insensitive; aggregate functions ignore empty cells, COUNT counts only numeric cells, and SUM/AVERAGE/MIN/MAX use only numeric cells and do not treat blanks as zero.
+          Users enter formulas beginning with an equals sign through the grid or formula bar in REQ-3.1.1. Formulas must support at least numeric constants, parentheses, addition, subtraction, multiplication, division, A1-style references within the same worksheet, and SUM, AVERAGE, COUNT, MIN, and MAX over contiguous ranges; cross-worksheet references are not required. The grid displays results calculated from the current source data, and when a formula cell is selected the formula bar displays the currently stored expression; both persist after refresh. Function names are case-insensitive; aggregate functions ignore empty cells, COUNT counts only numeric cells, and SUM/AVERAGE/MIN/MAX use only numeric cells and do not treat blanks as zero.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
           The current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.
 
-          The Formula bar displays the original formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
+          The Formula bar displays the stored formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
         image:
         - id: IMG-BASIC-FORMULAS
           reference: reference/basic-formulas.png
@@ -1017,11 +1055,13 @@ children:
         name: REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 2
         steps:
         - id: STEP-REQ-4.1.1-02-01
-          Given: In the current worksheet, B2=2, B4=4 and B6=6; B3, B5, B7 and B10 are empty; B8 contains not numeric
-            and B9 contains TRUE. D2:D6 are initially empty.
-          When: Enter =sum(B2:B10) in D2, =AVERAGE(B2:B10) in D3, =COUNT(B2:B10) in D4, =MIN(B2:B10) in D5 and
-            =MAX(B2:B10) in D6, then refresh.
-          Then: D2:D6 display 12, 4, 3, 2, and 6, and each formula bar retains the corresponding formula.
+          Given: B2=2, B4=4 and B6=6; B3, B5, B7 and B10 are empty; B8 is not numeric and B9 is TRUE. F2 is empty and F3
+            is not numeric. D2:D6 and H2:H6 are empty.
+          When: Enter =sum(B2:B10), =AVERAGE(B2:B10), =COUNT(B2:B10), =MIN(B2:B10), =MAX(B2:B10) in D2:D6. Enter the
+            corresponding five functions over F2:F3 in H2:H6, then refresh.
+          Then: "D2:D6 display 12, 4, 3, 2 and 6. H2:H6 display 0, #DIV/0!, 0, 0 and 0. Selecting every output shows
+            its own stored expression, including lowercase sum in D2; all results and expressions persist after
+            refresh."
           references:
           - \ref[requirement](REQ-3.1.1)
           - \ref[image](IMG-BASIC-FORMULAS)
@@ -1031,7 +1071,7 @@ children:
         - id: STEP-REQ-4.1.1-03-01
           Given: A1 is 9 and B1 is 3.
           When: The user enters =A1-B1, =A1/B1, =10-3*2, and =42 in C1:C4.
-          Then: C1:C4 display 6, 3, 4, and 42 with the raw formulas preserved after refresh.
+          Then: C1:C4 display 6, 3, 4, and 42 with the stored formula expressions preserved after refresh.
           references:
           - \ref[requirement](REQ-3.1.1)
           - \ref[image](IMG-BASIC-FORMULAS)
@@ -1066,7 +1106,7 @@ children:
 
           The current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.
 
-          The Formula bar displays the original formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
+          The Formula bar displays the stored formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
       scenarios:
       - id: SCN-REQ-4.1.2-01
         name: REQ-4.1.2 - Copy Formulas and Adjust Relative References - Scenario 1
@@ -1109,7 +1149,7 @@ children:
 
           The current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.
 
-          The Formula bar displays the original formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
+          The Formula bar displays the stored formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
       scenarios:
       - id: SCN-REQ-4.2.1-01
         name: REQ-4.2.1 - Recalculate Dependent Formulas After Source Data Changes - Scenario 1
@@ -1159,13 +1199,13 @@ children:
       name: Display and Fix Formula Errors
       description:
         text: |-
-          Formula errors use stable visible values: division by zero displays #DIV/0!, an invalid reference displays #REF!, an unsupported function displays #NAME?, a malformed expression displays #ERROR!, and a direct or indirect circular reference displays #REF!. When an error cell is selected, the formula bar displays the original formula submitted by the user; after refresh, both the error value and original formula persist. An error cell does not block viewing, editing, or recalculating other cells. After the user changes it to a valid formula through REQ-3.1.1, the grid displays the new result, the formula bar displays the new formula, related dependent results update, and the error no longer appears after refresh.
+          Formula errors use stable visible values: division by zero displays #DIV/0!, an invalid reference displays #REF!, an unsupported function displays #NAME?, a malformed expression displays #ERROR!, and a direct or indirect circular reference displays #REF!. When an error cell is selected, the formula bar displays the stored formula submitted by the user; after refresh, both the error value and stored formula persist. An error cell does not block viewing, editing, or recalculating other cells. After the user changes it to a valid formula through REQ-3.1.1, the grid displays the new result, the formula bar displays the new formula, related dependent results update, and the error no longer appears after refresh.
 
           The active worksheet uses grid role with accessible name Worksheet grid and aria-multiselectable=true. Cells use gridcell role and their coordinates as names; the selected cell and cells in a selected rectangular range expose aria-selected=true, and other cells expose aria-selected=false. Worksheet tabs use tab role and expose their active state through aria-selected.
 
           The current workbook retains its identity when revisiting or refreshing its visible state. Operations apply to the current active worksheet or workbook as stated and must not modify unrelated workbooks or worksheets.
 
-          The Formula bar displays the original formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
+          The Formula bar displays the stored formula while the grid displays its current calculated result. Edits, pastes, moves and row/column changes update dependent references and results; an erroneous formula does not corrupt unrelated cells.
       scenarios:
       - id: SCN-REQ-4.2.2-01
         name: REQ-4.2.2 - Display and Fix Formula Errors - Scenario 1
@@ -1174,8 +1214,8 @@ children:
           Given: A1 is Keep and the workbook is blank otherwise.
           When: The user enters =1/0, =A0, =UNSUPPORTED(1), =1+, and =B5 in B1:B5, changes A1 to a unique value,
             pastes 3 and =C1*2 into C1:C2, and refreshes.
-          Then: 'The five cells display #DIV/0!, #REF!, #NAME?, #ERROR!, and #REF!, their raw formulas remain in
-            the formula bar, unrelated A1 persists, and C2 evaluates to 6.'
+          Then: "The five cells display #DIV/0!, #REF!, #NAME?, #ERROR!, and #REF!, their stored formula expressions
+            remain in the formula bar, unrelated A1 persists, and C2 evaluates to 6."
           references:
           - \ref[requirement](REQ-4.1.1)
       - id: SCN-REQ-4.2.2-02
@@ -1202,7 +1242,7 @@ children:
         - id: STEP-REQ-4.2.2-04-01
           Given: A blank workbook is open.
           When: The user enters =NOPE(1) in A1 and =1+ in B1, then refreshes.
-          Then: 'A1 displays #NAME? and B1 displays #ERROR!, with both raw formulas preserved.'
+          Then: "A1 displays #NAME? and B1 displays #ERROR!, with both stored formula expressions preserved."
           references:
           - \ref[requirement](REQ-4.1.1)
       - id: SCN-REQ-4.2.2-05
@@ -1260,7 +1300,8 @@ children:
         name: REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 2
         steps:
         - id: STEP-REQ-5.1.1-02-01
-          Given: A1:C4 contains Charlie, Alpha, Bravo with dates and values 30, 10, 20.
+          Given: A1:C4 contains the rows [Name, Date, Value]; [Charlie, 2026-03-10, 30]; [Alpha, 2026-01-15, 10];
+            [Bravo, 2026-02-01, 20].
           When: The user sorts by Name ascending, then by Date descending.
           Then: The final order is Charlie, Bravo, Alpha with matching dates and values, and it persists after refresh.
           references:
@@ -1355,8 +1396,8 @@ children:
         - id: STEP-REQ-5.1.2-02-01
           Given: A1:C4 contains names Alpha East, Alpha West, Beta; dates 2026-01-10, 2026-02-10, 2025-12-01; Note
             is blank, Filled, blank.
-          When: The user applies Name contains Alpha, Date before 2026-02-01, and Note is empty, then replaces that
-            with Note is not empty.
+          When: Apply Name contains Alpha, Date before 2026-02-01, and Note is empty together, then refresh. Clear all
+            filter conditions, create a new filter containing only Note is not empty, then refresh again.
           Then: The first filter shows only Alpha East; the second shows only Alpha West; each state persists after
             refresh.
           references:
@@ -1366,7 +1407,7 @@ children:
         name: REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 3
         steps:
         - id: STEP-REQ-5.1.2-03-01
-          Given: A1:B4 contains East/100, North/200, East/300.
+          Given: A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300].
           When: The user filters Region to East, exports the sheet, and refreshes.
           Then: North's row is hidden in the grid, the export contains the complete original CSV, and the filter
             remains after refresh.
@@ -1387,7 +1428,7 @@ children:
         name: REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 5
         steps:
         - id: STEP-REQ-5.1.2-05-01
-          Given: A1:B4 contains Region/Sales rows East/100, North/200, East/300.
+          Given: A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300].
           When: The user creates a filter, filters Sales greater than 150, and refreshes.
           Then: Only North/200 and East/300 remain visible and the condition persists.
           references:
@@ -1535,7 +1576,7 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 2
         steps:
         - id: STEP-REQ-5.3.1-02-01
-          Given: Sheet1!A1:B4 contains East/1200, North/800, East/600.
+          Given: Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 1200]; [North, 800]; [East, 600].
           When: The user creates a Region/Sales SUM pivot, changes Sheet1!B2 to 1500, and refreshes the pivot.
           Then: Pivot1 updates to East 2100, North 800, Grand Total 2900 and persists.
           references:
@@ -1564,7 +1605,8 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 4
         steps:
         - id: STEP-REQ-5.3.1-04-01
-          Given: A1:B6 contains East 100, East not numeric, East 300, North 200, North blank.
+          Given: Sheet1!A1:B6 contains the rows [Region, Sales]; [East, 100]; [East, not numeric]; [East, 300]; [North,
+            200]; [North, empty]. The last Sales cell is empty, not the literal word empty.
           When: The user creates a Region/Sales AVERAGE pivot.
           Then: 'Pivot1 averages numeric values only: East 200, North 200, Grand Total 200; source text remains
             unchanged after refresh.'
@@ -1581,8 +1623,10 @@ children:
           Given: A1:B4 contains Region/Status East/Open, East/Closed, North/Open.
           When: The user creates a Status-row, Region-value COUNT pivot, then attempts to change the summary to
             SUM.
-          Then: COUNT shows Open 2, Closed 1, Grand Total 3; SUM is rejected with the numeric-values message and
-            COUNT remains after refresh.
+          Then: The applied COUNT table is [Status, COUNT of Region]; [Open, 2]; [Closed, 1]; [Grand Total, 3]. SUM is
+            rejected with Value field requires numeric values, preserving this complete result and source content. After
+            reopening and refresh, Rows=Status, Values=Region and Summarize by=COUNT remain the applied configuration
+            and the complete COUNT result persists.
           references:
           - \ref[requirement](REQ-2.1.1)
           - \ref[requirement](REQ-2.2.1)
@@ -1593,7 +1637,8 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 6
         steps:
         - id: STEP-REQ-5.3.1-06-01
-          Given: A1:B4 contains East/100, North/200, East/300 and the source is filtered to East.
+          Given: Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300], with an active
+            filter showing only East.
           When: The user creates a Region/Sales SUM pivot from the filtered range and refreshes it.
           Then: Pivot1 shows East 400, North 200, Grand Total 600 and remains unchanged after refresh.
           references:
@@ -1606,7 +1651,8 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 7
         steps:
         - id: STEP-REQ-5.3.1-07-01
-          Given: A1:B4 contains East/100, North/200, East/300 and a Region/Sales SUM pivot exists.
+          Given: Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]. Pivot1 has an
+            applied Region-row, Sales-SUM definition over A1:B4.
           When: The user inserts a source row East/50, refreshes Pivot1, inserts a source column left of Sales,
             refreshes again, and reloads.
           Then: The pivot totals update to East 450, North 200, Grand Total 650 and persist.
@@ -1620,10 +1666,14 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 8
         steps:
         - id: STEP-REQ-5.3.1-08-01
-          Given: A1:B4 contains East/100, North/200, East/300 and a Region/Sales SUM pivot exists.
-          When: The user deletes the source Sales column and refreshes Pivot1.
-          Then: The pivot field unavailable message is shown; the previous pivot values remain visible and persist
-            after refresh.
+          Given: Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]. Pivot1 has an
+            applied Region-row, Sales-SUM definition over A1:B4.
+          When: Delete the source Sales column, attempt Refresh pivot table, reopen and reload Pivot1, inspect its
+            remaining applied field selections, and attempt Refresh pivot table again.
+          Then: Each refresh attempt displays Pivot field is no longer available. Select a new field. The last
+            successful table [Region, SUM of Sales]; [East, 400]; [North, 200]; [Grand Total, 600] remains before and
+            after reload. Rows=Region and Summarize by=SUM remain applied; the removed value field remains unavailable.
+            The source stays in its post-deletion state and is not restored or modified by either refusal.
           references:
           - \ref[requirement](REQ-2.1.1)
           - \ref[requirement](REQ-2.2.1)
@@ -1634,7 +1684,7 @@ children:
         name: REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 9
         steps:
         - id: STEP-REQ-5.3.1-09-01
-          Given: A1:B5 contains East/Open, East/Closed, North/Open, South/Open.
+          Given: Sheet1!A1:B5 contains the rows [Region, Status]; [East, Open]; [East, Closed]; [North, Open]; [South, Open].
           When: The user creates a Region-row, Status-value COUNT pivot and refreshes.
           Then: "Pivot1!A1:B5 contains the following rows in order: [Region, COUNT of Status]; [East, 2]; [North, 1];
             [South, 1]; [Grand Total, 4]. The saved field configuration and all four counts remain after refresh."
@@ -1656,7 +1706,7 @@ children:
     name: Make validated cuts atomic across formulas and history
     description:
       text: |-
-        Cut and Paste of a rectangular range is one transaction. Validate the entire proposed final worksheet before saving, including values produced by formulas in validated destination cells. Numeric rules test the calculated numeric value, not the raw formula text. If any destination fails its rule, leave all source and destination values, formulas, validation rules and dependent results unchanged. A refused paste adds no undo entry and does not clear existing redo history. On success the destination is written and only source cells outside it are cleared. A reference to a moved source cell follows its new coordinate, even if the formula itself does not move; preserve dollar markers. A reference to a cell outside the source keeps its coordinate. Recalculate all dependent values before the edit is observable. One Undo restores the complete prior worksheet; one Redo reapplies the complete move. Saved worksheet state persists across reload; history across reload is not required.
+        Cut and Paste of a rectangular range is one transaction. Validate the entire proposed final worksheet before saving, including values produced by formulas in validated destination cells. Numeric rules test the calculated numeric value, not the stored formula text. If any destination fails its rule, leave all source and destination values, formulas, validation rules and dependent results unchanged. A refused paste adds no undo entry and does not clear existing redo history. On success the destination is written and only source cells outside it are cleared. A reference to a moved source cell follows its new coordinate, even if the formula itself does not move; preserve dollar markers. A reference to a cell outside the source keeps its coordinate. Recalculate all dependent values before the edit is observable. One Undo restores the complete prior worksheet; one Redo reapplies the complete move. Saved worksheet state persists across reload; history across reload is not required.
     scenarios:
     - id: SCN-REQ-6.1-01
       name: Refuse a final-cell validation failure without consuming undo
@@ -1693,7 +1743,7 @@ children:
     name: Resolve overlapping cuts using original cell identities
     description:
       text: |-
-        A same-worksheet cut can overlap its destination. Read the entire source before applying the move; each destination receives its original source cell, and only source cells outside the destination are cleared. Retarget each reference to an original source cell to that cell's new coordinate, including references in unmoved formulas and absolute references, preserving their dollar markers. References to cells outside the source retain their coordinates even in moved formulas. Apply these mappings once; do not recursively retarget the coordinates already produced by the move. Validate against the resulting proposed worksheet, and treat the whole move and its derived updates as one undoable transaction.
+        A same-worksheet cut can overlap its destination. Each destination receives the content of its corresponding source cell from the pre-paste state, and only source cells outside the destination are cleared. Retarget each reference to an original source cell to that cell's new coordinate, including references in unmoved formulas and absolute references, preserving their dollar markers. References to cells outside the source retain their coordinates even in moved formulas. Apply these mappings once; do not recursively retarget the coordinates already produced by the move. Validate against the resulting proposed worksheet, and treat the whole move and its derived updates as one undoable transaction.
     scenarios:
     - id: SCN-REQ-6.2-01
       name: Move an overlapping rectangle without chasing rewritten references

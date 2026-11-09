@@ -1,0 +1,3105 @@
+{
+  "task": "sheet",
+  "revision": "2026-11-09-sheet-experiment-r2",
+  "totalRequirements": 26,
+  "totalScenarios": 104,
+  "source": "arc-bench/sheet/requirements/requirements.yaml",
+  "historicalReview": {
+    "file": "audit/sheet.json",
+    "requirements": 24,
+    "scenarios": 100
+  },
+  "targetedScenariosReviewed": 15,
+  "scenarios": [
+    {
+      "requirementId": "REQ-1.1.1",
+      "scenarioId": "SCN-REQ-1.1.1-01",
+      "scenarioName": "REQ-1.1.1 - View and Open a Workbook - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
+      "testLine": 46,
+      "callbackSha256": "f4bf8e4fdcfbb477ee7ec10a83b9b163d68ce14a3427ff62e9e868396715a0d7",
+      "given": [
+        "The visitor starts on the home page with no workbook selected."
+      ],
+      "when": [
+        "The user creates a blank workbook, renames it with a runtime-unique name, enters a runtime-unique value in A1, returns home, and opens that workbook link."
+      ],
+      "then": [
+        "The editor shows the same workbook name, last-updated text, active Sheet1, and the value in A1; after refresh and in a new browser session, the workbook and A1 value remain visible."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.1.1",
+      "scenarioId": "SCN-REQ-1.1.1-02",
+      "scenarioName": "REQ-1.1.1 - View and Open a Workbook - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-1.1.1.spec.ts",
+      "testLine": 80,
+      "callbackSha256": "79e64115ab04a788cb9f387750a08d74364209ac9c2a5425b7cd54d368a41d37",
+      "given": [
+        "Two blank workbooks have been created, each with a different runtime-unique name and a different value in A1."
+      ],
+      "when": [
+        "The user returns home, opens the first workbook, and refreshes the editor."
+      ],
+      "then": [
+        "A1 contains the first workbook's value and the second workbook's value is absent both before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.2.1",
+      "scenarioId": "SCN-REQ-1.2.1-01",
+      "scenarioName": "REQ-1.2.1 - Create a Blank Workbook - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-1.2.1.spec.ts",
+      "testLine": 15,
+      "callbackSha256": "ccc026b0b37a11c6906d54fa3f6aa172054e48f4b04ed2c04f6d85964fe535b2",
+      "given": [
+        "The visitor is on the workbook home page."
+      ],
+      "when": [
+        "The user clicks New blank workbook, submits the creation page with Create, and refreshes the editor."
+      ],
+      "then": [
+        "The editor contains only blank Sheet1, Sheet1 is active, A1 is selected and empty, and those states remain after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.2.2",
+      "scenarioId": "SCN-REQ-1.2.2-01",
+      "scenarioName": "REQ-1.2.2 - Rename a Workbook - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-1.2.2.spec.ts",
+      "testLine": 16,
+      "callbackSha256": "4cbe27b40aa16fec10b6620c6d15436a4ddb2b5b6f05c9f1adff458bce81e88c",
+      "given": [
+        "A newly created workbook contains Existing data in A1."
+      ],
+      "when": [
+        "The user opens Rename workbook, enters a runtime-unique name surrounded by spaces, submits with Enter, returns home, reopens the renamed link, and opens the rename dialog again."
+      ],
+      "then": [
+        "Leading and trailing spaces are removed; the editor and home link show the new name, A1 still contains Existing data, and the reopened dialog is prefilled with the trimmed name."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.2"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.2.2",
+      "scenarioId": "SCN-REQ-1.2.2-02",
+      "scenarioName": "REQ-1.2.2 - Rename a Workbook - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-1.2.2.spec.ts",
+      "testLine": 36,
+      "callbackSha256": "e2a813504b91de85adc82743538f9a9cad3fbbb997e11cd051d6093261adca63",
+      "given": [
+        "A newly created workbook is open with a non-empty original name."
+      ],
+      "when": [
+        "The user enters only spaces in the Workbook name field and submits Save, then refreshes and reopens the rename dialog."
+      ],
+      "then": [
+        "The message Workbook name cannot be empty is visible; the original name remains in the editor and the reopened field."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.1",
+      "scenarioId": "SCN-REQ-1.3.1-01",
+      "scenarioName": "REQ-1.3.1 - Import CSV to Create a Workbook - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+      "testLine": 21,
+      "callbackSha256": "8a32af21d805823102a521c509f9a7a319c044083d0918bc3f355178a9255ad6",
+      "given": [
+        "The visitor is on the workbook home page and has a CSV containing quoted commas, a quoted newline and quote escapes, UTF-8 English and Chinese text, numeric text including 007, and blank fields.\nThe input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is \"Name,Note,Count,Blank\\r\\nAlex,\\\"Harbor District, East\\\",42,\\r\\nJordan,\\\"They said\\\"\\\"hello\\\"\\\"\\r\\nnext line\\\",3,\\r\\nAlice,English text 中文,007,\". In this notation, \\r\\n denotes CRLF and \\n denotes LF; quoted CSV fields retain embedded line breaks."
+      ],
+      "when": [
+        "The user opens Import CSV, uploads the CSV, and confirms the import."
+      ],
+      "then": [
+        "The uploaded file opens as a workbook on Sheet1. A1:D1 contains Name, Note, Count, Blank in that order. A2 is Alex; B2 is the single field Harbor District, East; C2 is 42 and D2 is empty. A3 is Jordan; B3 contains They said\"hello\" followed by the supplied line break and next line; C3 is 3 and D3 is empty. A4 is Alice, B4 is English text 中文, C4 is the ordinary text 007 and D4 is empty. Every decoded cell remains at its original coordinate after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expectCellText"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.1",
+      "scenarioId": "SCN-REQ-1.3.1-02",
+      "scenarioName": "REQ-1.3.1 - Import CSV to Create a Workbook - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+      "testLine": 72,
+      "callbackSha256": "9d5465d53843cef2e49853b52faa056b349b96db94d6271a0b9fee42aa360197",
+      "given": [
+        "The visitor is on the workbook home page.\nThe input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is \"Name,Note\\r\\n Alex,\\\"unfinished quote\". In this notation, \\r\\n denotes CRLF and \\n denotes LF; quoted CSV fields retain embedded line breaks."
+      ],
+      "when": [
+        "The user uploads a CSV with an unfinished quoted field and confirms the import."
+      ],
+      "then": [
+        "The message Invalid CSV file format. Import failed. is visible and no workbook link for that file name exists on the home page."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.1",
+      "scenarioId": "SCN-REQ-1.3.1-03",
+      "scenarioName": "REQ-1.3.1 - Import CSV to Create a Workbook - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+      "testLine": 88,
+      "callbackSha256": "3b61b8bf98bfeeaa18327893db7eba2b103e54451b5babdec61b3d19de4ba993",
+      "given": [
+        "The visitor is on the workbook home page with a three-column CSV containing London, a blank Description cell for Berlin, and counts 1, 2, 3.\nThe input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is \"City,Description,Count\\r\\nLondon,Capital,1\\r\\nBerlin,,2\\r\\nParis,Finance,3\". In this notation, \\r\\n denotes CRLF and \\n denotes LF; quoted CSV fields retain embedded line breaks."
+      ],
+      "when": [
+        "The user uploads and confirms the CSV import."
+      ],
+      "then": [
+        "The imported workbook shows London in A2, a blank B3, and 3 in C4; these values remain after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expectCellText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.1",
+      "scenarioId": "SCN-REQ-1.3.1-04",
+      "scenarioName": "REQ-1.3.1 - Import CSV to Create a Workbook - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.1.spec.ts",
+      "testLine": 111,
+      "callbackSha256": "c33b87eba4cbf45a15faea44800c3ccaaa874cdcc193f3fbaa86ec54403f1cd6",
+      "given": [
+        "The visitor is on the workbook home page with a single-column CSV containing Title, Alpha, Beta, and Gamma.\nThe input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is \"Title\\r\\nAlpha\\r\\nBeta\\r\\nGamma\". In this notation, \\r\\n denotes CRLF and \\n denotes LF; quoted CSV fields retain embedded line breaks."
+      ],
+      "when": [
+        "The user uploads and confirms the CSV import."
+      ],
+      "then": [
+        "The workbook opens on Sheet1 with Title in A1 and Gamma in A4, and both values remain after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expectCellText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.2",
+      "scenarioId": "SCN-REQ-1.3.2-01",
+      "scenarioName": "REQ-1.3.2 - Export the Current Worksheet as CSV - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+      "testLine": 32,
+      "callbackSha256": "7629ed389d9e05b394f454de6621bd35c917006b1c21c3877760f78e8be6de1b",
+      "given": [
+        "A workbook imported from CSV contains Region/Description/Count/Blank headers, quoted comma and newline text, and formulas E2 = C2*2 and E3 = C3+2.\nThe input file uses UTF-8 (text/csv) and a runtime-unique workbook name followed by .csv. Its exact content in JSON string notation is \"Region,Description,Count,Blank,Formula result\\nWest,\\\"Contains, commas\\\",2,,=C2*2\\nNorth,\\\"They said \\\"\\\"hello\\\"\\\"\\n next line\\\",3,,=C3+2\". In this notation, \\r\\n denotes CRLF and \\n denotes LF; quoted CSV fields retain embedded line breaks."
+      ],
+      "when": [
+        "The user exports the current worksheet, refreshes, and exports it again."
+      ],
+      "then": [
+        "Both downloads are CSV files with the evaluated formula values 4 and 5 and the required CSV quoting, blank fields, and multiline text."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell",
+        "expectCalculatedNumber",
+        "expectCsvValues"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.2",
+      "scenarioId": "SCN-REQ-1.3.2-02",
+      "scenarioName": "REQ-1.3.2 - Export the Current Worksheet as CSV - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+      "testLine": 72,
+      "callbackSha256": "62dac0fb98c51247feb9c79dd3ce249d9a880a2f1f947e1887e534fed961e943",
+      "given": [
+        "A blank workbook has 2 in A1 and formula =A1*2 in B1."
+      ],
+      "when": [
+        "The user exports Sheet1, selects B1, and refreshes."
+      ],
+      "then": [
+        "The download decodes to one row with cells 2 and 4; Sheet1 remains active, B1 displays 4, and its formula bar contains =A1*2 before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectCsvValues",
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.2",
+      "scenarioId": "SCN-REQ-1.3.2-03",
+      "scenarioName": "REQ-1.3.2 - Export the Current Worksheet as CSV - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+      "testLine": 92,
+      "callbackSha256": "6e65d477043d12e8d2e9338a64f90ef373d0317088f1d5a9c678153fbef6f82b",
+      "given": [
+        "Sheet1 contains Sheet1 in A1 and a second worksheet Sheet2 contains Sheet2 in A1."
+      ],
+      "when": [
+        "The user exports while Sheet2 is active."
+      ],
+      "then": [
+        "The CSV contains only Sheet2's value and Sheet2 remains active."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectCsvValues"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-1.3.2",
+      "scenarioId": "SCN-REQ-1.3.2-04",
+      "scenarioName": "REQ-1.3.2 - Export the Current Worksheet as CSV - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+      "testLine": 102,
+      "callbackSha256": "6bd04950dcc0aa781d6f8fd4c78c1b0d7cdcef3129c6761b46ee417b2a4743ff",
+      "given": [
+        "Sheet1 contains First in A1 and Sheet2 contains Second in A1."
+      ],
+      "when": [
+        "The user switches to Sheet1 and exports."
+      ],
+      "then": [
+        "The CSV contains only First and Sheet1 remains active."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-1.3"
+      ],
+      "assertionEntrypoints": [
+        "expectCsvValues"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.1",
+      "scenarioId": "SCN-REQ-2.1.1-01",
+      "scenarioName": "REQ-2.1.1 - Add a Worksheet - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.1.spec.ts",
+      "testLine": 18,
+      "callbackSha256": "c3f7b4091f6d2b4b5eecf699315543444c1aef913649c80e79b354073f412d1b",
+      "given": [
+        "A blank workbook is open with Existing data in Sheet1!A1."
+      ],
+      "when": [
+        "The user adds Sheet2, switches between Sheet1 and Sheet2, and refreshes while Sheet2 is active."
+      ],
+      "then": [
+        "Sheet2 starts blank and Sheet1 retains Existing data; after refresh Sheet2 is active with A1 selected and empty, and Sheet1 is still present."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.1",
+      "scenarioId": "SCN-REQ-2.1.1-02",
+      "scenarioName": "REQ-2.1.1 - Add a Worksheet - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.1.spec.ts",
+      "testLine": 49,
+      "callbackSha256": "489ed89284d1556bb328c0d3fea9c9d7a1291f1b7493b1ec69d46ce976370bb7",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user adds Sheet2, renames it to Sheet3, adds another Sheet2, and refreshes."
+      ],
+      "then": [
+        "Sheet1, Sheet3, and Sheet2 are visible; the active worksheet after refresh is Sheet2."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.2",
+      "scenarioId": "SCN-REQ-2.1.2-01",
+      "scenarioName": "REQ-2.1.2 - Switch Worksheets - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "testLine": 36,
+      "callbackSha256": "46170fa75a130257a2c2f144ee964bd3a23ffe1557a7e878bdafbfacd0dec35a",
+      "given": [
+        "Sheet1 contains 2 in A1 and =A1*2 in B1; Sheet2 contains Other in A1."
+      ],
+      "when": [
+        "The user switches Sheet1, Sheet2, Sheet1, and refreshes."
+      ],
+      "then": [
+        "Each sheet restores its own selected cell and formula bar: Sheet1 selects B1 with =A1*2 and value 4, while Sheet2 selects A1 with Other."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.2",
+      "scenarioId": "SCN-REQ-2.1.2-02",
+      "scenarioName": "REQ-2.1.2 - Switch Worksheets - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "testLine": 69,
+      "callbackSha256": "54a3278f207dba2b832709f37ecc2fabc59da2fe54bad57e8e28518af913f725",
+      "given": [
+        "Sheet1 contains 2 and =A1*2, and Sheet2 contains Other."
+      ],
+      "when": [
+        "The user selects B1, switches to Sheet2 and back to Sheet1, then switches to Sheet2 and refreshes."
+      ],
+      "then": [
+        "Sheet1 retains B1/value 4/formula =A1*2; Sheet2 retains A1/Other and remains active after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.2",
+      "scenarioId": "SCN-REQ-2.1.2-03",
+      "scenarioName": "REQ-2.1.2 - Switch Worksheets - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "testLine": 96,
+      "callbackSha256": "bcdcf24d173bb783c106adfa5f9b482aa67f9146e24606a425cfae63e3f46b42",
+      "given": [
+        "Sheet1 contains a Region/Status table, a dropdown validation on C2, and a filter on A1:B3."
+      ],
+      "when": [
+        "The user adds Sheet2, enters Other sheet in A1, switches between the worksheets, and refreshes Sheet2."
+      ],
+      "then": [
+        "Filter Region and the C2 dropdown are visible only on Sheet1, absent on Sheet2, and Sheet2 retains Other sheet after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.2",
+      "scenarioId": "SCN-REQ-2.1.2-04",
+      "scenarioName": "REQ-2.1.2 - Switch Worksheets - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "testLine": 136,
+      "callbackSha256": "413981fce882726549b42244eced1fc4dcd1ee38c9093df1c81a4e65ac819d5c",
+      "given": [
+        "Sheet1, Sheet2, and Sheet3 contain Sheet1 in A1, Sheet2 in B2, and Sheet3 in C3 respectively."
+      ],
+      "when": [
+        "The user visits all three worksheet tabs and refreshes while Sheet3 is active."
+      ],
+      "then": [
+        "Each worksheet restores its own active cell and value; Sheet3 remains active with C3 selected after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.2",
+      "scenarioId": "SCN-REQ-2.1.2-05",
+      "scenarioName": "REQ-2.1.2 - Switch Worksheets - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.2.spec.ts",
+      "testLine": 167,
+      "callbackSha256": "e79ab171a09c0048f08ed4e5fa19d1a209e0eef332455a93e14c3af2976b537d",
+      "given": [
+        "Sheet1 contains 2 and =A1*3; Sheet2 contains Other."
+      ],
+      "when": [
+        "The user switches between Sheet1 and Sheet2 and selects the displayed cells."
+      ],
+      "then": [
+        "Sheet1 shows 6 with formula =A1*3, while Sheet2 shows Other with formula bar Other."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.3",
+      "scenarioId": "SCN-REQ-2.1.3-01",
+      "scenarioName": "REQ-2.1.3 - Rename a Worksheet - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.3.spec.ts",
+      "testLine": 27,
+      "callbackSha256": "6b4f71cc969d85d252c6a72aaa9d6e87c0306e4c323e44c860cde2b57acfd960",
+      "given": [
+        "A blank workbook has Sheet2 with Existing worksheet data in A1."
+      ],
+      "when": [
+        "The user renames Sheet2 to a runtime-unique name with surrounding spaces and refreshes."
+      ],
+      "then": [
+        "The trimmed new tab name is active, Sheet1 remains visible, A1 still contains Existing worksheet data, and the rename dialog is prefilled with the new name."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.3",
+      "scenarioId": "SCN-REQ-2.1.3-02",
+      "scenarioName": "REQ-2.1.3 - Rename a Worksheet - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.3.spec.ts",
+      "testLine": 49,
+      "callbackSha256": "b38446bb4590f83c8950f65b7863ad5a4d88b51dabba9cbfe0cb6e1a5195f638",
+      "given": [
+        "A workbook contains Sheet1 and Sheet2, with Sheet2 active."
+      ],
+      "when": [
+        "The user tries to rename Sheet2 to Sheet1."
+      ],
+      "then": [
+        "Worksheet name already exists is visible, Sheet2 remains active, and that state remains after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.3",
+      "scenarioId": "SCN-REQ-2.1.3-03",
+      "scenarioName": "REQ-2.1.3 - Rename a Worksheet - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.3.spec.ts",
+      "testLine": 66,
+      "callbackSha256": "7d692908183cc6457b834c67f708b1a8804779561b3fbc80fa2b1734b2de4bf1",
+      "given": [
+        "A blank workbook with Sheet1 active is open."
+      ],
+      "when": [
+        "The user submits a worksheet name consisting only of spaces."
+      ],
+      "then": [
+        "Worksheet name cannot be empty is visible; Sheet1 remains active and the dialog still contains Sheet1 after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.4",
+      "scenarioId": "SCN-REQ-2.1.4-01",
+      "scenarioName": "REQ-2.1.4 - Delete a Worksheet - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+      "testLine": 27,
+      "callbackSha256": "478f55388f32b4a37e0773f77e260bc5745566d58ade560a2d3304ada6c7c2dc",
+      "given": [
+        "A blank workbook contains Sheet1 and Sheet2."
+      ],
+      "when": [
+        "The user chooses Delete for Sheet2 and confirms Delete worksheet."
+      ],
+      "then": [
+        "Sheet2 is removed, Sheet1 is active, and Sheet2 remains absent after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.4",
+      "scenarioId": "SCN-REQ-2.1.4-02",
+      "scenarioName": "REQ-2.1.4 - Delete a Worksheet - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+      "testLine": 43,
+      "callbackSha256": "abaac9bb4a01269f682fa0c2f81d0250a634d96a442f818715ece43162a93298",
+      "given": [
+        "A workbook contains only Sheet1."
+      ],
+      "when": [
+        "The user chooses Delete for Sheet1."
+      ],
+      "then": [
+        "The message A workbook must contain at least one worksheet is visible, no delete dialog remains, and Sheet1 remains active after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.4",
+      "scenarioId": "SCN-REQ-2.1.4-03",
+      "scenarioName": "REQ-2.1.4 - Delete a Worksheet - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+      "testLine": 55,
+      "callbackSha256": "13290aa7956f0174a5ab786ba48e73b1428a0d98794978f7ad7536a4ce352c2c",
+      "given": [
+        "Sheet1 contains a Region/Sales table and a dependent Pivot1 worksheet summarizes Sales by Region."
+      ],
+      "when": [
+        "The user attempts to delete Sheet1 and confirms the delete dialog."
+      ],
+      "then": [
+        "The message to delete or rebuild dependent pivot tables first is visible; Sheet1 and its data remain, Pivot1 remains available with East 100 in B2, and both survive refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.1.4",
+      "scenarioId": "SCN-REQ-2.1.4-04",
+      "scenarioName": "REQ-2.1.4 - Delete a Worksheet - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-2.1.4.spec.ts",
+      "testLine": 103,
+      "callbackSha256": "1799fd7f077897f4c92e4996440b4f061b7617e7a474fe832439589c9374739c",
+      "given": [
+        "Sheet1 contains a Region/Sales table, Sheet2 is present, and Pivot1 summarizes the source."
+      ],
+      "when": [
+        "The user deletes Pivot1, then deletes Sheet1, and refreshes."
+      ],
+      "then": [
+        "Pivot1 and Sheet1 are removed, Sheet2 becomes active, and both remain absent after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.1",
+      "scenarioId": "SCN-REQ-2.2.1-01",
+      "scenarioName": "REQ-2.2.1 - Insert and Delete Rows - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "testLine": 20,
+      "callbackSha256": "bae81afd607dd1eeeaf3a60bcb488e989dd7e89ea7004bec0bb2a2a96ae2ef84",
+      "given": [
+        "A1:B3 contains Item/Amount, Alpha/10, Beta/20. D1 is =SUM(B2:B3), E1 is =SUM($B$3:$B$3), and F1 is =SUM(B2:B2), with results 30, 20 and 10."
+      ],
+      "when": [
+        "The user inserts one row above row 3 and refreshes."
+      ],
+      "then": [
+        "Row 3 is blank and Beta/20 moves to row 4 while Alpha/10 stays in row 2. D1 becomes =SUM(B2:B4), E1 becomes =SUM($B$4:$B$4), and F1 retains =SUM(B2:B2); their results remain 30, 20 and 10. Values and stored expressions persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.1",
+      "scenarioId": "SCN-REQ-2.2.1-02",
+      "scenarioName": "REQ-2.2.1 - Insert and Delete Rows - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "testLine": 59,
+      "callbackSha256": "d0419b68e3033a1f2a1a7b666bc3dec4cd05c2ce9a89fa4624f0d9ed8047f61b",
+      "given": [
+        "A2:B4 contains Alpha/10, Remove me/20, Beta/30. C1 is =B3, D1 is =SUM(B2:B4), and E1 is =SUM(B3:B3), with results 20, 60 and 20."
+      ],
+      "when": [
+        "The user deletes row 3 and refreshes."
+      ],
+      "then": [
+        "Beta/30 moves to A3:B3 and A4:B4 becomes blank, while Alpha/10 remains in row 2. C1 and E1 display #REF! with stored expression =#REF!; D1 becomes =SUM(B2:B3) and displays 40. The cells and stored expressions persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.1",
+      "scenarioId": "SCN-REQ-2.2.1-03",
+      "scenarioName": "REQ-2.2.1 - Insert and Delete Rows - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "testLine": 98,
+      "callbackSha256": "1b978987c4a8a9aa1b2c82bb0e40ec96c278acd13bcba6396aa0636cab487514",
+      "given": [
+        "A1 and A2 contain Alpha and Beta."
+      ],
+      "when": [
+        "The user inserts one row below row 1 and refreshes."
+      ],
+      "then": [
+        "A2 is blank and Beta moves to A3."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.1",
+      "scenarioId": "SCN-REQ-2.2.1-04",
+      "scenarioName": "REQ-2.2.1 - Insert and Delete Rows - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "testLine": 115,
+      "callbackSha256": "85fbb7a1007775e0fd27f0e72ab75db0a81822d6e5fa31af2d2bfa302a38105a",
+      "given": [
+        "A1 is 2 and B1 is =A1*2."
+      ],
+      "when": [
+        "The user inserts one row above row 1 and selects B2."
+      ],
+      "then": [
+        "2 moves to A2, B2 evaluates to 4, and its formula bar is =A2*2 before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.1",
+      "scenarioId": "SCN-REQ-2.2.1-05",
+      "scenarioName": "REQ-2.2.1 - Insert and Delete Rows - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+      "testLine": 135,
+      "callbackSha256": "38b4a1e6020e6a8556983a9f17562d68615b2b436b2e7c09719a15bf70295d6b",
+      "given": [
+        "A2 is 50 with number validation from 0 through 100."
+      ],
+      "when": [
+        "The user inserts a row above row 2, attempts 120 in A3, then enters 120 in A2 and refreshes."
+      ],
+      "then": [
+        "A3 rejects 120 with the range error and remains 50; A2 accepts 120 and both values persist."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.2",
+      "scenarioId": "SCN-REQ-2.2.2-01",
+      "scenarioName": "REQ-2.2.2 - Insert and Delete Columns - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "testLine": 20,
+      "callbackSha256": "1e91ee21732d1773b8063ebe59a85eeef7f9a9899203ac980d22ee95323ef299",
+      "given": [
+        "A1:C1 contains Alpha, Beta, Gamma and A2:C2 contains 1, 2, 3. A4 is =SUM(A2:C2), A5 is =SUM($B$2:$C$2), and A6 is =SUM(A2:A2), with results 6, 5 and 1."
+      ],
+      "when": [
+        "The user inserts one column left of B and refreshes."
+      ],
+      "then": [
+        "Column B is blank; Beta/2 moves to C and Gamma/3 moves to D while Alpha/1 remains in A. A4 becomes =SUM(A2:D2), A5 becomes =SUM($C$2:$D$2), and A6 retains =SUM(A2:A2), with results 6, 5 and 1 before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.2",
+      "scenarioId": "SCN-REQ-2.2.2-02",
+      "scenarioName": "REQ-2.2.2 - Insert and Delete Columns - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "testLine": 55,
+      "callbackSha256": "dabcfd8b4656b2752ad77007fd60cc80a148bb32c59dc4913e7bfa9525e97672",
+      "given": [
+        "A1:C2 contains Unit price/Quantity/Total and 10/2/=A2*B2. A3:C3 contains 1, 2, 3. A4 is =SUM(A3:C3) with result 6 and A5 is =SUM(B3:B3) with result 2."
+      ],
+      "when": [
+        "The user deletes column B and refreshes."
+      ],
+      "then": [
+        "Total moves to column B; B2 displays #REF! with stored expression =#REF!. C1:C3 becomes blank, A3:B3 is 1/3, A4 becomes =SUM(A3:B3) and displays 4, and A5 displays #REF! with stored expression =#REF!. Values and stored expressions persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.2",
+      "scenarioId": "SCN-REQ-2.2.2-03",
+      "scenarioName": "REQ-2.2.2 - Insert and Delete Columns - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "testLine": 94,
+      "callbackSha256": "6bcefe949dc6f061affea4880cb276639e921602ebac6e7112df20d4d87facf0",
+      "given": [
+        "A1 and B1 contain Alpha and Beta."
+      ],
+      "when": [
+        "The user inserts one column right of A and refreshes."
+      ],
+      "then": [
+        "B1 is blank and Beta moves to C1."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.2",
+      "scenarioId": "SCN-REQ-2.2.2-04",
+      "scenarioName": "REQ-2.2.2 - Insert and Delete Columns - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "testLine": 111,
+      "callbackSha256": "844158923cfa371c0dfdc03f41ee8a739be50601f7357b0ca742570d97b5b585",
+      "given": [
+        "A1 is 2 and B1 is =A1*2."
+      ],
+      "when": [
+        "The user inserts one column left of A and selects C1."
+      ],
+      "then": [
+        "2 moves to B1, C1 evaluates to 4, and its formula bar is =B1*2 before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-2.2.2",
+      "scenarioId": "SCN-REQ-2.2.2-05",
+      "scenarioName": "REQ-2.2.2 - Insert and Delete Columns - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+      "testLine": 131,
+      "callbackSha256": "0211325a222a3154043ac9930638a8e8a58ab6832cbae3061f26210873c39b3f",
+      "given": [
+        "B1 is 50 with number validation from 0 through 100."
+      ],
+      "when": [
+        "The user inserts a column left of B, attempts 120 in C1, then enters 120 in B1 and refreshes."
+      ],
+      "then": [
+        "C1 rejects 120 and remains 50; B1 accepts 120 and both values persist."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-2.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.1",
+      "scenarioId": "SCN-REQ-3.1.1-01",
+      "scenarioName": "REQ-3.1.1 - Edit a Cell Through the Grid or Formula Bar - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+      "testLine": 19,
+      "callbackSha256": "b944b052fdcc252cd40e07f003164fb2a7de0c6fe6cfb4abadebee883497d859",
+      "given": [
+        "A1 is 2 and B1 contains =A1*2."
+      ],
+      "when": [
+        "The user edits A1 through the formula bar from 2 to 3, selects both cells, and refreshes."
+      ],
+      "then": [
+        "A1 is 3, B1 recalculates to 6, and B1's formula bar remains =A1*2."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.1",
+      "scenarioId": "SCN-REQ-3.1.1-02",
+      "scenarioName": "REQ-3.1.1 - Edit a Cell Through the Grid or Formula Bar - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+      "testLine": 47,
+      "callbackSha256": "a242fde75c57521dc42b0b5786045d1c0cd450b862afa7f15cb258420ebcef8a",
+      "given": [
+        "A1 contains Saved value."
+      ],
+      "when": [
+        "The user opens the inline editor, types Unsaved value, presses Escape, and refreshes."
+      ],
+      "then": [
+        "A1 remains Saved value, the inline editor closes, and Unsaved value is absent."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.1",
+      "scenarioId": "SCN-REQ-3.1.1-03",
+      "scenarioName": "REQ-3.1.1 - Edit a Cell Through the Grid or Formula Bar - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+      "testLine": 66,
+      "callbackSha256": "7213ef763c4d090df6290e0580bdb24b0e49f47632f3272e70cc08141dcbaa41",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "Through the grid, enter Plain text in A1, 42 in A2, TRUE in A3, 2026-08-06 in A4, and =A2*2 in A5, committing each edit. Then enter Committed by selection change in B1 and click B2 to commit that edit. Refresh the workbook."
+      ],
+      "then": [
+        "A1:A4 display their respective ordinary inputs unchanged, and A5 displays 84 with stored formula =A2*2. B1 displays Committed by selection change and the inline editor has closed. Selecting each cell shows its own stored input in the Formula bar. These values and the formula persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.1",
+      "scenarioId": "SCN-REQ-3.1.1-04",
+      "scenarioName": "REQ-3.1.1 - Edit a Cell Through the Grid or Formula Bar - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+      "testLine": 103,
+      "callbackSha256": "ede3c15710f34ebb3c0a0c0928636f5430146328e1b360b97213ca8201b9db5d",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user enters 7 in C3 and =C3*3 in D4, then selects D4 and refreshes."
+      ],
+      "then": [
+        "C3 is 7, D4 is 21, and D4's formula bar contains =C3*3 before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.2",
+      "scenarioId": "SCN-REQ-3.1.2-01",
+      "scenarioName": "REQ-3.1.2 - Paste Two-Dimensional Table Data - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "testLine": 18,
+      "callbackSha256": "039108409df016dbd4f06c98af5155fecdfc361e631f8b133b7f8c34d5acef14",
+      "given": [
+        "A1 is Outside and E4 is Keep."
+      ],
+      "when": [
+        "The user pastes Alpha/[blank]/3 and Beta/Middle/4 starting at B2 and refreshes."
+      ],
+      "then": [
+        "The two-dimensional paste occupies B2:D3 with the blank C2 preserved; A1 and E4 are unchanged and all values persist."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.2",
+      "scenarioId": "SCN-REQ-3.1.2-02",
+      "scenarioName": "REQ-3.1.2 - Paste Two-Dimensional Table Data - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "testLine": 51,
+      "callbackSha256": "6ed195b561e4785016087bb97270d6bb6be58c798af56f6bb8628aa4236d59f6",
+      "given": [
+        "A1 and A2 contain 10 and 20 with number validation 0 through 100."
+      ],
+      "when": [
+        "The user pastes 50 and 120 over A1:A2."
+      ],
+      "then": [
+        "The range error is shown and the paste is rejected atomically; A1 and A2 remain 10 and 20 after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.2",
+      "scenarioId": "SCN-REQ-3.1.2-03",
+      "scenarioName": "REQ-3.1.2 - Paste Two-Dimensional Table Data - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "testLine": 69,
+      "callbackSha256": "349b4e6006b76ba0a2dc47dbecce3599e26f85617efddb810d040061992089e5",
+      "given": [
+        "A1 is 2, B1 is =A1*2, and C1 is =B1+1."
+      ],
+      "when": [
+        "The user pastes 3 and 5 over A1:B1 using the cell context menu."
+      ],
+      "then": [
+        "A1 and B1 become 3 and 5, C1 recalculates to 6, and C1's formula remains =B1+1 after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.2",
+      "scenarioId": "SCN-REQ-3.1.2-04",
+      "scenarioName": "REQ-3.1.2 - Paste Two-Dimensional Table Data - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "testLine": 95,
+      "callbackSha256": "d8a2184eaf68229862c5466e15933a1a5a753a4475f2e3952e1e7da22d146a73",
+      "given": [
+        "E4 is Keep."
+      ],
+      "when": [
+        "The user pastes Alpha/[blank]/Gamma starting at A1 and refreshes."
+      ],
+      "then": [
+        "A1 is Alpha, B1 is blank, C1 is Gamma, and E4 remains Keep."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.2",
+      "scenarioId": "SCN-REQ-3.1.2-05",
+      "scenarioName": "REQ-3.1.2 - Paste Two-Dimensional Table Data - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.2.spec.ts",
+      "testLine": 114,
+      "callbackSha256": "7aabc7b3b46262f1659f64642864c77e3447b1a6c9468fffececc8554d67a78c",
+      "given": [
+        "A1 is Outside."
+      ],
+      "when": [
+        "The user pastes a 2x2 table One/Two/Three/Four starting at C3 and refreshes."
+      ],
+      "then": [
+        "C3:D4 contains the four values and A1 remains Outside."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.3",
+      "scenarioId": "SCN-REQ-3.1.3-01",
+      "scenarioName": "REQ-3.1.3 - Select a Rectangular Cell Range - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.3.spec.ts",
+      "testLine": 14,
+      "callbackSha256": "4f9ab630f7a8e35d1ffd671a47d54c3e64b4d27680c4b6d444635b6670336ce8",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user selects A1:B3 and then clicks C1."
+      ],
+      "then": [
+        "The worksheet grid is multiselectable; exactly A1:B3 are aria-selected before the click, then only C1 is selected."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.1.3",
+      "scenarioId": "SCN-REQ-3.1.3-02",
+      "scenarioName": "REQ-3.1.3 - Select a Rectangular Cell Range - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-3.1.3.spec.ts",
+      "testLine": 35,
+      "callbackSha256": "891d8dea4b63847a205305f457cfb42787246f1046b89fc6a2bcd3675a1eb24b",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user selects A1:B3, refreshes, clicks C1, and refreshes again."
+      ],
+      "then": [
+        "A1:B3 remain selected after the first refresh; after selecting C1 and refreshing, C1 is selected and A1:B3 are unselected."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.1",
+      "scenarioId": "SCN-REQ-3.2.1-01",
+      "scenarioName": "REQ-3.2.1 - Copy, Cut, and Paste Cell Ranges - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+      "testLine": 18,
+      "callbackSha256": "d24d56f1c84d6e06f0baca194757c360dac7432d04a9b221b366d07707df557d",
+      "given": [
+        "A1:B2 contains 1/2 and 3/=A1+$B$1, and G1 is Keep."
+      ],
+      "when": [
+        "The user copies A1:B2 to D1:E2 and refreshes."
+      ],
+      "then": [
+        "The copied range displays the same values, E2's formula bar is =D1+$B$1, the source is unchanged, and G1 remains Keep."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.1",
+      "scenarioId": "SCN-REQ-3.2.1-02",
+      "scenarioName": "REQ-3.2.1 - Copy, Cut, and Paste Cell Ranges - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+      "testLine": 61,
+      "callbackSha256": "2525fb4f7139c6f0db57ee6f2a89fb375ca1747fd6279526f15a0cb92656cd26",
+      "given": [
+        "A1:B2 contains A/B and C/D, and G1 is Keep."
+      ],
+      "when": [
+        "The user cuts A1:B2 and pastes at D1, then refreshes."
+      ],
+      "then": [
+        "A1:B2 are blank, D1:E2 contain A/B/C/D, and G1 remains Keep."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.1",
+      "scenarioId": "SCN-REQ-3.2.1-03",
+      "scenarioName": "REQ-3.2.1 - Copy, Cut, and Paste Cell Ranges - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+      "testLine": 102,
+      "callbackSha256": "e3b5e7600d226586bcac864b57a61a21df71e84cc87a7fcf78449f50b96c27cd",
+      "given": [
+        "A1:A2 contain 10 and 120; D1:D2 contain 1 and 2 with validation 0 through 100."
+      ],
+      "when": [
+        "The user cuts A1:A2 and pastes into D1."
+      ],
+      "then": [
+        "The validation error is shown and both source and destination ranges retain their original values after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.1",
+      "scenarioId": "SCN-REQ-3.2.1-04",
+      "scenarioName": "REQ-3.2.1 - Copy, Cut, and Paste Cell Ranges - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.1.spec.ts",
+      "testLine": 128,
+      "callbackSha256": "90ddad7d9c6cf015308faaa28c854a334762e0a6790cf7df53276d0251f5bbf6",
+      "given": [
+        "A1 is Copied text and B1 is Copied second cell."
+      ],
+      "when": [
+        "The user copies A1 and pastes it at D4, then refreshes."
+      ],
+      "then": [
+        "A1 and D4 both display Copied text."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-01",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 22,
+      "callbackSha256": "25e1900d3ad905200ccb2a2dfe786ed81c74b24d7f56063f7ad3eec2ce0a864b",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user enters a runtime-unique value in A1, clicks Undo, clicks Redo, and refreshes."
+      ],
+      "then": [
+        "Undo clears A1, Redo restores it, and the restored value persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-02",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 42,
+      "callbackSha256": "5af8c1b748846fda74010ea289b26888ae486f189946fa785667ade212c9633b",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "Enter a runtime-unique old value in A1 and undo it. Open the inline editor, enter a different unsaved value, and press Escape. Redo the old edit and Undo it again. Enter a distinct runtime-unique new value, attempt Redo and refresh."
+      ],
+      "then": [
+        "Escape closes the editor, leaves A1 and its stored input blank, and preserves the enabled redo branch. Redo restores exactly the old value and Undo clears it again. The successful new edit then disables Redo; toolbar and Ctrl+Y cannot restore the old branch, and the new value persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectStoredCell"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-03",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 76,
+      "callbackSha256": "60d0b97745baf7e3fc4b24fead851e612a0275e9927d3acd9570167b029fedaa",
+      "given": [
+        "A1 is 2, B1 is =A1*2, and A1 is then changed to 3."
+      ],
+      "when": [
+        "The user undoes and redoes the last edit, selecting B1 each time."
+      ],
+      "then": [
+        "Undo restores A1=2/B1=4; Redo restores A1=3/B1=6; B1's formula remains =A1*2 after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-04",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 102,
+      "callbackSha256": "c45ab9811b0de50e0a831d6db9dd377f94bc7e5ee7fe7c9ff6cb378d2973f81a",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user pastes a 2x2 table, undoes the paste, redoes it, and refreshes."
+      ],
+      "then": [
+        "Undo clears A1:B2; Redo restores A/B/C/D and the restored table persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-05",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 128,
+      "callbackSha256": "a1f788aeae2aef60a21fece546060fe970e80cd406a84be1dc3b4ecd11c3f698",
+      "given": [
+        "A1 is Left and B1 is Right."
+      ],
+      "when": [
+        "The user cuts A1:B1 to D1:E1, undoes, redoes, and refreshes."
+      ],
+      "then": [
+        "Undo restores the source and clears the destination; Redo clears the source and restores Left/Right at D1:E1."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-06",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 6",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 159,
+      "callbackSha256": "2b91a21e9526ed8ecf6eba017f4f41ae6ff92c90783b866a7a911d29393839da",
+      "given": [
+        "A1 is Keep with dropdown validation Keep/Other."
+      ],
+      "when": [
+        "The user inserts a row above and a column left, undoes both operations, redoes both, and refreshes."
+      ],
+      "then": [
+        "The value and validation move from A1 to B2 through the operations and remain there after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-3.2.2",
+      "scenarioId": "SCN-REQ-3.2.2-07",
+      "scenarioName": "REQ-3.2.2 - Undo and Redo Recent Operations - Scenario 7",
+      "testFile": "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+      "testLine": 199,
+      "callbackSha256": "abd4ec69203ea24aaab46bb2365c99508cee75ac07175e81c400435e6ae23471",
+      "given": [
+        "One runtime-named workbook contains a first unique value in A1."
+      ],
+      "when": [
+        "The user creates and runtime-names a second workbook, enters a second unique value, clicks Undo, and returns home."
+      ],
+      "then": [
+        "Both runtime-named workbook links remain visible. Undo clears only the second workbook's A1 and that blank value survives refresh and reopening; the first workbook retains its original A1 value. Other previously created workbooks are unaffected."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-3.2"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.1",
+      "scenarioId": "SCN-REQ-4.1.1-01",
+      "scenarioName": "REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "testLine": 16,
+      "callbackSha256": "53551bcc54be9c59cd817790cb9c60ee8f62c94d7e3e43245254fc434d493b3e",
+      "given": [
+        "A1 is 3 and B1 is 4."
+      ],
+      "when": [
+        "The user enters =(A1+B1)*2 in C1 and refreshes."
+      ],
+      "then": [
+        "C1 displays 14 and its formula bar contains the entered expression before and after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.1",
+      "scenarioId": "SCN-REQ-4.1.1-02",
+      "scenarioName": "REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "testLine": 33,
+      "callbackSha256": "aa7750aeb50efd32b2298eaa65af1c72d974712c164a237c0f1f3e168c44c6a8",
+      "given": [
+        "B2=2, B4=4 and B6=6; B3, B5, B7 and B10 are empty; B8 is not numeric and B9 is TRUE. F2 is empty and F3 is not numeric. D2:D6 and H2:H6 are empty."
+      ],
+      "when": [
+        "Enter =sum(B2:B10), =AVERAGE(B2:B10), =COUNT(B2:B10), =MIN(B2:B10), =MAX(B2:B10) in D2:D6. Enter the corresponding five functions over F2:F3 in H2:H6, then refresh."
+      ],
+      "then": [
+        "D2:D6 display 12, 4, 3, 2 and 6. H2:H6 display 0, #DIV/0!, 0, 0 and 0. Selecting every output shows its own stored expression, including lowercase sum in D2; all results and expressions persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.1",
+      "scenarioId": "SCN-REQ-4.1.1-03",
+      "scenarioName": "REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "testLine": 76,
+      "callbackSha256": "673db23b9a0d23fd6810474a646d4a2cddbcaf68c413e204fddf801c4825f8b1",
+      "given": [
+        "A1 is 9 and B1 is 3."
+      ],
+      "when": [
+        "The user enters =A1-B1, =A1/B1, =10-3*2, and =42 in C1:C4."
+      ],
+      "then": [
+        "C1:C4 display 6, 3, 4, and 42 with the stored formula expressions preserved after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.1",
+      "scenarioId": "SCN-REQ-4.1.1-04",
+      "scenarioName": "REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "testLine": 102,
+      "callbackSha256": "3c2416a9c1a8821acf7ed9a43ce1078ea79a062ae5320c148c76372fd13355bb",
+      "given": [
+        "A1, B1, and C1 are 8, 4, and 2."
+      ],
+      "when": [
+        "The user enters =(A1+B1)*C1 in D1 and =A1-B1/2 in D2, then refreshes."
+      ],
+      "then": [
+        "D1 is 24 and D2 is 6."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.1",
+      "scenarioId": "SCN-REQ-4.1.1-05",
+      "scenarioName": "REQ-4.1.1 - Calculate Basic Expressions and Aggregate Functions - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+      "testLine": 126,
+      "callbackSha256": "214be8cbfab1ce5a96356001ad1b5f1e92915e5e92953eb15ecf3ba471120b9d",
+      "given": [
+        "A1, B1, and C1 are 5, 6, and 4."
+      ],
+      "when": [
+        "The user enters =A1*B1+C1 in D1 and =(A1+B1)/C1 in D2, then refreshes."
+      ],
+      "then": [
+        "D1 is 34 and D2 is 2.75."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expectCalculatedNumber",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.2",
+      "scenarioId": "SCN-REQ-4.1.2-01",
+      "scenarioName": "REQ-4.1.2 - Copy Formulas and Adjust Relative References - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.2.spec.ts",
+      "testLine": 15,
+      "callbackSha256": "11ea306df251e9be867c3827d42fdab381a08583c36bcb60f2b8ed0e99308084",
+      "given": [
+        "A1 is 1, B1 is 2, A2 is 10, and C1 is =A1+$B$1."
+      ],
+      "when": [
+        "The user copies C1 to C2 and refreshes."
+      ],
+      "then": [
+        "C1 is 3 with formula =A1+$B$1; C2 is 12 with formula =A2+$B$1."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.1.2",
+      "scenarioId": "SCN-REQ-4.1.2-02",
+      "scenarioName": "REQ-4.1.2 - Copy Formulas and Adjust Relative References - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-4.1.2.spec.ts",
+      "testLine": 49,
+      "callbackSha256": "3ecbf5f5ad2fd677dc4435338b59cae3d71753368aceffd96c13b0b9a7a67309",
+      "given": [
+        "A1 is 2 and B1 is =A1."
+      ],
+      "when": [
+        "The user copies B1 to A1 and refreshes."
+      ],
+      "then": [
+        "A1 displays #REF! with formula =#REF!, while B1 keeps =A1."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.1",
+      "scenarioId": "SCN-REQ-4.2.1-01",
+      "scenarioName": "REQ-4.2.1 - Recalculate Dependent Formulas After Source Data Changes - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.1.spec.ts",
+      "testLine": 19,
+      "callbackSha256": "2444c833509beab6db227f7c40f1da611cf5bb32b4608fce5064af339d8eed4b",
+      "given": [
+        "Sheet1 contains A1=10, B1=A1*2, C1=B1+5; Sheet2 contains Other and =1+1."
+      ],
+      "when": [
+        "The user changes Sheet1!A1 to 20, visits Sheet2, returns to Sheet1, and refreshes."
+      ],
+      "then": [
+        "Sheet1 recalculates to 20, 40, 45; Sheet2 remains Other and 2; formulas remain visible in the formula bar."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.1",
+      "scenarioId": "SCN-REQ-4.2.1-02",
+      "scenarioName": "REQ-4.2.1 - Recalculate Dependent Formulas After Source Data Changes - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.1.spec.ts",
+      "testLine": 72,
+      "callbackSha256": "b5852f038a4babb55e7cb97e06dec2b9ef43c9058ebd1bc32d27fbd9758fd01a",
+      "given": [
+        "A1=2, B1=A1*2, and C1=B1+1."
+      ],
+      "when": [
+        "The user pastes 3 into A1 and refreshes."
+      ],
+      "then": [
+        "A1, B1, and C1 become 3, 6, and 7; dependent formulas remain intact."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.1",
+      "scenarioId": "SCN-REQ-4.2.1-03",
+      "scenarioName": "REQ-4.2.1 - Recalculate Dependent Formulas After Source Data Changes - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.1.spec.ts",
+      "testLine": 100,
+      "callbackSha256": "98bb930e9e703462907149585c7c695838497059118dc1189e87003e59dabe9c",
+      "given": [
+        "A1=2, B1=3, C1=B1*2, and D1=C1+1."
+      ],
+      "when": [
+        "The user cuts A1 and pastes it into B1, then refreshes."
+      ],
+      "then": [
+        "A1 is blank, B1 is 2, C1 is 4, and D1 is 5 with formulas =B1*2 and =C1+1."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.2",
+      "scenarioId": "SCN-REQ-4.2.2-01",
+      "scenarioName": "REQ-4.2.2 - Display and Fix Formula Errors - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "testLine": 17,
+      "callbackSha256": "68f238941d75e7317e3d4cb8dbdcce94f3b1e269af2b8b4acafc814f840b3b56",
+      "given": [
+        "A1 is Keep and the workbook is blank otherwise."
+      ],
+      "when": [
+        "The user enters =1/0, =A0, =UNSUPPORTED(1), =1+, and =B5 in B1:B5, changes A1 to a unique value, pastes 3 and =C1*2 into C1:C2, and refreshes."
+      ],
+      "then": [
+        "The five cells display #DIV/0!, #REF!, #NAME?, #ERROR!, and #REF!, their stored formula expressions remain in the formula bar, unrelated A1 persists, and C2 evaluates to 6."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.2",
+      "scenarioId": "SCN-REQ-4.2.2-02",
+      "scenarioName": "REQ-4.2.2 - Display and Fix Formula Errors - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "testLine": 58,
+      "callbackSha256": "73caad74056240edf3b903f2804423c5f7b93706f62863c6d24eab23f248a6e7",
+      "given": [
+        "A1 is 2."
+      ],
+      "when": [
+        "The user enters =1/0 in B1, replaces it with =A1*3, and refreshes."
+      ],
+      "then": [
+        "B1 changes from #DIV/0! to 6 and its formula bar contains =A1*3."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.2",
+      "scenarioId": "SCN-REQ-4.2.2-03",
+      "scenarioName": "REQ-4.2.2 - Display and Fix Formula Errors - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "testLine": 78,
+      "callbackSha256": "54b01e03b75642d61ca0152aec5d5e0119a55678b75b915d725f5eb0bd386980",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user enters =B1 in A1 and =A1 in B1, then refreshes."
+      ],
+      "then": [
+        "Both cells display #REF! while their entered formulas remain inspectable."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.2",
+      "scenarioId": "SCN-REQ-4.2.2-04",
+      "scenarioName": "REQ-4.2.2 - Display and Fix Formula Errors - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "testLine": 100,
+      "callbackSha256": "ba5dc85b5bb5e6188c30ff0d3a34725db766f1e286c2db5b4a50af96a8b554d8",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user enters =NOPE(1) in A1 and =1+ in B1, then refreshes."
+      ],
+      "then": [
+        "A1 displays #NAME? and B1 displays #ERROR!, with both stored formula expressions preserved."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-4.2.2",
+      "scenarioId": "SCN-REQ-4.2.2-05",
+      "scenarioName": "REQ-4.2.2 - Display and Fix Formula Errors - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-4.2.2.spec.ts",
+      "testLine": 122,
+      "callbackSha256": "a12fed5f13b07afb5a0535353cb674a17a5fd55a7e1c4f4c633f7cfa8625ad20",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user enters =A1 in A1, replaces it with =2+2, and refreshes."
+      ],
+      "then": [
+        "A1 changes from #REF! to 4 and its formula bar contains =2+2."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-4.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-01",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 44,
+      "callbackSha256": "54680c6503cb23f25f2781513dbc2942dfa59aae6df28a76a3872fbe31e67ab2",
+      "given": [
+        "A1:C5 contains Region/Sales/Status rows East/1200/Open, North/800/Closed, South/1200/Pending, West/500/Open; E1 is Outside."
+      ],
+      "when": [
+        "The user selects A1:C5 and sorts by Sales descending with a header row."
+      ],
+      "then": [
+        "Rows order East, South, North, West with their matching values; E1 is unchanged and the order persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-02",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 99,
+      "callbackSha256": "58cd267b70ae440ab484b7634385c08e8bb6d5c0c0a0da1f346bad49959a6170",
+      "given": [
+        "A1:C4 contains the rows [Name, Date, Value]; [Charlie, 2026-03-10, 30]; [Alpha, 2026-01-15, 10]; [Bravo, 2026-02-01, 20]."
+      ],
+      "when": [
+        "The user sorts by Name ascending, then by Date descending."
+      ],
+      "then": [
+        "The final order is Charlie, Bravo, Alpha with matching dates and values, and it persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-03",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 141,
+      "callbackSha256": "e31fde0690539309167e3dab7613e63e5c194834daf0ced1cf0e66574297cc13",
+      "given": [
+        "A1:C4 contains Item/Score/Double, scores 3, 1, 2, formulas C2:C4 =B*2, and validation B2:B4 from 0 through 10."
+      ],
+      "when": [
+        "The user sorts Score ascending and attempts 11 in B2."
+      ],
+      "then": [
+        "Rows order Bravo/1/2, Charlie/2/4, Alpha/3/6; formulas and validation remain; 11 is rejected and the result persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-04",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 196,
+      "callbackSha256": "88636d31bd4a09e35d40fa2b0cfda8abff311c938495a28c7f94687c1d1f5ac0",
+      "given": [
+        "A1:B4 contains Item/Score with scores 3, 1, 2."
+      ],
+      "when": [
+        "The user filters Score greater than 1, sorts the selected range ascending, refreshes, clears the filter, and inspects the rows."
+      ],
+      "then": [
+        "The filtered view hides the row with score 1, sorted visible rows are Charlie then Alpha, and clearing the filter restores Bravo, Charlie, Alpha."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-05",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 248,
+      "callbackSha256": "65563c97f9b808cd1bb7ab9af74c0e5cf19bd1835e6376648f405b505cbeb561",
+      "given": [
+        "A1:C4 contains Alpha/3/First, Bravo/3/Second, Charlie/1/Third."
+      ],
+      "when": [
+        "The user sorts by Score ascending."
+      ],
+      "then": [
+        "Charlie is first, followed by Alpha then Bravo, and that order persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.1",
+      "scenarioId": "SCN-REQ-5.1.1-06",
+      "scenarioName": "REQ-5.1.1 - Sort a Data Range by a Specified Column - Scenario 6",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.1.spec.ts",
+      "testLine": 273,
+      "callbackSha256": "26d479d2af493e578de2278a5f22bbe6d396cdf8693c7e2049219a579a9f7297",
+      "given": [
+        "A1:C4 contains names with dates Alpha/2026-01-10, Bravo/2026-03-20, Charlie/2026-02-15; E1 is Outside."
+      ],
+      "when": [
+        "The user sorts A1:C4 by Date descending."
+      ],
+      "then": [
+        "Rows order Bravo, Charlie, Alpha; E1 remains Outside and the order persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.2",
+      "scenarioId": "SCN-REQ-5.1.2-01",
+      "scenarioName": "REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "testLine": 41,
+      "callbackSha256": "97baaaab66fff7fb14411821b1ed4ec289d91f2eda55535e8b3f766324be0371",
+      "given": [
+        "A1:C6 contains Region/Sales/Status rows East/1200/Open, East/900/Closed, North/2000/Open, East/1500/Closed, South/700/Open."
+      ],
+      "when": [
+        "The user filters Region to East and Sales greater than 1000, refreshes, then clears the filter."
+      ],
+      "then": [
+        "Only rows 2 and 5 are visible while filtered; clearing restores all five source rows and their values."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.2",
+      "scenarioId": "SCN-REQ-5.1.2-02",
+      "scenarioName": "REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "testLine": 112,
+      "callbackSha256": "ccd438acbe3693937c21ccb3fc1898504694d307f3ea0a10d444e0409d8eb3f4",
+      "given": [
+        "A1:C4 contains names Alpha East, Alpha West, Beta; dates 2026-01-10, 2026-02-10, 2025-12-01; Note is blank, Filled, blank."
+      ],
+      "when": [
+        "Apply Name contains Alpha, Date before 2026-02-01, and Note is empty together, then refresh. Clear all filter conditions, create a new filter containing only Note is not empty, then refresh again."
+      ],
+      "then": [
+        "The first filter shows only Alpha East; the second shows only Alpha West; each state persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.2",
+      "scenarioId": "SCN-REQ-5.1.2-03",
+      "scenarioName": "REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "testLine": 156,
+      "callbackSha256": "580cc7d0bb1719e795b247e610ed2adcb35736e1c358549c09ec18d1c937f3fc",
+      "given": [
+        "A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]."
+      ],
+      "when": [
+        "The user filters Region to East, exports the sheet, and refreshes."
+      ],
+      "then": [
+        "North's row is hidden in the grid, the export contains the complete original CSV, and the filter remains after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCsvValues"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.2",
+      "scenarioId": "SCN-REQ-5.1.2-04",
+      "scenarioName": "REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "testLine": 190,
+      "callbackSha256": "09220d17aec47a12bcc8c0d128a012f2068e1b5303eb464c6110fb96679f3f20",
+      "given": [
+        "A1:C4 contains Region/Sales/Status rows East/1200/Open, North/800/Closed, East/600/Open."
+      ],
+      "when": [
+        "The user creates a filter, filters Status to Open, and refreshes."
+      ],
+      "then": [
+        "The visible rows are the two Open records and the filter remains active after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.1.2",
+      "scenarioId": "SCN-REQ-5.1.2-05",
+      "scenarioName": "REQ-5.1.2 - Filter Rows by Value or Condition - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-5.1.2.spec.ts",
+      "testLine": 211,
+      "callbackSha256": "a3dd36ba564d73328eed0eaa702bc4a4d1080966d3364ff6eb73efe72f15e018",
+      "given": [
+        "A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]."
+      ],
+      "when": [
+        "The user creates a filter, filters Sales greater than 150, and refreshes."
+      ],
+      "then": [
+        "Only North/200 and East/300 remain visible and the condition persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.1"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-01",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 34,
+      "callbackSha256": "5bcc9753b0f392e91e568e0a124fe10cd00bbeed9208b97ab91e635d58926f7d",
+      "given": [
+        "A blank workbook is open."
+      ],
+      "when": [
+        "The user applies a Dropdown rule to A1:A2 with Not Started, In Progress, Completed, selects In Progress in A1, and refreshes."
+      ],
+      "then": [
+        "A1 displays In Progress, dropdown controls are available in A1 and A2, and the rule persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-02",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 59,
+      "callbackSha256": "49ead26af0e5025555ee27af2566ce04f8837901c7f448e1b6feaafbdd8bd186",
+      "given": [
+        "A1 is 50."
+      ],
+      "when": [
+        "The user applies a Number range rule 0 through 100, attempts 120 and 101, then enters 100 and refreshes."
+      ],
+      "then": [
+        "Each out-of-range attempt shows the exact range error and preserves 50; 100 is accepted and persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-03",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 88,
+      "callbackSha256": "8bd0ed0f9cccd8706499a858c473389b501a126e928f4664cbbbcd84de1e0006",
+      "given": [
+        "A1 is 50."
+      ],
+      "when": [
+        "The user configures number validation 0 through 100 through the data menu, attempts 120 through the grid, and refreshes."
+      ],
+      "then": [
+        "The range error is shown, A1 remains 50, and the validation remains active."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-04",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 107,
+      "callbackSha256": "7d439a8a96076709e9e8e7b16c12ecf1641f605f53b812306c7210111c15a53e",
+      "given": [
+        "A1 is 50 with number validation 0 through 100."
+      ],
+      "when": [
+        "The user edits the rule to 10 through 60, rejects 5, deletes the rule, enters 5, and refreshes."
+      ],
+      "then": [
+        "The edited bounds reject 5 while active; after deletion 5 is accepted and persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectText"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-05",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 136,
+      "callbackSha256": "1ea0a866fd08c2de7bf626eb777cd4070044ee8eb0daab685b274ca3e034afc9",
+      "given": [
+        "A1 is Open with dropdown validation Open/Closed."
+      ],
+      "when": [
+        "The user attempts Pending before and after refresh."
+      ],
+      "then": [
+        "The exact allowed-values error is shown and A1 remains Open."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expectText",
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.2.1",
+      "scenarioId": "SCN-REQ-5.2.1-06",
+      "scenarioName": "REQ-5.2.1 - Set Dropdown or Numeric Validation for a Range - Scenario 6",
+      "testFile": "arc-bench/sheet/tests/REQ-5.2.1.spec.ts",
+      "testLine": 159,
+      "callbackSha256": "661dea7671915b942125663cde019cea8eb9bf9fe1c62fae649705f9e65f13a8",
+      "given": [
+        "A1 is Not Started and A1:A2 have dropdown values Not Started, In Progress, Completed."
+      ],
+      "when": [
+        "The user enters In Progress in A1 and Completed in A2, then refreshes."
+      ],
+      "then": [
+        "Both selected values display and persist with dropdown controls."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.2"
+      ],
+      "assertionEntrypoints": [
+        "expect"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-01",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 1",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 44,
+      "callbackSha256": "59761507fe4e21de587f90d5d9e8e68f5c8b9b44d281b3c462c5fab371124ee5",
+      "given": [
+        "The user creates a blank workbook and enters the following rows through the grid or clipboard into Sheet1!A1:B6, in this order: headers Region/Sales; East/1200; North/800; East/600; South/1000; North/700. These cells are UI-created input, not seeded workbook records."
+      ],
+      "when": [
+        "The user creates Pivot1 from A1:B6, selects Region as rows and Sales as SUM, and applies."
+      ],
+      "then": [
+        "Pivot1 shows East 1800, North 1500, South 1000, and Grand Total 4300; Sheet1 remains unchanged and Pivot1 persists after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-02",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 2",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 107,
+      "callbackSha256": "e1f4bc2328850842d883a3add42399a738119561e106459e21bcf0e748756233",
+      "given": [
+        "Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 1200]; [North, 800]; [East, 600]."
+      ],
+      "when": [
+        "The user creates a Region/Sales SUM pivot, changes Sheet1!B2 to 1500, and refreshes the pivot."
+      ],
+      "then": [
+        "Pivot1 updates to East 2100, North 800, Grand Total 2900 and persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-03",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 3",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 154,
+      "callbackSha256": "5f2811f96430131d4538441b588c833a452fe0a3b1928915aa6d421c724fdeb5",
+      "given": [
+        "A1:C6 contains Region/Quarter/Sales with East Q1 100, East Q1 200, East Q2 150, North Q1 300, North Q2 blank."
+      ],
+      "when": [
+        "The user creates a Region-row, Quarter-column, Sales-COUNT pivot."
+      ],
+      "then": [
+        "Pivot1!A1:D4 contains the following rows in order: [Region, Q1, Q2, Grand Total]; [East, 2, 1, 3]; [North, 1, 0, 1]; [Grand Total, 3, 1, 4]. The blank North/Q2 Sales cell contributes zero to COUNT. The field layout and every group and total persist after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber",
+        "expectPivotResult",
+        "expectPivotFields"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-04",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 4",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 207,
+      "callbackSha256": "beed718300a6a043a58ff8743145838f46403d0c84455ab3556ce49e49f21d1d",
+      "given": [
+        "Sheet1!A1:B6 contains the rows [Region, Sales]; [East, 100]; [East, not numeric]; [East, 300]; [North, 200]; [North, empty]. The last Sales cell is empty, not the literal word empty."
+      ],
+      "when": [
+        "The user creates a Region/Sales AVERAGE pivot."
+      ],
+      "then": [
+        "Pivot1 averages numeric values only: East 200, North 200, Grand Total 200; source text remains unchanged after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-05",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 5",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 253,
+      "callbackSha256": "897c4451076713b3681b139ad2daeace82c30f6953ca3d430cd39deebf21a5e8",
+      "given": [
+        "A1:B4 contains Region/Status East/Open, East/Closed, North/Open."
+      ],
+      "when": [
+        "The user creates a Status-row, Region-value COUNT pivot, then attempts to change the summary to SUM."
+      ],
+      "then": [
+        "The applied COUNT table is [Status, COUNT of Region]; [Open, 2]; [Closed, 1]; [Grand Total, 3]. SUM is rejected with Value field requires numeric values, preserving this complete result and source content. After reopening and refresh, Rows=Status, Values=Region and Summarize by=COUNT remain the applied configuration and the complete COUNT result persists."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber",
+        "expectPivotResult",
+        "expectText",
+        "expectPivotFields"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-06",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 6",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 305,
+      "callbackSha256": "44cd09714370b4fd7a30af398cc86319356606e11285dbd1d1237fe1e8b584e3",
+      "given": [
+        "Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300], with an active filter showing only East."
+      ],
+      "when": [
+        "The user creates a Region/Sales SUM pivot from the filtered range and refreshes it."
+      ],
+      "then": [
+        "Pivot1 shows East 400, North 200, Grand Total 600 and remains unchanged after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-07",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 7",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 351,
+      "callbackSha256": "e7fc0ee4f44411c94b886176d0e797921844a7d0985be23b3ee553d6fc1e9f37",
+      "given": [
+        "Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]. Pivot1 has an applied Region-row, Sales-SUM definition over A1:B4."
+      ],
+      "when": [
+        "The user inserts a source row East/50, refreshes Pivot1, inserts a source column left of Sales, refreshes again, and reloads."
+      ],
+      "then": [
+        "The pivot totals update to East 450, North 200, Grand Total 650 and persist."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber"
+      ],
+      "reviewBasis": "Inherited 24/100 semantic review plus current source/callback mapping",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-08",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 8",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 412,
+      "callbackSha256": "5b83696fd59b1515799c281c01edfeaa4e4592b5a4fb6199c933fd3d750e1708",
+      "given": [
+        "Sheet1!A1:B4 contains the rows [Region, Sales]; [East, 100]; [North, 200]; [East, 300]. Pivot1 has an applied Region-row, Sales-SUM definition over A1:B4."
+      ],
+      "when": [
+        "Delete the source Sales column, attempt Refresh pivot table, reopen and reload Pivot1, inspect its remaining applied field selections, and attempt Refresh pivot table again."
+      ],
+      "then": [
+        "Each refresh attempt displays Pivot field is no longer available. Select a new field. The last successful table [Region, SUM of Sales]; [East, 400]; [North, 200]; [Grand Total, 600] remains before and after reload. Rows=Region and Summarize by=SUM remain applied; the removed value field remains unavailable. The source stays in its post-deletion state and is not restored or modified by either refusal."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber",
+        "expectText",
+        "expectPivotResult",
+        "expectPivotFields"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-5.3.1",
+      "scenarioId": "SCN-REQ-5.3.1-09",
+      "scenarioName": "REQ-5.3.1 - Create and Refresh a Basic Pivot Table - Scenario 9",
+      "testFile": "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+      "testLine": 472,
+      "callbackSha256": "f1e6756ed4518883bf0cf61a9b1a107ccbb769e6a8e91727cc5e83813ed10156",
+      "given": [
+        "Sheet1!A1:B5 contains the rows [Region, Status]; [East, Open]; [East, Closed]; [North, Open]; [South, Open]."
+      ],
+      "when": [
+        "The user creates a Region-row, Status-value COUNT pivot and refreshes."
+      ],
+      "then": [
+        "Pivot1!A1:B5 contains the following rows in order: [Region, COUNT of Status]; [East, 2]; [North, 1]; [South, 1]; [Grand Total, 4]. The saved field configuration and all four counts remain after refresh."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-1",
+        "REQ-5.3"
+      ],
+      "assertionEntrypoints": [
+        "expect",
+        "expectCalculatedNumber",
+        "expectPivotResult",
+        "expectPivotFields"
+      ],
+      "reviewBasis": "R2 targeted source-to-assertion review",
+      "historicalReview": "audit/sheet.json",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-01",
+      "scenarioName": "Refuse a final-cell validation failure without consuming undo",
+      "testFile": "arc-bench/sheet/tests/REQ-6.1.spec.ts",
+      "testLine": 25,
+      "callbackSha256": "598bcd61272624a566f48f1246edb21d7c7f2076b910390749d8d9cdcfe173bc",
+      "given": [
+        "A1:B2 contains 10, 20, =A1+B1, 120 in row order; D1:E2 contains 1, 2, 3, 4. G1 is =A2+D2 and H1 is =G1+E2. Apply a 0–100 numeric rule to E2, then enter History marker in H2 as a separate edit."
+      ],
+      "when": [
+        "Cut A1:B2 and paste at D1. Inspect the validation error and worksheet, click Undo once, repeat the rejected cut, then Redo once and reload."
+      ],
+      "then": [
+        "The 120 in the final destination cell causes rejection. All eight source/target cells, both downstream formulas and their results (33 and 37), and the marker initially remain unchanged. Undo removes only the marker. The second failed cut leaves the marker blank and preserves the redo entry; Redo restores only the marker. After reload the same values and formulas remain, and E2 still rejects 101."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-6"
+      ],
+      "assertionEntrypoints": [],
+      "reviewBasis": "Transaction-guard review plus current source/callback mapping",
+      "historicalReview": "audit/transaction-guards.md",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-6.1",
+      "scenarioId": "SCN-REQ-6.1-02",
+      "scenarioName": "Undo and redo a validated move with chained external dependencies",
+      "testFile": "arc-bench/sheet/tests/REQ-6.1.spec.ts",
+      "testLine": 46,
+      "callbackSha256": "7701359f74dee1a0520298e3c3c5909e75e8e1313186f41808614fdda3685fad",
+      "given": [
+        "A1:B2 contains 10, 20, =A1+B1, 60 in row order; D1:E2 contains 1, 2, 3, 4. G1 is =A2+D2 and H1 is =G1+E2. H2 is blank and E2 has an inclusive 0–100 numeric rule."
+      ],
+      "when": [
+        "Cut A1:B2 and paste at D1. Undo once, Redo once, then reload."
+      ],
+      "then": [
+        "A1:B2 becomes blank and D1:E2 becomes 10, 20, =D1+E1, 60. G1 becomes =D2+D2 with result 60; H1 retains =G1+E2 and becomes 120. Undo restores the complete pre-move worksheet including G1=33 and H1=37; Redo and reload retain the complete moved state. The 0–100 validation at E2 remains enforced."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-6"
+      ],
+      "assertionEntrypoints": [],
+      "reviewBasis": "Transaction-guard review plus current source/callback mapping",
+      "historicalReview": "audit/transaction-guards.md",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-6.2",
+      "scenarioId": "SCN-REQ-6.2-01",
+      "scenarioName": "Move an overlapping rectangle without chasing rewritten references",
+      "testFile": "arc-bench/sheet/tests/REQ-6.2.spec.ts",
+      "testLine": 36,
+      "callbackSha256": "6733748f6db38cad5a894f6fb2fb97c8add1c7066f5c49fd931cda2301268959",
+      "given": [
+        "A1=4, B1=7, A2 is =A1+$E$1, B2 is =A2+$B$1, C1=90, C2=9 and E1=10. F1 is =A2+B2+C1 and G1 is =F1*2."
+      ],
+      "when": [
+        "Cut A1:B2, paste at B1, inspect, then Undo once, Redo once and reload."
+      ],
+      "then": [
+        "A1:A2 is cleared. B1:C2 holds 4, 7, =B1+$E$1 and =B2+$C$1 in row order, with calculated results 14 and 21. E1 stays 10. F1 becomes =B2+C2+C1 and shows 42, and G1 shows 84. Undo restores the original values and formulas, including F1=125 and G1=250. Redo and reload restore the same moved state."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-6"
+      ],
+      "assertionEntrypoints": [],
+      "reviewBasis": "Transaction-guard review plus current source/callback mapping",
+      "historicalReview": "audit/transaction-guards.md",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    },
+    {
+      "requirementId": "REQ-6.2",
+      "scenarioId": "SCN-REQ-6.2-02",
+      "scenarioName": "Validate an overlapping move against its calculated final values",
+      "testFile": "arc-bench/sheet/tests/REQ-6.2.spec.ts",
+      "testLine": 41,
+      "callbackSha256": "a6dd4b39100f6400e438f8c4f209e6f25944042815d2e248da0ed893ff1f878b",
+      "given": [
+        "A1=4, B1=7, A2 is =A1+$E$1, B2 is =A2+$B$1, C1=90, C2=9 and E1=10. F1 is =A2+B2+C1 and G1 is =F1*2. C2 has an inclusive numeric range 0–20. Moving A1:B2 to B1 would yield 21 in C2."
+      ],
+      "when": [
+        "Cut A1:B2 and paste at B1; inspect the refusal. Then change A1 to 2, cut the same range again and paste at B1. Undo once, Redo once and reload. Try entering 21 directly in C2."
+      ],
+      "then": [
+        "The failed paste keeps all original raw values, formulas and results. The retry succeeds with results B2=12, C2=19, F1=38 and G1=76 and the same rewritten formulas as the valid overlap. Undo restores the pre-retry worksheet (A1=2, F1=121, G1=242), not the original A1=4. Redo and reload keep the complete moved state. C2 still rejects 21; its saved formula and all dependent results remain intact."
+      ],
+      "inheritedRequirements": [
+        "ROOT",
+        "REQ-6"
+      ],
+      "assertionEntrypoints": [],
+      "reviewBasis": "Transaction-guard review plus current source/callback mapping",
+      "historicalReview": "audit/transaction-guards.md",
+      "applicationExecution": "pending",
+      "coverageBoundary": "Finite scenario evidence; descriptive combinations and all legal UI variants are not exhaustively measured."
+    }
+  ],
+  "scope": "Current exact scenario/callback mapping plus inherited semantic review and targeted R2 review. This is not a fresh independent semantic review of all 104 callbacks.",
+  "validation": {
+    "contracts": "validation/sheet-r2-contracts-report.json",
+    "passed": 47,
+    "failed": 0,
+    "browserChannel": "chrome",
+    "applicationScenariosExecuted": 0
+  }
+}

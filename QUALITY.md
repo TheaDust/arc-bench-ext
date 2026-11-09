@@ -1,5 +1,10 @@
 # Benchmark 质量与验收边界
 
+## 2026-11-09: Sheet 实验需求与测试收口
+
+修订 `2026-11-09-sheet-experiment-r2`，父版本 `2026-11-09-sheet-requirements-r1`（98723f2）。Sheet保持26/104，全库423/759。统一公式术语，明确COUNT、数值/CSV及结构范围边界，补齐总计、存储输入、撤销分支与pivot拒绝配置的断言。类型与47条定向DOM合同通过；完整应用104场景可行性仍须正式运行前验证。协议见 [SHEET-EXPERIMENT.md](SHEET-EXPERIMENT.md)，审查见 [audit/sheet-r2.md](audit/sheet-r2.md)。修正父提交、历史验证指针、审查范围和评测方法名称。
+
+
 ## 2026-11-09: Sheet 需求打磨第一轮
 
 修订 `2026-11-09-sheet-requirements-r1`，父版本 `2026-11-09-keep-bookstack-observation-fixes`。Sheet 保持 26 条原子需求、104 个场景；全库保持 423/759。澄清插入位置、存储公式与计算结果、剪切外部引用、历史事务边界、筛选与排序关系及 pivot 已应用状态；五个已有场景补齐坐标、数据和总计。测试尚未对齐或执行；对 OpenCode 的区分度尚未测量。审查与未决输入域见 [Sheet 需求记录](audit/sheet-requirements-20261109.md)。历史结果不转移。

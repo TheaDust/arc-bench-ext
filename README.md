@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-09-sheet-requirements-r1`
+> 当前修订：`2026-11-09-sheet-experiment-r2`
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -34,14 +34,14 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-09-sheet-requirements-r1` |
-| 父版本 | `2026-11-09-keep-bookstack-observation-fixes` |
+| 修订 | `2026-11-09-sheet-experiment-r2` |
+| 父版本 | `2026-11-09-sheet-requirements-r1`（98723f2） |
 | 需求 / 场景 | 423 / 759 |
-| 质量状态 | Sheet 需求第一轮打磨完成；静态检查通过，测试待对齐与执行 |
+| 质量状态 | Sheet需求/断言收口，47条定向合同通过；完整参考应用运行待完成 |
 | 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
-| 本轮变更 | Sheet 共享状态与操作语义澄清；五个已有场景补齐明确输入和预期；需求输入域仍有未决项 |
+| 本轮变更 | Sheet输入域与范围边界明确；补齐相关场景断言；当前审查26/104 |
 | 历史参考验证（修复前） | 父版 BookStack 49/49；观测修复在既有 `pi` 候选定向复验：BookStack 5/5（REQ-11.1/11.3），Keep 7/7（REQ-2.4/6.4）；BookStack REQ-5.4 Cancel 仍为真实实现缺陷 |
-| 验证记录 | [validation.json](validation.json)、[父版记录](validation/history/2026-11-07-bookstack-lifecycle/README.md) |
+| 验证记录 | [validation.json](validation.json)、[父版记录](validation/history/2026-11-09-sheet-requirements-r1/validation.json) |
 
 本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量；完整产品行为与模型区分度尚需实际执行，具体边界见 [QUALITY.md](QUALITY.md) 与 [audit/README.md](audit/README.md)。
 
@@ -124,6 +124,8 @@ node validation/run-task-suite.mjs <task> <base-url> [--grep <pattern>]
 
 ## 文档
 
+- [SHEET-EXPERIMENT.md](SHEET-EXPERIMENT.md)：Sheet R2 输入域、方法能力、计分与启动门禁
+
 - [UPSTREAM.md](UPSTREAM.md)：上游来源、导入 commit、同步策略
 - [TESTING.md](TESTING.md)：观测合同、共享通知/导航 helper、静态策略和扩展清单
 - [CHANGES.md](CHANGES.md)：逐轮修订记录
@@ -140,7 +142,7 @@ node validation/run-task-suite.mjs <task> <base-url> [--grep <pattern>]
 
 - 上游：<https://github.com/code-philia/arc-bench>
 - 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`
-- 本仓库当前修订：`2026-11-09-sheet-requirements-r1`
+- 本仓库当前修订：`2026-11-09-sheet-experiment-r2`
 
 上游快照中没有 `LICENSE` 文件；本仓库目前也没有单独声明开源许可证。公开分发或再利用上游材料前，请先确认上游作者的授权。详见 [NOTICE](NOTICE) 和 [UPSTREAM.md](UPSTREAM.md)。
 

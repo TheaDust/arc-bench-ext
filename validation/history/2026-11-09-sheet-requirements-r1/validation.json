@@ -1,0 +1,100 @@
+{
+  "revision": "2026-11-09-sheet-requirements-r1",
+  "parentRevision": "2026-11-09-keep-bookstack-observation-fixes",
+  "manifestSha256": "d461fab83bebc61ec82e9da1f4578fbdca8579bc3b6a4396fb71ef6681248a76",
+  "recordedAt": "2026-11-09T15:02:49.546Z",
+  "status": "sheet-requirements-refined-tests-alignment-and-execution-pending",
+  "scope": {
+    "tasks": 8,
+    "atomicRequirements": 423,
+    "scenarios": 759,
+    "preservedExistingScenarioIdsAndContent": false,
+    "mergedExtensions": {
+      "keepLifecycle": {
+        "atomicRequirements": 2,
+        "scenarios": 8
+      },
+      "keepInteractions": {
+        "atomicRequirements": 4,
+        "scenarios": 8
+      },
+      "bookstackInteractions": {
+        "atomicRequirements": 3,
+        "scenarios": 7
+      },
+      "sheetTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      },
+      "githubTransactionGuards": {
+        "atomicRequirements": 2,
+        "scenarios": 4
+      }
+    },
+    "observationStrengthening": {
+      "task": "bookstack",
+      "scenarios": 3
+    },
+    "preservedExistingScenarioIds": true,
+    "changedExistingScenarioContent": [
+      "SCN-REQ-1.3.1-01",
+      "SCN-REQ-3.1.1-03",
+      "SCN-REQ-4.1.1-02",
+      "SCN-REQ-5.3.1-03",
+      "SCN-REQ-5.3.1-09"
+    ]
+  },
+  "testsExecuted": false,
+  "testsChanged": false,
+  "staticChecks": {
+    "yamlUniqueKeys": true,
+    "identitiesTitlesImagesAndReferencesPreserved": true,
+    "sheetRequirements": 26,
+    "sheetScenarios": 104,
+    "completeGwt": true,
+    "sheetTestsByteIdentical": true,
+    "otherTaskRequirementsByteIdentical": true,
+    "frozenFiles": 770,
+    "unmodifiedYamlFormattingPreserved": true
+  },
+  "requirementReview": {
+    "task": "sheet",
+    "documentation": "audit/sheet-requirements-20261109.md",
+    "changedDescriptions": [
+      "ROOT",
+      "REQ-2.2.1",
+      "REQ-2.2.2",
+      "REQ-3.2.1",
+      "REQ-3.2.2",
+      "REQ-4.2.1",
+      "REQ-5.1.1",
+      "REQ-5.1.2",
+      "REQ-5.3.1"
+    ],
+    "changedScenarios": [
+      "SCN-REQ-1.3.1-01",
+      "SCN-REQ-3.1.1-03",
+      "SCN-REQ-4.1.1-02",
+      "SCN-REQ-5.3.1-03",
+      "SCN-REQ-5.3.1-09"
+    ],
+    "preservedIdsAndTitles": true,
+    "requirements": 26,
+    "scenarios": 104,
+    "testsChanged": false,
+    "testsExecuted": false,
+    "openCodeDifficultyMeasured": false
+  },
+  "historicalEvidence": {
+    "manifest": "validation/history/2026-11-09-keep-bookstack-observation-fixes/revision.json",
+    "validation": "validation/history/2026-11-09-keep-bookstack-observation-fixes/validation.json",
+    "originalSheetRequirements": "validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml",
+    "resultsTransferred": false
+  },
+  "limitations": [
+    "Existing Sheet tests have not been aligned clause by clause with the refined requirements.",
+    "The input-domain and boundary questions listed in the requirement review remain unresolved.",
+    "No Sheet generation or OpenCode comparison was run; potential discriminative power remains a hypothesis.",
+    "The parent Keep/BookStack selector changes remain without runtime verification."
+  ]
+}

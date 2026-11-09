@@ -4,9 +4,10 @@ import { existsSync } from 'node:fs';
 import { dirname, resolve, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const [controller, task, application, output, method='shallow'] = process.argv.slice(2);
-if (!controller || !task || !application || !output || !['baseline','shallow','arc'].includes(method)) {
-  console.error('Usage: node evaluate-project.mjs <ShallowCode directory> <task> <application directory> <new output directory> [baseline|shallow|arc]');
+const [controller, task, application, output, requestedMethod='shallow'] = process.argv.slice(2);
+const method = requestedMethod === 'baseline' ? 'pi' : requestedMethod;
+if (!controller || !task || !application || !output || !['pi','opencode','shallow','arc'].includes(method)) {
+  console.error('Usage: node evaluate-project.mjs <ShallowCode directory> <task> <application directory> <new output directory> [pi|opencode|shallow|arc] (baseline is a legacy alias for pi)');
   process.exitCode=2;
 } else {
   const root=resolve(controller), benchmark=dirname(fileURLToPath(import.meta.url));

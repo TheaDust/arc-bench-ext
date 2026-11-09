@@ -1,3 +1,4 @@
+import { expectPivotFields, expectPivotResult } from './support/experiment-observations';
 import { expectCalculatedNumber } from './support/observations';
 import { expectText } from './support/observations';
 import { selectChoice } from './support/public-controls';
@@ -186,6 +187,9 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 3', async ({ 
   await expect(gridCell(page, 'A4')).toHaveText('Grand Total');
   await expectCalculatedNumber(gridCell(page, 'D4'), 4);
 
+  const expected = [['Region', 'Q1', 'Q2', 'Grand Total'], ['East', 2, 1, 3], ['North', 1, 0, 1], ['Grand Total', 3, 1, 4]] as const;
+  await expectPivotResult(page, expected);
+  await expectPivotFields(page, { rows: 'Region', columns: 'Quarter', values: 'Sales', method: 'COUNT' });
   await page.reload();
   await expectActiveWorksheet(page, 'Pivot1');
   await expectCalculatedNumber(gridCell(page, 'B2'), 2);
@@ -196,6 +200,8 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 3', async ({ 
     D2: '3', A3: 'North', B3: '1', C3: '0', D3: '1', A4: 'Grand Total' }))
     if (/^\d+$/.test(value)) await expectCalculatedNumber(gridCell(page, coordinate), Number(value));
     else await expect(gridCell(page, coordinate)).toHaveText(value);
+  await expectPivotResult(page, expected);
+  await expectPivotFields(page, { rows: 'Region', columns: 'Quarter', values: 'Sales', method: 'COUNT' });
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 4', async ({ page }) => {
@@ -267,6 +273,8 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ 
   await expectCalculatedNumber(gridCell(page, 'B3'), 1);
   await expectCalculatedNumber(gridCell(page, 'B4'), 3);
 
+  const expected = [['Status', 'COUNT of Region'], ['Open', 2], ['Closed', 1], ['Grand Total', 3]] as const;
+  await expectPivotResult(page, expected);
   await chooseEditorOption(page, editor, /^(summarize by)$/i, /^SUM$/i);
   await editor.getByRole('button', { name: /^Apply$/ }).click();
   await expectText(page, 
@@ -276,6 +284,7 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ 
   await expectCalculatedNumber(gridCell(page, 'B3'), 1);
   await expectCalculatedNumber(gridCell(page, 'B4'), 3);
 
+  await expectPivotResult(page, expected);
   await worksheetTab(page, 'Sheet1').click();
   await expectActiveWorksheet(page, 'Sheet1');
   await expect(gridCell(page, 'B2')).toHaveText('Open');
@@ -289,6 +298,8 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 5', async ({ 
   await expect(gridCell(page, 'A3')).toHaveText('Closed');
   await expectCalculatedNumber(gridCell(page, 'B3'), 1);
   await expectCalculatedNumber(gridCell(page, 'B4'), 3);
+  await expectPivotResult(page, expected);
+  await expectPivotFields(page, { rows: 'Status', values: 'Region', method: 'COUNT' });
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 6', async ({ page }) => {
@@ -447,6 +458,15 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 8', async ({ 
   await expectCalculatedNumber(gridCell(page, 'B2'), 400);
   await expectCalculatedNumber(gridCell(page, 'B3'), 200);
   await expectCalculatedNumber(gridCell(page, 'B4'), 600);
+  const expected = [['Region', 'SUM of Sales'], ['East', 400], ['North', 200], ['Grand Total', 600]] as const;
+  await expectPivotResult(page, expected);
+  await expectPivotFields(page, { rows: 'Region', method: 'SUM' });
+  await page.getByRole('button', { name: /^Refresh pivot table$/ }).click();
+  await expectText(page, 'Pivot field is no longer available. Select a new field.', { exact: true });
+  await expectPivotResult(page, expected);
+  await worksheetTab(page, 'Sheet1').click();
+  for (const [coordinate, value] of Object.entries({ A1: 'Region', A2: 'East', A3: 'North', A4: 'East', B1: '', B2: '', B3: '', B4: '' }))
+    await expect(gridCell(page, coordinate)).toHaveText(value);
 });
 
 test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9', async ({ page }) => {
@@ -476,6 +496,8 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9', async ({ 
   await expectCalculatedNumber(gridCell(page, 'B3'), 1);
   await expect(gridCell(page, 'A4')).toHaveText('South');
   await expectCalculatedNumber(gridCell(page, 'B4'), 1);
+  const expected = [['Region', 'COUNT of Status'], ['East', 2], ['North', 1], ['South', 1], ['Grand Total', 4]] as const;
+  await expectPivotResult(page, expected);
   await page.reload();
   await expectCalculatedNumber(gridCell(page, 'B2'), 2);
   await expectCalculatedNumber(gridCell(page, 'B3'), 1);
@@ -484,4 +506,6 @@ test('REQ-5.3.1: Create and Refresh a Basic Pivot Table - Scenario 9', async ({ 
   await expect(gridCell(page, 'A3')).toHaveText('North');
   await expect(gridCell(page, 'A4')).toHaveText('South');
   await expectCalculatedNumber(gridCell(page, 'B4'), 1);
+  await expectPivotResult(page, expected);
+  await expectPivotFields(page, { rows: 'Region', values: 'Status', method: 'COUNT' });
 });

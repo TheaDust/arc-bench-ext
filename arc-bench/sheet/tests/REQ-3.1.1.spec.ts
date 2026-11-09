@@ -1,3 +1,4 @@
+import { expectStoredCell } from './support/experiment-observations';
 import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -95,6 +96,8 @@ test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 3', asyn
   await expect(gridCell(page, 'B1')).toHaveText('Committed by selection change');
   await gridCell(page, 'A5').click();
   await expect(formulaBar(page)).toHaveValue('=A2*2');
+  for (const value of values) await expectStoredCell(page, value.cell, value.raw, value.raw.startsWith('=') ? Number(value.visible) : value.visible);
+  await expectStoredCell(page, 'B1', 'Committed by selection change');
 });
 
 test('REQ-3.1.1: Edit a Cell Through the Grid or Formula Bar - Scenario 4', async ({ page }) => {

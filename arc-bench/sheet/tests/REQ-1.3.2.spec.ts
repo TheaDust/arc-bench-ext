@@ -1,3 +1,4 @@
+import { expectStoredCell } from './support/experiment-observations';
 import { expectCalculatedNumber } from './support/observations';
 import { baseUrl } from './support/e2e';
 import { expectCsvValues } from './support/observations';
@@ -52,8 +53,8 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 1', async ({ pag
 
   await expect(gridCell(page, 'B2')).toHaveText('Contains, commas');
   await expect(gridCell(page, 'B3')).toHaveText('They said "hello"\n next line');
-  await commitCellThroughFormulaBar(page, 'E2', '=C2*2');
-  await commitCellThroughFormulaBar(page, 'E3', '=C3+2');
+  await expectStoredCell(page, 'E2', '=C2*2', 4);
+  await expectStoredCell(page, 'E3', '=C3+2', 5);
   await expectCalculatedNumber(gridCell(page, 'E2'), 4);
   await expectCalculatedNumber(gridCell(page, 'E3'), 5);
   const firstExport = await exportCsv(page);
@@ -64,6 +65,8 @@ test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 1', async ({ pag
   await expectCalculatedNumber(gridCell(page, 'E3'), 5);
   const secondExport = await exportCsv(page);
   expectCsvValues(secondExport, expectedCsv, [[1, 4], [2, 4]]);
+  await expectStoredCell(page, 'E2', '=C2*2', 4);
+  await expectStoredCell(page, 'E3', '=C3+2', 5);
 });
 
 test('REQ-1.3.2: Export the Current Worksheet as CSV - Scenario 2', async ({ page }) => {

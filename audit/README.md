@@ -1,5 +1,7 @@
 # 八题需求与测试逐场景审查
 
+Sheet 当前R2记录见 [sheet-r2.md](sheet-r2.md) 与 [sheet-r2.json](sheet-r2.json)（26/104）。下文表格与审查数量属于历史版本。
+
 本目录保留 2026-11-07 的八题审查记录，并同步 2026-11-08 的 BookStack 补强、Keep 生命周期扩展与 Keep/BookStack 组合约束扩展。组合扩展已完成输入、收集与公开合同检查；生命周期组件当时按用户要求仅完成静态与类型检查。父版执行结果不转移至新输入。输入来自导入时的 `2026-11-06-isolated-scenarios` 本地快照；原目录和既有实验产物保持独立。本轮在当前目录修订需求和测试，不修改生成应用或 ShallowCode 控制器。
 
 每题分别读取需求树的继承合同、叶需求、场景及测试。逐场景矩阵记录 Given/When/Then 与断言对应关系；问题清单同时记录假阴性、漏断言、初态、对象归属和不确定解释。`PROTOCOL.md` 规定审查边界。子智能体继承本会话上下文，因此这属于模型辅助审查，不声称双盲审查或人工标注。
@@ -18,7 +20,7 @@
 | StackOverflow | 52 | 66 | [stackoverflow.md](stackoverflow.md) | [stackoverflow.json](stackoverflow.json) |
 | 合计 | 419 | 751 | | |
 
-表中合计为当前合并修订总数。`bookstack.json` / `keep.json` 矩阵覆盖生命周期与观察点补强范围（BookStack 26/49、Keep 18/41）；组合约束需求 REQ-6.1–6.4、REQ-11.1–11.3 的逐需求审查见 [interactions.md](interactions.md)。
+表中合计为当时合并修订总数。`bookstack.json` / `keep.json` 矩阵覆盖生命周期与观察点补强范围（BookStack 26/49、Keep 18/41）；组合约束需求 REQ-6.1–6.4、REQ-11.1–11.3 的逐需求审查见 [interactions.md](interactions.md)。
 
 BookStack 在 2026-11-07 的生命周期扩展中新增 2 条原子需求、14 个场景；原 24/35 身份保持不变。扩展场景在本地参考实现上 49/49 通过，旧分数不可直接混算。
 

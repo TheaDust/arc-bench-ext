@@ -1,100 +1,86 @@
 {
-  "revision": "2026-11-09-sheet-requirements-r1",
-  "parentRevision": "2026-11-09-keep-bookstack-observation-fixes",
-  "manifestSha256": "d461fab83bebc61ec82e9da1f4578fbdca8579bc3b6a4396fb71ef6681248a76",
-  "recordedAt": "2026-11-09T15:02:49.546Z",
-  "status": "sheet-requirements-refined-tests-alignment-and-execution-pending",
+  "revision": "2026-11-09-sheet-experiment-r2",
+  "parentRevision": "2026-11-09-sheet-requirements-r1",
+  "manifestSha256": "48e1766b64123285ca631f71635c5ecbb305cc58f8173b270ebcac57c45228b7",
+  "recordedAt": "2026-11-09T15:55:03.802Z",
+  "status": "sheet-contracts-validated-reference-application-run-pending",
   "scope": {
     "tasks": 8,
     "atomicRequirements": 423,
     "scenarios": 759,
-    "preservedExistingScenarioIdsAndContent": false,
-    "mergedExtensions": {
-      "keepLifecycle": {
-        "atomicRequirements": 2,
-        "scenarios": 8
-      },
-      "keepInteractions": {
-        "atomicRequirements": 4,
-        "scenarios": 8
-      },
-      "bookstackInteractions": {
-        "atomicRequirements": 3,
-        "scenarios": 7
-      },
-      "sheetTransactionGuards": {
-        "atomicRequirements": 2,
-        "scenarios": 4
-      },
-      "githubTransactionGuards": {
-        "atomicRequirements": 2,
-        "scenarios": 4
-      }
-    },
-    "observationStrengthening": {
-      "task": "bookstack",
-      "scenarios": 3
-    },
-    "preservedExistingScenarioIds": true,
-    "changedExistingScenarioContent": [
-      "SCN-REQ-1.3.1-01",
-      "SCN-REQ-3.1.1-03",
-      "SCN-REQ-4.1.1-02",
-      "SCN-REQ-5.3.1-03",
-      "SCN-REQ-5.3.1-09"
-    ]
-  },
-  "testsExecuted": false,
-  "testsChanged": false,
-  "staticChecks": {
-    "yamlUniqueKeys": true,
-    "identitiesTitlesImagesAndReferencesPreserved": true,
     "sheetRequirements": 26,
     "sheetScenarios": 104,
-    "completeGwt": true,
-    "sheetTestsByteIdentical": true,
-    "otherTaskRequirementsByteIdentical": true,
-    "frozenFiles": 770,
-    "unmodifiedYamlFormattingPreserved": true
+    "preservedExistingIdsAndTitles": true
   },
-  "requirementReview": {
-    "task": "sheet",
-    "documentation": "audit/sheet-requirements-20261109.md",
-    "changedDescriptions": [
-      "ROOT",
-      "REQ-2.2.1",
-      "REQ-2.2.2",
-      "REQ-3.2.1",
-      "REQ-3.2.2",
-      "REQ-4.2.1",
-      "REQ-5.1.1",
-      "REQ-5.1.2",
-      "REQ-5.3.1"
-    ],
-    "changedScenarios": [
-      "SCN-REQ-1.3.1-01",
-      "SCN-REQ-3.1.1-03",
-      "SCN-REQ-4.1.1-02",
-      "SCN-REQ-5.3.1-03",
-      "SCN-REQ-5.3.1-09"
-    ],
-    "preservedIdsAndTitles": true,
-    "requirements": 26,
-    "scenarios": 104,
-    "testsChanged": false,
-    "testsExecuted": false,
-    "openCodeDifficultyMeasured": false
+  "typecheck": {
+    "passed": true,
+    "command": "npm run typecheck"
+  },
+  "contracts": {
+    "passed": 47,
+    "failed": 0,
+    "skipped": 0,
+    "report": "validation/sheet-r2-contracts-report.json",
+    "browserChannel": "chrome",
+    "scope": "Sheet DOM contracts; 30 inherited and 17 new cases"
+  },
+  "collection": {
+    "passed": true,
+    "total": 759,
+    "sheet": 104,
+    "report": "validation/collection-report.json"
+  },
+  "sourceIntegrity": {
+    "passed": true,
+    "frozenFiles": 782,
+    "command": "npm run test:collect",
+    "scope": "YAML identity/reference, scenario counts, frozen bytes and standalone helpers"
+  },
+  "review": {
+    "current": "audit/sheet-r2.json",
+    "targetedR2Scenarios": 15,
+    "historicalBase": "audit/sheet.json",
+    "boundary": "Current mapping plus inherited semantic review; not a fresh independent review of every callback."
   },
   "historicalEvidence": {
-    "manifest": "validation/history/2026-11-09-keep-bookstack-observation-fixes/revision.json",
-    "validation": "validation/history/2026-11-09-keep-bookstack-observation-fixes/validation.json",
-    "originalSheetRequirements": "validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml",
+    "manifest": "validation/history/2026-11-09-sheet-requirements-r1/revision.json",
+    "validation": "validation/history/2026-11-09-sheet-requirements-r1/validation.json",
     "resultsTransferred": false
   },
+  "formalExperimentGate": {
+    "inputContract": "bounded-and-explicit",
+    "testContracts": "passed",
+    "referenceApplication": {
+      "status": "pending",
+      "expectedScenarios": 104
+    },
+    "modelProtocol": {
+      "status": "to-be-frozen-in-experiment-plan",
+      "opencodeSubagents": "available"
+    },
+    "ready": false,
+    "readiness": "validation/sheet-r2-readiness.json"
+  },
+  "applications": {
+    "generated": false,
+    "modified": false,
+    "businessScenariosExecuted": 0
+  },
   "limitations": [
-    "Existing Sheet tests have not been aligned clause by clause with the refined requirements.",
-    "The input-domain and boundary questions listed in the requirement review remain unresolved.",
-    "No Sheet generation or OpenCode comparison was run; potential discriminative power remains a hypothesis.",
-    "The parent Keep/BookStack selector changes remain without runtime verification."
-  ]
+    "The complete Sheet application suite has not been run against a compliant reference application; runtime feasibility and the 60-second per-scenario budget remain to be checked.",
+    "Synthetic DOM contracts cover selected valid variants and defects, not every legal UI implementation.",
+    "No model comparison was run; discrimination against OpenCode remains unmeasured."
+  ],
+  "runnerCatalog": {
+    "passed": true,
+    "method": "opencode",
+    "scenarios": 104,
+    "report": "validation/sheet-r2-catalog.json",
+    "modelCalled": false,
+    "applicationStarted": false
+  },
+  "syntax": {
+    "passed": true,
+    "command": "node --check evaluate-project.mjs"
+  }
 }

@@ -1,8 +1,8 @@
 {
-  "version": 12,
+  "version": 13,
   "sourceRepository": "E:\\my-works\\coding\\arc-bench",
   "sourceCommit": "e59696bbc68578c3b3da1ad47f9a0ac07e581184",
-  "revision": "2026-11-09-sheet-requirements-r1",
+  "revision": "2026-11-09-sheet-experiment-r2",
   "tasks": {
     "12306": {
       "atomicRequirements": 93,
@@ -307,14 +307,29 @@
         "arc-bench/sheet/tests/support/observations.ts",
         "arc-bench/sheet/tests/support/public-controls.ts",
         "arc-bench/sheet/tests/support/transactional-cut.ts",
-        "arc-bench/sheet/tests/support/workbook-record.ts"
+        "arc-bench/sheet/tests/support/workbook-record.ts",
+        "arc-bench/sheet/tests/support/experiment-observations.ts"
       ],
       "changedFilesSinceParent": [
-        "arc-bench/sheet/requirements/requirements.yaml"
+        "arc-bench/sheet/requirements/requirements.yaml",
+        "arc-bench/sheet/tests/REQ-1.3.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.2.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-2.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-3.2.2.spec.ts",
+        "arc-bench/sheet/tests/REQ-4.1.1.spec.ts",
+        "arc-bench/sheet/tests/REQ-5.3.1.spec.ts",
+        "arc-bench/sheet/tests/support/experiment-observations.ts"
       ],
       "requirementsChangedSinceParent": true,
-      "review": "audit/sheet.json",
-      "extensionReview": "audit/transaction-guards.md"
+      "review": "audit/sheet-r2.json",
+      "extensionReview": "audit/transaction-guards.md",
+      "historicalReview": {
+        "file": "audit/sheet.json",
+        "requirements": 24,
+        "scenarios": 100
+      },
+      "reviewDocumentation": "audit/sheet-r2.md"
     },
     "stackoverflow": {
       "atomicRequirements": 52,
@@ -932,31 +947,31 @@
     "arc-bench/sheet/requirements/reference/workbook-home.png": "b1cceb9fb430ab35b059f86f07abdeb6065305e004e7f43b9fd6966673e9a577",
     "arc-bench/sheet/requirements/reference/worksheet-lifecycle.png": "bcff393226d23557eb4d63ac3afb52fb320ef2aace7cdd9c52599ccc4d2dd5ae",
     "arc-bench/sheet/requirements/reference/worksheet-overview.png": "413a5baa064ee00d825694937c11ccfeeba4388a1ef7468c063e82287b3965e3",
-    "arc-bench/sheet/requirements/requirements.yaml": "fe23bc724309ab2313682167fe0607b3781eb37eba89693610f7385a038c98ec",
+    "arc-bench/sheet/requirements/requirements.yaml": "9e073c190c7ee2b16ff59c922ab8e1d8c811f6ca563ed89e94627a661df63498",
     "arc-bench/sheet/tests/REQ-1.1.1.spec.ts": "6fe2e002623bd6407e488708b48d0a33f4e175080ad8a061b4dadf6e7c02c81e",
     "arc-bench/sheet/tests/REQ-1.2.1.spec.ts": "a1e81038bb3dc0b87a43570c19ae0d78275142d17336d4d5f3b245c4c7c089ec",
     "arc-bench/sheet/tests/REQ-1.2.2.spec.ts": "84adc4c32ec5b3d72f6ef5cbd5996f766618874f953940d8a5c066389ff13bec",
     "arc-bench/sheet/tests/REQ-1.3.1.spec.ts": "b1997fcd2663ff7fce77c9ec0489cf8a9f0a2c4d77ad687dc20466f57e60b03b",
-    "arc-bench/sheet/tests/REQ-1.3.2.spec.ts": "170d67274f8e23f844cff969adc1d2a42f2c2a8745d3fb5dddb7c85a04aca7e1",
+    "arc-bench/sheet/tests/REQ-1.3.2.spec.ts": "afe7a5e4b12136b35be052a8cd8628bdc098f77c24688f000be03c429406849d",
     "arc-bench/sheet/tests/REQ-2.1.1.spec.ts": "51ff27895912371dc04ccc533f3f6767a624b82863b5518412a832994e272f9e",
     "arc-bench/sheet/tests/REQ-2.1.2.spec.ts": "f821dae1358326c75bb756799645fb547d04c4c7dc0468c6e7d0b8f97b85eb4e",
     "arc-bench/sheet/tests/REQ-2.1.3.spec.ts": "8a95b3b3e21636c734f9682af84457dae61896a7899911d572202665d4d055f6",
     "arc-bench/sheet/tests/REQ-2.1.4.spec.ts": "276ac1f0b97684d406d3920daa9ce367cd55e385285970e20da886ada7236118",
-    "arc-bench/sheet/tests/REQ-2.2.1.spec.ts": "e3797b8e043cb979213c8ec9b8ad0814513b83f896cdb527e9eb4204f32058a4",
-    "arc-bench/sheet/tests/REQ-2.2.2.spec.ts": "2e9863ae8f10cd327737f6243784c091d7b67e67149db7f5ce96e490a6e76ef8",
-    "arc-bench/sheet/tests/REQ-3.1.1.spec.ts": "52204e17b2aa6a1265869e02be7581b3d6a634f38c6bed66c363782ab03c6623",
+    "arc-bench/sheet/tests/REQ-2.2.1.spec.ts": "112bf87502c5539d7855d3dfcbf5812e704975e11e07fb84a2b423b6f415bcc5",
+    "arc-bench/sheet/tests/REQ-2.2.2.spec.ts": "93370562acc2e1b884e895f3ed76c92923ed2dd70ab157be84826928920f89f4",
+    "arc-bench/sheet/tests/REQ-3.1.1.spec.ts": "ac1b38cc71717e6c099b7d8e4ab262a3995411a9c8500ab0bd26bc5dd0ad6630",
     "arc-bench/sheet/tests/REQ-3.1.2.spec.ts": "afd186eec2329507156b520095037b682b0f42a57806dda6f6bebfcb09a125fe",
     "arc-bench/sheet/tests/REQ-3.1.3.spec.ts": "3eaf9b3862d0458d8af20866abb642c1beb46e2e9f7dda6da0c96da6d79fd3ae",
     "arc-bench/sheet/tests/REQ-3.2.1.spec.ts": "203339b395ed3da1c0e36eb448e0f106d3395f8da243945ed5da7d972e12fcd1",
-    "arc-bench/sheet/tests/REQ-3.2.2.spec.ts": "e40b58232bcdcd0a546494cf89846df2b71e4dfc36bd31b978ba59675c457587",
-    "arc-bench/sheet/tests/REQ-4.1.1.spec.ts": "39b1331057a8586b14eb4e849e1159d6d32b88a5287b6d2f847cda3e8b6f5c55",
+    "arc-bench/sheet/tests/REQ-3.2.2.spec.ts": "c92219813d0894483a8f91eef6d585d57e5983ed27eccde3e0abf84fddac94e0",
+    "arc-bench/sheet/tests/REQ-4.1.1.spec.ts": "90d84231d7353e205fb36d26d86bf68fc12898ee2cffbf275b503d6e0452a27a",
     "arc-bench/sheet/tests/REQ-4.1.2.spec.ts": "dbab639611751628d2d695a1772aa9b881c27f8c9c15b38650abf97223d387be",
     "arc-bench/sheet/tests/REQ-4.2.1.spec.ts": "5d2714558e9945c54ccef911b54fdf3af18f957aef922eebed68f4eabfec5bb1",
     "arc-bench/sheet/tests/REQ-4.2.2.spec.ts": "d682bd15fabde1d6bbefbf857d63fbfc7389e85c0531525206c3bce1e3425730",
     "arc-bench/sheet/tests/REQ-5.1.1.spec.ts": "a8f5c736cdd8a3a4bfc91b3899922d00d45845418532b6254a1dfc1d78d5d533",
     "arc-bench/sheet/tests/REQ-5.1.2.spec.ts": "dfd3601e99c751ce012a1e1c37b9ff1980d3d6b2cb4b239ca260fd0e4968d161",
     "arc-bench/sheet/tests/REQ-5.2.1.spec.ts": "88c1d5efdc3d03bd692d7fc2af2c2d166274983a43406144150dc54b6acdb68d",
-    "arc-bench/sheet/tests/REQ-5.3.1.spec.ts": "be31516d54f977f46d7c1c5dac686178ba1fec36e2c3f6a0b164651ef86151fa",
+    "arc-bench/sheet/tests/REQ-5.3.1.spec.ts": "3d54c8433fe4e53832dfb387e71fda1fba039afce9edc268af9eef9b91fc6b8b",
     "arc-bench/sheet/tests/REQ-6.1.spec.ts": "b481344cbfcb065f5172b4e7ab875498f4d0b63896386c38e5088ba84251f18b",
     "arc-bench/sheet/tests/REQ-6.2.spec.ts": "bab86bda944ca08ddaadf6c4de8f42cf8f59fd027de01270c08ba2e204ef505a",
     "arc-bench/sheet/tests/support/e2e.ts": "a8df35cc1c2523e4864a285d02ff0b283dd4a930b1d7be96926da4653192d6b8",
@@ -1061,7 +1076,7 @@
     "audit/prestashop.json": "d59d98bc06fe265cf408df0f6ceebd35146e0fd8e1ee39bef748be415ac2ae0b",
     "audit/prestashop.md": "cfcd7d8b18904650a56d8088b30e924d92b0799af2223238a9730f9abf920380",
     "audit/PROTOCOL.md": "3f6286fad5fb3d5d08373731d170dc349a349bc3018fab98b2439697a56a17b0",
-    "audit/README.md": "769ceba932f541ee3698aa9af2cb300d99ac976598446427adaca62b1cb95feb",
+    "audit/README.md": "0085a7e96747debfb2b039172c9db5eb255a07ac3173552e642489867f0f2fe1",
     "audit/sheet.json": "932c2af0b038e4d5abf65145e003f0f51239240784a7ce33667b0df0ce0f510a",
     "audit/sheet.md": "70ad36c5a281c91e50aeb078aaf7834ecf8da7f4840c27e556688209ddc31bc0",
     "audit/stackoverflow.json": "766b1630e3361c3d03648682781f22045f8f95fffd2e04e3f0ace5c6c524e3d3",
@@ -1080,19 +1095,19 @@
     "audit/validation/prestashop.spec.ts": "56f17862202b18769f01153cb142b1ef0843fca9ddd1f962774f61a22f1e202a",
     "audit/validation/sheet.spec.ts": "1a98afdd4d864930ef679ddd4a48f734e3c1e1fd232881b8ec7ad6655952ad46",
     "audit/validation/stackoverflow.spec.ts": "e5429ea16c6676a019296beb1f1f554535f51b3ce6920a016d9a8e8951b2259e",
-    "CHANGES.md": "8d60eb7470b2784a5a26171f10f9767303a714ebc982f3b57f4a2cefba55abaa",
+    "CHANGES.md": "e041f5f27e492263b38c7a70da2aa592eae9f5cfdba9b9aaaf28db2e25b7c9b3",
     "CONSISTENCY.md": "7c607bcbff001ba428ce58429923d3e923cd570f425e6dc28f5a4b45d51e1070",
     "CONTRIBUTING.md": "673c82eabb7395f08b00a1741b9832e0d3af3e2fcf92cd83b445bd5923934722",
-    "evaluate-project.mjs": "2c38aa1238612b7bdd0952f9c4c8780127478a87fee5759b6e125968fce68e1b",
+    "evaluate-project.mjs": "f9f6219a835c8f4052e0602d518409827367331bf9506a4c36732caf35d09f12",
     "package.json": "a2680bc8a232b91eb32ced4f8b0614eeacc601b4afc5865806360628c49b8e97",
-    "QUALITY.md": "985d9854baf5875a26d7c9061d38111094738e1924a04970be208e05e5e36df8",
-    "README.md": "9ba7b42123c733a6d2bb74b03d285e3a854870fbba0c1e3d7d730db937c9ad0a",
+    "QUALITY.md": "c5ea2fb5fb04bc677f5106c5e282afc7777b41dd148ce79a80ff060be2227cbf",
+    "README.md": "4e9df90895a01d7059fc9294856f14560765b16f4c7bde0f88b7e2e252768208",
     "review.patch": "ee99a8b82e5bc9b45500f01653947d4ffa7f65533c51f9fa7a171ba502813402",
     "setup-playwright.cjs": "22360b4ad2f9457bdc6f651ebbf0e848b75056a5596a9c54944355110f2e537e",
     "setup-playwright.ps1": "94083d86049c7b43f73e724a9966528a7af34021b95bc328e900eab01d0cde95",
     "setup-playwright.sh": "334ec9b72ef6e3685811807f2a526db03d057a6eca3e54d85edcf9e9c1161a35",
     "TESTING.md": "4c195e69677c884e76fd83a3ff04c8e8054ac85ea145fa91d3249a611fdd0dbb",
-    "UPSTREAM.md": "ba61e2692c81686d31ad39aca4eb996648df180d3d74008662458347bfba9c38",
+    "UPSTREAM.md": "d665ebb88801a45ec82798485995bea0be8ee76160413c9cdfc9e06be4437475",
     "validation/audit-inputs.mjs": "76d30947d564310867ce6fe63fd52f2cdccfd885da64bd0e01c249c005aadabb",
     "validation/behavior-contracts.spec.ts": "6d62e5b034b793d7ea4ef0b6a1e122f18dbf9a99a774a112856bcf07012d8236",
     "validation/closeout-contracts.spec.ts": "7f5a43f0fbe5093bcb5ac06642c859283d709efabfdde4a1c4a940ca290dee4a",
@@ -1137,25 +1152,37 @@
     "validation/history/2026-11-09-keep-bookstack-observation-hardening/validation.json": "3d99c2d7957ee05b511d1a17cea9eca2ab12420f0c134a6386e204e36e627945",
     "validation/history/2026-11-09-keep-bookstack-observation-hardening/probe-contracts-report.json": "2435b97d630b56f1ef24fda1118cca1a25d18030f333c14c01f3b807856812e4",
     "validation/history/2026-11-09-keep-bookstack-observation-hardening/README.md": "e9031f9588b6f5e674810c39c0927155b45b246af4d8671879037e1124f8b125",
-    "audit/sheet-requirements-20261109.md": "c80a910ac2ce86e59dec6e9a6ae03b2d8b3bda1494b2003822a91e2be5162c0b",
+    "audit/sheet-requirements-20261109.md": "f913ac8ae7fef4a2e916d47d55b1ef174335de05c95a5d9e5da52bc9598f9a1b",
     "validation/history/2026-11-09-keep-bookstack-observation-fixes/revision.json": "f803f12748c830ae7b9207a6e6d3f589bf7f563eb2cc1207f40c5deb15c926bf",
     "validation/history/2026-11-09-keep-bookstack-observation-fixes/validation.json": "70a334ed8eb10e3c682cb520a1e0bf5b3bc5920f395d19eadc34d8b8675a57cb",
-    "validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml": "2177dd539d64ce1716f0e09d1433b08c2d37818bd514fa01b0538fe141a913e8"
+    "validation/history/2026-11-09-keep-bookstack-observation-fixes/sheet-requirements.yaml": "2177dd539d64ce1716f0e09d1433b08c2d37818bd514fa01b0538fe141a913e8",
+    "arc-bench/sheet/tests/support/experiment-observations.ts": "87c9da8fd66354808963a646819199716c56dba88e847c3903f66eab6ae8a155",
+    "validation/sheet-experiment-contracts.spec.ts": "6c47cd10f5b97a45337a39e09cb76d48769cac64e79f0cfb11eed784c658d1ac",
+    "validation/sheet-r2-contracts-report.json": "f9bd52c5e60d1474c4bc0a8f302c22f5d4bbf81c56aa29c1b5bfd02ff0123a0d",
+    "validation/sheet-r2-controller-review.json": "2f0ec019549dcadfb3e924522cc63d9c64512385fde355f8826c5555f80ee792",
+    "audit/sheet-r2.json": "6ab91bd8dc62d02c42b117ca41f884729df58c8c775aed9e64a4004d3a405376",
+    "audit/sheet-r2.md": "bd4d1a3026b21111e7559b46c8bbdf09d11ffb599664650fd8c522b81c19b056",
+    "SHEET-EXPERIMENT.md": "79461abd5fb94ddff068464dc661232352b7d6ae3dbb7aa48c921d4ce51fc57d",
+    "validation/history/2026-11-09-sheet-requirements-r1/revision.json": "d461fab83bebc61ec82e9da1f4578fbdca8579bc3b6a4396fb71ef6681248a76",
+    "validation/history/2026-11-09-sheet-requirements-r1/validation.json": "9414faa41dbb156640e8970fae954418f8f031ae7f309629633c928646f5936a",
+    "validation/history/2026-11-09-sheet-requirements-r1/sheet-requirements.yaml": "fe23bc724309ab2313682167fe0607b3781eb37eba89693610f7385a038c98ec",
+    "validation/sheet-r2-catalog.json": "aa1c2b50fdf67590539144509df9af863a2b97b9e14cdf2de521fe12f98f4e0e",
+    "validation/sheet-r2-readiness.json": "5f799f2d63f50d77c6c0e6971433cc07d504a3c6835f73c55865fa55e7a74faf"
   },
-  "parentRevision": "2026-11-09-keep-bookstack-observation-fixes",
-  "parentManifestSha256": "f803f12748c830ae7b9207a6e6d3f589bf7f563eb2cc1207f40c5deb15c926bf",
+  "parentRevision": "2026-11-09-sheet-requirements-r1",
+  "parentManifestSha256": "d461fab83bebc61ec82e9da1f4578fbdca8579bc3b6a4396fb71ef6681248a76",
   "reviewedAt": "2026-11-09",
-  "qualityStatus": "sheet-requirements-refined-tests-alignment-and-execution-pending",
+  "qualityStatus": "sheet-contracts-validated-reference-application-run-pending",
   "consistencyReview": "audit/README.md",
   "evaluation": {
     "protocol": "application-per-scenario-v1",
     "entrypoint": "evaluate-project.mjs",
-    "controllerCommit": "cfb5b629eaf46c98e5fb79f9443e4a31e26e6b9d",
+    "controllerCommit": "7af8f39d63e3235af7bc551a60934ba7bd22e6bd",
     "controllerFiles": {
-      "src/experiments/worker.ts": "d94336d3a0a921f459f3a5306d077813971650d52e7fd6193d680a8ed4902831",
+      "src/experiments/worker.ts": "575aa82c30581a4a4e526d90bb2c6b49f12c77d6a723b359884e696358b77ad1",
       "src/experiments/scenario-evaluation.ts": "6cc84a201bff39a1b4dd202b0cae14548e100c6c9db4ec6899faee52e2c74f09",
       "src/experiments/node-command.mjs": "64056833ea120d3e389dc6f4408b52a393c1541cf0c364579d59f585a3301d01",
-      "src/experiments/protocol.ts": "f193978920eb025a4c87360737c8f2577c3cb4ab4fa8838f14275fef0540b9ae",
+      "src/experiments/protocol.ts": "cfd22950aa71fa1bf1c1126a0de599e9ed4dd037c76e2bdd69ee16e0ec56b62f",
       "src/experiments/process.ts": "42fd189e868645542f2fd388405e5562d03bff20f6f15c8b19e72bf8eff9609d",
       "src/application/candidate-runtime.ts": "b43ebb2fc7cb749ecf0083e81b345be0c06bc23eb772562fd15aea59ce4466f8",
       "src/inherited-data.ts": "5a21bd5c5bea664efcd6360e1f955df962d47ed85ba7b9c46a6c73fa3d2881f2",
@@ -1165,7 +1192,7 @@
     },
     "node": "v24.19.0",
     "playwright": "1.57.0",
-    "compatibilityReview": "audit/controller-review.json"
+    "compatibilityReview": "validation/sheet-r2-controller-review.json"
   },
   "review": {
     "protocol": "audit/PROTOCOL.md",
@@ -1186,10 +1213,14 @@
       ],
       "requirementsChanged": false,
       "contracts": 110,
-      "auditContracts": 175
-    }
+      "auditContracts": 175,
+      "evidenceRevision": "2026-11-09-keep-bookstack-observation-hardening",
+      "validation": "validation/history/2026-11-09-keep-bookstack-observation-hardening/validation.json",
+      "fullContractsReportAvailable": false
+    },
+    "currentSheetReview": "audit/sheet-r2.json"
   },
-  "parentCommit": "7226dd96c6e1890401f6d767b3c4855ad92d05e3",
+  "parentCommit": "98723f2ba73e38fc09b140068e586117a29ec262",
   "extension": {
     "documentation": "audit/interactions.md",
     "tasks": {
@@ -1278,7 +1309,7 @@
       "requirementsChanged": false,
       "identitiesAndDenominatorPreserved": true,
       "description": "Live regions use the exact declared visible message instead of an undeclared accessible name; repeated feedback is accepted; saved URLs reload on identical or hash-only navigation.",
-      "validation": "validation.json"
+      "validation": "validation/history/2026-11-09-keep-bookstack-observation-hardening/validation.json"
     },
     {
       "id": "2026-11-09-keep-bookstack-observation-fixes",
@@ -1286,37 +1317,22 @@
       "requirementsChanged": false,
       "identitiesAndDenominatorPreserved": true,
       "description": "Match visible accessible message fragments; reject existing suite outputs; isolate reports and archive the overwritten-report evidence.",
-      "validation": "validation.json",
+      "validation": "validation/history/2026-11-09-keep-bookstack-observation-fixes/validation.json",
       "testsExecuted": false
     }
   ],
-  "fileCount": 770,
+  "fileCount": 782,
   "requirementReview": {
     "task": "sheet",
-    "documentation": "audit/sheet-requirements-20261109.md",
-    "changedDescriptions": [
-      "ROOT",
-      "REQ-2.2.1",
-      "REQ-2.2.2",
-      "REQ-3.2.1",
-      "REQ-3.2.2",
-      "REQ-4.2.1",
-      "REQ-5.1.1",
-      "REQ-5.1.2",
-      "REQ-5.3.1"
-    ],
-    "changedScenarios": [
-      "SCN-REQ-1.3.1-01",
-      "SCN-REQ-3.1.1-03",
-      "SCN-REQ-4.1.1-02",
-      "SCN-REQ-5.3.1-03",
-      "SCN-REQ-5.3.1-09"
-    ],
-    "preservedIdsAndTitles": true,
+    "documentation": "audit/sheet-r2.md",
+    "matrix": "audit/sheet-r2.json",
     "requirements": 26,
     "scenarios": 104,
-    "testsChanged": false,
-    "testsExecuted": false,
-    "openCodeDifficultyMeasured": false
+    "preservedIdsAndTitles": true,
+    "testsChanged": true,
+    "contractsPassed": 47,
+    "businessApplicationRun": false,
+    "openCodeDifficultyMeasured": false,
+    "readiness": "validation/sheet-r2-readiness.json"
   }
 }

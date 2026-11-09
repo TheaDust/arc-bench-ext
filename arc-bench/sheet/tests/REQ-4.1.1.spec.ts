@@ -37,25 +37,37 @@ test('REQ-4.1.1: Calculate Basic Expressions and Aggregate Functions - Scenario 
     { cell: 'D4', expression: '=COUNT(B2:B10)', result: '3' },
     { cell: 'D5', expression: '=MIN(B2:B10)', result: '2' },
     { cell: 'D6', expression: '=MAX(B2:B10)', result: '6' },
+    { cell: 'H2', expression: '=SUM(F2:F3)', result: '0' },
+    { cell: 'H3', expression: '=AVERAGE(F2:F3)', result: '#DIV/0!' },
+    { cell: 'H4', expression: '=COUNT(F2:F3)', result: '0' },
+    { cell: 'H5', expression: '=MIN(F2:F3)', result: '0' },
+    { cell: 'H6', expression: '=MAX(F2:F3)', result: '0' },
   ];
 
   await createBlankWorkbook(page);
   await setClipboardText(page, '2\n\n4\n\n6\n\nnot numeric\nTRUE');
   await gridCell(page, 'B2').click();
   await page.keyboard.press('Control+V');
-  await setClipboardText(page, formulas.map((formula) => formula.expression).join('\n'));
+  await commitCellThroughFormulaBar(page, 'F3', 'not numeric');
+  await setClipboardText(page, formulas.slice(0, 5).map((formula) => formula.expression).join('\n'));
   await gridCell(page, 'D2').click();
   await page.keyboard.press('Control+V');
 
+  await setClipboardText(page, formulas.slice(5).map(formula => formula.expression).join('\n'));
+  await gridCell(page, 'H2').click();
+  await page.keyboard.press('Control+V');
+
   for (const formula of formulas) {
-    await expectCalculatedNumber(gridCell(page, formula.cell), Number(formula.result));
+    if (formula.result.startsWith('#')) await expect(gridCell(page, formula.cell)).toHaveText(formula.result);
+    else await expectCalculatedNumber(gridCell(page, formula.cell), Number(formula.result));
     await gridCell(page, formula.cell).click();
     await expect(formulaBar(page)).toHaveValue(formula.expression);
   }
 
   await page.reload();
   for (const formula of formulas) {
-    await expectCalculatedNumber(gridCell(page, formula.cell), Number(formula.result));
+    if (formula.result.startsWith('#')) await expect(gridCell(page, formula.cell)).toHaveText(formula.result);
+    else await expectCalculatedNumber(gridCell(page, formula.cell), Number(formula.result));
     await gridCell(page, formula.cell).click();
     await expect(formulaBar(page)).toHaveValue(formula.expression);
   }
