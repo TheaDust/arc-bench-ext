@@ -5,7 +5,7 @@
 > **本仓库不是官方 ARC-Bench。**  
 > 上游：<https://github.com/code-philia/arc-bench>  
 > 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`  
-> 当前修订：`2026-11-09-sheet-experiment-r2`
+> 当前修订：`2026-11-10-github-12306-ctrip-experiment-polish`
 > 本版需求、测试和公共契约与上游不同，旧分数不能直接迁移或混算。
 
 ## Overview
@@ -28,20 +28,20 @@ ARC-Bench Ext is an extended, independently maintained derivative of ARC-Bench. 
 | stackoverflow | 52 | 66 |
 | **合计** | **423** | **759** |
 
-当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。Keep 生命周期扩展新增 REQ-2.10/REQ-2.11 与 8 个生命周期/标签/搜索场景；Keep 与 BookStack 组合约束新增 7 条需求、15 个场景，见 [audit/interactions.md](audit/interactions.md)。本版合并的 Sheet 与 GitHub 事务守卫新增 4 条需求、8 个场景，见 [audit/transaction-guards.md](audit/transaction-guards.md)。历史审查见 [audit/README.md](audit/README.md)。
+当前修订在保留既有需求 ID、场景 ID 和场景名称的前提下，修正需求—测试错配、补充漏断言、增加正反例合同，并显式记录未决项。BookStack 生命周期扩展新增 2 条原子需求、14 个场景，覆盖页面/章节删除、书架成员关系、重命名/删除后的跨视图一致性、草稿发布与隐私、多用户收藏/最近浏览隔离。Keep 生命周期扩展新增 REQ-2.10/REQ-2.11 与 8 个生命周期/标签/搜索场景；Keep 与 BookStack 组合约束新增 7 条需求、15 个场景，见 [audit/interactions.md](audit/interactions.md)。本版合并的 Sheet 与 GitHub 事务守卫新增 4 条需求、8 个场景，见 [audit/transaction-guards.md](audit/transaction-guards.md)。历史审查见 [audit/README.md](audit/README.md)。本轮题面审查见 [GitHub](audit/github-experiment-polish.md)、[12306](audit/12306-experiment-polish.md) 和 [Ctrip](audit/ctrip-experiment-polish.md)。
 
 ## 当前状态
 
 | 项目 | 值 |
 | --- | --- |
-| 修订 | `2026-11-09-sheet-experiment-r2` |
-| 父版本 | `2026-11-09-sheet-requirements-r1`（98723f2） |
+| 修订 | `2026-11-10-github-12306-ctrip-experiment-polish` |
+| 父版本 | `2026-11-09-sheet-experiment-r2`（be8aa2f） |
 | 需求 / 场景 | 423 / 759 |
-| 质量状态 | Sheet需求/断言收口，47条定向合同通过；完整参考应用运行待完成 |
+| 质量状态 | 见验证记录；完整候选应用与配对实验待执行 |
 | 审查发现 | 112 项既有发现：91 项修复，21 项保留（7 项 high）；扩展新增 13 类记录，无新增需求缺陷 |
-| 本轮变更 | Sheet输入域与范围边界明确；补齐相关场景断言；当前审查26/104 |
+| 本轮变更 | 打磨 GitHub、12306 与 Ctrip；全库仍是 423 条原子需求、759 个场景 |
 | 历史参考验证（修复前） | 父版 BookStack 49/49；观测修复在既有 `pi` 候选定向复验：BookStack 5/5（REQ-11.1/11.3），Keep 7/7（REQ-2.4/6.4）；BookStack REQ-5.4 Cancel 仍为真实实现缺陷 |
-| 验证记录 | [validation.json](validation.json)、[父版记录](validation/history/2026-11-09-sheet-requirements-r1/validation.json) |
+| 验证记录 | [validation.json](validation.json)、[父版记录](https://github.com/TheaDust/arc-bench-ext/blob/be8aa2f174ff2a7cd317aac0d223fce40f8ca058/validation.json) |
 
 本版是模型辅助的逐场景审查，不等同于人工双盲标注或完整应用通过率测量；完整产品行为与模型区分度尚需实际执行，具体边界见 [QUALITY.md](QUALITY.md) 与 [audit/README.md](audit/README.md)。
 
@@ -142,7 +142,7 @@ node validation/run-task-suite.mjs <task> <base-url> [--grep <pattern>]
 
 - 上游：<https://github.com/code-philia/arc-bench>
 - 导入 commit：`e59696bbc68578c3b3da1ad47f9a0ac07e581184`
-- 本仓库当前修订：`2026-11-09-sheet-experiment-r2`
+- 本仓库当前修订：`2026-11-10-github-12306-ctrip-experiment-polish`
 
 上游快照中没有 `LICENSE` 文件；本仓库目前也没有单独声明开源许可证。公开分发或再利用上游材料前，请先确认上游作者的授权。详见 [NOTICE](NOTICE) 和 [UPSTREAM.md](UPSTREAM.md)。
 

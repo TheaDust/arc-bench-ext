@@ -11,5 +11,8 @@ test("REQ-8.5: Pay and persist upcoming state", async ({ page }) => {
     await expect(row(page, 'G1001')).toContainText('Paid');
     await expect(button(row(page, 'G1001'), 'Refund')).toBeVisible();
     await page.reload();
+    const category = page.getByRole('tab', { name: 'Upcoming trips', exact: true });
+    if (await category.getAttribute('aria-selected') !== 'true') await category.click();
+    await expect(category).toHaveAttribute('aria-selected', 'true');
     await expect(row(page, 'G1001')).toContainText('Paid');
 });

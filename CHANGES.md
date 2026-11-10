@@ -1,3 +1,7 @@
+# 2026-11-10: GitHub、12306 与 Ctrip 正式实验题面打磨
+
+修订 `2026-11-10-github-12306-ctrip-experiment-polish`，父版本 `2026-11-09-sheet-experiment-r2`。沿用全部需求与场景 ID，不新增功能或场景。统一 GitHub 合并权限与提交状态、12306 订单状态流，以及 Ctrip 搜索、计价和支付口径。 见 [GitHub](audit/github-experiment-polish.md)、[12306](audit/12306-experiment-polish.md) 和 [Ctrip](audit/ctrip-experiment-polish.md)。同一轮实验使用本版，旧成绩不直接迁移。
+
 # 2026-11-09: Sheet 实验需求与测试收口
 
 修订 `2026-11-09-sheet-experiment-r2`，父版本 `2026-11-09-sheet-requirements-r1`（98723f2）。Sheet保持26/104，全库423/759。统一公式术语，明确COUNT、数值/CSV及结构范围边界，补齐总计、存储输入、撤销分支与pivot拒绝配置的断言。类型与47条定向DOM合同通过；完整应用104场景可行性仍须正式运行前验证。协议见 [SHEET-EXPERIMENT.md](SHEET-EXPERIMENT.md)，审查见 [audit/sheet-r2.md](audit/sheet-r2.md)。修正父提交、历史验证指针、审查范围和评测方法名称。

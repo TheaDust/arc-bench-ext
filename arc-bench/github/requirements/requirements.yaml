@@ -793,7 +793,7 @@ children:
         - \ref[requirement](REQ-3.3)
         - \ref[requirement](REQ-1.1.2)
       - id: STEP-REQ-2.3-01-02
-        Then: After reloading the Manage access page, `frontend-team` remains visible.
+        Then: After reloading Manage access, exactly one row for `frontend-team` displays Write.
         references:
         - \ref[requirement](REQ-3.3)
         - \ref[requirement](REQ-1.1.2)
@@ -806,7 +806,7 @@ children:
           Admin permission on repository `acme-docs`. The separate organization team `access-role-team` already
           has exactly one direct Write access grant on `acme-docs`.
         When: The visitor signs in as `repo-admin`, opens repository `acme-docs`, clicks “Settings”, and clicks
-          “Manage access”. In the row whose accessible name contains `access-role-team`, the visitor verifies the
+          “Manage access”. In the row displaying the exact name `access-role-team`, the visitor verifies the
           current role is Write, selects “Read” in the “Role” combobox, and clicks “Save”.
         Then: After reloading, exactly one row for `access-role-team` is present and that row displays the role
           “Read”.
@@ -1554,7 +1554,7 @@ children:
 
         Unless a narrower scope is explicitly given below, each named control is unique on the active page, and field and option names refer to accessible names.
 
-        When the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.
+        A commit on a compare branch has the review and check effects defined in \ref[requirement](REQ-6).
 
         Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
       image:
@@ -2094,11 +2094,16 @@ children:
   name: Change Review and Merge Control
   description:
     text: |-
-      A pull request (PR) is a persistent proposal to “merge code changes from the compare branch into the base branch”; it is not a branch, commit, or issue. The Pull requests page lists the current repository's PR number, title, author, source/target branches, and status; “New pull request” first opens the comparison page, where the user selects base (the target branch that receives the changes) and compare (the source branch that provides the changes) and inspects the diff. On the PR detail page, Conversation displays the title, description, ordinary comments, activities, and review summary; Commits displays commits on the compare branch relative to base; Files changed displays per-file, per-line differences; Checks displays check status for the PR's current compare commit. A PR's persisted status may only be Draft, Open, Closed, or Merged — normal creation produces Open, draft creation produces Draft, and the author or Maintain/Admin may mark a Draft as Ready for review to transition it to Open; the author or Maintain/Admin may transition an unmerged Open or Draft PR to Closed and may transition Closed back to Open; Merged is terminal and cannot be closed or reopened. Write, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge. Each PR stores a repository-scoped number, source/target branches, creation-time and current compare commits, creation-time base commit, title, description, author, status, and activity records. When the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated. Failure does not change branches or PR state. The following REQ-6 interaction contracts use English accessible names and apply to direct navigation as well as navigation from a repository. Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer. PR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name. Conversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs. The current PR status is visible text. Signed-in scenarios begin with the unique Sign in link on the home page, labeled Username or email and Password fields, a Sign in button, and the account username visible after authentication; each role account has a username, verified email, and password. Visitor scenarios use public repositories and require no session. Seed records identify the corresponding pages, not to private implementation interfaces; role accounts, branches, PRs, and mutable state must be provisioned as distinct records for each stateful scenario; no scenario may rely on a mutation performed by an earlier scenario, and the complete seed set is present before the serial suite starts. Existing titles, usernames, paths, and branch names described below are supplied as seed values and must be displayed verbatim; generated PR titles and comments may carry a unique suffix.
+      Identity and views. A PR belongs to one repository and proposes changes from its compare (source) branch into its base (target) branch. Persist its repository-scoped number, title, description, author, branches, status and activity, the base and compare commits at creation, and the current compare commit. The list shows its number, title, author, branches and status. New pull request opens the branch comparison before creation. Conversation shows the PR details, comments, activity and review summary; Commits lists compare-branch commits relative to base; Files changed shows per-file and per-line diffs; Checks shows the check on the current compare commit.
 
-      For existing pull requests and check state: Existing pull requests opened directly, with only test-supported initial attributes. Reviews and changes produced by UI are not preloaded.
+      Status and authority. Normal creation starts Open; draft creation starts Draft. The author or a user with Maintain or Admin can mark a Draft ready, close an unmerged Open or Draft PR, and reopen a Closed PR as Open. Merged is terminal. On an Open PR, only a non-author with Write, Maintain or Admin can add inline comments or submit a review. The author or a user with Maintain or Admin can manage pending reviewer requests. Only Maintain, Admin or the owning organization’s Owner can merge. These are action-specific grants, not a cumulative role ladder. Repository grants and visibility are described in \ref[requirement](REQ-2.3); being able to read a PR is not permission to write or merge.
 
-      For new pull requests, review comments and reviews: Created through comparison and review UI, including draft pull requests and pending reviews. These objects are not present before their create or submit actions.
+      Versioned decisions. A submitted review and a test check refer to the compare commit to which they were recorded. A new compare commit makes earlier review decisions Stale, preserves their history, and leaves earlier inline comments at their original commit and line with Outdated state. Earlier test success does not satisfy the new commit; its check starts pending. Recalculate eligibility from the current commit. Pending reviewer requests are separate from decisions. Merge conditions are defined in \ref[requirement](REQ-6.5); the stale editor and confirmation behavior and additional public observations are defined in \ref[requirement](REQ-7.1) and \ref[requirement](REQ-7.2).
+
+      Public observations. PR titles are exact headings on detail pages and exact links in the list. Conversation, Commits, Files changed and Checks are navigation links even when styled as tabs. Show the current PR status. Use exact English accessible names and unique controls on the active page, except for controls explicitly repeated per changed line or reviewer. These rules also apply on direct navigation. Rejected writes do not change branches or persisted PR state.
+
+      Initial state. Each scenario starts from its own independent seed state. Supply the named accounts, repository objects, roles, branches and any explicitly pre-existing review or check state. Do not preload results that the scenario creates through the UI. Use the declared account login for signed-in scenarios; visitor scenarios use public repositories without a session. Seed names and paths are exact; generated PR titles and comments may use a unique suffix.
+
   scenarios: []
   children:
   - id: REQ-6.1
@@ -2109,8 +2114,7 @@ children:
         A repository Admin can open Settings and Branches, create a rule with `Branch
         name pattern`, `Require 1 approval`, and `Require status check test`, and see it
         after reload. Non-Admins cannot create the rule. On an Open PR, an Admin can set
-        the `test` check from pending to success; the saved status and setter remain after
-        reload. Each scenario has independent accounts and seed state.
+        the `test` check for the current compare commit from pending to success on Checks; the saved status and setter remain after reload. Each scenario has independent accounts and seed state.
 
         For branch protection rules created through UI: Created through branch protection settings for an existing repository. The requested approval and check requirements come from the UI selections.
 
@@ -2137,7 +2141,7 @@ children:
         Given: The system pre-provisions public repository `branch-protection-demo`, branch `main`, and Admin account
           `protection-admin` with email `protection-admin@example.test`, password `Valid-password-123!`. The visitor
           starts unauthenticated and the Admin can open Settings and Branches.
-        When: The Admin signs in, clicks `Add branch protection rule`, enters `main` in `Branch name pattern`, checks
+        When: The Admin signs in, opens the repository, follows Settings and Branches, clicks `Add branch protection rule`, enters `main` in `Branch name pattern`, checks
           `Require 1 approval` and `Require status check test`, and clicks `Create` or `Save changes`.
         Then: After reload, the Branches page displays `main`, `1 approval`, and the status-check test requirement.
         references:
@@ -2164,7 +2168,7 @@ children:
         Given: The system pre-provisions public repository `branch-protection-demo`, an Open PR titled `Protection
           status onboarding PR` targeting `main`, and Admin account `protection-admin` (`protection-admin@example.test`,
           `Valid-password-123!`). Its Checks area contains `test` with pending status.
-        When: The Admin signs in, opens the PR, selects `success` in the `test` status combobox, and clicks Save
+        When: The Admin signs in, opens the PR, follows Checks, selects `success` in the `test` status combobox, and clicks Save
           or Update.
         Then: The Checks area shows `test` success and the Admin username; after reload, success remains visible.
         references:
@@ -2479,10 +2483,6 @@ children:
           saves it as a pending review comment. The exact entered body remains visible
           after reload in both applicable states.
 
-          Write, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.
-
-          When the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.
-
           Failure does not change branches or PR state.
 
           Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.
@@ -2492,8 +2492,6 @@ children:
           Conversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.
 
           The current PR status is visible text.
-
-          A non-author reviewer with Write, Maintain, or Admin permission can add line comments and submit review decisions on an Open PR.
 
           A line comment is anchored to the current changed code and is either published immediately or stored as a pending review comment.
 
@@ -2536,10 +2534,6 @@ children:
           status. Request changes stores and displays the exact summary with Changes
           requested status, which persists after reload.
 
-          Write, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.
-
-          When the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.
-
           Failure does not change branches or PR state.
 
           Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.
@@ -2550,9 +2544,7 @@ children:
 
           The current PR status is visible text.
 
-          A non-author reviewer with Write, Maintain, or Admin permission can add line comments and submit review decisions on an Open PR.
-
-          A review stores its reviewer, decision, optional summary, and current compare commit.
+          A review stores its reviewer, decision, optional summary and the compare commit reviewed.
 
           Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
       scenarios:
@@ -2586,7 +2578,7 @@ children:
   - id: REQ-6.4
     name: Request or Remove Pull Request Reviewers
     description:
-      text: "The PR author or an authorized maintainer can use `Reviewers` to manage\npending reviewer requests. The picker has a `Search` textbox; typing filters eligible\nreviewer options and selecting an exact option saves the request immediately. The\nrequested username remains visible after reload. A button named `Remove <username>`\nremoves that request without affecting any submitted review.\n\nWrite, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder."
+      text: "The PR author or an authorized maintainer can use `Reviewers` to manage\npending reviewer requests. The picker has a `Search` textbox; typing filters eligible\nreviewer options and selecting an exact option saves the request immediately. The\nrequested username remains visible after reload. A button named `Remove <username>`\nremoves that request without affecting any submitted review.\n\nFailure does not change branches or PR state.\n\nEach named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.\n\nPR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.\n\nConversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.\n\nThe current PR status is visible text.\n\nQuoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder."
     scenarios:
     - id: SCN-REQ-6.4-01
       name: 'REQ-6.4: Request or Remove Pull Request Reviewers - Scenario 1'
@@ -2607,27 +2599,16 @@ children:
     name: Merge an Eligible Pull Request
     description:
       text: |-
-        On an eligible PR, Merge pull request and then Confirm merge are buttons; confirming displays Merged, and that state remains after reload. A blocked PR keeps a visible disabled Merge pull request button and explains its unmet review or protection condition before any click. Seed data supplies a Maintain account and separate Open PRs for success and refusal. The eligible PR targets protected main, has a current non-author approval and test: success, and has no conflicts. The blocked PR targets a protected branch and lacks the required valid approval; its disabled button is accompanied by Review required by branch protection. The success and refusal states are separate PR records, so neither test relies on restoring a mutation from the other. “Merge” is the only write operation that writes the current compare commit's changes from an Open PR into the base branch; it is not simply marking the PR as complete. Only Maintain, Admin, or organization Owner may merge from the PR detail page using the sole supported “Create a merge commit” method; the merge confirmation area should display satisfied and unsatisfied conditions. Before confirmation, the system rereads the target branch head, current compare commit, merge-conflict state, and protection rules — there must be no valid Request changes; if the target is protected, each enabled rule requirement is enforced independently, requiring 1 valid non-author Approve for the current compare commit when Require 1 approval is enabled and requiring `test` success when Require status check test is enabled. An unprotected target has no additional approval-count or check-success requirement, but merging still requires no merge conflicts and no valid Request changes review. After validation succeeds, the system atomically creates a merge commit whose parents are the target-branch head at merge time and the current compare commit, updates the target-branch head, sets the PR to Merged, and stores the merger, time, and resulting commit identifier. If any condition is unsatisfied or persistence fails, the page explains the applicable reason and neither the target branch nor PR changes; a missing required approval displays “Review required by branch protection”. Merged is terminal. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-6.3.4 (Submit a Pull Request Review) and REQ-6.1 (Protect Branches with Review and Status-Check Requirements); it must reuse that context and keep pages and data consistent after the context changes.
+        Eligibility. The actor must have current merge permission and the PR must be Open and conflict-free. A current Request changes decision blocks merging. For a protected base branch, independently enforce each enabled rule: Require 1 approval needs a valid non-author Approve on the current compare commit; Require status check test needs test success on that same commit. An unprotected base does not add those two requirements. Neither an older approval nor an older successful check counts.
 
-        Write, Maintain, and Admin may add inline comments and submit reviews, the author or Maintain/Admin may request reviewers, and only Maintain, Admin, or organization Owner may merge.
+        Confirmation. The only method is Create a merge commit. On an eligible PR, Merge pull request opens confirmation and Confirm merge submits it. On a PR blocked by protection, the authorized maintainer sees a disabled Merge pull request button and the unmet condition. If approval is missing, show Review required by branch protection. Before writing, re-read the actor’s current authorization, PR status, current compare commit, current base head, conflict state and applicable rules. Apply the existing stale-confirmation behavior in \ref[requirement](REQ-7.1) and \ref[requirement](REQ-7.2). Opening confirmation does not reserve eligibility.
 
-        When the compare branch receives a new commit, the system updates the current compare commit, marks all existing review decisions as stale while preserving them in the timeline, recalculates merge eligibility, and retains inline comments at their original commit and line position marked Outdated.
+        Result. One successful confirmation creates one commit with the live base head as first parent and the current compare commit as second parent, updates the base head and file tree, and records Merged, merger, time and commit identifier together. The compare branch remains unchanged. Rejection or a failed write does not alter the PR or branches. Reload shows the persisted result; Merged is terminal.
 
-        Failure does not change branches or PR state.
-
-        Each named action, field, and navigation link is unique on its active page unless explicitly repeated per changed line or reviewer.
-
-        PR titles are headings whose accessible name is exactly the persisted title; list titles are links with that same exact name.
-
-        Conversation, Commits, Files changed, and Checks are navigation links, even when visually styled as tabs.
-
-        The current PR status is visible text.
-
-        Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
 
         The repository overview and each branch page expose a region named "Branch state" for the currently selected branch. It contains visible status outputs named "Repository owner", "Branch name", and "Branch head" with their actual values. A table named "Branch files" lists the complete selected branch tree, with ordered columns Path and Content, one body row per full file path (including nested paths) and its saved plain-text content. A table named "Commit history" lists the complete reachable history, with ordered columns Commit, Parents, Author, Message, one body row per commit. Commit identifiers are nonempty and unique, Parents is a comma-separated list of identifiers (empty for the root), and rows may appear in any order. Header rows use columnheader cells and data rows use cell roles. These are public readable views of persisted branch/file/commit records, not editable inputs. They update after navigation and reload; identifiers are implementation-defined. This observation interface supplements the ordinary Code, file and Commits navigation.
 
-        Both named PRs refer to a separate repository merge-demo owned by repo-owner, with base main and compare feature-search. Before either scenario, main contains base-only.md = "Base branch content" and shared.md = "Common content"; feature-search contains those unchanged files plus feature-only.md = "Feature branch content". The two heads are distinct. Both PRs start Open; their approval/check eligibility is as described above. The PR detail provides exact links "Base branch" and "Compare branch" to those live branch pages. The merge method is a combobox named "Merge method" with the sole option "Create a merge commit". The PR region "Merge result" appears on success and contains visible status outputs "Merge commit", "Merged by", and "Merged at"; the time is a nonempty ISO 8601 UTC timestamp. The merge commit's author is pr-maintainer. The refused PR continues to display Open after reload. These seed branch files and public observations make integration, both commit parents, persistence, and refusal distinguishable from a status-only update.
+        Each merge scenario starts from its own seed state for merge-demo owned by repo-owner, with base main and compare feature-search. Before either scenario, main contains base-only.md = "Base branch content" and shared.md = "Common content"; feature-search contains those unchanged files plus feature-only.md = "Feature branch content". The two heads are distinct. The eligible seed has a current non-author approval and successful test. The blocked seed is Open and lacks a valid approval. It has no merge conflict; the missing approval is the condition under test. The PR detail provides exact links "Base branch" and "Compare branch" to those live branch pages. The merge method is a combobox named "Merge method" with the sole option "Create a merge commit". The PR region "Merge result" appears on success and contains visible status outputs "Merge commit", "Merged by", and "Merged at"; the time is a nonempty ISO 8601 UTC timestamp. The merge commit's author is pr-maintainer. The refused PR continues to display Open after reload. These seed branch files and public observations make integration, both commit parents, persistence, and refusal distinguishable from a status-only update.
     scenarios:
     - id: SCN-REQ-6.5-01
       name: 'REQ-6.5: Merge an Eligible Pull Request - Scenario 1'
@@ -2638,23 +2619,17 @@ children:
           conflict. It also pre-provisions Maintain account `pr-maintainer` with email `pr-maintainer@example.test`,
           password `Valid-password-123!`, and permission to merge this PR. The visitor starts at the application
           home page.
-        When: 'The maintainer confirms that the only selectable method on the page is “Create a merge commit”, clicks
-          “Merge pull request”, and clicks “Confirm merge” in the confirmation box. Seed values: pull requests `Mergeable
-          onboarding PR` and `Fix search`, branches `main` and `feature-search`, reviewer `bob-reviewer`, check
-          `test`.'
-        Then: 'The PR displays Merged, the merger, time, and resulting commit identifier; the `main` branch head
-          is updated to the merge result, and the PR''s source- and target-branch content is integrated according
-          to the selected merge method. Seed values: pull requests `Mergeable onboarding PR` and `Fix search`, branches
-          `main` and `feature-search`, reviewer `bob-reviewer`, check `test`.'
+        When: The maintainer signs in, opens Mergeable onboarding PR, verifies Create a merge commit is the sole method,
+          then selects Merge pull request and Confirm merge.
+        Then: The PR displays Merged, the merger, time and resulting commit. The base head becomes that commit,
+          its parents are the pre-merge base and compare heads in that order, and its file tree contains the
+          two base files and the compare-only file. The compare branch is unchanged.
+
         references:
         - \ref[requirement](REQ-6.3.4)
         - \ref[requirement](REQ-6.1)
       - id: STEP-REQ-6.5-01-02
-        Then: 'After refreshing the PR and `main` branch, the merged status and resulting commit remain; if the
-          PR is a draft, lacks approval, has a failed check, is unmergeable, or the user lacks permission, the merge
-          entry is disabled or rejected and the target branch and PR state remain unchanged. Seed values: pull requests
-          `Mergeable onboarding PR` and `Fix search`, branches `main` and `feature-search`, reviewer `bob-reviewer`,
-          check `test`.'
+        Then: Reloading the PR and both branch views preserves the merge result, base commit and file tree, and unchanged compare branch.
         references:
         - \ref[requirement](REQ-6.3.4)
         - \ref[requirement](REQ-6.1)
@@ -2668,14 +2643,12 @@ children:
           by its unmet review or protection requirement.
         When: The maintainer signs in with `pr-maintainer` and opens `Blocked onboarding PR`; the `Merge pull request`
           button is visible but disabled.
-        Then: The page displays a review, required, or protection explanation, and the disabled merge control remains
-          unchanged.
+        Then: The page shows Review required by branch protection and the merge control stays disabled.
         references:
         - \ref[requirement](REQ-6.3.4)
         - \ref[requirement](REQ-6.1)
       - id: STEP-REQ-6.5-02-02
-        Then: The maintainer does not activate the disabled control; the blocked PR and its target branch remain
-          unchanged.
+        Then: After reload the PR is still Open, the merge action remains disabled and no Merge result appears. Both branch heads, file trees and commit histories are unchanged.
         references:
         - \ref[requirement](REQ-6.3.4)
         - \ref[requirement](REQ-6.1)
@@ -2735,14 +2708,14 @@ children:
   description:
     text: |-
       All roles use normal browser login in independent sessions against one shared application instance. Changes are driven by UI operations in a fixed order.
+
+      For this extension, seed four independent public repositories named head-guard, review-guard, access-guard and race-guard with exact repository-name links on the signed-in home. Their respective PR links on that page are Head guard PR, Review guard PR, Access guard PR and Race guard PR. Each PR is Open, compare feature-guard to protected main with one required non-author approval and test success, and starts eligible without conflicts. Base files are base.md with Base content and shared.md with Shared content; the compare tree includes both plus change.txt with Original feature. Branch state exposes a valid parent graph; commit identifiers are observed through the UI. Accounts use the existing verified account convention: pr-author (Write and PR author), pr-reviewer (Write, non-author), pr-maintainer and guard-maintainer (Maintain), and protection-admin (Admin), all using the existing seed password Valid-password-123!. The organization guard-org owns access-guard. Its guard-team includes pr-maintainer, who has direct Read and inherits Maintain only through that team. guard-maintainer has a direct Maintain grant independent of guard-team. The initial approval is by pr-reviewer on the initial compare commit, and that commit has test: success. Head guard PR also has pr-reviewer's inline comment Keep this original comment on change.txt line 1 of the initial compare commit. This text is historical, not a pending review.
   scenarios: []
   children:
   - id: REQ-7.1
     name: Bind review and check decisions to the current commit
     description:
       text: |-
-        For this extension, seed four independent public repositories named head-guard, review-guard, access-guard and race-guard with exact repository-name links on the signed-in home. Their respective PR links on that page are Head guard PR, Review guard PR, Access guard PR and Race guard PR. Each PR is Open, compare feature-guard to protected main with one required non-author approval and test success, and starts eligible without conflicts. Base files are base.md with Base content and shared.md with Shared content; the compare tree includes both plus change.txt with Original feature. Branch state exposes a valid parent graph; commit identifiers are observed through the UI. Accounts use the existing verified account convention: pr-author (Write and PR author), pr-reviewer (Write, non-author), pr-maintainer and guard-maintainer (Maintain), and protection-admin (Admin), all using the existing seed password Valid-password-123!. The organization guard-org owns access-guard. Its guard-team includes pr-maintainer, who has direct Read and inherits Maintain only through that team. guard-maintainer has a direct Maintain grant independent of guard-team. The initial approval is by pr-reviewer on the initial compare commit, and that commit has test: success. Head guard PR also has pr-reviewer's inline comment Keep this original comment on change.txt line 1 of the initial compare commit. This text is historical, not a pending review.
-
         On the PR Conversation view, "Review history"(role=table) has cells Reviewer, Commit, Decision, State in that order, and "Inline review comments"(role=table) has Author, Commit, Path, Line, Comment, State. Show full original commit identifiers, the original line, and a Stale or Outdated state as applicable; a current approval or inline comment has State Current. On Checks show "Check commit"(role=status) with the current full compare identifier and "test status"(role=status) with pending or success. A new compare commit starts with pending test, regardless of prior results. Admin can choose success in "test status"(role=combobox) and use "Save check"(role=button) on the current Checks view. Non-author eligible reviewers open "Review changes"(role=button) from Files changed, then use "Approve"(role=radio) and "Submit review"(role=button). Successful submission opens Conversation with the current approval visible. A stale review editor cannot record a review or approve a commit it did not display. A stale merge or review displays "Merge blocked" or "Review blocked"(role=alert) respectively with exact reason Compare branch changed. It may reject on submission or invalidate the open confirmation/editor proactively with the same alert.
     scenarios:
     - id: SCN-REQ-7.1-01

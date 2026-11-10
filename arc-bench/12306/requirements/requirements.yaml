@@ -4,6 +4,8 @@ description:
   text: |-
     A railway ticketing system for searching trains, managing traveler information, booking journeys, and paying for tickets.
 
+    Case setup and identity. Each scenario starts independently with the published services, verified accounts and historical completed orders declared in its seed. Any extra passenger or current order named in a Given is established through the UI actions in that scenario; it is not an extra seed. Use the departure date and service declared for that case. A train number identifies a service only in the selected journey context, not a passenger or order. A passenger is identified by their document number within the signed-in account; an order belongs to the account that confirmed it. Navigation, reload and actions on an order keep that association.
+
     Dates and times use Asia/Shanghai. The application, client, server and evaluator start at 2026-07-21T00:00:00+08:00; client and server clocks advance together with elapsed time.
     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
 
@@ -1609,7 +1611,8 @@ children:
 - id: REQ-5
   name: Personal center and orders
   description:
-    text: Personal center and orders capability.
+    text: |-
+      The personal center operates on the signed-in account; unauthenticated entry goes to Login. Ticket orders shows that account’s orders by lifecycle. Unpaid orders appear in Uncompleted orders with Pay and do not appear in Upcoming trips. A confirmed cancellation of an unpaid order leaves a Cancelled record in Uncompleted orders without Pay. A paid order before departure appears in Upcoming trips with Refund when eligible. A successfully refunded order appears in History orders as refunded; completed historical orders use their declared seeded state. Category and status are persisted, not inferred from the last notification.
   scenarios: []
   children:
   - id: REQ-5.1
@@ -2148,13 +2151,13 @@ children:
         steps:
         - id: STEP-REQ-5.3.3-01-01
           Given: |-
-            orders_unpaid_user has created an unpaid G1001 order for 2026-07-21 through the passenger, search, booking and confirmation UI. Through UI, sign in with Password123!, create Passenger Example using Add new passengers with China, a distinct passport, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040; search Shanghai–Beijing for the stated date, click Book on the stated train, check Passenger Example, select Business-class seat in that passenger row, click Place order and Confirm. Uncompleted orders is selected.
+            orders_unpaid_user has created an unpaid G1001 order for 2026-07-21 through the passenger, search, booking and confirmation UI. Through UI, sign in with Password123!, create Passenger Example using Add new passengers with China, passport P20269801, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040; search Shanghai–Beijing for the stated date, click Book on the stated train, check Passenger Example, select Business-class seat in that passenger row, click Place order and Confirm. Uncompleted orders is selected.
             Seed prerequisites (prepared before this scenario):
             - station directory: {"locations": ["Shanghai (上海)", "Beijing (北京)"]}
             - published services: {"Shanghai-Beijing": {"2026-07-21": [{"number": "G1001", "from_station": "Shanghai Hongqiao", "to_station": "Beijing South", "departure": "08:00", "arrival": "13:00", "duration": 300, "second_price": 576}, {"number": "G1002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "13:00", "arrival": "19:00", "duration": 360, "second_price": 600}, {"number": "K1003", "from_station": "Shanghai", "to_station": "Beijing South", "departure": "00:30", "arrival": "15:30", "duration": 900, "second_price": 200}]}, "G1001_seats": {"business": {"price": 1870, "discount": "32% off", "available": 1}, "first": {"price": 967, "discount": "24% off", "available": 0}, "second": {"price": 576, "discount": "27% off", "available": 0}, "standing": {"price": 576, "discount": "27% off", "available": "Enough"}}, "allocation": "One independent business seat per booking account; current orders created in UI. G2002 has an available business seat and refund deadline 2026-07-22T00:00:00+08:00; G1001 departure July 22 has an unexpired refund deadline."}
             - verified account directory: {"accounts": [{"username": "orders_unpaid_user", "email": "orders_unpaid_user@example.com", "password": "Password123!", "verified": true, "gender": "Male", "passenger_type": "Adult"}], "specific_identity": {}, "other_identity": "Each other account has a distinct unused passport assigned by evaluator; use source username as holder name, nationality China, ID type Foreign passport. Holder automatically appears as nondeletable frequent passenger. No other frequent passengers/current orders initially."}
           When: Click Pay within the G1001 row.
-          Then: Order details identifies G1001 and Payment information is visible for the resumed unpaid order.
+          Then: Order details retains G1001, Passenger Example, P20269801 and Business-class seat from the selected unpaid order. Payment information is visible.
           references:
           - \ref[requirement](REQ-5.3.2)
           - \ref[requirement](REQ-8.4)
@@ -2369,13 +2372,13 @@ children:
       steps:
       - id: STEP-REQ-5.5-01-01
         Given: |-
-          orders_refund_user has created and paid for G2002 departing 2026-07-22 through UI before its refund deadline; Upcoming trips is selected. Through UI, sign in with Password123!, create Passenger Example using Add new passengers with China, a distinct passport, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040; search Shanghai–Beijing for the stated date, click Book on the stated train, check Passenger Example, select Business-class seat in that passenger row, click Place order and Confirm.
+          orders_refund_user has created and paid for G2002 departing 2026-07-22 through UI before its refund deadline; Upcoming trips is selected. Sign in with Password123!, create Passenger Example using Add new passengers with China, passport P20269801, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040; search Shanghai–Beijing for the stated date, click Book on the stated train, check Passenger Example, select Business-class seat in that passenger row, click Place order, Confirm and Pay.
           Seed prerequisites (prepared before this scenario):
           - station directory: {"locations": ["Shanghai (上海)", "Beijing (北京)"]}
           - published services: {"Shanghai-Beijing": {"2026-07-22": [{"number": "G1001", "from_station": "Shanghai Hongqiao", "to_station": "Beijing South", "departure": "08:00", "arrival": "13:00", "duration": 300, "second_price": 576}, {"number": "G1002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "13:00", "arrival": "19:00", "duration": 360, "second_price": 600}, {"number": "K1003", "from_station": "Shanghai", "to_station": "Beijing South", "departure": "00:30", "arrival": "15:30", "duration": 900, "second_price": 200}, {"number": "G2002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "10:00", "arrival": "15:00", "duration": 300, "second_price": 576}]}, "G1001_seats": {"business": {"price": 1870, "discount": "32% off", "available": 1}, "first": {"price": 967, "discount": "24% off", "available": 0}, "second": {"price": 576, "discount": "27% off", "available": 0}, "standing": {"price": 576, "discount": "27% off", "available": "Enough"}}, "allocation": "One independent business seat per booking account; current orders created in UI. G2002 has an available business seat and refund deadline 2026-07-22T00:00:00+08:00; G1001 departure July 22 has an unexpired refund deadline."}
           - verified account directory: {"accounts": [{"username": "orders_refund_user", "email": "orders_refund_user@example.com", "password": "Password123!", "verified": true, "gender": "Male", "passenger_type": "Adult"}], "specific_identity": {}, "other_identity": "Each other account has a distinct unused passport assigned by evaluator; use source username as holder name, nationality China, ID type Foreign passport. Holder automatically appears as nondeletable frequent passenger. No other frequent passengers/current orders initially."}
         When: Click Refund within G2002, inspect Refund information, click Confirm refund, activate View History
-          orders, then reload.
+          orders, then reload and reopen History orders if needed.
         Then: Refund information identifies G2002 and Refund amount; Refund successful appears; G2002 is refunded
           in History orders and remains refunded after reload.
         references:
@@ -3395,9 +3398,9 @@ children:
   name: Booking and payment
   description:
     text: |-
-      Booking and payment capability.
+      Search selects a dated service. Book opens that service for an authenticated user or shows the existing quick-login entry. Select a passenger belonging to that account and configure the ticket class for that passenger. Place order opens confirmation after validation; it does not submit an order. Edit returns to the form. Confirm creates the unpaid order for the confirmed service, passenger and class and starts the seat lock. Payment details show that same selection and its fare.
 
-      For current ticket order: Search > Book > select passenger/class > Place order > Confirm; paid/refunded/cancelled states follow public actions. Use July 22 for future order searches and July 21 for booking flows.
+      Pay on the payment page completes payment; Pay in Uncompleted orders opens payment for the existing order. Cancel on the payment page cancels that unpaid order; in Order center the row action opens confirmation, whose Cancel dismisses without modifying the order. A confirmed cancellation releases the seat under that case’s allocation. Refund is a separate action on an eligible paid order (REQ-5.5). Category and status rules are in REQ-5; date, availability and refund deadline come from the scenario seed.
   scenarios: []
   children:
   - id: REQ-8.1
@@ -4091,7 +4094,7 @@ children:
         When: Inspect payment details and countdown, observe its decrease over elapsed time, record the remaining
           seconds and reload.
         Then: 'The seat-lock message is visible; Order details retains G1001, Passenger Example, P20269993 and Business-class
-          seat with Total: ￥1870.00. Payment countdown is MM:SS, initially at most 20:00 and near that start, decreases
+          seat with Total: ￥1870.00. Payment countdown is MM:SS, first observed between 19:40 and 20:00 inclusive, decreases
           with time, and after reload does not exceed its pre-reload remaining value.'
         references:
         - \ref[requirement](REQ-8.3.3.1)
@@ -4117,12 +4120,12 @@ children:
       steps:
       - id: STEP-REQ-8.5-01-01
         Given: |-
-          The stated user has signed in with Password123!, created Passenger Example through the passenger UI using China, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040, searched Shanghai–Beijing for 2026-07-21 and clicked Book in G1001. booking_paid_user has selected Passenger Example/P20269995 and Business-class seat and confirmed an unpaid G1001 order.
+          booking_paid_user signs in with Password123! and creates Passenger Example/P20269995 through the passenger UI using China, expiration 2027-12-31, birth 2000-01-15, Female, Adult, passenger@example.com and 13800000040. Select G1001 on Shanghai–Beijing for 2026-07-21, select that passenger and Business-class seat, and confirm the unpaid order.
           Seed prerequisites (prepared before this scenario):
           - station directory: {"locations": ["Shanghai (上海)", "Beijing (北京)"]}
           - published services: {"Shanghai-Beijing": {"2026-07-21": [{"number": "G1001", "from_station": "Shanghai Hongqiao", "to_station": "Beijing South", "departure": "08:00", "arrival": "13:00", "duration": 300, "second_price": 576}, {"number": "G1002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "13:00", "arrival": "19:00", "duration": 360, "second_price": 600}, {"number": "K1003", "from_station": "Shanghai", "to_station": "Beijing South", "departure": "00:30", "arrival": "15:30", "duration": 900, "second_price": 200}]}, "G1001_seats": {"business": {"price": 1870, "discount": "32% off", "available": 1}, "first": {"price": 967, "discount": "24% off", "available": 0}, "second": {"price": 576, "discount": "27% off", "available": 0}, "standing": {"price": 576, "discount": "27% off", "available": "Enough"}}, "allocation": "One independent business seat per booking account; current orders created in UI. G2002 has an available business seat and refund deadline 2026-07-22T00:00:00+08:00; G1001 departure July 22 has an unexpired refund deadline."}
           - verified account directory: {"accounts": [{"username": "booking_paid_user", "email": "booking_paid_user@example.com", "password": "Password123!", "verified": true, "gender": "Male", "passenger_type": "Adult"}], "specific_identity": {}, "other_identity": "Each other account has a distinct unused passport assigned by evaluator; use source username as holder name, nationality China, ID type Foreign passport. Holder automatically appears as nondeletable frequent passenger. No other frequent passengers/current orders initially."}
-        When: Click Pay, open Upcoming trips through My 12306 → Order center → Ticket orders, then reload.
+        When: Click Pay, open Upcoming trips through My 12306 → Order center → Ticket orders, then reload and reopen Upcoming trips if needed.
         Then: Payment successful. appears; G1001 displays Paid with Refund available in Upcoming trips and remains
           Paid after reload.
         references:
@@ -4154,7 +4157,7 @@ children:
           - station directory: {"locations": ["Shanghai (上海)", "Beijing (北京)"]}
           - published services: {"Shanghai-Beijing": {"2026-07-21": [{"number": "G1001", "from_station": "Shanghai Hongqiao", "to_station": "Beijing South", "departure": "08:00", "arrival": "13:00", "duration": 300, "second_price": 576}, {"number": "G1002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "13:00", "arrival": "19:00", "duration": 360, "second_price": 600}, {"number": "K1003", "from_station": "Shanghai", "to_station": "Beijing South", "departure": "00:30", "arrival": "15:30", "duration": 900, "second_price": 200}]}, "G1001_seats": {"business": {"price": 1870, "discount": "32% off", "available": 1}, "first": {"price": 967, "discount": "24% off", "available": 0}, "second": {"price": 576, "discount": "27% off", "available": 0}, "standing": {"price": 576, "discount": "27% off", "available": "Enough"}}, "allocation": "One independent business seat per booking account; current orders created in UI. G2002 has an available business seat and refund deadline 2026-07-22T00:00:00+08:00; G1001 departure July 22 has an unexpired refund deadline."}
           - verified account directory: {"accounts": [{"username": "booking_unpaid_user", "email": "booking_unpaid_user@example.com", "password": "Password123!", "verified": true, "gender": "Male", "passenger_type": "Adult"}], "specific_identity": {}, "other_identity": "Each other account has a distinct unused passport assigned by evaluator; use source username as holder name, nationality China, ID type Foreign passport. Holder automatically appears as nondeletable frequent passenger. No other frequent passengers/current orders initially."}
-        When: Open Uncompleted orders, inspect the order and reload, then select Upcoming trips.
+        When: Open Uncompleted orders, inspect the order, reload and reopen Uncompleted orders if needed, then select Upcoming trips.
         Then: G1001 is Unpaid with Pay available in Uncompleted orders, remains Unpaid after reload, and is absent
           from Upcoming trips.
         references:
@@ -4196,7 +4199,7 @@ children:
           - station directory: {"locations": ["Shanghai (上海)", "Beijing (北京)"]}
           - published services: {"Shanghai-Beijing": {"2026-07-21": [{"number": "G1001", "from_station": "Shanghai Hongqiao", "to_station": "Beijing South", "departure": "08:00", "arrival": "13:00", "duration": 300, "second_price": 576}, {"number": "G1002", "from_station": "Shanghai", "to_station": "Beijing", "departure": "13:00", "arrival": "19:00", "duration": 360, "second_price": 600}, {"number": "K1003", "from_station": "Shanghai", "to_station": "Beijing South", "departure": "00:30", "arrival": "15:30", "duration": 900, "second_price": 200}]}, "G1001_seats": {"business": {"price": 1870, "discount": "32% off", "available": 1}, "first": {"price": 967, "discount": "24% off", "available": 0}, "second": {"price": 576, "discount": "27% off", "available": 0}, "standing": {"price": 576, "discount": "27% off", "available": "Enough"}}, "allocation": "One independent business seat per booking account; current orders created in UI. G2002 has an available business seat and refund deadline 2026-07-22T00:00:00+08:00; G1001 departure July 22 has an unexpired refund deadline."}
           - verified account directory: {"accounts": [{"username": "booking_cancel_user", "email": "booking_cancel_user@example.com", "password": "Password123!", "verified": true, "gender": "Male", "passenger_type": "Adult"}], "specific_identity": {}, "other_identity": "Each other account has a distinct unused passport assigned by evaluator; use source username as holder name, nationality China, ID type Foreign passport. Holder automatically appears as nondeletable frequent passenger. No other frequent passengers/current orders initially."}
-        When: Click Cancel on payment, open Uncompleted orders and reload; return Home, search the same journey,
+        When: Click Cancel on payment, open Uncompleted orders, reload and reopen that tab if needed; return Home, search the same journey,
           click Book, select the same passenger/business class and click Place order.
         Then: Order cancelled successfully. appears; G1001 is Cancelled without Pay before and after reload; rebooking
           reaches confirmation, showing the released business seat is available again.
@@ -4212,7 +4215,7 @@ children:
     name: Cancel unpaid order from order center or dismiss
     description:
       text: |-
-        Allow the user to click the "Cancel" button for one unpaid order in the "Uncompleted orders" tab, open a dialog named "Are you sure you want to cancel this order?" with buttons "Cancel" and "Confirm", cancel the order and release the locked seats with feedback "Order cancelled successfully." after clicking "Confirm", or close the dialog without cancelling after clicking "Cancel". Verified accounts "orders_cancel_center_user" and "orders_unpaid_dismiss_user", each with password "Password123!", have separate seeded unpaid G1001 orders.
+        Allow the user to click the "Cancel" button for one unpaid order in the "Uncompleted orders" tab, open a dialog named "Are you sure you want to cancel this order?" with buttons "Cancel" and "Confirm", cancel the order and release the locked seats with feedback "Order cancelled successfully." after clicking "Confirm", or close the dialog without cancelling after clicking "Cancel". Verified accounts "orders_cancel_center_user" and "orders_unpaid_dismiss_user", each with password "Password123!", each establish a separate unpaid G1001 order through the booking UI.
 
         Create unpaid example orders through booking UI before opening order-center cancellation. Scope both Cancel buttons to their order row or confirmation dialog.
 

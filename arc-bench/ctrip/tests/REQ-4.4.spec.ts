@@ -9,9 +9,10 @@ test('REQ-4.4: Inspect unpaid itinerary and payment countdown', async ({ page },
   await openOrderDetails(page, 'order_read', 'CTRIP20260721001');
   await heading(page, 'Order details');
   await textVisible(page, 'CTRIP20260721001');
-  await textVisible(page, 'JD5162');
-  await textVisible(page, 'Chengdu to Guangzhou');
-  await visible(button(region(page, 'Flight itinerary'), 'Refund and change rules'));
+  const itinerary = region(page, 'Flight itinerary');
+  await textVisible(itinerary, 'JD5162');
+  await textVisible(itinerary, 'Chengdu to Guangzhou');
+  await visible(button(itinerary, 'Refund and change rules'));
   await textVisible(region(page, 'Payment status'), 'Pending payment');
   await textVisible(region(page, 'Payment status'), 'Unpaid orders are cancelled when the timer expires');
   await visible(button(region(page, 'Payment status'), 'Pay now'));

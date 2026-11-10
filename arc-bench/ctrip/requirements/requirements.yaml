@@ -8,7 +8,7 @@ description:
 
     Dates, voucher eligibility and public countdowns use Asia/Shanghai and the shared application/evaluator clock 2026-07-19T08:00:00+08:00.
 
-    Sessions, current search criteria, booking selections and status-search history are established by public UI behavior within each scenario, never injected into storage.
+    Each scenario starts independently with the inventory, accounts, saved travelers and order records declared in its seed. Sessions, search criteria, booking selections and status-search history are produced through the UI. A new booking order is created only by Submit order in that scenario; it is separate from any seeded order inspected or cancelled in My account.
     Native masked password inputs are identified by their exact associated accessible label and password type; an explicit textbox role is not required for these native inputs. Other declared field roles and names remain required. A combobox may use a native select or an accessible popup: choices and selected state are compared by their visible labels, not private option values or a required DOM nesting.
 
 scenarios: []
@@ -728,7 +728,7 @@ children:
   name: Find flights and select a fare
   description:
     text: |-
-      Domestic/international route search uses fixed current date 2026-07-19. Quick-search supports trip type, cities, dates, children and cabin preferences. Results allow criterion updates, nearby fares, filtering and sorting. Multi-city, time and airport filter details are not specified beyond capability context.
+      Search uses the benchmark date and submits the selected trip type, origin, destination, dates, traveling-with-children setting and cabin preference. Results reflect the submitted criteria; changing and resubmitting them updates the result set. Airline and stop filters narrow that set; sorting changes its order. Book is scoped to the fare inside the selected flight record and carries that flight, route, date and fare into Book flight. Multi-city, time and airport filter details remain capability context.
 
       Flight results expose a list with listitems named Flight <number>. Cabin class and Airline use combobox semantics; All airlines removes only the airline restriction.
 
@@ -1297,7 +1297,7 @@ children:
           - published booking inventory: {"flights": [{"number": "CZ3401", "origin": "Chengdu", "destination": "Guangzhou", "date": "2026-07-21", "airline": "China Southern", "stops": "nonstop", "fare": 320, "departure": "11:00", "on_time": "95%"}, {"number": "JD5162", "origin": "Chengdu", "destination": "Guangzhou", "date": "2026-07-21", "airline": "Other airline", "stops": "stopover", "fare": 460, "departure": "09:00", "on_time": "88%"}, {"number": "MU5234", "origin": "Chengdu", "destination": "Guangzhou", "date": "2026-07-21", "airline": "Other airline", "stops": "nonstop", "fare": 580, "departure": "07:30", "on_time": "91%"}], "calendar_fare": {"2026-07-21": 460, "2026-07-22": 320}, "jd5162": {"taxes_per_passenger": 70, "baggage_kg": 20, "insurance": 40, "extra_10kg": 60, "drop_off": 42, "lounge": 80, "refund_fee": 100}}
           - city directory: {"Chengdu": {"code": "CTU", "group": "Popular"}, "Guangzhou": {"code": "CAN", "group": "GHIJ"}}
         When: Click Show fares within Flight JD5162 and Book within its Economy fare group.
-        Then: Book flight opens for JD5162 with the selected Chengdu–Guangzhou route, July 21 and Economy fare retained.
+        Then: 'Book flight shows JD5162, Chengdu–Guangzhou and the 2026-07-21 departure date. The selected Economy fare is retained: with ¥460 fare plus ¥70 tax, Fee breakdown shows Order total: ¥530 for one passenger.'
         references:
         - \ref[requirement](REQ-2.11)
         - \ref[image](IMG-SEARCH-RESULTS)
@@ -1434,7 +1434,11 @@ children:
   name: Book, price and pay for flights
   description:
     text: |-
-      Booking supports reminders, passengers, contact mobile, optional protection, baggage, transfer and lounge services. Fee summary includes fare/taxes and chosen services. Guest submission and simulated payment are allowed. Insurance variants, fast-track security and fulfillment beyond stated examples remain broad context.
+      Book flight edits the current selection for the fare opened from search. Signed-in users may select saved passengers from their own Frequent passengers; a guest can enter the declared ad hoc passenger details. Contact mobile is validated separately from passenger identity. Editing the draft or selecting a service is not order submission.
+
+      Fee breakdown uses the current passenger count and the selected fare plus tax per passenger. For the one-passenger JD5162 Economy example the base is ¥460 + ¥70 = ¥530. Add the fees of selected services as declared in each scenario. Removing an option removes only that option’s fee; keep the other options and totals consistent. Fee details itemizes the currently selected services. Insurance variants, fast-track security and fulfillment beyond stated examples remain context.
+
+      Submit order validates the declared passenger and contact details and booking terms, then opens Payment for the resulting pending order. Alipay and Pay now simulate payment of the order already open at Payment. They do not start another booking. Guest submission and payment are allowed; this does not require adding a guest order to a signed-in account’s list.
 
       Contact information is the booking contact-validation region. Public countdown timers are named Time remaining and render MM:SS or HH:MM:SS. Payment is simulated.
 
@@ -1764,10 +1768,6 @@ children:
       text: |-
         A guest completes "Full name"(role=textbox) and "ID number"(role=textbox) in "Passenger details"(role=region) with Wang Wu and checksum-valid 110101199001011237, enters 13800000014 in "Contact mobile"(role=textbox), selects "Agree to booking terms"(role=checkbox), and clicks "Submit order"(role=button). The JD5162 order awaits payment, showing Payment heading, "Time remaining"(role=timer) with textual remaining duration, and Unpaid orders are cancelled when the timer expires.
 
-        Public countdowns use "Time remaining"(role=timer) and render MM:SS or HH:MM:SS.
-
-        For new flight orders: Created by Submit order; paid only using simulated Alipay.
-
         Global navigation is a navigation landmark named Global navigation. Fields have associated labels; explicitly named tabs, radios, checkboxes, dialogs and fields retain their stated roles.
 
         Dates and time-dependent behavior use Asia/Shanghai and the shared application/evaluator time 2026-07-19T08:00:00+08:00; public countdowns use elapsed time.
@@ -1793,8 +1793,7 @@ children:
           - accepted test identity inputs: {"ids": ["110101199001011237"]}
         When: Enter Full name Wang Wu and ID number 110101199001011237 in Passenger details, enter Contact mobile
           13800000014, check Agree to booking terms and click Submit order.
-        Then: Payment opens with a visible Time remaining timer representing a positive duration and Unpaid orders
-          are cancelled when the timer expires reminder.
+        Then: Payment opens with a visible Time remaining timer representing a positive duration and the reminder Unpaid orders are cancelled when the timer expires. This scenario observes the pending state and reminder without waiting for expiry.
         references:
         - \ref[requirement](REQ-3.3)
         - \ref[image](IMG-BOOK2)
@@ -2005,7 +2004,9 @@ children:
   name: Inspect and cancel orders
   description:
     text: |-
-      My account Orders shows list entries with number, booking date, itinerary, flight, total and display status. Not traveled/Pending review are distinct from payment state. Type/date-range filtering and detail fields such as terminals, operating carrier, non-flight services, masked passengers and fee summary remain source context without concrete fixtures/oracles.
+      My account Orders shows orders for the signed-in account, using order number as the record identity. The list shows booking date, itinerary, flight, total and display status. Keep payment state distinct from display status: Not traveled and Pending review are display states of the seeded paid orders, not unpaid states.
+
+      View details, Pay now and Cancel order act on the selected order. Confirm cancellation changes the identified pending order to Closed; Keep order dismisses the dialog without changing its pending payment or Pay now action. The historical and cancellation fixtures keep their declared identities and dates. Type/date-range filtering and details such as terminals, operating carrier, non-flight services, masked passengers and fee summary remain context without concrete fixtures or oracles.
 
       Order records are uniquely named Record <order number> within their list region. Record actions are scoped to that identity. Non-destructive cancellation confirmation provides Keep order.
 
@@ -2206,7 +2207,7 @@ children:
           - historical and cancellation orders: [{"owner": "order_read", "number": "CTRIP20260721001", "flight": "JD5162", "date": "2026-07-21", "origin": "Chengdu", "destination": "Guangzhou", "total": 530, "payment_status": "Pending payment", "display_status": "Pending payment"}, {"owner": "order_read", "number": "CTRIP20260722002", "flight": "CZ3401", "date": "2026-07-22", "total": 390, "payment_status": "Paid", "display_status": "Not traveled"}, {"owner": "order_read", "number": "CTRIP20260718003", "flight": "MU5234", "date": "2026-07-18", "total": 650, "payment_status": "Paid", "display_status": "Pending review"}]
         When: Inspect Order details, Flight itinerary and Payment status; record Time remaining and advance browser
           elapsed time by 1.1 seconds.
-        Then: The order number, JD5162 and Chengdu to Guangzhou are visible; itinerary offers Refund and change
+        Then: The order number is visible. Flight itinerary contains JD5162 and Chengdu to Guangzhou and offers Refund and change
           rules; Payment status displays Pending payment, expiry reminder, Pay now and Cancel order, and its positive
           Time remaining decreases.
         references:

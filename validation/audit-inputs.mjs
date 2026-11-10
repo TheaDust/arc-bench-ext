@@ -69,9 +69,10 @@ for (const [task, expected] of Object.entries(revision.tasks)) {
         const titles = collected.get(`${task}:${node.id}`) ?? [];
         assert.equal(titles.length, node.scenarios.length,
           `${task}: ${node.id} requirement/scenario vs collected-test coverage differs`);
-        if (revision.extension?.tasks[task]?.requirements.includes(node.id)) {
-          const expectedTitles = node.scenarios.map(scenario => `${node.id}: ${scenario.name}`);
-          assert.deepEqual(titles.sort(), expectedTitles.sort(), `${task}: extension scenario titles differ`);
+        if (expected.exactScenarioTitles || revision.extension?.tasks[task]?.requirements.includes(node.id)) {
+          const prefix = node.id + ': ';
+          const expectedTitles = node.scenarios.map(({ name }) => name.startsWith(prefix) ? name : prefix + name);
+          assert.deepEqual(titles.sort(), expectedTitles.sort(), task + ': ' + node.id + ' scenario titles differ');
         }
         collected.delete(`${task}:${node.id}`);
       }

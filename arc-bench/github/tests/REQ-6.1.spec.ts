@@ -18,11 +18,11 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
   await openVisibleTarget(page, repositoryEntry);
   await page.getByRole('link', { name: /^Settings$/ }).click();
   await page.getByRole('link', { name: /branches/i }).click();
-  await page.getByRole('button', { name: /add branch protection rule/i }).click();
+  await page.getByRole('button', { name: 'Add branch protection rule', exact: true }).click();
   await page.getByRole('textbox', { name: 'Branch name pattern', exact: true }).fill(pattern);
-  await page.getByRole('checkbox', { name: /require.*1.*approval|require.*review/i }).check();
-  await page.getByRole('checkbox', { name: /require.*status check.*test/i }).check();
-  await page.getByRole('button', { name: /create|save changes/i }).click();
+  await page.getByRole('checkbox', { name: 'Require 1 approval', exact: true }).check();
+  await page.getByRole('checkbox', { name: 'Require status check test', exact: true }).check();
+  await page.getByRole('button', { name: /^(Create|Save changes)$/ }).click();
   await page.reload();
   await expectText(page, pattern, { exact: true });
   await expectText(page, /1 approval/i);
@@ -46,7 +46,7 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
   }
 
   await expect(
-    page.getByRole('button', { name: /add branch protection rule/i }),
+    page.getByRole('button', { name: 'Add branch protection rule', exact: true }),
   ).toHaveCount(0);
 });
 
@@ -56,10 +56,11 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
 
   await signIn(page, administrator);
   await openVisibleTarget(page, pullRequestEntry);
+  await page.getByRole('link', { name: 'Checks', exact: true }).click();
   await expectText(page, /test.*pending|pending.*test/i);
   const testStatus = page.getByRole('combobox', { name: /test.*status|status.*test/i });
   await selectChoice(testStatus, { label: 'success' });
-  await page.getByRole('button', { name: /save|update/i }).click();
+  await page.getByRole('button', { name: /^(Save|Update)$/ }).click();
 
   await expectText(page, /test.*success|success.*test/i);
   await expectVisibleText(page, administrator.username);

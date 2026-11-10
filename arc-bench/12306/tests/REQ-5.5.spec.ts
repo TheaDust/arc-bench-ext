@@ -14,5 +14,8 @@ test("REQ-5.5: Refund and inspect history", async ({ page }) => {
     await link(page, 'View History orders').click();
     await expect(row(page, 'G2002')).toContainText('refunded');
     await page.reload();
+    const category = page.getByRole('tab', { name: 'History orders', exact: true });
+    if (await category.getAttribute('aria-selected') !== 'true') await category.click();
+    await expect(category).toHaveAttribute('aria-selected', 'true');
     await expect(row(page, 'G2002')).toContainText('refunded');
 });

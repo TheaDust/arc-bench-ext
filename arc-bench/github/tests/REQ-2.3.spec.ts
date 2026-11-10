@@ -1,8 +1,12 @@
-import { expectText } from './support/observations';
-import { selectChoice } from './support/public-controls';
+import { expectSelectedChoice, selectChoice } from './support/public-controls';
+import type { Page } from '@playwright/test';
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import { seedValue, signIn, seedAccount, openVisibleRepository, clickVisibleTarget } from './support/e2e';
+
+const grantRow = (page: Page, name: string) => page.getByRole('row').filter({
+  has: page.getByText(name, { exact: true }).filter({ visible: true }),
+});
 
 test.beforeEach(async ({ page }) => {
   await page.goto(baseUrl());
@@ -22,10 +26,12 @@ test('REQ-2.3: Grant Repository Access to People and Teams - Scenario 1', async 
   await page.getByRole('option', { name: team, exact: true }).click();
   await selectChoice(page.getByRole('combobox', { name: 'Role', exact: true }), { label: 'Write' });
   await page.getByRole('button', { name: 'Add', exact: true }).click();
-  await expectText(page, team, { exact: true });
-  await expectText(page, 'Write', { exact: true });
+  const row = grantRow(page, team);
+  await expect(row).toHaveCount(1);
+  await expectSelectedChoice(row.getByRole('combobox', { name: 'Role', exact: true }), 'Write');
   await page.reload();
-  await expectText(page, team, { exact: true });
+  await expect(row).toHaveCount(1);
+  await expectSelectedChoice(row.getByRole('combobox', { name: 'Role', exact: true }), 'Write');
 });
 
 test('REQ-2.3: Grant Repository Access to People and Teams - Scenario 2', async ({ page }, testInfo) => {
@@ -38,16 +44,15 @@ test('REQ-2.3: Grant Repository Access to People and Teams - Scenario 2', async 
   await clickVisibleTarget(page, 'Settings');
   await clickVisibleTarget(page, 'Manage access');
 
-  const accessRow = page.getByRole('row', { name: new RegExp(teamName, 'i') });
-  await expect(accessRow).toContainText('Write');
+  const accessRow = grantRow(page, teamName);
+  await expect(accessRow).toHaveCount(1);
+  await expectSelectedChoice(accessRow.getByRole('combobox', { name: 'Role', exact: true }), 'Write');
   await selectChoice(accessRow.getByRole('combobox', { name: 'Role', exact: true }), {
     label: 'Read',
   });
   await accessRow.getByRole('button', { name: 'Save', exact: true }).click();
 
   await page.reload();
-  await expect(page.getByRole('row', { name: new RegExp(teamName, 'i') })).toHaveCount(1);
-  await expect(page.getByRole('row', { name: new RegExp(teamName, 'i') })).toContainText(
-    'Read',
-  );
+  await expect(accessRow).toHaveCount(1);
+  await expectSelectedChoice(accessRow.getByRole('combobox', { name: 'Role', exact: true }), 'Read');
 });

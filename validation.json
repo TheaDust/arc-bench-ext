@@ -1,86 +1,85 @@
 {
-  "revision": "2026-11-09-sheet-experiment-r2",
-  "parentRevision": "2026-11-09-sheet-requirements-r1",
-  "manifestSha256": "48e1766b64123285ca631f71635c5ecbb305cc58f8173b270ebcac57c45228b7",
-  "recordedAt": "2026-11-09T15:55:03.802Z",
-  "status": "sheet-contracts-validated-reference-application-run-pending",
+  "revision": "2026-11-10-github-12306-ctrip-experiment-polish",
+  "parentRevision": "2026-11-09-sheet-experiment-r2",
+  "manifestSha256": "5562410dea0ffb2909a5704c3f8b1063592995c011897b84d82ac5abeea6bd39",
+  "recordedAt": "2026-11-10T10:05:53.266Z",
+  "status": "github-12306-and-ctrip-polished-candidate-execution-pending",
   "scope": {
     "tasks": 8,
     "atomicRequirements": 423,
     "scenarios": 759,
-    "sheetRequirements": 26,
-    "sheetScenarios": 104,
-    "preservedExistingIdsAndTitles": true
+    "changedTasks": [
+      "12306",
+      "ctrip",
+      "github"
+    ],
+    "addedScenarios": 0,
+    "preservedRequirementScenarioStepIdsAndTitles": true
   },
   "typecheck": {
     "passed": true,
     "command": "npm run typecheck"
   },
-  "contracts": {
-    "passed": 47,
-    "failed": 0,
-    "skipped": 0,
-    "report": "validation/sheet-r2-contracts-report.json",
-    "browserChannel": "chrome",
-    "scope": "Sheet DOM contracts; 30 inherited and 17 new cases"
-  },
   "collection": {
     "passed": true,
-    "total": 759,
-    "sheet": 104,
-    "report": "validation/collection-report.json"
+    "scenarios": 759,
+    "exactTitlesByTask": {
+      "12306": 142,
+      "ctrip": 152,
+      "github": 104
+    }
   },
   "sourceIntegrity": {
+    "frozenFiles": 785,
+    "passed": true
+  },
+  "contracts": {
+    "passed": 141,
+    "failed": 0,
+    "skipped": 0
+  },
+  "oraclePolicy": {
+    "errors": 0,
+    "warnings": 90
+  },
+  "experimentPrepare": {
     "passed": true,
-    "frozenFiles": 782,
-    "command": "npm run test:collect",
-    "scope": "YAML identity/reference, scenario counts, frozen bytes and standalone helpers"
-  },
-  "review": {
-    "current": "audit/sheet-r2.json",
-    "targetedR2Scenarios": 15,
-    "historicalBase": "audit/sheet.json",
-    "boundary": "Current mapping plus inherited semantic review; not a fresh independent review of every callback."
-  },
-  "historicalEvidence": {
-    "manifest": "validation/history/2026-11-09-sheet-requirements-r1/revision.json",
-    "validation": "validation/history/2026-11-09-sheet-requirements-r1/validation.json",
-    "resultsTransferred": false
-  },
-  "formalExperimentGate": {
-    "inputContract": "bounded-and-explicit",
-    "testContracts": "passed",
-    "referenceApplication": {
-      "status": "pending",
-      "expectedScenarios": 104
+    "tasks": {
+      "12306": 142,
+      "ctrip": 152,
+      "github": 104
     },
-    "modelProtocol": {
-      "status": "to-be-frozen-in-experiment-plan",
-      "opencodeSubagents": "available"
-    },
-    "ready": false,
-    "readiness": "validation/sheet-r2-readiness.json"
+    "methods": [
+      "baseline",
+      "shallow"
+    ],
+    "modelCalled": false
+  },
+  "requirementTestConsistency": {
+    "mappings": [
+      "audit/github-experiment-polish.md",
+      "audit/12306-experiment-polish.md",
+      "audit/ctrip-experiment-polish.md"
+    ],
+    "actualExperimentCatalogTitlesMatched": {
+      "12306": 142,
+      "ctrip": 152,
+      "github": 104
+    }
   },
   "applications": {
     "generated": false,
     "modified": false,
-    "businessScenariosExecuted": 0
+    "businessScenariosExecuted": 0,
+    "pairedExperimentExecuted": false
+  },
+  "parentValidation": {
+    "commit": "be8aa2f174ff2a7cd317aac0d223fce40f8ca058",
+    "path": "validation.json",
+    "resultsTransferred": false
   },
   "limitations": [
-    "The complete Sheet application suite has not been run against a compliant reference application; runtime feasibility and the 60-second per-scenario budget remain to be checked.",
-    "Synthetic DOM contracts cover selected valid variants and defects, not every legal UI implementation.",
-    "No model comparison was run; discrimination against OpenCode remains unmeasured."
-  ],
-  "runnerCatalog": {
-    "passed": true,
-    "method": "opencode",
-    "scenarios": 104,
-    "report": "validation/sheet-r2-catalog.json",
-    "modelCalled": false,
-    "applicationStarted": false
-  },
-  "syntax": {
-    "passed": true,
-    "command": "node --check evaluate-project.mjs"
-  }
+    "Collection and synthetic contracts do not replace candidate business execution.",
+    "Use the same frozen revision for each method; historical scores are not carried forward."
+  ]
 }
