@@ -2096,7 +2096,7 @@ children:
     text: |-
       Identity and views. A PR belongs to one repository and proposes changes from its compare (source) branch into its base (target) branch. Persist its repository-scoped number, title, description, author, branches, status and activity, the base and compare commits at creation, and the current compare commit. The list shows its number, title, author, branches and status. New pull request opens the branch comparison before creation. Conversation shows the PR details, comments, activity and review summary; Commits lists compare-branch commits relative to base; Files changed shows per-file and per-line diffs; Checks shows the check on the current compare commit.
 
-      Status and authority. Normal creation starts Open; draft creation starts Draft. The author or a user with Maintain or Admin can mark a Draft ready, close an unmerged Open or Draft PR, and reopen a Closed PR as Open. Merged is terminal. On an Open PR, only a non-author with Write, Maintain or Admin can add inline comments or submit a review. The author or a user with Maintain or Admin can manage pending reviewer requests. Only Maintain, Admin or the owning organization’s Owner can merge. These are action-specific grants, not a cumulative role ladder. Repository grants and visibility are described in \ref[requirement](REQ-2.3); being able to read a PR is not permission to write or merge.
+      Status and authority. Normal creation starts Open; draft creation starts Draft. The author or a user with Maintain or Admin can mark a Draft ready. The author, a user with Maintain or Admin, or the owning organization’s Owner can close an unmerged Open or Draft PR and reopen a Closed PR as Open, as specified in REQ-6.6. Merged is terminal. On an Open PR, only a non-author with Write, Maintain or Admin can add inline comments or submit a review. The author or a user with Maintain or Admin can manage pending reviewer requests. Only Maintain, Admin or the owning organization’s Owner can merge. These are action-specific grants, not a cumulative role ladder. Repository grants and visibility are described in \ref[requirement](REQ-2.3); being able to read a PR is not permission to write or merge.
 
       Versioned decisions. A submitted review and a test check refer to the compare commit to which they were recorded. A new compare commit makes earlier review decisions Stale, preserves their history, and leaves earlier inline comments at their original commit and line with Outdated state. Earlier test success does not satisfy the new commit; its check starts pending. Recalculate eligibility from the current commit. Pending reviewer requests are separate from decisions. Merge conditions are defined in \ref[requirement](REQ-6.5); the stale editor and confirmation behavior and additional public observations are defined in \ref[requirement](REQ-7.1) and \ref[requirement](REQ-7.2).
 
@@ -2114,7 +2114,7 @@ children:
         A repository Admin can open Settings and Branches, create a rule with `Branch
         name pattern`, `Require 1 approval`, and `Require status check test`, and see it
         after reload. Non-Admins cannot create the rule. On an Open PR, an Admin can set
-        the `test` check for the current compare commit from pending to success on Checks; the saved status and setter remain after reload. Each scenario has independent accounts and seed state.
+        the `test` check for the current compare commit from pending to success on Checks; the saved status and setter remain after reload. A visible check record associates the name test, its displayed status and, after the save, the setter. A row, list item, named group, region or article can represent the record; no particular layout or new action is required. Text in the account menu, in another record or in the unsaved status selector is not evidence of the saved setter or status. Each scenario has independent accounts and seed state.
 
         For branch protection rules created through UI: Created through branch protection settings for an existing repository. The requested approval and check requirements come from the UI selections.
 
@@ -2170,7 +2170,7 @@ children:
           `Valid-password-123!`). Its Checks area contains `test` with pending status.
         When: The Admin signs in, opens the PR, follows Checks, selects `success` in the `test` status combobox, and clicks Save
           or Update.
-        Then: The Checks area shows `test` success and the Admin username; after reload, success remains visible.
+        Then: The same visible test check record shows success and identifies protection-admin as its setter, before and after reload. The signed-in username elsewhere on the page does not satisfy this result.
         references:
         - \ref[requirement](REQ-4.3.1)
         - \ref[requirement](REQ-1.1.2)
@@ -2335,10 +2335,12 @@ children:
         name: 'REQ-6.2.3: Create a Pull Request from Comparison Results - Scenario 2'
         steps:
         - id: STEP-REQ-6.2.3-02-01
-          Given: Public repository `acme-docs` has a valid `Compare` entry. Account `pr-contributor` (`pr-contributor@example.test`,
-            `Valid-password-123!`) may create PRs.
-          When: The contributor signs in, opens the comparison, enters three spaces in Title, and submits.
-          Then: A title-required message is displayed and no PR is created.
+          Given: |-
+            Public repository `acme-docs` has a valid `Compare` entry. Account `pr-contributor` (`pr-contributor@example.test`, `Valid-password-123!`) may create PRs. The independent acme-docs fixture lists exactly PR #1 in Open and PR #2 in Closed. Pull requests is linked from the repository; each filter displays all records in that category in a region named Pull requests, including their visible #number even if a title is empty. The Open category includes drafts and the Closed category includes merged PRs for this list check.
+          When: |-
+            Record the Open and Closed PR numbers from the repository list. Return to the comparison, enter three spaces in Title, and submit.
+          Then: |-
+            The form shows a title-required message. Reopen the same repository list and select each filter again. Open still contains only #1 and Closed only #2, with no duplicate or newly numbered record in either category.
           references:
           - \ref[requirement](REQ-6.2.2)
       children: []
@@ -2403,6 +2405,8 @@ children:
           Visitor scenarios use public repositories and require no session.
 
           Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+
+          For the Overview onboarding PR scenarios, the seeded compare-only commit has an identifier beginning with 4f8a9c2 and message Implement onboarding search. The Commits region shows its visible identifier (full or a prefix of at least those seven characters) and message on the same row, list item or article. Relative to the base, the seeded diff includes src/search.ts with aggregate totals of three additions and one deletion, visible as Diff totals in the Files changed region. Diff totals is a named status output and accepts a compact +3 -1 summary or equivalent wording. The PR heading identifies the same PR on both views.
       scenarios:
       - id: SCN-REQ-6.3.1-01
         name: 'REQ-6.3.1: View Pull Request Overview and Commits - Scenario 1'
@@ -2412,8 +2416,8 @@ children:
             PR` with at least one commit and changed file.
           When: The visitor opens the visible `Overview onboarding PR` PR, then opens the `Commits` and `Files changed`
             links in sequence.
-          Then: The detail heading is exactly `Overview onboarding PR`; Commits displays commit information and
-            Files changed displays a changed-files summary.
+          Then: |-
+            The exact Overview onboarding PR heading identifies the PR in both views. Commits shows the seeded compare-only identifier and message together. Files changed shows src/search.ts and an aggregate of three additions and one deletion.
           references:
           - \ref[requirement](REQ-6.2.1)
       - id: SCN-REQ-6.3.1-02
@@ -2423,8 +2427,8 @@ children:
           Given: The visitor is unauthenticated. Public repository `acme-docs` has an Open PR titled `Overview onboarding
             PR` with at least one commit.
           When: The visitor opens the PR, reloads its detail page, and clicks `Commits`.
-          Then: The exact `Overview onboarding PR` heading remains visible after reload, and Commit information
-            is visible.
+          Then: |-
+            After reload, the exact Overview onboarding PR heading identifies the PR. Its Commits region shows the seeded compare-only identifier and message together.
           references:
           - \ref[requirement](REQ-6.2.1)
       - id: SCN-REQ-6.3.1-03
@@ -2435,7 +2439,8 @@ children:
             PR` with changed files.
           When: The visitor opens the PR, returns to the application home page, reopens the same PR, and clicks
             `Files changed`.
-          Then: The exact `Overview onboarding PR` heading and the changed-files summary are visible after reopening.
+          Then: |-
+            After reopening, the exact Overview onboarding PR heading identifies the PR. Its Files changed region shows src/search.ts and an aggregate of three additions and one deletion.
           references:
           - \ref[requirement](REQ-6.2.1)
       children: []
@@ -2466,10 +2471,11 @@ children:
         name: 'REQ-6.3.2: Inspect Changed Files and Aggregate Diff - Scenario 1'
         steps:
         - id: STEP-REQ-6.3.2-01-01
-          Given: The visitor is unauthenticated. Public repository `acme-docs` has an Open PR titled `Public onboarding
-            PR` whose diff includes `src/search.ts` and at least one addition or deletion.
+          Given: |-
+            The visitor is unauthenticated. Public repository acme-docs has an Open PR titled Public onboarding PR. Its seeded diff relative to the base includes src/search.ts, with exactly three added lines and one deleted line across the PR.
           When: The visitor opens the PR and clicks `Files changed`.
-          Then: The exact `src/search.ts` path and an additions/deletions aggregate summary are visible.
+          Then: |-
+            The exact Public onboarding PR heading identifies the PR. The Files changed region shows src/search.ts and a named status output Diff totals displaying the aggregate of three additions and one deletion. A compact +3 -1 summary or equivalent wording is accepted.
           references:
           - \ref[requirement](REQ-6.3.1)
       children: []
@@ -2547,6 +2553,8 @@ children:
           A review stores its reviewer, decision, optional summary and the compare commit reviewed.
 
           Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+
+          For these two review scenarios, the PR links to the live Compare branch; its Branch state exposes the Branch head value, using the branch observation already defined for PR merge and review guards. The compare head stays unchanged while the reviewer submits. The PR Conversation uses a Review history table. One visible row for the reviewer and that exact compare head shows the submitted decision and, when entered, the exact summary. The row is still present when the PR is reopened. Text from the account menu, input form or an unrelated review does not supply evidence.
       scenarios:
       - id: SCN-REQ-6.3.4-01
         name: 'REQ-6.3.4: Submit a Pull Request Review - Scenario 1'
@@ -2555,9 +2563,10 @@ children:
           Given: The system pre-provisions public repository `acme-docs`, an Open reviewable PR titled `Reviewable
             onboarding PR` with changed files, and non-author reviewer account `pr-reviewer` (`pr-reviewer@example.test`,
             `Valid-password-123!`) with review permission and no prior effective decision.
-          When: The reviewer signs in, opens Files changed, clicks `Review changes`, selects `Approve`, and clicks
-            `Submit review`.
-          Then: Approved status is visible.
+          When: |-
+            The reviewer signs in, reads the current compare head from Compare branch, returns to the PR, opens Files changed, clicks Review changes, selects Approve, and clicks Submit review.
+          Then: |-
+            On Conversation, the same Review history row shows pr-reviewer, the recorded compare head and the approval decision. It still shows all three after reopening the PR.
           references:
           - \ref[requirement](REQ-6.3.1)
           - \ref[requirement](REQ-1.1.2)
@@ -2568,9 +2577,10 @@ children:
           Given: The system pre-provisions public repository `acme-docs`, a separate Open reviewable PR titled `Change
             request onboarding PR` with changed files, and non-author reviewer account `pr-reviewer` (`pr-reviewer@example.test`,
             `Valid-password-123!`) with review permission and no prior effective decision.
-          When: The reviewer signs in, opens Files changed, clicks `Review changes`, enters a unique summary, selects
-            `Request changes`, and clicks `Submit review`.
-          Then: Changes requested and the exact summary are visible; Changes requested remains visible after reload.
+          When: |-
+            The reviewer signs in, reads the current compare head from Compare branch, returns to the PR, opens Files changed, enters a unique summary in Review changes, selects Request changes, and clicks Submit review.
+          Then: |-
+            On Conversation, the same Review history row shows pr-reviewer, the recorded compare head, the request-changes decision and the exact summary. It still shows all four after reopening the PR.
           references:
           - \ref[requirement](REQ-6.3.1)
           - \ref[requirement](REQ-1.1.2)
@@ -2657,9 +2667,9 @@ children:
     name: Close or Reopen a Pull Request Without Merging
     description:
       text: |-
-        The PR page provides Close pull request and Reopen pull request as buttons for authorized users. Close pull request immediately sets Closed without an extra confirmation dialog, then Reopen pull request immediately restores Open. After reload, Close pull request is available again. For a viewer who is neither author nor Maintain/Admin/Owner, both controls are absent, rather than merely disabled or rejected after activation. Seed data supplies the author and a separate Read viewer, an authored Open PR for the close/reopen cycle, and a separate Open PR readable by that viewer for permission validation. When the proposed change should not proceed, the PR author, Maintain, Admin, or organization Owner may close an unmerged Open or Draft PR without merging; the same roles may reopen a Closed PR as Open. The system stores the status, operator, and time and records the transition, while keeping the PR discussion, reviews, diff, and branch references viewable; closing or reopening must not update any branch. Merged is terminal, the page does not display close or reopen operations, and the server rejects status changes. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-6.2.3 (Create a Pull Request from Comparison Results) and REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes.
+        The PR page provides Close pull request and Reopen pull request as buttons for authorized users. Close pull request immediately sets Closed without an extra confirmation dialog, then Reopen pull request immediately restores Open. After reload, Close pull request is available again. For a viewer who is neither author nor Maintain/Admin/Owner, both controls are absent, rather than merely disabled or rejected after activation. Seed data supplies the author and a separate Read viewer, an authored Open PR for the close/reopen cycle, and a separate Open PR readable by that viewer for permission validation. When the proposed change should not proceed, the PR author, Maintain, Admin, or the owning organization’s Owner may close an unmerged Open or Draft PR without merging; the same roles may reopen a Closed PR as Open. The system stores the status, operator, and time and records the transition, while keeping the PR discussion, reviews, diff, and branch references viewable; closing or reopening must not update any branch. Merged is terminal, the page does not display close or reopen operations, and the server rejects status changes. This feature builds on the persisted objects, opened pages, or authenticated-session context provided by REQ-6.2.3 (Create a Pull Request from Comparison Results) and REQ-1.1.2 (Sign In with an Existing Account); it must reuse that context and keep pages and data consistent after the context changes.
 
-        A PR's persisted status may only be Draft, Open, Closed, or Merged — normal creation produces Open, draft creation produces Draft, and the author or Maintain/Admin may mark a Draft as Ready for review to transition it to Open; the author or Maintain/Admin may transition an unmerged Open or Draft PR to Closed and may transition Closed back to Open; Merged is terminal and cannot be closed or reopened.
+        A PR's persisted status may only be Draft, Open, Closed, or Merged — normal creation produces Open, draft creation produces Draft, and the author or Maintain/Admin may mark a Draft as Ready for review to transition it to Open; the author, Maintain, Admin or the owning organization’s Owner may transition an unmerged Open or Draft PR to Closed and may transition Closed back to Open; Merged is terminal and cannot be closed or reopened.
 
         Failure does not change branches or PR state.
 
@@ -2672,6 +2682,8 @@ children:
         The current PR status is visible text.
 
         Quoted interface names are exact English accessible names unless this leaf explicitly allows alternatives. Permission eligibility follows the stated operation-specific role list; role names do not imply an extra cumulative permission ladder.
+
+        For the close/reopen scenario, the PR exposes its visible #number as a status output named PR number and its current state as a status output named PR status. Base branch and Compare branch open the live branch views, whose Branch state exposes Branch head as in REQ-6.5. The fixture starts with distinct base and compare heads. The same PR number and both original heads survive each transition and reload.
     scenarios:
     - id: SCN-REQ-6.6-01
       name: 'REQ-6.6: Close or Reopen a Pull Request Without Merging - Scenario 1'
@@ -2680,13 +2692,17 @@ children:
         Given: The system pre-provisions the separate unmerged Open PR `Closable onboarding PR` and the author account
           `pr-author` with email `pr-author@example.test`, password `Valid-password-123!`, and permission to close
           and reopen it. The visitor starts at the application home page.
-        When: The author clicks `Close pull request`, waits for `Closed`, and then clicks `Reopen pull request`.
-        Then: The PR displays `Closed` and then `Open`.
+        When: |-
+          Read the PR number and both branch heads. Close the PR and reload before reopening it.
+        Then: |-
+          The PR displays Closed immediately and after reload, with the original PR number and unchanged base and compare heads.
         references:
         - \ref[requirement](REQ-6.3.1)
         - \ref[requirement](REQ-1.1.2)
       - id: STEP-REQ-6.6-01-02
-        Then: After reloading, the `Close pull request` button is visible again.
+        When: Reopen the same PR.
+        Then: |-
+          The PR displays Open immediately and after reload, with the original PR number and unchanged base and compare heads. Close pull request is available again.
         references:
         - \ref[requirement](REQ-6.3.1)
         - \ref[requirement](REQ-1.1.2)

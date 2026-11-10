@@ -1,3 +1,7 @@
+# 2026-11-10: 补清容易误通过的验收结果
+
+修订 `2026-11-10-observable-outcome-r2`，父版 `2026-11-10-github-12306-ctrip-experiment-polish`。GitHub 检查记录、12306 重订确认和 Ctrip 搜索恢复对齐题面与已有断言；场景数不变。GitHub 同步收紧空标题拒绝、提交与变更摘要、审核归属、关闭与重开的 8 个既有场景，统一 Owner 的关闭和重开权限。 见 [跨题审查](audit/false-positive-polish.md) 和 [GitHub PR 审查](audit/github-pr-evidence.md)。新旧评分口径不可混算。
+
 # 2026-11-10: GitHub、12306 与 Ctrip 正式实验题面打磨
 
 修订 `2026-11-10-github-12306-ctrip-experiment-polish`，父版本 `2026-11-09-sheet-experiment-r2`。沿用全部需求与场景 ID，不新增功能或场景。统一 GitHub 合并权限与提交状态、12306 订单状态流，以及 Ctrip 搜索、计价和支付口径。 见 [GitHub](audit/github-experiment-polish.md)、[12306](audit/12306-experiment-polish.md) 和 [Ctrip](audit/ctrip-experiment-polish.md)。同一轮实验使用本版，旧成绩不直接迁移。

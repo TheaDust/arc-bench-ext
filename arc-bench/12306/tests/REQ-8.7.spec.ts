@@ -1,6 +1,7 @@
 // requirement: REQ-8.7
 import { expect } from '@playwright/test';
 import { test } from './fixtures/test';
+import { expectRebookingIdentity } from './support/rebooking';
 import { entry, button, text, row, orders, confirmation, payment } from './helpers';
 test("REQ-8.7: Cancel persist status and release seat", async ({ page }) => {
     await entry(page);
@@ -17,4 +18,5 @@ test("REQ-8.7: Cancel persist status and release seat", async ({ page }) => {
     await expect(row(page, 'G1001')).toContainText('Cancelled');
     await expect(button(row(page, 'G1001'), 'Pay')).toHaveCount(0);
     await confirmation(page, 'booking_cancel_user', true);
+    await expectRebookingIdentity(page, 'G1001', 'Passenger Example');
 });

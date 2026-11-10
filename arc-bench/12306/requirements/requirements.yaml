@@ -4202,7 +4202,7 @@ children:
         When: Click Cancel on payment, open Uncompleted orders, reload and reopen that tab if needed; return Home, search the same journey,
           click Book, select the same passenger/business class and click Place order.
         Then: Order cancelled successfully. appears; G1001 is Cancelled without Pay before and after reload; rebooking
-          reaches confirmation, showing the released business seat is available again.
+          reaches confirmation for G1001 and Passenger Example, after selecting Business-class seat in that passenger row. This is the public rebooking check; an unrelated or empty confirmation does not count.
         references:
         - \ref[requirement](REQ-8.3.3.1)
         - \ref[image](IMG-PAYMENT)
@@ -4256,7 +4256,7 @@ children:
           When: Click Cancel within G1001, click Confirm in Are you sure you want to cancel this order?, then repeat
             the same booking up to Place order.
           Then: The dialog closes with Order cancelled successfully.; G1001 becomes Cancelled without Pay and rebooking
-            reaches confirmation using the released seat.
+            reaches confirmation for G1001 and Passenger Example after selecting Business-class seat in that passenger row. An unrelated or empty confirmation does not count.
           references:
           - \ref[requirement](REQ-8.3.3.1)
           - \ref[requirement](REQ-5.1.2)

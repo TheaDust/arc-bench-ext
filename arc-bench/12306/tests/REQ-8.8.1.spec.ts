@@ -1,6 +1,7 @@
 // requirement: REQ-8.8.1
 import { expect } from '@playwright/test';
 import { test } from './fixtures/test';
+import { expectRebookingIdentity } from './support/rebooking';
 import { entry, button, text, row, center, orders, confirmation, orderSetup } from './helpers';
 test("REQ-8.8.1: Confirm order-center cancellation", async ({ page }) => {
     await entry(page);
@@ -15,4 +16,5 @@ test("REQ-8.8.1: Confirm order-center cancellation", async ({ page }) => {
     await expect(row(page, 'G1001')).toContainText('Cancelled');
     await expect(button(row(page, 'G1001'), 'Pay')).toHaveCount(0);
     await confirmation(page, 'orders_cancel_center_user', true);
+    await expectRebookingIdentity(page, 'G1001', 'Passenger Example');
 });

@@ -1,5 +1,6 @@
 import { expectText } from './support/observations';
-import { expectVisibleText, selectChoice } from './support/public-controls';
+import { selectChoice } from './support/public-controls';
+import { expectTestCheck } from './support/saved-test-check';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
@@ -57,13 +58,12 @@ test('REQ-6.1: Protect Branches with Review and Status-Check Requirements - Scen
   await signIn(page, administrator);
   await openVisibleTarget(page, pullRequestEntry);
   await page.getByRole('link', { name: 'Checks', exact: true }).click();
-  await expectText(page, /test.*pending|pending.*test/i);
+  await expectTestCheck(page, 'pending');
   const testStatus = page.getByRole('combobox', { name: /test.*status|status.*test/i });
   await selectChoice(testStatus, { label: 'success' });
   await page.getByRole('button', { name: /^(Save|Update)$/ }).click();
 
-  await expectText(page, /test.*success|success.*test/i);
-  await expectVisibleText(page, administrator.username);
+  await expectTestCheck(page, 'success', administrator.username);
   await page.reload();
-  await expectText(page, /test.*success|success.*test/i);
+  await expectTestCheck(page, 'success', administrator.username);
 });

@@ -1,9 +1,9 @@
 {
-  "revision": "2026-11-10-github-12306-ctrip-experiment-polish",
-  "parentRevision": "2026-11-09-sheet-experiment-r2",
-  "manifestSha256": "5562410dea0ffb2909a5704c3f8b1063592995c011897b84d82ac5abeea6bd39",
-  "recordedAt": "2026-11-10T10:05:53.266Z",
-  "status": "github-12306-and-ctrip-polished-candidate-execution-pending",
+  "revision": "2026-11-10-observable-outcome-r2",
+  "parentRevision": "2026-11-10-github-12306-ctrip-experiment-polish",
+  "manifestSha256": "e102e098fac2a32484b6ae9ec27440076e6997475ba2d60b10e3f83fab304cd0",
+  "recordedAt": "2026-11-10T12:14:28.392Z",
+  "status": "observable-outcome-r2-candidate-execution-pending",
   "scope": {
     "tasks": 8,
     "atomicRequirements": 423,
@@ -30,42 +30,23 @@
     }
   },
   "sourceIntegrity": {
-    "frozenFiles": 785,
+    "frozenFiles": 793,
     "passed": true
   },
   "contracts": {
-    "passed": 141,
+    "passed": 150,
     "failed": 0,
-    "skipped": 0
-  },
-  "oraclePolicy": {
-    "errors": 0,
-    "warnings": 90
-  },
-  "experimentPrepare": {
-    "passed": true,
-    "tasks": {
-      "12306": 142,
-      "ctrip": 152,
-      "github": 104
-    },
-    "methods": [
-      "baseline",
-      "shallow"
-    ],
-    "modelCalled": false
+    "skipped": 0,
+    "newObservableOutcomeContracts": 9,
+    "newGitHubPrEvidenceContracts": 4
   },
   "requirementTestConsistency": {
     "mappings": [
-      "audit/github-experiment-polish.md",
-      "audit/12306-experiment-polish.md",
-      "audit/ctrip-experiment-polish.md"
+      "audit/false-positive-polish.md",
+      "audit/github-pr-evidence.md"
     ],
-    "actualExperimentCatalogTitlesMatched": {
-      "12306": 142,
-      "ctrip": 152,
-      "github": 104
-    }
+    "clarifiedScenarios": 12,
+    "clarifiedGitHubPrEvidenceScenarios": 8
   },
   "applications": {
     "generated": false,
@@ -74,12 +55,12 @@
     "pairedExperimentExecuted": false
   },
   "parentValidation": {
-    "commit": "be8aa2f174ff2a7cd317aac0d223fce40f8ca058",
+    "commit": "f7834e9976d2354aecb1f41d58e1a98746766b76",
     "path": "validation.json",
     "resultsTransferred": false
   },
   "limitations": [
     "Collection and synthetic contracts do not replace candidate business execution.",
-    "Use the same frozen revision for each method; historical scores are not carried forward."
+    "Prepare a new experiment plan for this revision and use the same frozen inputs for both methods."
   ]
 }

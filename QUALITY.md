@@ -1,5 +1,9 @@
 # Benchmark 质量与验收边界
 
+## 2026-11-10: 已有场景的误通过修正
+
+2026-11-10-observable-outcome-r2 明确检查状态、重订和搜索结果的归属，保留原场景。见 [证据边界](audit/false-positive-polish.md)。GitHub 同步收紧空标题拒绝、提交与变更摘要、审核归属、关闭与重开的 8 个既有场景，统一 Owner 的关闭和重开权限。 见 [GitHub PR 审查](audit/github-pr-evidence.md)。
+
 ## 2026-11-10: GitHub、12306 与 Ctrip 题面打磨
 
 沿用全部需求与场景 ID，不新增功能或场景。统一 GitHub 合并权限与提交状态、12306 订单状态流，以及 Ctrip 搜索、计价和支付口径。 三题的需求、场景和已知验收边界见 [GitHub](audit/github-experiment-polish.md)、[12306](audit/12306-experiment-polish.md) 和 [Ctrip](audit/ctrip-experiment-polish.md)；合成合同与目录校验不等同于候选业务执行。

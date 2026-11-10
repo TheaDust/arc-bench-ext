@@ -1,8 +1,8 @@
-import { expectText } from './support/observations';
 import { openVisibleTarget } from "./support/e2e";
 import { baseUrl } from './support/e2e';
 import { expect, test } from '@playwright/test';
 import { seedValue } from './support/e2e';
+import { expectOverviewCommit, expectSearchDiff } from './support/pr-evidence';
 
 test.beforeEach(async ({ page }) => {
   await page.goto(baseUrl());
@@ -15,9 +15,11 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 1', async ({ 
   await openVisibleTarget(page, pullRequestEntry);
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /^Commits$/ }).click();
-  await expectText(page, /commit/i);
+  await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  await expectOverviewCommit(page);
   await page.getByRole('link', { name: /files changed/i }).click();
-  await expectText(page, /changed files/i);
+  await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  await expectSearchDiff(page);
 });
 
 test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 2', async ({ page }, testInfo) => {
@@ -29,7 +31,8 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 2', async ({ 
   await page.reload();
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /^Commits$/ }).click();
-  await expectText(page, /commit/i);
+  await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  await expectOverviewCommit(page);
 });
 
 test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 3', async ({
@@ -44,5 +47,6 @@ test('REQ-6.3.1: View Pull Request Overview and Commits - Scenario 3', async ({
   await openVisibleTarget(page, pullRequestEntry);
   await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
   await page.getByRole('link', { name: /files changed/i }).click();
-  await expectText(page, /changed files/i);
+  await expect(page.getByRole('heading', { name: title, exact: true })).toBeVisible();
+  await expectSearchDiff(page);
 });
